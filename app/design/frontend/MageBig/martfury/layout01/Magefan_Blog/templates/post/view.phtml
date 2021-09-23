@@ -1,0 +1,63 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $this->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+?>
+<div class="post-view">
+    <div class="post-holder post-holder-<?php echo $_post->getId() ?>">
+        <div class="post-content">
+            <div class="post-description clearfix">
+                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                <div class="post-ftimg-hld">
+                    <img class="img-fluid" src="<?php echo $featuredImage ?>" alt="<?php echo $_postName ?>" />
+                </div>
+                <?php } ?>
+                <div class="post-text-hld">
+                    <?php echo $block->getContent() ?>
+                    <div class="clear"></div><br/>
+                    <div class="post-header clearfix">
+                        <?php echo $this->getInfoHtml() ?>
+                    </div>
+                    <div class="share-tag">
+                        <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                            <div class="item post-categories">
+                                <span class="label"><?php echo __('Tags:') ?></span>
+                                <?php $n = 0; foreach($_post->getRelatedTags() as $tag) { $n++; ?>
+                                    <a title="<?php echo $block->escapeHtml($tag->getTitle()) ?>" href="<?php echo $tag->getTagUrl() ?>">
+                                        <?php echo $block->escapeHtml($tag->getTitle()) ?>
+                                    </a>
+                                    <?php if ($n != $_tagsCount) { ?>, <?php } ?>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $_postUrl ?>">
+                            <a class="addthis_button_facebook"></a>
+                            <a class="addthis_button_twitter"></a>
+                            <a class="addthis_button_email"></a>
+                            <a class="addthis_button_compact"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+            <?php echo $this->getChildHtml('blog.post.bottom') ?>
+        </div>
+    </div>
+</div>

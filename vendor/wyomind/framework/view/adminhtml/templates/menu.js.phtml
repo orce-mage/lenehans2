@@ -1,0 +1,11 @@
+<script>
+
+require(['jquery'],function($) {
+    $(document).on('click','li[data-ui-id=menu-wyomind-framework-main] li.level-1', function(evt) {
+        let elt = $(evt.target);
+        $(elt.parents('.submenu')[0]).find('li.level-1').removeClass('active');
+        elt.addClass('active');
+    });
+});
+
+</script>

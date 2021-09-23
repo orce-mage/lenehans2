@@ -1,0 +1,15 @@
+<?php
+$csLocationA = $block->getCsLocationA();
+?>
+
+<div class="cs-location-wrapper">
+    <?php if($csLocationA):?>
+        <div class="cs-location-a">
+            Find me in Capel Street
+            <div class="cs-location-content" style="display: none;">
+                <div class="cs-c-header"><?php echo __('This item is located at.') ?></div>
+                <div class="cs-c-c"><?php echo $csLocationA ?></div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

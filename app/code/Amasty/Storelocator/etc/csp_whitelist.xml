@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="google_map" type="host">maps.googleapis.com</value>
+                <value id="google_map_static" type="host">maps.gstatic.com</value>
+                <value id="google_fonts" type="host">fonts.googleapis.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="google_map" type="host">maps.googleapis.com</value>
+                <value id="google_map_static" type="host">maps.gstatic.com</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="google_fonts" type="host">fonts.googleapis.com</value>
+                <value id="google_fonts_static" type="host">fonts.gstatic.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="google_fonts" type="host">fonts.googleapis.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

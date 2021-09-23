@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="MageBig\Shopbybrand\Block\Brand\AllBrands" name="all_brands" template="MageBig_Shopbybrand::brand/brands_index.phtml">
+                <block class="MageBig\Shopbybrand\Block\Widget\BrandSearch" name="brand_search_index" template="MageBig_Shopbybrand::brand/brand_search_index.phtml" />
+                <block class="MageBig\Shopbybrand\Block\Widget\BrandFeatured" name="brand_alphabet_list" template="MageBig_Shopbybrand::brand/alphabet_list.phtml"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

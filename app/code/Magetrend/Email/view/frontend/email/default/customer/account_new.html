@@ -1,0 +1,71 @@
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name",
+
+"layout handle=\"mtemail_header\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_header\"  noborder=\"1\" margintop=30 ":"mtemail_header",
+"layout handle=\"mtemail_header_center\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_header_center\"  noborder=\"1\" margintop=30 ":"mtemail_header_center",
+"layout handle=\"mtemail_text\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_text\" ":"mtemail_text",
+"layout handle=\"mtemail_grid2\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_grid2\" noborder=\"1\"":"mtemail_grid2",
+"layout handle=\"mtemail_empty\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_empty\" ":"mtemail_empty",
+"layout handle=\"mtemail_button\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_button\" ":"mtemail_button",
+"layout handle=\"mtemail_signature\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_signature\" ":"mtemail_signature",
+"layout handle=\"mtemail_footer\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_footer\" noborder=\"1\" ":"mtemail_footer"
+
+} @-->
+
+<!--@styles
+body, html { padding: 0; margin: 0; }
+
+.col2-right, .col2-left { width: 42.5% !important; max-width: 42.5% !important;float:left;clear: none;}
+.msi .col2-right, .msi .col2-left {width: 92.5% !important; max-width: 92.5% !important;}
+.col2-left {margin: 0 2.5% 0 5%  !important;} .col2-right {margin: 0 5% 0 2.5% !important;}
+@media (max-width: 640px) {.col2-right, .col2-left { float: left; clear: both; width: 90% !important; max-width: 90% !important; margin: 0 5% !important; min-width: 0 !important;}}
+
+@media (min-width: 640px) {
+    .header-logo,
+    .header-logo td{
+        text-align: left !important;
+        float: left !important;
+    }
+
+    .header-title td,
+    .header-title {
+        text-align: right  !important;
+        float: right;
+    }
+}
+
+@media (max-width: 640px) {
+
+    *[data-hide-on-mobile="true"] {
+        display: none;
+    }
+
+    *[data-show-on-mobile="true"] {
+        display: block;
+    }
+    .header-logo,
+    .header-title {
+        width: 100% !important;
+    }
+
+    .header-logo td,
+    .header-title td{
+        text-align: center !important;
+    }
+
+    .header-logo {
+        margin-bottom: 10px;
+    }
+}
+@-->
+
+
+{{layout handle="mtemail_header" theme="default" template_id=$this.template_id block_id=11 block_name="mtemail_header" noborder=1 margintop=30 }}
+{{layout handle="mtemail_text" theme="default" template_id=$this.template_id block_id=12 block_name="mtemail_text" }}
+{{layout handle="mtemail_button" theme="default" template_id=$this.template_id block_id=13 block_name="mtemail_button" }}
+{{layout handle="mtemail_signature" theme="default" template_id=$this.template_id block_id=14 block_name="mtemail_signature" }}
+{{layout handle="mtemail_footer" theme="default" template_id=$this.template_id block_id=15 block_name="mtemail_footer"  noborder=1 }}
+

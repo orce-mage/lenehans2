@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block ifconfig="amgiftcard/general/active" class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-amgiftcard">
+                <arguments>
+                    <argument name="path" xsi:type="string">amgcard/account</argument>
+                    <argument name="label" xsi:type="string" translate="true">Gift Cards</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,30 @@
+<?php
+    /** @var \Searchanise\SearchAutocomplete\Block\Jsinit $block */
+    $configuration = $block->getConfiguration();
+    $widgetLink = $block->getWidgetLink();
+
+    if (empty($configuration)) {
+        return;
+    }
+?>
+
+<script>
+    window.Searchanise = <?= /* @noEscape */ json_encode($configuration); ?>;
+
+    requirejs.config({
+        paths: {
+            'searchanise': '<?= /* @noEscape */ $widgetLink; ?>'
+        },
+        shim: {
+            'searchanise': ['jquery']
+        }
+    });
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "searchanise": {}
+        }
+    }
+</script>

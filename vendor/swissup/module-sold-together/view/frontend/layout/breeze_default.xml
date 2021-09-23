@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="breeze.js">
+            <arguments>
+                <argument name="bundles" xsi:type="array">
+                    <item name="product" xsi:type="array">
+                        <item name="items" xsi:type="array">
+                            <item name="Swissup_SoldTogether/js/frequently-bought-together" xsi:type="array">
+                                <item name="path" xsi:type="string">Swissup_SoldTogether/js/breeze/frequently-bought-together</item>
+                                <item name="enabled" xsi:type="helper" helper="Swissup\Breeze\Helper\Config::isEnabled">
+                                    <param name="path">soldtogether/order/enabled</param>
+                                </item>
+                                <item name="import" xsi:type="array">
+                                    <item name="price-utils" xsi:type="string">Swissup_Breeze/js/common/price-utils</item>
+                                    <item name="validator" xsi:type="string">Swissup_SoldTogether/js/breeze/validator</item>
+                                    <item name="helper" xsi:type="string">Swissup_SoldTogether/js/breeze/helper</item>
+                                </item>
+                            </item>
+                            <item name="Swissup_SoldTogether/js/customer-also-bought" xsi:type="array">
+                                <item name="path" xsi:type="string">Swissup_SoldTogether/js/breeze/customer-also-bought</item>
+                                <item name="enabled" xsi:type="helper" helper="Swissup\Breeze\Helper\Config::isEnabled">
+                                    <param name="path">soldtogether/customer/enabled</param>
+                                </item>
+                                <item name="import" xsi:type="array">
+                                    <item name="validator" xsi:type="string">Swissup_SoldTogether/js/breeze/validator</item>
+                                    <item name="helper" xsi:type="string">Swissup_SoldTogether/js/breeze/helper</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="configurable" xsi:type="array">
+                        <item name="items" xsi:type="array">
+                            <item name="Swissup_SoldTogether/js/configurable" xsi:type="array">
+                                <item name="path" xsi:type="string">Swissup_SoldTogether/js/breeze/configurable</item>
+                                <item name="enabled" xsi:type="helper" helper="Swissup\Breeze\Helper\Config::isAnyEnabled">
+                                    <param name="order">soldtogether/order/enabled</param>
+                                    <param name="customer">soldtogether/customer/enabled</param>
+                                </item>
+                                <item name="import" xsi:type="array">
+                                    <item name="item::configurable" xsi:type="string">configurable</item>
+                                </item>
+                            </item>
+                            <item name="Swissup_SoldTogether/js/swatch-renderer" xsi:type="array">
+                                <item name="path" xsi:type="string">Swissup_SoldTogether/js/breeze/swatch-renderer</item>
+                                <item name="enabled" xsi:type="helper" helper="Swissup\Breeze\Helper\Config::isAnyEnabled">
+                                    <param name="order">soldtogether/order/enabled</param>
+                                    <param name="customer">soldtogether/customer/enabled</param>
+                                </item>
+                                <item name="import" xsi:type="array">
+                                    <item name="item::swatch-renderer" xsi:type="string">Magento_Swatches/js/swatch-renderer</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

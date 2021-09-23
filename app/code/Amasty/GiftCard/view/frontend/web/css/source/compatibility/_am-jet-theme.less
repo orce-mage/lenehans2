@@ -1,0 +1,114 @@
+//
+// Compatibility with Amasty Jet Theme
+// ______________________________________________
+
+//
+//  Variables
+//  --------------------------------------------
+
+@amgiftcard-slick-button__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04LjAyNyAxNi4yNjFsNS4wNzMtNS4xODVhLjgyOC44MjggMCAwMDAtMS4xNTJMOC4wMjcgNC43MzlhLjc4NS43ODUgMCAwMC0xLjEyNyAwIC44MjguODI4IDAgMDAwIDEuMTUybDQuNTEgNC42MDktNC41MSA0LjYxYS44MjguODI4IDAgMDAwIDEuMTUxLjc4NS43ODUgMCAwMDEuMTI3IDB6IiBmaWxsPSIjQThBNjlGIi8+PC9zdmc+');
+@amgiftcard-icon-plus__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUuNzE0IDBINC4yODZ2NC4yODZIMHYxLjQyOGg0LjI4NlYxMGgxLjQyOFY1LjcxNEgxMFY0LjI4Nkg1LjcxNFYweiIgZmlsbD0iIzQ3NTUyNCIvPjwvc3ZnPg==');
+
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amasty-jet-theme {
+        .amcard-carousel-container .slick-slider button.slick-arrow {
+            display: block;
+            visibility: visible;
+            width:  15px;
+            background: @amgiftcard-slick-button__background center no-repeat !important;
+            opacity: 1;
+        }
+
+        .amcardacc-template-container {
+            margin-top: @indent__base;
+        }
+
+        .amcard-field-block .amcard-field {
+            border: @amtheme__border;
+            border-radius: @amtheme__border-radius__s;
+        }
+
+        .amcard-field-block .amcard-button {
+            & {
+                padding-left: 15px;
+                border: none;
+                background: @amtheme__background-primary__color;
+                color: @amtheme__link__color;
+                letter-spacing: .03em;
+                transition: color .3s ease-out;
+            }
+
+            &:hover {
+                color: #27046f;
+            }
+        }
+
+        .amcard-tooltip-container:after {
+            left: 29px;
+        }
+
+        .amcard-preview-container .amcard-button,
+        .amcard-label-block.-price,
+        .amcard-label-block.-upload {
+            & {
+                border: @amtheme__border;
+                background-color: @amtheme__background-primary__color;
+                color: #4a4948;
+                transition: color .3s ease-out, background-color .3s ease-out, border .3s ease-out;
+            }
+
+            &.-active,
+            &:hover {
+                border: @amtheme__border__width solid @color-black;
+                background-color: @amtheme__background-tertiary__color;
+                color: @amtheme__text-primary__color;
+            }
+        }
+
+        .amcard-label-block.-price {
+            border: @amtheme__border;
+            border-radius: @amtheme__border-radius__s;
+            padding: 10px;
+        }
+
+        .amcard-radio-container {
+            display: flex;
+        }
+
+        .amcard-label-block {
+            & {
+                display: flex;
+            }
+
+            .amcard-icon {
+                padding: 0;
+            }
+
+            .amcard-icon:before,
+            .amcard-icon:after {
+                margin: 0;
+            }
+        }
+    }
+
+    .amcard-upload-container .amcard-label-block {
+        &:hover {
+            background-color: @amtheme__background-tertiary__color;
+        }
+
+        &.-upload:before {
+            background: @amgiftcard-icon-plus__background no-repeat center;
+        }
+    }
+
+    .amcard-checkbox-container .amcard-label:before {
+        top: 0;
+        width: 15px;
+        height: 15px;
+    }
+}

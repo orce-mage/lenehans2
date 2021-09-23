@@ -1,0 +1,33 @@
+.lib-css(
+    @_property,
+    @_value
+) when not (@_value = '')
+  and not (@_value = false)
+  and not (extract(@_value, 1) = false)
+  and not (extract(@_value, 2) = false)
+  and not (extract(@_value, 3) = false)
+  and not (extract(@_value, 4) = false)
+  and not (extract(@_value, 5) = false) {
+    @{_property}: @_value;
+}
+
+// mixin for plus sign
+// -----------------------------------
+.soldtogether-plus () {
+    position: relative;
+    .padding-left(32px);
+
+    &::before {
+        position: absolute;
+        content: '';
+        background-image: url(../images/plus.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        display: block;
+        height: 32px;
+        width: 32px;
+        .left(0);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}

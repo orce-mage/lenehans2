@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   <head>
+        <link src="Magetrend_Email::js/system/config/button.js"/>
+        <css src="Magetrend_Email::css/adminhtml.css"/>
+    </head>
+</page>

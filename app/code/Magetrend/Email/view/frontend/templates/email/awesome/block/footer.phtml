@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+?>
+<?php $var = $block->getVarModel();?>
+<table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
+    <tr <?php echo $var->getHtmlAttribute('style', 'secondary-bg-color-footer', 'background-color: #f7f7f7;'); ?>
+        <?php echo $var->getHtmlAttribute('bgcolor', 'secondary-bg-color-color-footer', '#f7f7f7'); ?>
+            class="mteditor-bgcolor dark-block">
+        <td align="center" valign="top" width="100%" class="content-padding" style="height: 100px">
+            <center>
+                <table cellspacing="0" cellpadding="0" width="600" class="w320">
+                    <tr>
+                        <td class="mteditor-color footer-text"
+                            <?php echo $var->getTextEditAttribute('footer_text');?>
+                            <?php echo $var->getHtmlAttribute('style', 'footer_text_style', 'padding: 25px 0 0'); ?>>
+                            <?php echo $var->getValue('footer_text', 'If you have any questions about your account or any other matter, please feel free to contact us at <a href="mailto:'."{{config path='trans_email/ident_support/email'}}".'">'."{{config path='trans_email/ident_support/email'}}</a> or by phone at {{config path='general/store_information/phone'}}.", true);?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mteditor-color thank-you-note"
+                            <?php echo $var->getTextEditAttribute('footer_text_2');?>
+                            <?php echo $var->getHtmlAttribute('style', 'v_style_2', 'font-weight: bold; padding: 0 0 25px'); ?>>
+                            <?php echo $var->getValue('footer_text_2', "Thank you again!", true);?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><br/><br/></td>
+                    </tr>
+                </table>
+            </center>
+        </td>
+
+    </tr>
+</table>

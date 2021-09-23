@@ -1,0 +1,35 @@
+{
+    "amasty_storepickup_quote": {
+        "column": {
+            "id": true,
+            "address_id": true,
+            "quote_id": true,
+            "store_id": true,
+            "date": true,
+            "time_from": true,
+            "time_to": true,
+            "is_curbside_pickup": true,
+            "curbside_pickup_comment": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_STOREPICKUP_QUOTE_ADDR_ID_QUOTE_ADDR_ADDR_ID": true
+        }
+    },
+    "amasty_storepickup_order": {
+        "column": {
+            "id": true,
+            "order_id": true,
+            "store_id": true,
+            "date": true,
+            "time_from": true,
+            "time_to": true,
+            "is_curbside_pickup": true,
+            "curbside_pickup_comment": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_STOREPICKUP_ORDER_ORDER_ID_SALES_ORDER_ENTT_ID": true
+        }
+    }
+}

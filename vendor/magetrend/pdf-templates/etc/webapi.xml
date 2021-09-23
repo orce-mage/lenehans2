@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/pdf/order/:incrementId" method="GET">
+        <service class="Magetrend\PdfTemplates\Api\PdfManagementInterface" method="getOrder"/>
+        <resources>
+            <resource ref="Magetrend_PdfTemplates::api" />
+        </resources>
+    </route>
+
+    <route url="/V1/pdf/invoice/:incrementId" method="GET">
+        <service class="Magetrend\PdfTemplates\Api\PdfManagementInterface" method="getInvoice"/>
+        <resources>
+            <resource ref="Magetrend_PdfTemplates::api" />
+        </resources>
+    </route>
+
+    <route url="/V1/pdf/shipment/:incrementId" method="GET">
+        <service class="Magetrend\PdfTemplates\Api\PdfManagementInterface" method="getShipment"/>
+        <resources>
+            <resource ref="Magetrend_PdfTemplates::api" />
+        </resources>
+    </route>
+
+    <route url="/V1/pdf/creditmemo/:incrementId" method="GET">
+        <service class="Magetrend\PdfTemplates\Api\PdfManagementInterface" method="getCreditmemo"/>
+        <resources>
+            <resource ref="Magetrend_PdfTemplates::api" />
+        </resources>
+    </route>
+
+</routes>

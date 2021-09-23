@@ -1,0 +1,188 @@
+@media all and (min-width: 768px), print {
+  .amgiftcard .fieldset {
+    width: 48%;
+  }
+}
+.amgiftcard-userimage-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 1px solid #c4c4c4;
+}
+.amgiftcard-image-container {
+  position: relative;
+  width: 120px;
+  height: 80px;
+  margin-right: 20px;
+  border: 2px solid #dcdcdc;
+}
+.amgiftcard-image-wrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.amgiftcard-image {
+  width: 120px;
+  padding: 2px;
+}
+.amgiftcard-image.-selected,
+.amgiftcard-image:hover {
+  padding: 0;
+  border: 2px solid #58b4ff;
+}
+.amgiftcard-image.amgiftcard-image-container {
+  padding: 0;
+}
+.amgiftcard-label-container {
+  margin-bottom: 12px;
+}
+.amgiftcard-label-container .amgiftcard-label {
+  -webkit-flex-basis: 100%;
+  flex-basis: 100%;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: middle;
+}
+.amgiftcard-label-container .amgiftcard-note {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 5px;
+  vertical-align: middle;
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOCA5QTkgOSAwIDEgMSAwIDlhOSA5IDAgMCAxIDE4IDB6bS04LTIuMDg0djUuNDA3YzAgLjU3LjA2LjkzNi4xODIgMS4wOTguMTIyLjE1NS4zNi4yNDUuNzEzLjI2OFYxNEg3LjExM3YtLjMxMWMuMzI3LS4wMTIuNTctLjExNi43MjktLjMxMi4xMDUtLjEzMi4xNTgtLjQ4NC4xNTgtMS4wNTR2LTMuNzJjMC0uNTcxLS4wNi0uOTM0LS4xODItMS4wOS0uMTIyLS4xNjEtLjM1Ny0uMjU0LS43MDUtLjI3N3YtLjMySDEwek05IDZhMSAxIDAgMSAwIDAtMiAxIDEgMCAwIDAgMCAyeiIgZmlsbD0iIzRDNEM0QyIvPjwvc3ZnPg==) center no-repeat;
+}
+.amgiftcard-label-container .amgiftcard-note:hover {
+  opacity: 0.7;
+}
+.amgiftcard-tooltip {
+  box-sizing: border-box;
+  width: 400px;
+  max-width: 90vw;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+.amgiftcard-userimage {
+  box-sizing: border-box;
+  width: unset;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+}
+.amgiftcard-button {
+  display: inline-block;
+  padding: 10px 20px 10px 15px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  word-break: break-all;
+  background: #5dcd91;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.amgiftcard-button:hover {
+  background: #84d9ab;
+}
+.amgiftcard-button .amgiftcard-title {
+  vertical-align: middle;
+}
+.amgiftcard-error {
+  display: none;
+  margin-top: 15px;
+  padding: 10px;
+  background: #ffcaca;
+}
+.amgiftcard-icon {
+  display: inline-block;
+  min-width: 30px;
+  min-height: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.amgiftcard-icon.-camera {
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEwLjQ3MiAwTDguNDU4IDRIMi44MkEyLjgwNCAyLjgwNCAwIDAgMCAwIDYuOHYxNC40QzAgMjIuNzUxIDEuMjU3IDI0IDIuODIgMjRoMjMuMzZBMi44MDQgMi44MDQgMCAwIDAgMjkgMjEuMlY2LjhDMjkgNS4yNDkgMjcuNzQyIDQgMjYuMTggNGgtNS42MzhsLTIuMDE0LTRoLTguMDU2ek0xNC41IDcuMmMzLjc2NyAwIDYuODQ3IDMuMDU5IDYuODQ3IDYuOCAwIDMuNzQxLTMuMDggNi44LTYuODQ3IDYuOC0zLjc2NyAwLTYuODQ3LTMuMDU5LTYuODQ3LTYuOCAwLTMuNzQxIDMuMDgtNi44IDYuODQ3LTYuOHptMCAyLjRjLTIuNDYxIDAtNC40MyAxLjk1Ni00LjQzIDQuNCAwIDIuNDQ0IDEuOTY5IDQuNCA0LjQzIDQuNCAyLjQ2MSAwIDQuNDMtMS45NTYgNC40My00LjQgMC0yLjQ0NC0xLjk2OS00LjQtNC40My00LjR6IiBmaWxsPSIjZmZmIi8+PC9zdmc+) center no-repeat;
+  background-size: contain;
+}
+.amgiftcard-close {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  display: none;
+  width: 16px;
+  height: 16px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNDEuNzU2IDQxLjc1NiI+PHBhdGggZD0iTTI3Ljk0OCAyMC44NzhMNDAuMjkxIDguNTM2YTUgNSAwIDEgMC03LjA3LTcuMDcxTDIwLjg3OCAxMy44MDkgOC41MzUgMS40NjVhNSA1IDAgMCAwLTcuMDcgNy4wNzFsMTIuMzQyIDEyLjM0MkwxLjQ2NSAzMy4yMmE1IDUgMCAxIDAgNy4wNyA3LjA3MWwxMi4zNDMtMTIuMzQyIDEyLjM0MyAxMi4zNDNjLjk3Ni45NzcgMi4yNTYgMS40NjQgMy41MzUgMS40NjRzMi41Ni0uNDg3IDMuNTM1LTEuNDY0YTUgNSAwIDAgMCAwLTcuMDcxTDI3Ljk0OCAyMC44Nzh6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIGRhdGEtb2xkX2NvbG9yPSIjRkJGM0YzIiBmaWxsPSIjRkRGQUZBIi8+PC9zdmc+) center no-repeat;
+  background-color: #000;
+  background-size: 55%;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.amgiftcard-form {
+  margin-bottom: 40px;
+}
+.amgiftcard-form .fieldset {
+  margin-bottom: 20px;
+}
+.amgiftcard-check {
+  float: left;
+}
+.amgiftcard-amount-custom {
+  margin-top: 20px;
+}
+.amgiftcard-codes-list {
+  margin: 10px 0;
+}
+.amgiftcard-gift-card-info {
+  margin-bottom: 10px;
+}
+.amgiftcard-delivery-info,
+.amgiftcard-image-input,
+.-hidden {
+  display: none;
+}
+.amgiftcard-clear {
+  clear: both;
+}
+.amgiftcard-preview {
+  text-align: right;
+}
+
+.page-product-amgiftcard.product-info-main.product-info-price {
+    border: 0;
+    display: block;
+    float: right;
+    white-space: nowrap;
+    width: auto;
+}
+.page-product-amgiftcard.product-info-main.product-reviews-summary {
+    float: none;
+}
+.page-product-amgiftcard.product-add-form {
+    clear: none;
+    padding-top: 0;
+    border: 0;
+}
+.page-product-amgiftcard.price-final_price.price-wrapper.price {
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: 600;
+    color: #575757;
+}
+
+.page-product-amgiftcard.amgiftcard-fieldset {
+    border-top: 1px #c1c1c1 solid;
+    padding-top: 15px;
+    clear: both;
+    margin-top: 20px;
+}

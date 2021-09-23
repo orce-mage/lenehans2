@@ -1,0 +1,52 @@
+<div if="hasData()"
+     class="widget-product recently-viewed" css="additionalClasses">
+    <div class="main-heading">
+        <h2 class="heading-title block-title">
+            <span role="heading"
+                  aria-level="2"
+                  text="label"/>
+        </h2>
+    </div>
+    <div class="category-products block-content">
+        <div class="widget-products-grid">
+            <ol class="product-items owl-carousel owl-theme">
+                <li class="product-item" repeat="foreach: filteredRows, item: '$row'">
+                    <div class="product-item-info">
+                        <div class="product-show">
+                            <fastForEach args="data: getRegion('general-area'), as: '$col'" >
+                                <render args="$col.getBody()"/>
+                            </fastForEach>
+                            <if args="getRegion('action-primary-area')().length || getRegion('action-secondary-area')().length">
+                                <div class="product-btn">
+                                    <div class="row no-gutters text-center">
+                                        <if args="getRegion('action-primary-area')().length">
+                                            <div class="col">
+                                                <div class="actions-primary">
+                                                    <fastForEach args="data: getRegion('action-primary-area'), as: '$col'" >
+                                                        <render args="$col.getBody()"/>
+                                                    </fastForEach>
+                                                </div>
+                                            </div>
+                                        </if>
+                                        <if args="getRegion('action-secondary-area')().length">
+                                            <fastForEach args="data: getRegion('action-secondary-area'), as: '$col'" >
+                                                <render args="$col.getBody()"/>
+                                            </fastForEach>
+                                        </if>
+                                    </div>
+                                </div>
+                            </if>
+                        </div>
+
+                        <div class="product-item-details">
+                            <fastForEach args="data: getRegion('details-area'), as: '$col'" >
+                                <render args="$col.getBody()"/>
+                            </fastForEach>
+                        </div>
+                    </div>
+                    <!-- ko if: sliderInit($index) --><!-- /ko -->
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

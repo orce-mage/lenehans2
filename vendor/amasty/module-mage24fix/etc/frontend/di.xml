@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Mage24Fix
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\ViewModel\Product\Breadcrumbs">
+        <plugin name="Amasty_Mage24Fix::fix_class_constant" type="Amasty\Mage24Fix\Plugin\Catalog\ViewModel\Product\BreadcrumbsPlugin"/>
+    </type>
+</config>

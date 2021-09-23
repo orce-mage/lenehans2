@@ -1,0 +1,37 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+?>
+<?php /** @var \Amasty\Storelocator\Block\View\Attributes $block */ ?>
+<div class="amlocator-block -grey -attributes amlocator-attributes-wrapper" data-amlocator-js="location-attributes">
+    <div class="amlocator-collapse-title" data-amlocator-js="collapse-trigger">
+        <span><?= $block->escapeHtml(__('Additional Information')); ?></span>
+        <span class="amlocator-arrow" data-amlocator-js="collapse-indicator"></span>
+    </div>
+    <div class="amlocator-attributes-container" data-amlocator-js="collapse-content">
+        <?php foreach ($block->getLocationAttributes() as $attribute) : ?>
+            <div class="amlocator-location-attribute">
+                <span class="amlocator-label">
+                    <strong><?= $block->escapeHtml($attribute['frontend_label']) ?>:</strong>
+                </span>
+                <div class="amlocator-values">
+                    <?php if (isset($attribute['option_title']) && is_array($attribute['option_title'])) : ?>
+                        <?php foreach ($attribute['option_title'] as $optionTitle) : ?>
+                            <span class="amlocator-value -<?= $block->escapeHtml($attribute['frontend_input']) ?>">
+                                <?= $block->escapeHtml($optionTitle) ?>
+                            </span>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <span class="amlocator-value -<?= $attribute['frontend_input'] ?>">
+                            <?= $block->escapeHtml(isset($attribute['option_title']) ? $attribute['option_title'] : '')?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <div style="clear: both"></div>
+    </div>
+</div>

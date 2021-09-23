@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageBig_Ajaxwishlist::ajaxwishlist" title="Ajax Wishlist" translate="title" module="MageBig_Ajaxwishlist" sortOrder="80" parent="MageBig_MbFrame::ext_config" resource="MageBig_Ajaxwishlist::ajaxwishlist" action="adminhtml/system_config/edit/section/ajaxwishlist" />
+    </menu>
+</config>

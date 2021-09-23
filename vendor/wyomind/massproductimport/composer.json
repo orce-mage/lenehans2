@@ -1,0 +1,30 @@
+{
+    "name": "wyomind/massproductimport",
+    "version": "8.4.1",
+    "version_normalized": "8.4.1.0",
+    "dist": {
+        "type": "zip",
+        "url": "https://repo.wyomind.com/wyomind-massproductimport-8.4.1.zip",
+        "reference": ""
+    },
+    "require": {
+        "magento/framework": ">=100.0.0",
+        "php": "~5.5.0|~5.6.0|>=7.0.0",
+        "wyomind/framework": ">=5.0.0",
+        "wyomind/massstockupdate": ">=9.2.0.0,<=11.1.0"
+    },
+    "type": "magento2-module",
+    "extra": [],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Wyomind\\MassProductImport\\": ""
+        }
+    },
+    "license": [
+        "Commercial License - Copyright 2021  - WYOMIND  - Purchasing any product (Software) from the  wyomind.com web-site means buyer agree to the following statements (see LICENSE.TXT)"
+    ],
+    "description": false
+}

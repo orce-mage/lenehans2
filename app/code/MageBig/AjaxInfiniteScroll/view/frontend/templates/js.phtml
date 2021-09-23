@@ -1,0 +1,10 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php /** @var $block \MageBig\AjaxInfiniteScroll\Block\Init */ ?>
+<?php if ($block->isEnabled()) : ?>
+    <script type="text/x-magento-init">{"*":{"ajaxinfinitescroll": <?= $block->getJsonConfig() ?>}}</script>
+<?php endif ?>

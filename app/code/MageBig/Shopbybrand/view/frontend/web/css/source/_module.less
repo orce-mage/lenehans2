@@ -1,0 +1,113 @@
+& when (@media-common = true) {
+    .brand-desc {
+        margin-bottom: 15px;
+    }
+    ul.brand-list {
+        list-style: none;
+        padding: 5px;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-top: none;
+        display: block;
+        width: 100% !important;
+        li {
+            margin: 5px 0;
+        }
+    }
+    .brand-search-form {
+        position: relative;
+        i {
+            position: absolute;
+            top: 50%;
+            font-size: 16px;
+            line-height: 1;
+            right: 5px;
+            margin-top: -8px;
+            .layout-rtl & {
+                left: 5px;
+                right: auto;
+            }
+        }
+    }
+    .brand-list-wrap {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .brand-search-index {
+        .brand-search-form {
+            position: relative;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            ul {
+                padding: 5px;
+                list-style: none;
+            }
+            input {
+                height: 40px;
+                border-radius: 3px;
+            }
+        }
+    }
+    .featured-brands {
+        .brand-item {
+            margin-bottom: 15px;
+        }
+    }
+    .brand-item-inner {
+        margin-bottom: 30px;
+        text-align: center;
+        .count {
+            font-size: 1.2rem;
+        }
+    }
+
+    .brand-list-page {
+        .char-list {
+            overflow: hidden;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .char-item {
+            display: none;
+            margin: 5px;
+            padding: 4px 10px;
+            background-color: #fff;
+            color: #fcb800;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: all ease 400ms;
+            min-width: 32px;
+            opacity: 0.5;
+            cursor: default;
+            font-size: 14px;
+
+            &.available {
+                opacity: 1;
+                cursor: pointer;
+                display: inline-block;
+
+                &:hover {
+                    background-color: #fcb800;
+                    color: #ffffff;
+                    border-color: #fcb800;
+                }
+            }
+
+            &.active {
+                background-color: #fcb800;
+                color: #ffffff;
+                border-color: #fcb800;
+            }
+        }
+    }
+}
+

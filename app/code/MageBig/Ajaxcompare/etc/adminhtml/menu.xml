@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageBig_Ajaxcompare::ajaxcompare" title="Ajax Compare" translate="title" module="MageBig_Ajaxcompare" action="adminhtml/system_config/edit/section/ajaxcompare/" sortOrder="70" parent="MageBig_MbFrame::ext_config" resource="MageBig_Ajaxcompare::ajaxcompare"/>
+    </menu>
+</config>

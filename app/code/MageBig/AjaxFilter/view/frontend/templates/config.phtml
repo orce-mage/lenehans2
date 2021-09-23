@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+
+<?php
+$helper = $this->helper('MageBig\AjaxFilter\Helper\Data');
+?>
+<div id="product-container-wrap" data-role="ajax-filter">
+    <?php echo $this->getChildHtml() ?>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-role=ajax-filter]" : {
+            "MageBig_AjaxFilter/js/ajaxfilter" : {
+                "enableAjax": <?= $helper->enableAjaxFilter() ?>
+            }
+        }
+    }
+</script>

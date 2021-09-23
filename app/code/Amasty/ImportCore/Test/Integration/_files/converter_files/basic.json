@@ -1,0 +1,26 @@
+{
+    "basic": {
+        "name": "basic",
+        "isHidden": true,
+        "description": "basic description",
+        "behaviors": {
+            "add": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Add\\Model",
+                "name": "Only add",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test\\Test"
+                    }
+                }
+            }
+        },
+        "fieldsConfig": {
+            "fieldsClass": {
+                "class": "Amasty\\ImportCore\\Model\\FieldCollector",
+                "arguments": []
+            }
+        }
+    }
+}

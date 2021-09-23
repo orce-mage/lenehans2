@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.composite.fieldset">
+            <block class="Amasty\GiftCard\Block\Adminhtml\Catalog\Product\Composite\Fieldset\Giftcard" name="product.composite.fieldset.amgiftcard" before="product.composite.fieldset.options" template="Amasty_GiftCard::catalog/product/composite/fieldset/giftcard.phtml"/>
+            <block class="Magento\Backend\Block\Template" name="amcard_reorder_js" template="Amasty_GiftCard::catalog/product/composite/fieldset/js.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

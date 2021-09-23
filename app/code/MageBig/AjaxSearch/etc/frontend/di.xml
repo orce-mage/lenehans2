@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MageBig\AjaxSearch\Model\SearchFactory">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="suggest" xsi:type="string">MageBig\AjaxSearch\Model\Search\Suggested</item>
+                <item name="product" xsi:type="string">MageBig\AjaxSearch\Model\Search\Product</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \Magento\Theme\Block\Html\Breadcrumbs $block */
+/** @var \Magento\Catalog\ViewModel\Product\Breadcrumbs $viewModel */
+$viewModel = $block->getData('viewModel');
+?>
+<div class="wrapper-breadcrums">
+    <div class="breadcrumbs container" data-mage-init='{
+        "breadcrumbs": {
+            "categoryUrlSuffix": "<?= $block->escapeHtml($viewModel->getCategoryUrlSuffix()); ?>",
+            "useCategoryPathInUrl": <?= (int)$viewModel->isCategoryUsedInProductUrl(); ?>,
+            "product": "<?= $block->escapeJs($block->escapeHtml($viewModel->getProductName())); ?>"
+        }
+    }'>
+    </div>
+</div>

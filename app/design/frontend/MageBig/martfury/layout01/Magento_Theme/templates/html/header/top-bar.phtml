@@ -1,0 +1,14 @@
+<div class="header-top-inner">
+    <div class="row flex-items-xs-middle header-top-row">
+        <div class="hidden-xs col-xs">
+            <?= $this->getChildHtml('store_language') ?>
+            <?= $this->getChildHtml('currency') ?>
+        </div>
+        <div class="col-xs text-xs-center">
+            <?= $this->getChildHtml('header.links') ?>
+        </div>
+        <div class="col-xs">
+            <?= $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('social-topbar')->toHtml();?>
+        </div>
+    </div>
+</div>

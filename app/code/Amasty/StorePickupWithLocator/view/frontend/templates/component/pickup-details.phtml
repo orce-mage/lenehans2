@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+?>
+<?php /** @var \Amasty\StorePickupWithLocator\Block\Component\PickupDetails $block */ ?>
+
+<div data-bind="scope: 'amstorepickup'">
+    <!-- ko template: getTemplate() -->
+    <!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout();?>
+            }
+        }
+    </script>
+    <script>
+        window.checkoutConfig = <?= /* @noEscape */ $block->getJsonCheckoutConfig() ?>;
+    </script>
+</div>

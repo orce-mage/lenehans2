@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- save gift card account -->
+    <route url="/V1/amgcard/account" method="POST">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_account" />
+        </resources>
+    </route>
+    <!-- save gift card account by id -->
+    <route url="/V1/amgcard/account/:id" method="PUT">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_account" />
+        </resources>
+    </route>
+    <!-- delete gift card account by id -->
+    <route url="/V1/amgcard/account/:id" method="DELETE">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_account" />
+        </resources>
+    </route>
+    <!-- get gift card account by id -->
+    <route url="/V1/amgcard/account/:id" method="GET">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_account" />
+        </resources>
+    </route>
+    <!-- get gift card account by code -->
+    <route url="/V1/amgcard/account/code/:code" method="GET">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountRepositoryInterface" method="getByCode"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_account" />
+        </resources>
+    </route>
+    <!-- get all gift card accounts-->
+    <route url="/V1/amgcard/account/all" method="GET">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_account" />
+        </resources>
+    </route>
+
+    <!-- delete gift cart account for guest -->
+    <route url="/V1/guest-carts/:cartId/gift-card/:giftCardCode" method="DELETE">
+        <service class="Amasty\GiftCardAccount\Api\GuestGiftCardAccountManagementInterface" method="removeGiftCardFromCart"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- add gift cart account for guest -->
+    <route url="/V1/guest-carts/:cartId/gift-card/:giftCardCode" method="PUT">
+        <service class="Amasty\GiftCardAccount\Api\GuestGiftCardAccountManagementInterface" method="applyGiftCardToCart"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <!-- delete gift cart account for customer -->
+    <route url="/V1/carts/mine/gift-card/:giftCardCode" method="DELETE">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountManagementInterface" method="removeGiftCardFromCart"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <!-- add gift cart account for customer -->
+    <route url="/V1/carts/mine/gift-card/:giftCardCode" method="PUT">
+        <service class="Amasty\GiftCardAccount\Api\GiftCardAccountManagementInterface" method="applyGiftCardToCart"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>

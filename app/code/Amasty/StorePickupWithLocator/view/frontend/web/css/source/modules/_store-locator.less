@@ -1,0 +1,124 @@
+//
+//  Amasty Store Pickup With Locator
+//  Store Locator Elements Styles
+//  ___________________________________________
+
+//
+//  Common
+//  -------------------------------------------
+
+& when (@media-common = true) {
+    .ampickup-map-popup {
+        .amlocator-button.-pickup {
+            & {
+                float: right;
+                margin-top: 10px;
+                min-height: inherit;
+            }
+
+            &:hover {
+                background: lighten(#1979c3, 10%);
+            }
+        }
+
+        .amlocator-search-container .amlocator-title {
+            display: block;
+        }
+
+        .amlocator-search-container .amlocator-select.-measurement {
+            margin-bottom: 5px;
+        }
+
+        .amlocator-search-radius .amlocator-radio + .amlocator-label {
+            & {
+                padding: 5px 10px;
+            }
+
+            &:hover {
+                background: darken(#f8f8f8, 10%);
+            }
+        }
+
+        .amlocator-main-container .amlocator-block.-separator {
+            border-top: 1px solid #e7e7e7;
+        }
+
+        .amlocator-attribute-wrapper .amlocator-label {
+            cursor: pointer;
+        }
+
+        .amlocator-filters-container .amlocator-clear {
+            border: none;
+            background: none;
+            box-shadow: none;
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        .amlocator-store-desc.-active .amlocator-button.-pickup {
+            & {
+                margin-top: 10px;
+                background: #f6f6f6;
+                color: #1979c3;
+            }
+
+            &:hover {
+                background: darken(#f6f6f6, 10%);
+            }
+        }
+
+        .amlocator-store-information {
+            flex: auto;
+        }
+    }
+
+    .ampickup-details-container {
+        .amlocator-location-info {
+            padding: 0;
+        }
+
+        .amlocator-link {
+            & {
+                display: flex;
+                color: inherit;
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+
+            &:not(:last-of-type) {
+                margin-bottom: 7px;
+            }
+        }
+
+        .amlocator-link .amlocator-icon {
+            min-width: 20px;
+        }
+    }
+
+    // Added z-index for google autocomplete
+    .pac-container.pac-logo {
+        z-index: 999999;
+    }
+}
+
+//
+//  Tablet
+//  -------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .ampickup-map-popup {
+        .ampickup-content {
+            display: flex;
+            flex-direction: column;
+            width: 80vw;
+        }
+
+        .amlocator-main-container .amlocator-map-container {
+            min-height: 600px;
+        }
+
+        .amlocator-main-container .amlocator-map-container .amlocator-block.-map {
+            height: 100%;
+        }
+    }
+}

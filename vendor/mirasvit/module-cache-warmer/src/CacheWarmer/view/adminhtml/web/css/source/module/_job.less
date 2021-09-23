@@ -1,0 +1,96 @@
+.mst-cache-warmer__job-listing-array {
+    width: 100%;
+    border: 1px dashed #d6d6d6;
+    background: #fff;
+    //margin-top: 1rem;
+
+    table {
+        tr {
+            td {
+                background: transparent !important;
+                border-left: 0;
+                border-right: 0;
+                border-bottom: 1px dashed #d6d6d6;
+                padding: .5rem 1.5rem;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                &:first-child {
+                    width: 1%;
+                    text-align: right;
+                }
+
+                &:last-child {
+                    max-width: 30rem;
+                }
+
+                &:hover {
+                    white-space: normal;
+                }
+
+                span {
+                    padding: 3px 8px;
+                    border-radius: 5px;
+                }
+            }
+
+            &:last-child {
+                td {
+                    border-bottom: 0 !important;
+                    white-space: pre;
+                }
+            }
+
+            &._error {
+                td {
+                    color: #ff2014;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    &._trace {
+        tr {
+            td {
+                background: #fff !important;
+                font-family: 'Courier New', sans-serif;
+                padding: .3rem .5rem;
+            }
+        }
+    }
+}
+
+.mst-trace-leggend {
+    display: flex;
+    justify-content: left;
+
+    &__item {
+        width: 150px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 5px;
+        border-radius: 5px;
+    }
+}
+
+.mst-trace-backend {
+    background-color: #c3daf9;
+}
+
+.mst-trace-frontend {
+    background-color: #fffbbb;
+}
+
+.mst-trace-cli {
+    background-color: #ffd5d5;
+}
+
+.mst-trace-default {
+    background-color: #a1a1a1;
+}
+
+.mst-trace-rest {
+    background-color: #bbffcc;
+}

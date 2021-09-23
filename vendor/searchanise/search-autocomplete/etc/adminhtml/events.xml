@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Layout -->
+    <event name="layout_load_before">
+        <observer name="layout_load_before" instance="Searchanise\SearchAutocomplete\Model\Observer" />
+    </event>
+
+    <!-- products -->
+    <event name="catalog_product_save_before">
+        <observer name="catalog_product_save_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="catalog_product_save_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_product_delete_before">
+        <observer name="catalog_product_delete_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_product_attribute_update_before">
+        <observer name="catalog_product_attribute_update_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_product_to_website_change">
+        <observer name="catalog_product_to_website_change" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+
+    <!-- product import -->
+    <event name="catalog_product_import_bunch_save_after">
+        <observer name="catalog_product_import_bunch_save_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_product_import_bunch_delete_after">
+        <observer name="catalog_product_import_bunch_delete_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+
+    <!-- facets-->
+    <event name="catalog_entity_attribute_save_before">
+        <observer name="catalog_entity_attribute_save_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_entity_attribute_save_after">
+        <observer name="catalog_entity_attribute_save_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_entity_attribute_delete_after">
+        <observer name="catalog_entity_attribute_delete_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+
+    <!-- categories -->
+    <event name="catalog_category_save_before">
+        <observer name="catalog_category_save_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_category_save_after">
+        <observer name="catalog_category_save_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_category_move_after">
+        <observer name="catalog_category_move_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="catalog_category_delete_before">
+        <observer name="catalog_category_delete_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+
+    <!-- pages -->
+    <event name="cms_page_delete_before">
+        <observer name="cms_page_delete_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="cms_page_save_after">
+        <observer name="cms_page_save_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+
+    <!-- store -->
+    <event name="model_save_before">
+        <observer name="model_save_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="store_delete_before">
+        <observer name="store_delete_before" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="store_edit">
+        <observer name="store_edit" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="store_add">
+        <observer name="store_add" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+
+    <!-- order -->
+    <event name="sales_order_save_after">
+        <observer name="sales_order_save_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+
+    <!-- config -->
+    <event name="admin_system_config_changed_section_advanced">
+        <observer name="admin_system_config_changed_section_advanced" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+</config>

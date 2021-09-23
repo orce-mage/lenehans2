@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ExportCore
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_ExportCore::exportcore"
+             title="Amasty Export"
+             translate="title"
+             module="Amasty_ExportCore"
+             parent="Magento_Backend::system"
+             dependsOnModule="Amasty_ExportCore"
+             sortOrder="16"
+             resource="Amasty_ExportCore::exportcore"
+        />
+        <add id="Amasty_ExportCore::export"
+             title="Export"
+             module="Amasty_ExportCore"
+             sortOrder="10"
+             action="amexport/export/index"
+             parent="Amasty_ExportCore::exportcore"
+             resource="Amasty_ExportCore::export"/>
+    </menu>
+</config>

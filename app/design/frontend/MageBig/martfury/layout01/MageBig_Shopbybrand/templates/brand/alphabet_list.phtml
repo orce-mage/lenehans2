@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+$alphabetTable = $block->getAlphabetTable();
+$brands = $block->getBrandObject('brand_label', 'asc', false, false);
+$width = $block->getData('thumb_width');
+$height = $block->getData('thumb_height');
+$paddingBottom = 100*$height/$width;
+
+$widget = [
+    'MageBig_Shopbybrand/js/brands' => [
+        'magebig.alphabetList' => []
+    ]
+];
+?>
+
+<div class="brand-list-page" data-mage-init='<?= json_encode($widget) ?>'>
+    <div class="brand-inner hidden">
+        <div class="char-list" data-role="char-list">
+            <button type="button" class="char-item all active" data-char="all" class="active"><?php echo __('All') ?></button>
+            <button type="button" class="char-item number" data-char="num" class="active"><?php echo __('0 - 9') ?></button>
+            <?php foreach ($alphabetTable as $char) : ?>
+            <button type="button" class="char-item alphabet" data-char="<?= strtoupper($char) ?>"><?= strtoupper($char) ?></button>
+            <?php endforeach ?>
+        </div>
+        <div class="brand-list-index row" data-role="brand-list-index">
+            <?php foreach ($brands as $brand) : ?>
+            <?php
+            $label = strip_tags($brand->getBrandLabel());
+            $url = $brand->getUrl();
+            $optId = $brand->getData('option_id');
+            $productCount = $brand->getData('product_count');
+            ?>
+            <?php if($productCount > 0): ?>
+                <div class="brand-item col-6 col-md-4 col-lg-3 col-xl-2" data-label='<?= $label ?>'>
+                    <div class="brand-item-inner">
+                        <div class="item-img product-image-container">
+                            <a class="brand-link product-image-wrapper img-lazy-wrap" style="padding-bottom: <?= $paddingBottom ?>%" href="<?= $url ?>" title="<?= $label; ?>">
+                                <img class="brand-img img-fluid product-image-photo media-lazy lazyload" alt="<?= $label ?>"
+                                     data-src="<?= $block->getThumbnailImage($brand, ['width' => $width, 'height' => $height]) ?>"
+                                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+                            </a>
+                        </div>
+                        <div class="item-info">
+                            <a class="brand-name" href="<?= $url ?>" title="<?= $label; ?>">
+                                <?= $label; ?>
+                            </a>
+                            <?php if ($brand->getData('product_count') > 1) : ?>
+                            <div class="count"><?= __('%1 products', $productCount) ?></div>
+                            <?php else : ?>
+                            <div class="count"><?= __('%1 product', $productCount) ?></div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif ?>
+            <?php endforeach ?>
+        </div>
+        <div class="no-item d-none"><?= __('There is no brand matching your select') ?></div>
+    </div>
+    <br><br>
+</div>

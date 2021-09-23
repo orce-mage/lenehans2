@@ -1,0 +1,332 @@
+//
+//  Amasty Store Pickup With Locator
+//  Base Styles
+//  ___________________________________________
+
+//
+//  Variables
+//  -------------------------------------------
+
+@ampickup-curbside-icon__size: 18px;
+@ampickup-curbside-icon__background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTkgLjVjLTQuOTYgMC05IDQuMDQtOSA5czQuMDQgOSA5IDkgOS00LjA0IDktOS00LjA0LTktOS05em00LjE4NiA3LjM2N2wtNS4wMjMgNS4wMjRhLjgyNy44MjcgMCAwMS0uNTg2LjI1LjgyNy44MjcgMCAwMS0uNTg2LS4yNWwtMi41OTYtMi41NTRhLjgzNC44MzQgMCAwMTAtMS4xOTMuODM0LjgzNCAwIDAxMS4xOTMgMGwxLjk2OCAxLjk2OCA0LjQzNy00LjQzOGEuODM0LjgzNCAwIDAxMS4xOTMgMCAuODczLjg3MyAwIDAxMCAxLjE5M3oiIGZpbGw9IiM4MkI2ODciLz48L3N2Zz4=);
+
+//
+//  Common
+//  -------------------------------------------
+
+& when (@media-common = true) {
+    .ampickup-store-container {
+        & {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        &.-cart {
+            padding: 0 5px;
+        }
+
+        .ampickup-field {
+            & {
+                width: 100%;
+            }
+
+            &:not(:last-of-type) {
+                margin-bottom: 10px;
+            }
+        }
+
+        .ampickup-field select,
+        .ampickup-field input {
+            padding: 5px 10px;
+            height: inherit;
+        }
+
+        .ampickup-field.-store .ampickup-wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .ampickup-field.-date .control {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .ampickup-field.-date input {
+            flex: 1 1 80%;
+        }
+
+        .ampickup-field.-date .ui-datepicker-trigger {
+            flex: 1 1 20%;
+            max-width: 50px;
+        }
+
+        .ampickup-separator {
+            align-self: stretch;
+            margin: 15px 0;
+            width: inherit;
+            border-top: 1px solid #c7c7c7;
+        }
+
+        .ampickup-choosemap {
+            & {
+                display: inline-block;
+                margin: 0 auto 0 0;
+                padding: 5px 15px;
+                border-radius: 4px;
+                background: #1979c3;
+                color: #fff;
+                white-space: nowrap;
+                cursor: pointer;
+            }
+
+            &:hover {
+                background: darken(#1973c3, 10%);
+            }
+        }
+
+        .label {
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+    }
+
+    .ampickup-details-container {
+        & {
+            flex: 1 1 100%;
+            margin-bottom: 15px;
+        }
+
+        .ampickup-title {
+            margin: 0 0 15px;
+        }
+
+        div:empty,
+        div:empty + br {
+            display: none;
+        }
+
+        // Override Amasty OSC shipping address details width for store details
+        .amcheckout-step-container .amcheckout-shipping-address &.shipping-address-details {
+            width: 100%;
+        }
+    }
+
+    .ampickup-map-popup {
+        & {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .ampickup-overlay {
+            position: absolute;
+            z-index: 1;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, .5);
+        }
+
+        .ampickup-title {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .ampickup-content {
+            position: relative;
+            z-index: 2;
+            overflow: auto;
+            box-sizing: border-box;
+            padding: 25px;
+            max-height: 95vh;
+            width: 90vw;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .ampickup-close {
+            & {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 25px;
+                height: 25px;
+                opacity: .3;
+                cursor: pointer;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &:before,
+            &:after {
+                position: absolute;
+                left: 11px;
+                width: 2px;
+                height: 27px;
+                background-color: #333;
+                content: ' ';
+            }
+
+            &:before {
+                transform: rotate(45deg);
+            }
+
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+
+        .amlocator-block.-map {
+            box-sizing: border-box;
+        }
+    }
+
+    .ampickup-nostores-message {
+        & {
+            margin-top: 15px;
+        }
+
+        &.-background {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f6f6f6;
+        }
+    }
+
+    .ampickup-curbside-banner-img {
+        width: 100%;
+    }
+
+    .ampickup-options-container {
+        & {
+            box-sizing: border-box;
+            margin: 5px 0 20px;
+            width: 100%;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .ampickup-conditions {
+            &:extend(.abs-cart-block all);
+        }
+
+        .ampickup-comment {
+            display: block;
+        }
+
+        .ampickup-comment label {
+            display: none;
+        }
+    }
+
+    .checkout-index-index .ampickup-options-container {
+        margin-bottom: 40px;
+    }
+
+    .ampickup-conditions-container.block {
+        & {
+            margin-top: 5px;
+            margin-bottom: 10px !important; // override magento styles
+        }
+
+        > .title {
+            & {
+                padding: 5px 0;
+                border-top: none;
+            }
+
+            &:after {
+                top: 7px;
+            }
+        }
+
+        > .content {
+            padding: 10px 0 0;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+    }
+
+    .ampickup-curbside-label {
+        & {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        &:before {
+            display: block;
+            flex-shrink: 0;
+            margin-right: 5px;
+            width: @ampickup-curbside-icon__size;
+            height: @ampickup-curbside-icon__size;
+            background: @ampickup-curbside-icon__background-image no-repeat center;
+            content: '';
+        }
+
+        .amlocator-store-information &,
+        .amlocator-info-popup & {
+            margin-bottom: 5px;
+        }
+
+        .amlocator-location-info & {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+//
+//  Tablet
+//  -------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .ampickup-store-container.-checkout {
+        .ampickup-field {
+            box-sizing: border-box;
+        }
+
+        .ampickup-field.-time {
+            padding-left: 10px;
+            width: 50%;
+        }
+
+        .ampickup-field.-date {
+            padding-right: 10px;
+            width: 50%;
+        }
+
+        .ampickup-field.-store .ampickup-wrapper {
+            flex-direction: row;
+        }
+
+        .ampickup-separator {
+            margin: 0 25px;
+            border-top: 0;
+            border-right: 1px solid #c7c7c7;
+        }
+    }
+
+    .ampickup-map-popup .ampickup-content {
+        width: 80vw;
+    }
+
+    .checkout-index-index .ampickup-conditions-container.block {
+        > .title {
+            display: none;
+        }
+
+        > .content {
+            padding-top: 0;
+        }
+    }
+}

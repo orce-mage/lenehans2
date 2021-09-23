@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="storepickup_locator" translate="label" type="text" sortOrder="192016" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_StorePickupWithLocator::config</resource>
+            <class>separator-top</class>
+            <label>Store Pickup With Locator</label>
+            <tab>amasty</tab>
+            <group id="amasty_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Information</label>
+                <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Extension Enabled</label>
+                    <config_path>carriers/amstorepickup/active</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="check_product_availability" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Check Product Availability in Stores on Checkout and Cart</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="shipping_template" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Store Details Description Template</label>
+                    <tooltip><![CDATA[When a customer choose a pickup point on checkout page, a text block with the details appears.
+                            The setting allows to customize the attributes displayed in the block.
+                            To add an attribute please use the construction {{attribute_code}}.<br>
+                            Allowed fields:<br>
+                            {{name}}<br>
+                            {{photo}}<br>
+                            {{rating}}<br>
+                            {{country}}<br>
+                            {{state}}<br>
+                            {{city}}<br>
+                            {{zip}}<br>
+                            {{address}}<br>
+                            {{phone}}<br>
+                            {{email}}<br>
+                            {{website}}<br>
+                            {{description}}<br>
+                            {{short_description}}<br>
+                            {{lat}}<br>
+                            {{lng}}<br>
+                            {{curbside_available_label}}<br>
+                            To add a phone/email/website icon please use the following tags:<br>
+                            &lt;span class="amlocator-icon -phone"&gt;&lt;/span&gt;<br>
+                            &lt;span class="amlocator-icon -email"&gt;&lt;/span&gt;<br>
+                            &lt;span class="amlocator-icon -website"&gt;&lt;/span&gt;<br>]]>
+                    </tooltip>
+                </field>
+
+                <field id="display_shipping_info" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Where to Display Store Details</label>
+                    <source_model>Amasty\StorePickupWithLocator\Model\Config\Source\DisplayInfo</source_model>
+                    <tooltip>
+                        <![CDATA[
+                            Choose a place to display Pickup Point details. It could either be displayed instead of a customer address
+                            in the Shipping Address area<br/>
+                            <img src='https://amasty.com/media/marketing/demo/store-pickup-with-locator-for-magento-2/shipping-address-area.png' alt='shipping-address-area' title='Shipping Address Area' width='30%' height='30%'/><br/>
+                            or below the store selector in the Shipping Methods area
+                            <img src='https://amasty.com/media/marketing/demo/store-pickup-with-locator-for-magento-2/shipping-methods-area.png' width='30%' height='30%' alt='Shipping Methods Area' title=''/><br/>
+                            In case if you use any One Step Checkout extension, the layout of the page will be changed accordingly as well.
+                        ]]>
+                    </tooltip>
+                </field>
+            </group>
+            <group id="date_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Date Settings</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Customers to Choose Pickup Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allow_same_day" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Same Day Pickup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="time_settings" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Time Settings</label>
+                <depends>
+                    <field id="storepickup_locator/date_settings/enabled">1</field>
+                </depends>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Customers to Choose Pickup Time</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="storepickup_locator/date_settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="same_day_cutoff_time" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Same Day Pickup Cut-off Time</label>
+                    <source_model>Amasty\StorePickupWithLocator\Model\Config\Source\CutOffTime</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="storepickup_locator/date_settings/allow_same_day">1</field>
+                    </depends>
+                </field>
+                <field id="min_time_order" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Min. Time Required to Handle Order (Hours)</label>
+                    <validate>required-entry validate-number validate-zero-or-greater</validate>
+                    <comment> Works based on calendar days.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="storepickup_locator/date_settings/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="min_time_backorder" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Min. Time Required to Handle Backorder (Hours)</label>
+                    <validate>required-entry validate-number validate-zero-or-greater</validate>
+                    <comment><![CDATA[Works based on calendar days.<br/><strong>Note:</strong> the current setting is non-applicable for Magento 2.3.* versions due to MSI peculiarities.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="storepickup_locator/date_settings/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="curbside_pickup_settings" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pickup Options (Curbside Pickup, Non-contact Delivery, Pandemic Conditions, etc)</label>
+                <field id="checkbox_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pickup Option Checkbox Enabled</label>
+                    <comment><![CDATA[Adds checkbox with default label "Curbside Pickup" to Checkout for locations with Pickup Option enabled. If Pickup Option Checkbox is checked, than Pickup Option Conditions and Comments field appear on storefront.]]></comment>
+                    <tooltip><![CDATA[<img src='{{view url=Amasty_StorePickupWithLocator::images/config/tooltip/curbside_checkbox_enabled.gif}}' alt='checkbox-enabled' title='Pickup Option Checkbox' width='100%' height='100%'/>]]></tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\ComplexTooltip</frontend_model>
+                </field>
+                <field id="checkbox_label" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pickup Option Label</label>
+                    <validate>required-entry validate-length maximum-length-30</validate>
+                    <depends>
+                        <field id="checkbox_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="display_curbside_conditions" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Pickup Option Conditions on the Storefront</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Adds a static text to checkout if the location has Pickup Option enabled. It may be used to tell customers about pickup procedure. If Pickup Option Checkbox Enabled = No and Display Pickup Option Conditions on the Storefront = Yes, than Pickup Option Conditions field is displayed on storefront while Store Pickup method is chosen.]]></comment>
+                    <tooltip><![CDATA[<img src='{{view url=Amasty_StorePickupWithLocator::images/config/tooltip/display_curbside_conditions.gif}}' alt='pickup-conditions' title='Pickup Option Conditions' width='100%' height='100%'/>]]></tooltip>
+                    <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\ComplexTooltip</frontend_model>
+                </field>
+                <field id="conditions_label" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pickup Option Conditions Label</label>
+                    <comment><![CDATA[Is used as a label for Pickup Option Conditions on the Storefront]]></comment>
+                    <tooltip><![CDATA[<img src='{{view url=Amasty_StorePickupWithLocator::images/config/tooltip/curbside_conditions_label.gif}}' alt='pickup-conditions-label' title='Pickup Option Conditions Label' width='100%' height='100%'/>]]></tooltip>
+                    <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\ComplexTooltip</frontend_model>
+                    <validate>required-entry validate-length maximum-length-30</validate>
+                    <depends>
+                        <field id="display_curbside_conditions">1</field>
+                    </depends>
+                </field>
+                <field id="comments_enabled" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Customers Leave Comments</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Adds a text area to checkout if the location has Pickup Option enabled. It may be used to gather information from customers that will help you to identify them. If Pickup Option Checkbox Enabled = No and Allow Customers Leave Comments = Yes, than Comments field is displayed on storefront while Store Pickup method is chosen.]]></comment>
+                    <tooltip><![CDATA[<img src='{{view url=Amasty_StorePickupWithLocator::images/config/tooltip/curbside_comments.gif}}' alt='comments_enabled' title='Allow Customers Leave Comments' width='100%' height='100%'/>]]></tooltip>
+                    <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\ComplexTooltip</frontend_model>
+                </field>
+                <field id="comment_placeholder" translate="label" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Placeholder for Customer Comments Field</label>
+                    <depends>
+                        <field id="comments_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="comment_field_required" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Comments Field Value Is Required</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="comments_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="labels_enabled" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Labels Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[<img src='{{view url=Amasty_StorePickupWithLocator::images/config/tooltip/curbside_label_enabled.gif}}' alt='curbside-label' title='Pickup Label Enabled' width='100%' height='100%'/>]]></tooltip>
+                    <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\ComplexTooltip</frontend_model>
+                    <comment><![CDATA[Adds labels to "Pickup is available" section on product pages and to location description at store locator. You may need to manually add {{curbside_available_label}} to List Template and Google Mark Template. Please, see User Guide.<br>
+                        To use the functionality of this setting to the max, please upgrade the module-store-pickup-with-locator-msi to version 1.0.3 or above.]]>
+                    </comment>
+                </field>
+                <field id="label_text" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Label Text</label>
+                    <validate>required-entry validate-length maximum-length-30</validate>
+                    <depends>
+                        <field id="labels_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="pickup_banner" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pickup Option Banner</label>
+                    <source_model>Magento\Cms\Model\Config\Source\Block</source_model>
+                    <comment><![CDATA[Places banner on product page. To enable/disable appropriate CMS block on Product Pages or edit its content please go to Content -> Blocks -> "Selected Block Name"]]></comment>
+                    <tooltip><![CDATA[<img src='{{view url=Amasty_StorePickupWithLocator::images/config/tooltip/curbside_block.gif}}' alt='pickup-banner' title='Pickup Option Banner' width='100%' height='100%'/>]]></tooltip>
+                    <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\ComplexTooltip</frontend_model>
+                </field>
+            </group>
+        </section>
+
+        <section id="carriers">
+            <group id="amstorepickup" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>In-Store Pickup</label>
+                <frontend_model>Amasty\StorePickupWithLocator\Block\Adminhtml\System\Config\Carriers\Information</frontend_model>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Method Name</label>
+                </field>
+                <field id="price" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Price</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="handling_type" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Calculate Handling Fee</label>
+                    <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
+                </field>
+                <field id="handling_fee" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Default Handling Fee</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                </field>
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Displayed Error Message</label>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
+                </field>
+            </group>
+        </section>
+
+        <section id="amlocator">
+            <group id="locator">
+                <group id="visual_settings">
+                    <field id="template">
+                        <tooltip><![CDATA[When a customer clicks on a location mark on the map, a popup with the details appears.
+                            The setting allows to customize the attributes displayed in the popup.
+                            To add an attribute please use the construction {{attribute_code}}.<br>
+                            Allowed fields:<br>
+                            {{name}}<br>
+                            {{rating}}<br>
+                            {{country}}<br>
+                            {{state}}<br>
+                            {{city}}<br>
+                            {{zip}}<br>
+                            {{address}}<br>
+                            {{phone}}<br>
+                            {{email}}<br>
+                            {{website}}<br>
+                            {{description}}<br>
+                            {{short_description}}<br>
+                            {{lat}}<br>
+                            {{lng}}<br>
+                            {{curbside_available_label}}<br>]]>
+                        </tooltip>
+                    </field>
+                    <field id="store_list_template">
+                        <tooltip><![CDATA[Allowed fields:<br>
+                            {{name}}<br>
+                            {{rating}}<br>
+                            {{country}}<br>
+                            {{state}}<br>
+                            {{city}}<br>
+                            {{zip}}<br>
+                            {{address}}<br>
+                            {{phone}}<br>
+                            {{email}}<br>
+                            {{website}}<br>
+                            {{description}}<br>
+                            {{short_description}}<br>
+                            {{lat}}<br>
+                            {{lng}}<br>
+                            {{curbside_available_label}}<br>
+                            The setting is responsible for a location attributes displayed in the sidebar list of locations.
+                            To add an attribute please use the construction {{attribute_code}}]]>
+                        </tooltip>
+                    </field>
+                    <field id="shipping_template" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Store Details Description Template</label>
+                        <config_path>storepickup_locator/general/shipping_template</config_path>
+                        <tooltip><![CDATA[When a customer choose a pickup point on checkout page, a text block with the details appears.
+                            The setting allows to customize the attributes displayed in the block.
+                            To add an attribute please use the construction {{attribute_code}}.<br>
+                            Allowed fields:<br>
+                            {{name}}<br>
+                            {{photo}}<br>
+                            {{rating}}<br>
+                            {{country}}<br>
+                            {{state}}<br>
+                            {{city}}<br>
+                            {{zip}}<br>
+                            {{address}}<br>
+                            {{phone}}<br>
+                            {{email}}<br>
+                            {{website}}<br>
+                            {{description}}<br>
+                            {{short_description}}<br>
+                            {{lat}}<br>
+                            {{lng}}<br>
+                            {{curbside_available_label}}<br>
+                            To add a phone/email/website icon please use the following tags:<br>
+                            &lt;span class="amlocator-icon -phone"&gt;&lt;/span&gt;<br>
+                            &lt;span class="amlocator-icon -email"&gt;&lt;/span&gt;<br>
+                            &lt;span class="amlocator-icon -website"&gt;&lt;/span&gt;<br>]]>
+                        </tooltip>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

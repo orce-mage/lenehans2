@@ -1,0 +1,15 @@
+{
+    "name": "magetrend/pdf-templates",
+    "autoload": {
+        "psr-4": {"Magetrend\\PdfTemplates\\":""},
+        "files": ["registration.php"]
+    },
+    "description": "Replace default magento invoice pdf template",
+    "type": "magento2-module",
+    "version": "1.7.17",
+    "support": {
+        "email": "info@magetrend.com",
+        "wiki": "http://wiki2.magetrend.com",
+        "author": "Edvinas Stulpinas"
+    }
+}

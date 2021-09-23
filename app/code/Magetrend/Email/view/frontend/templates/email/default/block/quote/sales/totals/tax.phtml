@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+?>
+<?php
+$_order  = $block->getOrder();
+$_source = $block->getSource();
+$_fullInfo = $this->helper('Magento\Tax\Helper\Data')->getCalculatedTaxes($_source);
+$code = 'tax';
+?>
+<?php $var = $block->getParentBlock()->getVarModel();?>
+
+<tr>
+    <td
+        <?php echo $var->getHtmlAttribute('style', 'order_totals_table_label_style_subtotal', 'color: #707582; font-size: 14px; font-weight: bold;'); ?>
+        <?php echo $var->getTextEditAttribute('order_totals_table_label_'.$code);?>
+
+        class="mteditor-color total-color">
+        <?php echo $var->getValue('order_totals_table_label_'.$code, $block->escapeHtml(__('Tax')), false);?>
+    </td>
+    <td width="15" height="25"  style="width: 15px !important; height: 25px">&nbsp;</td>
+    <td
+        <?php echo $var->getHtmlAttribute('style', 'order_totals_table_label_style_subtotal', 'color: #707582; font-size: 14px; text-align: right;'); ?>
+        class="mteditor-color total-color"
+        align="right">
+        <?php echo $_order->formatPrice($_source->getTaxAmount()) ?>
+    </td>
+</tr>

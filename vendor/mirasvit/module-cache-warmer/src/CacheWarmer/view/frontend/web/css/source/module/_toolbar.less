@@ -1,0 +1,121 @@
+& when (@media-common = true) {
+    .mst-cache-warmer__toolbar {
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        font-size: 1.3rem;
+        outline: 5px solid rgba(74, 69, 66, 0.6);
+        border-radius: 0;
+        z-index: 1000000;
+        box-shadow: 2px 2px 2px 0 rgba(50, 50, 50, 0.25);
+        max-width: 90%;
+        min-width: 30rem;
+
+        > strong {
+            text-align: center;
+            font-weight: 600;
+            display: block;
+            padding: 1rem 2rem;
+            color: #fff;
+            background: #7c7977;
+        }
+
+        &._hit {
+            > strong {
+                background: #69BA6D;
+            }
+        }
+
+        &._miss {
+            > strong {
+                background: #D0011B;
+            }
+        }
+
+        .mst-cache-warmer__toolbar-body {
+            padding: 1rem 2rem;
+            background: #fff;
+            text-align: center;
+
+            > strong {
+                text-align: center;
+                font-size: 2.8rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                color: #928f8e;
+            }
+        }
+
+        table {
+            tr {
+                th, td {
+                    background: #fff;
+                    padding: .5rem 1rem;
+                    font-size: 1.2rem;
+                }
+                th {
+                    background: #f1f1f1;
+                    padding: 1rem;
+                    text-align: center;
+                }
+                td {
+                    text-align: left;
+                    border-top: 1px solid #f1f1f1;
+                }
+            }
+        }
+
+        .mst-cache-warmer__toolbar-test,
+        .mst-cache-warmer__toolbar-info {
+            background: #fff;
+            padding: .5rem 1rem;
+            text-align: right;
+            font-size: 1.2rem;
+            border-top: 1px solid #f1f1f1;
+            color: #928f8e;
+            margin: 0;
+
+            a {
+                color: #928f8e;
+                text-decoration: underline;
+            }
+
+            li {
+                text-align: left;
+                padding-bottom: .5rem;
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .__item {
+                font-weight: 600;
+            }
+        }
+    }
+
+    .m__page__data {
+        display: none;
+    }
+
+    .cache-warmer__hole_punch_block_info {
+        position: relative;
+        border: 1px dotted red;
+        margin: 6px 2px;
+        padding: 18px 2px 2px 2px;
+        zoom: 1;
+    }
+
+    .cache-warmer__hole_punch_timer_info {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 5px;
+        background: #faa;
+        color: #333;
+        font: normal 9px Arial;
+        text-align: left !important;
+        z-index: 998;
+        text-transform: none;
+    }
+}

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="cache_warmer" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="label"
+                 sortOrder="100">
+            <label>Page Cache Warmer</label>
+            <tab>mirasvit</tab>
+            <resource>Mirasvit_CacheWarmer::cache_warmer_config</resource>
+            <group id="general" showInDefault="1" sortOrder="10">
+                <label>General Settings</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Enable/disable full page cache warmer]]></tooltip>
+                </field>
+
+                <field id="ignored_uri_expressions" translate="label comment tooltip" sortOrder="50" showInDefault="1">
+                    <label>Ignored Pages</label>
+                    <frontend_model>Mirasvit\CacheWarmer\Block\Adminhtml\Config\Form\Field\IgnoredUri</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <tooltip><![CDATA[
+                        /\?/ - ignore pages with GET params<br>
+                        /\?[\w]*&[\w]*&[\w]*/ - ignore pages with more than 2 GET params
+                        ]]></tooltip>
+                    <comment>
+                        <![CDATA[
+                        For example, to exclude pages like /category/page/*, the regular expression should be:
+                        /\/category\/page\//
+                        ]]>
+                    </comment>
+                </field>
+
+                <field id="ignored_user_agents" translate="label" sortOrder="50" showInDefault="1">
+                    <label>Ignored User-agents</label>
+                    <frontend_model>Mirasvit\CacheWarmer\Block\Adminhtml\Config\Form\Field\IgnoredUserAgent</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment><![CDATA[
+                        Pages visited by this user-agents will not be added to the cache warmer queue.
+                        You can use regular expression like
+                        /.*Googlebot.*/
+                        ]]></comment>
+                </field>
+
+                <field id="ignored_page_types" type="multiselect" translate="label" sortOrder="50" showInDefault="1">
+                    <label>Ignored Page Types</label>
+                    <source_model>Mirasvit\CacheWarmer\Model\Config\Source\PageType</source_model>
+                    <comment><![CDATA[
+                        Pages with page types matches selected page types from this list will not be added to the cache warmer queue.
+                        ]]></comment>
+                </field>
+            </group>
+            <group id="performance" showInDefault="1" sortOrder="20">
+                <label>Performance</label>
+
+                <field id="is_warm_variations" translate="label" type="select" sortOrder="1" showInDefault="1">
+                    <label>Warming Strategy</label>
+                    <source_model>Mirasvit\CacheWarmer\Model\Config\Source\StrategySource</source_model>
+                    <tooltip><![CDATA[Define warming strategy]]></tooltip>
+                    <comment>
+                        &lt;b&gt;Warm Rules&lt;/b&gt; - warm pages depends on Warm Rules and Popularity of URLs.
+                        &lt;br&gt;&lt;b&gt;Warm Rules + URL variations&lt;/b&gt; - additionally to the default strategy the extension will fire additional background process
+                        trying to warm all variations of URLs from the current warming job's queue.
+                        &lt;b&gt;The exec() function should be enabled&lt;/b&gt;.
+                        Can create additional load on the server.
+                    </comment>
+                </field>
+
+                <field id="level" translate="label" type="select" sortOrder="3" showInDefault="1">
+                    <label>Cache Warming Intensity</label>
+                    <source_model>Mirasvit\CacheWarmer\Model\Config\Source\PerformanceLevelSource</source_model>
+                    <comment>
+                        &lt;b&gt;High - intensive warming&lt;/b&gt; - for stores installed on high-performance servers with a low load rate. CURL multi requests should be available.
+                        &lt;br&gt;&lt;b&gt;Medium - default mode&lt;/b&gt; - recommended for most Magento stores. CURL multi requests should be available.
+                        &lt;br&gt;&lt;b&gt;Low - soft warming&lt;/b&gt; - for stores installed on servers with a high load rate. CURL multi requests are not required.
+                        &lt;br&gt;&lt;b&gt;Custom - expert mode&lt;/b&gt; - use this option if preset settings are not suitable for your store.
+                    </comment>
+                </field>
+
+                <field id="threads" translate="label" type="text" sortOrder="10" showInDefault="1">
+                    <label>Threads</label>
+                    <depends>
+                        <field id="level">0</field>
+                    </depends>
+                    <comment>The number of concurrent requests to store</comment>
+                    <tooltip><![CDATA[If empty, extension will use default value (1 request).]]></tooltip>
+                </field>
+
+<!--                <field id="delay" translate="label" type="text" sortOrder="15" showInDefault="1">-->
+<!--                    <label>Delay between requests</label>-->
+<!--                    <depends>-->
+<!--                        <field id="level">0</field>-->
+<!--                    </depends>-->
+<!--                    <comment>in milliseconds</comment>-->
+<!--                    <tooltip><![CDATA[If empty, extension will use default value. Default value is 0.]]></tooltip>-->
+<!--                </field>-->
+
+                <field id="job_time" translate="label" type="text" sortOrder="20" showInDefault="1">
+                    <label>Maximum job run time</label>
+                    <depends>
+                        <field id="level">0</field>
+                    </depends>
+                    <comment>The maximum job run time (in seconds). Should be less than the time interval between warming jobs executions according to the Job Schedule.</comment>
+                    <tooltip><![CDATA[Should be less then job run frequency by schedule. If empty, extension will use default value. Default value is 100.]]></tooltip>
+                </field>
+
+                <field id="job_schedule_custom" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Job Schedule</label>
+                    <depends>
+                        <field id="level">0</field>
+                    </depends>
+                    <comment>Cron expression only</comment>
+                    <tooltip><![CDATA[
+                        */1 * * * * - run job every minute<br>
+                        */5 * * * * - run job every 5 minutes
+                        ]]></tooltip>
+                    <validate>cron-expression</validate>
+                </field>
+
+                <field id="system_load_limit" translate="label" type="text" sortOrder="40" showInDefault="1">
+                    <label><![CDATA[Don't run warmer job if average<br/>system load is more than (%)]]></label>
+                    <depends>
+                        <field id="level">0</field>
+                    </depends>
+                    <tooltip><![CDATA[Can be used value from 25 to 100. ]]></tooltip>
+                    <comment>To disable this configuration leave this field empty</comment>
+                </field>
+            </group>
+            <group id="extended" showInDefault="1" sortOrder="30">
+                <label>Extended Settings</label>
+
+                <field id="is_statistics_enabled" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enable statistics</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[
+                        Enable/disable collecting statistical data.
+                        If disabled, the extension stops making /cache_warmer/track requests on the front pages of the website.
+                        The extension will not collect statistical data and count the popularity of the pages.
+                        ]]></tooltip>
+                    <comment>If disabled, the extension will stop collecting statistical data</comment>
+                </field>
+
+                <field id="crawler_limit" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Warmer limit (%)</label>
+                    <tooltip><![CDATA[Warmer will stop when cache fill rate reach this value.]]></tooltip>
+                    <comment>To disable this configuration leave this field empty</comment>
+                </field>
+
+                <field id="forbid_cache_flush" translate="label" type="select" sortOrder="40" showInDefault="1">
+                    <label>Forbid cache flushing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Forbid flush FPC cache. Cache can be flushed only in Cache Management. Or if TTL expired.]]></tooltip>
+                    <comment>If enabled store will stop flush FPC cache even if you change products.</comment>
+                </field>
+
+                <!--<field id="run_as_web_server_user" translate="label" type="select" sortOrder="50" showInDefault="1">-->
+                <!--<label>Run warmer as web server user</label>-->
+                <!--<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+                <!--<tooltip><![CDATA[Run warmer as web server user. Enable if cron user not enough permissions.]]></tooltip>-->
+                <!--</field>-->
+
+                <field id="is_delete_cacheable_false" translate="label" type="select" sortOrder="60" showInDefault="1">
+                    <label>Forcibly make pages cacheable</label>
+                    <source_model>Mirasvit\CacheWarmer\Model\Config\Source\PageCacheable</source_model>
+                    <tooltip><![CDATA[
+                    If set to "All pages", extension will delete cacheable="false" for all blocks for home, category and product pages.
+                    If set to "Configure" you can configure pages (home, category and product). Such way those pages become cacheable.
+                    ]]></tooltip>
+                </field>
+
+                <field id="delete_cacheable_false_config" translate="label" sortOrder="70" showInDefault="1">
+                    <label>Config</label>
+                    <frontend_model>Mirasvit\CacheWarmer\Block\Adminhtml\Config\Form\Field\PageCacheable</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="is_delete_cacheable_false">2</field>
+                    </depends>
+                </field>
+
+                <!--<field id="is_warm_mobile_pages" translate="label" type="select" sortOrder="80" showInDefault="1">-->
+                <!--<label>Warm mobile pages separately</label>-->
+                <!--<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+                <!--<tooltip><![CDATA[-->
+                <!--Enable only if your store create different cache for mobile pages.-->
+                <!--]]></tooltip>-->
+                <!--</field>-->
+
+                <!--<field id="is_use_empty_vary_data_for_mobile_pages" translate="label" type="select" sortOrder="90" showInDefault="1">-->
+                <!--<label>Use empty vary data for mobile pages</label>-->
+                <!--<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+                <!--<tooltip><![CDATA[Will not use vary data for mobile pages.]]></tooltip>-->
+                <!--<depends>-->
+                <!--<field id="is_warm_mobile_pages">1</field>-->
+                <!--</depends>-->
+                <!--</field>-->
+
+                <field id="is_use_same_cache_for_new_visitor" translate="label" type="select" sortOrder="100" showInDefault="1">
+                    <label>Use the same cache for new visitor</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Use the same cache for new visitor (delete store from vary data).]]></tooltip>
+                </field>
+
+                <group id="http_auth" showInDefault="1" sortOrder="110">
+                    <label>HTTP authentication</label>
+
+                    <field id="username" translate="label" type="text" showInDefault="1" sortOrder="10">
+                        <label>Username</label>
+                    </field>
+
+                    <field id="password" translate="label" type="text" showInDefault="1" sortOrder="20">
+                        <label>Password</label>
+                    </field>
+                </group>
+            </group>
+            <group id="hole_punch" showInDefault="1" sortOrder="40">
+                <label>FPC hole punch</label>
+                <field id="hole_punch_templates" translate="label comment tooltip" sortOrder="10" showInDefault="1">
+                    <label>Config</label>
+                    <frontend_model>Mirasvit\CacheWarmer\Block\Adminhtml\Config\Form\Field\HolePunchTemplates</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Refresh cache to apply changes. Not all blocks can be excluded using this functionality (for example price block, product listing).</comment>
+                    <tooltip><![CDATA[
+                        Add template path, block name, cms block ID and store.
+                        ]]></tooltip>
+                </field>
+            </group>
+
+            <group id="debug" showInDefault="1" sortOrder="50">
+                <label>Debug</label>
+                <field id="info" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Show cache status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Show info block in frontend with info if page in cache. <br> You must flush the cache after enabling this option.]]></comment>
+                </field>
+
+                <field id="allowed_ip" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Show cache status only for</label>
+                    <comment><![CDATA[Comma separated IP addresses]]></comment>
+                </field>
+
+                <field id="request_log" translate="label" type="select" sortOrder="40" showInDefault="1">
+                    <label>Log warmer requests</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log will be in file /var/log/cache-warmer.log</comment>
+                </field>
+
+                <field id="tag_log" translate="label" type="select" sortOrder="40" showInDefault="1">
+                    <label>Log tags for cache flushing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log will be in file /var/log/cache-warmer-flush.log</comment>
+                </field>
+
+                <field id="backtrace_log" translate="label" type="select" sortOrder="50" showInDefault="1">
+                    <label>Log backtrace for cache flushing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log will be in file /var/log/cache-warmer-flush.log</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

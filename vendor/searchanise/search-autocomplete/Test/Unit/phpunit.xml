@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<phpunit
+        colors="true"
+        bootstrap="../../../../../../dev/tests/unit/framework/bootstrap.php">
+    <php>
+        <const name="MAGENTO_ROOT" value="."/>
+    </php>
+    <testsuites>
+        <testsuite name="Searchanise Unit Tests">
+            <directory suffix="Test.php">./Helper</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

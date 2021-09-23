@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="amasty_giftcard_order">
+        <name>Amasty Gift Card Order</name>
+        <group>Amasty Gift Card</group>
+        <description>Amasty Gift Card Order</description>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Import\FieldsClass\Describe">
+                <arguments>
+                    <argument name="tableName" xsi:type="string">amasty_giftcard_order</argument>
+                </arguments>
+            </fieldsClass>
+            <fields>
+                <field name="entity_id">
+                    <actions>
+                        <trim apply="beforeValidate"/>
+                    </actions>
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty>
+                            <excludeBehaviors>
+                                <addDirect/>
+                            </excludeBehaviors>
+                        </notEmpty>
+                    </validation>
+                </field>
+                <field name="order_id">
+                    <validation>
+                        <nonNegative/>
+                        <tableRowExists tableName="sales_order"
+                                        idFieldName="entity_id"
+                                        rootOnly="true"
+                                        error="Order with specified 'order_id' doesn't exist">
+                            <excludeBehaviors>
+                                <deleteDirect/>
+                            </excludeBehaviors>
+                        </tableRowExists>
+                    </validation>
+                </field>
+                <field name="gift_cards">
+                    <actions>
+                        <unserialize/>
+                    </actions>
+                </field>
+                <field name="gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="base_gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="invoice_gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="base_invoice_gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="refund_gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="base_refund_gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+            </fields>
+            <sampleData>
+                <row>
+                    <field name="entity_id">1</field>
+                    <field name="order_id">1</field>
+                    <field name="gift_cards">[{"id":1,"code":"SPD_482_PC57","amount":50,"b_amount":50}]</field>
+                    <field name="gift_amount">50.0000</field>
+                    <field name="base_gift_amount">50.0000</field>
+                    <field name="invoice_gift_amount">50.0000</field>
+                    <field name="base_invoice_gift_amount">50.0000</field>
+                    <field name="refund_gift_amount">50.0000</field>
+                    <field name="base_refund_gift_amount">50.0000</field>
+                </row>
+            </sampleData>
+        </fieldsConfig>
+        <behaviors>
+            <addUpdateDirect name="Add/Update">
+                <tableName>amasty_giftcard_order</tableName>
+            </addUpdateDirect>
+            <addDirect name="Only add">
+                <tableName>amasty_giftcard_order</tableName>
+            </addDirect>
+            <updateDirect name="Only update">
+                <tableName>amasty_giftcard_order</tableName>
+            </updateDirect>
+            <deleteDirect name="Delete">
+                <tableName>amasty_giftcard_order</tableName>
+            </deleteDirect>
+        </behaviors>
+    </entity>
+    <relation code="amasty_giftcard_order">
+        <parent_entity>sales_order</parent_entity>
+        <child_entity>amasty_giftcard_order</child_entity>
+        <sub_entity_field_name>amasty_giftcard_order</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">entity_id</argument>
+            <argument name="child_field_name" xsi:type="string">order_id</argument>
+        </arguments>
+    </relation>
+</config>

@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="magetrend" translate="label" sortOrder="200">
+            <label>Magetrend Extensions</label>
+        </tab>
+        <section id="pdftemplates" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>PDF Templates</label>
+            <tab>magetrend</tab>
+            <resource>Magetrend_PdfTemplates::config_general</resource>
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="is_active" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="frontend_is_active" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable on Frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>It will replace magento invoice print view page to pdf download link in customers side.</comment>
+                </field>
+
+                <field id="adapter" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>PDF Processor</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\Adapter</source_model>
+                    <comment>To install TCPDF processor, run: composer require tecnickcom/tcpdf</comment>
+                </field>
+
+                <field id="rtl_price_fix" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>RTL price with left side currency symbol</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable this option if your price is incorrect: 71.3 instead of 3.17</comment>
+                    <depends>
+                        <field id="adapter">tcpdf</field>
+                    </depends>
+                </field>
+
+                <field id="single_store_mode" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Single Store Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Use only this store information to generate pdf</comment>
+                </field>
+
+                <field id="globa_store_id" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Store View</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\Store</source_model>
+                    <depends>
+                        <field id="single_store_mode">1</field>
+                    </depends>
+                    <comment>for Single Store Mode</comment>
+                </field>
+
+            </group>
+
+            <group id="pdf" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Templates Settings</label>
+
+                <field id="usage" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Dependencies</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="order_template" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order PDF template</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\Template\Order</source_model>
+                    <depends>
+                        <field id="usage">0</field>
+                    </depends>
+                </field>
+
+                <field id="order_template_customer_group" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order PDF template</label>
+                    <frontend_model>Magetrend\PdfTemplates\Block\Adminhtml\System\Form\Field\OrderPdfCustomerMap</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="usage">1</field>
+                    </depends>
+                </field>
+
+                <field id="invoice_template" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invoice PDF template</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\Template\Invoice</source_model>
+                    <depends>
+                        <field id="usage">0</field>
+                    </depends>
+                </field>
+
+                <field id="invoice_template_customer_group" translate="label" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invoice PDF template</label>
+                    <frontend_model>Magetrend\PdfTemplates\Block\Adminhtml\System\Form\Field\InvoicePdfCustomerMap</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="usage">1</field>
+                    </depends>
+                </field>
+
+                <field id="creditmemo_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credit Memo PDF template</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\Template\Creditmemo</source_model>
+                    <depends>
+                        <field id="usage">0</field>
+                    </depends>
+                </field>
+
+                <field id="creditmemo_template_customer_group" translate="label" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credit Memo PDF template</label>
+                    <frontend_model>Magetrend\PdfTemplates\Block\Adminhtml\System\Form\Field\CreditmemoPdfCustomerMap</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="usage">1</field>
+                    </depends>
+                </field>
+
+
+                <field id="shipment_template" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipment PDF template</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\Template\Shipment</source_model>
+                    <depends>
+                        <field id="usage">0</field>
+                    </depends>
+                </field>
+
+                <field id="shipment_template_customer_group" translate="label" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipment PDF template</label>
+                    <frontend_model>Magetrend\PdfTemplates\Block\Adminhtml\System\Form\Field\ShipmentPdfCustomerMap</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="usage">1</field>
+                    </depends>
+                </field>
+
+            </group>
+
+            <group id="attachments" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sales Email's Attachments</label>
+                <field id="new_order" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Order Email</label>
+                </field>
+
+                <field id="order_update" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Order Comment Email</label>
+                </field>
+
+                <field id="new_invoice" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Invoice Email</label>
+                </field>
+
+                <field id="invoice_update" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Invoice Comment Email</label>
+                </field>
+
+                <field id="new_shipment" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Shipment Email</label>
+                </field>
+
+                <field id="shipment_update" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Shipment Comment Email</label>
+                </field>
+
+                <field id="new_creditmemo" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Credit Memo Email</label>
+                </field>
+
+                <field id="creditmemo_update" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Attach PDF to Credit Memo Comment Email</label>
+                </field>
+            </group>
+
+            <group id="sales" translate="label" type="text" sortOrder="48" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sales Settings</label>
+                <field id="price_tax" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Item Prices</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\TaxMode</source_model>
+                    <comment>Include tax amount into item price. </comment>
+                </field>
+
+                <field id="subtotal_tax" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subtotal Prices</label>
+                    <source_model>Magetrend\PdfTemplates\Model\Config\Source\TaxMode</source_model>
+                    <comment>Include tax amount into subtotal price. </comment>
+                </field>
+            </group>
+
+            <group id="additional" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Additional Settings</label>
+
+                <field id="paper_size" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Custom Page Sizes</label>
+                    <frontend_model>Magetrend\PdfTemplates\Block\Adminhtml\System\Form\Field\CustomSize</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Paper widht and height must be in points (pt).</comment>
+                </field>
+
+                <field id="total_sort_order" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Totals Sorting</label>
+                    <frontend_model>Magetrend\PdfTemplates\Block\Adminhtml\System\Form\Field\TotalSortOrder</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+
+                <field id="name_order" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order PDF name</label>
+                    <comment>Default: order_%increment_id.pdf Available variables: %date, %increment_id</comment>
+                </field>
+
+                <field id="name_order_collection" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Collection PDF name</label>
+                    <comment>Default: orders_%date.pdf Available variables: %date</comment>
+                </field>
+
+                <field id="name_invoice" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invoice PDF name</label>
+                    <comment>Default: invoice_%increment_id.pdf Available variables: %date, %increment_id</comment>
+                </field>
+
+                <field id="name_invoice_collection" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invoice Collection PDF name</label>
+                    <comment>Default: invoices_%date.pdf Available variables: %date</comment>
+                </field>
+
+                <field id="name_shipment" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipment PDF name</label>
+                    <comment>Default: shipment_%increment_id.pdf Available variables: %date, %increment_id</comment>
+                </field>
+
+                <field id="name_shipment_collection" translate="label" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipment Collection PDF name</label>
+                    <comment>Default: shipments_%date.pdf Available variables: %date</comment>
+                </field>
+
+                <field id="name_cm" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credit Memo PDF name</label>
+                    <comment>Default: creditmemo_%increment_id.pdf Available variables: %date, %increment_id</comment>
+                </field>
+
+                <field id="name_cm_collection" translate="label" type="text" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credit Memo Collection PDF name</label>
+                    <comment>Default: creditmemos_%date.pdf Available variables: %date</comment>
+                </field>
+
+                <field id="brake_option_line" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Break option's line</label>
+                    <comment>Print each item option on the new line</comment>
+                </field>
+
+                <field id="duplex_mode" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Print on both sides of paper</label>
+                    <comment>Duplex printing</comment>
+                </field>
+
+            </group>
+
+            <group id="license" translate="label" type="text" sortOrder="9999" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label><![CDATA[Information & License]]></label>
+                <field id="key" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>License Key</label>
+                    <comment><![CDATA[
+                    If you don't know the license key, please follow this article
+                    <br/><a target="_blank" href="https://www.magetrend.com/user-guide/licensing">
+                    https://www.magetrend.com/user-guide/licensing</a>
+                    ]]></comment>
+                </field>
+
+                <field id="info" translate="label" type="label" sortOrder="1002" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Magetrend\PdfTemplates\Block\Adminhtml\Config\System\Config\Info</frontend_model>
+                </field>
+
+            </group>
+        </section>
+
+    </system>
+</config>

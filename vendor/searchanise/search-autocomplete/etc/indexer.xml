@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="searchanise_queue" view_id="searchanise_queue" class="Searchanise\SearchAutocomplete\Model\Indexer\Queue">
+        <title translate="true">Searchanise queue</title>
+        <description translate="true">
+            Processes the indexing queue.
+        </description>
+    </indexer>
+</config>

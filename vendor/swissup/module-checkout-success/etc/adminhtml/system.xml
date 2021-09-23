@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="success_page" translate="label" type="text" sortOrder="1978" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Success Page</label>
+            <tab>swissup_checkout</tab>
+            <resource>Swissup_CheckoutSuccess::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment>Multishipping checkout is not supported and will use standard success page.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="miscellaneous_scripts" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Miscellaneous scripts and HTML</label>
+                    <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Htmlmixed</frontend_model>
+                    <comment><![CDATA[You can use this field to add some JS/HTML code. For example, google adwords conversion tracking. This field supports variables - <i>{{orderId}}</i>, <i>{{orderAmount}}</i> and others. You can read more about variables at <a href='http://docs.swissuplabs.com/m2/extensions/checkout-success/settings/#general' target='_blank'>our documentation</a>.]]></comment>
+                </field>
+            </group>
+            <group id="layout" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Page Layout</label>
+                <field id="available_blocks" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Blocks available on Success Page</label>
+                    <source_model>Swissup\CheckoutSuccess\Model\Config\Source\AvailableBlocks</source_model>
+                    <frontend_model>Swissup\CheckoutSuccess\Block\Adminhtml\Config\Form\Field\Available</frontend_model>
+                </field>
+                <field id="layout" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layout of Success Page</label>
+                    <frontend_model>Swissup\CheckoutSuccess\Block\Adminhtml\Config\Form\Field\Layout</frontend_model>
+                </field>
+                <field id="preview_hash" type="text" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Preview hash</label>
+                    <frontend_model>Swissup\CheckoutSuccess\Block\Adminhtml\Config\Form\Field\PreviewHash</frontend_model>
+                </field>
+                <field id="preview_expires" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Preview expires at (timestamp)</label>
+                    <frontend_model>Swissup\CheckoutSuccess\Block\Adminhtml\Config\Form\Field\PreviewExpires</frontend_model>
+                </field>
+                <field id="order_to_preview" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order # to preview Success Page</label>
+                    <frontend_model>Swissup\CheckoutSuccess\Block\Adminhtml\Config\Form\Field\Preview</frontend_model>
+                </field>
+            </group>
+            <group id="blocks" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cms blocks for additional content</label>
+                <field id="block_top" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Above order information</label>
+                    <source_model>Swissup\CheckoutSuccess\Model\Config\Source\CmsBlock</source_model>
+                </field>
+                <field id="block_bottom" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Below order information</label>
+                    <source_model>Swissup\CheckoutSuccess\Model\Config\Source\CmsBlock</source_model>
+                </field>
+            </group>
+            <include path="Swissup_Checkout::system/checkout_modules.xml"/>
+        </section>
+    </system>
+</config>

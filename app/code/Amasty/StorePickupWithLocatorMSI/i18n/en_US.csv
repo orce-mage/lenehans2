@@ -1,0 +1,19 @@
+"Unable to save new entity. Error: %1","Unable to save new entity. Error: %1"
+"Unable to remove entity. Error: %1","Unable to remove entity. Error: %1"
+"MSI Source","MSI Source"
+Enabled,Enabled
+Disabled,Disabled
+"Show Relevant Locations List for Products with Assigned MSI Stock","Show Relevant Locations List for Products with Assigned MSI Stock"
+"Enables Location List at Product pages.
+                            Location should have assigned MSI Source to appear in the list.
+                            The list will appear for Products, assigned Stocks of which are assotiated with any available Location's Source.
+                            Only locations where Product is In Stock would appear by default.","Enables Location List at Product pages.
+                            Location should have assigned MSI Source to appear in the list.
+                            The list will appear for Products, assigned Stocks of which are assotiated with any available Location's Source.
+                            Only locations where Product is In Stock would appear by default."
+"Include Locations at which Product is Out Of Stock into Product Location List","Include Locations at which Product is Out Of Stock into Product Location List"
+"Allows displaying Locations at which the product is not available immediately (Out Of Stock).","Allows displaying Locations at which the product is not available immediately (Out Of Stock)."
+"Is Chosen","Is Chosen"
+Code,Code
+Name,Name
+"Is Enabled","Is Enabled"

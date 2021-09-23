@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageBig_Quickview::quickviewsettings" title="Quick View" module="MageBig_QuickView" parent="MageBig_MbFrame::ext_config" sortOrder="10" action="adminhtml/system_config/edit/section/quickview/" resource="MageBig_Quickview::quickview_settings"/>
+    </menu>
+</config>

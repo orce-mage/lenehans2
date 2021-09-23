@@ -1,0 +1,39 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+?>
+<?php
+/**
+ * @var \Amasty\Stockstatus\Block\Adminhtml\Product\Attribute\Edit\AdditionalSettings $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<?php if ($block->isCanAddStockStatusSettings()): ?>
+    <script type="text/x-magento-template" id="stockstatus-loader-html">
+        <div class="amasty-stockstatus-loader-spinner">
+            <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('images/loader-1.gif')); ?>"
+                 alt="<?= $escaper->escapeHtml(__('Loading...')) ?>">
+        </div>
+    </script>
+
+    <script type="text/x-magento-template" id="stockstatus-settings-buttons">
+        <div class="amstockstatus-settings-button-wrapper">
+            <span data-amstockstatus-js="button" data-amstockstatus-option-id="<%- data.optionId %>"
+                  class="amstockstatus-settings amstockstatus-settings-button" title="<%- data.settingsLabel %>"></span>
+            <span data-amstockstatus-js="button" class="delete-option amstockstatus-settings-button"
+                  title="<%- data.deleteLabel %>"></span>
+        </div>
+    </script>
+
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "stockstatusAdvancedSettings": <?= /* @noEscape */ $block->getJsConfig() ?>
+        }
+    }
+    </script>
+<?php endif; ?>

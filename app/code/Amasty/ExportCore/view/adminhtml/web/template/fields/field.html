@@ -1,0 +1,38 @@
+<tr class="amexportcore-row -dnd">
+    <td colspan="5">
+        <table class="amexportcore-fields-table">
+            <tbody class="amexportcore-fields-tbody">
+                <tr class="amexportcore-row">
+                    <td class="amexportcore-td -dnd">
+                        <span class="amexportcore-dnd"></span>
+                    </td>
+                    <!-- ko if: !$data.isStatic -->
+                    <td class="amexportcore-td -modifier">
+                        <button class="amexportcore-button -brown" type="button"
+                                data-bind="i18n: 'Add Modifier', click: function(){$data.addModifier($data.index)}"></button>
+                    </td>
+                    <!-- /ko -->
+                    <td class="amexportcore-td -name">
+                        <input class="amexportcore-field -disabled"
+                               data-amexportcore-js="code"
+                               type="text"
+                               data-bind="value: $data.code, disable: !$data.isStatic"/>
+                    </td>
+                    <td class="amexportcore-td -name">
+                        <input class="amexportcore-field" type="text" data-bind="
+                                                                    value: $data.output_value,
+                                                                    valueUpdate: 'afterkeydown'"/>
+                    </td>
+                    <td class="amexportcore-td -button">
+                        <span class="amexportcore-delete" data-bind="click: $data.remove.bind($data, $data.index, $index())"></span>
+                    </td>
+                </tr>
+                <!-- ko foreach: $data.elems() -->
+                    <!-- ko ifnot: $data.isStatic -->
+                        <!--ko template: getTemplate()--><!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </td>
+</tr>

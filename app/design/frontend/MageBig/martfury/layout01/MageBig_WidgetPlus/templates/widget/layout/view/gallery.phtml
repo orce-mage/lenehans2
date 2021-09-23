@@ -1,0 +1,91 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+
+$_mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$id = $block->getGalleryId().$block->getProduct()->getId();
+$images = $block->getGalleryImages()->getItems();
+$imgCount = count($images);
+$mainImage = current(array_filter($images, function ($img) use ($block) {
+    return $block->isMainImage($img);
+}));
+
+if (!empty($images) && empty($mainImage)) {
+    $mainImage = $block->getGalleryImages()->getFirstItem();
+}
+
+$helper = $this->helper('Magento\Catalog\Helper\Image');
+$mainImageData = $mainImage ?
+    $mainImage->getData('medium_image_url') :
+    $helper->getDefaultPlaceholderUrl('image');
+
+$thumbType = $_mbHelper->getConfig('mbconfig/product_view/nav_dir');
+$imgs = '';
+$pl = '';
+if ($imgCount > 1) {
+    $imgs = 'imgs';
+    $pl = '<span class="thumb-pl"></span>';
+}
+?>
+<div class="gallery-placeholder _block-content-loading gallery-<?= $id; ?> <?= $thumbType ?> <?= $imgs ?>" data-gallery-role="gallery-placeholder">
+    <div class="gallery-placeholder__image">
+        <img
+            alt="main product photo"
+            class="img-fluid"
+            src="<?= /* @noEscape */ $mainImageData ?>"
+        />
+        <?= $pl ?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        ".gallery-<?= $id; ?>": {
+            "mage/gallery/gallery": {
+                "data": <?= /* @escapeNotVerified */ $block->getGalleryImagesJson() ?>,
+                "options": {
+                    "thumbmargin": 10,
+                    "thumbborderwidth": 1,
+                    "nav": "thumbs",
+                    "loop": 1,
+                    "keyboard": 1,
+                    "arrows": 0,
+                    "allowfullscreen": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/allowfullscreen') ?>,
+                    "showCaption": 0,
+                    "width": <?= $block->getImageAttribute('product_page_image_medium', 'width') ?>,
+                    "thumbwidth": <?= $block->getImageAttribute('product_page_image_small', 'width') ?>,
+                    "thumbheight": <?= $block->getImageAttribute('product_page_image_small', 'height')
+        ?: $block->getImageAttribute('product_page_image_small', 'width'); ?>,
+                    "height": <?= $block->getImageAttribute('product_page_image_medium', 'height')
+        ?: $block->getImageAttribute('product_page_image_medium', 'width'); ?>,
+                    "transitionduration": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_duration') ?>,
+                    "transition": "<?= $_mbHelper->getConfig('mbconfig/product_view/gallery_effect') ?>",
+                    "navarrows": 1,
+                    "navtype": "slides",
+                    "navdir": "vertical"
+                },
+                "fullscreen": {
+                    "nav": "thumbs",
+                    "loop": 1,
+                    "navdir": "vertical",
+                    "navarrows": 0,
+                    "navtype": "slides",
+                    "arrows": 1,
+                    "showCaption": 1,
+                    "transitionduration": 600,
+                    "transition": "crossfade"
+                },
+                "breakpoints": {"mobile":{"conditions":{"max-width":"767px"},"options":{"options":{"nav":"thumbs","navdir":"horizontal"}}}}
+            }
+        }
+    }
+</script>

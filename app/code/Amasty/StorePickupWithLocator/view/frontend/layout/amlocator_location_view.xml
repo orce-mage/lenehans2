@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="extra.info">
+            <block class="Amasty\Storelocator\Block\View\Location"
+                   name="storepickup-curbside-label"
+                   as="curbside.label"
+                   template="Amasty_StorePickupWithLocator::location/curbside_label.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Amasty\StorePickupWithLocator\ViewModel\Location\CurbsideLabel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

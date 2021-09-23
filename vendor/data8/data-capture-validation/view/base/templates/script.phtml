@@ -1,0 +1,39 @@
+<?php
+$data8Settings = $this->helper('Data8\DataCaptureValidation\Helper\SettingsData');
+$data8AjaxApiKey = $data8Settings->getAjaxKey();
+	
+if ($data8AjaxApiKey && !empty($data8AjaxApiKey)) { ?>
+
+<script src="https://webservices.data-8.co.uk/javascript/predictiveaddress.js"></script>
+<link rel="stylesheet" href="https://webservices.data-8.co.uk/content/predictiveaddress.css">
+<style type="text/css">
+#data8-postcodelookup-list {
+	height: 10em;
+}
+#data8-postcodelookup-cancel {
+	margin-left: 1em;
+}
+</style>
+
+<script type="text/javascript">
+
+	if (typeof(data8) == "undefined")
+		data8 = function () {};
+	
+	data8.magentoconfig = {
+		ajaxKey: '<?php echo $data8AjaxApiKey ?>',
+		license: '<?php echo $data8Settings->getLicense() ?>',
+		usePredictiveAddress: <?php echo $data8Settings->getUsePredictiveAddress() ? 'true' : 'false' ?>,
+		predictiveAddressOptions: `<?php echo $data8Settings->getPredictiveAddressOptions() ?>`,
+		useOnBlur: <?php echo $data8Settings->getUseOnBlur() ? 'true' : 'false' ?>,
+		emailValidationLevel: '<?php echo $data8Settings->getEmailValidationLevel() ?>',
+		useTelephoneValidation: <?php echo $data8Settings->getUseTelephoneValidation() ? 'true' : 'false' ?>,
+		defaultCountryCode: '<?php echo $data8Settings->getDefaultCountryCode() ?>',
+		useSalaciousName: <?php echo $data8Settings->getUseSalaciousName() ? 'true' : 'false' ?>
+	};
+
+	require(["https://webservices.data-8.co.uk/javascript/magento2-2.js"])
+</script>
+<?php 
+	
+}

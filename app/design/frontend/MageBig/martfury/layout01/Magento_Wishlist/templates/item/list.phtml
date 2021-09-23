@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Items $block */
+$columns = $block->getColumns();
+$mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$class = $mbHelper->getPageColumn();
+?>
+
+<div class="products-grid wishlist">
+    <?php if (count($block->getItems())): ?>
+    <ol class="product-items row">
+        <?php foreach ($block->getItems() as $item): ?>
+        <li class="product-item <?= $class ?>" id="item_<?= $block->escapeHtmlAttr($item->getId()) ?>">
+            <div class="product-item-info" data-container="product-grid">
+                <?php foreach ($columns as $column): ?>
+                    <?php $column->setItem($item); echo $column->toHtml($item);?>
+                <?php endforeach; ?>
+            </div>
+        </li>
+        <?php endforeach; ?>
+    </ol>
+    <?php else: ?>
+        <div class="message info empty">
+            <span><?= $block->escapeHtml(__('This Wish List has no Items')) ?></span>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php foreach ($columns as $column): ?>
+    <?= $column->getAdditionalHtml() ?>
+<?php endforeach; ?>

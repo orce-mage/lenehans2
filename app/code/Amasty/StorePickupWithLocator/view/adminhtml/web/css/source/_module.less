@@ -1,0 +1,49 @@
+//
+//  Amasty Store Pickup with Locator
+//  ____________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ampickup-date-info {
+        & {
+            float: right;
+            clear: right;
+            margin-top: 15px;
+            width: ~"calc(100% * 0.5 - 30px)";
+        }
+
+        & > * {
+            display: block;
+        }
+
+        .ampickup-title {
+            font-weight: bold;
+        }
+    }
+
+    // Admin create order form styles
+    .ampickup-order-fieldset {
+        & {
+            margin: 40px 0 0;
+            padding: 0;
+            min-width: 0;
+            border: 0;
+        }
+
+        .ampickup-field {
+            width: 40%;
+        }
+    }
+
+    // Hide magento sections title for Store Pickup shipping method (create order page)
+    .admin__page-section.-ampickup {
+        & > div > h4,
+        .admin__page-section-title {
+            display: none;
+        }
+    }
+    // (end) Hide magento sections title for Store Pickup shipping method (create order page)
+}

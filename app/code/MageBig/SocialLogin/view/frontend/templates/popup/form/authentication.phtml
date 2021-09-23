@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<div class="social-login block-container authentication">
+    <div class="social-login-title">
+        <h2 class="login-title"><?= __('Sign In') ?></h2>
+    </div>
+    <div class="block social-login-customer-authentication login-container" id="social-login-authentication">
+        <div class="block-content">
+            <form class="form-customer-login form-login" id="social-form-login" data-mage-init='{"validation":{}}' method="post">
+                <?= $block->getBlockHtml('formkey'); ?>
+                <fieldset class="fieldset login" data-hasrequired="<?= __('* Required Fields') ?>">
+                    <div class="field email required">
+                        <label class="label d-none" for="email-login"><span><?php echo __('Email') ?></span></label>
+                        <div class="control">
+                            <input name="username" id="email-login" type="email" class="input-text"
+                                   value="<?= $block->escapeHtml($block->getUsername()) ?>"<?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?>
+                                   title="<?= __('Email') ?>"
+                                   data-validate="{required:true, 'validate-email':true}" placeholder="<?= __('Email') ?>">
+                        </div>
+                    </div>
+                    <div class="field password required">
+                        <label class="label d-none" for="pass-popup"><span><?php echo __('Password') ?></span></label>
+                        <div class="control">
+                            <input name="password" id="pass-popup" type="password"
+                                   class="input-text"<?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?>
+                                   title="<?= __('Password') ?>"
+                                   data-validate="{required:true}" placeholder="<?= __('Password') ?>">
+                            <a class="action remind" href="<?= $block->getForgotPasswordUrl() ?>" title="<?= __('Forgot Your Password?') ?>"><span><?= __('Forgot?') ?></span></a>
+                        </div>
+                    </div>
+                    <?= $block->getChildHtml('form_additional_info'); ?>
+                    <?php //echo $block->getChildHtml('login.captcha') ?>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <button type="submit" class="action login primary" id="btn-social-login-authentication">
+                                <span><?= __('Login') ?></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <a class="action create" href="<?= $block->getRegisterUrl() ?>"><span><?= __('Create New Account?') ?></span></a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <?= $block->getChildHtml('popup.authentication.social') ?>
+</div>
+

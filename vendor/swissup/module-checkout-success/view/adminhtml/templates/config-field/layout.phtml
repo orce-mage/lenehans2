@@ -1,0 +1,23 @@
+<?php
+    $element = $block->getElement();
+?>
+<div class="success-page-layout-wrapper" data-mage-init='{"Swissup_CheckoutSuccess/js/success-page/layout": <?php echo $block->getOptions();?>}'>
+<div data-role="spinner" class="admin__data-grid-loading-mask">
+    <div class="spinner">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+    </div>
+</div>
+    <?php echo $element->getElementHtml(); ?>
+</div>
+
+<script type="text/html" id="layout-template">
+    <div data-type="container" data-bind="attr: {'data-name': name}, foreach: children">
+        <div data-type="block" data-bind="attr: {'data-name': name}">
+            <span class="name" data-bind="text: $root.availableBlocks[name], attr: {title: $root.availableBlocks[name]}"></span>
+            <div class="actions">
+                <a class="delete" title="Delete" href="#" data-bind="click: function () { $root.removeChild($data, $parent); }"></a>
+            </div>
+        </div>
+    </div>
+</script>

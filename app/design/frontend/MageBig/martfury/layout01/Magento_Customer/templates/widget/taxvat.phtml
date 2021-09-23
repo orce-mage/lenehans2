@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="field taxvat<?php if ($block->isRequired()) echo ' required'; ?>">
+    <label class="label" for="<?= /* @escapeNotVerified */ $block->getFieldId('taxvat')?>"><span><?= /* @escapeNotVerified */ __('Tax/VAT number') ?></span></label>
+    <div class="control">
+        <input type="text" id="<?= /* @escapeNotVerified */ $block->getFieldId('taxvat')?>" name="<?= /* @escapeNotVerified */ $block->getFieldName('taxvat')?>" value="<?= $block->escapeHtml($block->getTaxvat()) ?>" title="<?= /* @escapeNotVerified */ __('Tax/VAT number') ?>" class="input-text <?= /* @escapeNotVerified */ $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('taxvat') ?>" <?= /* @escapeNotVerified */ $block->getFieldParams() ?> <?php if ($block->isRequired()) echo ' data-validate="{required:true}"' ?>>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../Cron/etc/crontab.xsd">
+    <group id="default">
+        <job name="massstockupdate_run" instance="Wyomind\MassStockUpdate\Cron\Run" method="run">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+    </group>
+</config>

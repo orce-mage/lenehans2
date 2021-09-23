@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Catalog\Block\Product\View"
+                   name="ampickupwithlocator.product.banner"
+                   as="ampickupwithlocator_product_banner"
+                   template="Amasty_StorePickupWithLocator::product/banner.phtml"
+                   after="product.info.extrahint">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Amasty\StorePickupWithLocator\ViewModel\Catalog\Product\Banner</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

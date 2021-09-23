@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ExportCore:etc/am_export.xsd">
+    <entity code="amasty_giftcard_account">
+        <name>Amasty Gift Card Account</name>
+        <group>Amasty Gift Card</group>
+        <collectionFactory class="Amasty\GiftCardAccount\Model\GiftCardAccount\ResourceModel\CollectionFactory"/>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ExportCore\Export\FieldsClass\Describe"/>
+            <fields>
+                <field name="image_id">
+                    <actions>
+                        <optionValue2OptionLabel>
+                            <arguments>
+                                <argument name="optionSource" xsi:type="object">Amasty\GiftCard\Model\Config\Source\Image</argument>
+                            </arguments>
+                        </optionValue2OptionLabel>
+                    </actions>
+                    <filter>
+                        <type>select</type>
+                        <options>
+                            <class>Amasty\GiftCard\Model\Config\Source\Image</class>
+                        </options>
+                    </filter>
+                </field>
+                <field name="website_id">
+                    <actions>
+                        <custom class="Amasty\ExportCore\Export\DataHandling\FieldModifier\WebsiteId2WebsiteCode"/>
+                    </actions>
+                    <filter>
+                        <type>select</type>
+                        <options>
+                            <class>Amasty\ExportCore\Export\SourceOption\WebsiteOptions</class>
+                        </options>
+                    </filter>
+                </field>
+                <field name="status">
+                    <actions>
+                        <optionValue2OptionLabel>
+                            <arguments>
+                                <argument name="optionSource" xsi:type="object">Amasty\GiftCardAccount\Model\OptionSource\AccountStatus</argument>
+                            </arguments>
+                        </optionValue2OptionLabel>
+                    </actions>
+                    <filter>
+                        <type>select</type>
+                        <options>
+                            <class>Amasty\GiftCardAccount\Model\OptionSource\AccountStatus</class>
+                        </options>
+                    </filter>
+                </field>
+                <field name="is_sent">
+                    <filter>
+                        <type>toggle</type>
+                    </filter>
+                </field>
+            </fields>
+        </fieldsConfig>
+    </entity>
+    <relation code="sales_order_item_giftcard_account">
+        <parent_entity>sales_order_item</parent_entity>
+        <child_entity>amasty_giftcard_account</child_entity>
+        <sub_entity_field_name>amasty_giftcard_account</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">item_id</argument>
+            <argument name="child_field_name" xsi:type="string">order_item_id</argument>
+        </arguments>
+    </relation>
+    <relation code="giftcard_account_sales_order_item">
+        <parent_entity>amasty_giftcard_account</parent_entity>
+        <child_entity>sales_order_item</child_entity>
+        <sub_entity_field_name>sales_order</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">order_item_id</argument>
+            <argument name="child_field_name" xsi:type="string">item_id</argument>
+        </arguments>
+    </relation>
+</config>

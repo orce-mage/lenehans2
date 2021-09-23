@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amgcard_code_listing.amgcard_code_listing_data_source</item>
+            <item name="deps" xsi:type="string">amgcard_code_listing.amgcard_code_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">amgcard_code_columns</item>
+    </argument>
+    <dataSource name="amgcard_code_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Amasty\GiftCard\Model\Code\DataProvider\Listing</argument>
+            <argument name="name" xsi:type="string">amgcard_code_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">code_id</argument>
+            <argument name="requestFieldName" xsi:type="string">code_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">code_id</item>
+                        <item name="cacheRequests" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sticky" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+        <exportButton name="export_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/grid/export</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="codePool" xsi:type="string">${ $.provider }:params.pool_id</item>
+                    </item>
+                </item>
+            </argument>
+        </exportButton>
+    </listingToolbar>
+    <columns name="amgcard_code_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">code</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Code</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+        <column name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+                <item name="options" xsi:type="object">Amasty\GiftCard\Model\OptionSource\Status</item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Amasty\GiftCard\Ui\Component\Listing\Column\DeleteAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">code_id</item>
+                    <item name="urlEntityParamName" xsi:type="string">code_id</item>
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/grid/columns/delete-action</item>
+                    <item name="deleteUrl" xsi:type="url" path="amgcard/codepool/deletecode" />
+                    <item name="buttons" xsi:type="array">
+                        <item name="delete" xsi:type="array">
+                            <item name="itemLabel" xsi:type="string" translate="true">Delete</item>
+                            <item name="callback" xsi:type="array">
+                                <item name="provider" xsi:type="string">amgcard_code_listing.amgcard_code_listing.amgcard_code_columns.actions</item>
+                                <item name="target" xsi:type="string">deleteCode</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">10000</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

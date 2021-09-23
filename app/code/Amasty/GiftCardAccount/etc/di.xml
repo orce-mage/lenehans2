@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\GiftCardAccount\Api\GiftCardAccountRepositoryInterface" type="Amasty\GiftCardAccount\Model\GiftCardAccount\Repository" />
+    <preference for="Amasty\GiftCardAccount\Api\Data\GiftCardAccountInterface" type="Amasty\GiftCardAccount\Model\GiftCardAccount\Account" />
+
+    <preference for="Amasty\GiftCardAccount\Api\CustomerCardRepositoryInterface" type="Amasty\GiftCardAccount\Model\CustomerCard\Repository" />
+    <preference for="Amasty\GiftCardAccount\Api\Data\CustomerCardInterface" type="Amasty\GiftCardAccount\Model\CustomerCard\CustomerCard" />
+
+    <preference for="Amasty\GiftCardAccount\Api\Data\GiftCardQuoteInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Quote\Quote" />
+    <preference for="Amasty\GiftCardAccount\Api\GiftCardQuoteRepositoryInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Quote\Repository" />
+
+    <preference for="Amasty\GiftCardAccount\Api\Data\GiftCardOrderInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Order\Order" />
+    <preference for="Amasty\GiftCardAccount\Api\GiftCardOrderRepositoryInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Order\Repository" />
+
+    <preference for="Amasty\GiftCardAccount\Api\Data\GiftCardInvoiceInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Invoice\Invoice" />
+    <preference for="Amasty\GiftCardAccount\Api\GiftCardInvoiceRepositoryInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Invoice\Repository" />
+
+    <preference for="Amasty\GiftCardAccount\Api\Data\GiftCardCreditmemoInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Creditmemo\Creditmemo" />
+    <preference for="Amasty\GiftCardAccount\Api\GiftCardCreditmemoRepositoryInterface" type="Amasty\GiftCardAccount\Model\GiftCardExtension\Creditmemo\Repository" />
+
+    <preference for="Amasty\GiftCardAccount\Api\GiftCardAccountManagementInterface" type="Amasty\GiftCardAccount\Model\GiftCardAccount\GiftCardAccountManagement" />
+    <preference for="Amasty\GiftCardAccount\Api\GuestGiftCardAccountManagementInterface" type="Amasty\GiftCardAccount\Model\GiftCardAccount\GuestGiftCardAccountManagement" />
+
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="AmGiftCardQuoteExtension" type="Amasty\GiftCardAccount\Plugin\Quote\CartRepositoryPlugin" />
+    </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="AmGiftCardOrderExtension" type="Amasty\GiftCardAccount\Plugin\Sales\OrderRepositoryPlugin" />
+    </type>
+    <type name="Magento\Sales\Api\InvoiceRepositoryInterface">
+        <plugin name="AmGiftCardInvoiceExtension" type="Amasty\GiftCardAccount\Plugin\Sales\InvoiceRepositoryPlugin" />
+    </type>
+    <type name="Magento\Sales\Api\CreditmemoRepositoryInterface">
+        <plugin name="AmGiftCardCreditmemoExtension" type="Amasty\GiftCardAccount\Plugin\Sales\CreditmemoRepositoryPlugin" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\TotalsCollector">
+        <plugin name="AmGiftCardAmountUpdater" type="Amasty\GiftCardAccount\Plugin\Quote\TotalsCollector" />
+    </type>
+    <type name="Klarna\Core\Model\Checkout\Orderline\Giftcard">
+        <plugin name="AmaGiftCardKlarnaOrderline" type="Amasty\GiftCardAccount\Plugin\Klarna\Orderline\GiftCardPlugin"/>
+    </type>
+    <!-- comp with Klarna Checkout -->
+    <type name="Klarna\Base\Model\Checkout\Orderline\Items\Giftcard">
+        <plugin name="AmaGiftCardKlarnaCheckoutOrderline" type="Amasty\GiftCardAccount\Plugin\Klarna\Orderline\Items\GiftCardPlugin"/>
+    </type>
+
+    <type name="Amasty\GiftCardAccount\Block\Checkout\Cart\GiftCard">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Block\Customer\Cards">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Controller\Account\Index">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Controller\Account\AddCard">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Controller\Account\Remove">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Model\GiftCardAccount\CheckoutConfigProvider">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Controller\Cart\Apply">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Model\GiftCardAccount\GiftCardCartProcessor">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCardAccount\Model\GiftCardAccount\GiftCardAccountValidator">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

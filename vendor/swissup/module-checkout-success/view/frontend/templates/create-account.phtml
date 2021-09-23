@@ -1,0 +1,15 @@
+<?php
+    $contentHtml = $block->getChildHtml();
+    if (!$contentHtml) {
+        return;
+    }
+?>
+<div class="block create-account">
+    <div class="block-title">
+        <strong><?= __('Create account for next time') ?></strong>
+    </div>
+
+    <div class="block-content">
+        <?= $contentHtml; ?>
+    </div>
+</div>

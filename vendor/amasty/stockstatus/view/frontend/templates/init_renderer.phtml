@@ -1,0 +1,18 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Amasty_Stockstatus/js/amstockstatus": <?= /* @noEscape */ $block->getData('options_data') ?>
+        }
+    }
+</script>

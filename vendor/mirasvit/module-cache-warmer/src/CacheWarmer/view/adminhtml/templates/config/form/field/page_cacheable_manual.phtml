@@ -1,0 +1,64 @@
+<?php
+//@codingStandardsIgnoreFile
+/** @var \Mirasvit\CacheWarmer\Block\Adminhtml\Config\Form\Field\PageCacheableManual $block */
+?>
+<tr id="row_cache_warmer_general_warm_by_page_type">
+    <td class="label">
+        <label><?php echo __('Make pages cacheable by page type') ?></label>
+    </td>
+    <td colspan="3">
+        <input type="hidden" id="cache_warmer_extended_delete_cacheable_false_config" />
+        <table class="cache-warmer__config-page-type" id="cache-warmer-page-cacheable-manual">
+            <tr>
+                <th></th>
+                <th><?= __('Page Type') ?></th>
+                <th><?= __('Status') ?></th>
+            </tr>
+            <?php foreach ($block->getPageTypes() as $type): ?>
+                <tr>
+                    <td class="col-order" data-role="draggable-handle">
+                        <div class="draggable-handle"></div>
+                        <input type="hidden" data-role="order"
+                               name="<?php echo $block->getNamePrefix($type) ?>[order]"
+                               value="<?php echo $type->getData('order') ?>">
+                    </td>
+
+                    <td class="col-title"><?php echo $type->getLabel() ?></td>
+
+                    <td class="col-status">
+                        <div class="switcher" onselectstart="return false;">
+                            <input type="checkbox" id="<?php echo $type->getCode() ?>"
+                                   name="<?php echo $block->getNamePrefix($type) ?>[is_active]"
+                                   value="1"
+                                   <?php if ($type->getData('is_active')): ?>checked<?php endif ?>>
+                            <label class="switcher-label"
+                                   for="<?php echo $type->getCode() ?>"
+                                   data-text-on="Enabled"
+                                   data-text-off="Disabled"
+                                   title="<?= __('Status') ?>"></label>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </table>
+    </td>
+    <script>
+        require([
+            'jquery',
+            'collapsable'
+        ], function ($) {
+            var list = $('#cache-warmer-page-cacheable-manual');
+            list.sortable({
+                axis: 'y',
+                handle: '[data-role=draggable-handle]',
+                items: 'tr',
+                update: function (event, data) {
+                    list.find('[data-role=order]').each(function (i, el) {
+                        $(el).val(i + 1);
+                    });
+                },
+                tolerance: 'pointer'
+            });
+        });
+    </script>
+</tr>

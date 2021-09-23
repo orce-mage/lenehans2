@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Amasty\Stockstatus\Api\Data\RuleInterface">
+        <attribute code="ranges" type="Amasty\Stockstatus\Api\Data\RangeInterface[]" />
+    </extension_attributes>
+
+    <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
+        <attribute code="stockstatus_information" type="Amasty\Stockstatus\Api\Data\StockstatusInformationInterface" />
+    </extension_attributes>
+
+    <extension_attributes for="Magento\Quote\Api\Data\TotalsItemInterface">
+        <attribute code="stockstatus_information" type="Amasty\Stockstatus\Api\Data\StockstatusInformationInterface" />
+    </extension_attributes>
+</config>

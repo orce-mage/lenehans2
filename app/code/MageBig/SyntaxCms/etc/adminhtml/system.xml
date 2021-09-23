@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="cms" translate="label" type="text" sortOrder="1001" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="snm_wysiwyg_cm" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Syntax CMS Highlighter</label>
+
+                <field id="enabled" translate="label" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <config_path>magebig_syntaxcms/general/enabled</config_path>
+                </field>
+                <field id="line_wrapping" translate="label" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Use LineWrapping</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <config_path>magebig_syntaxcms/general/line_wrapping</config_path>
+                </field>
+                <field id="theme" translate="label" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Theme</label>
+                    <options>
+                        <option label="Default">default</option>
+                        <option label="Darcula">darcula</option>
+                    </options>
+                    <config_path>magebig_syntaxcms/general/theme</config_path>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="wysi_options" translate="label" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Wysiwyg TinyMCE Options</label>
+                    <frontend_model>MageBig\SyntaxCms\Block\Adminhtml\Form\Field\Wysioptions</frontend_model>
+                    <backend_model>MageBig\SyntaxCms\Model\Adminhtml\System\Config\Wysioptions</backend_model>
+                    <config_path>magebig_syntaxcms/general/wysi_options</config_path>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="bgelements" translate="label" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Use for Background Elements</label>
+                    <frontend_model>MageBig\SyntaxCms\Block\Adminhtml\Form\Field\Bgelements</frontend_model>
+                    <backend_model>MageBig\SyntaxCms\Model\Adminhtml\System\Config\Bgelements</backend_model>
+                    <config_path>magebig_syntaxcms/general/bgelements</config_path>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="frontend" translate="label" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Add for Frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <config_path>magebig_syntaxcms/general/frontend</config_path>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

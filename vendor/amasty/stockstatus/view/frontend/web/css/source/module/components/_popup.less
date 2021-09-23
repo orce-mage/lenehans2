@@ -1,0 +1,220 @@
+//
+//  Amasty Popup Styles
+// _______________________________________________
+
+//
+//  Imports
+//  ----------------------------------------------
+
+@import '../_utils';
+
+//
+//  Variables
+//  ----------------------------------------------
+
+@amstock-close-button__image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAxNSAxNSI+CiAgPGRlZnMvPgogIDxwYXRoIGZpbGw9IiNDMkMyQzIiIGQ9Ik04LjMyODQ0IDcuNTAwNzZsNi40OTk2Ni02LjQ5OTc0Yy4yMjg5LS4yMjg4MzYuMjI4OS0uNTk5ODUxIDAtLjgyODY1OS0uMjI4OC0uMjI4ODA4Ny0uNTk5OC0uMjI4ODM4LS44Mjg2IDBMNy40OTk3NSA2LjY3MjA5IDEuMDAwMDQuMTcyMzYxYy0uMjI4ODMzLS4yMjg4MzgtLjU5OTg0OC0uMjI4ODM4LS44Mjg2NTYgMC0uMjI4ODA4Mi4yMjg4MzctLjIyODgzNzUuNTk5ODUyIDAgLjgyODY1OUw2LjY3MTA5IDcuNTAwNzMuMTcxMzg0IDE0LjAwMDVjLS4yMjg4Mzc1LjIyODgtLjIyODgzNzUuNTk5OCAwIC44Mjg2LjExNDQwNC4xMTQ0LjI2NDM3NC4xNzE2LjQxNDM0NS4xNzE2LjE0OTk3IDAgLjI5OTkxMi0uMDU3Mi40MTQzNDEtLjE3MTZsNi40OTk2OC02LjQ5OTY4IDYuNDk5NzUgNi40OTk2OGMuMTE0NC4xMTQ0LjI2NDMuMTcxNi40MTQzLjE3MTYuMTUgMCAuMjk5OS0uMDU3Mi40MTQzLS4xNzE2LjIyODktLjIyODguMjI4OS0uNTk5OCAwLS44Mjg2TDguMzI4NDQgNy41MDA3NnoiLz4KPC9zdmc+Cg==);
+@amstock-close-button__size__s: 10px;
+@amstock-close-button__size__m: 15px;
+@amstock-popup-block__offset: 25px;
+@amstock-popup-block__height: calc(~'100% - @{amstock-popup-block__offset} * 2');
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amstock-popup-wrapper {
+        & {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, .24);
+            transition: visibility .2s, opacity .2s;
+        }
+
+        &:not(.-active) {
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+
+    .amstock-popup-block {
+        & {
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            margin: @amstock-popup-block__offset 15px;
+            padding: 30px 15px 45px;
+            width: 100%;
+            height: @amstock-popup-block__height;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0 3px 7px rgba(139, 144, 154, .25), 0 6px 25px rgba(139, 144, 154, .5);
+            text-align: left;
+            transition: transform .4s, opacity .4s;
+        }
+
+        .amstock-popup-wrapper:not(.-active) & {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        & > .amstock-button.-close {
+            & {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 5px;
+                padding: 25px;
+                width: @amstock-close-button__size__s;
+                height: @amstock-close-button__size__s;
+                background: @amstock-close-button__image center/@amstock-close-button__size__s no-repeat;
+                font-size: 0;
+                transition: filter .2s;
+            }
+
+            &:hover,
+            &:focus,
+            &:active {
+                filter: brightness(.5);
+            }
+        }
+
+        .ie11 & > .amstock-button.-close {
+            & {
+                transition: opacity .2s;
+            }
+
+            &:hover,
+            &:focus,
+            &:active {
+                opacity: .6;
+            }
+        }
+
+        & > .amstock-header {
+            .am-word-break;
+
+            margin: 20px 15px 40px;
+            color: #000;
+            text-align: center;
+            font-weight: @font-weight__semibold;
+            font-size: 2.4rem;
+            line-height: 3.3rem;
+        }
+
+        & > .amstock-content {
+            .am-scrollbar();
+
+            overflow: auto;
+            margin-top: 40px;
+            max-height: calc(~'100% - 100px');
+            height: 100%;
+            color: #333;
+        }
+
+        .amstock-item {
+            & {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+                box-sizing: border-box;
+                margin: 0 15px;
+                padding: 10px 0;
+                min-height: 35px;
+                border-top: 1px solid transparent;
+            }
+
+            &:not(:first-child) {
+                border-color: #ebeef5;
+            }
+        }
+
+        .amstock-item > .amstock-title {
+            .am-word-break;
+
+            flex-basis: calc(~'100% / 3');
+            margin-bottom: 5px;
+            padding: 0;
+            min-width: calc(~'100% / 3');
+            font-weight: @font-weight__semibold;
+            font-size: 1.4rem;
+            line-height: 1.9rem;
+        }
+
+        .amstock-item > .amstock-value {
+            .am-word-break;
+
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            flex-wrap: wrap;
+            padding: 0;
+            font-weight: @font-weight__regular;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+        }
+
+        .amstock-image {
+            display: flex;
+            margin-right: 10px;
+            max-width: 50%;
+        }
+    }
+
+    body.-amstock-popup-active {
+        overflow: hidden;
+    }
+}
+
+//
+//  Tablet
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amstock-popup-block {
+        & {
+            overflow: auto;
+            padding-bottom: 50px;
+            max-width: 565px;
+            max-height: @amstock-popup-block__height;
+            height: auto;
+        }
+
+        & > .amstock-button.-close {
+            margin: 10px 5px;
+            padding: 15px;
+            width: @amstock-close-button__size__m;
+            height: @amstock-close-button__size__m;
+            background-size: @amstock-close-button__size__m;
+        }
+
+        & > .amstock-content {
+            max-height: 375px;
+        }
+
+        .amstock-item {
+            align-items: center;
+            flex-direction: row;
+            padding: 5px 0;
+        }
+
+        .amstock-item > .amstock-title {
+            margin-bottom: 0;
+            padding: 0 5px;
+        }
+
+        .amstock-item > .amstock-value {
+            flex-wrap: nowrap;
+            padding: 0 5px;
+        }
+    }
+}

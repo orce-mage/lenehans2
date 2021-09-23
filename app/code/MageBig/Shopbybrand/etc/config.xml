@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 MageBig. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magebig_shopbybrand>
+			<general>
+				<attribute_code>manufacturer</attribute_code>
+                <brand_route>our-brands</brand_route>
+                <display_brand_logo>0</display_brand_logo>
+			</general>
+            <our_brands_page>
+                <title>Our Brands</title>
+                <description><![CDATA[<p>Introducing our major brands to serve wholehearted satisfaction and enrichment of the lives of people.</p>]]></description>
+                <alphabet_table>a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z</alphabet_table>
+                <meta_title>Our Brands</meta_title>
+                <meta_keywords>brands,our brands</meta_keywords>
+                <meta_description>Our Quality Brands stretch from corner to corner in our stores, with over 10,000 items that families know they can trust.</meta_description>
+                <display_brand_search>1</display_brand_search>
+            </our_brands_page>
+			<brand_page>
+				<display_cover>1</display_cover>
+				<display_thumbnail>1</display_thumbnail>
+				<display_description>1</display_description>
+			</brand_page>
+            <brand_search_form>
+                <display_on_brand_page>1</display_on_brand_page>
+                <display_on_cat_page>0</display_on_cat_page>
+                <display_on_search_page>0</display_on_search_page>
+            </brand_search_form>
+            <featured_brands>
+                <title>Featured Brands</title>
+                <sort_by>brand_label</sort_by>
+                <sort_order>asc</sort_order>
+                <display_on_brand_page>1</display_on_brand_page>
+                <display_on_cat_page>0</display_on_cat_page>
+                <display_on_search_page>0</display_on_search_page>
+                <display_on_top_cat_page>0</display_on_top_cat_page>
+            </featured_brands>
+		</magebig_shopbybrand>
+	</default>
+</config>

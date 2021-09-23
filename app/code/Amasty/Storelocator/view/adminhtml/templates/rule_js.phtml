@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+?>
+<?php /** @var \Amasty\Storelocator\Block\Location $block */ ?>
+<script>
+    require([
+        "jquery",
+        "Magento_Ui/js/lib/view/utils/dom-observer",
+        "mage/adminhtml/form",
+        "Amasty_Storelocator/js/admin",
+        "https://maps.googleapis.com/maps/api/js?libraries=places&key=<?= $block->escapeHtml(
+            $block->configProvider->getApiKey()
+        ); ?>"
+    ], function(jQuery, domObserver) {
+        domObserver.get('#map-canvas', function () {
+            jQuery('#map-canvas').amLocator();
+        });
+    })
+</script>

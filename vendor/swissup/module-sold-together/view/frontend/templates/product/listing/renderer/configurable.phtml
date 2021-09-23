@@ -1,0 +1,53 @@
+<?php
+    /** @var $block \Magento\ConfigurableProduct\Block\Product\View\Type\Configurable*/
+    $_product    = $block->getProduct();
+    $_attributes = $block->decorateArray($block->getAllowAttributes());
+    if (!$_product->isSaleable() || count($_attributes) < 1) {
+        return;
+    }
+
+    $containerSelector = "[data-role=configurable-options-{$block->escapeJs($_product->getId())}]";
+    $priceBoxSelector = "[data-price-box=product-id-{$block->escapeJs($_product->getId())}]";
+    $superSelector = ".configurable-opt-{$block->escapeJs($_product->getId())} .super-attribute";
+    $blockHtmlId = $block->getData('block_html_id');
+    if ($blockHtmlId) {
+        $containerSelector = '#' . str_replace('.', '\\\\.', $blockHtmlId) . ' ' . $containerSelector;
+        $priceBoxSelector = '#' . str_replace('.', '\\\\.', $blockHtmlId) . ' ' . $priceBoxSelector;
+        $superSelector = '#' . str_replace('.', '\\\\.', $blockHtmlId) . ' ' . $superSelector;
+    }
+?>
+<div class="configurable-opt-<?= $block->escapeHtmlAttr($_product->getId()) ?>"
+     data-role="configurable-options-<?= $block->escapeHtmlAttr($_product->getId()) ?>">
+<?php foreach ($_attributes as $_attribute) : ?>
+    <div class="field configurable required">
+        <label class="label" for="<?= $block->getDropdownHtmlId($_attribute) ?>">
+            <span><?= $block->escapeHtml($_attribute->getProductAttribute()->getStoreLabel()) ?></span>
+        </label>
+        <div class="control">
+            <select name="super_attribute[<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>]"
+                    data-selector="super_attribute[<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>]"
+                    data-validate="{required:true}"
+                    id="<?= $block->getDropdownHtmlId($_attribute) ?>"
+                    class="super-attribute">
+                <option value=""><?= $block->escapeHtml(__('Choose an Option...')) ?></option>
+            </select>
+        </div>
+    </div>
+<?php endforeach; ?>
+</div>
+<script type="text/x-magento-init">
+    {
+        "<?= $priceBoxSelector ?>": {
+            "priceBox": {
+                "priceConfig":  <?= /* @noEscape */ $block->getPriceConfigJson() ?>
+            }
+        },
+        "<?= $containerSelector ?>": {
+            "Swissup_SoldTogether/js/configurable": {
+                "superSelector": "<?= $superSelector ?>",
+                "priceHolderSelector": "<?= $priceBoxSelector ?>",
+                "spConfig": <?= /* @noEscape */ $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>

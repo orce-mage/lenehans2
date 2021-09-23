@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\Storelocator\Block\Adminhtml\Attribute\Edit" name="attribute_edit_content"/>
+        </referenceContainer>
+
+        <referenceContainer name="left">
+            <block class="Amasty\Storelocator\Block\Adminhtml\Attribute\Edit\Tabs" name="attribute_edit_tabs">
+                <block class="Amasty\Storelocator\Block\Adminhtml\Attribute\Edit\Tab\Main" name="amasty_storelocetor_edit_tab_main"/>
+                <block class="Amasty\Storelocator\Block\Adminhtml\Attribute\Edit\Tab\Label" name="amasty_storelocetor_edit_tab_label"/>
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">amasty_storelocetor_edit_tab_main</argument>
+                    <argument name="block" xsi:type="string">amasty_storelocetor_edit_tab_main</argument>
+                </action>
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">amasty_storelocetor_edit_tab_label</argument>
+                    <argument name="block" xsi:type="string">amasty_storelocetor_edit_tab_label</argument>
+                </action>
+
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="js">
+            <block class="Magento\Backend\Block\Template" name="attribute_edit_js" template="Amasty_Storelocator::attribute/js.phtml"/>
+        </referenceContainer>
+
+    </body>
+</page>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocatorMSI
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Amasty\StorePickupWithLocatorMSI\Block\Product\MsiPickupLocations"
+                   name="ampickupmsi.product.locations"
+                   as="ampickupmsi_product_locations"
+                   template="Amasty_StorePickupWithLocatorMSI::product/locations.phtml"
+                   after="page.main.title">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Amasty\StorePickupWithLocatorMSI\ViewModel\Catalog\Product\Locations</argument>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="ampickupmsi.locations" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_StorePickupWithLocatorMSI/js/view/product/pickup-locations</item>
+                                <item name="template" xsi:type="string">Amasty_StorePickupWithLocatorMSI/product/pickup-locations</item>
+                                <item name="dataScope" xsi:type="string">ampickupmsi.locations</item>
+                                <item name="maxLocationsToShowBeforeExpand" xsi:type="number">3</item>
+                            </item>
+                            <item name="ampickupmsi.locations.map" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_StorePickupWithLocatorMSI/js/view/product/locations-map</item>
+                                <item name="template" xsi:type="string">Amasty_StorePickupWithLocatorMSI/product/locations-map</item>
+                                <item name="dataScope" xsi:type="string">ampickupmsi.locations.map</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <move element="amlocator.link"
+              destination="ampickupmsi.product.locations"
+              as="amlocator_link" />
+    </body>
+</page>

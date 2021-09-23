@@ -1,0 +1,54 @@
+
+<?php $varList = $block->getVariableList();?>
+<div class="mteditor-var-list">
+    <?php if (isset($varList['other']) && !empty($varList['other'])) : ?>
+        <table border="0" cellspacing="10" cellpadding="0">
+            <tr>
+                <td class="mteditor-var-list-label"  colspan="2"><b><?php echo __('General Variables'); ?></b></td>
+            </tr>
+            <?php $i = 0; ?>
+            <?php foreach ($varList['other'] as $key => $value) : ?>
+                <tr class="row-<?php echo (($i%2)+1);?>">
+                    <td class="var-label">{<?php echo $key; ?>}</td>
+                    <td class="var-value"><?php echo $value; ?></td>
+                </tr>
+                <?php $i++; ?>
+            <?php endforeach;?>
+        </table>
+    <?php endif; ?>
+
+    <?php if (isset($varList['billing']) && !empty($varList['billing'])) : ?>
+        <table border="0" cellspacing="10" cellpadding="0">
+            <tr>
+                <td class="mteditor-var-list-label" colspan="2"><b><?php echo __('Billing Information'); ?></b></td>
+            </tr>
+            <?php $i = 0; ?>
+            <?php foreach ($varList['billing'] as $key => $value) : ?>
+                <tr class="row-<?php echo (($i%2)+1);?>">
+                    <td class="var-label">{<?php echo $key; ?>}</td>
+                    <td class="var-value"><?php echo $value; ?></td>
+                </tr>
+                <?php $i++; ?>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+
+    <?php if (isset($varList['shipping'])  && !empty($varList['shipping'])) : ?>
+        <table border="0" cellspacing="10" cellpadding="0">
+            <tr>
+                <td class="mteditor-var-list-label"  colspan="2"><b><?php echo __('Shipping Information'); ?></b></td>
+            </tr>
+        <?php $i = 0; ?>
+        <?php foreach ($varList['shipping'] as $key => $value) : ?>
+            <tr class="row-<?php echo (($i%2)+1);?>">
+                <td class="var-label">{<?php echo $key; ?>}</td>
+                <td class="var-value"><?php echo $value; ?></td>
+            </tr>
+        <?php $i++; ?>
+        <?php endforeach;?>
+        </table>
+    <?php endif; ?>
+
+
+
+</div>

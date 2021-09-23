@@ -1,0 +1,122 @@
+//
+//  Amasty Store Pickup With Locator
+//  Paypal Express Page
+//  ___________________________________________
+
+//
+//  Variables
+//  ___________________________________________
+
+@paypal-express-page_blocks-gap: 5%;
+@paypal-express-column__desktop__width: 33%;
+
+//
+//  Common
+//  -------------------------------------------
+
+& when (@media-common = true) {
+    .paypal-review {
+        .ampickup-store-container.fieldset {
+            display: flex;
+        }
+
+        // Override magento css classes
+        .fieldset > .ampickup-field.field > .label {
+            display: inline-block;
+        }
+
+        // Magento disabled link without an acceptable css identification
+        a.-disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+//
+//  Mobile
+//  -------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .paypal-review .ampickup-store-container.-checkout {
+        .ampickup-field.-store {
+            order: 0;
+        }
+
+        .ampickup-options-container {
+            order: 1;
+        }
+
+        .ampickup-field.-date {
+            order: 2;
+        }
+
+        .ampickup-field.-time {
+            order: 3;
+        }
+    }
+}
+
+//
+//  Tablet
+//  -------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .paypal-review .ampickup-store-container.-checkout {
+        // Field width is equal magento field width
+        .ampickup-field {
+            width: @paypal-express-column__desktop__width;
+        }
+
+        .ampickup-field.-store .ampickup-wrapper {
+            flex-direction: column;
+        }
+
+        .ampickup-separator {
+            align-self: stretch;
+            margin: 15px 0;
+            width: inherit;
+            border-top: 1px solid #c7c7c7;
+        }
+
+        .ampickup-field.-date {
+            padding-left: @paypal-express-page_blocks-gap;
+        }
+
+        .ampickup-field.-time {
+            padding-right: @paypal-express-page_blocks-gap;
+        }
+    }
+
+    .paypal-review .ampickup-conditions-container.block {
+        & {
+            &:extend(.checkout-index-index .ampickup-conditions-container.block all);
+
+            float: none;
+            width: 100%;
+        }
+    }
+
+    .paypal-review .ampickup-options-container {
+        padding-right: ~'calc((100% - @{paypal-express-column__desktop__width} * 2) + 10px)';
+        width: 100%;
+    }
+}
+
+//
+//  Desktop
+//  -------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .paypal-review .ampickup-store-container.-checkout {
+        .ampickup-field.-store .ampickup-wrapper {
+            flex-direction: row;
+        }
+
+        .ampickup-separator {
+            margin: 0 25px;
+            border-top: 0;
+            border-right: 1px solid #c7c7c7;
+        }
+    }
+}

@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+?>
+<?php $var = $block->getVarModel();?>
+<table style=" font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" border="0" width="100%"  cellspacing="0" cellpadding="0">
+    <tr>
+        <td colspan="5" height="0"></td>
+    </tr>
+    <?php foreach ($block->getTotals() as $_code => $_total) : ?>
+        <?php $label = $_total->getLabel();?>
+        <?php $code = $_total->getCode();?>
+        <?php  if ($_total->getBlockName()) : ?>
+            <?php echo $block->getChildHtml($_total->getBlockName()); ?>
+        <?php else :?>
+            <tr>
+                <td
+                    <?php echo $var->getHtmlAttribute('style', 'order_totals_table_label_style_subtotal', 'color: #707582; font-size: 14px; font-weight: bold;'); ?>
+                    <?php echo $var->getTextEditAttribute('order_totals_table_label_'.$code);?>
+
+                    class="mteditor-color total-color">
+                    <?php if ($code == 'discount') : ?>
+                        <?php echo $block->escapeHtml($_total->getLabel());?>
+                    <?php else : ?>
+                        <?php echo $var->getValue('order_totals_table_label_'.$code, $block->escapeHtml($_total->getLabel()), false);?>
+                    <?php endif;?>
+                </td>
+                <td width="15" height="25"  style="width: 15px !important; height: 25px">&nbsp;</td>
+                <td
+                    <?php echo $var->getHtmlAttribute('style', 'order_totals_table_value_style_subtotal', 'color: #707582; font-size: 14px; text-align: right;'); ?>
+                    class="mteditor-color total-color"
+                    align="right">
+                    <?php echo $block->formatValue($_total) ?>
+                </td>
+            </tr>
+        <?php endif?>
+    <?php endforeach?>
+    <tr >
+        <td colspan="5" height="5"><div style="font-size: 0; height: 0;">&nbsp;</div></td>
+    </tr>
+</table>
+

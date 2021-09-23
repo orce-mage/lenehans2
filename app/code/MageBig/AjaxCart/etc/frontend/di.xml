@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Framework\Message\Manager">
+		<plugin name="magebig_remove_default_addtocart_message"
+				type="MageBig\AjaxCart\Plugin\Framework\Message\Manager"
+				sortOrder="10"
+				disabled="false"/>
+	</type>
+</config>

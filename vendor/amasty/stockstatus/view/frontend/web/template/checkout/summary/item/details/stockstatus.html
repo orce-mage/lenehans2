@@ -1,0 +1,25 @@
+<div class="amstockstatus-status-container -checkout stock" data-bind="if: canDisplay($parent)">
+    <!-- ko if: getStatusIcon($parent) !== null -->
+        <img data-bind="attr: {
+                src: getStatusIcon($parent),
+                alt: getStatusMessage($parent),
+                title: getStatusMessage($parent)
+            }"
+        />
+    <!-- /ko -->
+    <!-- ko if: !isIconOnly -->
+        <span class="amstockstatus"
+              data-bind="text: getStatusMessage($parent), css: 'amsts_' + getStatusId($parent)">
+        </span>
+    <!-- /ko -->
+
+    <!-- ko if: getTooltipText($parent) -->
+        <span class="amstockstatus-tooltip-block" tabindex="0">
+            <span class="amstockstatus-tooltip-content">
+                <span class="amstockstatus-inner"
+                      data-bind="text: getTooltipText($parent)">
+                </span>
+            </span>
+        </span>
+    <!-- /ko -->
+</div>

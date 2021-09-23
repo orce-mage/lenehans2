@@ -1,0 +1,105 @@
+<?php
+/**
+ * Copyright © 2020 Wyomind. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<!--
+  Cron schedule selector template
+-->
+
+<div class='entry-edit form-inline'>
+    <fieldset id="cron_fieldset" class="fieldset ">
+        <legend class="legend">
+            <span><?php echo __('Settings'); ?></span>
+        </legend>
+        <br>
+        <div class="fieldset" id='cron-setting'>
+            <input id="cron_settings" name="cron_settings" value='<?php echo $block->getCronSettings(); ?>'
+                   class=" input-text" type="hidden" class="debug">
+            <table>
+                <thead>
+                <tr>
+                    <th><?php echo __('Days of the week'); ?></th>
+                    <th colspan='4'><?php echo __('Hours of the day'); ?></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td width='300'>
+                        <label class="data-grid-checkbox-cell-inner">
+
+                            <label for="d-Monday">&nbsp;<?php echo __("Monday"); ?></label>
+                            <input class='admin__control-checkbox cron-box day' value='Monday' id="d-Monday"
+                                   type='checkbox'/>
+                        </label>
+                    </td>
+                    <td rowspan="7" class="hours">
+                        <table>
+                            <?php $interval = $block->getCronInterval() ? $block->getCronInterval() : 30; /*interval in minutes*/ ?>
+                            <?php $percent = 100 / (60 / 15) / 2; ?>
+                            <?php for ($h = 0; $h < 12; $h++) : ?>
+                                <?php $am = str_pad($h, 2, "0", STR_PAD_LEFT); ?>
+                                <?php $pm = $h + 12; ?>
+                                <tr>
+
+                                    <?php
+                                    for ($ham = 0; $ham < 60; $ham++) {
+                                        if ($ham % $interval == 0) {
+                                            $mn = str_pad($ham, 2, '0', STR_PAD_LEFT);
+                                            ?>
+                                            <td style='width:<?php echo $percent; ?>%;'>
+                                                <label class="data-grid-checkbox-cell-inner">
+                                                    <label for="h-<?php echo $am; ?><?php echo $mn; ?>">&nbsp;<?php echo __($am . ":" . $mn . ""); ?></label>
+                                                    <input class='cron-box hour admin__control-checkbox'
+                                                           value='<?php echo $am; ?>:<?php echo $mn; ?>'
+                                                           id='h-<?php echo $am; ?><?php echo $mn; ?>'
+                                                           type='checkbox'/>
+
+                                                </label>
+                                            </td>
+                                            <?php
+                                        }
+                                    }
+                                    for ($pam = 0; $pam < 60; $pam++) {
+                                        if ($pam % $interval == 0) {
+                                            $mn = str_pad($pam, 2, '0', STR_PAD_LEFT);
+                                            ?>
+                                            <td style='width:<?php echo $percent; ?>%;'>
+                                                <label class="data-grid-checkbox-cell-inner">
+                                                    <label for="h-<?php echo $pm; ?><?php echo $mn; ?>">&nbsp;<?php echo __($pm . ":" . $mn . ""); ?></label>
+                                                    <input class='cron-box hour admin__control-checkbox'
+                                                           value='<?php echo $pm; ?>:<?php echo $mn; ?>'
+                                                           id='h-<?php echo $pm; ?><?php echo $mn; ?>'
+                                                           type='checkbox'/>
+
+                                                </label>
+                                            </td>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </tr>
+                            <?php endfor; ?>
+                        </table>
+                    </td>
+                    <?php
+                    $days = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                    foreach ($days
+
+                    as $day) :
+                    ?>
+                <tr>
+                    <td width='300'>
+                        <label class="data-grid-checkbox-cell-inner">
+                            <label for="d-<?php echo $day; ?>">&nbsp;<?php echo __($day); ?></label>
+                            <input class='admin__control-checkbox cron-box day' value='<?php echo $day; ?>'
+                                   id="d-<?php echo $day; ?>" type='checkbox'/>
+
+                        </label>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </fieldset>
+</div>

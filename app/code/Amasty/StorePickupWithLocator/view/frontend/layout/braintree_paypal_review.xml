@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="paypal.additional.actions">
+            <block class="Amasty\StorePickupWithLocator\Block\Component\PickupDetails" name="amasty.pickup-details.template" template="Amasty_StorePickupWithLocator::component/pickup-details.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="amstorepickup" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/paypal-express/pickup/pickup-fieldset</item>
+                                <item name="dataScope" xsi:type="string">amstorepickup</item>
+                                <item name="provider" xsi:type="string">checkoutProvider</item>
+                                <item name="maxCommentLength" xsi:type="const">Amasty\StorePickupWithLocator\Model\Quote\CurbsideValidator::COMMENT_MAX_LENGTH</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="deps" xsi:type="array">
+                                        <item name="0" xsi:type="string">checkoutProvider</item>
+                                    </item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                    <item name="am_pickup_store" xsi:type="array">
+                                        <item name="label" translate="true" xsi:type="string">Select a store to collect your order:</item>
+                                        <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/paypal-express/pickup/pickup-store</item>
+                                        <item name="dataScope" xsi:type="string">am_pickup_store</item>
+                                        <item name="provider" xsi:type="string">checkoutProvider</item>
+                                        <item name="validation" xsi:type="array">
+                                            <item name="required-entry" xsi:type="string">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="am_pickup_date" xsi:type="array">
+                                        <item name="label" translate="true" xsi:type="string">Pickup Date:</item>
+                                        <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/pickup/pickup-date</item>
+                                        <item name="template" xsi:type="string">ui/form/field</item>
+                                        <item name="additionalClasses" xsi:type="string">ampickup-field -date</item>
+                                        <item name="dataScope" xsi:type="string">am_pickup_date</item>
+                                        <item name="placeholder" xsi:type="string">Choose a Pickup Date</item>
+                                        <item name="provider" xsi:type="string">checkoutProvider</item>
+                                        <item name="validation" xsi:type="array">
+                                            <item name="required-entry" xsi:type="string">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="am_pickup_time" xsi:type="array">
+                                        <item name="label" translate="true" xsi:type="string">Pickup Time:</item>
+                                        <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/pickup/pickup-time</item>
+                                        <item name="template" xsi:type="string">ui/form/field</item>
+                                        <item name="additionalClasses" xsi:type="string">ampickup-field -time</item>
+                                        <item name="dataScope" xsi:type="string">am_pickup_time</item>
+                                        <item name="placeholder" xsi:type="string">Choose a Time Slot</item>
+                                        <item name="provider" xsi:type="string">checkoutProvider</item>
+                                        <item name="validation" xsi:type="array">
+                                            <item name="required-entry" xsi:type="string">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="am_pickup_map" xsi:type="array">
+                                        <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/locator/locations-map</item>
+                                        <item name="template" xsi:type="string">Amasty_StorePickupWithLocator/locator/locations-map</item>
+                                        <item name="provider" xsi:type="string">checkoutProvider</item>
+                                    </item>
+                                    <item name="am_pickup_options" xsi:type="array">
+                                        <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/pickup/pickup-options</item>
+                                        <item name="dataScope" xsi:type="string">am_pickup_options</item>
+                                        <item name="provider" xsi:type="string">checkoutProvider</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="isCart" xsi:type="boolean">false</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="comment" xsi:type="array">
+                                                <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/paypal-express/pickup/pickup-options-comment</item>
+                                                <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                <item name="dataScope" xsi:type="string">curbside_comment</item>
+                                                <item name="additionalClasses" xsi:type="string">ampickup-comment</item>
+                                                <item name="validation" xsi:type="array">
+                                                    <item name="max_text_length" xsi:type="const">Amasty\StorePickupWithLocator\Model\Quote\CurbsideValidator::COMMENT_MAX_LENGTH</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="checkoutProvider" xsi:type="array">
+                                <item name="component" xsi:type="string">uiComponent</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

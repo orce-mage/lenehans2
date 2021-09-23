@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="sidebar.main">
+            <block class="MageBig\SmartMenu\Block\SmartMenu" name="categorymenu" before="-" template="MageBig_SmartMenu::html/categories.phtml" />
+        </referenceContainer>
+        <move element="catalog.leftnav" destination="sidebar.main" after="categorymenu"/>
+    </body>
+</page>

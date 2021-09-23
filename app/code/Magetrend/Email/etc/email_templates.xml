@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="mt_email_default_custom"                                      label="* Custom  [ MTEmail/Default ]"                           file="default/custom.html"                                      type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Contact Form (Magento_Contact) -->
+    <template id="mt_email_default_contact_form"                                label="* Contact Form  [ MTEmail/Default ]"                     file="default/contact/submitted_form.html"                      type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Customer Emails (Magento_Customer) -->
+    <template id="mt_email_default_forgot_password"                             label="* Forgot Password  [ MTEmail/Default ]"                  file="default/customer/password_reset_confirmation.html"        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_account"                                 label="* New Account  [ MTEmail/Default ]"                      file="default/customer/account_new.html"                        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_account_confirmation_key"                label="* New Account Confirmation Key  [ MTEmail/Default ]"     file="default/customer/account_new_confirmation.html"           type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_account_confirmed"                       label="* New Account Confirmed  [ MTEmail/Default ]"            file="default/customer/account_new_confirmed.html"              type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_account_without_password"                label="* New Account Without Password  [ MTEmail/Default ]"     file="default/customer/account_new_no_password.html"            type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_remind_password"                             label="* Remind Password  [ MTEmail/Default ]"                  file="default/customer/password_new.html"                       type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_reset_password"                              label="* Reset Password  [ MTEmail/Default ]"                   file="default/customer/password_reset.html"                     type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_change_email"                                label="* Change Email  [ MTEmail/Default ]"                     file="default/customer/change_email.html"                       type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_change_email_and_password"                   label="* Change Email and Password  [ MTEmail/Default ]"        file="default/customer/change_email_and_password.html"          type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Newsletter Emails (Magento_Newsletter) -->
+    <template id="mt_email_default_subscription_confirmation"                   label="* Subscription Confirmation  [ MTEmail/Default ]"        file="default/newsletter/subscr_confirm.html"                   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_subscription_success"                        label="* Subscription Success  [ MTEmail/Default ]"             file="default/newsletter/subscr_success.html"                   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_unsubscription_success"                      label="* Unsubscription Success  [ MTEmail/Default ]"           file="default/newsletter/unsub_success.html"                    type="html" module="Magetrend_Email" area="frontend"/>
+
+
+    <!-- Sales Email (Magento_Sales) -->
+    <template id="mt_email_default_credit_memo_update"                          label="* Credit Memo Update [ MTEmail/Default ]"                file="default/sales/creditmemo_update.html"           type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_credit_memo_update_for_guest"                label="* Credit Memo Update for Guest [ MTEmail/Default ]"      file="default/sales/creditmemo_update_guest.html"     type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_invoice_update"                              label="* Invoice Update [ MTEmail/Default ]"                    file="default/sales/invoice_update.html"              type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_invoice_update_for_guest"                    label="* Invoice Update fot Guest  [ MTEmail/Default ]"         file="default/sales/invoice_update_guest.html"        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_credit_memo"                             label="* New Credit Memo  [ MTEmail/Default ]"                  file="default/sales/creditmemo_new.html"              type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_credit_memo_for_guest"                   label="* New Credit Memo for Guest [ MTEmail/Default ]"         file="default/sales/creditmemo_new_guest.html"        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_invoice"                                 label="* New Invoice  [ MTEmail/Default ]"                      file="default/sales/invoice_new.html"                 type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_invoice_for_guest"                       label="* New Invoice for Guest [ MTEmail/Default ]"             file="default/sales/invoice_new_guest.html"           type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_order"                                   label="* New Order  [ MTEmail/Default ]"                        file="default/sales/order_new.html"                   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_order_for_guest"                         label="* New Order for Guest [ MTEmail/Default ]"               file="default/sales/order_new_guest.html"             type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_shipment"                                label="* New Shipment  [ MTEmail/Default ]"                     file="default/sales/shipment_new.html"                type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_shipment_for_guest"                      label="* New Shipment for Guest [ MTEmail/Default ]"            file="default/sales/shipment_new_guest.html"          type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_order_update"                                label="* Order Update  [ MTEmail/Default ]"                     file="default/sales/order_update.html"                type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_order_update_for_guest"                      label="* Order Update for Guest [ MTEmail/Default ]"            file="default/sales/order_update_guest.html"          type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_shipment_update"                             label="* Shipment Update [ MTEmail/Default ]"                   file="default/sales/shipment_update.html"             type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_shipment_update_for_guest"                   label="* Shipment Update for Guest [ MTEmail/Default ]"         file="default/sales/shipment_update_guest.html"       type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_new_quote"                                   label="* Quote  [ MTEmail/Default ]"                        file="default/sales/quote_new.html"                   type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Send to Friend (Magento_Send_Friend) -->
+    <template id="mt_email_default_send_product_link_to_friend"                 label="* Send Product Link to Friend [ MTEmail/Default ]"       file="default/send_friend/product_share.html"   type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Wish List (Magento_WishList) -->
+    <template id="mt_email_default_wish_list_sharing"                           label="* Wish List Sharing [ MTEmail/Default ]"                 file="default/wishlist/share_notification.html" type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Product Alert (Magento_Product_Alert) -->
+    <template id="mt_email_default_price_alert"                                 label="* Price Alert  [ MTEmail/Default ]"                      file="default/product_alert/price_alert.html"   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_stock_alert"                                 label="* Stock Alert  [ MTEmail/Default ]"                      file="default/product_alert/stock_alert.html"   type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Checkout -->
+    <template id="mt_email_default_payment_failed"                              label="* Payment Failed  [ MTEmail/Default ]"                   file="default/checkout/failed_payment.html"     type="html" module="Magetrend_Email"  area="frontend"/>
+
+    <!-- Temondo Shipping -->
+    <template id="mt_email_default_pickup_new_order"                            label="* Pickup New Order  [ MTEmail/Default ]"                 file="default/pickup/order_new.html"            type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_pickup_new_order_guest"                      label="* Pickup New Order Guest  [ MTEmail/Default ]"           file="default/pickup/order_new_guest.html"      type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_pickup_ready"                                label="* Pickup Ready  [ MTEmail/Default ]"                     file="default/pickup/ready.html"                type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_pickup_canceled"                             label="* Pickup Canceled  [ MTEmail/Default ]"                  file="default/pickup/canceled.html"             type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_default_pickup_collected"                            label="* Pickup Collected  [ MTEmail/Default ]"                 file="default/pickup/collected.html"            type="html" module="Magetrend_Email" area="frontend"/>
+
+
+    <template id="mt_email_awesome_custom"                                      label="* Custom  [ MTEmail/Awesome ]"                           file="awesome/custom.html"                            type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Awesome Design > Contact Form (Magento_Contact) -->
+    <template id="mt_email_awesome_contact_form"                                label="* Contact Form  [ MTEmail/Awesome ]"                     file="awesome/contact/submitted_form.html"            type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Awesome Design > Customer Emails (Magento_Customer) -->
+    <template id="mt_email_awesome_new_account"                                 label="* New Account  [ MTEmail/Awesome ]"                      file="awesome/customer/account_new.html"                        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_account_confirmation_key"                label="* New Account Confirmation Key  [ MTEmail/Awesome ]"     file="awesome/customer/account_new_confirmation.html"           type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_account_confirmed"                       label="* New Account Confirmed  [ MTEmail/Awesome ]"            file="awesome/customer/account_new_confirmed.html"              type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_account_without_password"                label="* New Account Without Password  [ MTEmail/Awesome ]"     file="awesome/customer/account_new_no_password.html"            type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_forgot_password"                             label="* Forgot Password  [ MTEmail/Awesome ]"                  file="awesome/customer/password_reset_confirmation.html"        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_remind_password"                             label="* Remind Password  [ MTEmail/Awesome ]"                  file="awesome/customer/password_new.html"                       type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_reset_password"                              label="* Reset Password  [ MTEmail/Awesome ]"                   file="awesome/customer/password_reset.html"                     type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_change_email"                                label="* Change Email  [ MTEmail/Awesome ]"                     file="awesome/customer/change_email.html"                       type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_change_email_and_password"                   label="* Change Email and Password  [ MTEmail/Awesome ]"        file="awesome/customer/change_email_and_password.html"          type="html" module="Magetrend_Email" area="frontend"/>
+
+
+    <!-- Newsletter Emails (Magento_Newsletter) -->
+    <template id="mt_email_awesome_subscription_confirmation"                   label="* Subscription Confirmation  [ MTEmail/Awesome ]"        file="awesome/newsletter/subscr_confirm.html"                   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_subscription_success"                        label="* Subscription Success  [ MTEmail/Awesome ]"             file="awesome/newsletter/subscr_success.html"                   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_unsubscription_success"                      label="* Unsubscription Success  [ MTEmail/Awesome ]"           file="awesome/newsletter/unsub_success.html"                    type="html" module="Magetrend_Email" area="frontend"/>
+
+
+    <!-- Awesome Design > Sales Email (Magento_Sales) -->
+    <template id="mt_email_awesome_credit_memo_update"                          label="* Credit Memo Update [ MTEmail/Awesome ]"                file="awesome/sales/creditmemo_update.html"           type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_credit_memo_update_for_guest"                label="* Credit Memo Update for Guest [ MTEmail/Awesome ]"      file="awesome/sales/creditmemo_update_guest.html"     type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_invoice_update"                              label="* Invoice Update [ MTEmail/Awesome ]"                    file="awesome/sales/invoice_update.html"              type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_invoice_update_for_guest"                    label="* Invoice Update fot Guest  [ MTEmail/Awesome ]"         file="awesome/sales/invoice_update_guest.html"        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_credit_memo"                             label="* New Credit Memo  [ MTEmail/Awesome ]"                  file="awesome/sales/creditmemo_new.html"              type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_credit_memo_for_guest"                   label="* New Credit Memo for Guest [ MTEmail/Awesome ]"         file="awesome/sales/creditmemo_new_guest.html"        type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_invoice"                                 label="* New Invoice  [ MTEmail/Awesome ]"                      file="awesome/sales/invoice_new.html"                 type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_invoice_for_guest"                       label="* New Invoice for Guest [ MTEmail/Awesome ]"             file="awesome/sales/invoice_new_guest.html"           type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_order"                                   label="* New Order  [ MTEmail/Awesome ]"                        file="awesome/sales/order_new.html"                   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_order_for_guest"                         label="* New Order for Guest [ MTEmail/Awesome ]"               file="awesome/sales/order_new_guest.html"             type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_shipment"                                label="* New Shipment  [ MTEmail/Awesome ]"                     file="awesome/sales/shipment_new.html"                type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_new_shipment_for_guest"                      label="* New Shipment for Guest [ MTEmail/Awesome ]"            file="awesome/sales/shipment_new_guest.html"          type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_order_update"                                label="* Order Update  [ MTEmail/Awesome ]"                     file="awesome/sales/order_update.html"                type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_order_update_for_guest"                      label="* Order Update for Guest [ MTEmail/Awesome ]"            file="awesome/sales/order_update_guest.html"          type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_shipment_update"                             label="* Shipment Update [ MTEmail/Awesome ]"                   file="awesome/sales/shipment_update.html"             type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_shipment_update_for_guest"                   label="* Shipment Update for Guest [ MTEmail/Awesome ]"         file="awesome/sales/shipment_update_guest.html"       type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Temondo Shipping -->
+    <template id="mt_email_awesome_pickup_new_order"                            label="* Pickup New Order  [ MTEmail/Awesome ]"                 file="awesome/pickup/order_new.html"            type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_pickup_new_order_guest"                      label="* Pickup New Order Guest  [ MTEmail/Awesome ]"           file="awesome/pickup/order_new_guest.html"      type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_pickup_ready"                                label="* Pickup Ready  [ MTEmail/Awesome ]"                     file="awesome/pickup/ready.html"                type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_pickup_canceled"                             label="* Pickup Canceled  [ MTEmail/Awesome ]"                  file="awesome/pickup/canceled.html"             type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_pickup_collected"                            label="* Pickup Collected  [ MTEmail/Awesome ]"                 file="awesome/pickup/collected.html"            type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Send to Friend (Magento_Send_Friend) -->
+    <template id="mt_email_awesome_send_product_link_to_friend"                 label="* Send Product Link to Friend [ MTEmail/Awesome ]"       file="awesome/send_friend/product_share.html"   type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Wish List (Magento_WishList) -->
+    <template id="mt_email_awesome_wish_list_sharing"                           label="* Wish List Sharing [ MTEmail/Awesome ]"                 file="awesome/wishlist/share_notification.html" type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Product Alert (Magento_Product_Alert) -->
+    <template id="mt_email_awesome_price_alert"                                 label="* Price Alert  [ MTEmail/Awesome ]"                      file="awesome/product_alert/price_alert.html"   type="html" module="Magetrend_Email" area="frontend"/>
+    <template id="mt_email_awesome_stock_alert"                                 label="* Stock Alert  [ MTEmail/Awesome ]"                      file="awesome/product_alert/stock_alert.html"   type="html" module="Magetrend_Email" area="frontend"/>
+
+    <!-- Checkout -->
+    <template id="mt_email_awesome_payment_failed"                              label="* Payment Failed  [ MTEmail/Awesome ]"                   file="awesome/checkout/failed_payment.html"     type="html" module="Magetrend_Email"  area="frontend"/>
+
+
+
+</config>
+

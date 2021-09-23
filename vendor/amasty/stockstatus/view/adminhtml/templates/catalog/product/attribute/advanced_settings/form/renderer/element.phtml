@@ -1,0 +1,66 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+?>
+<?php
+// phpcs:ignoreFile
+/**
+ * @var \Amasty\Stockstatus\Block\Adminhtml\Product\Attribute\Edit\Form\Renderer\Fieldset\Element $block
+ * @var \Magento\Framework\Escaper $escaper
+ **/
+
+/** @var @var \Magento\Framework\Data\Form\Element\AbstractElement $element **/
+$element = $block->getElement();
+$elementId = $escaper->escapeHtmlAttr($element->getId());
+$elementNote = $escaper->escapeHtml($element->getNote());
+$note = $element->hasNote() ? "<div class=\"note\" id=\"{$elementId}-note\">{$elementNote}</div>" : '';
+?>
+
+<?php if (!$element->getNoDisplay()) : ?>
+    <?php if ($element->getType() === 'hidden') : ?>
+        <?= $element->getElementHtml() ?>
+    <?php else : ?>
+        <div <?= ($element->getHtmlContainerId()) ? ' id="' . $escaper->escapeHtml($element->getHtmlContainerId()) . '"' : ''?>
+            class="<?= $escaper->escapeHtmlAttr($block->getFieldClass()) ?>"
+            <?= $escaper->escapeHtmlAttr($block->getUiId('form-field', $element->getId())) ?>
+            <?= $escaper->escapeHtmlAttr($element->getFieldExtraAttributes()) ?>>
+            <?php if ($block->isElementBeforeLabel()) : ?>
+                <?= $element->getElementHtml() ?>
+                <?= $element->getLabelHtml() ?>
+                <?= /* @escapeNotVerified */ $note ?>
+            <?php else : ?>
+                <?= $element->getLabelHtml() ?>
+                <div class="admin__field-control control">
+                    <?= /* @escapeNotVerified */ $block->isElementAddon() ?
+                        '<div class="admin__field">' . $element->getElementHtml() . '</div>' :
+                        $element->getElementHtml(); ?>
+                    <?= /* @escapeNotVerified */ $note ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="field-service" value-scope="<?= $escaper->escapeHtml(__('[STORE VIEW]')) ?>">
+                <?php if ($block->isShowUseDefault()) : ?>
+                    <label for="<?= $element->getHtmlId() ?>_default" class="choice use-default">
+                        <input
+                            <?php if ($element->getReadonly()) : ?>
+                                disabled="disabled"
+                            <?php endif; ?>
+                            type="checkbox"
+                            name="use_default[]"
+                            class="use-default-control"
+                            id="<?= $escaper->escapeHtmlAttr($element->getHtmlId()) ?>_default"
+                            <?php if ($block->isValueDefault()) : ?>
+                                checked="checked"
+                            <?php endif; ?>
+                            onclick="toggleValueElements(this, this.parentNode.parentNode.parentNode)"
+                            value="<?= $escaper->escapeHtmlAttr($element->getName()) ?>"/>
+                        <span class="use-default-label"><?= $escaper->escapeHtml(__('Use Default Value')) ?></span>
+                    </label>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

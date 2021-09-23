@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_ImportCore::importcore"
+             title="Amasty Import"
+             translate="title"
+             module="Amasty_ImportCore"
+             parent="Magento_Backend::system"
+             dependsOnModule="Amasty_ImportCore"
+             sortOrder="15"
+             resource="Amasty_ImportCore::importcore"
+        />
+        <add id="Amasty_ImportCore::import"
+             title="Import"
+             module="Amasty_ImportCore"
+             sortOrder="10"
+             action="amimport/import/index"
+             parent="Amasty_ImportCore::importcore"
+             resource="Amasty_ImportCore::import"/>
+    </menu>
+</config>

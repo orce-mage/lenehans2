@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!--<move element="checkout.cart.coupon" destination="cart.summary" after="checkout.cart.summary.title" />-->
+        <move element="checkout.cart.widget" destination="checkout.cart.container" after="-" />
+        <referenceBlock name="checkout.cart.crosssell" remove="true" />
+    </body>
+</page>

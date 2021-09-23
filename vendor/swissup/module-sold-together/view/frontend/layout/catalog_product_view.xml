@@ -1,0 +1,40 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Swissup_SoldTogether::css/soldtogether.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Swissup\SoldTogether\Block\Order" name="soldtogether.product.order" template="product/order.phtml" after="-"/>
+            <block class="Swissup\SoldTogether\Block\Customer" name="soldtogether.product.customer" template="product/carousel.phtml" after="-">
+                <arguments>
+                    <argument name="type" xsi:type="string">related</argument>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="Swissup_Swiper/js/swiper" xsi:type="array">
+                            <item name="slidesPerView" xsi:type="number">5</item>
+                            <item name="spaceBetween" xsi:type="number">10</item>
+                            <item name="freeMode" xsi:type="boolean">true</item>
+                            <item name="navigation" xsi:type="array">
+                                <item name="nextEl" xsi:type="string">.swiper-button-next</item>
+                                <item name="prevEl" xsi:type="string">.swiper-button-prev</item>
+                            </item>
+                            <item name="breakpoints" xsi:type="array">
+                                <item name="1024" xsi:type="array">
+                                    <item name="slidesPerView" xsi:type="number">4</item>
+                                </item>
+                                <item name="600" xsi:type="array">
+                                    <item name="slidesPerView" xsi:type="number">3</item>
+                                </item>
+                                <item name="480" xsi:type="array">
+                                    <item name="slidesPerView" xsi:type="number">2</item>
+                                </item>
+                                <item name="376" xsi:type="array">
+                                    <item name="slidesPerView" xsi:type="number">1</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="magebig_syntaxcms_cm"
+            class="MageBig\SyntaxCms\Block\Widget\Cm"
+    >
+        <!-- placeholder_image="MageBig_SyntaxCms::images/wysiwyg_cm.png" -->
+        <label translate="true">Syntax Cms</label>
+        <description translate="true">SyntaxHigligher</description>
+        <parameters>
+            <parameter name="template" xsi:type="select" visible="true" required="true" sort_order="10">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="widget/cm/default.phtml" selected="true">
+                        <label translate="true">Default Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="mode" xsi:type="select" visible="true" required="true" sort_order="10"
+                       source_model="MageBig\SyntaxCms\Model\Adminhtml\Source\Type">
+                <label translate="true">Type</label>
+            </parameter>
+            <parameter name="code" xsi:type="block" required="true" sort_order="20">
+                <label translate="true">Code</label>
+                <block class="MageBig\SyntaxCms\Block\Widget\Cm\Code"/>
+            </parameter>
+        </parameters>
+    </widget>
+
+</widgets>

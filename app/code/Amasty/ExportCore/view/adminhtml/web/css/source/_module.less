@@ -1,0 +1,536 @@
+//
+//  Export Core
+//  ____________________________________________
+
+@amexportcore-reset-icon__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMCAuNzc1TDkuMjI0IDAgNSA0LjIyNS43NzYgMCAwIC43NzUgNC4yMjUgNSAwIDkuMjI1Ljc3NiAxMCA1IDUuNzc1IDkuMjI0IDEwIDEwIDkuMjI1IDUuNzc1IDUgMTAgLjc3NXoiIGZpbGw9IiNCODM4NTEiLz48L3N2Zz4=');
+@amexportcore-delete-icon__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjE0OCAyMmg5LjczMmwxLjIyMy0xMS45NDRINS45OEw3LjE1IDIyem03LjU4NS0xNy4wM1YyLjY4M2MwLS4zNzctLjI5Mi0uNjgyLS42NTItLjY4Mkg5Ljk0OGMtLjM2IDAtLjY1MS4zMDYtLjY1MS42ODJ2Mi4yNTFBMTguMjU3IDE4LjI1NyAwIDAwNSA1Ljk2MXYyLjEwMmgxNFY1LjkwNXMtMS43MDktLjYxNi00LjI2OC0uOTM0aC4wMDF6bS0xLjI5OS0uMTI1YTIyLjQ4IDIyLjQ4IDAgMDAtMi45MDctLjAyVjMuNjJjMC0uMTg4LjE0My0uMzQuMzI0LS4zNGgyLjI1NmMuMTgyIDAgLjMyNy4xNTIuMzI3LjM0djEuMjI2eiIgZmlsbD0iIzVBNTU1MiIvPjwvc3ZnPg==');
+@amexportcore-dnd-icon__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDE5LjMzM2gzLjA0OVYyMkg4di0yLjY2N3pNMTIuOTUzIDJIMTZ2Mi42NjdoLTMuMDQ3VjJ6bTAgNC4zMzNIMTZWOWgtMy4wNDdWNi4zMzN6bTAgNC4zMzRIMTZ2Mi42NjZoLTMuMDQ3di0yLjY2NnptMCA0LjMzM0gxNnYyLjY2N2gtMy4wNDdWMTV6bTAgNC4zMzNIMTZWMjJoLTMuMDQ3di0yLjY2N3pNOCAyaDMuMDQ5djIuNjY3SDhWMnptMCA0LjMzM2gzLjA0OVY5SDhWNi4zMzN6bTAgNC4zMzRoMy4wNDl2Mi42NjZIOHYtMi42NjZ6TTggMTVoMy4wNDl2Mi42NjdIOFYxNXoiIGZpbGw9IiM1QTU1NTIiLz48L3N2Zz4=');
+@amexportcore-table__background: #f6f6f6;
+@amexportcore-border__color: #adadad;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amexportcore-dynamic-rows {
+        // Override magento styles start
+        & {
+            margin-top: 0!important;
+        }
+
+        & > .admin__field-label {
+            margin-bottom: 20px!important;
+            font-size: 20px!important;
+        }
+
+        .amexportcore-remove .action-delete:before {
+            position: absolute;
+            top: 18px;
+            right: 30px;
+            width: 15px;
+            height: 20px;
+            background: @amexportcore-delete-icon__background no-repeat center;
+            content: '';
+        }
+
+        th._no-header {
+            font-weight: 600;
+            color: #444444;
+            padding: 13px 1rem;
+            border-bottom: 5px solid #fff;
+        }
+
+        td.-amwidth30 {
+            width: 30%;
+        }
+
+        td.amexportcore-filter {
+            padding: 13px 1rem;
+            border-bottom: 5px solid #fff;
+        }
+
+        td.amwidth40px {
+            width: 40px;
+            border-bottom: 5px solid #fff;
+        }
+
+        td.-amwidth30 .admin__control-select,
+        td.-amwidth30 .admin__control-multiselect {
+            width: 100%;
+        }
+
+        .admin__control-table-wrapper .admin__action-multiselect-wrap .action-menu {
+            z-index: 10;
+        }
+
+        // Override magento styles end
+
+        .amexportcore-remove {
+            position: relative;
+            text-align: right;
+        }
+    }
+
+    .amexportcore-fields-table {
+        & {
+            width: 100%;
+        }
+
+        .amexportcore-row {
+            padding: 3px 10px;
+            border-bottom: 5px solid #fff;
+        }
+
+        .amexportcore-td {
+            padding: 7px 10px;
+            background: #f1f1f1;
+            color: #403630;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .amexportcore-td.-checkbox {
+            width: 35px;
+        }
+
+        .amexportcore-td.-button {
+            text-align: right;
+        }
+
+        .amexportcore-td.-button .amexportcore-td {
+            padding-left: 15px;
+        }
+
+        .amexportcore-td.-button .amexportcore-button {
+            padding: 5px 31px;
+        }
+
+        .amexportcore-td.-fields {
+            display: flex;
+        }
+
+        .amexportcore-td.-fields .amexportcore-field + .amexportcore-field {
+            margin-left: 15px;
+        }
+
+        .amexportcore-delete {
+            margin-right: 30px;
+            padding: 10px;
+            width: 6px;
+            height: 30px;
+            background: @amexportcore-delete-icon__background no-repeat center;
+            cursor: pointer;
+        }
+    }
+
+    .amexportcore-fields-table .amexportcore-thead.-search {
+        .amexportcore-row {
+            background: #e3e3e3;
+        }
+
+        .amexportcore-th {
+            padding: 6px 10px;
+            text-align: left;
+        }
+
+        .amexportcore-th.-button {
+            max-width: 120px;
+            width: 120px;
+            text-align: right;
+        }
+
+        .amexportcore-th.-button .action-primary {
+            padding: 5px 19px;
+            font-size: 16px;
+        }
+    }
+
+    .amexportcore-fields-table.-selected {
+        & {
+            background: @amexportcore-table__background;
+        }
+
+        &.-static {
+            margin: 0;
+        }
+
+        .amexportcore-thead .amexportcore-row {
+            text-align: left;
+        }
+
+        .amexportcore-thead .amexportcore-row,
+        .amexportcore-row.-dnd {
+            border-bottom: 1px solid #fff;
+        }
+
+        .amexportcore-row {
+            border-bottom: none;
+        }
+
+        .amexportcore-thead {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .amexportcore-th {
+            padding: 15px 0 15px 15px;
+            color: #444;
+            font-weight: 600;
+        }
+
+        .amexportcore-td.-dnd {
+            padding-left: 30px;
+        }
+
+        .amexportcore-td {
+            padding: 20px 0 20px 15px;
+            background: @amexportcore-table__background;
+        }
+
+        .amexportcore-td.-modifier .amexportcore-button {
+            padding: 6px 5px;
+            width: 134px;
+        }
+
+        .amexportcore-td.-button,
+        .amexportcore-th.-button {
+            width: 65px;
+        }
+
+        .amexportcore-th.-button {
+            position: relative;
+        }
+
+        .amexportcore-th .amexportcore-label {
+            position: absolute;
+            top: ~'calc(50% - 10px)';
+            right: 20px;
+        }
+
+        .amexportcore-td.-dnd,
+        .amexportcore-th.-dnd {
+            width: 55px;
+        }
+
+        .amexportcore-td.-modifier,
+        .amexportcore-th.-modifier {
+            width: 149px;
+        }
+
+        .amexportcore-td.-name,
+        .amexportcore-th.-name {
+            width: 40%;
+        }
+
+        .amexportcore-field {
+            padding: 5px 8px;
+            width: 100%;
+            border: 1px solid @amexportcore-border__color;
+            border-radius: 1px;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .amexportcore-field::placeholder {
+            color: #ccc;
+        }
+
+        .amexportcore-field.-disabled {
+            box-sizing: border-box;
+            background: @amexportcore-table__background;
+            color: @amexportcore-border__color;
+        }
+
+        .amexportcore-dnd {
+            display: block;
+            width: 24px;
+            height: 24px;
+            background: @amexportcore-dnd-icon__background;
+        }
+    }
+
+    .amexportcore-fields-table.-static {
+        & {
+            background: @amexportcore-table__background;
+        }
+
+        .amexportcore-fields-table.-selected + & {
+            margin-top: 0;
+        }
+
+        .amexportcore-thead .amexportcore-row {
+            border: none;
+        }
+
+        .amexportcore-th {
+            padding: 30px;
+            width: 50%;
+            text-align: left;
+        }
+
+        .amexportcore-td {
+            padding: 0 0 30px 30px;
+            background: @amexportcore-table__background;
+        }
+
+        .amexportcore-row {
+            border: none;
+        }
+
+        .amexportcore-field {
+            padding: 5px 8px;
+            width: 100%;
+            border: 1px solid @amexportcore-border__color;
+            border-radius: 1px;
+            font-size: 14px;
+        }
+
+        & + .amexportcore-button-container {
+            border: none;
+        }
+    }
+
+    .amexportcore-fields-container {
+        margin-top: 30px;
+        background: #f1f1f1;
+    }
+
+    .amexportcore-fields-container {
+        .amexportcore-header {
+            display: flex;
+            margin-bottom: 5px;
+            background: #f1f1f1;
+        }
+
+        .amexportcore-title {
+            display: block;
+            padding: 15px;
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .amexportcore-title.-button {
+            padding: 0 25px;
+        }
+    }
+
+    .amexportcore-button-container {
+        margin-bottom: 30px;
+        padding: 30px;
+        background: @amexportcore-table__background;
+    }
+
+    .amexportcore-button:active,
+    .amexportcore-button {
+        border-color: @amexportcore-border__color;
+        background: #e3e3e3;
+        box-shadow: none;
+        color: #514943;
+        text-shadow: none;
+    }
+    .amexportcore-button-margin {
+        margin-bottom: 30px;
+    }
+
+    .amexportcore-button:hover {
+        background-color: #dbdbdb;
+        box-shadow: none;
+        color: #514943;
+    }
+
+    .amexportcore-flex-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .amexportcore-search-container {
+        .amexportcore-search {
+            padding: 5px 25px 5px 10px;
+            min-width: 250px;
+            width: 100%;
+            border: 1px solid #ccc;
+            font-weight: 400;
+        }
+
+        .amexportcore-reset.-hidden {
+            display: none;
+        }
+
+        .amexportcore-reset {
+            position: absolute;
+            right: 5px;
+            width: 20px;
+            height: 32px;
+            background: @amexportcore-reset-icon__background no-repeat center;
+        }
+    }
+
+    .amexportcore-search-input {
+        position: relative;
+    }
+
+    .amexportcore-fieldset > .admin__fieldset-wrapper-content > .admin__fieldset {
+        padding-top: 0;
+    }
+
+    .amexportcore-modal-fields {
+        .modal-header .page-main-actions {
+            background: #fff;
+            border: none;
+        }
+
+        .modal-title {
+            font-size: 30px;
+        }
+    }
+
+    .amexportpro-exportjob-edit,
+    .amexport-export-index,
+    .amorderexport-profile-edit,
+    .amproductexport-profile-edit,
+    .amcustomerexport-profile-edit {
+        .amexportcore-button.-brown:hover {
+            background-color: #7b776b;
+        }
+
+        .amexportcore-button.-brown {
+            border-radius: 3px;
+            background-color: #605d56;
+            color: #fff;
+            font-weight: 400;
+            transition: background-color .3s ease-in;
+        }
+
+        .amexportcore-button.-light:hover {
+            background-color: #dbdbdb;
+        }
+
+        .amexportcore-button.-light {
+            box-sizing: border-box;
+            border-radius: 3px;
+            background-color: @amexportcore-table__background;
+            transition: background-color .3s ease-in;
+        }
+    }
+
+    .amorderexport-profile-edit,
+    .amproductexport-profile-edit,
+    .amcustomerexport-profile-edit {
+        .amexportcore-field .admin__control-select,
+        .amexportcore-fieldset .admin__control-select,
+        .amexportcore-fieldset ul.ui-widget,
+        .amexportcore-textarea .admin__control-textarea,
+        .amcron-select .admin__control-select {
+            width: ~'calc(100% - 45px - 4px)';
+        }
+
+        .amcron-schedule-container .admin__field-control .admin__control-text {
+            width: 100%;
+        }
+
+        .admin__fieldset .amexportcore-button-margin:not(:first-of-type) {
+            margin-left: 15px;
+        }
+    }
+
+    .amexportpro-exportjob-edit,
+    .amexport-export-index {
+        .amexportcore-fields-table.-selected .amexportcore-td.-name,
+        .amexportcore-fields-table.-selected .amexportcore-th.-name {
+            width: 45%;
+        }
+    }
+
+    .amexportpro-exportjob-edit {
+        .amexportcore-fieldset .admin__control-select {
+            width: 100%;
+        }
+    }
+
+    .amexportcore-fieldset ul.ui-widget {
+        & {
+            margin-bottom: 0;
+            border: 1px solid @amexportcore-border__color;
+        }
+
+        .tagit-new {
+            margin: 0;
+        }
+    }
+
+    .amexportcore-checkbox,
+    .amexportcore-fieldset-container {
+        .admin__field-tooltip .admin__field-tooltip-content {
+            width: 45vw;
+        }
+
+        .fieldset-wrapper-title .title {
+            font-size: 2rem;
+            font-weight: 400;
+        }
+    }
+
+    .amexportcore-template-type .admin__fieldset,
+    .amexportcore-compress-file .admin__fieldset {
+        padding-top: 0;
+    }
+
+    .amexportcore-tooltip .admin__field-tooltip-content {
+        & {
+            top: 40px;
+            bottom: inherit;
+            width: 45vw;
+        }
+
+        &:after,
+        &:before {
+            top: -32px;
+            transform: rotate(180deg);
+        }
+
+        &:after {
+            margin-top: 1px;
+        }
+    }
+
+    .amexport-export-index .amexportcore-checkbox.-type .amexportcore-tooltip .admin__field-tooltip-content {
+        & {
+            left: -14px;
+        }
+
+        &:after,
+        &:before {
+            left: 10px;
+        }
+    }
+
+    .admin__fieldset-wrapper-content .admin__field.amexportpro-notice-field {
+        margin-top: ~'calc(-3rem + 15px)';
+    }
+}
+
+//
+//  Desktop +
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    // Override magento styles start
+    .amexportcore-modal-fields {
+        left: 50%;
+    }
+    // Override magento styles end
+
+    .amexportcore-dynamic-rows {
+        td.amexportcore-filter {
+            width: 32%;
+        }
+    }
+    .amexportcore-dynamic-rows {
+        &._empty {
+            margin-bottom: 0;
+        }
+    }
+}

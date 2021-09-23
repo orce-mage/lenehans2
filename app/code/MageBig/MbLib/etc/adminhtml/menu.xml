@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageBig_MbFrame::magebig_config" title="MageBig" module="MageBig_MbFrame" sortOrder="10" resource="MageBig_Frame::magebig_config"/>
+        <add id="MageBig_MbFrame::ext_config" title="Extensions" module="MageBig_MbFrame" sortOrder="20" parent="MageBig_MbFrame::magebig_config" resource="MageBig_MbFrame::ext_config"/>
+    </menu>
+</config>

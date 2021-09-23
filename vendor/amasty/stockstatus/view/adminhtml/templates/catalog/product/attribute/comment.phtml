@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+?>
+<?php
+/** @var \Amasty\Stockstatus\Block\Adminhtml\Product\Edit\Comment $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div class="messages" style="position: relative; top: -25px;">
+    <div class="message message-notice">
+        <?= $escaper->escapeHtml(__('You can use the following variables: {qty-threshold}, {qty}, {tomorrow}, {day-after-tomorrow}, {yesterday}, {expected_date} or any product attributes.')) ?>
+    </div>
+</div>

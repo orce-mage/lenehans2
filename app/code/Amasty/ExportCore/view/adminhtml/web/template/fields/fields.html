@@ -1,0 +1,45 @@
+<!-- ko if: checkedFields().length || isShowFields -->
+<table class="amexportcore-fields-table -selected" data-role="grid" afterRender="renderDefaultFields">
+    <thead class="amexportcore-thead">
+        <tr class="amexportcore-row">
+            <th class="amexportcore-th -dnd"></th>
+            <th class="amexportcore-th -modifier" data-bind="i18n: 'Modifier'"></th>
+            <th class="amexportcore-th -name" data-bind="i18n: 'Field Name'"></th>
+            <th class="amexportcore-th -name" data-bind="i18n: 'Field Name in Export File'"></th>
+            <th class="amexportcore-th -button">
+                <span class="amexportcore-label" data-bind="i18n: 'Action'"></span>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="amexportcore-fields-tbody" data-amexportcore-js="amexportcore-fields-tbody" afterRender="initSortable.bind($data, $element)">
+    <!-- ko foreach: $data.elems() -->
+        <!-- ko ifnot: $data.isStatic -->
+            <!--ko template: getTemplate()--><!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+    </tbody>
+</table>
+<!-- /ko -->
+<!-- ko if: isShowStatic -->
+<table class="amexportcore-fields-table -static" data-role="grid">
+    <thead class="amexportcore-thead">
+    <tr class="amexportcore-row">
+        <th class="amexportcore-th" data-bind="i18n: 'Field Name'"></th>
+        <th class="amexportcore-th" data-bind="i18n: 'Static Field Value'"></th>
+        <th class="amexportcore-th -button"></th>
+    </tr>
+    </thead>
+    <tbody>
+        <!-- ko foreach: $data.elems() -->
+            <!-- ko if: $data.isStatic -->
+            <!--ko template: getTemplate()--><!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </tbody>
+</table>
+<!-- /ko -->
+<!-- ko if: checkedFields().length || elems().length -->
+<div class="amexportcore-button-container">
+    <button class="amexportcore-button -brown" data-bind="i18n: 'Add Static Field', click: initStaticField.bind($data)"></button>
+</div>
+<!-- /ko -->

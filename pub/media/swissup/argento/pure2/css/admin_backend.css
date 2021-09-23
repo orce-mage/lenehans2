@@ -1,0 +1,7 @@
+.page-wrapper{max-width:100%;}
+.navigation, .breadcrumbs, .page-header .header.panel, .header.content, .footer.content, .page-wrapper > .widget, .page-wrapper > .page-bottom, .block.category.event, .top-container, .page-main, .page-container > .content, .jumbotron > .container{max-width:100%;}
+.nav-sections .navigation a.level-top{font-size:13px;}
+@media (min-width: 768px){
+.product.data.items > .item.title > .switch, .product.data.items > .item.title > .switch:hover, .product.data.items > .item.title > .switch:visited, .argento-tabs > .item.title > .switch{text-transform:capitalize;}
+.product.data.items > .item.title:not(.disabled) > .switch:focus,.product.data.items > .item.title:not(.disabled) > .switch:hover,.argento-tabs > .item.title:not(.disabled) > .switch:focus,.argento-tabs > .item.title:not(.disabled) > .switch:hover{background:#f7f7f7;}
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<!-- configuration file used for the Wyomind's demo store: https://demo2.wyomind.com -->
+<config>
+    <login>MassStockUpdate</login>
+    <password>MassStockUpdate123</password>
+    <acl>
+        Magento_Backend::system
+        Magento_Backend::convert
+        Wyomind_MassStockUpdate::main
+        Wyomind_MassStockUpdate::profiles
+        {{system/config}}
+        Wyomind_MassStockUpdate::massstockupdate_config
+        Magento_Catalog::catalog
+        Magento_Catalog::products
+    </acl>
+    <scenarii>
+        <scenario type="backend" id="profiles" default="1">
+            <label>Stock Update Profiles</label>
+            <comment><![CDATA[See an update profile in action]]></comment>
+            <actions>
+                <action type="landing_page">
+                    <param name="url">Wyomind_MassStockUpdate::profiles</param>
+                </action>
+                <action type="script">
+                    <param name="content">require(['wyomind_MassImportAndUpdate_profile'], function (index) {
+                        index.run('{{URL:massstockupdate/profiles/run/id/1}}'); });
+                    </param>
+                </action>
+            </actions>
+        </scenario>
+        <scenario type="backend" id="profiles_edition" default="1">
+            <label>Profiles Edition</label>
+            <comment><![CDATA[Check the profile edition panel]]></comment>
+            <actions>
+                <action type="landing_page">
+                    <param name="url">massstockupdate/profiles/edit/id/1</param>
+                </action>
+            </actions>
+        </scenario>
+    </scenarii>
+</config>

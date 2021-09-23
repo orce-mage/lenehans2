@@ -1,0 +1,52 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see \Magento\Customer\Block\Form\Login
+ * @var $block \Magento\Customer\Block\Form\Login
+ */
+?>
+<div class="block block-customer-login">
+    <div class="block-content" >
+        <form class="form form-login"
+              action="<?= /* @escapeNotVerified */ $block->getPostActionUrl() ?>"
+              method="post"
+              id="login-form-mini"
+              data-mage-init='{"validation":{}}'>
+            <?= $block->getBlockHtml('formkey'); ?>
+            <fieldset class="fieldset login" data-hasrequired="<?= /* @escapeNotVerified */ __('* Required Fields') ?>">
+                <div class="field email required">
+                    <!--<label class="label" for="email"><span><?= /* @escapeNotVerified */ __('Email') ?></span></label>-->
+                    <div class="control">
+                        <input placeholder="<?= /* @escapeNotVerified */ __('Email') ?>" name="login[username]" value="<?= $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" title="<?= /* @escapeNotVerified */ __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
+                    </div>
+                </div>
+                <div class="field password required">
+                    <label for="pass" class="label"><span><?= /* @escapeNotVerified */ __('Password') ?></span></label>
+                    <div class="control">
+                        <input placeholder="<?= /* @escapeNotVerified */ __('Password') ?>" name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?= /* @escapeNotVerified */ __('Password') ?>" data-validate="{required:true, 'validate-password':true}">
+                    </div>
+                </div>
+                <?= $block->getChildHtml('form_additional_info'); ?>
+                <div class="actions-toolbar">
+                    <div class="button-login">
+						<button type="submit" class="action button btn-login" name="send" id="send2"><span><?= /* @escapeNotVerified */ __('Sign In') ?></span></button>
+                    </div>
+					<div class="secondary">
+					<a class="action remind" href="<?= /* @escapeNotVerified */ $block->getForgotPasswordUrl() ?>"><span><?= /* @escapeNotVerified */ __('Forgot Your Password?') ?></span></a>
+					</div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

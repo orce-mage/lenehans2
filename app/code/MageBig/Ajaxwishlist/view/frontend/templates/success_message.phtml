@@ -1,0 +1,15 @@
+<?php
+$_product = $block->getProduct(); ?>
+<div class="magebig-ajax-popup ajaxwishlist-success-box zoom-anim-dialog">
+    <div class="wishlist-media">
+        <?= $block->getImage($_product, 'wishlist_small_image')->toHtml() ?>
+        <div class="product-name"><?= $_product->getName() ?></div>
+    </div>
+    <p class="h3"><?= __("has been added to your Wish List"); ?></p>
+    <div class="ajaxwishlist-buttons">
+        <button type="button" id="ajaxwishlist" class="action primary"
+                onClick="window.location = '<?= $block->getUrl('wishlist'); ?>'">
+            <span><?= __('View Wish List') ?></span>
+        </button>
+    </div>
+</div>

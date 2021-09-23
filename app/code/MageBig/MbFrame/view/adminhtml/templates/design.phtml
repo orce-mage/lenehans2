@@ -1,0 +1,108 @@
+<?php
+    $design = $block->getThemes();
+    $items = [];
+    $activeTheme = '';
+    foreach($design as $theme){
+        if($theme->getThemeId() == $block->getCurrentThemeId()){
+            $activeTheme = $theme;
+            $codeactive = str_replace('MageBig/','',$theme->getCode());
+        }else{
+            $items[] = $theme;
+        }
+    }
+?>
+<div class="template-wrap">
+    <div class="template-content">
+        <div class="theme-btn"><span>Choose Layout</span></div>
+        <ul class="themes-grid">
+            <?php if($activeTheme): ?>
+            <li class="theme-item active">
+                <div class="theme-image" data-href="<?= $block->getCustomThemeUrl($activeTheme->getThemeId()); ?>">
+                    <span class="image-wrap move-long" style="background-image: url('<?= $block->getPreviewImageUrl($activeTheme); ?>');"></span>
+                </div>
+                <div class="control">
+                    <span class="theme-active-name"><strong><?= __('Activated') ?>:</strong> <?= $activeTheme->getThemeTitle() ?></span>
+                    <a class="btn-active" href="#theme-configuration"><span><span><?= __('Theme Configuration') ?></span></span></a>
+                    <button class="button btn-import"><span><?= __('Import Content') ?></span></button>
+                </div>
+            </li>
+            <?php endif ?>
+            <li>
+                <ul>
+                    <?php foreach($design as $theme): ?>
+                    <?php
+                        $title = $theme->getThemeTitle();
+                        $tmp = explode(' - ',$title);
+                        if (isset($tmp[1])) {
+                            $title = $tmp[1];
+                        }
+                        $code = str_replace('MageBig/','',$theme->getCode());
+                    ?>
+                        <li class="theme-item">
+                            <div class="theme-wrap">
+                                <div class="theme-image" data-href="<?= $block->getCustomThemeUrl($theme->getThemeId()); ?>">
+                                    <span class="image-wrap move-long" style="background-image: url('<?= $block->getPreviewImageUrl($theme); ?>');"></span>
+                                </div>
+                                <div class="theme-name">
+                                    <span><?= $title ?></span>
+                                </div>
+                            </div>
+                            <div class="button-wrap">
+                                <a class="button btn-active" href="<?= $block->getActiveThemeUrl($theme->getThemeId()); ?>">
+                                    <span>
+                                        <span><?= __('Activate') ?></span>
+                                    </span>
+                                </a>
+                            </div>
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<?php if($activeTheme): ?>
+<div id="theme-configuration" class="theme-configuration"></div>
+<?php endif; ?>
+
+<div style="display:none" id="import-data" data-role="import_data">
+    <div class="import-data">
+        <button class="button" onclick="setLocation('<?= $this->getUrl("mbframe/theme/import").'?override=0' ?>')" title="<?= __('The content will not be overwritten if they exist'); ?>"><span><?= __('Import Blocks/Pages/Widgets') ?></span></button>
+        <span class="or-import"><?= __('Or') ?></span>
+        <button class="button" onclick="setLocation('<?= $this->getUrl("mbframe/theme/import").'?override=1' ?>')" title="<?= __('The content will be overwritten if they exist'); ?>"><span><?= __('Override Blocks/Pages/Widgets') ?></span></button>
+    </div>
+</div>
+<script>
+require([
+    "jquery",
+    "Magento_Ui/js/modal/modal"
+], function($){
+    if (this.import_data) {
+        this.import_data.html($('[data-role="import_data"]').html());
+    } else {
+        this.import_data = $('[data-role="import_data"]').modal({
+            modalClass: '',
+            type: 'popup',
+            buttons: [],
+            clickableOverlay: true
+        });
+    }
+    $import_data = this.import_data;
+    $('.btn-import').on('click', function(event) {
+        event.preventDefault();
+        $import_data.modal('openModal');
+    });
+    $('body').append('<div class="hide-theme-grid"></div>');
+    $('.theme-btn').on('click', function (event) {
+        $('.hide-theme-grid').show();
+        $('.themes-grid').addClass('show');
+        $('body').addClass('overflowed');
+    });
+    $('.hide-theme-grid').on('click', function (event) {
+        $(this).hide();
+        $('.themes-grid').removeClass('show');
+        $('body').removeClass('overflowed');
+    })
+
+});
+</script>

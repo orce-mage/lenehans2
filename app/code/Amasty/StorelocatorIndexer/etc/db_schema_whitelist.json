@@ -1,0 +1,12 @@
+{
+    "amasty_amlocator_location_index": {
+        "column": {
+            "location_id": true,
+            "product_id": true,
+            "store_id": true
+        },
+        "index": {
+            "AMASTY_AMLOCATOR_LOCATION_IDX_LOCATION_ID_PRD_ID_STORE_ID": true
+        }
+    }
+}

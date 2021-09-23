@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/Magento/Module/etc/module.xsd">
+    <module name="Wyomind_MassProductImportCustom" setup_version="9.2.0.0">
+        <sequence>
+            <module name="Wyomind_MassProductImport"/>
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Framework\View\Design\Theme\Image"
+                type="MageBig\MbFrame\Framework\View\Design\Theme\Image" />
+
+    <preference for="Magento\Framework\App\Config\Initial"
+                type="MageBig\MbFrame\Framework\App\Config\Initial" />
+    <preference for="Magento\Framework\App\Config\Initial\Reader"
+                type="MageBig\MbFrame\Framework\App\Config\Initial\Reader" />
+    <type name="MageBig\MbFrame\Framework\App\Config\Initial">
+        <arguments>
+            <argument name="reader" xsi:type="object">MageBig\MbFrame\Framework\App\Config\Initial\Reader\Proxy</argument>
+        </arguments>
+    </type>
+</config>

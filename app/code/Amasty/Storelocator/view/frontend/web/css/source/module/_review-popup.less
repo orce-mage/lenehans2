@@ -1,0 +1,154 @@
+//
+//  Store Locator
+//  ____________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amlocator-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+        .lib-vendor-prefix-display(flex);
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        .lib-vendor-box-align(center);
+        width: 100vw;
+        height: 100vh;
+        background: #00000047;
+    }
+
+    .amlocator-review-popup {
+        & {
+            position: relative;
+            box-sizing: border-box;
+            width: 80vw;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+        }
+
+        .amlocator-header {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .amlocator-name {
+            font-weight: 600;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+        .amlocator-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: block;
+            padding: 10px;
+            .lib-css(background, @amlocator-icon-close-popup__background);
+            background-size: 70%;
+            cursor: pointer;
+        }
+
+        .amlocator-close:hover {
+            .lib-css(background, @amlocator-icon-close-popup__hover__background);
+            background-size: 70%;
+        }
+    }
+
+    .amlocator-review-form {
+        // Override magento styles
+        .review-field-rating .control {
+            margin: 5px 0 40px;
+        }
+
+        .review-field-rating .label {
+            font-weight: 400;
+            color: #3f3f3f;
+        }
+
+        .review-control-vote:before {
+            content: '';
+            width: 165px;
+            .lib-css(height, @amstars-star__l__height);
+            .lib-css(background, @amstars-star__background);
+        }
+
+        .review-control-vote label:before {
+            content: '';
+            display: inline-block;
+            .lib-css(height, @amstars-star__l__height);
+            .lib-css(background, @amstars-star__active__background);
+        }
+
+        .review-control-vote input[type="radio"]:not(:checked) + label:hover:before {
+            opacity: 1;
+            .lib-css(background, @amstars-star__hover__background);
+            cursor: pointer;
+        }
+
+        .review-control-vote {
+            @amreview-stars: 5;
+
+            .override-stars (@i) when (@i > 0) {
+                .rating-@{i}:before {
+                    width: @i*33px;
+                }
+                .override-stars(@i - 1);
+            }
+
+            .override-stars (@amreview-stars);
+        }
+
+        &.review-form .action.submit.primary {
+            width: inherit;
+            min-height: 40px;
+            color: #fff;
+            background: #1979c3;
+            border: 0;
+            border-radius: 0;
+        }
+
+        &.review-form .action.submit.primary:hover {
+            background: lighten(#1979c3, 5%);
+        }
+
+        .label-gdpr.amreview-checboxlabel span {
+            color: #e02b27;
+            font-size: 1.2rem;
+            margin: 0 0 0 5px;
+        }
+    }
+
+    .amlocator-review-form .field.review-field-ratings {
+        .label {
+            margin: 10px 15px 0 0;
+            vertical-align: top;
+        }
+
+        .control {
+            display: inline-block;
+            width: 100%;
+            vertical-align: top;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amlocator-popup-overlay .amlocator-review-popup {
+        & {
+            width: 30%;
+            min-width: 330px;
+        }
+    }
+
+    .amlocator-popup-overlay .field.review-field-ratings .control {
+        width: inherit;
+    }
+}

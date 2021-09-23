@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<!-- Layout of the list of all google shopping data feeds -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Wyomind_MassStockUpdate::js/index.js"/>
+        <link src="Wyomind_Framework::js/progress.js"/>
+        <link src="Wyomind_Framework::css/progress.css"/>
+
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles" name="massstockupdate_profiles_index"/>
+            <block template="Wyomind_MassStockUpdate::index/report.phtml" class="Magento\Backend\Block\Template"
+                   name="wyomind_massstockupdate_report"/>
+            <block class="Magento\Backend\Block\Template" name="massstockupdate_profiles_import"
+                   template="Wyomind_MassStockUpdate::index/import.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

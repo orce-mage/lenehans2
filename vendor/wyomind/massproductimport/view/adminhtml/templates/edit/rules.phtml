@@ -1,0 +1,19 @@
+<div id="overlay-rule">
+    <div id="rule">
+
+        <div class="handler">
+            <select size="10" >
+                <?php echo $block->getRules(); ?>
+            </select>
+            <button type="button" class="validate">Validate</button>
+            <button type="button" class="cancel">Cancel</button>
+
+        </div>
+    </div>
+</div>
+<script>
+    require(['wyomind_MassImportAndUpdate_rules'], function (rule) {
+
+        rule.initialize()
+    });
+</script>

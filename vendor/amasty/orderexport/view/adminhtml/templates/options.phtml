@@ -1,0 +1,308 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+?>
+<?php
+$allValues = $block->getOptionValues();
+?>
+<?php if (!$block->getRequest()->getParam('isAjax')) { ?>
+    <fieldset class="fieldset" id="thirdpartyMap">
+        <legend class="legend"><span><?= $block->escapeHtml(__('Manage Mappings')) ?></span></legend>
+        <div id="manage-options-panel" class="selected-type-options">
+            <table class="admin__control-table">
+                <thead>
+                <tr id="attribute-options-table">
+                    <th class="col-draggable"></th>
+                    <th><?= $block->escapeHtml(__('DataBase Field')) ?></th>
+                    <th><?= $block->escapeHtml(__('Mapping')) ?></th>
+                    <th class="col-delete">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody data-role="options-container" class="">
+                <?php foreach ($allValues as $value): ?>
+                    <tr data-role="mappingoptions-item-row" style="" class="">
+                        <td class="col-draggable">
+                            <div data-role="draggable-handle" class="draggable-handle" title="Sort Option"></div>
+                            <input data-role="order"
+                                   type="hidden"
+                                   name="mapping_order[<?= $block->escapeHtml($value['id']) ?>"
+                                   value="<?= $block->escapeHtml($value['order']) ?>"
+                            />
+                        </td>
+                        <td class="col-<?= $block->escapeHtml($value['id']) ?>" data-role="mappingoptions-item-row">
+                            <div>
+                                <select name="mapping_options[<?= $block->escapeHtml($value['id']) ?>]" data-role="select-options">
+                                    <?= /* @noEscape */ $block->getSelectOptionsHtml($value['option']); ?>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="col-<?= $block->escapeHtml($value['id']) ?>">
+                            <input type="text"
+                                   class="required-entry"
+                                   name="mapping_values[<?= $block->escapeHtml($value['id']) ?>]"
+                                   value="<?= $block->escapeHtml($value['value']) ?>"
+                                   data-role="select-values"
+                            />
+                        </td>
+                        <td id="delete_button_container_<?= $block->escapeHtml($value['id']) ?>" class="col-delete">
+                            <input type="hidden"
+                                   class="delete-flag"
+                                   name="mapping_delete[<?= $block->escapeHtml($value['id']) ?>]"
+                                   value=""
+                            />
+                            <button id="delete_button_<?= $block->escapeHtml($value['id']) ?>" title="Delete" type="button" class="action-scalable delete delete-option">
+                                <span><?= $block->escapeHtml(__('Delete')) ?></span>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="4" class="col-actions-add">
+                        <button id="add_new_option_button" title="<?= $block->escapeHtml(__('Add Mapping')) ?>"
+                                type="button" class="action-scalable add">
+                            <span><?= $block->escapeHtml(__('Add Mapping')) ?></span>
+                        </button>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+            <input type="hidden" id="option-count-check" value=""/>
+        </div>
+
+        <script id="row-template" type="text/x-magento-template">
+            <tr data-role="mappingoptions-item-row">
+                <td class="col-draggable">
+                    <div data-role="draggable-handle" class="draggable-handle" title="<?= $block->escapeHtml(__('Sort Option')) ?>"></div>
+                    <input data-role="order" type="hidden" name="mapping_order[<%- data.id %>]" value="<%- data.sort_order %>"/>
+                </td>
+                <td class="col-<%- data.id %>" data-role="mappingoptions-item-row">
+                    <div><select name="mapping_options[<%- data.id %>]" data-role="select-options">
+                            <?= /* @noEscape */ $block->getSelectOptionsHtml(); ?>
+                        </select></div>
+                </td>
+                <td class="col-<%- data.id %>">
+                    <input type="text" class="required-entry" name="mapping_values[<%- data.id %>]" value="" data-role="select-values"/>
+                </td>
+                <td id="delete_button_container_<%- data.id %>" class="col-delete">
+                    <input type="hidden" class="delete-flag" name="mapping_delete[<%- data.id %>]" value=""/>
+                    <button id="delete_button_<%- data.id %>" title="<?= $block->escapeHtml(__('Delete')) ?>" type="button"
+                            class="action-scalable delete delete-option">
+                        <span><?= $block->escapeHtml(__('Delete')) ?></span>
+                    </button>
+                </td>
+            </tr>
+        </script>
+
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Catalog/js/options": {
+                    "attributesData": <?= /* @noEscape */ json_encode($allValues); ?>,
+                    "isSortable":  <?= 1 ?>,
+                    "isReadOnly": <?= 0 ?>
+                }
+            }
+        }
+        </script>
+
+        <script type="text/x-magento-init">
+        {
+            "#thirdpartyMap": {
+                "validation": {}
+            }
+        }
+        </script>
+    </fieldset>
+
+    <script type="text/javascript">
+        setTimeout(refreshSortable, 3000);
+
+        function refreshSortable() {
+            jQuery(function ($) {
+                $('[data-role=options-container]').sortable({
+                    distance: 8,
+                    tolerance: 'pointer',
+                    cancel: 'select,input, button',
+                    axis: 'y',
+                    update: function () {
+                        $('[data-role=options-container] [data-role=order]').each(function (index, element) {
+                            $(element).val(index + 1);
+                        });
+                    }
+                });
+            });
+        }
+
+        function amOrderexportLoadFields() {
+            jQuery(function ($) {
+                var tableName = $('#thirdparty_table').val();
+                $.ajax({
+                    url: '<?= $block->escapeUrl($block->getUrl('amasty_orderexport/thirdparty/fields')) ?>',
+                    data: {table: tableName}
+                }).done(function (result) {
+                    $('#row-template').replaceWith(result);
+                    extendAttributeOptions();
+                });
+            });
+        }
+
+        function extendAttributeOptions(){
+            attributeOption = null;
+
+            require(['jquery',
+                'mage/template',
+                'uiRegistry',
+                'prototype',
+                'form',
+                'validation'
+            ], function (jQuery, mageTemplate, rg) {
+                    optionDefaultInputType = 'radio',
+                    attributeOption = {
+                        table: $('attribute-options-table'),
+                        itemCount: 0,
+                        totalItems: 0,
+                        rendered: 0,
+                        template: mageTemplate('#row-template'),
+                        isReadOnly: 0,
+                        add: function (data, render) {
+                            var isNewOption = false,
+                                element;
+
+                            if (typeof data.id == 'undefined') {
+                                data = {
+                                    'id': 'option_' + this.itemCount,
+                                    'sort_order': this.itemCount + 1
+                                };
+                                isNewOption = true;
+                            }
+
+                            if (!data.intype) {
+                                data.intype = optionDefaultInputType;
+                            }
+
+                            if (!this.totalItems) {
+                                data.checked = 'checked';
+                            }
+                            element = this.template({
+                                data: data
+                            });
+
+                            if (isNewOption && !this.isReadOnly) {
+                                this.enableNewOptionDeleteButton(data.id);
+                            }
+                            this.itemCount++;
+                            this.totalItems++;
+                            this.elements += element;
+
+                            if (render) {
+                                this.render();
+                            }
+                            },
+                        remove: function (event) {
+                            var element = $(Event.findElement(event, 'tr')),
+                                elementFlags; // !!! Button already have table parent in safari
+
+                            // Safari workaround
+                            element.ancestors().each(function (parentItem) {
+                                if (parentItem.hasClassName('option-row')) {
+                                    element = parentItem;
+                                    throw $break;
+                                } else if (parentItem.hasClassName('box')) {
+                                    throw $break;
+                                }
+                            });
+
+                            if (element) {
+                                elementFlags = element.getElementsByClassName('delete-flag');
+
+                                if (elementFlags[0]) {
+                                    elementFlags[0].value = 1;
+                                }
+
+                                element.addClassName('no-display');
+                                element.addClassName('template');
+                                element.hide();
+                                this.totalItems--;
+                                this.updateItemsCountField();
+                            }
+                            },
+                        updateItemsCountField: function () {
+                            $('option-count-check').value = this.totalItems > 0 ? '1' : '';
+                            },
+                        enableNewOptionDeleteButton: function (id) {
+                            $$('#delete_button_container_' + id + ' button').each(function (button) {
+                                button.enable();
+                                button.removeClassName('disabled');
+                            });
+                            },
+                        bindRemoveButtons: function () {
+                            jQuery('#swatch-visual-options-panel').on('click', '.delete-option', this.remove.bind(this));
+                            },
+                        render: function () {
+                            Element.insert($$('[data-role=options-container]')[0], this.elements);
+                            this.elements = '';
+                            },
+                        renderWithDelay: function (data, from, step, delay) {
+                            var arrayLength = data.length,
+                                len;
+
+                            for (len = from + step; from < len && from < arrayLength; from++) {
+                                this.add(data[from]);
+                            }
+                            this.render();
+
+                            if (from === arrayLength) {
+                                this.updateItemsCountField();
+                                this.rendered = 1;
+                                jQuery('body').trigger('processStop');
+
+                                return true;
+                            }
+                            setTimeout(this.renderWithDelay.bind(this, data, from, step, delay), delay);
+                            },
+                        ignoreValidate: function () {
+                            var ignore = '.ignore-validate input, ' +
+                                '.ignore-validate select, ' +
+                                '.ignore-validate textarea';
+
+                            jQuery('#edit_form').data('validator').settings.forceIgnore = ignore;
+                        }
+                    };
+                    Event.stopObserving('add_new_option_button', 'click');
+                    Event.observe('add_new_option_button', 'click', attributeOption.add.bind(attributeOption, {}, true));
+            });
+        }
+    </script>
+
+<?php } else { ?>
+    <script id="row-template" type="text/x-magento-template">
+        <tr data-role="mappingoptions-item-row">
+            <td class="col-draggable">
+                <div data-role="draggable-handle" class="draggable-handle" title="<?= $block->escapeHtml(__('Sort Option')) ?>"></div>
+                <input data-role="order" type="hidden" name="mapping_order[<%- data.id %>]" value="<%- data.sort_order %>"/>
+            </td>
+            <td class="col-<%- data.id %>" data-role="mappingoptions-item-row">
+                <div>
+                    <select name="mapping_options[<%- data.id %>]" data-role="select-options">
+                        <?= /* @noEscape */ $block->getSelectOptionsHtml(); ?>
+                    </select>
+                </div>
+            </td>
+            <td class="col-<%- data.id %>">
+                <input type="text" name="mapping_values[<%- data.id %>]" value="" data-role="select-values"/>
+            </td>
+            <td id="delete_button_container_<%- data.id %>" class="col-delete">
+                <input type="hidden" class="delete-flag" name="mapping_delete[<%- data.id %>]" value=""/>
+                <button id="delete_button_<%- data.id %>" title="<?= $block->escapeHtml(__('Delete')) ?>" type="button"
+                        class="action-scalable delete delete-option">
+                    <span><?= $block->escapeHtml(__('Delete')) ?></span>
+                </button>
+            </td>
+        </tr>
+    </script>
+<?php } ?>

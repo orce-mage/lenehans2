@@ -1,0 +1,321 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:include schemaLocation="urn:magento:framework:Data/etc/argument/types.xsd" />
+
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="include" type="includeType"/>
+                <xs:element name="entity" type="entity"/>
+                <xs:element name="relation" type="relation" maxOccurs="unbounded"/>
+            </xs:choice>
+        </xs:complexType>
+        <xs:unique name="uniqueEntityCode">
+            <xs:annotation>
+                <xs:documentation>
+                    Export entity code must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="entity"/>
+            <xs:field xpath="@code"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="includeType">
+        <xs:annotation>
+            <xs:documentation>
+                Include Resource. Recursive complex type
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="path" type="typePath" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="entity">
+        <xs:all>
+            <xs:element name="name" type="translatable" />
+            <xs:element name="isHidden" type="xs:boolean" minOccurs="0" default="true" />
+            <xs:element name="description" type="translatable" minOccurs="0" />
+            <xs:element name="group" type="translatable" minOccurs="0" />
+            <xs:element name="enabledChecker" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="collectionFactory">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="collectionModifier" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="fieldsConfig">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element ref="fieldsClass"/>
+                        <xs:element ref="fields"/>
+                        <xs:element ref="virtualFields"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="code" use="required" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="translatable">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="translate" default="true" type="xs:boolean"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:element name="fieldsClass">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+            </xs:sequence>
+            <xs:attribute name="class" use="required" type="modelName" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="fields">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="field" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="rowActionClass" type="modelName" />
+        </xs:complexType>
+        <xs:unique name="uniqueFieldName">
+            <xs:annotation>
+                <xs:documentation>
+                    Field name must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="field"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+    </xs:element>
+    <xs:element name="field">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actions" minOccurs="0" type="fieldActions" />
+                <xs:element name="map" type="xs:string" minOccurs="0" />
+                <xs:element name="label" type="xs:string" minOccurs="0" />
+                <xs:choice>
+                    <xs:element name="filter" type="fieldFilter" minOccurs="0" />
+                    <xs:element name="filterClass" type="fieldFilterClass" minOccurs="0" />
+                </xs:choice>
+                <xs:element name="remove" type="xs:boolean" minOccurs="0" default="false" />
+            </xs:sequence>
+            <xs:attribute name="name" use="required" type="xs:string"/>
+        </xs:complexType>
+        <xs:unique name="uniqueFieldNames">
+            <xs:annotation>
+                <xs:documentation>
+                    Field name must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="field"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="fieldFilter">
+        <xs:sequence>
+            <xs:element name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="text" />
+                        <xs:enumeration value="date" />
+                        <xs:enumeration value="select" />
+                        <xs:enumeration value="toggle" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="options" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="option" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="value" type="xs:string" />
+                                        <xs:element name="label" type="xs:string" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="class" type="modelName" minOccurs="0" />
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="fieldFilterClass">
+        <xs:sequence>
+            <xs:element name="class">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="name" type="modelName" use="required" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="metaClass">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="name" type="modelName" use="required" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:element name="virtualFields">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="virtualField" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniqueVirtualFieldNames">
+            <xs:annotation>
+                <xs:documentation>
+                    Field name must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="virtualField"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+    </xs:element>
+    <xs:element name="virtualField">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="label" type="xs:string" minOccurs="0" />
+                <xs:element name="generator" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                        </xs:sequence>
+                        <xs:attribute name="class" use="required" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attribute name="name" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="fieldActions">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="trim" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ExportCore\Export\DataHandling\FieldModifier\Trim" type="modelName" />
+                    <xs:attribute name="name" default="trim" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="defaultValue" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ExportCore\Export\DataHandling\FieldModifier\DefaultValue" type="modelName" />
+                    <xs:attribute name="name" default="Set Default Value" />
+                    <xs:attribute name="force" default="false" type="xs:boolean" />
+                    <xs:attribute name="value" use="required" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="explode" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ExportCore\Export\DataHandling\FieldModifier\Explode" type="modelName" />
+                    <xs:attribute name="name" default="explode" />
+                    <xs:attribute name="separator" default="," />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="implode" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ExportCore\Export\DataHandling\FieldModifier\Implode" type="modelName" />
+                    <xs:attribute name="name" default="explode" />
+                    <xs:attribute name="separator" default="," />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="storeCode2StoreId" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ExportCore\Export\DataHandling\FieldModifier\StoreCode2StoreId" type="modelName" />
+                    <xs:attribute name="name" default="Convert Store Code To Store Id" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="storeId2StoreCode" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ExportCore\Export\DataHandling\FieldModifier\StoreId2StoreCode" type="modelName" />
+                    <xs:attribute name="name" default="Convert Store Id To Store Code" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="optionValue2OptionLabel" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" default="Amasty\ExportCore\Export\DataHandling\FieldModifier\OptionValue2OptionLabel" type="modelName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName"/>
+                    <xs:attribute name="preselected" type="xs:boolean" default="true"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name="modelName">
+        <xs:annotation>
+            <xs:documentation>
+                Model name can contain only [A-Za-z_\\].
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9_\\]+" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="typePath">
+        <xs:annotation>
+            <xs:documentation>
+                <![CDATA[
+                    Path identifier. Item can has only [a-zA-Z0-9/_:]. Minimal length 8 symbol. Case sensitive.
+                    For example: <Magento_Module>::path/to/file.xml (path in the "etc" area in module)
+                 ]]>
+            </xs:documentation>
+        </xs:annotation>
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]+[a-zA-Z0-9]{1,}_[A-Z]+[A-Z0-9a-z]{1,}::[A-Za-z_0-9/.]{1,}" />
+            <xs:minLength value="8" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="relation">
+        <xs:all>
+            <xs:element name="parent_entity"/>
+            <xs:element name="child_entity"/>
+            <xs:element name="sub_entity_field_name"/>
+            <xs:element name="type"/>
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+        <xs:attribute name="code" use="required" type="xs:string"/>
+    </xs:complexType>
+</xs:schema>

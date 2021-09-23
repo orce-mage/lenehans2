@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var $block \Magento\Theme\Block\Html\Title
+ */
+$mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$cssClass = $block->getCssClass() ? ' ' . $block->getCssClass() : '';
+$title = '';
+if (trim($block->getPageHeading())) {
+    $title = '<span class="base" data-ui-id="page-title-wrapper" ' .  $block->getAddBaseAttribute() . '>'
+        . $block->escapeHtml($block->getPageHeading()) . '</span>';
+}
+?>
+<?php if (!$mbHelper->isHomePage() && $title): ?>
+<div class="page-title-wrapper<?= /* @escapeNotVerified */ $cssClass; ?>">
+    <h1 class="page-title"
+        <?php if ($block->getId()): ?> id="<?= /* @escapeNotVerified */ $block->getId();?>" <?php endif; ?>>
+        <?= /* @escapeNotVerified */ $title ?>
+    </h1>
+    <?= $block->getChildHtml(); ?>
+</div>
+<?php endif; ?>

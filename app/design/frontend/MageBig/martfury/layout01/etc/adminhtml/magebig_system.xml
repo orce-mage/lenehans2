@@ -1,0 +1,730 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="general" translate="label" sortOrder="10">
+            <label>General</label>
+        </tab>
+        <section id="mbconfig" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+            <class>separator-top</class>
+            <label>Theme Configuration</label>
+            <tab>general</tab>
+            <resource>MageBig_MbFrame::themes_config</resource>
+            <group id="general" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>General</label>
+                <field id="full_width" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Full Width Layout</label>
+                    <options>
+                        <option label="No">0</option>
+                        <option label="max-width: 1600px">max-1600</option>
+                        <option label="max-width: 1900px">max-1900</option>
+                        <option label="max-width: 100%">max-100</option>
+                    </options>
+                </field>
+            </group>
+            <group id="header" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Header</label>
+                <field id="menu_layout" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Menu Layout</label>
+                    <options>
+                        <option label="Vertical">vertical</option>
+                        <option label="Horizontal">horizontal</option>
+                    </options>
+                </field>
+                <field id="sticky_header" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable Sticky Header</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sticky_offset" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sticky Offset</label>
+                    <comment>Start Sticky after 500px</comment>
+                    <depends>
+                        <field id="newsletter_form">1</field>
+                    </depends>
+                </field>
+                <field id="sticky_type" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sticky Type</label>
+                    <options>
+                        <option label="Hide on Scroll Up">0</option>
+                        <option label="Hide on Scroll Down">1</option>
+                        <option label="Always Show">2</option>
+                    </options>
+                    <depends>
+                        <field id="sticky_header">1</field>
+                    </depends>
+                </field>
+                <field id="logo_nav" translate="label comment" type="image" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Logo in Navigation Mobile</label>
+                    <comment>JPG,PNG,GIF</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media">wysiwyg/magebig/logo</upload_dir>
+                    <base_url type="media">wysiwyg/magebig/logo</base_url>
+                </field>
+            </group>
+            <group id="category_view" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Category View</label>
+                <field id="product_image_hover" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable product image hover</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_addcart" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show Add To Cart Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_quickview" translate="label comment" type="select" sortOrder="41" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show Quickview Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_wishlist" translate="label comment" type="select" sortOrder="43" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show Wishlist Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_compare" translate="label comment" type="select" sortOrder="45" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show Compare Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_rating" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show Rating Star</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="category_one_column" translate="label" type="text" sortOrder="80" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Layout - One Column - Product per row</label>
+                    <field id="viewport_1600" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 1600px and up</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                        </options>
+                    </field>
+                    <field id="viewport_1200" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 1200px - 1599px</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                        </options>
+                    </field>
+                    <field id="viewport_992" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 992px - 1199px</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_768" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 768px - 991px</label>
+                        <options>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_576" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 576px - 767px</label>
+                        <options>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_0" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 0 - 575px</label>
+                        <options>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                            <option label="1">1</option>
+                        </options>
+                    </field>
+                </group>
+                <group id="category_two_columns" translate="label" type="text" sortOrder="90" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Layout - Two Columns - Product per row</label>
+                    <field id="viewport_1600" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 1600px and up</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                        </options>
+                    </field>
+                    <field id="viewport_1200" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 1200px - 1599px</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                        </options>
+                    </field>
+                    <field id="viewport_992" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 992px - 1199px</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_768" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 768px - 991px</label>
+                        <options>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_576" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 576px - 767px</label>
+                        <options>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_0" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 0 - 575px</label>
+                        <options>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                            <option label="1">1</option>
+                        </options>
+                    </field>
+                </group>
+                <group id="category_three_columns" translate="label" type="text" sortOrder="100" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Layout - Three Columns - Product per row</label>
+                    <field id="viewport_1600" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 1600px and up</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                        </options>
+                    </field>
+                    <field id="viewport_1200" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 1200px - 1599px</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                        </options>
+                    </field>
+                    <field id="viewport_992" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 992px - 1199px</label>
+                        <options>
+                            <option label="6">6</option>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_768" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 768px - 991px</label>
+                        <options>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_576" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 576px - 767px</label>
+                        <options>
+                            <option label="5">5</option>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                        </options>
+                    </field>
+                    <field id="viewport_0" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Viewport 0 - 575px</label>
+                        <options>
+                            <option label="4">4</option>
+                            <option label="3">3</option>
+                            <option label="2">2</option>
+                            <option label="1">1</option>
+                        </options>
+                    </field>
+                </group>
+            </group>
+            <group id="product_view" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Product View</label>
+                <field id="product_layout" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Product Layout</label>
+                    <options>
+                        <option label="2 columns">0</option>
+                        <option label="3 columns (sidebar)">1</option>
+                    </options>
+                </field>
+                <field id="nav_dir" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Gallery Thumbnail Style</label>
+                    <source_model>MageBig\MbFrame\Model\Config\Source\Direction</source_model>
+                </field>
+                <field id="gallery_autoplay" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Gallery Autoplay</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gallery_duration" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Gallery Transition Duration</label>
+                </field>
+                <field id="gallery_effect" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Gallery Transition Effect</label>
+                    <options>
+                        <option label="Slide">slide</option>
+                        <option label="Cross Fade">crossfade</option>
+                        <option label="Dissolve">dissolve</option>
+                    </options>
+                </field>
+                <field id="allowfullscreen" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Gallery Fullscreen</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gallery_caption" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Gallery Caption</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="share_social" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show Share Social</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_countdown" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable Countdown</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_sold" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable Sold Items</label>
+                    <comment>Enable progress bar Sold Items</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_countdown">1</field>
+                    </depends>
+                </field>
+                <field id="catalog_list" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show categories of product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="footer" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Footer</label>
+                <field id="newsletter_form" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable Subscribe Form</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="title_newsletter" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Tilte</label>
+                    <depends>
+                        <field id="newsletter_form">1</field>
+                    </depends>
+                </field>
+                <field id="title_small_newsletter" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sub Tilte</label>
+                    <depends>
+                        <field id="newsletter_form">1</field>
+                    </depends>
+                </field>
+                <field id="cookie_heading" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label></label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="cookie_position" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Cookie Notice Position</label>
+                    <options>
+                        <option label="Bottom - Left">bottom-left</option>
+                        <option label="Bottom - Right">bottom-right</option>
+                        <option label="Bottom - Full width">bottom-full</option>
+                    </options>
+                </field>
+                <field id="go_top" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Button Go Top</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+            </group>
+            <group id="mobile_view" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Mobile View</label>
+                <field id="btn_menu" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Top Menu Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Display Button Menu on Top Menu</comment>
+                </field>
+                <field id="bottom_menu" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Bottom Menu</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Display Bottom Menu</comment>
+                </field>
+            </group>
+        </section>
+        <section id="mbdesign" translate="label" type="text" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1">
+            <class>separator-top</class>
+            <label>Design Configuration</label>
+            <tab>general</tab>
+            <resource>MageBig_MbFrame::themes_config</resource>
+            <group id="general" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="enable_custom_style" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Custom Style LESS/CSS</label>
+                    <comment><![CDATA[Enable your custom style]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="custom_css_less" translate="label comment" type="textarea" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>LESS or CSS Code</label>
+                    <comment><![CDATA[You need to have knowledge of LESS or CSS. Eg:<br/><code>.page-header{background-color: orange;}</code><br/><i>Warning: If you write the wrong code, the layout will break</i>]]></comment>
+                    <depends>
+                        <field id="enable_custom_style">1</field>
+                    </depends>
+                </field>
+                <field id="enable_rtl" translate="label comment" type="select" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>RTL Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="main_color_heading" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main Color</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="main_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #fcb800</comment>
+                </field>
+                <field id="main2_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Color 2</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #0066cc</comment>
+                </field>
+                <field id="main3_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Color 3</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+            </group>
+            <group id="font" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Font</label>
+                <field id="font_heading" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Google Font</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="enablegooglefont" translate="label" type="select" sortOrder="5" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Load Google Font</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="google_font_1" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Google Font</label>
+                    <source_model>MageBig\MbFrame\Model\Config\Source\Font</source_model>
+                    <comment>
+                        <![CDATA[<span id="note1">&nbsp;</span><br><span id="note1_1">&nbsp;</span>]]>
+                    </comment>
+                    <depends>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_weights_1" translate="label" type="text" sortOrder="15" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Weights</label>
+                    <comment>
+                        <![CDATA[300,300italic,400,400italic,500,500italic,700,700italic,900,900italic]]>
+                    </comment>
+                    <depends>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_subsets_1" translate="label" type="text" sortOrder="16" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Character Sets</label>
+                    <comment>latin,latin-ext</comment>
+                    <depends>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="font2_heading" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label></label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="enablefont2" translate="label" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Load Google Font 2</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_2" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Google Font</label>
+                    <source_model>MageBig\MbFrame\Model\Config\Source\Font</source_model>
+                    <comment>
+                        <![CDATA[<span id="note2">&nbsp;</span><br><span id="note2_1">&nbsp;</span>]]></comment>
+                    <depends>
+                        <field id="enablefont2">1</field>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_weights_2" translate="label" type="text" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Weights</label>
+                    <comment>
+                        <![CDATA[300,300italic,400,400italic,500,500italic,700,700italic,900,900italic]]>
+                    </comment>
+                    <depends>
+                        <field id="enablefont2">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_subsets_2" translate="label" type="text" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Character Sets</label>
+                    <comment>latin,latin-ext</comment>
+                    <depends>
+                        <field id="enablefont2">1</field>
+                    </depends>
+                </field>
+                <field id="font3_heading" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label></label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="enablefont3" translate="label" type="select" sortOrder="80" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Load Google Font 3</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_3" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Google Font</label>
+                    <source_model>MageBig\MbFrame\Model\Config\Source\Font</source_model>
+                    <comment>
+                        <![CDATA[<span id="note3">&nbsp;</span><br><span id="note3_1">&nbsp;</span>]]></comment>
+                    <depends>
+                        <field id="enablefont3">1</field>
+                        <field id="enablegooglefont">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_weights_3" translate="label" type="text" sortOrder="100" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Weights</label>
+                    <comment>
+                        <![CDATA[300,300italic,400,400italic,500,500italic,700,700italic,900,900italic]]>
+                    </comment>
+                    <depends>
+                        <field id="enablefont3">1</field>
+                    </depends>
+                </field>
+                <field id="google_font_subsets_3" translate="label" type="text" sortOrder="110" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Character Sets</label>
+                    <comment>latin,latin-ext</comment>
+                    <depends>
+                        <field id="enablefont3">1</field>
+                    </depends>
+                </field>
+
+                <field id="fontassign_heading" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Assign Font</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="font_default" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Default</label>
+                </field>
+                <field id="font_size" translate="label comment" type="text" sortOrder="135" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Size</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="font_h" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Heading</label>
+                    <comment>Assign for h1 h2 h3 h4 h5 h6 tags and .h1 .h2 .h3 .h4 .h5 .h6 classes</comment>
+                </field>
+                <field id="font_special" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Special</label>
+                    <comment>Assign for .font-special class</comment>
+                </field>
+                <field id="font_text" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Font Text</label>
+                    <comment>Assign for .font-text class</comment>
+                </field>
+            </group>
+            <group id="page" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Body</label>
+                <field id="page_background" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #f2f2f2</comment>
+                </field>
+                <field id="page_background_pattern" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Pattern</label>
+                    <frontend_model>MageBig\MbFrame\Block\Adminhtml\Config\Form\Field\Patterns</frontend_model>
+                    <source_model>MageBig\MbFrame\Model\Config\Source\Patterns</source_model>
+                    <frontend_class>patterns hidden</frontend_class>
+                </field>
+                <field id="page_background_file" translate="label comment" type="image" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Page Background Image</label>
+                    <comment>Your background image instead of background pattern</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media">wysiwyg/magebig/background</upload_dir>
+                    <base_url type="media">wysiwyg/magebig/background</base_url>
+                </field>
+                <field id="page_background_image_option" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Page Background Image Position</label>
+                    <comment>Default: 0 0 no-repeat fixed</comment>
+                </field>
+                <field id="page_background_image_size" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Page Background Image Size</label>
+                    <comment>Values: contain, cover, auto</comment>
+                </field>
+                <field id="page_text" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Text Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+                <field id="page_link" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Link Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+            </group>
+            <group id="header" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Header</label>
+                <field id="header_heading" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main Header</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="header_background" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #ffffff</comment>
+                </field>
+                <field id="header_background_pattern" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Pattern</label>
+                    <frontend_model>MageBig\MbFrame\Block\Adminhtml\Config\Form\Field\Patterns</frontend_model>
+                    <source_model>MageBig\MbFrame\Model\Config\Source\Patterns</source_model>
+                    <frontend_class>patterns hidden</frontend_class>
+                </field>
+                <field id="header_background_file" translate="label comment" type="image" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Image</label>
+                    <comment>Your background image instead of background pattern</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media">wysiwyg/magebig/background</upload_dir>
+                    <base_url type="media">wysiwyg/magebig/background</base_url>
+                </field>
+                <field id="header_background_image_option" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Image Position</label>
+                    <comment>Default: 0 0 no-repeat fixed</comment>
+                </field>
+                <field id="header_background_image_size" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Image Size</label>
+                    <comment>Values: contain, cover, auto</comment>
+                </field>
+                <field id="header_text" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Text Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #999999</comment>
+                </field>
+                <field id="header_link" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Link Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #66666</comment>
+                </field>
+                <field id="headertop_heading" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Top Header</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="headertop_background" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: transparent</comment>
+                </field>
+                <field id="headertop_text_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Text Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+                <field id="headertop_link_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Link Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+                <field id="headertop_border_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Border Bottom Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: transparent</comment>
+                </field>
+            </group>
+            <group id="menu" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Menu</label>
+                <field id="menu_heading" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Main Menu</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="menu_background" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: transparent</comment>
+                </field>
+                <field id="menu_link_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Link Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+                <field id="menu_link_hover_color" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Link Hover Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #fcb800</comment>
+                </field>
+            </group>
+            <group id="footer" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Footer</label>
+                <field id="footer_background" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #ffffff</comment>
+                </field>
+                <field id="footer_background_pattern" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Pattern</label>
+                    <frontend_model>MageBig\MbFrame\Block\Adminhtml\Config\Form\Field\Patterns</frontend_model>
+                    <source_model>MageBig\MbFrame\Model\Config\Source\Patterns</source_model>
+                    <frontend_class>patterns hidden</frontend_class>
+                </field>
+                <field id="footer_background_file" translate="label comment" type="image" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Image</label>
+                    <comment>Your background image instead of background pattern</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media">wysiwyg/magebig/background</upload_dir>
+                    <base_url type="media">wysiwyg/magebig/background</base_url>
+                </field>
+                <field id="footer_background_image_option" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Image Position</label>
+                    <comment>Default: 0 0 no-repeat fixed</comment>
+                </field>
+                <field id="footer_background_image_size" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Background Image Size</label>
+                    <comment>Values: contain, cover, auto</comment>
+                </field>
+                <field id="footer_text" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Text Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+                <field id="footer_link" translate="label comment" type="text" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Link Color</label>
+                    <frontend_class>pick-color</frontend_class>
+                    <comment>Default: #000000</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+?>
+<?php /* @var $block \Amasty\GiftCardAccount\Block\Adminhtml\Sales\Order\Create\GiftCard*/?>
+
+<?php if ($block->isGiftCardEnable()): ?>
+<div class="admin__field field-apply-coupon-code">
+    <label class="admin__field-label">
+        <span><?= $block->escapeHtml(__('Gift Cards')) ?></span></label>
+    <div class="admin__field-control">
+        <input type="text" class="admin__control-text" id="amgiftcard_code" value="" name="amgiftcard_code" />
+        <button onclick="amgiftOrder.applyAmGCard()" type="button" value="" class="action-default">
+            <span><?= $block->escapeHtml(__('Apply')) ?></span>
+        </button>
+        <?php foreach ($block->getGiftCards() as $card): ?>
+            <p class="added-coupon-code">
+                <span><?=  $block->escapeHtml($card) ?></span>
+                <a href="#" onclick="amgiftOrder.removeAmGCard('<?= $block->escapeJs($card) ?>'); return false;"
+                   title="<?= $block->escapeHtml(__('Remove Gift Cards Code')) ?>"
+                   class="action-remove">
+                    <span><?= $block->escapeHtml(__('Remove')) ?></span>
+                </a>
+            </p>
+        <?php endforeach; ?>
+        <script>
+            require([
+                'jquery',
+                'Amasty_GiftCardAccount/js/order'
+            ], function ($, amgiftOrder) {
+                window.amgiftOrder = amgiftOrder;
+            });
+        </script>
+    </div>
+</div>
+<?php endif; ?>
+

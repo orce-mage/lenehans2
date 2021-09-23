@@ -1,0 +1,29 @@
+.page{max-width:100%;}
+.top-toolbar, .header, .top-container, .main, .footer, .footer-toolbar, .footer-cms, .container{width:100%;max-width:none;}
+body{background-color:#fff;background-image:none;background-repeat:repeat;background-position:0px 0px;}
+.top-toolbar-container{background-color:#eaeaea;background-image:none;background-repeat:repeat;background-position:0px 0px;}
+.header-container, .header-container #search_mini_form.active .form-search{background-color:#fff;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+.main-container{background-color:#fff;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+.main{background-color:#fff;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+.footer-container{background-color:#eaeaea;background-image:none;background-repeat:repeat;background-position:0px 0px;}
+.nav-container .navpro a.level-top, .nav-container .navpro div.level-top a{font-family:Arial,Helvetica,sans-serif;font-size:13px;text-transform:capitalize;color:#fff;}
+.nav-container .navpro li a.nav-a:hover, .nav-container .navpro li .nav-sibling-title a:hover, .nav-container .navpro .over > a.level-top, .nav-container .navpro .over > div.level-top a{color:#fff;}
+.nav-container .navpro .active > a.level-top, .nav-container .navpro .active > div.level-top a, #nav li.active a.level-top:hover, #nav li.active a.level-top.over, .nav-container .navpro li.active a.level-top:hover, .nav-container .navpro li.active a.level-top.over{color:#fff;}
+.nav-container .navpro .nav-ul .nav-a, .nav-container .navpro .nav-ul .nav-sibling-title a{color:#737373;}
+.nav-container .navpro .nav-ul .nav-a.over, .nav-container .navpro .nav-ul .nav-sibling-title a.over{color:#000000;}
+.nav-container .navpro .nav-ul .active > .nav-a{color:#fff;}
+button.button span{border-color:#F86706;background-color:transparent;color:#F86706;}
+button.button:hover span{background-color:#FF8724;color:#ffffff;}
+button.btn-alt span{border-color:#000;background-color:transparent;color:#000;}
+button.btn-alt:hover span{background-color:#000;color:#ffffff;}
+.product-view .product-shop .btn-cart span, .amazonstyle-checkboxes .btn-cart span, button.btn-checkout span{border-color:#F86706;background-color:#FF8724;color:#ffffff;}
+.product-view .product-shop .btn-cart:hover span, .amazonstyle-checkboxes .btn-cart:hover span, button.btn-checkout:hover span{background-color:#F86706;color:#ffffff;}
+.easytabs li .easytabs-a{font-family:Arial,Helvetica,Tahoma,sans-serif;font-size:13px;font-weight:bold;text-transform:none;background-color:#f5f5f5;color:#777;border-color:#f5f5f5;}
+.easytabs li:hover .easytabs-a{background-color:#fbfbfb;color:#555;border-color:#fbfbfb;}
+.easytabs li.active .easytabs-a, .easytabs li.active .easytabs-a:hover{background-color:#fff;color:#000;}
+.easytabs li.active .easytabs-a, .easytabs li.active .easytabs-a:hover, .easytabs-content, .easytabs-content-wrapper{border-color:#ccc;}
+.page-title h1, .page-title h2, .hero .block-title span, .sidebar .block-title, .product-name h1, .product-collateral .h2, .product-collateral h2, .box-collateral .h2, .box-collateral h2, .cart .crosssell h2, .suggestpage-index-index h2{font-family:'Noto Sans', sans-serif;;font-size:25px;text-transform:capitalize;}
+.product-collateral .h2, .product-collateral h2{font-size:16px;}
+.sidebar .block-title{font-size:15px;}
+.nav-container .nav-dropdown .easycatalogimg .parent-category {text-align: left;} 
+.sidebar .block-currency { display: none }

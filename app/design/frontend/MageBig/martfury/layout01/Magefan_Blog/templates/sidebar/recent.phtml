@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar posts list template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList\AbstractList
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+?>
+<?php
+    $width = (int)$block->getBlockImageWidth() ?: 74;
+    $height = (int)$block->getBlockImageheight() ?: 60;
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+    $padTop = round(($height/$width)*100, 2);
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="widget block block-<?= $block->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts" >
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
+    </div>
+    <div class="block-content">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+            ?>
+            <div class="item clearfix">
+                <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                <?php if ($featuredImage) { ?>
+                    <div class="post-image">
+                        <?php
+                        $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                        if (!$featuredImgAlt) {
+                            $featuredImgAlt =  $_postName;
+                        }
+                        ?>
+                        <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                            <span class="img-lazy-wrap" style="padding-top: <?= $padTop ?>%">
+                                <img class="media-lazy lazyload" data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" src="#" width="<?= $width ?>" height="<?= $height ?>" layout="responsive" data-src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
+                                 alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                            </span>
+                        </a>
+                    </div>
+                <?php } ?>
+
+                <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                    <?= $_postName ?>
+                </a>
+
+                <?php /** if ($featuredImage && $_post->isPublishDateEnabled()) { ?>
+                    <div class="post-item-date">
+                        <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                    </div>
+                <?php } **/ ?>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>

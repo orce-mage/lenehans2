@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/Magento/Module/etc/module.xsd">
+    <module name="Wyomind_MassStockUpdate" setup_version="11.1.0">
+        <sequence>
+            <module name="Magento_Core"/>
+        </sequence>
+    </module>
+</config>  

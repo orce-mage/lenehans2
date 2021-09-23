@@ -1,0 +1,14 @@
+<tr class="amexportcore-row">
+    <td class="amexportcore-td">
+        <input class="amexportcore-field" type="text"
+               data-bind="value: $data.code"/>
+    </td>
+    <td class="amexportcore-td -label">
+        <input class="amexportcore-field" type="text" data-bind="
+                                                                value: $data.output_value,
+                                                                valueUpdate: 'afterkeydown'"/>
+    </td>
+    <td class="amexportcore-td -code">
+        <span class="amexportcore-delete" data-bind="click: $data.remove.bind($data, $data.index, $index())"></span>
+    </td>
+</tr>

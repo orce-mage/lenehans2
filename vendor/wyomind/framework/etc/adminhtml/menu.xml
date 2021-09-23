@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2018 Wyomind. All rights reserved.
+  See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <add id="Wyomind_Framework::main"
+             module="Wyomind_Framework"
+             title="Wyomind"
+             sortOrder="79"
+             resource="Wyomind_Framework::main"
+        />
+
+        <add id="Wyomind_Framework::discover"
+             module="Wyomind_Framework"
+             title="More Wyomind Extensions"
+             sortOrder="0"
+             parent="Wyomind_Framework::main"
+             resource="Wyomind_Framework::discover"/>
+
+
+        <add id="Wyomind_Framework::payg"
+             module="Wyomind_Framework"
+             title="Wyomind Development Services"
+             sortOrder="1"
+             parent="Wyomind_Framework::main"
+             target="_blank"
+             resource="Wyomind_Framework::payg"
+             action="payg"/>
+
+        <add id="Wyomind_Framework::support"
+             module="Wyomind_Framework"
+             title="Support"
+             sortOrder="9999"
+             parent="Wyomind_Framework::main"
+             target="_blank"
+             resource="Wyomind_Framework::support"
+             action="support"/>
+
+    </menu>
+</config>

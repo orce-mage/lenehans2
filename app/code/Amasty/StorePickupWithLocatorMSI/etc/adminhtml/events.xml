@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- save location inventory source data -->
+    <event name="controller_amasty_location_form_save">
+        <observer name="amasty_save_location_inventory_source" instance="Amasty\StorePickupWithLocatorMSI\Observer\Adminhtml\Location\Save" />
+    </event>
+</config>

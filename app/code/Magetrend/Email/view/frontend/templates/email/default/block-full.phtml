@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+?>
+<?php $var = $block->getVarModel();?>
+<?php $templateId = $block->getTemplateId(); ?>
+<?php $blockId = $block->getTemplateId(); ?>
+<?php $blockName = $block->getBlockName(); ?>
+<table
+    dir="<?php echo $block->getDirection();?>"
+    width="100%"
+    border="0" cellpadding="0" cellspacing="0"
+    class="mteditor-bgcolor full-width-body-bg-color"
+    <?php echo $var->getHtmlAttribute('style', 'full-width-body-bg-color-'.$blockName, 'width: 100% !important; max-width: 100% !important; background-color: #f1f1f1'); ?>
+    <?php echo $var->getHtmlAttribute('bgcolor', 'full-width-body-bg-color-bgcolor-'.$blockName, '#f1f1f1'); ?>
+    data-block-id="<?php echo $block->getBlockId();?>"
+    data-block-name="<?php echo $block->getBlockName();?>">
+    <?php if ($block->getMargintop() > 0) :?>
+        <tr>
+            <td colspan="3" height="<?php echo $block->getMargintop();?>" style="height: <?php echo $block->getMarginTop();?>px"><div style="font-size: 0; height: 0;">&nbsp;</div></td>
+        </tr>
+    <?php endif; ?>
+    <tr>
+        <td align="center">
+            <table width="100%"
+                cellspacing="0" cellpadding="0" border="0"
+                class="mteditor-bgcolor full-width-secondary-bg-color"
+                <?php echo $var->getHtmlAttribute('style', 'full-width-secondary-bg-color-'.$blockName, 'width: 100% !important; max-width: 100% !important; background-color: #FFFFFF;'); ?>
+                <?php echo $var->getHtmlAttribute('bgcolor', 'full-width-secondary-bg-color-color-'.$blockName, '#FFFFFF'); ?>
+                data-block-content="<?php echo $block->getId();?>">
+                <tr>
+                    <td align="center"><?php echo $block->getChildHtml();?></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

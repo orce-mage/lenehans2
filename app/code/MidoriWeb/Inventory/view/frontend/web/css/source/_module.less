@@ -1,0 +1,30 @@
+.cs-location-wrapper {
+    .cs-location-a {
+        position:relative;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+            .cs-location-content{
+                display: block !important;
+            }
+        }
+        .cs-location-content{
+            position: absolute;
+            border: 1px solid #335588;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 10px 15px;
+            text-align: center;
+            z-index: 9999;
+            .cs-c-header{
+                padding-bottom: 10px;
+                font-size:15px;
+            }
+            .cs-c-c{
+                font-size:30px;
+                font-weight: 500;
+            }
+        }
+    }
+}
+

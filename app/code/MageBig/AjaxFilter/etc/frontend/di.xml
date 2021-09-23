@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\LayeredNavigation\Block\Navigation\Category" type="MageBig\AjaxFilter\Block\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\LayeredNavigation\Block\Navigation\Search" type="MageBig\AjaxFilter\Block\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">searchFilterList</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="categoryFilterList" type="MageBig\AjaxFilter\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="price" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Decimal</item>
+                <item name="attribute" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Attribute</item>
+                <item name="rating" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Rating</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="searchFilterList" type="MageBig\AjaxFilter\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="price" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Decimal</item>
+                <item name="attribute" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Attribute</item>
+                <item name="rating" xsi:type="string">MageBig\AjaxFilter\Model\Layer\Filter\Rating</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Catalog\Controller\Category\View">
+        <plugin name="ajax_filter_plugin_category_view" type="MageBig\AjaxFilter\Plugin\Category\View" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\CatalogSearch\Controller\Result\Index">
+        <plugin name="ajax_filter_plugin_catalogsearch_result_index" type="MageBig\AjaxFilter\Plugin\CatalogSearch\View" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="MageBig\Shopbybrand\Controller\Index\View">
+        <plugin name="ajax_filter_plugin_brand_view" type="MageBig\AjaxFilter\Plugin\Brands\View" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\Catalog\Model\Config">
+        <plugin name="ajax_filter_catalog_config" type="MageBig\AjaxFilter\Plugin\Catalog\Model\Config" />
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="ajax_filter_catalog_product_toolbar" type="MageBig\AjaxFilter\Plugin\Catalog\Product\ProductList\Toolbar" />
+    </type>
+</config>

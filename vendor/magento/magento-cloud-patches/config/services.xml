@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Default configuration for services in *this* file -->
+        <defaults autowire="true" public="true"/>
+
+        <prototype namespace="Magento\CloudPatches\" resource="../src/*" exclude="../src/{Test}"/>
+
+        <service id="Psr\Log\LoggerInterface" alias="Magento\CloudPatches\App\Logger" />
+        <service id="Magento\CloudPatches\App\Container" autowire="false"/>
+        <service id="Magento\CloudPatches\Filesystem\DirectoryList" autowire="false"/>
+        <service id="Symfony\Component\Console\Helper\QuestionHelper"/>
+        <service id="Composer\Composer"/>
+        <service id="Magento\CloudPatches\App\GenericException" autowire="false"/>
+        <service id="Magento\CloudPatches\App\RuntimeException" autowire="false"/>
+        <service id="Magento\CloudPatches\Filesystem\FileSystemException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\SourceProviderException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\Collector\CollectorException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\Status\StatusResolverException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\PatchIntegrityException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\Pool\PatchNotFoundException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\ApplierException" autowire="false"/>
+        <service id="Magento\CloudPatches\Shell\PackageNotFoundException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\Data\Patch" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\Data\AggregatedPatch" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\Pool\OptionalPool" lazy="true" />
+        <service id="Magento\CloudPatches\Patch\Pool\RequiredPool" lazy="true"/>
+        <service id="Magento\CloudPatches\Patch\Pool\LocalPool" lazy="true"/>
+        <service id="Magento\CloudPatches\Patch\Status\StatusPool" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\PatchCommandNotFound" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\PatchCommandException" autowire="false"/>
+        <service id="Magento\CloudPatches\Shell\Command\DriverException" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\PatchCommand" autowire="false"/>
+        <service id="Magento\CloudPatches\Patch\PatchCommandInterface" alias="Magento\CloudPatches\Patch\PatchCommand"/>
+        <service id="statusPool" class="Magento\CloudPatches\Patch\Status\StatusPool" lazy="true">
+            <argument key="$resolvers" type="collection">
+                <argument type="service" id="Magento\CloudPatches\Patch\Status\LocalResolver"/>
+                <argument type="service" id="Magento\CloudPatches\Patch\Status\OptionalResolver"/>
+            </argument>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\ShowStatus">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Ece\Revert">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Action\ApplyOptionalAction">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Action\RevertAction">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Action\ConfirmRequiredAction">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Action\ProcessDeprecatedAction">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Action\ReviewAppliedAction">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Patch\RevertValidator">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Renderer">
+            <argument key="$statusPool" type="service" id="statusPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Action\ActionPool" autowire="false"/>
+        <service id="ApplyOptionalActionPool" class="Magento\CloudPatches\Command\Process\Action\ActionPool">
+            <argument key="$actions" type="collection">
+                <argument type="service" id="Magento\CloudPatches\Command\Process\Action\ReviewAppliedAction"/>
+                <argument type="service" id="Magento\CloudPatches\Command\Process\Action\ConfirmRequiredAction"/>
+                <argument type="service" id="Magento\CloudPatches\Command\Process\Action\ProcessDeprecatedAction"/>
+                <argument type="service" id="Magento\CloudPatches\Command\Process\Action\ApplyOptionalAction"/>
+            </argument>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\ApplyOptional">
+            <argument key="$actionPool" type="service" id="ApplyOptionalActionPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Command\Process\Ece\ApplyOptional">
+            <argument key="$actionPool" type="service" id="ApplyOptionalActionPool"/>
+        </service>
+        <service id="Magento\CloudPatches\Patch\PatchBuilder" shared="false"/>
+        <service id="Magento\CloudPatches\Patch\PatchCommand">
+            <argument key="$drivers" type="collection">
+                <argument type="service" id="Magento\CloudPatches\Shell\Command\GitDriver"/>
+                <argument type="service" id="Magento\CloudPatches\Shell\Command\PatchDriver"/>
+            </argument>
+        </service>
+        <service id="Magento\CloudPatches\Patch\Collector\SupportCollector">
+            <argument key="$getPatchesConfig" type="service" id="Magento\CloudPatches\Patch\Collector\GetSupportPatchesConfig"/>
+        </service>
+        <service id="Magento\CloudPatches\Patch\Collector\CommunityCollector">
+            <argument key="$getPatchesConfig" type="service" id="Magento\CloudPatches\Patch\Collector\GetCommunityPatchesConfig"/>
+        </service>
+        <service id="Magento\CloudPatches\Patch\GetCategoriesList">
+            <argument key="$providers" type="collection">
+                <argument type="service" id="Magento\CloudPatches\Patch\CategoriesList\GetLocalPatchCategories"/>
+                <argument type="service" id="Magento\CloudPatches\Patch\CategoriesList\GetSupportPatchCategories"/>
+            </argument>
+        </service>
+        <service id="Magento\CloudPatches\Patch\Pool\OptionalPool">
+            <argument key="$collectors" type="collection">
+                <argument type="service" id="Magento\CloudPatches\Patch\Collector\CloudCollector"/>
+                <argument type="service" id="Magento\CloudPatches\Patch\Collector\SupportCollector"/>
+                <argument type="service" id="Magento\CloudPatches\Patch\Collector\CommunityCollector"/>
+            </argument>
+        </service>
+        <service id="Magento\CloudPatches\Patch\Pool\RequiredPool">
+            <argument key="$collectors" type="collection">
+                <argument type="service" id="Magento\CloudPatches\Patch\Collector\CloudCollector"/>
+            </argument>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Catalog:etc/catalog_attributes.xsd">
+    <group name="catalog_product">
+        <attribute name="am_giftcard_type"/>
+        <attribute name="am_giftcard_prices"/>
+        <attribute name="am_allow_open_amount"/>
+        <attribute name="am_open_amount_min"/>
+        <attribute name="am_open_amount_max"/>
+        <attribute name="am_giftcard_lifetime"/>
+        <attribute name="am_giftcard_code_image"/>
+        <attribute name="am_giftcard_code_set"/>
+        <attribute name="am_giftcard_fee_enable"/>
+        <attribute name="am_giftcard_fee_type"/>
+        <attribute name="am_giftcard_fee_value"/>
+    </group>
+    <group name="quote_item">
+        <attribute name="am_giftcard_type"/>
+        <attribute name="am_giftcard_prices"/>
+        <attribute name="am_allow_open_amount"/>
+        <attribute name="am_open_amount_min"/>
+        <attribute name="am_open_amount_max"/>
+        <attribute name="am_giftcard_lifetime"/>
+        <attribute name="am_email_template"/>
+        <attribute name="am_giftcard_code_image"/>
+        <attribute name="am_giftcard_code_set"/>
+        <attribute name="am_giftcard_fee_enable"/>
+        <attribute name="am_giftcard_fee_type"/>
+        <attribute name="am_giftcard_fee_value"/>
+    </group>
+</config>

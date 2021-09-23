@@ -1,0 +1,109 @@
+<?php
+
+use Mirasvit\CacheWarmer\Block\Adminhtml\Info\Info;
+
+/** @var $block Info */
+
+$pagesStatusData  = $block->getPagesStatusData();
+$cacheStatusRates = $pagesStatusData['rates'];
+$coverageData     = $block->getCacheCoverageRate();
+$coverageRates    = $coverageData['rates'];
+?>
+
+<div class="mst-cache-warmer__info">
+    <div class="row">
+        <div class="column doughnut">
+            <h4><?= Info::CACHE_COVERAGE_LABEL ?></h4>
+            <div class="column__content">
+                <div class="chart__legend">
+                    <div class="legend__label green">
+                        HIT
+                        <div class="value"><?= $coverageData['hit'] ?></div>
+                    </div>
+                    <div class="legend__label yellow">
+                        MISS
+                        <div class="value"><?= $coverageData['miss'] ?></div>
+                    </div>
+                </div>
+
+                <div class="chart__chart">
+                    <canvas style="width: 150px; height: 150px" id="<?= Info::CACHE_COVERAGE_ID ?>"></canvas>
+                    <div class="chart__label">
+                        <span class="chart__label-main green"><?= $coverageRates[0] ?>%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column doughnut">
+            <h4><?= Info::CACHE_STATUS_LABEL ?></h4>
+            <div class="column__content">
+                <div class="chart__legend">
+                    <div class="legend__label green">
+                        Cached
+                        <div class="value"><?= $pagesStatusData['cached'] ?></div>
+                    </div>
+                    <div class="legend__label yellow">
+                        Pending
+                        <div class="value"><?= $pagesStatusData['pending'] ?></div>
+                    </div>
+                    <div class="legend__label red">
+                        Uncacheable
+                        <div class="value"><?= $pagesStatusData['uncacheable'] ?></div>
+                    </div>
+
+                </div>
+                <div class="chart__chart">
+                    <canvas style="width: 150px; height: 150px" id="<?= Info::CACHE_STATUS_ID ?>"></canvas>
+                    <div class="chart__label">
+                        <span class="chart__label-main green"><?= $cacheStatusRates[0] ?>%</span>
+                        <span class="yellow"><?= $cacheStatusRates[1] ?>%</span>
+                        <span class="red"><?= $cacheStatusRates[2] ?>%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column line-chart">
+            <h4><?= Info::CACHE_HISTORY_LABEL ?></h4>
+
+            <div class="column__content">
+                <canvas id="<?= Info::CACHE_HISTORY_ID ?>"></canvas>
+            </div>
+        </div>
+        <div class="column info">
+            <h4>Server Info</h4>
+            <div class="column__content">
+                <div class="server-info">
+                    <p>Cache Type: <span><?= $block->getCacheType(); ?></span></p>
+                    <p>Cache TTL: <span><?= $block->getPrettyTtl(); ?></span></p>
+                    <p>Average Warming Speed:</p>
+                    <p><span><?= $block->getAverageWarmingSpeed() ?> URLs/hour</span></p>
+                </div>
+
+                <div class="test-link">
+                    <a class="action-default" href="<?= $block->getTestPageUrl() ?>" target="_blank">
+                        <?= __('Check Test Page') ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init"><?= \Zend_Json::encode([
+        '#' . Info::CACHE_COVERAGE_ID => [
+            'Mirasvit_CacheWarmer/js/component/chart' => $block->getChartConfigData(Info::CHART_TYPE_DOUGHNUT, Info::CACHE_COVERAGE_ID),
+        ],
+    ]); ?></script>
+<script type="text/x-magento-init"><?= \Zend_Json::encode([
+        '#' . Info::CACHE_STATUS_ID => [
+            'Mirasvit_CacheWarmer/js/component/chart' => $block->getChartConfigData(Info::CHART_TYPE_DOUGHNUT, Info::CACHE_STATUS_ID),
+        ],
+    ]); ?></script>
+<script type="text/x-magento-init"><?= \Zend_Json::encode([
+        '#' . Info::CACHE_HISTORY_ID => [
+            'Mirasvit_CacheWarmer/js/component/chart' => $block->getChartConfigData(Info::CHART_TYPE_LINE, Info::CACHE_HISTORY_ID),
+        ],
+    ]); ?></script>
+

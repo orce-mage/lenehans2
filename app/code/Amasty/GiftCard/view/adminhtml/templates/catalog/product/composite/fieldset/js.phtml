@@ -1,0 +1,108 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+?>
+<?php
+/**
+ * @var \Magento\Backend\Block\Template $block
+ */
+?>
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+        const amastyReorder = (function() {
+            const typePrinted = '<?= \Amasty\GiftCard\Model\Config\Source\GiftCardType::TYPE_PRINTED ?>',
+                hideClass = '_am-hide',
+                validateClass = 'required-entry',
+                fieldSelector = '[data-amcard-js="field"]',
+                datepickerSelector = '[data-amgiftcard-js="amgiftcard-datepicker"]',
+                giftTypeSelector = '[data-amgiftcard-js="amgiftcard-type"]',
+                recipientNameSelector = '[data-amgiftcard-js="amgiftcard-recipient-name"]',
+                recipientEmailSelector = '[data-amgiftcard-js="amgiftcard-recipient-email"]',
+                deliveryDateSelector = '[data-amgiftcard-js="amgiftcard-delivery-date"]',
+                timezonesSelector = '[data-amgiftcard-js="amgiftcard-timezone"]',
+                amountSelector = '[data-amgiftcard-js="amount"]',
+                customAmountSelector = '[data-amgiftcard-js="custom-amount"]',
+                isSendLaterSelector = '[data-amgiftcard-js="amgiftcard-send-later"]';
+
+            function initialize () {
+                addEvents();
+                initDatepicker();
+            }
+
+            function initDatepicker () {
+                $(datepickerSelector).calendar({
+                    minDate: new Date(),
+                    dateFormat:'m/d/yy',
+                    showButtonPanel: true,
+                    currentText: '<?= $block->escapeHtml(__('Go Today')) ?>',
+                    changeMonth: true,
+                    changeYear: true,
+                });
+            }
+
+            function toggleRecipient () {
+                toggleState(recipientNameSelector);
+                toggleState(recipientEmailSelector);
+            }
+
+            function toggleState (elementSelector) {
+                $(elementSelector)
+                    .toggleClass(hideClass)
+                    .find(fieldSelector)
+                    .toggleClass(validateClass);
+            }
+
+            function giftTypeChanged () {
+                var isTypePrinted = $(giftTypeSelector).val() === typePrinted,
+                    isHide = $(recipientNameSelector).hasClass(hideClass);
+
+                if ((isTypePrinted && !isHide) || (!isTypePrinted && isHide)) {
+                    toggleRecipient();
+                }
+            }
+
+            function toggleDatepicker () {
+                toggleState(deliveryDateSelector);
+                toggleState(timezonesSelector);
+            }
+
+            function validateDataValue () {
+                var datepicker = $(datepickerSelector),
+                    currentDate = Date.now();
+
+                if (+new Date(datepicker.val()) < currentDate) {
+                    datepicker.datepicker('setDate', currentDate);
+                }
+            }
+
+            function toggleCustomAmount () {
+                var isCustomAmountEnable = $(amountSelector).val() === 'custom',
+                    isCustomAmountHide = $(customAmountSelector).hasClass(hideClass);
+
+                if ((isCustomAmountEnable && isCustomAmountHide) || (!isCustomAmountEnable && !isCustomAmountHide)) {
+                    toggleState(customAmountSelector);
+                }
+            }
+
+            function addEvents () {
+                $(giftTypeSelector).on('change', giftTypeChanged);
+                $(isSendLaterSelector).on('change', toggleDatepicker);
+                $(datepickerSelector).on('change', validateDataValue);
+                $(amountSelector).on('change', toggleCustomAmount);
+            }
+
+            return {
+                init: function() {
+                    initialize();
+                }
+            }
+        })();
+        amastyReorder.init();
+    });
+</script>

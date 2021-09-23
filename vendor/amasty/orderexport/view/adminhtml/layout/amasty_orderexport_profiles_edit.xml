@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Tabs" name="amasty_orderexport_profiles_edit_tabs">
+                <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Tab\Main" name="amasty_orderexport_profiles_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">amasty_orderexport_profiles_edit_tab_main</argument>
+                </action>
+
+                <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Tab\Filters" name="amasty_orderexport_profiles_edit_tab_filters"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">filters_section</argument>
+                    <argument name="block" xsi:type="string">amasty_orderexport_profiles_edit_tab_filters</argument>
+                </action>
+
+                <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Tab\File" name="amasty_orderexport_profiles_edit_tab_file"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">file_section</argument>
+                    <argument name="block" xsi:type="string">amasty_orderexport_profiles_edit_tab_file</argument>
+                </action>
+
+                <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Tab\StaticFields" name="amasty_orderexport_profiles_edit_tab_static_fields"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">static_fields</argument>
+                    <argument name="block" xsi:type="string">amasty_orderexport_profiles_edit_tab_static_fields</argument>
+                </action>
+
+                <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Tab\Mappings" name="amasty_orderexport_profiles_edit_tab_mappings"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mappings_section</argument>
+                    <argument name="block" xsi:type="string">amasty_orderexport_profiles_edit_tab_mappings</argument>
+                </action>
+
+                <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Tab\History" name="amasty_orderexport_profiles_edit_tab_history">
+                    <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\History\Grid" name="amorderexport.history.grid" as="amorderexport.history.grid" />
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">history_section</argument>
+                    <argument name="block" xsi:type="string">amasty_orderexport_profiles_edit_tab_history</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Amasty\Orderexport\Block\Adminhtml\Profiles\Edit" name="orderexport_profiles_edit"/>
+        </referenceContainer>
+    </body>
+</page>

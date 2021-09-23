@@ -1,0 +1,76 @@
+<?php /** @var \Wyomind\Framework\Block\Adminhtml\License\Manager $block */ ?>
+<?php $module = $block->getModule(); ?>
+<div class="message message-warning"><?php echo __("It seems your license is not properly registered for"); ?>
+    <b><?php echo $module["name"]; ?></b></div>
+<div style="margin-left: 20px;margin-top:40px;">
+    <h3><?php echo __("Find below a list of the most frequent errors: "); ?></h3>
+    <ul style="margin-left: 20px;">
+        <li>
+            <h4><?php echo __("You didn't activate the license yet."); ?></h4>
+            <div><?php echo __("Check "); ?>
+                <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>/faq/index/index/magento/2/q/413"target="_blank">
+                    <?php echo __("how to activate the license."); ?>
+                </a>
+            </div>
+        </li>
+        <li style="margin-top: 20px;">
+            <h4><?php echo __("All licenses for this activation key have been registered."); ?></h4>
+            <div><?php echo __("Check "); ?>
+                <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>/faq/index/index/magento/2/q/413" target="_blank">
+                    <?php echo __("how to request a new license for this domain."); ?>
+                </a>
+            </div>
+        </li>
+        <li style="margin-top: 20px;">
+            <h4><?php echo __("The activation key you entered is incorrect."); ?></h4>
+            <div>
+                <?php echo __("Check "); ?>
+                <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>/faq/index/index/magento/2/q/487" target="_blank">
+                    <?php echo __("how to find the correct activation key for this module."); ?>
+                </a>
+            </div>
+        </li>
+        <li style="margin-top: 20px;">
+            <h4><?php echo __("You upgraded the module and the license must be updated."); ?></h4>
+            <div>
+                <?php echo __("Check "); ?>
+                <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>/faq/index/index/magento/2/q/413" target="_blank">
+                    <?php echo __("how to re-activate the license."); ?>
+                </a>
+            </div>
+        </li>
+        <li style="margin-top: 20px;">
+            <h4><?php echo __("You changed the website domain name."); ?></h4>
+            <div>
+                <?php echo __("Check "); ?>
+                <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>/faq/index/index/magento/2/q/413" target="_blank">
+                    <?php echo __("how to re-activate the license."); ?>
+                </a>
+            </div>
+        </li>
+        <li style="margin-top: 20px;">
+            <h4><?php echo __("Some key files are missing or altered."); ?></h4>
+            <div>
+                <?php echo __("Check "); ?>
+                <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>/faq/index/index/magento/2/q/371" target="_blank">
+                    <?php echo __("how to re-install the module."); ?></a>
+            </div>
+        </li>
+        <li style="margin-top: 20px;">
+            <h4><?php echo __("Your trial period has ended."); ?></h4>
+            <div>
+                <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>trial-license.html?ak=<?php echo $module["activation_key"]; ?>" target="_blank">
+                    <?php echo __("It's time to purchase your life-time license."); ?>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+<br><br>
+<div class="message message-notice">
+    <?php echo __("If none of the above solutions works for you, please "); ?>
+    <a href="<?php echo \Wyomind\Framework\Helper\License::SOAP_URI; ?>/contact.html" target="_blank">
+        <?php echo __("get in touch with our support team."); ?>
+    </a>
+    <?php echo __("We will reply in a few minutes."); ?>
+</div>

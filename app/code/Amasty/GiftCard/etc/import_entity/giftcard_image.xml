@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="amasty_giftcard_image">
+        <name>Amasty Gift Card Image</name>
+        <group>Amasty Gift Card</group>
+        <description>Amasty Gift Card Image</description>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Import\FieldsClass\Describe">
+                <arguments>
+                    <argument name="tableName" xsi:type="string">amasty_giftcard_image</argument>
+                </arguments>
+            </fieldsClass>
+            <fields>
+                <field name="image_id">
+                    <actions>
+                        <trim apply="beforeValidate"/>
+                    </actions>
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty>
+                            <excludeBehaviors>
+                                <addDirect/>
+                            </excludeBehaviors>
+                        </notEmpty>
+                    </validation>
+                    <synchronization>
+                        <item>
+                            <entityName>amasty_giftcard_account</entityName>
+                            <fieldName>image_id</fieldName>
+                        </item>
+                    </synchronization>
+                </field>
+                <field name="status">
+                    <validation>
+                        <boolean/>
+                    </validation>
+                </field>
+                <field name="user_upload">
+                    <validation>
+                        <boolean/>
+                    </validation>
+                </field>
+            </fields>
+            <sampleData>
+                <row>
+                    <field name="image_id">1</field>
+                    <field name="title">Gift Card 1</field>
+                    <field name="status">1</field>
+                    <field name="image_path">5a5995066225a_gift-card-1.png</field>
+                    <field name="user_upload">0</field>
+                </row>
+            </sampleData>
+        </fieldsConfig>
+        <behaviors>
+            <addUpdateDirect name="Add/Update">
+                <tableName>amasty_giftcard_image</tableName>
+            </addUpdateDirect>
+            <addDirect name="Only add">
+                <tableName>amasty_giftcard_image</tableName>
+            </addDirect>
+            <updateDirect name="Only update">
+                <tableName>amasty_giftcard_image</tableName>
+            </updateDirect>
+            <deleteDirect name="Delete">
+                <tableName>amasty_giftcard_image</tableName>
+            </deleteDirect>
+        </behaviors>
+    </entity>
+    <relation code="amasty_giftcard_account_image">
+        <parent_entity>amasty_giftcard_account</parent_entity>
+        <child_entity>amasty_giftcard_image</child_entity>
+        <sub_entity_field_name>amasty_giftcard_image</sub_entity_field_name>
+        <skip_relation_fields_update>true</skip_relation_fields_update>
+        <type>one_to_one</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">image_id</argument>
+            <argument name="child_field_name" xsi:type="string">image_id</argument>
+        </arguments>
+    </relation>
+</config>

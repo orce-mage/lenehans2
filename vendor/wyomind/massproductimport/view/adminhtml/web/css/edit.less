@@ -1,0 +1,80 @@
+/**
+ * Copyright © 2019 Wyomind. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+#mapping-area {
+
+  .icon {
+
+    // margin: 0 0 0 20px;
+    &.code {
+
+      margin: 0px;
+
+    }
+    &.rule {
+      background: url(icons.png) no-repeat;
+      background-position: 0px 0;
+      width: 24px;
+      cursor: pointer;
+      &:hover {
+        background-position: 0px -24px;
+        &.active {
+          border-bottom: 3px solid #c34502;
+        }
+      }
+      &.active {
+        border-bottom: 3px solid #eb5202;
+
+      }
+
+    }
+
+  }
+
+}
+
+#rule {
+  position: absolute;
+  left: 50%;
+  margin-left: -84px;
+  border: 5px solid #808080;
+  top: 250px;
+  background: #808080 none repeat scroll 0 0;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  min-width: 235px;
+  height: 250px;
+
+  SELECT {
+    width: 100%;
+    background: white;
+  }
+  BUTTON {
+    position: absolute;
+    bottom: 0;
+    &.validate {
+      right: 0;
+    }
+    &.cancel {
+      right: 90px;
+    }
+    &.clear {
+      right: 170px;
+    }
+  }
+  .handler {
+    height: 38px;
+  }
+}
+
+#overlay-rule {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: none;
+}

@@ -1,0 +1,41 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Currency switcher
+ *
+ * @see \Magento\Directory\Block\Currency
+ */
+?>
+<?php $currencyList = $block->getCurrencyCount(); ?>
+<?php $currencies = $block->getCurrencies(); ?>
+<?php $currentCurrencyCode = $block->getCurrentCurrencyCode(); ?>
+<?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : ''?>
+
+<?php if ($currencyList > 1) : ?>
+<div class="col-auto top-links">
+    <div class="currency-topbar switcher currency switcher-currency" id="switcher-currency<?= /* @escapeNotVerified */ $id?>">
+        <div class="currency-sym language-<?= $block->escapeHtml($block->getCurrentCurrencyCode()) ?>">
+            <span class="title"><span><?= $block->escapeHtml($currentCurrencyCode) ?><?php //echo @$block->escapeHtml($currencies[$currentCurrencyCode]) ?></span><i class="mbi mbi-ios-arrow-down"></i></span>
+        </div>
+        <div class="currency-list">
+            <ul class="dropdown switcher-dropdown">
+                <?php foreach ($currencies as $_code => $_name): ?>
+                    <?php if ($_code != $currentCurrencyCode): ?>
+                        <li class="currency-<?= /* @escapeNotVerified */ $_code ?> switcher-option">
+                            <a href="#" data-post='<?= /* @escapeNotVerified */ $block->getSwitchCurrencyPostData($_code); ?>'><?= /* @escapeNotVerified */ $_code ?><?php /* @escapeNotVerified */ //echo $_name ?></a>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

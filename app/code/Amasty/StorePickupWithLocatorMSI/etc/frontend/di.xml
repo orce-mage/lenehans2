@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Amasty\StorePickupWithLocatorMSI\Model\Location\LocationProductFilterApplier" type="Amasty\StorePickupWithLocator\Model\Location\LocationProductFilterApplier">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="msi" xsi:type="object">Amasty\StorePickupWithLocatorMSI\Model\Location\Filter\MSIConditionTypeFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\StorePickupWithLocator\ViewModel\Catalog\Product\Banner">
+        <arguments>
+            <argument name="locationFilterApplier" xsi:type="object">Amasty\StorePickupWithLocatorMSI\Model\Location\LocationProductFilterApplier</argument>
+        </arguments>
+    </type>
+</config>

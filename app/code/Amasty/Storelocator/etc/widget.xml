@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="amasty_store_locator" class="Amasty\Storelocator\Block\Location">
+        <label translate="true">Amasty Store Locator</label>
+        <description translate="true">Store Locator</description>
+        <parameters>
+            <parameter name="show_locations" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Store List On Widget</label>
+            </parameter>
+            <parameter name="show_search" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show NearBy And Radius Filter</label>
+            </parameter>
+            <parameter name="automatic_locate" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Automatic positioning to the nearest location</label>
+                <depends>
+                    <parameter name="show_search" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="widget_description" xsi:type="text" required="false" visible="true">
+                <label translate="true">Widget Description</label>
+            </parameter>
+            <parameter name="wrap_block" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Widget Block Wrapping</label>
+                <description translate="true">Set 'No' to disable the map block wrapping with the page content</description>
+            </parameter>
+            <parameter name="store_attributes" xsi:type="block" visible="true">
+                <block class="Amasty\Storelocator\Block\Adminhtml\Location\Edit\Tab\Attribute" />
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

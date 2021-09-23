@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="test">
+        <name>test entity 1</name>
+        <description>test entity 1</description>
+        <behaviors>
+            <add>
+                <modelFactory>Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Factory</modelFactory>
+                <repository>
+                    <class>\Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Repository</class>
+                    <saveMethod>save</saveMethod>
+                </repository>
+            </add>
+            <update>
+                <modelFactory>Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Factory</modelFactory>
+                <repository>
+                    <class>\Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Repository</class>
+                    <saveMethod>save</saveMethod>
+                    <loadMethod>getById</loadMethod>
+                </repository>
+            </update>
+            <delete>
+                <modelFactory>Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Factory</modelFactory>
+                <repository>
+                    <class>\Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Repository</class>
+                    <deleteMethod>delete</deleteMethod>
+                </repository>
+            </delete>
+            <addUpdate>
+                <modelFactory>Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Factory</modelFactory>
+                <insertResourceModel>Amasty\ImportCore\Test\Integration\TestModule\Model\ResourceModel\TestEntity1Inserter</insertResourceModel>
+                <repository>
+                    <class>\Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Repository</class>
+                    <saveMethod>save</saveMethod>
+                    <loadMethod>getById</loadMethod>
+                </repository>
+            </addUpdate>
+            <addDirect>
+                <tableName>amasty_import_test_entity1</tableName>
+            </addDirect>
+            <addUpdateDirect>
+                <tableName>amasty_import_test_entity1</tableName>
+            </addUpdateDirect>
+            <updateDirect>
+                <tableName>amasty_import_test_entity1</tableName>
+            </updateDirect>
+            <deleteDirect>
+                <tableName>amasty_import_test_entity1</tableName>
+            </deleteDirect>
+            <custom class="Amasty\ImportCore\Import\Behavior\Add\Model" code="customAdd">
+                <arguments>
+                    <argument name="modelFactory" xsi:type="string">Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Factory</argument>
+                    <argument name="repository" xsi:type="array">
+                        <item name="class" xsi:type="string">\Amasty\ImportCore\Test\Integration\TestModule\Model\TestEntity1Repository</item>
+                        <item name="saveMethod" xsi:type="string">save</item>
+                    </argument>
+                </arguments>
+            </custom>
+        </behaviors>
+        <fieldsConfig>
+            <fields>
+                <field name="field_1"/>
+                <field name="field_2"/>
+                <field name="field_3"/>
+            </fields>
+        </fieldsConfig>
+    </entity>
+</config>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="tsNewsPopup" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Newsletter Popup</label>
+            <tab>magebig_extensions</tab>
+            <resource>MageBig_NewsPopup::config_tsNewsPopup</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Newsletter Popup:</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_only_home" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show only Home page</label>
+                    <comment>If you choose No, Popup will be displayed in All pages</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="behaviour" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Behaviour</label>
+                    <comment>When visitor don't want to show the popup</comment>
+                    <source_model>MageBig\NewsPopup\Model\Config\Behaviour</source_model>
+                </field>
+                <field id="background_image" translate="label comment" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Image</label>
+                    <comment>JPG,PNG,GIF</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media">wysiwyg/magebig/newsletter</upload_dir>
+                    <base_url type="media" scope_info="1">wysiwyg/magebig/newsletter</base_url>
+                </field>
+                <field id="title" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title newsletter</label>
+                </field>
+                <field id="text" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description newsleter: </label>
+                </field>
+                <field id="width" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup width</label>
+                    <comment>830px</comment>
+                </field>
+                <field id="height" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup height</label>
+                    <comment>auto or 400px</comment>
+                </field>
+                <field id="min_height" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup min height</label>
+                    <comment>400px</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

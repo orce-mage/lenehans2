@@ -1,0 +1,165 @@
+<!--@subject {{trans "Your %store_name order confirmation" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order.getEmailCustomerNote()":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.getShippingDescription()":"Shipping Description",
+
+"layout handle=\"mtemail_header\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_header\"  noborder=\"1\" margintop=30 ":"mtemail_header",
+"layout handle=\"mtemail_header_center\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_header_center\"  noborder=\"1\" margintop=30 ":"mtemail_header_center",
+"layout handle=\"mtemail_text\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_text\" ":"mtemail_text",
+"layout handle=\"mtemail_grid2\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_grid2\" noborder=\"1\"":"mtemail_grid2",
+"layout handle=\"mtemail_empty\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_empty\" ":"mtemail_empty",
+"layout handle=\"mtemail_button\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_button\" ":"mtemail_button",
+"layout handle=\"mtemail_signature\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_signature\" ":"mtemail_signature",
+"layout handle=\"mtemail_footer\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_footer\" noborder=\"1\" ":"mtemail_footer",
+
+"layout handle=\"mtemail_sales_items\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_items\" order=$order ":"mtemail_sales_items",
+"layout handle=\"mtemail_sales_info\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_info\" order=$order ":"mtemail_sales_info",
+"layout handle=\"mtemail_sales_totals\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_totals\" order=$order ":"mtemail_sales_totals",
+"layout handle=\"mtemail_sales_gift_message\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_gift_message\" order=$order ":"mtemail_sales_gift_message",
+"layout handle=\"mtemail_sales_static_products\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_static_products\" noborder=\"1\" order=$order":"mtemail_sales_static_products",
+"layout handle=\"mtemail_sales_related_products\" area=\"frontend\" theme=\"default\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_related_products\" noborder=\"1\" order=$order":"mtemail_sales_related_products"
+
+
+} @-->
+
+
+<!--@styles
+body, html { padding: 0; margin: 0; }
+
+.col2-right, .col2-left { width: 42.5% !important; max-width: 42.5% !important;float:left;clear: none;}
+.msi .col2-right, .msi .col2-left {width: 92.5% !important; max-width: 92.5% !important;}
+.col2-left {margin: 0 2.5% 0 5%  !important;} .col2-right {margin: 0 5% 0 2.5% !important;}
+@media (max-width: 640px) {.col2-right, .col2-left {width: 90% !important; max-width: 90% !important; margin: 0 5% !important; min-width: 0 !important;}}
+
+
+@media (min-width: 640px) {
+    .header-logo,
+    .header-logo td{
+        text-align: left !important;
+        float: left !important;
+    }
+
+    .header-title td,
+    .header-title {
+        text-align: right  !important;
+        float: right;
+    }
+}
+
+@media (max-width: 640px) {
+
+    *[data-hide-on-mobile="true"] {
+        display: none;
+    }
+
+    *[data-show-on-mobile="true"] {
+        display: block;
+    }
+    .header-logo,
+    .header-title {
+        width: 100% !important;
+    }
+
+    .header-logo td,
+    .header-title td{
+        text-align: center !important;
+    }
+
+    .header-logo {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 640px) {
+    .totals-body {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .column-half {
+        width: 100% !important;
+        clear: both;
+        max-width: 100% !important;
+        margin-bottom: 30px;
+    }
+    td.separator {
+        height: 0 !important;
+    }
+}
+
+.payment-method .table-row strong {
+    font-weight: 400 !important;
+}
+
+@media (max-width: 640px) {
+    table[data-block-content="block_header"] {
+        margin-top: 20px !important;
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    td[class="pattern"] table { width: 100%; }
+    td[class="pattern"] .col{
+        width: 25%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    td[class="pattern"] .col{
+        width: 100%;
+        display: block;
+    }
+    td[class="pattern"] .col-left,
+    td[class="pattern"] .col-mid {
+        margin-bottom: 20px;
+    }
+}
+
+.msi .grid-4 .col-4 {
+    width: 100% !important;
+}
+
+.grid-4 .col-4 {
+    width: 25% !important;
+    max-width: 25% !important;
+}
+
+@media (max-width: 640px) {
+    .grid-4 .col-4 {
+        width: 50% !important;
+        float: left;
+        max-width: 50% !important;
+        margin-bottom: 30px;
+    }
+
+    .grid-4 .col-4.clearfix {
+        clear: both;
+        float: left;
+    }
+}
+
+@media (max-width: 320px) {
+    .grid-4 .col-4 {
+        width: 100% !important;
+        float: left;
+        max-width: 100% !important;
+        margin-bottom: 30px;
+        clear: both;
+    }
+}
+@-->
+
+{{layout handle="mtemail_header" theme="default" template_id=$this.template_id block_id=111 block_name="mtemail_header" noborder=1 margintop=30 }}
+{{layout handle="mtemail_text" theme="default" template_id=$this.template_id block_id=112 block_name="mtemail_text" }}
+{{layout handle="mtemail_sales_items" theme="default" template_id=$this.template_id block_id=113 block_name="mtemail_sales_items" order=$order }}
+{{layout handle="mtemail_sales_totals" theme="default" template_id=$this.template_id block_id=114 block_name="mtemail_sales_totals" order=$order totals_type="order" }}
+{{layout handle="mtemail_sales_info" theme="default" template_id=$this.template_id block_id=115 block_name="mtemail_sales_info" order=$order}}
+{{layout handle="mtemail_signature" theme="default" template_id=$this.template_id block_id=116 block_name="mtemail_signature" }}
+{{layout handle="mtemail_footer" theme="default" template_id=$this.template_id block_id=117 block_name="mtemail_footer"  noborder=1 }}
+

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!--
+/**
+ * © Copyright 2013-present Adobe. All rights reserved.
+ *
+ * This file is licensed under OSL 3.0 or your existing commercial license or subscription
+ * agreement with Magento or its Affiliates (the "Agreement).
+ *
+ * You may obtain a copy of the OSL 3.0 license at http://opensource.org/licenses/osl-3.0.php Open
+ * Software License (OSL 3.0) or by contacting engcom@adobe.com for a copy.
+ *
+ * Subject to your payment of fees and compliance with the terms and conditions of the Agreement,
+ * the Agreement supersedes the OSL 3.0 license with respect to this file.
+ */
+-->
+<ruleset name="Magento PHPMD rule set" xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>Magento Cloud Code Check Rules</description>
+
+    <!-- Code Size Rules -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity" />
+    <rule ref="rulesets/codesize.xml/NPathComplexity" />
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength" />
+    <rule ref="rulesets/codesize.xml/ExcessiveParameterList" />
+    <rule ref="rulesets/codesize.xml/ExcessivePublicCount" />
+    <rule ref="rulesets/codesize.xml/TooManyFields" />
+    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
+        <properties>
+            <property name="maximum" value="100" />
+        </properties>
+    </rule>
+
+    <!-- Unused code rules -->
+    <rule ref="rulesets/unusedcode.xml" />
+
+    <!-- Code design rules -->
+    <rule ref="rulesets/design.xml/ExitExpression" />
+    <rule ref="rulesets/design.xml/EvalExpression" />
+    <rule ref="rulesets/design.xml/GotoStatement" />
+    <rule ref="rulesets/design.xml/NumberOfChildren" />
+    <rule ref="rulesets/design.xml/DepthOfInheritance">
+        <properties>
+            <property name="minimum" value="8" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects" />
+
+    <!-- Naming Rules -->
+    <rule ref="rulesets/naming.xml/ShortMethodName" />
+    <rule ref="rulesets/naming.xml/ConstantNamingConventions" />
+    <rule ref="rulesets/naming.xml/BooleanGetMethodName" />
+
+    <exclude-pattern>_files</exclude-pattern>
+</ruleset>

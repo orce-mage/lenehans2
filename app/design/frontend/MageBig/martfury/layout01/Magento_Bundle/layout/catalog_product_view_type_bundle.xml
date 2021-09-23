@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.price.render.bundle.customization">
+            <arguments>
+                <argument name="price_label" xsi:type="string" translate="true">Price as configured</argument>
+                <argument name="price_render" xsi:type="string">product.price.render.default</argument>
+                <argument name="price_type_code" xsi:type="string">configured_price</argument>
+                <argument name="zone" xsi:type="string">item_view</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceBlock name="product.info.addtocart.bundle">
+            <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist.bundle"
+                   template="Magento_Catalog::product/view/addto/wishlist.phtml" />
+        </referenceBlock>
+        <referenceBlock name="customize.button" remove="true" />
+        <referenceBlock name="bundle.back.button" remove="true" />
+        <referenceBlock name="bundle.product.view.options.notice" remove="true" />
+        <move element="bundle.options.container" destination="product.info.main" />
+        <move element="product.price.render.bundle.customization" destination="bundle.summary" before="-"/>
+    </body>
+</page>

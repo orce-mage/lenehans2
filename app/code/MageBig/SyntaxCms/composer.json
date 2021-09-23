@@ -1,0 +1,14 @@
+{
+  "name": "magebig/module-syntaxcms",
+  "description": "N/A",
+  "type": "magento2-module",
+  "version": "3.0.0",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "MageBig\\SyntaxCms\\": ""
+    }
+  }
+}

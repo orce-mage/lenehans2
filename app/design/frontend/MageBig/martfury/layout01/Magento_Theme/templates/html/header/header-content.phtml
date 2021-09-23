@@ -1,0 +1,150 @@
+<?php
+$mbHelper       = $this->helper('MageBig\MbFrame\Helper\Data');
+$logoSticky     = $mbHelper->getConfig('mbconfig/header/logo_sticky');
+$pathLogo       = $mbHelper->getBaseMediaUrl() . 'wysiwyg/magebig/logo/';
+$blockLogo      = $block->getLayout()->createBlock('Magento\Theme\Block\Html\Header\Logo');
+$blockWelcome   = $block->getLayout()->createBlock('Magento\Theme\Block\Html\Header');
+$blockCustomer  = $block->getLayout()->createBlock('Magento\Customer\Block\Account\Customer');
+//$wishlistHelper = $this->helper('Magento\Wishlist\Helper\Data');
+$menuLayout     = $mbHelper->getConfig('mbconfig/header/menu_layout');
+$topMenuBtn     = $mbHelper->getConfig('mbconfig/mobile_view/btn_menu');
+$bottomMenu     = $mbHelper->getConfig('mbconfig/mobile_view/bottom_menu');
+?>
+<div class="header-top-inner">
+    <div class="container">
+        <div class="row align-items-center header-top-row">
+            <div class="d-none d-md-block col-sm-3 col-lg-5">
+                <div class="welcome"><?= $blockWelcome->getWelcome() ?></div>
+            </div>
+            <div class="col-12 col-md-9 col-lg-7">
+                <div class="row align-items-center justify-content-end top-link-wrap">
+                    <?= $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('top-links')->toHtml(); ?>
+                    <?= $this->getChildHtml('currency') ?>
+                    <?= $this->getChildHtml('store_language') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header-main-content sticky-menu">
+    <div class="container">
+        <div class="header-main-inner <?php if ($menuLayout == 'horizontal') : ?>header-horizontal<?php endif;?>">
+            <div class="row align-items-center header-maininner-row">
+                <div class="col-12 col-md-3 col-lg-3 col-logo">
+                    <div class="menu-logo">
+                        <?php if ($topMenuBtn) : ?>
+                        <div class="btn-nav-mobile-top d-table-cell d-md-none"><button type="button" class="btn-nav mb-toggle-switch mb-toggle-switch__htx"><span></span></button></div>
+                        <?php endif ?>
+                        <div class="logo-top d-table-cell <?php if ($topMenuBtn) echo 'has-btn' ?>"><?= $this->getChildHtml('logo') ?></div>
+                        <div class="icon-top-mobile">
+                            <div class="minicart-action">
+                                <a class="action showcart" href="<?= $block->getUrl('checkout/cart') ?>"
+                                   data-bind="scope: 'minicart_content'">
+                                    <i class="mbi mbi-bag2"></i>
+                                    <span class="counter qty empty"
+                                          data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
+                                    <span class="counter-number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
+                                    <span class="counter-label">
+                                    <!-- ko if: getCartParam('summary_count') -->
+                                        <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
+                                        <!-- ko i18n: 'items' --><!-- /ko -->
+                                        <!-- /ko -->
+                                    </span>
+                                </span>
+                                </a>
+                            </div>
+                            <div class="user-icon-mobile user-topbar"><i class="mbi mbi-user"></i></div>
+                        </div>
+                    </div>
+                    <?= $this->getChildHtml('smartmenu.topnav') ?>
+                </div>
+                <div class="col-md-5 col-lg-5 col-xl-6 col-search">
+                    <div class="top-search-wrap mfp-with-anim">
+                        <?= $this->getChildHtml('topSearch') ?>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-3 col-btn-actions-desktop d-none d-md-block">
+                    <div class="header-content-action row no-gutters">
+                        <?= $this->getChildHtml('wishlist_icon') ?>
+                        <?= $this->getChildHtml('minicart') ?>
+                            <?php /* ?>
+                            <span class="counter qty">
+                                <span class="cart-label"> - </span>
+                                <span class="subtotal-top" data-bind="scope: 'ajaxcart_content'">
+                                    <!-- ko ifnot: getCartParam('subtotal') -->
+                                    <span class="price-zero"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format(0, 2), true, false); ?></span>
+                                    <!-- /ko -->
+                                    <span class="price-label" data-bind="html: getCartParam('subtotal')"></span>
+                                </span>
+                            </span>
+                            */ ?>
+                        <div class="user-topbar col">
+                            <i class="mbi mbi-user"></i>
+                            <?= $this->getChildHtml('header.links') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header-menu-content d-none d-md-block">
+    <div class="container">
+        <div class="menu-container">
+            <?php if ($menuLayout == 'vertical') : ?>
+            <div class="row align-items-center">
+                <div class="col-3 d-none d-md-block">
+                </div>
+                <div class="col-9 col-md-9 col-lg-6 d-none d-md-block">
+                    <div class="horizontal-menu-wrap"><?= $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('horizontal-menu')->toHtml(); ?></div>
+                </div>
+                <div class="col-12 col-md-3 d-none d-lg-block"><?= $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('hotline')->toHtml(); ?></div>
+            </div>
+            <?php else: ?>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <?= $this->getChildHtml('smartmenu.topnav-hori') ?>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?php if($bottomMenu) : ?>
+<div class="d-block d-md-none col-btn-actions">
+    <div class="header-content-action row no-gutters">
+        <div class="btn-nav-mobile col">
+            <button type="button" class="btn-nav mb-toggle-switch mb-toggle-switch__htx"><span></span></button>
+            <div class="menu-btn-text"><?= $block->escapeHtml(__('Menu')) ?></div>
+        </div>
+        <div class="btn-search-mobile col">
+            <i class="mbi mbi-magnifier"></i>
+            <div class="menu-btn-text"><?= __('Search') ?></div>
+        </div>
+        <div class="col col-home">
+            <a href="<?= $block->getBaseUrl() ?>" class="go-home"><i class="mbi mbi-home3"></i></a>
+            <div class="menu-btn-text"><?= $block->escapeHtml(__('Home')) ?></div>
+        </div>
+
+        <div class="col col-cart">
+            <div class="minicart-action">
+                <a class="action showcart" href="<?= $block->getUrl('checkout/cart') ?>" data-bind="scope: 'minicart_content'">
+                    <i class="mbi mbi-bag2"></i>
+                    <span class="counter qty empty" data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
+                        <span class="counter-number"><!-- ko text: getCartParam('summary_count') -->0<!-- /ko --></span>
+                        <span class="counter-label">
+                        <!-- ko if: getCartParam('summary_count') --><!-- /ko -->
+                        </span>
+                    </span>
+                </a>
+            </div>
+            <div class="menu-btn-text"><?= $block->escapeHtml(__('My Cart')) ?></div>
+        </div>
+
+        <div class="user-topbar col">
+            <i class="mbi mbi-user"></i>
+            <div class="menu-btn-text"><?= $block->escapeHtml(__('Me')) ?></div>
+        </div>
+    </div>
+</div>
+<?php endif ?>

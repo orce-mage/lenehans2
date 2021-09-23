@@ -1,0 +1,25 @@
+<div class="ampickup-options-container"
+     visible="visible()">
+    <div class="ampickup-checkbox" visible="curbsideConfig.checkbox_enabled">
+        <input type="checkbox"
+               class="ampickup-checkbox"
+               id="ampickup_curbside_state"
+               name="ampickup_curbside_state"
+               data-bind="checked: curbsideChecked,
+                          event: {change: onCurbsideChange},
+                          value: curbsideChecked" />
+        <label for="ampickup_curbside_state" text="curbsideConfig.checkbox_label"></label>
+    </div>
+    <div class="ampickup-conditions ampickup-conditions-container block"
+         data-ampickup-js="curbside-conditions"
+         afterRender="initCollapsible"
+         visible="getConditionsVisibility()">
+        <span class="title" text="curbsideConfig.conditions_label" data-role="title"></span>
+        <div class="content" data-role="content">
+            <p html="storeCurbsideConditions()"></p>
+        </div>
+    </div>
+    <each args="data:elems(), as: 'element'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </each>
+</div>

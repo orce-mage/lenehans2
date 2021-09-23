@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+
+            <action name="mass_print_order">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Print Orders (PDF)</item>
+                        <item name="url" xsi:type="url" path="pdftemplates/printPdf/massOrder"/>
+                        <item name="type" xsi:type="string">mass_print_order</item>
+                    </item>
+                </argument>
+            </action>
+
+        </massaction>
+    </listingToolbar>
+</listing>

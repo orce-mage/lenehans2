@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+
+?>
+<?php $var = $block->getVarModel();?>
+<?php $staticProducts = $block->getItems(); ?>
+<?php if (count($staticProducts) > 1) : ?>
+<table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
+    <tr
+        <?php echo $var->getHtmlAttribute('style', 'secondary-bg-color-static-product', 'background-color: #ffffff;  border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;'); ?>
+        <?php echo $var->getHtmlAttribute('bgcolor', 'secondary-bg-color-color-static-product', '#ffffff'); ?> class="mteditor-bgcolor light-block">
+        <td align="center" valign="top" width="100%" class="content-padding">
+            <center>
+                <table cellpadding="0" cellspacing="0" width="600" class="w320">
+                    <tr>
+                        <td class="content-padding">
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <td <?php echo $var->getTextEditAttribute('product_list_title_text');?>
+                                    <?php echo $var->getHtmlAttribute('style', 'product_list_title', ''); ?>
+                                        class="mteditor-color header-md">
+                                    <?php echo $var->getValue('product_list_title_text', "Check out some of our upgraded deals!", false);?>
+                                </td>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 75px;">
+                            <table cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate !important;">
+                                <?php if (isset($staticProducts[0]) && isset($staticProducts[1])) : ?>
+                                    <tr>
+                                        <td class="info-block">
+                                            <?php echo $block->getProductHtml($staticProducts[0], 0); ?>
+                                        </td>
+                                        <td class="info-block">
+                                            <?php echo $block->getProductHtml($staticProducts[1], 1); ?>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                                <?php if (isset($staticProducts[2]) && isset($staticProducts[3])) : ?>
+                                    <tr>
+                                        <td colspan="2" height="30px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="info-block">
+                                            <?php echo $block->getProductHtml($staticProducts[2], 2); ?>
+                                        </td>
+                                        <td class="info-block">
+                                            <?php echo $block->getProductHtml($staticProducts[3], 3); ?>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+        </td>
+    </tr>
+</table>
+<?php endif; ?>

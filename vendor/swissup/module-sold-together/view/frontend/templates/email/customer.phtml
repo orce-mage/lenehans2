@@ -1,0 +1,32 @@
+<?php
+    $products = $this->getProductCollection();
+    $_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+?>
+<?php if($products && $products->count()) : ?>
+    <h3 style="text-align: center;"><?php echo __('Customers Who Bought This Item(s) Also Bought') ?></h3>
+    <table class="items" cellpadding="0" cellspacing="0" border="0">
+        <tr style="text-align: center;">
+        <?php foreach ($products as $_product) : ?>
+                <td class="cell-content" style="max-width: 150px; padding: 15px; text-align: center; display: inline-block;">
+                    <div class="product-image-wrapper">
+                        <a href="<?php echo $block->getProductUrl($_product) ?>" class="product photo product-item-photo">
+                            <?php
+                                $productImage = $_imagehelper
+                                    ->init($_product, 'category_page_grid')
+                                    ->constrainOnly(FALSE)
+                                    ->keepAspectRatio(TRUE)
+                                    ->keepFrame(FALSE)
+                                    ->resize(135)->getUrl();
+                            ?>
+                            <img src="<?php echo $productImage; ?>" />
+                        </a>
+                    </div>
+                    <h3 class="product-name" style="text-align: center; font-size: 15px;">
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $block->escapeHtml($_product->getName()) ?></a>
+                    </h3>
+                    <?php echo $block->getProductPrice($_product); ?>
+                </td>
+        <?php endforeach; ?>
+        </tr>
+    </table>
+<?php endif; ?>

@@ -1,0 +1,150 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .block.filter {
+        margin-bottom: 30px;
+        background-color: #f5f5f5;
+        padding: 20px;
+        .filter-title {
+            .font-size(18);
+            text-transform: uppercase;
+        }
+        .filter-subtitle {
+            display: none;
+        }
+    }
+    .block-subtitle {
+        display: inline-block;
+        margin-bottom: @indent__s;
+    }
+    .filter-current {
+        ul, ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .item {
+            padding-right: 20px;
+            position: relative;
+            .remove {
+                position: absolute;
+                top: 2px;
+                right: 0;
+                font-size: 12px;
+                width: 20px;
+                height: 20px;
+                text-align: right;
+            }
+        }
+        .filter-label {
+            display: block;
+            font-weight: 500;
+            &:after {
+                content: ':';
+            }
+        }
+        + .filter-actions {
+            margin-bottom: 30px;
+            text-align: right;
+            .clear .mbi {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+    .filter-options-content {
+        .filter-count-label {
+            &:extend(.abs-visually-hidden all);
+        }
+    }
+    .filter-options {
+        margin: 0;
+        ul, ol {
+            list-style: none;
+            padding: 0;
+        }
+        .filter-options-title {
+            .font-size(15);
+            margin: 0;
+            padding: 15px 0 5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            position: relative;
+            cursor: pointer;
+        }
+        .filter-options-content {
+            .font-size(14);
+            margin: 0;
+            padding: 0 0 20px;
+            border-bottom: 1px solid #d8d8d8;
+            display: inline-block;
+            vertical-align: top;
+            width: 100%;
+            .item {
+                margin-bottom: 3px;
+            }
+        }
+        .count {
+            .lib-css(color, @text__color__muted);
+            &:before {
+                content: '(';
+            }
+            &:after {
+                content: ')';
+            }
+        }
+    }
+    .filter-options-item[data-collapsible="true"] {
+        .filter-options-title:after {
+            .abs-iconfont(@mbi-ios-arrow-down, 14px);
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -7px;
+            line-height: inherit;
+        }
+        .filter-options-title[aria-expanded="true"]:after {
+            content: @mbi-ios-arrow-up;
+        }
+    }
+    .filtered {
+        .items {
+            margin: 15px 0;
+        }
+        .item {
+            margin-bottom: 6px;
+            padding-left: 22px;
+            position: relative;
+            .label {
+                font-weight: @font-weight__bold;
+            }
+            .action.remove {
+                &:extend(.abs-remove-button-for-blocks all);
+                left: -6px;
+                position: absolute;
+                top: 0;
+            }
+        }
+        & + .actions {
+            margin-bottom: 35px;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .page-with-filter {
+        .columns {
+            .sidebar-main {
+                .lib-vendor-prefix-order(0);
+            }
+        }
+    }
+}

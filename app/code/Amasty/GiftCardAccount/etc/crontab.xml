@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="amgiftcard_send_cards" instance="Amasty\GiftCardAccount\Cron\SendGiftCard" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="amgiftcard_notify_expired_cards" instance="Amasty\GiftCardAccount\Cron\NotifyCardsExpiration" method="execute">
+            <schedule>0 22 * * *</schedule>
+        </job>
+        <job name="amgiftcard_check_expired_cards" instance="Amasty\GiftCardAccount\Cron\CheckExpiredCards" method="execute">
+            <schedule>0 0 * * *</schedule>
+        </job>
+    </group>
+</config>

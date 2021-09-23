@@ -1,0 +1,174 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+
+$cfHelper   = $this->helper('MageBig\WidgetPlus\Helper\Config');
+$mbHelper   = $this->helper('MageBig\MbFrame\Helper\Data');
+$id         = $block->getWidgetId();
+$title      = $block->escapeHtml($block->getData('widget_title'), ['h2', 'h3', 'h4', 'h5', 'div', 'span', 'i', 'br', 'a']);
+$subtitle   = $block->escapeHtml($block->getData('widget_subtitle'), ['h2', 'h3', 'h4', 'h5', 'div', 'span', 'i', 'br', 'a']);
+$class      = $block->getData('classes');
+$isHover    = $mbHelper->getConfig('mbconfig/category_view/product_image_hover');
+if ($class) {
+    $class  = $block->escapeHtmlAttr($class);
+}
+$type       = $block->getData('product_type');
+$carousel   = $block->getData('slider');
+$collection = $block->getLoadedProductCollection();
+$count      = 0;
+if ($collection) {
+    $count = $collection->count(); 
+}
+$showBlock = 1;
+if ($count < 1 && ($type == 'related' || $type = 'crosssell' || $type = 'upsell')) {
+    $showBlock = 0;
+}
+?>
+<?php if ($showBlock) : ?>
+    <div class="widgetplus widget-product lazyload <?= $type ?> <?= $class ?>" id="<?= $id ?>">
+        <?php if ($title): ?>
+            <div class="main-heading">
+                <h2 class="heading-title"><span><?= __($title) ?></span></h2>
+            </div>
+        <?php endif ?>
+        <?php if ($subtitle): ?>
+            <div class="subtitle-widget"><span><?= __($subtitle) ?></span></div>
+        <?php endif ?>
+
+        <?php if ($count): ?>
+            <?php
+            $type          = 'widget-product-grid';
+            $row           = (int)$block->getData('row') ?: 1;
+            $pricePrefixId = $id;
+            $column        = $carousel == 1 && $row == 1 ? $count : ($carousel == 1 && $row > 1 ? $row : (int)$block->getData('column'));
+            $column        = $column ?: 1;
+            $image         = 'new_products_content_widget_grid';
+
+            $showAddCart   = $mbHelper->getConfig('mbconfig/category_view/show_addcart');
+            $showCompare   = $mbHelper->getConfig('mbconfig/category_view/show_compare');
+            $showWishlist  = $mbHelper->getConfig('mbconfig/category_view/show_wishlist');
+            $showRating    = $mbHelper->getConfig('mbconfig/category_view/show_rating');
+            $showQuickview = $mbHelper->getConfig('mbconfig/category_view/show_quickview');
+
+            $templateType    = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+            $description     = false;
+            $viewMode        = 'grid';
+            $showDescription = false;
+
+            $urlHelper   = $this->helper('Magento\Framework\Url\Helper\Data');
+            $labelHelper = $this->helper('MageBig\WidgetPlus\Helper\Config');
+
+            $productStyle = $block->getData('product_style');
+            ?>
+            <?php
+            switch ($productStyle) {
+                case '2' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-02.phtml');
+                    break;
+                case '3' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-03.phtml');
+                    break;
+                case '4' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-04.phtml');
+                    break;
+                case '5' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-05.phtml');
+                    break;
+                case '6' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-06.phtml');
+                    break;
+                case '7' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-07.phtml');
+                    break;
+                default :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-01.phtml');
+                    break;
+            }
+            ?>
+        <?php endif; ?>
+    </div>
+
+    <?php if ($carousel == 1): ?>
+        <?php
+        $autoplay        = is_numeric($block->getData('autoplay')) ? 'true' : 'false';
+        $autoplayTimeout = is_numeric($block->getData('autoplay')) ? (int)$block->getData('autoplay') : 5000;
+        $items           = $carousel == 1 ? (is_numeric($block->getData('column')) ? (int)$block->getData('column') : 4) : 1;
+        $margin          = $carousel == 1 ? (is_numeric($block->getData('margin')) ? (int)$block->getData('margin') : 30) : 0;
+        $nav             = (bool)$block->getData('navigation') ? 'true' : 'false';
+        $dots            = (bool)$block->getData('paging') ? 'true' : 'false';
+        $responsive      = $carousel == 1 ? $cfHelper->getCfRes($this->getData('x0'), $this->getData('x576'), $this->getData('x768'), $this->getData('x992'), $this->getData('x1200'), $this->getData('x1600')) : '{}';
+        $rtl             = $mbHelper->getConfig('mbdesign/general/enable_rtl') ? 'true' : 'false';
+        ?>
+        <script type="text/x-magento-init">
+            {
+                "#<?= $id ?>": {
+                    "MageBig_WidgetPlus/js/owl.carousel-set": {
+                        "autoplay"          : <?= $autoplay ?>,
+                        "autoplayTimeout"   : <?= $autoplayTimeout ?>,
+                        "items"             : <?= $items ?>,
+                        "margin"            : <?= $margin ?>,
+                        "nav"               : <?= $nav ?>,
+                        "dots"              : <?= $dots ?>,
+                        "responsive"        : <?= $responsive ?>,
+                        "rtl"               : <?= $rtl ?>
+                    }
+                }
+            }
+        </script>
+    <?php endif; ?>
+
+    <?php if ($block->getData('countdown')) : ?>
+        <?php
+            $dayText = 'd';
+            $hourText = 'h';
+            $minText = 'm';
+            $secText = 's';
+            $daySingularText = 'd';
+            $hourSingularText = 'h';
+            $minSingularText = 'm';
+            $secSingularText = 's';
+            if ($productStyle == 4) {
+                $dayText = __('Days');
+                $hourText = __('Hours');
+                $minText = __('Mins');
+                $secText = __('Secs');
+                $daySingularText = __('Day');
+                $hourSingularText = __('Hour');
+                $minSingularText = __('Min');
+                $secSingularText = __('Sec');
+            }
+        ?>
+        <script type="text/x-magento-init">
+            {
+                "#<?= $id ?> > .category-products .sale-countdown": {
+                    "MageBig_WidgetPlus/js/jcountdown-set": {
+                        "dataAttr"          : "date",
+                        "dayText"           : "<?= $dayText; ?>",
+                        "hourText"          : "<?= $hourText; ?>",
+                        "minText"           : "<?= $minText; ?>",
+                        "secText"           : "<?= $secText; ?>",
+                        "daySingularText"   : "<?= $daySingularText; ?>",
+                        "hourSingularText"  : "<?= $hourSingularText; ?>",
+                        "minSingularText"   : "<?= $minSingularText; ?>",
+                        "secSingularText"   : "<?= $secSingularText; ?>",
+                        "offset"            : <?= $cfHelper->getOffsetTimeZone(); ?>
+                    }
+                }
+            }
+        </script>
+    <?php endif ?>
+
+    <?php if (!$block->isRedirectToCartEnabled()) : ?>
+        <script type="text/x-magento-init">
+            {
+                "[data-role=tocart-form], .form.map.checkout": {
+                    "catalogAddToCart": {}
+                }
+            }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

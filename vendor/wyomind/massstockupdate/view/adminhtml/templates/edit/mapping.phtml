@@ -1,0 +1,101 @@
+<?php $template = $this->getRow(); ?>
+<fieldset id="massstockupdate_mapping " class="fieldset admin__fieldset">
+    <legend class="admin__legend legend">
+        <span><?php echo __('Column Mapping'); ?></span>
+    </legend>
+    <br/>
+    <ul id="mapping-area">
+        <li>
+            <div class="mapping-row ">
+                <span class="cell head"><span class='icon grip invisible'></span></span>
+                <span class="cell head"><?php echo __("Target attribute"); ?></span>
+                <span class="cell head"></span><span class="cell head"><?php echo __("Data source"); ?><span
+                            class="icon help"></span></span>
+                <span class="cell head"><?php echo __("Default Value"); ?></span>
+                </span><span class="cell head"></span><span class="cell head"></span>
+            </div>
+        </li>
+        <li>
+            <div class="mapping-row dont-sort">
+                <span class="cell body"><span class='icon grip invisible'></span></span>
+                <span class="cell body">
+                    <div style="font-size:11px"><b>Magento Unique Identifier</b></div>
+                    <select id='identifier_code'>
+                        <?php
+                        /**
+                         * Copyright © 2020 Wyomind. All rights reserved.
+                         * See LICENSE.txt for license details.
+                         */
+
+                        $identifier = $this->getModel()->getIdentifier();
+                        $attributes = $this->_dataHelper->getProductIdentifiers();
+
+                        foreach ($attributes as $attribute) {
+                            if ($attribute["is_unique"]) {
+                                $selected = "";
+                                if ($attribute["value"] == $identifier) {
+                                    $selected = "selected";
+                                }
+                                echo "<option $selected value=" . $attribute["value"] . ">" . $attribute["label"] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </span>
+                <span class="cell body"><span class='icon link invisible'></span></span>
+                <span class="cell body">
+                    <div style="font-size:11px"><b>Source file Unique Identifier</b></div>
+                    <select id="identifier_source">
+                        <option value=''><?php echo __("custom value"); ?></option>
+                    </select>
+                </span>
+                <span class="cell body"><input type="text" class='default invisible'/></span>
+                <?php
+                $active = "";
+                if ($this->getModel()->getIdentifierScript() != "") {
+                    $active = "active";
+                }
+                ?>
+                <span class="cell body"><span class='icon code <?php echo $active; ?>'></span>
+                    <textarea id="identifier_script" name="identifier_script"
+                              class="scripting hidden"><?php echo $this->getModel()->getIdentifierScript(); ?></textarea>
+                </span>
+                <span class="cell body"><span class='icon add '></span></span>
+                <span class="cell body"></span>
+            </div>
+        </li>
+        <?php
+        try {
+            $mapping = json_decode($this->getModel()->getMapping(), true);
+            foreach ($mapping as $column) {
+                echo $this->getRow($column);
+            };
+        } catch (\Exception $e) {
+        }
+        ?>
+
+    </ul>
+    <div id="overlay">
+        <div id="scripting">
+            <textarea id="codemirror"></textarea>
+            <div class="handler">
+                <button type="button" class="validate">Validate</button>
+                <button type="button" class="cancel">Cancel</button>
+                <button type="button" class="clear">Clear</button>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        massImportAndUpdateTemplate = '<?php echo addslashes($template); ?>';
+        massImportAndUpdateLoadLibraryUrl = '<?php echo $this->getUrl('*/*/library', ['profile_id' => $this->getProfileId()]) ?>';
+        massImportAndUpdateLoadFileUrl = '<?php echo $this->getUrl('*/*/preview', ['profile_id' => $this->getProfileId()]) ?>';
+        massImportAndUpdateLoadPreviewUrl = '<?php echo $this->getUrl('*/*/preview', ['profile_id' => $this->getProfileId(), "isOutput" => true]) ?>';
+        require(["jquery", "wyomind_MassImportAndUpdate_mapping"], function ($, mapping) {
+            $(document).ready(function () {
+                mapping.row.colorpicker();
+            })
+        })
+    </script>
+</fieldset>
+

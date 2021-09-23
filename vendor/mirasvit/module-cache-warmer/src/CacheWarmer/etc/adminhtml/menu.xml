@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mirasvit_CacheWarmer::cache_warmer_page" title="Page Cache Warmer" module="Mirasvit_CacheWarmer"
+             resource="Mirasvit_CacheWarmer::cache_warmer_page" sortOrder="15" parent="Magento_Backend::system_tools"
+             action="cache_warmer/page"/>
+    </menu>
+</config>

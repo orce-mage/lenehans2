@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../lib/Magento/Framework/Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Wyomind_MassStockUpdate::main" title="Mass Stock Update" sortOrder="10">
+                    <resource id="Wyomind_MassStockUpdate::profiles" title="Manage profiles" sortOrder="10"/>
+                    <resource id="Wyomind_MassStockUpdate::history" title="See profile history" sortOrder="20"/>
+                    <resource id="Wyomind_MassStockUpdate::massstockupdate_config" title="Manage module configuration"
+                              sortOrder="30"/>
+
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

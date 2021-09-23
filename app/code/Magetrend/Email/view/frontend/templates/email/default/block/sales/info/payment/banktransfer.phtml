@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Payment\Block\Info $block
+ * @see \Magento\Payment\Block\Info
+ */
+$specificInfo = $block->getInstructions();
+$title = $block->escapeHtml($block->getMethod()->getTitle());
+?>
+<span class="payment-method">
+    <span class="title"><?= /* @noEscape */ $title ?></span>
+    <?php if ($specificInfo) : ?>
+        <span class="content">
+            <?= /* @noEscape */ nl2br($block->escapeHtml($specificInfo)) ?>
+        </span>
+    <?php endif;?>
+</span>
+<?= $block->getChildHtml() ?>

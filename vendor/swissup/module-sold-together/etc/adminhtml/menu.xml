@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Swissup_SoldTogether::soldtogether"
+            title="SoldTogether"
+            module="Swissup_SoldTogether"
+            sortOrder="1957"
+            parent="Swissup_Core::swissup"
+            resource="Swissup_SoldTogether::soldtogether" />
+        <add id="Swissup_SoldTogether::soldtogether_order"
+            title="Frequently Bought Together"
+            module="Swissup_SoldTogether"
+            sortOrder="1"
+            parent="Swissup_SoldTogether::soldtogether"
+            action="soldtogether/order"
+            resource="Swissup_SoldTogether::soldtogether_order"/>
+        <add id="Swissup_SoldTogether::soldtogether_customer"
+            title="Customers Who Bought This Item Also Bought"
+            module="Swissup_SoldTogether"
+            sortOrder="2"
+            parent="Swissup_SoldTogether::soldtogether"
+            action="soldtogether/customer"
+            resource="Swissup_SoldTogether::soldtogether_customer"/>
+    </menu>
+</config>

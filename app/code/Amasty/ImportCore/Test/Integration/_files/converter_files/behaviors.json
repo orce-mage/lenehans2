@@ -1,0 +1,580 @@
+{
+    "behaviors": {
+        "name": "behaviors test",
+        "behaviors": {
+            "add": {
+                "class": "Amasty\\ImportCore\\Test\\Behavior\\Add",
+                "name": "Add Custom Name",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test\\Test"
+                    }
+                }
+            },
+            "update": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Update\\Model",
+                "name": "Update Custom Name",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test2\\Test2"
+                    }
+                }
+            },
+            "delete": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\Behaviors\\Delete",
+                "name": "Delete",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test3\\Test3"
+                    }
+                }
+            },
+            "addUpdate": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\AddUpdate\\Model",
+                "name": "Add\/Update",
+                "arguments": {
+                    "test-number": {
+                        "name": "test-number",
+                        "xsi:type": "number",
+                        "value": "2"
+                    },
+                    "test-string": {
+                        "name": "test-string",
+                        "xsi:type": "string",
+                        "value": "test-string"
+                    },
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test4\\Test4"
+                    },
+                    "insertResourceModel": {
+                        "name": "insertResourceModel",
+                        "xsi:type": "string",
+                        "value": "InsertTest\\InsertTest"
+                    }
+                }
+            },
+            "custom_behavior": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior",
+                "name": "",
+                "arguments": []
+            },
+            "custom_behavior2": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior2",
+                "name": "custom_behavior2",
+                "arguments": {
+                    "custom-test-array": {
+                        "name": "custom-test-array",
+                        "xsi:type": "array",
+                        "item": {
+                            "custom-test-array-number": {
+                                "name": "custom-test-array-number",
+                                "xsi:type": "number",
+                                "value": "11"
+                            },
+                            "custom-test-array-string": {
+                                "name": "custom-test-array-string",
+                                "xsi:type": "string",
+                                "value": "custom-test-string"
+                            }
+                        }
+                    },
+                    "custom-test-number": {
+                        "name": "custom-test-number",
+                        "xsi:type": "number",
+                        "value": "22"
+                    },
+                    "custom-test-string": {
+                        "name": "custom-test-string",
+                        "xsi:type": "string",
+                        "value": "custom-test-string"
+                    }
+                }
+            }
+        },
+        "fieldsConfig": {
+            "fieldsClass": {
+                "class": "Amasty\\ImportCore\\Model\\FieldCollector",
+                "arguments": []
+            }
+        }
+    },
+    "behaviors_with_repository": {
+        "name": "behaviors with repository test",
+        "behaviors": {
+            "add": {
+                "class": "Amasty\\ImportCore\\Test\\Behavior\\Add",
+                "name": "Add Custom Name",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test\\Test"
+                    },
+                    "repository": {
+                        "name": "repository",
+                        "xsi:type": "array",
+                        "item": {
+                            "class": {
+                                "name": "class",
+                                "xsi:type": "string",
+                                "value": "TestRepository\\TestRepository"
+                            },
+                            "saveMethod": {
+                                "name": "saveMethod",
+                                "xsi:type": "string",
+                                "value": "save"
+                            }
+                        }
+                    }
+                }
+            },
+            "update": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Update\\Model",
+                "name": "Update Custom Name",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test2\\Test2"
+                    },
+                    "repository": {
+                        "name": "repository",
+                        "xsi:type": "array",
+                        "item": {
+                            "class": {
+                                "name": "class",
+                                "xsi:type": "string",
+                                "value": "TestRepository2\\TestRepository2"
+                            },
+                            "loadMethod": {
+                                "name": "loadMethod",
+                                "xsi:type": "string",
+                                "value": "getById"
+                            },
+                            "saveMethod": {
+                                "name": "saveMethod",
+                                "xsi:type": "string",
+                                "value": "save"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\Behaviors\\Delete",
+                "name": "Delete",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test3\\Test3"
+                    },
+                    "repository": {
+                        "name": "repository",
+                        "xsi:type": "array",
+                        "item": {
+                            "class": {
+                                "name": "class",
+                                "xsi:type": "string",
+                                "value": "TestRepository2\\TestRepository2"
+                            },
+                            "deleteMethod": {
+                                "name": "deleteMethod",
+                                "xsi:type": "string",
+                                "value": "delete"
+                            }
+                        }
+                    }
+                }
+            },
+            "addUpdate": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\AddUpdate\\Model",
+                "name": "Add\/Update",
+                "arguments": {
+                    "test-number": {
+                        "name": "test-number",
+                        "xsi:type": "number",
+                        "value": "2"
+                    },
+                    "test-string": {
+                        "name": "test-string",
+                        "xsi:type": "string",
+                        "value": "test-string"
+                    },
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test4\\Test4"
+                    },
+                    "repository": {
+                        "name": "repository",
+                        "xsi:type": "array",
+                        "item": {
+                            "class": {
+                                "name": "class",
+                                "xsi:type": "string",
+                                "value": "TestRepository2\\TestRepository2"
+                            },
+                            "saveMethod": {
+                                "name": "saveMethod",
+                                "xsi:type": "string",
+                                "value": "save"
+                            },
+                            "loadMethod": {
+                                "name": "loadMethod",
+                                "xsi:type": "string",
+                                "value": "delete"
+                            }
+                        }
+                    }
+                }
+            },
+            "custom_behavior": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior",
+                "name": "",
+                "arguments": []
+            },
+            "custom_behavior2": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior2",
+                "name": "custom_behavior2",
+                "arguments": {
+                    "custom-test-array": {
+                        "name": "custom-test-array",
+                        "xsi:type": "array",
+                        "item": {
+                            "custom-test-array-number": {
+                                "name": "custom-test-array-number",
+                                "xsi:type": "number",
+                                "value": "11"
+                            },
+                            "custom-test-array-string": {
+                                "name": "custom-test-array-string",
+                                "xsi:type": "string",
+                                "value": "custom-test-string"
+                            }
+                        }
+                    },
+                    "custom-test-number": {
+                        "name": "custom-test-number",
+                        "xsi:type": "number",
+                        "value": "22"
+                    },
+                    "custom-test-string": {
+                        "name": "custom-test-string",
+                        "xsi:type": "string",
+                        "value": "custom-test-string"
+                    }
+                }
+            }
+        },
+        "fieldsConfig": {
+            "fieldsClass": {
+                "class": "Amasty\\ImportCore\\Model\\FieldCollector",
+                "arguments": []
+            }
+        }
+    },
+    "direct_behaviors": {
+        "name": "direct behaviors test",
+        "behaviors": {
+            "add_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Add\\Table",
+                "name": "Add Direct",
+                "arguments": {
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test_table"
+                    }
+                }
+            },
+            "update_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Update\\Table",
+                "name": "Update Custom Name",
+                "arguments": {
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test2_table"
+                    }
+                }
+            },
+            "delete_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\Behaviors\\Delete\\Direct",
+                "name": "Delete Direct",
+                "arguments": {
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test3_table"
+                    }
+                }
+            },
+            "addUpdate_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\AddUpdate\\Table",
+                "name": "Add\/Update Direct",
+                "arguments": {
+                    "test-number": {
+                        "name": "test-number",
+                        "xsi:type": "number",
+                        "value": "2"
+                    },
+                    "test-string": {
+                        "name": "test-string",
+                        "xsi:type": "string",
+                        "value": "test-string"
+                    },
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test4_table"
+                    }
+                }
+            },
+            "custom_behavior": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior",
+                "name": "",
+                "arguments": []
+            },
+            "custom_behavior2": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior2",
+                "name": "custom_behavior2",
+                "arguments": {
+                    "custom-test-array": {
+                        "name": "custom-test-array",
+                        "xsi:type": "array",
+                        "item": {
+                            "custom-test-array-number": {
+                                "name": "custom-test-array-number",
+                                "xsi:type": "number",
+                                "value": "11"
+                            },
+                            "custom-test-array-string": {
+                                "name": "custom-test-array-string",
+                                "xsi:type": "string",
+                                "value": "custom-test-string"
+                            }
+                        }
+                    },
+                    "custom-test-number": {
+                        "name": "custom-test-number",
+                        "xsi:type": "number",
+                        "value": "22"
+                    },
+                    "custom-test-string": {
+                        "name": "custom-test-string",
+                        "xsi:type": "string",
+                        "value": "custom-test-string"
+                    }
+                }
+            }
+        },
+        "fieldsConfig": {
+            "fieldsClass": {
+                "class": "Amasty\\ImportCore\\Model\\FieldCollector",
+                "arguments": []
+            }
+        }
+    },
+    "all_behaviors": {
+        "name": "all behaviors test",
+        "behaviors": {
+            "add": {
+                "class": "Amasty\\ImportCore\\Test\\Behavior\\Add",
+                "name": "Add Custom Name",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test\\Test"
+                    },
+                    "repository": {
+                        "name": "repository",
+                        "xsi:type": "array",
+                        "item": {
+                            "class": {
+                                "name": "class",
+                                "xsi:type": "string",
+                                "value": "TestRepository\\TestRepository"
+                            },
+                            "saveMethod": {
+                                "name": "saveMethod",
+                                "xsi:type": "string",
+                                "value": "save"
+                            }
+                        }
+                    }
+                }
+            },
+            "update": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Update\\Model",
+                "name": "Update Custom Name",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test2\\Test2"
+                    },
+                    "repository": {
+                        "name": "repository",
+                        "xsi:type": "array",
+                        "item": {
+                            "class": {
+                                "name": "class",
+                                "xsi:type": "string",
+                                "value": "TestRepository2\\TestRepository2"
+                            },
+                            "loadMethod": {
+                                "name": "loadMethod",
+                                "xsi:type": "string",
+                                "value": "getById"
+                            },
+                            "saveMethod": {
+                                "name": "saveMethod",
+                                "xsi:type": "string",
+                                "value": "save"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\Behaviors\\Delete",
+                "name": "Delete",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test3\\Test3"
+                    }
+                }
+            },
+            "addUpdate": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\AddUpdate\\Model",
+                "name": "Add\/Update",
+                "arguments": {
+                    "test-number": {
+                        "name": "test-number",
+                        "xsi:type": "number",
+                        "value": "2"
+                    },
+                    "test-string": {
+                        "name": "test-string",
+                        "xsi:type": "string",
+                        "value": "test-string"
+                    },
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test4\\Test4"
+                    }
+                }
+            },
+            "add_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Add\\Table",
+                "name": "Add Direct",
+                "arguments": {
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test_table"
+                    }
+                }
+            },
+            "update_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Update\\Table",
+                "name": "Update Custom Name",
+                "arguments": {
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test2_table"
+                    }
+                }
+            },
+            "delete_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\Behaviors\\Delete",
+                "name": "Delete Direct",
+                "arguments": {
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test3_table"
+                    }
+                }
+            },
+            "addUpdate_direct": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\AddUpdate\\Table",
+                "name": "Add\/Update Direct",
+                "arguments": {
+                    "test-number": {
+                        "name": "test-number",
+                        "xsi:type": "number",
+                        "value": "2"
+                    },
+                    "test-string": {
+                        "name": "test-string",
+                        "xsi:type": "string",
+                        "value": "test-string"
+                    },
+                    "tableName": {
+                        "name": "tableName",
+                        "xsi:type": "string",
+                        "value": "test4_table"
+                    }
+                }
+            },
+            "custom_behavior": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior",
+                "name": "",
+                "arguments": []
+            },
+            "custom_behavior2": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior2",
+                "name": "custom_behavior2",
+                "arguments": {
+                    "custom-test-array": {
+                        "name": "custom-test-array",
+                        "xsi:type": "array",
+                        "item": {
+                            "custom-test-array-number": {
+                                "name": "custom-test-array-number",
+                                "xsi:type": "number",
+                                "value": "11"
+                            },
+                            "custom-test-array-string": {
+                                "name": "custom-test-array-string",
+                                "xsi:type": "string",
+                                "value": "custom-test-string"
+                            }
+                        }
+                    },
+                    "custom-test-number": {
+                        "name": "custom-test-number",
+                        "xsi:type": "number",
+                        "value": "22"
+                    },
+                    "custom-test-string": {
+                        "name": "custom-test-string",
+                        "xsi:type": "string",
+                        "value": "custom-test-string"
+                    }
+                }
+            }
+        },
+        "fieldsConfig": {
+            "fieldsClass": {
+                "class": "Amasty\\ImportCore\\Model\\FieldCollector",
+                "arguments": []
+            }
+        }
+    }
+}

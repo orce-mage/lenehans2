@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Searchanise_SearchAutocomplete::css/se.css" />
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Searchanise\SearchAutocomplete\Block\Async" name="searchanise.async" template="Searchanise_SearchAutocomplete::async.phtml" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,7 @@
+@media only screen and (min-width: 767px) {
+    .sidebar-product-wrap .category-products .product-items .owl-stage-outer .owl-stage{transform: none !important; width: auto !important;}
+    .category-view .category-image {display: none;}
+    .horizontal-menu-wrap .horizontal-menu .smartmenu li.level0.level-top{padding: 0 20px;}
+}
+.sidebar-product-wrap .related.widget-heading-center .heading-title{background-color: #fff;}
+.page-product-configurable .configurable-variation-qty { display: none !important;}

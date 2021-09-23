@@ -1,0 +1,95 @@
+<?php
+use Magento\Framework\App\Action\Action;
+?>
+<?php if (!$carousel) : ?>
+<ol class="product-items row">
+    <?php endif ?>
+    <?php $i = 0; foreach ($collection as $_product): ?>
+        <?php if ($carousel == 1 && $row > 1 && $i == 0): ?>
+            <div class="owl-carousel owl-theme">
+        <?php endif ?>
+        <?php if (($i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        <div class="category-products">
+        <ol class="product-items <?= $type; ?> <?= $carousel && $row == 1 ? ' owl-carousel owl-theme' : '' ?>">
+    <?php endif ?>
+
+        <?php $i++ ?>
+        <li class="product-item single-discount">
+            <div class="product-item-info">
+                <div class="row">
+                    <div class="col-12 col-md-7">
+                        <div class="gallery-wrap">
+                            <?= $this->getLayout()->createBlock("MageBig\WidgetPlus\Block\Product\View\Gallery")->setGalleryId($id)->setProduct($_product)->setTemplate("MageBig_WidgetPlus::widget/layout/view/gallery.phtml")->toHtml(); ?>
+                            <div class="discount-percent"><?= $labelHelper->getDiscountPercent($_product); ?></div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <div class="product details product-item-details">
+                            <h3 class="product-item-name">
+                                <a title="<?= $block->escapeHtml($_product->getName()) ?>"
+                                   href="<?= /* @escapeNotVerified */ $block->getProductUrl($_product) ?>"
+                                   class="product-item-link">
+                                    <?= $block->escapeHtml($_product->getName()) ?>
+                                </a>
+                            </h3>
+                            <div class="price-wrap">
+                                <?= /* @escapeNotVerified */ $block->getProductPriceHtml(
+                                    $_product,
+                                    \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE,
+                                    \Magento\Framework\Pricing\Render::ZONE_ITEM_LIST,
+                                    [
+                                        'price_id_suffix' => '-' . $pricePrefixId
+                                    ]
+                                ) ?>
+                            </div>
+                            <?php if ($templateType): ?>
+                                <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+                            <?php endif; ?>
+
+                            <div class="stock-wrap">
+                                <span><?= __('Status:'); ?></span>
+                                <?php if ($_product->getIsSalable()): ?>
+                                    <div class="stock available"><span><?= /* @escapeNotVerified */ __('In stock') ?></span></div>
+                                <?php else: ?>
+                                    <div class="stock unavailable"><span><?= /* @escapeNotVerified */ __('Out of stock') ?></span></div>
+                                <?php endif; ?>
+                            </div>
+
+                            <?php if($cfHelper->getDate($_product)) : ?>
+                                <div class="promo-countdown">
+                                    <div class="label-cd"><?= __('Expires in'); ?></div>
+                                    <div class="sale-countdown style-box" data-date="<?= $cfHelper->getDate($_product); ?>"></div>
+                                </div>
+                            <?php endif;?>
+
+                            <?php if ($_product->isSaleable()) : ?>
+                                <?php
+                                $stockQty = $cfHelper->getStockQty($_product);
+                                $sold = $cfHelper->getSoldQty($_product);
+                                ?>
+                                <?php if ($stockQty) : ?>
+                                    <div class="sold-progress">
+                                        <div class="sold"
+                                             style="width: <?= $cfHelper->getSoldPercent($_product); ?>%;"></div>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="sold-qty-wrap">
+                                    <span class="sold-qty"><?= $sold . '/' .($stockQty+$sold); ?></span><span> <?= __('Sold'); ?></span>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <?php if (($i == $count || $i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        </ol>
+        </div>
+    <?php endif ?>
+        <?php if ($carousel == 1 && $row > 1 && $i == $count): ?>
+            </div>
+        <?php endif ?>
+    <?php endforeach ?>
+    <?php if (!$carousel) : ?>
+</ol>
+<?php endif ?>

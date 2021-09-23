@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <!-- Searchanise style hosts -->
+        <policy id="style-src">
+            <values>
+                <value id="searchanise_style" type="host">www.searchanise.com</value>
+                <value id="searchanise_cdn" type="host">searchanise-ef84.kxcdn.com</value>
+                <value id="searchanise_amazon_s3" type="host">s3.amazonaws.com</value>
+                <value id="twitter_styles" type="host">platform.twitter.com</value>
+                <value id="twitter_styles_ton" type="host">ton.twimg.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="searchanise_frame" type="host">www.searchanise.com</value>
+                <value id="searchanise_frame_twitter" type="host">platform.twitter.com</value>
+                <value id="searchanise_frame_twitter_syndication" type="host">syndication.twitter.com</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="searchanise_font" type="host">www.searchanise.com</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="amplitude_src" type="host">api.amplitude.com</value>
+            </values>
+        </policy>
+        <!-- Searchanise js hosts -->
+        <policy id="script-src">
+            <values>
+                <value id="searchanise_cdn" type="host">searchanise-ef84.kxcdn.com</value>
+                <value id="searchanise_amazon_s3" type="host">s3.amazonaws.com</value>
+                <value id="searchanise_jquery" type="host">ajax.aspnetcdn.com</value>
+                <value id="searchanise_main" type="host">www.searchanise.com</value>
+                <value id="searchanise_static" type="host">static.searchanise.com</value>
+                <value id="searchanise_amplitude" type="host">api.amplitude.com</value>
+                <value id="searchanise_twitter" type="host">platform.twitter.com</value>
+                <value id="searchanise_cdn_twitter" type="host">cdn.syndication.twimg.com</value>
+            </values>
+        </policy>
+        <!-- Alows data: images -->
+        <policy id="img-src">
+            <values>
+                <value id="se_data" type="host">data:</value>
+                <value id="twitter_image" type="host">platform.twitter.com</value>
+                <value id="twitter_image_abs" type="host">abs.twimg.com</value>
+                <value id="twitter_image_pbs" type="host">pbs.twimg.com</value>
+                <value id="twitter_image_ton" type="host">ton.twimg.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

@@ -1,0 +1,29 @@
+<?php /**@var MageBig\AjaxSearch\Block\Autocomplete $block  */?>
+
+<div data-bind="scope: 'ajaxsearch_form'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "ajaxsearch_form": {
+                    "component": "MageBig_AjaxSearch/js/autocomplete",
+                    "config": {
+                        "url": "<?= $block->escapeUrl($block->getSearchUrl()) ?>",
+                        "lifetime": <?= (int)$block->getLifetime() ?: 60 ?>,
+                        "searchFormSelector": "#search_mini_form",
+                        "searchButtonSelector": "button.search",
+                        "inputSelector": ".minisearch input.input-text",
+                        "searchDelay": <?= (int)$block->getSearchDelay() ?>,
+                        "storeCode": "<?= $block->getStoreCode() ?>",
+                        "currencyCode": "<?= $block->getCurrencyCode() ?>"
+                    }
+                }
+            }
+        }
+    }
+}
+</script>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <cache_warmer>
+            <general>
+                <enabled>1</enabled>
+                <warm_strategy>popularity</warm_strategy>
+                <ignored_user_agents>{"_1537451867545_545":{"expression":"\/.*spider.*\/i"},"_1537451948457_457":{"expression":"\/.*YandexBot.*\/"},"_1537451959465_465":{"expression":"\/.*Baiduspider.*\/"},"_1537451985985_985":{"expression":"\/.*Slurp.*\/"},"_1537451998033_33":{"expression":"\/.*Bingbot.*\/"},"_1537452036193_193":{"expression":"\/.*Googlebot.*\/"}}</ignored_user_agents>
+            </general>
+            <performance>
+                <level>2</level>
+                <threads>2</threads>
+<!--                <delay>100</delay>-->
+                <job_time>90</job_time>
+                <job_schedule>*/2 * * * *</job_schedule>
+                <job_schedule_custom>*/2 * * * *</job_schedule_custom>
+                <system_load_limit>80</system_load_limit>
+            </performance>
+            <extended>
+                <is_statistics_enabled>1</is_statistics_enabled>
+                <is_use_same_cache_for_new_visitor>0</is_use_same_cache_for_new_visitor>
+            </extended>
+        </cache_warmer>
+    </default>
+</config>

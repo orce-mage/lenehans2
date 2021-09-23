@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportExportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\ImportExportCore\Api\Config\ConfigClass\ConfigClassInterface" type="Amasty\ImportExportCore\Config\ConfigClass\ConfigClass"/>
+    <preference for="Amasty\ImportExportCore\Api\Config\ConfigClass\ArgumentInterface" type="Amasty\ImportExportCore\Config\ConfigClass\Argument"/>
+
+    <virtualType name="AmastyImportExportCompiler" type="Magento\Framework\View\TemplateEngine\Xhtml\Compiler" shared="false">
+        <arguments>
+            <argument name="compilerText" xsi:type="object">Magento\Framework\View\TemplateEngine\Xhtml\Compiler\Text</argument>
+            <argument name="compilerAttribute" xsi:type="object">Magento\Framework\View\TemplateEngine\Xhtml\Compiler\Attribute</argument>
+            <argument name="compilerCdata" xsi:type="object">Magento\Framework\View\TemplateEngine\Xhtml\Compiler\Cdata</argument>
+            <argument name="compilerComment" xsi:type="object">Magento\Framework\View\TemplateEngine\Xhtml\Compiler\Comment</argument>
+            <argument name="elementCompilers" xsi:type="array">
+                <item name="include" xsi:type="object">Amasty\ImportExportCore\Config\SchemaReader\ConfigCompiler\IncludeElement</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Mail\TransportInterface">
+        <plugin name="customer-sample-data-disable-registration-email-send" disabled="true"/>
+    </type>
+</config>

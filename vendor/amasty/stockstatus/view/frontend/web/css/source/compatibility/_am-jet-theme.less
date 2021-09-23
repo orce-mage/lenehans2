@@ -1,0 +1,58 @@
+//
+//  Compatibility with Amasty Jet Theme
+//  ____________________________________
+
+//
+//  Common
+//  ------------------------------------
+
+& when (@media-common = true) {
+    .amasty-jet-theme .amtheme-short-info > .product-info-stock-sku {
+        & {
+            display: block;
+        }
+
+        .amstockstatus-status-container {
+            & {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    .amasty-jet-theme .amstockstatus-status-container.-checkout {
+        & {
+            position: relative;
+            padding-left: 95px;
+        }
+
+        .amstockstatus-tooltip-block > .amstockstatus-tooltip-content {
+            left: 0;
+        }
+    }
+
+    .amasty-jet-theme .amstockstatus-tooltip-content {
+        z-index: 99;
+        text-transform: none;
+    }
+}
+
+//
+//  Mobile only
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .amasty-jet-theme {
+        .block-search .actions {
+            z-index: 8;
+        }
+
+        .product-item .product-item-details {
+            z-index: auto;
+        }
+    }
+}

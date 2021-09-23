@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amasty_orderexport" translate="label" type="text" sortOrder="50605" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Efficient Order Export</label>
+            <tab>amasty</tab>
+            <resource>Amasty_Orderexport::amasty_orderexport</resource>
+            <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Settings</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Automatic Execution</label>
+                    <comment>Automatic execution of appropriate profiles after new order is placed (appropriate setting for a profile should be enabled)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="run_by_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Run Profile By URL</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow to run profile by direct URL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This option can be useful when running profiles by cron (using wget for example) or with the help of the external software.
+                        The URL format to use is the following: http://yourmagentourl/amasty_orderexport/index/run/id/[profile_id]/sec/[code]/ ,
+                        where [code] is the value specified in the next setting</comment>
+                </field>
+                <field id="sec_code" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Security code</label>
+                    <comment>You should provide this code in the URL to run profile. If security code is empty, profile will not run!
+                        It is recommended to use combination of letters and digits, something about 10 symbols.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

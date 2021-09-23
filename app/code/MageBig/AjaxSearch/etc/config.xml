@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magebig_ajaxsearch>
+            <ajaxsearch_main>
+                <search_delay>800</search_delay>
+                <autocomplete_fields>product</autocomplete_fields>
+                <suggested_result_number>3</suggested_result_number>
+                <product_result_number>5</product_result_number>
+                <product_result_fields>name,image,reviews_rating,price</product_result_fields>
+                <search_cache_lifetime>60</search_cache_lifetime>
+            </ajaxsearch_main>
+        </magebig_ajaxsearch>
+    </default>
+</config>

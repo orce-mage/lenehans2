@@ -1,0 +1,386 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@legend-border-bottom: 1px solid @color-gray-light6;
+@form-field__vertical-indent__desktop: 29px;
+@form-calendar-icon__color: @primary__color;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .fieldset {
+        border: none;
+        padding: 0;
+        margin-bottom: 15px;
+
+        > .field,
+        > .fields > .field {
+            margin-bottom: 15px;
+            &.no-label {
+                > .label {
+                    .lib-visually-hidden();
+                }
+            }
+
+            &.choice {
+                .label {
+                    display: inline;
+                    font-weight: normal;
+                    margin: 0;
+                }
+            }
+
+            .label {
+                font-weight: 500;
+                .column:not(.main) & {
+                    font-weight: normal;
+                }
+            }
+
+            .field.choice {
+                margin-bottom: @indent__s;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .legend + .fieldset,
+    .legend + div {
+        clear: both;
+    }
+
+    .legend {
+        > span {
+            margin-right: @indent__xs;
+        }
+    }
+    .fieldset.info > div.legend {
+        float: none !important;
+    }
+
+    fieldset.field {
+        border: 0;
+        padding: 0;
+    }
+
+    .field {
+        &.date {
+            .time-picker {
+                display: inline-block;
+                margin-top: @indent__s;
+                white-space: nowrap;
+            }
+        }
+
+        .message {
+            &.warning {
+                margin-top: @indent__s;
+            }
+        }
+    }
+
+    .select-styling() {
+        .lib-css(appearance, none, 1);
+        appearance: none;
+        background: @select__background url('../images/select-bg.svg') no-repeat 100% 46%;
+        background-size: 30px 60px;
+        border: 1px solid @border-color__base;
+        height: 42px;
+        padding-right: 25px;
+        border-radius: 3px;
+        font-size: 16px;
+        max-width: 100%;
+        &::-ms-expand {
+            display: none;
+        }
+
+        .lt-ie10 & {
+            background-image: none;
+            padding-right: 8px;
+        }
+    }
+
+    select {
+        .select-styling();
+        padding-left: 8px;
+        &.multiselect {
+            background: #ffffff;
+            min-height: 60px;
+            max-height: 150px;
+            padding: 8px;
+        }
+    }
+
+    input.input-text {
+        height: 42px;
+        width: 100%;
+        padding: 0 10px;
+        border-radius: 3px;
+        font-size: 16px;
+    }
+    textarea {
+        border-radius: 3px;
+    }
+    .field {
+        position: relative;
+        & > input[type="checkbox"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            border: 0;
+            & + label {
+                position: relative;
+                padding-left: 25px;
+                margin: 0;
+                cursor: pointer;
+                font-weight: normal !important;
+                &:before {
+                    content: '';
+                    width: 16px;
+                    height: 16px;
+                    border: 1px solid #000000;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -8px;
+                    left: 0;
+                }
+            }
+            &:checked + label:after {
+                content: '\e934';
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                top: 50%;
+                margin-top: -8px;
+                left: 0;
+                font-family: 'mbicon' !important;
+                speak: none;
+                font-style: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 15px;
+                letter-spacing: 0;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                color: #000000;
+                border: 1px solid #000000;
+                font-size: 10px;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+        & > input[type="radio"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            border: 0;
+            & + label {
+                position: relative;
+                padding-left: 25px;
+                margin: 0;
+                cursor: pointer;
+                font-weight: normal !important;
+                line-height: 20px;
+                &:before {
+                    content: '';
+                    width: 16px;
+                    height: 16px;
+                    border: 1px solid #000000;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -8px;
+                    left: 0;
+                    border-radius: 50%;
+                    font-size: 16px;
+                }
+            }
+            &:checked + label:after {
+                content: '';
+                width: 8px;
+                height: 8px;
+                position: absolute;
+                top: 50%;
+                margin-top: -4px;
+                left: 4px;
+                border: 1px solid #000000;
+                font-size: 10px;
+                text-align: center;
+                font-weight: bold;
+                border-radius: 50%;
+                background-color: #000000;
+            }
+        }
+    }
+
+    .field .control {
+        position: relative;
+    }
+    .swatch-attribute {
+        position: relative;
+        div.mage-error[generated] {
+            right: 50%;
+            margin-right: -80px;
+            margin-bottom: -14px;
+            .layout-rtl & {
+                right: auto;
+                left: 50%;
+                margin-left: -80px;
+                margin-right: 0;
+            }
+        }
+    }
+    .field-error, .field-notice, div.mage-error[generated] {
+        margin-bottom: 10px;
+        color: red;
+        .font-size(13) !important;
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        max-width: 260px;
+        border: none !important;
+        padding: 5px 8px;
+        border-radius: 3px;
+        background: #fff;
+        line-height: 1;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            margin-left: -2px;
+            bottom: -7px;
+            left: 20%;
+            border: 4px solid black;
+            border-color: transparent transparent #fff #fff;
+            transform-origin: 0 0;
+            transform: rotate(-45deg);
+            box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.3);
+            .layout-rtl & {
+                left: auto;
+                right: 20%;
+            }
+        }
+        .layout-rtl & {
+            right: auto;
+            left: 0;
+        }
+    }
+    #qty-error {
+        position: absolute;
+        bottom: 100%;
+        width: 500px;
+        margin-bottom: 14px;
+        text-align: left;
+    }
+    .product-options-wrapper {
+        select, .input-text, textarea {
+            width: 100%;
+            border: 1px solid #d1d1d1;
+        }
+    }
+
+    .field .tooltip {
+        .lib-tooltip(right);
+        .tooltip-content {
+            min-width: 200px;
+            white-space: normal;
+        }
+    }
+
+    input:focus ~ .tooltip .tooltip-content,
+    select:focus ~ .tooltip .tooltip-content {
+        display: block;
+    }
+
+    ._has-datepicker {
+        ~ .ui-datepicker-trigger {
+            .lib-button-reset();
+            .lib-icon-font(
+                @_icon-font-content: @icon-calendar,
+                @_icon-font-color: @primary__color__lighter,
+                @_icon-font-size: @icon-calendar__font-size,
+                @_icon-font-line-height: @icon-calendar__font-size,
+                @_icon-font-display: block,
+                @_icon-font-text-hide: true
+            );
+            display: inline-block;
+            margin-top: -4px;
+            vertical-align: middle;
+
+            &:focus {
+                box-shadow: none;
+                outline: 0;
+            }
+        }
+    }
+
+    .field.date,
+    .field-dob {
+        ._has-datepicker {
+            &:extend(.abs-field-date-input all);
+        }
+    }
+
+    //
+    //  Sidebar forms
+    //  ---------------------------------------------
+
+    .sidebar {
+        .fieldset {
+            margin: 0;
+
+            > .field:not(.choice) >,
+            .fields > .field {
+                &:not(:last-child) {
+                    margin: 0 0 @form-field__vertical-indent;
+                }
+
+                .label {
+                    margin: 0 0 4px;
+                    padding: 0 0 @indent__xs;
+                    text-align: left;
+                    width: 100%;
+                }
+
+                .control {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .legend {
+        .lib-css(border-bottom, @legend-border-bottom);
+    }
+}

@@ -1,0 +1,53 @@
+<div class="amexportcore-table-container">
+    <table class="amexportcore-fields-table" data-role="grid">
+        <thead class="amexportcore-thead -search">
+            <tr class="amexportcore-row">
+                <th class="amexportcore-th">
+                    <input type="checkbox" data-bind="
+                                                checked: allSelectedState,
+                                                click: checkClick.bind($data, $parent)"/>
+                </th>
+                <th class="amexportcore-th">
+                    <div class="amexportcore-search-container">
+                        <div class="amexportcore-search-input">
+                            <input class="amexportcore-search"
+                                   type="text"
+                                   data-bind="
+                                        value: searchValue,
+                                        valueUpdate: 'afterkeydown',
+                                        attr: {placeholder: $t('Search')},
+                                        event: {'keyup': changeSearch.bind($data)}"/>
+                            <span class="amexportcore-reset -hidden" data-bind="css: {'-hidden': !isSearchActive()}, click: clearSearch.bind($data)"></span>
+                        </div>
+                    </div>
+                </th>
+                <th class="amexportcore-th -button">
+                    <button class="action-primary"
+                            data-bind="i18n: 'Search', click: searchClick.bind($data)">
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- ko if: $data.fields -->
+            <!-- ko repeat: {foreach: $data.isSearchActive() ? $data.searchFields() : $data.fields, item: 'field'} -->
+                <tr class="amexportcore-row">
+                    <td class="amexportcore-td -checkbox">
+                        <input type="checkbox"
+                               data-bind="
+                                    attr: {id: uniqFor + field().code},
+                                    checkedValue: field().code,
+                                    checked: $data.selected" />
+                    </td>
+                    <td class="amexportcore-td -label">
+                        <label data-bind="text: $data.getLabel(field().label, field().name), attr: {for: uniqFor + field().code}" style="cursor:pointer"/>
+                    </td>
+                    <td class="amexportcore-td -button">
+                        <button class="amexportcore-button" data-bind="i18n: 'Add', click: $data.addField.bind($data, $parent, field())"></button>
+                    </td>
+            </tr>
+            <!-- /ko -->
+        <!-- /ko -->
+        </tbody>
+    </table>
+</div>

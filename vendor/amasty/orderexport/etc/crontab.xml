@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="amasty_orderexport">
+        <job instance="Amasty\Orderexport\Cron\Profile\Run" method="execute" name="amasty_orderexport_profile_run">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job instance="Amasty\Orderexport\Cron\Queue\Generate" method="execute" name="amasty_orderexport_queue_generate">
+            <schedule>0 * * * *</schedule>
+        </job>
+    </group>
+</config>

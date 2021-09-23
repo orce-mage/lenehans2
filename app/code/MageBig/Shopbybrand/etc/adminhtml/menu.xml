@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="MageBig_Shopbybrand::shopbybrand" title="Shop by brand" module="MageBig_Shopbybrand" sortOrder="30" parent="MageBig_MbFrame::magebig_config" resource="MageBig_Shopbybrand::shopbybrand"/>
+		<add id="MageBig_Shopbybrand::manage_brands" title="Brand Management" module="MageBig_Shopbybrand" sortOrder="0" parent="MageBig_Shopbybrand::shopbybrand" action="shopbybrand/index" resource="MageBig_Shopbybrand::index" />
+		<add id="MageBig_Shopbybrand::config" title="Brand Configuration" module="MageBig_Shopbybrand" sortOrder="10" parent="MageBig_Shopbybrand::shopbybrand" action="adminhtml/system_config/edit/section/magebig_shopbybrand" resource="MageBig_Shopbybrand::config" />
+	</menu>
+</config>

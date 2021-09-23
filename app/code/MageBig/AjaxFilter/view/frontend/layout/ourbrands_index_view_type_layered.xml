@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block name="category.products.list.container" class="Magento\Framework\View\Element\Template" template="MageBig_AjaxFilter::config.phtml" />
+        </referenceContainer>
+        <move element="category.products" destination="category.products.list.container" before="-" />
+        <referenceBlock name="catalog.navigation.state" template="MageBig_AjaxFilter::layer/brand/state.phtml" />
+        <referenceBlock name="catalog.leftnav" template="MageBig_AjaxFilter::layer/brand/view.phtml">
+            <block class="MageBig\AjaxFilter\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer" >
+                <block class="MageBig\AjaxFilter\Block\Navigation\Renderer\PriceSlider"
+                       name="catalog.navigation.renderer.price.slider"
+                       template="MageBig_AjaxFilter::layer/filter/style/slider.phtml" />
+                <block class="MageBig\AjaxFilter\Block\Navigation\Renderer\Attribute"
+                       name="catalog.navigation.renderer.attribute"
+                       template="MageBig_AjaxFilter::layer/filter/style/checkbox.phtml" after="-" />
+                <block class="MageBig\AjaxFilter\Block\Navigation\Renderer\Swatches"
+                       name="catalog.navigation.renderer.swatches"
+                       template="MageBig_AjaxFilter::layer/filter/style/swatches.phtml" />
+                <block class="MageBig\AjaxFilter\Block\Navigation\Renderer\Rating"
+                       name="catalog.navigation.renderer.rating"
+                       template="MageBig_AjaxFilter::layer/filter/style/rating.phtml" />
+            </block>
+        </referenceBlock>
+    </body>
+</page>

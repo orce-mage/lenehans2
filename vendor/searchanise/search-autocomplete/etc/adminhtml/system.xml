@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
+    <system>
+        <tab id="searchanise" translate="label" sortOrder="1000">
+             <label>Searchanise</label>
+        </tab>
+
+        <section id="searchanise" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>General</label>
+
+            <tab>searchanise</tab>
+            <resource>Searchanise_SearchAutocomplete::configuration</resource>
+
+            <group id="searchanise_general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+
+                <field id="search_input_selector" translate="label comment" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Search input jQuery selector</label>
+                    <comment>
+                        <![CDATA[
+                            jQuery selector of search input field.<br /><br />
+                            <b>Important!:</b> Edit only if your custom theme changes the default search input ID!
+                        ]]>
+                    </comment>
+                </field>
+                <field id="enabled_searchanise_search" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Searchanise for full-text search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                            Disable in case of invalid search operation.<br>The instant search widget will <strong>remain active</strong>.
+                        ]]>
+                    </comment>
+                </field>
+                <field id="sync_mode" translate="label comment" sortOrder="20" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sync mode</label>
+                    <source_model>Searchanise\SearchAutocomplete\Model\Config\Source\SyncModes</source_model>
+                    <comment>
+                        <![CDATA[
+                            Select <strong>When catalog updates</strong> to keep track of catalog changes and index them automatically.<br>
+                            Select <strong>Periodically via cron</strong> to index catalog changes every day in at 3 o'clock in the morning. You can read how to configure a cron <a href="https://devdocs.magento.com/guides/v2.3/config-guide/cli/config-cli-subcommands-cron.html" target="_blank">here</a>
+                            <br>Select <strong>Manually</strong> to index catalog changes manually by clicking <i>FORCE RE-INDEXATION</i> button in the Searchanise control panel (<i>Catalog → Searchanise</i>).
+                        ]]>
+                    </comment>
+                </field>
+                <field id="index_enabled" translate="label comment" sortOrder="30" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use indexing queue</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                            When set to 'Yes', all synchronization operations will be performed via magento indexer.<br /><br />
+                            To schedule the run searchanise queue you need to add the code to your crontab:<br />
+                            <code>*/1 * * * * php <magento-root>/bin/magento indexer:reindex searchanise_queue</code><br />
+                        ]]>
+                    </comment>
+                </field>
+                <field id="enable_customer_usergroups" translate="label comment" sortOrder="40" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use prices for usergroups</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                            If disabled, prices for customer usergroups will <b>NOT</b> be indexed. It may increase indexation speed significantly.
+                        ]]>
+                    </comment>
+                </field>
+                <field id="use_direct_image_links" translate="label comment" sortOrder="50" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use direct images links</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                           When set to ‘Yes’, Searchanise will index full size images instead of thumbnails.
+                           It may help decrease indexation time and avoid some server side issues occurring during thumbnail generation.
+                           But it may also increase widget loading time on frontend.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes.
+                        ]]>
+                    </comment>
+                </field>
+                <field id="summary_attr" translate="label comment" sortOrder="60" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description attribute</label>
+                    <source_model>Searchanise\SearchAutocomplete\Model\Config\Source\DescriptionAttr</source_model>
+                    <comment>
+                        <![CDATA[
+                            Select an attribute to use as product description for indexation to display in Searchanise widgets.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes
+                        ]]>
+                    </comment>
+                </field>
+                <field id="render_page_template" translate="label comment" sortOrder="70" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Render page templates</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                            When set to ‘Yes’ , CMS page template custom variables like '{{config path="web/unsecure/base_url"}}' will be rendered and indexed.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes.
+                        ]]>
+                    </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

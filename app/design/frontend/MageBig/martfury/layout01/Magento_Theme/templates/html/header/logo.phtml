@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+?>
+<?php $mbHelper = $this->helper('MageBig\MbFrame\Helper\Data'); ?>
+<?php $storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();?>
+
+<?php if ($mbHelper->isHomePage()):?>
+    <h1 class="logo text-hide">
+<?php else: ?>
+    <div class="logo text-hide">
+<?php endif ?>
+    <a href="<?= $block->getUrl(''); ?>" title="<?= /* @escapeNotVerified */ $storeName ?>">
+        <strong><?= /* @escapeNotVerified */ $block->getLogoAlt() ?></strong>
+        <img class="img-fluid" src="<?= /* @escapeNotVerified */ $block->getLogoSrc() ?>"
+             alt="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
+             <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+             <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+        />
+    </a>
+<?php if ($mbHelper->isHomePage()):?>
+    </h1>
+<?php else:?>
+    </div>
+<?php endif?>

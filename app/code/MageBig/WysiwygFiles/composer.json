@@ -1,0 +1,12 @@
+{
+    "name": "magebig/module-wysiwygfiles",
+    "description": "This module makes it possible to upload different filetypes inside the WYSIWYG-editor. Extra filetypes are Word (doc, docm, docx), Excel (csv, xml, xls, xlsx), PDF (pdf), mp4, webm, Compressed Folder (zip, tar, rar)",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageBig\\WysiwygFiles\\": ""
+        }
+    }
+}

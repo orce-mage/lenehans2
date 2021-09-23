@@ -1,0 +1,128 @@
+//
+//  VARIABLES
+//  _____________________________________________
+@stripe-block-title__margin: false;
+@stripe-block-title__padding: false;
+
+@stripe-block-content__border: false;
+@stripe-block-content__box-shadow: false;
+
+@stripe-images__margin: 10px 5px;
+@stripe-images__padding: false;
+
+@stripe-images-plus__background-color: false;
+@stripe-images-plus__border-radius: false;
+
+@stripe-checkboxes__background: false;
+@stripe-checkboxes__border: false;
+@stripe-checkboxes__margin: false;
+@stripe-checkboxes__padding: 1rem;
+
+@stripe-checkboxes-button-cart__margin: 0;
+
+@stripe-checkboxes__desktop__border-width: false;
+
+@stripe-checkboxes-button-cart__desktop__margin: 10px 0;
+
+//
+//  STYLES
+//  _____________________________________________
+.amazon-stripe {
+    .block-title {
+        .margin(@stripe-block-title__margin);
+        .padding(@stripe-block-title__padding);
+    }
+
+    .block-content {
+        .lib-css(border, @stripe-block-content__border);
+        .lib-css(box-shadow, @stripe-block-content__box-shadow);
+    }
+
+    .amazonstyle-images {
+        text-align: center;
+        .margin(@stripe-images__margin);
+        .padding(@stripe-images__padding);
+
+        li.first {
+            display: none;
+
+            + li.plus + li {
+                .padding-left(0); // No padding for first visible item
+
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        .plus::before {
+            .lib-css(background-color, @stripe-images-plus__background-color);
+            .lib-css(border-radius, @stripe-images-plus__border-radius);
+        }
+    }
+
+    .product-photo-wrapper {
+        display: inline-block;
+        position: relative;
+
+        .checkbox {
+            margin: 0;
+            position: absolute;
+            top: .5rem;
+            .right(.5rem);
+            z-index: 2;
+        }
+    }
+
+    .amazonstyle-checkboxes {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        .lib-css(background, @stripe-checkboxes__background);
+        .lib-css(border, @stripe-checkboxes__border);
+        .padding(@stripe-checkboxes__padding);
+        .margin(@stripe-checkboxes__margin);
+
+        li.button-cart {
+            .margin(@stripe-checkboxes-button-cart__margin);
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .amazon-stripe {
+        .block-content {
+            display: flex;
+
+            .amazonstyle-images {
+                flex: 4;
+                display: flex;
+                justify-content: space-around;
+
+                li {
+                    .padding-left(0);
+
+                    &::before {
+                        display: none;
+                    }
+
+                    &:not(.first) + li.plus {
+                        .soldtogether-plus();
+                    }
+                }
+            }
+
+            .amazonstyle-checkboxes {
+                flex: 1;
+                flex-direction: column-reverse;
+                justify-content: center;
+                padding: 0;
+                .border-width(@stripe-checkboxes__desktop__border-width);
+
+                li.button-cart {
+                    .margin(@stripe-checkboxes-button-cart__desktop__margin);
+                }
+            }
+        }
+    }
+}

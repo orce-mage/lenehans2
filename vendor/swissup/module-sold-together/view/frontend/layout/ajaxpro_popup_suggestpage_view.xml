@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="soldtogether.product.customer">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="Swissup_Swiper/js/swiper" xsi:type="array">
+                        <item name="slidesPerView" xsi:type="helper" helper="Swissup\SoldTogether\Helper\Suggestpage::getSlidesPerView" />
+                        <item name="breakpoints" xsi:type="array">
+                            <item name="1024" xsi:type="array">
+                                <item name="slidesPerView" xsi:type="helper" helper="Swissup\SoldTogether\Helper\Suggestpage::getSlidesPerView" />
+                            </item>
+                            <item name="600" xsi:type="array">
+                                <item name="slidesPerView" xsi:type="helper" helper="Swissup\SoldTogether\Helper\Suggestpage::getSlidesPerView" />
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

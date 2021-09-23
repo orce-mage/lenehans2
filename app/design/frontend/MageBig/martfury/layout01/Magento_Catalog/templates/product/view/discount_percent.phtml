@@ -1,0 +1,7 @@
+<?php
+$_product = $block->getProduct();
+$labelHelper = $this->helper('MageBig\WidgetPlus\Helper\Config');
+?>
+<?php if ($labelHelper->getDiscountPercent($_product)) : ?>
+    <span class="discount-percent"><?= $labelHelper->getDiscountPercent($_product); ?></span>
+<?php endif;?>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Sales::sales">
+                    <resource id="Magetrend_PdfTemplates::api" title="PDF Api" sortOrder="20" />
+                    <resource id="Magetrend_PdfTemplates::templates" title="PDF Templates">
+                        <resource id="Magetrend_PdfTemplates::templates_index" title="Invoice" sortOrder="20" />
+                    </resource>
+                    <resource id="Magento_Sales::sales_operation">
+                        <resource id="Magento_Sales::sales_order"  title="Orders" translate="title" sortOrder="10">
+                            <resource id="Magento_Sales::actions" title="Actions" translate="title" sortOrder="10">
+                                <resource id="Magetrend_PdfTemplates::print_order_pdf"  title="Print Order Pdf" translate="title" sortOrder="990"/>
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magetrend_PdfTemplates::config_general" title="Pdf Templates Settings" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

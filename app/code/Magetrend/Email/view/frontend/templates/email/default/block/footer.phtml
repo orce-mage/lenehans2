@@ -1,0 +1,49 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+?>
+<?php $var = $block->getVarModel();?>
+<table
+    width="100%"
+    <?php echo $var->getHtmlAttribute('style', 'footer_style', 'width: 100% !important; max-width: 100% !important; background-color: #f1f1f1'); ?>
+    <?php echo $var->getHtmlAttribute('bgcolor', 'footer_bgcolor', '#f1f1f1'); ?>
+    border="0" cellpadding="0" cellspacing="0"
+    class="mteditor-bgcolor body-bg-color">
+    <tr>
+        <td align="center">
+            <table
+                <?php echo $var->getHtmlAttribute('style', 'footer_style_2', 'background-color: #ffffff; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;'); ?>
+                <?php echo $var->getHtmlAttribute('bgcolor', 'footer_bgcolor_2', '#ffffff'); ?>
+                class="mteditor-bgcolor secondary-bg-color" width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td height="45">&nbsp;</td>
+                    </tr>
+            </table>
+            <table
+                width="600"
+                style="width: 100% !important; max-width: 600px !important; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
+                cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                    <td height="30">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="mteditor-color footer-color"
+                        <?php echo $var->getHtmlAttribute('style', 'footer_text_style', 'font-size: 12px; color: #707582;'); ?>
+                        <?php echo $var->getTextEditAttribute('footer_text');?>
+                        align="center">
+                        <?php echo $var->getValue('footer_text', "{{config path='design/footer/copyright'}}");?>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="60">&nbsp;</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,71 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+    $width = 370;
+    $height = 300;
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+    $padTop = round(($height/$width)*100, 2);
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="post-list-wrapper post-list-owl">
+    <?php if ($block->getData('title')) : ?>
+        <h2 class="title"><?php echo $block->escapeHtml($block->getTitle(), ['h2', 'h3', 'h4', 'h5', 'div', 'span', 'i', 'br', 'a']) ?></h2>
+    <?php endif;?>
+    <div class="owl-carousel owl-theme">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $_post->getPostUrl();
+                $_postName = $block->escapeHtml($_post->getTitle(), null, true);
+            ?>
+            <div class="post-item-wrap">
+                <div class="post-item">
+                    <?php if ($featuredImage = $_post->getFeaturedImage()) : ?>
+                        <a class="img-featured" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
+                            <span class="img-lazy-wrap" style="padding-top: <?= $padTop ?>%">
+                                <img class="media-lazy lazyload" data-src="<?= $imageHelper->init($_post->getFeaturedImg())->resize($width, $height) ?>" src="#" width="<?= $width ?>" height="<?= $height ?>" alt="<?php echo $_postName ?>" />
+                            </span>
+                        </a>
+                    <?php endif;?>
+                    <h3 class="title">
+                        <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>"><?php echo $_postName ?></a>
+                    </h3>
+                    <div class="post-posed-date">
+                        <span class="label"><?php echo __('Posted:') ?></span>
+                        <span class="value"><?php echo $_post->getPublishDate('F d, Y') ?></span>
+                    </div>
+                </div>
+            </div>
+
+        <?php } ?>
+    </div>
+    <script>
+        require(['jquery', 'owlWidget'], function ($) {
+            $(function() {
+                $('.post-list-owl').owlWidget({
+                    items: 4,
+                    dots: false,
+                    nav: true,
+                    loop: true,
+                    margin: 30,
+                    responsive: {"0":{"items":1},"576":{"items":2},"768":{"items":2},"992":{"items":3},"1200":{"items":4},"1600":{"items":5}}
+                });
+            });
+        });
+    </script>
+</div>
+<?php } ?>

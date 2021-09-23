@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--collect new pages-->
+    <type name="Magento\Framework\Controller\ResultInterface">
+        <plugin name="mstCacheWarmerCollectPage" type="Mirasvit\CacheWarmer\Plugin\Frontend\Framework\Controller\Result\CollectPagePlugin" sortOrder="1"/>
+    </type>
+
+    <!--add info and headers on hit-->
+    <type name="Magento\PageCache\Model\App\FrontController\BuiltinPlugin">
+        <plugin name="mstCacheWarmerDebug" type="Mirasvit\CacheWarmer\Plugin\Debug\OnHitPlugin" sortOrder="1000"/>
+    </type>
+
+    <!--add info block on miss-->
+    <type name="Magento\Framework\App\PageCache\Kernel">
+        <plugin name="mstCacheWarmerDebug" type="Mirasvit\CacheWarmer\Plugin\Debug\OnMissPlugin" sortOrder="1000"/>
+    </type>
+
+    <!--register not cacheable blocks-->
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="mstCacheWarmerDebug" type="Mirasvit\CacheWarmer\Plugin\Debug\LayoutPlugin"/>
+    </type>
+
+    <!--restore vary data-->
+    <type name="Magento\Framework\App\FrontControllerInterface">
+        <plugin name="mstCacheWarmerVaryData" type="Mirasvit\CacheWarmer\Plugin\Warmer\RestoreSessionDataPlugin"/>
+    </type>
+
+    <!-- blocks marking  -->
+    <type name="Magento\Framework\View\TemplateEngineFactory">
+        <plugin name="mstCacheWarmerMarkBlock" type="Mirasvit\CacheWarmer\Plugin\HolePunch\MarkBlockPlugin" sortOrder="1300"/>
+    </type>
+
+    <!-- correct image generation if blocks excluded -->
+    <type name="Magento\Catalog\Model\Product\Image">
+        <plugin name="mstCacheWarmerImage" type="Mirasvit\CacheWarmer\Plugin\HolePunch\ProductImagePlugin" sortOrder="1000"/>
+    </type>
+
+    <!-- correct price generation inside excluded cms block -->
+    <type name="Magento\CatalogWidget\Block\Product\ProductsList">
+        <plugin name="mstCacheWarmerPrice" type="Mirasvit\CacheWarmer\Plugin\HolePunch\CmsPricePlugin" sortOrder="1000"/>
+    </type>
+
+    <!-- cli set store_currency for store -->
+    <type name="Magento\Store\Model\Store">
+        <plugin name="mstCacheWarmerCurrency" type="Mirasvit\CacheWarmer\Plugin\Cli\StoreCurrencyStorePlugin" sortOrder="1000"/>
+    </type>
+
+    <!-- cli set store_currency for cache -->
+    <type name="Magento\Framework\App\Http\Context">
+        <plugin name="mstCacheWarmerCurrency" type="Mirasvit\CacheWarmer\Plugin\Cli\StoreCurrencyCachePlugin" sortOrder="1000"/>
+
+        <!-- use the same cache for new visitor (delete store from vary data) -->
+        <plugin name="mstCacheWarmerCurrencyCache" type="Mirasvit\CacheWarmer\Plugin\UseSameCachePlugin" sortOrder="1000"/>
+    </type>
+</config>

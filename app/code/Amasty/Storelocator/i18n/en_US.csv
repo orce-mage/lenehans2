@@ -1,0 +1,288 @@
+"Save and Continue Edit","Save and Continue Edit"
+Edit,Edit
+"Manage Labels","Manage Labels"
+Label,Label
+Properties,Properties
+"Attribute Properties","Attribute Properties"
+"Attribute Code","Attribute Code"
+"The code is used internally. Make sure you don't use spaces or more than %1 symbols.","The code is used internally. Make sure you don't use spaces or more than %1 symbols."
+"Default Label","Default Label"
+"Default label","Default label"
+"Catalog Input Type for Store Owner","Catalog Input Type for Store Owner"
+"Manage Options (Values of Your Attribute)","Manage Options (Values of Your Attribute)"
+Options,Options
+"Text Field","Text Field"
+Yes/No,Yes/No
+"Multiple Select","Multiple Select"
+Dropdown,Dropdown
+"Attribute Information","Attribute Information"
+"Location Management","Location Management"
+"Add Location","Add Location"
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Delete,Delete
+Disabled,Disabled
+Enabled,Enabled
+Reset,Reset
+Save,Save
+"Available Products","Available Products"
+"Apply the rule only if the following conditions are met (leave blank for all products).","Apply the rule only if the following conditions are met (leave blank for all products)."
+Conditions,Conditions
+"Location Attributes","Location Attributes"
+"Please Select","Please Select"
+"All Store Views","All Store Views"
+"Edit Review","Edit Review"
+Reviews,Reviews
+"Review Details","Review Details"
+"<a href=""%1"" onclick=""this.target='blank'"">%2 %3</a>","<a href=""%1"" onclick=""this.target='blank'"">%2 %3</a>"
+Author,Author
+Rating,Rating
+Status,Status
+Review,Review
+mi,mi
+km,km
+"Attribute has been deleted.","Attribute has been deleted."
+"This item no longer exists.","This item no longer exists."
+"Edit Attribute","Edit Attribute"
+"New Attribute","New Attribute"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"Attribute with the same attribute code exists.","Attribute with the same attribute code exists."
+"The wrong data is specified.","The wrong data is specified."
+"Record has been successfully saved","Record has been successfully saved"
+"Something went wrong while saving data. Please review the error log.","Something went wrong while saving data. Please review the error log."
+"Store Locator","Store Locator"
+"You deleted the item.","You deleted the item."
+"We can't delete item right now. Please review the log and try again.","We can't delete item right now. Please review the log and try again."
+"We can't find a item to delete.","We can't find a item to delete."
+"Please select a location to duplicate.","Please select a location to duplicate."
+"The location has been duplicated. Please feel free to activate it.","The location has been duplicated. Please feel free to activate it."
+"Something went wrong while saving the item data. Please review the error log.","Something went wrong while saving the item data. Please review the error log."
+"Edit Location","Edit Location"
+"New Location","New Location"
+Locations,Locations
+"Please correct the data sent.","Please correct the data sent."
+"Something went wrong while saving the location.","Something went wrong while saving the location."
+"You deleted the location(s).","You deleted the location(s)."
+"You changed the location(s).","You changed the location(s)."
+"We can't delete location(s) right now. Please review the log and try again.","We can't delete location(s) right now. Please review the log and try again."
+"We can't find a location(s) to delete.","We can't find a location(s) to delete."
+"The wrong item is specified.","The wrong item is specified."
+"You saved the item.","You saved the item."
+"You deleted the review.","You deleted the review."
+"We can't delete review right now. Please review the log and try again.","We can't delete review right now. Please review the log and try again."
+"Location Reviews","Location Reviews"
+"Edit Location Review","Edit Location Review"
+"Locations Reviews","Locations Reviews"
+"Changes Saved","Changes Saved"
+"%1 review(s) was deleted","%1 review(s) was deleted"
+"%1 review(s) was failed to delete","%1 review(s) was failed to delete"
+"Status was changed for %1 review(s)","Status was changed for %1 review(s)"
+"Failed to change status for %1 review(s)","Failed to change status for %1 review(s)"
+"An error has occured","An error has occured"
+"Review has been saved.","Review has been saved."
+"You deleted the schedule.","You deleted the schedule."
+"We can't delete schedule right now. Please review the log and try again.","We can't delete schedule right now. Please review the log and try again."
+"We can't find a schedule to delete.","We can't find a schedule to delete."
+"Edit Location Schedule","Edit Location Schedule"
+"New Location Schedule","New Location Schedule"
+"Location Schedules","Location Schedules"
+"You saved the schedule.","You saved the schedule."
+"Review has been placed","Review has been placed"
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Saturday,Saturday
+Sunday,Sunday
+"No Conditions","No Conditions"
+"Product Attribute","Product Attribute"
+Kilometers,Kilometers
+Miles,Miles
+"Allow User To Choose","Allow User To Choose"
+Slider,Slider
+Pending,Pending
+Approved,Approved
+Declined,Declined
+24h,24h
+12h,12h
+"Read More","Read More"
+Closed,Closed
+"Break Time","Break Time"
+"Available In Stores","Available In Stores"
+"File directory '%1' is not readable.","File directory '%1' is not readable."
+"File directory '%1' is not writable.","File directory '%1' is not writable."
+"An error has happened while detecting geo-position data by Google. The error is: status","An error has happened while detecting geo-position data by Google. The error is: status"
+"Unable to save review with ID %1. Error: %2","Unable to save review with ID %1. Error: %2"
+"Unable to save new review. Error: %1","Unable to save new review. Error: %1"
+"Review with specified ID ""%1"" not found.","Review with specified ID ""%1"" not found."
+"Unable to remove review with ID %1. Error: %2","Unable to remove review with ID %1. Error: %2"
+"Unable to remove review. Error: %1","Unable to remove review. Error: %1"
+No,No
+Yes,Yes
+"There is no sample file for this entity.","There is no sample file for this entity."
+Open,Open
+"Open Time","Open Time"
+"Start of Break","Start of Break"
+"End of Break","End of Break"
+"Close Time","Close Time"
+"Add Option","Add Option"
+"Sort Option","Sort Option"
+" can be found at the following stores:&nbsp;"," can be found at the following stores:&nbsp;"
+"Current location","Current location"
+"Search Radius","Search Radius"
+"Locate Nearby","Locate Nearby"
+Filter,Filter
+Distance:,Distance:
+"Additional Information","Additional Information"
+Directions,Directions
+"Zip: ","Zip: "
+"Country: ","Country: "
+"State: ","State: "
+"City: ","City: "
+"Address: ","Address: "
+Photos,Photos
+" reviews"," reviews"
+"Write a review","Write a review"
+"See full review","See full review"
+"You're reviewing:","You're reviewing:"
+"* Required Fields","* Required Fields"
+"Your Rating","Your Rating"
+"%1 %2","%1 %2"
+"Submit Review","Submit Review"
+"Work Time Today:","Work Time Today:"
+"Make base","Make base"
+"Delete image","Delete image"
+Collapse,Collapse
+"Sorry, Google failed to get directions and answered with status: ","Sorry, Google failed to get directions and answered with status: "
+"Sorry, there is no available view of the street yet.","Sorry, there is no available view of the street yet."
+"Sorry we're unable to display the nearby stores because the ""Use browser location"" option is disabled in the module settings. Please, contact the administrator.","Sorry we're unable to display the nearby stores because the ""Use browser location"" option is disabled in the module settings. Please, contact the administrator."
+"You need to choose address from the dropdown with suggestions.","You need to choose address from the dropdown with suggestions."
+"Select Some Options","Select Some Options"
+"Sorry, no locations were found.","Sorry, no locations were found."
+"Please select one of each of the ratings above.","Please select one of each of the ratings above."
+General,General
+"Google API Key","Google API Key"
+"Enable Location Pages","Enable Location Pages"
+"Enable Customers Reviews for Locations","Enable Customers Reviews for Locations"
+"Show Store Locator's Link on Product Pages","Show Store Locator's Link on Product Pages"
+"'Available in Stores' Link Text","'Available in Stores' Link Text"
+"Open 'Available in Stores' Page in a New Tab","Open 'Available in Stores' Page in a New Tab"
+Title,Title
+"Add Store Locator Link to the Toolbar","Add Store Locator Link to the Toolbar"
+"Add Store Locator Link to the Footer","Add Store Locator Link to the Footer"
+"Map and Customer's Geolocation","Map and Customer's Geolocation"
+"Use Browser Location","Use Browser Location"
+"Use Geo IP","Use Geo IP"
+"Show Nearest Location by Default","Show Nearest Location by Default"
+"Map Zoom","Map Zoom"
+"Enable Clustering","Enable Clustering"
+"Autosuggestions Click Search","Autosuggestions Click Search"
+"Search locations by clicking on the suggestions item.
+                        If set to NO search occurs after pressing an ""Enter"" button.","Search locations by clicking on the suggestions item.
+                        If set to NO search occurs after pressing an ""Enter"" button."
+"Store Locator Page","Store Locator Page"
+"Main Settings","Main Settings"
+"URL Key","URL Key"
+"Meta Title","Meta Title"
+"Meta Description","Meta Description"
+"Number of Locations on a Page","Number of Locations on a Page"
+"Description Length Limit","Description Length Limit"
+"Address Autosuggestion Restrictions","Address Autosuggestion Restrictions"
+"Please use the field if you need to show only specific countries in the list of offered addresses for the 'Current Location' field on the Store locator's page.
+                            Please mind that Google Service allows to choose no more than 5 countries (you can find more information <a href=""https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete"" target=""_blank"">here</a>).
+                            Or leave the field blank to show all possible countries in the list of offered addresses.","Please use the field if you need to show only specific countries in the list of offered addresses for the 'Current Location' field on the Store locator's page.
+                            Please mind that Google Service allows to choose no more than 5 countries (you can find more information <a href=""https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete"" target=""_blank"">here</a>).
+                            Or leave the field blank to show all possible countries in the list of offered addresses."
+"General Visual Settings","General Visual Settings"
+"Distance Units","Distance Units"
+"Radius Type","Radius Type"
+"Minimum Value for Radius Range","Minimum Value for Radius Range"
+"Maximum Value for Radius Range","Maximum Value for Radius Range"
+"If you would like to use other search radius, you may list them above, separated with comma","If you would like to use other search radius, you may list them above, separated with comma"
+"Google Mark Template","Google Mark Template"
+"Store List Template","Store List Template"
+"Sidebar Store List Visual Configuration","Sidebar Store List Visual Configuration"
+"Day Off Text","Day Off Text"
+"Break Time Text","Break Time Text"
+"Time Format","Time Format"
+"Show Distance to the Location","Show Distance to the Location"
+"Collapse Locations Filter by Default","Collapse Locations Filter by Default"
+"Amasty Store Locator","Amasty Store Locator"
+"Show Store List On Widget","Show Store List On Widget"
+"Show NearBy And Radius Filter","Show NearBy And Radius Filter"
+"Automatic positioning to the nearest location","Automatic positioning to the nearest location"
+"Widget Description","Widget Description"
+"Enable Widget Block Wrapping","Enable Widget Block Wrapping"
+"Set 'No' to disable the map block wrapping with the page content","Set 'No' to disable the map block wrapping with the page content"
+"Add New Attribute","Add New Attribute"
+"Delete selected items?","Delete selected items?"
+ID,ID
+"Input Type","Input Type"
+"Store Locator Location","Store Locator Location"
+Back,Back
+"General Information","General Information"
+"Location Name","Location Name"
+"Store View","Store View"
+Position,Position
+"Short Description","Short Description"
+"
+                        If set, a pop-up and a store list on the store locator's page will show the short description.
+                    ","
+                        If set, a pop-up and a store list on the store locator's page will show the short description.
+                    "
+Description,Description
+Address,Address
+Country,Country
+State/Province,State/Province
+City,City
+Zip,Zip
+"Phone Number","Phone Number"
+"E-mail Address","E-mail Address"
+"Website URL","Website URL"
+"Please set the URL to the external websites in the format: http://www.example.com","Please set the URL to the external websites in the format: http://www.example.com"
+"Location On Map","Location On Map"
+Latitude,Latitude
+"Valid latitudes values are from -85 to 85 degrees.","Valid latitudes values are from -85 to 85 degrees."
+Longitude,Longitude
+"Valid longitudes values are from -180 to 180 degrees.","Valid longitudes values are from -180 to 180 degrees."
+"Marker Image","Marker Image"
+"
+                        Image will be resized to 27x43 px. Allowed file types : jpg jpeg gif png. Gif can have only one frame
+                    ","
+                        Image will be resized to 27x43 px. Allowed file types : jpg jpeg gif png. Gif can have only one frame
+                    "
+Preview,Preview
+"Image Gallery","Image Gallery"
+"Images of Location","Images of Location"
+"
+                        Allowed file types : jpg jpeg gif png. Gif can have only one frame
+                    ","
+                        Allowed file types : jpg jpeg gif png. Gif can have only one frame
+                    "
+"Product Conditions","Product Conditions"
+"Choose Condition Type","Choose Condition Type"
+"Meta Information","Meta Information"
+"Meta Robots","Meta Robots"
+Canonical,Canonical
+"Store Schedule","Store Schedule"
+"Show Schedule","Show Schedule"
+"-- Please Select --","-- Please Select --"
+"Add New","Add New"
+Enable,Enable
+Disable,Disable
+"Delete items","Delete items"
+"Are you sure you want to delete selected items?","Are you sure you want to delete selected items?"
+"Store Views","Store Views"
+Name,Name
+Approve,Approve
+Decline,Decline
+Id,Id
+"Location Id","Location Id"
+"Customer Name","Customer Name"
+"Customer Email","Customer Email"
+"Date Placed","Date Placed"
+"Date Published","Date Published"
+"Store Locator Schedule","Store Locator Schedule"
+"Schedule Name","Schedule Name"
+"Add New Schedule","Add New Schedule"
+Schedule,Schedule

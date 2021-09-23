@@ -1,0 +1,50 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+?>
+<?php
+/** @var \Amasty\Orderexport\Block\Adminhtml\Profiles\Edit\Options\StaticFields $block */
+
+$staticFields = $block->getData();
+?>
+<div id="profile_export_static_fields_options" class="control-value admin__field-value">
+    <fieldset class="fieldset">
+        <legend class="legend">
+            <span><?= $block->escapeHtml(__('Static Fields')); ?></span>
+        </legend>
+        <div>
+            <table class="admin__control-table">
+                <thead>
+                <tr>
+                    <th class="col-default"><?= $block->escapeHtml(__('Field Label')); ?></th>
+                    <th class="col-default"><?= $block->escapeHtml(__('Field Value')); ?></th>
+                    <th class="col-default"><?= $block->escapeHtml(__('Position')); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php for ($i = 0; $i < 10; $i++) : ?>
+                        <tr>
+                            <td class="col-default">
+                                <input name="static_fields[label][<?= $i; ?>]" value="<?= (!empty($staticFields['label'][$i]) ? $block->escapeHtml($staticFields['label'][$i]) : '') ?>" class="input-text" type="text">
+                            </td>
+                            <td class="col-default">
+                                <input name="static_fields[value][<?= $i; ?>]" value="<?= (!empty($staticFields['value'][$i]) ? $block->escapeHtml($staticFields['value'][$i]) : '') ?>" class="input-text" type="text">
+                            </td>
+                            <td class="col-default">
+                                <select name="static_fields[position][<?= $i; ?>]" class="input-text" type="text">
+                                    <option value="0" <?= (empty($staticFields['position'][$i]) ? 'selected' : ''); ?>><?= $block->escapeHtml(__('At The Beginning')); ?></option>
+                                    <option value="1" <?= (!empty($staticFields['position'][$i]) ? 'selected' : ''); ?>><?= $block->escapeHtml(__('At The End')); ?></option>
+                                </select>
+                            </td>
+                        </tr>
+                    <?php endfor; ?>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </fieldset>
+</div>

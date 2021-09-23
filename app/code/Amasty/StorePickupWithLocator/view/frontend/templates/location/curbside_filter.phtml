@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+?>
+<?php
+/** @var \Amasty\StorePickupWithLocator\ViewModel\Location\CurbsideFilter $viewModel */
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel && $viewModel->isNeedToShowFilter()): ?>
+    <div class="amlocator-attribute-wrapper">
+        <div class="amlocator-label"><?= $escaper->escapeHtml($viewModel->getFilterLabel()); ?></div>
+        <div class="amlocator-input">
+            <select name="curbside_enabled" class="amlocator-select">
+                    <option value="" selected><?= $escaper->escapeHtml(__('Please Select')); ?></option>
+                <?php foreach ($viewModel->getFilterOptions() as $option): ?>
+                    <option value="<?= (int)$option['value'] ?>">
+                        <?= $escaper->escapeHtml($option['label']); ?>
+                    </option>
+                <?php endforeach;?>
+            </select>
+        </div>
+    </div>
+<?php endif; ?>

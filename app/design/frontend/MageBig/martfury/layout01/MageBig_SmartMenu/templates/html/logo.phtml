@@ -1,0 +1,41 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+?>
+<?php
+$_mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$logoNav = $_mbHelper->getConfig('mbconfig/header/logo_nav');
+$logoNavUrl = $_mbHelper->getBaseMediaUrl() . 'wysiwyg/magebig/logo/' . $logoNav;
+?>
+<?php $storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt(); ?>
+<div class="nav-logo text-hide">
+    <a href="<?= $block->getUrl(''); ?>" title="<?= /* @escapeNotVerified */ $storeName ?>">
+        <strong><?= /* @escapeNotVerified */
+            $block->getLogoAlt() ?></strong>
+        <?php if (!$logoNav) : ?>
+            <img class="img-fluid" src="<?= /* @escapeNotVerified */
+            $block->getLogoSrc() ?>"
+                 alt="<?= /* @escapeNotVerified */
+                 $block->getLogoAlt() ?>"
+                <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+                <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+            />
+        <?php else : ?>
+            <img class="img-fluid" src="<?= /* @escapeNotVerified */
+            $logoNavUrl ?>"
+                 alt="<?= /* @escapeNotVerified */
+                 $block->getLogoAlt() ?>"
+                <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+                <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+            />
+        <?php endif; ?>
+    </a>
+</div>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amgcard_codepool_form.amgcard_codepool_form_data_source</item>
+            <item name="deps" xsi:type="string">amgcard_codepool_form.amgcard_codepool_form_data_source</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">amgcard_codepool_form_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/</item>
+            </item>
+            <item name="delete" xsi:type="string">Amasty\GiftCard\Block\Adminhtml\Buttons\CodePool\DeleteButton</item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">save primary</item>
+            </item>
+            <item name="save_and_continue" xsi:type="array">
+                <item name="name" xsi:type="string">save_and_continue</item>
+                <item name="label" xsi:type="string" translate="true">Save and Continue Edit</item>
+                <item name="class" xsi:type="string">save_and_continue</item>
+            </item>
+        </item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+    </argument>
+    <dataSource name="amgcard_codepool_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Amasty\GiftCard\Model\CodePool\DataProvider\Form</argument>
+            <argument name="name" xsi:type="string">amgcard_codepool_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pool_id</argument>
+            <argument name="requestFieldName" xsi:type="string">pool_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Settings</item>
+                <item name="additionalClasses" xsi:type="string">amcard-general-settings</item>
+            </item>
+        </argument>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Code Pool Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">title</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <container name="conditions_apply_to">
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Amasty\GiftCard\Block\Adminhtml\Conditions\CodePool\Conditions</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="codes">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Codes Settings</item>
+                <item name="additionalClasses" xsi:type="string">amcard-codes-setting</item>
+            </item>
+        </argument>
+        <field name="template">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Codes Template</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">template</item>
+                    <item name="additionalClasses" xsi:type="string">amcard-codes-template</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        <![CDATA[{L} - letter, {D} - digit<br/>
+                        e.g. PROMO_{L}{L}{D}{D}{D} results in PROMO_DF627<br/>
+                        Recommended code length is 20 symbols]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Codes Qty to Generate</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">qty</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="csv">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Csv File</item>
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/file</item>
+                    <item name="notice" xsi:type="string" translate="true">Each code on a new line</item>
+                    <item name="formElement" xsi:type="string">file</item>
+                    <item name="elementTmpl" xsi:type="string">Amasty_GiftCard/form/file</item>
+                    <item name="source" xsi:type="string">csv</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-file-extension" xsi:type="boolean">true</item>
+                        <item name="validate-file-size" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="title" xsi:type="string">Generate</item>
+                    <item name="formElement" xsi:type="string">button</item>
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/generate-button</item>
+                    <item name="generateUrl" xsi:type="url" path="amgcard/codepool/generatecodes"/>
+                    <item name="imports" xsi:type="array">
+                        <item name="code_pool_id" xsi:type="string">${ $.provider }:data.general.pool_id</item>
+                    </item>
+                    <item name="externalCodesProvider" xsi:type="string">amgcard_code_listing.amgcard_code_listing_data_source</item>
+                </item>
+            </argument>
+        </field>
+        <fieldset name="codes_listing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Codes List</item>
+                    <item name="additionalClasses" xsi:type="string">amcard-codes-grid</item>
+                </item>
+            </argument>
+            <insertListing name="details_listing">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="autoRender" xsi:type="boolean">true</item>
+                        <item name="selectionsProvider" xsi:type="string">amgcard_code_listing.amgcard_code_listing.amgcard_code_listing_manage_columns.ids</item>
+                        <item name="externalProvider" xsi:type="string">amgcard_code_listing.amgcard_code_listing_data_source</item>
+                        <item name="ns" xsi:type="string">amgcard_code_listing</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="codePoolId" xsi:type="string">${ $.provider }:data.general.pool_id</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="codePoolId" xsi:type="string">${ $.externalProvider }:params.pool_id</item>
+                        </item>
+                        <item name="externalFilterMode" xsi:type="boolean">true</item>
+                        <item name="realTimeLink" xsi:type="boolean">true</item>
+                        <item name="dataLinks" xsi:type="array">
+                            <item name="imports" xsi:type="boolean">true</item>
+                            <item name="exports" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+            </insertListing>
+        </fieldset>
+    </fieldset>
+</form>

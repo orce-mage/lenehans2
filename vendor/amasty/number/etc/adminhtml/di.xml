@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Number
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="AmastyOrderResetButton" type="Amasty\Number\Block\Adminhtml\Settings\Button\ResetButton">
+        <arguments>
+            <argument name="alertMessage" xsi:type="string" translate="true">Are you sure you want to reset the order counter?</argument>
+            <argument name="resetType" xsi:type="const">\Amasty\Number\Model\ConfigProvider::ORDER_TYPE</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AmastyInvoiceResetButton" type="Amasty\Number\Block\Adminhtml\Settings\Button\ResetButton">
+        <arguments>
+            <argument name="alertMessage" xsi:type="string" translate="true">Are you sure you want to reset the invoice counter?</argument>
+            <argument name="resetType" xsi:type="const">\Amasty\Number\Model\ConfigProvider::INVOICE_TYPE</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AmastyShippingResetButton" type="Amasty\Number\Block\Adminhtml\Settings\Button\ResetButton">
+        <arguments>
+            <argument name="alertMessage" xsi:type="string" translate="true">Are you sure you want to reset the shipping counter?</argument>
+            <argument name="resetType" xsi:type="const">\Amasty\Number\Model\ConfigProvider::SHIPMENT_TYPE</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AmastyCreditMemoResetButton" type="Amasty\Number\Block\Adminhtml\Settings\Button\ResetButton">
+        <arguments>
+            <argument name="alertMessage" xsi:type="string" translate="true">Are you sure you want to reset the creditmemo counter?</argument>
+            <argument name="resetType" xsi:type="const">\Amasty\Number\Model\ConfigProvider::CREDITMEMO_TYPE</argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Number\Model\Config\Backend\Start">
+        <arguments>
+            <argument name="resetHandler" xsi:type="object">Amasty\Number\Model\Counter\ResetHandler\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Number\Model\Counter\Scope\CounterScopeResolver">
+        <arguments>
+            <argument name="quoteBackendSession" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+</config>

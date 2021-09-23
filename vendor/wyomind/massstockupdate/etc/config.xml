@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Core/etc/config.xsd">
+    <default>
+        <massstockupdate>
+            <license>
+                <extension_label>Mass Stock Update</extension_label>
+                <extension_version>11.1.0</extension_version>
+                <extension_code>msi</extension_code>
+                <get_online_license>1</get_online_license>
+            </license>
+            <settings>
+                <log>0</log>
+                <nb_preview>100</nb_preview>
+                <cron_interval>30</cron_interval>
+            </settings>
+        </massstockupdate>
+    </default>
+</config>

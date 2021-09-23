@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="behaviors">
+        <name>behaviors test</name>
+        <behaviors>
+            <add name="Add Custom Name" class="Amasty\ImportCore\Test\Behavior\Add">
+                <modelFactory>Test\Test</modelFactory>
+            </add>
+            <update name="Update Custom Name">
+                <modelFactory>Test2\Test2</modelFactory>
+            </update>
+            <delete class="Amasty\ImportCore\Import\Test\Behaviors\Delete">
+                <modelFactory>Test3\Test3</modelFactory>
+            </delete>
+            <addUpdate>
+                <modelFactory>Test4\Test4</modelFactory>
+                <insertResourceModel>InsertTest\InsertTest</insertResourceModel>
+                <arguments>
+                    <argument name="test-number" xsi:type="number">2</argument>
+                    <argument name="test-string" xsi:type="string">test-string</argument>
+                </arguments>
+            </addUpdate>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior" code="custom_behavior"/>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior2" code="custom_behavior2" name="custom_behavior2">
+                <arguments>
+                    <argument name="custom-test-array" xsi:type="array">
+                        <item name="custom-test-array-number" xsi:type="number">11</item>
+                        <item name="custom-test-array-string" xsi:type="string">custom-test-string</item>
+                    </argument>
+                    <argument name="custom-test-number" xsi:type="number">22</argument>
+                    <argument name="custom-test-string" xsi:type="string">custom-test-string</argument>
+                </arguments>
+            </custom>
+        </behaviors>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Model\FieldCollector" />
+        </fieldsConfig>
+    </entity>
+    <entity code="behaviors_with_repository">
+        <name>behaviors with repository test</name>
+        <behaviors>
+            <add name="Add Custom Name" class="Amasty\ImportCore\Test\Behavior\Add">
+                <modelFactory>Test\Test</modelFactory>
+                <repository>
+                    <class>TestRepository\TestRepository</class>
+                    <saveMethod>save</saveMethod>
+                </repository>
+            </add>
+            <update name="Update Custom Name">
+                <modelFactory>Test2\Test2</modelFactory>
+                <repository>
+                    <class>TestRepository2\TestRepository2</class>
+                    <loadMethod>getById</loadMethod>
+                    <saveMethod>save</saveMethod>
+                </repository>
+            </update>
+            <delete class="Amasty\ImportCore\Import\Test\Behaviors\Delete">
+                <modelFactory>Test3\Test3</modelFactory>
+                <repository>
+                    <class>TestRepository2\TestRepository2</class>
+                    <deleteMethod>delete</deleteMethod>
+                </repository>
+            </delete>
+            <addUpdate>
+                <modelFactory>Test4\Test4</modelFactory>
+                <repository>
+                    <class>TestRepository2\TestRepository2</class>
+                    <saveMethod>save</saveMethod>
+                    <loadMethod>delete</loadMethod>
+                </repository>
+                <arguments>
+                    <argument name="test-number" xsi:type="number">2</argument>
+                    <argument name="test-string" xsi:type="string">test-string</argument>
+                </arguments>
+            </addUpdate>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior" code="custom_behavior"/>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior2" code="custom_behavior2" name="custom_behavior2">
+                <arguments>
+                    <argument name="custom-test-array" xsi:type="array">
+                        <item name="custom-test-array-number" xsi:type="number">11</item>
+                        <item name="custom-test-array-string" xsi:type="string">custom-test-string</item>
+                    </argument>
+                    <argument name="custom-test-number" xsi:type="number">22</argument>
+                    <argument name="custom-test-string" xsi:type="string">custom-test-string</argument>
+                </arguments>
+            </custom>
+        </behaviors>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Model\FieldCollector" />
+        </fieldsConfig>
+    </entity>
+    <entity code="direct_behaviors">
+        <name>direct behaviors test</name>
+        <behaviors>
+            <addDirect>
+                <tableName>test_table</tableName>
+            </addDirect>
+            <updateDirect name="Update Custom Name">
+                <tableName>test2_table</tableName>
+            </updateDirect>
+            <deleteDirect class="Amasty\ImportCore\Import\Test\Behaviors\Delete\Direct">
+                <tableName>test3_table</tableName>
+            </deleteDirect>
+            <addUpdateDirect>
+                <tableName>test4_table</tableName>
+                <arguments>
+                    <argument name="test-number" xsi:type="number">2</argument>
+                    <argument name="test-string" xsi:type="string">test-string</argument>
+                </arguments>
+            </addUpdateDirect>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior" code="custom_behavior"/>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior2" code="custom_behavior2" name="custom_behavior2">
+                <arguments>
+                    <argument name="custom-test-array" xsi:type="array">
+                        <item name="custom-test-array-number" xsi:type="number">11</item>
+                        <item name="custom-test-array-string" xsi:type="string">custom-test-string</item>
+                    </argument>
+                    <argument name="custom-test-number" xsi:type="number">22</argument>
+                    <argument name="custom-test-string" xsi:type="string">custom-test-string</argument>
+                </arguments>
+            </custom>
+        </behaviors>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Model\FieldCollector" />
+        </fieldsConfig>
+    </entity>
+    <entity code="all_behaviors">
+        <name>all behaviors test</name>
+        <behaviors>
+            <add name="Add Custom Name" class="Amasty\ImportCore\Test\Behavior\Add">
+                <modelFactory>Test\Test</modelFactory>
+                <repository>
+                    <class>TestRepository\TestRepository</class>
+                    <saveMethod>save</saveMethod>
+                </repository>
+            </add>
+            <update name="Update Custom Name">
+                <modelFactory>Test2\Test2</modelFactory>
+                <repository>
+                    <class>TestRepository2\TestRepository2</class>
+                    <loadMethod>getById</loadMethod>
+                    <saveMethod>save</saveMethod>
+                </repository>
+            </update>
+            <delete class="Amasty\ImportCore\Import\Test\Behaviors\Delete">
+                <modelFactory>Test3\Test3</modelFactory>
+            </delete>
+            <addUpdate>
+                <modelFactory>Test4\Test4</modelFactory>
+                <arguments>
+                    <argument name="test-number" xsi:type="number">2</argument>
+                    <argument name="test-string" xsi:type="string">test-string</argument>
+                </arguments>
+            </addUpdate>
+            <addDirect>
+                <tableName>test_table</tableName>
+            </addDirect>
+            <updateDirect name="Update Custom Name">
+                <tableName>test2_table</tableName>
+            </updateDirect>
+            <deleteDirect class="Amasty\ImportCore\Import\Test\Behaviors\Delete">
+                <tableName>test3_table</tableName>
+            </deleteDirect>
+            <addUpdateDirect>
+                <tableName>test4_table</tableName>
+                <arguments>
+                    <argument name="test-number" xsi:type="number">2</argument>
+                    <argument name="test-string" xsi:type="string">test-string</argument>
+                </arguments>
+            </addUpdateDirect>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior" code="custom_behavior"/>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior2" code="custom_behavior2" name="custom_behavior2">
+                <arguments>
+                    <argument name="custom-test-array" xsi:type="array">
+                        <item name="custom-test-array-number" xsi:type="number">11</item>
+                        <item name="custom-test-array-string" xsi:type="string">custom-test-string</item>
+                    </argument>
+                    <argument name="custom-test-number" xsi:type="number">22</argument>
+                    <argument name="custom-test-string" xsi:type="string">custom-test-string</argument>
+                </arguments>
+            </custom>
+        </behaviors>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Model\FieldCollector" />
+        </fieldsConfig>
+    </entity>
+</config>

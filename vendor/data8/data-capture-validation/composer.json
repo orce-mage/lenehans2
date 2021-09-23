@@ -1,0 +1,16 @@
+{
+	"name": "data8/data-capture-validation",
+	"description": "Data8 Data Capture and Validation",
+	"type": "magento2-module",
+    "require": {
+		"php": "~5.6.5|7.0.*|7.1.*|7.2.*|7.3.*|7.4.*",
+		"magento/framework": "^100.1.0|^101.0.0|^102.0.0|^103.0.0|^104.0.0",
+        "magento/module-store": "^100.1.0|^101.0.0"
+    },
+	"version": "2.2.0",
+	"license": [ "OSL-3.0" ],
+	"autoload": {
+		"psr-4": { "Data8\\DataCaptureValidation\\": "" },
+		"files": [ "registration.php" ]
+	}
+}

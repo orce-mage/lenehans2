@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $wishlistHelper = $this->helper('Magento\Wishlist\Helper\Data');?>
+<?php if ($block->customerLoggedIn()): ?>
+    <li class="customer-welcome acc-topbar">
+        <div class="customer-name acc-btn" data-bind="scope: 'customer'">
+            <!-- ko if: customer().fullname  -->
+            <div><?= __("Hi,") ?></div>
+            <div class="name" data-bind="text: customer().firstname"></div>
+            <!-- /ko -->
+        </div>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer": {
+                            "component": "Magento_Customer/js/view/customer"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+        <div class="customer-menu acc-list">
+            <ul>
+                <li>
+                    <a href="<?= $block->getBaseUrl() ?>customer/account/"><i class="mbi mbi-clipboard-user"></i><span><?= __('My Account') ?></span></a></li>
+                <?php if ($wishlistHelper->isAllow()): ?>
+                    <li>
+                        <a href="<?= $block->getBaseUrl() ?>wishlist/"><i class="mbi mbi-heart"></i><span><?= __('My Wishlist') ?></span></a></li>
+                <?php endif;?>
+                <li>
+                    <a href="<?= $block->getBaseUrl() ?>checkout/cart/"><i class="mbi mbi-cart"></i><span><?= __('My Cart') ?></span></a></li>
+                <li>
+                    <a href="<?= $block->getBaseUrl() ?>customer/account/logout/"><i class="mbi mbi-exit"></i><span><?= __('Log Out') ?></span></a></li>
+            </ul>
+        </div>
+    </li>
+<?php endif;?>

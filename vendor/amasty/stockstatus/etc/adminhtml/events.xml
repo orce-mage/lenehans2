@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_entity_attribute_save_after">
+        <observer name="amstockstatus-save-after-attribute" instance="Amasty\Stockstatus\Observer\Backend\CatalogEntityAttributeSaveAfter" />
+    </event>
+
+    <event name="catalog_entity_attribute_save_before">
+        <observer name="amstockstatus-save-before-attribute" instance="Amasty\Stockstatus\Observer\Backend\CatalogEntityAttributeSaveBefore" />
+    </event>
+
+    <event name="catalog_product_save_after">
+        <observer name="amasty_tabs_product_tab_indexer" instance="Amasty\Stockstatus\Observer\Backend\CatalogProductSaveAfterObserver" />
+    </event>
+</config>

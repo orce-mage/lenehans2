@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="searchanise_queue" class="Searchanise\SearchAutocomplete\Model\Indexer\Queue" group="indexer">
+        <subscriptions>
+            <table name="searchanise_queue" entity_column="queue_id" />
+        </subscriptions>
+    </view>
+</config>

@@ -1,0 +1,4 @@
+id,name,country,city,zip,address,state,description,phone,email,website,status,gallery_image,stores,schedule,url_key,meta_title,meta_description
+,Computer Gallery,US,New York,11235,1800 Tiffin Avenue,New York,Lots of great shops and room to walk around. Not a lot of inexpensive food choices though.,1 419-422-0787,gallery@it.com,websiteURL.com,1,,all,,url-1,test title,test description
+,Supercenter,US,Washington,20001,2501 Oakridge Farm Lane,Washington,The meats are delicious and fresh!,262-284-9903,supercenter@mail.com,websiteURL2.com,1,,all,,url-2,test title,test description
+,City Mall,GB,London,W1B 4JQ ,180 Regent St,,Its pretty organized and neat. Costumer service is decent. Its pretty good for the prices,606-755-4546,Mall@mall.com,websiteURL3.com,1,,all,,url-3,test title,test description

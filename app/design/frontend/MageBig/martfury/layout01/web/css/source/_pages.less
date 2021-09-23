@@ -1,0 +1,64 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .pages {
+        text-align: center;
+        .pages-items {
+            display: inline-block;
+            padding: 0;
+            list-style: none;
+            .item {
+                float: left;
+                height: 34px;
+                line-height: 34px;
+                min-width: 34px;
+                padding: 0;
+                display: block;
+                text-align: center;
+                background-color: #f5f5f5;
+                .font-size(15);
+                margin: 0 4px;
+                &.current {
+                    background-color: @main_color;
+                    strong {
+                        font-weight: normal;
+                        display: block;
+                    }
+                }
+                a {
+                    color: #000;
+                    display: block;
+                    padding: 0 8px;
+                }
+                &:hover {
+                    background-color: @main_color;
+                }
+            }
+        }
+        .label {
+            display: none;
+        }
+        .action {
+            &.next:after {
+                .abs-iconfont("\f3d3", 18px);
+                vertical-align: middle;
+            }
+            &.previous:before {
+                .abs-iconfont("\f3d2", 18px);
+                vertical-align: middle;
+            }
+            span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .label {
+                display: none;
+            }
+        }
+    }
+}

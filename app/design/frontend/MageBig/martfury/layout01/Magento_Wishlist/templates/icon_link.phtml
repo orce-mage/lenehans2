@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var \Magento\Wishlist\Block\Link $block */
+?>
+<div class="col col-wishlist d-none d-md-block">
+    <div class="wishlist-topbar" data-bind="scope: 'wishlist'">
+        <a <?= /* @noEscape */
+        $block->getLinkAttributes() ?> class="wishlist-icon link wishlist">
+            <i class="mbi mbi-heart"></i>
+            <span data-bind="text: wishlist().counter ? wishlist().items.length : 0, css: { empty: !!wishlist().counter == false }" class="counter-number qty empty"></span>
+        </a>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "wishlist": {
+                        "component": "Magento_Wishlist/js/view/wishlist"
+                    }
+                }
+            }
+        }
+    }
+</script>

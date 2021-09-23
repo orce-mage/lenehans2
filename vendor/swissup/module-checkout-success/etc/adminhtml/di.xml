@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Swissup\CheckoutSuccess\Model\Config\Source\AvailableBlocks">
+        <arguments>
+            <argument name="options" xsi:type="array">
+                <item name="thank.you" xsi:type="string" translate="true">"Thank you" note</item>
+                <item name="order.date" xsi:type="string" translate="true">Order Date</item>
+                <item name="sales.order.view" xsi:type="string" translate="true">Order Items</item>
+                <item name="sales.order.info" xsi:type="string" translate="true">Order Info</item>
+                <item name="create.account" xsi:type="string" translate="true">Create Account</item>
+                <item name="order.success.additional.info" xsi:type="string" translate="true">Additional Info</item>
+                <item name="checkout.additional.cms.top" xsi:type="string" translate="true">CMS: Above info</item>
+                <item name="checkout.additional.cms.bottom" xsi:type="string" translate="true">CMS: Below info</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,68 @@
+<!-- ko if: visible() -->
+    <div style="border-top: 1px solid #cccccc;">
+        <!-- ko if: status() === 'running' && proceed() > 0 -->
+        <div class="messages">
+            <div class="message message-success">
+                Proceed Rows: <span data-bind="text: proceed()"></span>
+                <!-- ko if: total() > 0 -->
+                    of <span data-bind="text: total()"></span>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $data.messages() -->
+        <div class="messages" style="margin: 20px 0">
+            <!-- ko foreach: $data.messages() -->
+            <div class="message" data-bind="
+                css: {
+                     'message-error error': $data.type === 40 || $data.type === 50,
+                     'message-warning warning': $data.type === 30
+                     }">
+                <!-- ko if: $data.entityMessage -->
+                    <p data-bind="text: $data.entityMessage"></p>
+                    <!-- ko foreach: $data.messages -->
+                        <span>- </span><span data-bind="text: $data.message"></span>
+                            <!-- ko if: $data.errorRows -->
+                                <span> In row(s): </span>
+                                <span data-bind="text: $data.errorRows"></span>
+                            <!-- /ko -->
+                        <br>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko ifnot: $data.entityMessage -->
+                    <span data-bind="text: $data.message"></span>
+                    <!-- ko if: $data.errorRows -->
+                        <span> In row(s): </span>
+                        <span data-bind="text: $data.errorRows"></span>
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: isImport() -->
+            <!-- ko if: status() === 'success' -->
+            <div class="messages">
+                <div class="message message-success">
+                    Import Successfully Done. Processed rows: <span data-bind="text: proceed()"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko ifnot: isImport() -->
+            <!-- ko if: status() === 'success' -->
+            <div class="messages">
+                <div class="message message-success">
+                    Data Prepare Competed. Processed rows: <span data-bind="text: proceed()"></span>
+                </div>
+            </div>
+
+            <button data-bind="i18n:'Import', click: processImport" class="action- scalable primary"></button>
+            <button data-bind="i18n:'Cancel', click: cancelClick" class="action- scalable"></button>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+<!-- /ko -->

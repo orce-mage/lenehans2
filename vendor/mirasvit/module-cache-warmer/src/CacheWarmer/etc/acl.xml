@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::system">
+                    <resource id="Magento_Backend::tools">
+                        <resource id="Mirasvit_CacheWarmer::cache_warmer" title="Page Cache Warmer" sortOrder="20">
+                            <resource id="Mirasvit_CacheWarmer::cache_warmer_page" title="Pages" sortOrder="10"/>
+                            <resource id="Mirasvit_CacheWarmer::cache_warmer_source" title="Page Sources" sortOrder="15"/>
+                            <resource id="Mirasvit_CacheWarmer::cache_warmer_job" title="Jobs" sortOrder="20"/>
+                            <resource id="Mirasvit_CacheWarmer::cache_warmer_warm_rule" title="Warm Rules" sortOrder="25"/>
+                            <resource id="Mirasvit_CacheWarmer::cache_warmer_trace" title="Cache Flushes" sortOrder="28"/>
+                            <resource id="Mirasvit_CacheWarmer::cache_warmer_report" title="Page Cache Reports" sortOrder="30"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Mirasvit_CacheWarmer::cache_warmer_config" title="Page Cache Warmer" sortOrder="20"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

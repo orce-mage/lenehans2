@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Number
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_before">
+        <observer name="Amasty_Number::change_order_increment_id" instance="Amasty\Number\Observer\OrderSaveBefore" />
+    </event>
+    <event name="sales_order_invoice_save_before">
+        <observer name="Amasty_Number::change_invoice_increment_id" instance="Amasty\Number\Observer\SalesEntitySaveBefore" />
+    </event>
+    <event name="sales_order_shipment_save_before">
+        <observer name="Amasty_Number::change_shipment_increment_id" instance="Amasty\Number\Observer\SalesEntitySaveBefore" />
+    </event>
+    <event name="sales_order_creditmemo_save_before">
+        <observer name="Amasty_Number::change_creditmemo_increment_id" instance="Amasty\Number\Observer\SalesEntitySaveBefore" />
+    </event>
+</config>

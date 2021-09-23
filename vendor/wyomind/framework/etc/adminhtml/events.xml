@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="wyomind_controller_predispatch" instance="Wyomind\Framework\Observer\ControllerActionPredispatch" />
+    </event>
+</config>

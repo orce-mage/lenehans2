@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Mage24Fix
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <referenceContainer name="root">
+        <referenceContainer name="page.main.actions">
+            <referenceBlock name="store_switcher" template="Amasty_Mage24Fix::store/switcher.phtml"/>
+        </referenceContainer>
+    </referenceContainer>
+</layout>

@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amstockstatus" translate="label" type="text" sortOrder="32119" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Custom Stock Status</label>
+            <tab>amasty</tab>
+            <resource>Amasty_Stockstatus::config</resource>
+            <group id="amasty_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Information</label>
+                <frontend_model>Amasty\Stockstatus\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="display_default_status" translate="label comment" type="select" sortOrder="15" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Default Stock Status with Custom Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="use_threshold_for_range" translate="label" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Out of Stock Threshold Value for Quantity Ranges</label>
+                    <comment><![CDATA[<a target="_blank" href="https://docs.magento.com/m2/ce/user_guide/catalog/inventory.html">https://docs.magento.com/m2/ce/user_guide/catalog/inventory.html</a>]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="icon_only" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Icon Only (No Status Text)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display only icon and no custom status text on the product view and product list pages.</comment>
+                </field>
+            </group>
+
+            <group id="display" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Display Settings</label>
+                <field id="display_on_category" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Custom Stock Status on Product List Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_in_cart" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Custom Stock Status in Shopping Cart</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Will display custom stock status for items in shopping cart.</comment>
+                </field>
+                <field id="display_on_checkout" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Custom Stock Status on Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_in_email" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Custom Status in Order Confirmation Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="info" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Info Link</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Info Link</label>
+                    <comment>The information link will lead to any CMS page and will be displayed below the Custom Stock Status</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="text" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Info Link Text</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="cms" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>CMS Page</label>
+                    <source_model>Amasty\Stockstatus\Model\Source\CmsPage</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="expected_date" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Expected Date</label>
+                <field id="expected_date_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Expected Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Amasty\Stockstatus\Model\Backend\UpdaterAttribute</backend_model>
+                </field>
+                <field id="format" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Expected Date Format</label>
+                    <source_model>Amasty\Stockstatus\Model\Source\DateFormat</source_model>
+                    <depends>
+                        <field id="expected_date_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="expired" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Hide Expired Expected Dates</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="expected_date_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="configurable_products" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Configurable Products</label>
+                <field id="outofstock" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Out of Stock Configurable Attributes</label>
+                    <comment>​If any of 'Yes' options is selected here, please make sure that Stores-Configuration-Catalog-Inventory-Display Out of Stock Products is enabled as well.</comment>
+                    <tooltip><![CDATA[<img src="Amasty_Stockstatus::images/outofstock.gif">]]></tooltip>
+                    <source_model>Amasty\Stockstatus\Model\Source\Outofstock</source_model>
+                </field>
+                <field id="change_custom_configurable_status" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Change Configurable Product Status upon Options Selection</label>
+                    <comment>On product page only.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_in_dropdowns" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Custom Status in Dropdowns</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="status" translate="label comment" type="label" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable 'Back In Stock' Alert for Out of Stock Configurable Items</label>
+                    <comment>It notifies users when the product comes back to stock. To enable this feature install Out of Stock Notification plugin.</comment>
+                    <frontend_model>Amasty\Stockstatus\Block\Adminhtml\System\Config\Form\Field\OutOfStock</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

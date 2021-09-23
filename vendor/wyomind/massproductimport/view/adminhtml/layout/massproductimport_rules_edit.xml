@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2019 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+           <block class="Wyomind\MassProductImport\Block\Adminhtml\Rules\Edit" name="massproductimport_rules_import"
+                   template="Wyomind_MassProductImport::rules/import.phtml"/>
+           <uiComponent name="replacement_rows"/>
+        </referenceContainer>
+    </body>
+</page>

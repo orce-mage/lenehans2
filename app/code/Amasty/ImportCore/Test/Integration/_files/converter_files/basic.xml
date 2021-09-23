@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="basic">
+        <name>basic</name>
+        <isHidden>true</isHidden>
+        <description>basic description</description>
+        <behaviors>
+            <add>
+                <modelFactory>Test\Test</modelFactory>
+            </add>
+        </behaviors>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Model\FieldCollector" />
+        </fieldsConfig>
+    </entity>
+</config>

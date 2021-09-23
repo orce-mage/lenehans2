@@ -1,0 +1,15 @@
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "emailImportForm": {
+                "uploadAction":"<?php echo $block->getUrl('mtemail/mtemail/importUpload'); ?>",
+                "importAction":"<?php echo $block->getUrl('mtemail/mtemail/import'); ?>"
+
+            }
+        }
+    }
+</script>
+<form id="mt_template_import" action="" method="POST" enctype="multipart/form-data">
+    <input name="form_key" type="hidden" value="<?php echo $block->getFormKey();?>">
+    <input type="file" name="mt_template_files">
+</form>

@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+/**
+ * Product list template
+ *
+ * @var $block MageBig\Shopbybrand\Block\Brand\BrandInformation
+ */ ?>
+
+<?php
+$_brand = $this->getBrandOfCurrentProduct();
+$block->setBrand($_brand);
+$_brandUrl = $_brand->getUrl();
+?>
+<?php if ($_brand->getOptionId()) : ?>
+<?php $label = $this->stripTags($_brand->getData('brand_label')); ?>
+<div class="product-brand-info">
+	<a class="brand-link" title="<?php echo $label; ?>" href="<?php echo $_brandUrl ?>">
+        <img alt="<?php echo $label; ?>" class="brand-image img-fluid" src="<?php echo $_brand->getThumbnail() ?>" />
+    </a>
+</div>
+<?php endif ?>

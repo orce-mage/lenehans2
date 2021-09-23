@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Number
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\SalesSequence\Model\Manager">
+        <plugin name="Amasty_Number::collectConfig" type="Amasty\Number\Plugin\SequenceManagerPlugin" />
+    </type>
+    <type name="Magento\Framework\DB\Sequence\SequenceInterface">
+        <plugin name="Amasty_Number::ReplaceNewIncrementId" type="Amasty\Number\Plugin\SequencePlugin" />
+    </type>
+    <type name="Amasty\Number\Model\Number\Generator">
+        <arguments>
+            <argument name="formatterPool" xsi:type="array">
+                <item name="counter" xsi:type="object">Amasty\Number\Model\Number\Format\CounterFormatter</item>
+                <item name="date" xsi:type="object">Amasty\Number\Model\Number\Format\DateFormatter</item>
+                <item name="order_id" xsi:type="object">Amasty\Number\Model\Number\Format\OrderIdFormatter</item>
+                <item name="prefix" xsi:type="object">Amasty\Number\Model\Number\Format\PrefixFormatter</item>
+                <item name="random" xsi:type="object">Amasty\Number\Model\Number\Format\RandomFormatter</item>
+                <item name="store" xsi:type="object">Amasty\Number\Model\Number\Format\StoreFormatter</item>
+                <item name="country_code" xsi:type="object">Amasty\Number\Model\Number\Format\CountryCodeFormatter</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Number\Observer\SalesEntitySaveBefore">
+        <arguments>
+            <argument name="collectionFactoryTypes" xsi:type="array">
+                <item name="invoice" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory</item>
+                <item name="shipment" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Shipment\CollectionFactory</item>
+                <item name="creditmemo" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Creditmemo\CollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Number\Observer\OrderSaveBefore">
+        <arguments>
+            <argument name="formatterPool" xsi:type="array">
+                <item name="country_code" xsi:type="object">Amasty\Number\Model\Number\Format\CountryCodeFormatter</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Amasty\Number\Api\Data\CounterInterface" type="Amasty\Number\Model\Counter\Counter" />
+    <preference for="Amasty\Number\Api\CounterRepositoryInterface" type="Amasty\Number\Model\Counter\CounterRepository" />
+</config>

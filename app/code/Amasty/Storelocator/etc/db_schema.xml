@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_amlocator_location" resource="default" engine="innodb" comment="Amasty Locations Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Block Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" onCreate="migrateDataFrom(name)" length="255"
+                default=""/>
+        <column xsi:type="varchar" name="country" nullable="false" onCreate="migrateDataFrom(country)" length="255"
+                default=""/>
+        <column xsi:type="varchar" name="city" nullable="false" onCreate="migrateDataFrom(city)" length="255"
+                default=""/>
+        <column xsi:type="varchar" name="zip" nullable="false" onCreate="migrateDataFrom(zip)" length="255" default=""/>
+        <column xsi:type="text" name="address" nullable="true" comment="Location Address"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Location Status"/>
+        <column xsi:type="decimal" name="lat" scale="8" precision="11" unsigned="false" nullable="true"
+                comment="Location Latitude"/>
+        <column xsi:type="decimal" name="lng" scale="8" precision="11" unsigned="false" nullable="true"
+                comment="Location Longitude"/>
+        <column xsi:type="text" name="photo" nullable="true" comment="Location Photo"/>
+        <column xsi:type="text" name="marker" nullable="true" comment="Location Marker"/>
+        <column xsi:type="smallint" name="position" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Location Position"/>
+        <column xsi:type="varchar" name="state" nullable="false" onCreate="migrateDataFrom(state)" length="255"
+                default=""/>
+        <column xsi:type="text" name="description" nullable="true" comment="Location Description"/>
+        <column xsi:type="varchar" name="phone" nullable="true" onCreate="migrateDataFrom(phone)" length="255"/>
+        <column xsi:type="varchar" name="email" nullable="true" onCreate="migrateDataFrom(email)" length="255"/>
+        <column xsi:type="text" name="website" nullable="true" comment="Location Website"/>
+        <column xsi:type="text" name="category" nullable="true" comment="Location Category"/>
+        <column xsi:type="text" name="actions_serialized" nullable="true" comment="Actions Serialized"/>
+        <column xsi:type="text" name="store_img" nullable="false" comment="Store image"/>
+        <column xsi:type="text" name="stores" nullable="false" comment="Stores Ids"/>
+        <column xsi:type="int" name="schedule" nullable="true" onCreate="migrateDataFrom(schedule)" padding="10"
+                unsigned="true" identity="false"/>
+        <column xsi:type="text" name="marker_img" nullable="false" comment="Marker Image"/>
+        <column xsi:type="boolean" name="show_schedule" nullable="false" default="true" comment="Show schedule"/>
+        <column xsi:type="varchar" name="url_key" nullable="true" length="255" comment="Url Key"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="text" name="meta_robots" nullable="true" comment="Meta Robots"/>
+        <column xsi:type="text" name="short_description" nullable="true" comment="Short Description"/>
+        <column xsi:type="varchar" name="canonical_url" nullable="true" length="255" comment="Canonical Url"/>
+        <column xsi:type="smallint" name="condition_type" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Condition Type"/>
+        <column xsi:type="boolean" name="curbside_enabled" nullable="false" default="false" comment="Curbside enabled"/>
+        <column xsi:type="text" name="curbside_conditions_text" nullable="true" comment="Curbside conditions text"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_619F59240F66661EFD1057D256BF4A4E"
+                    table="amasty_amlocator_location" column="schedule" referenceTable="amasty_amlocator_schedule"
+                    referenceColumn="id" onDelete="SET NULL"/>
+        <index referenceId="AMASTY_AMLOCATOR_LOCATION_SCHEDULE" indexType="btree">
+            <column name="schedule"/>
+        </index>
+        <index referenceId="AMASTY_AMLOCATOR_LOCATION_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="AMASTY_AMLOCATOR_LOCATION_POSITION" indexType="btree">
+            <column name="position"/>
+        </index>
+    </table>
+    <table name="amasty_amlocator_attribute" resource="default" engine="innodb" comment="amasty_amlocator_attribute">
+        <column xsi:type="int" name="attribute_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Attribute Id"/>
+        <column xsi:type="varchar" name="frontend_label" nullable="false" length="255" comment="Default Label"/>
+        <column xsi:type="varchar" name="attribute_code" nullable="false" length="255" comment="Attribute Code"/>
+        <column xsi:type="varchar" name="frontend_input" nullable="false" length="50" comment="Frontend Input"/>
+        <column xsi:type="smallint" name="is_required" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Is Required"/>
+        <column xsi:type="text" name="label_serialized" nullable="true" comment="Attribute Labels by store"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="attribute_id"/>
+        </constraint>
+        <index referenceId="AMASTY_AMLOCATOR_ATTRIBUTE_FRONTEND_INPUT" indexType="btree">
+            <column name="frontend_input"/>
+        </index>
+    </table>
+    <table name="amasty_amlocator_attribute_option" resource="default" engine="innodb"
+           comment="amasty_amlocator_attribute_option">
+        <column xsi:type="int" name="value_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Value Id"/>
+        <column xsi:type="int" name="attribute_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Attribute Id"/>
+        <column xsi:type="text" name="options_serialized" nullable="true" comment="Value And Store"/>
+        <column xsi:type="text" name="is_default" nullable="true" comment="This is Default Option"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Sort order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="value_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_88EA0ABD233FA2A18A4A71B2F16107DE"
+                    table="amasty_amlocator_attribute_option" column="attribute_id"
+                    referenceTable="amasty_amlocator_attribute" referenceColumn="attribute_id" onDelete="CASCADE"/>
+        <index referenceId="AMASTY_AMLOCATOR_ATTRIBUTE_OPTION_ATTRIBUTE_ID" indexType="btree">
+            <column name="attribute_id"/>
+        </index>
+    </table>
+    <table name="amasty_amlocator_store_attribute" resource="default" engine="innodb"
+           comment="amasty_amlocator_store_attribute">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity Id"/>
+        <column xsi:type="int" name="attribute_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Attribute Id"/>
+        <column xsi:type="int" name="store_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Store Location Id"/>
+        <column xsi:type="varchar" name="value" nullable="false" length="255" comment="Attribute Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_D52A23F6D2C512750A2D1C61601A1772"
+                    table="amasty_amlocator_store_attribute" column="attribute_id"
+                    referenceTable="amasty_amlocator_attribute" referenceColumn="attribute_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_BD0B076D0A0B268A4BE906DCAAF8A707"
+                    table="amasty_amlocator_store_attribute" column="store_id"
+                    referenceTable="amasty_amlocator_location" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_AMLOCATOR_STORE_ATTRIBUTE_ATTRIBUTE_ID_STORE_ID">
+            <column name="attribute_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="AMASTY_AMLOCATOR_STORE_ATTRIBUTE_ATTRIBUTE_ID" indexType="btree">
+            <column name="attribute_id"/>
+        </index>
+    </table>
+    <table name="amasty_amlocator_schedule" resource="default" engine="innodb" comment="amasty_amlocator_schedule">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Schedule Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Schedule Name"/>
+        <column xsi:type="text" name="schedule" nullable="false" comment="Schedule"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="amasty_amlocator_gallery" resource="default" engine="innodb"
+           comment="Table for images gallery of each location">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="location_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Location Id"/>
+        <column xsi:type="text" name="image_name" nullable="false" comment="Image Name"/>
+        <column xsi:type="boolean" name="is_base" nullable="false" comment="Base Image Flag"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_D9AC99358DF1B12B06EB19D32541807A"
+                    table="amasty_amlocator_gallery" column="location_id" referenceTable="amasty_amlocator_location"
+                    referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+    <table name="amasty_amlocator_review" resource="default" engine="innodb"
+           comment="Amasty Storelocator reviews table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="location_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Location Id"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Customer Id"/>
+        <column xsi:type="text" name="review_text" nullable="false" comment="Text"/>
+        <column xsi:type="int" name="rating" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Rating"/>
+        <column xsi:type="timestamp" name="placed_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Placed Date"/>
+        <column xsi:type="timestamp" name="published_at" on_update="false" nullable="true" comment="Approved Date"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="false" identity="false"
+                comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AMASTY_AMLOCATOR_REVIEW_CSTR_ID_CSTR_ENTT_ENTT_ID"
+                    table="amasty_amlocator_review" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="NO ACTION"/>
+        <constraint xsi:type="foreign" referenceId="FK_85B98BE1C75F0843C9DC4DC865E06C3B" table="amasty_amlocator_review"
+                    column="location_id" referenceTable="amasty_amlocator_location" referenceColumn="id"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>

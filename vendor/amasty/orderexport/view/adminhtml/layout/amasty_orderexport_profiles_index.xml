@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\Orderexport\Block\Adminhtml\Profiles" name="amasty.orderexport.block.adminhtml.profiles">
+                <block class="Magento\Backend\Block\Widget\Grid" name="amasty.orderexport.block.adminhtml.profiles.grid" as="grid">
+                    <arguments>
+                        <argument name="id" xsi:type="string">amasty_orderexport_profiles_grid</argument>
+                        <argument name="dataSource" xsi:type="object">Amasty\Orderexport\Model\ResourceModel\Profiles\Collection</argument>
+                        <argument name="default_sort" xsi:type="string">entity_id</argument>
+                        <argument name="default_dir" xsi:type="string">ASC</argument>
+                        <argument name="save_parameters_in_session" xsi:type="string">1</argument>
+                    </arguments>
+                    <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet"
+                           name="amasty.orderexport.block.adminhtml.profilescolumnSet">
+                        <arguments>
+                            <argument name="rowUrl" xsi:type="array">
+                                <item name="path" xsi:type="string">amasty_orderexport/*/edit</item>
+                                <item name="extraParamsTemplate" xsi:type="array">
+                                    <item name="id" xsi:type="string">getId</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="id">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Profile ID</argument>
+                                <argument name="index" xsi:type="string">entity_id</argument>
+                                <argument name="column_css_class" xsi:type="string">col-id</argument>
+                                <argument name="header_css_class" xsi:type="string">col-id</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="name">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Name</argument>
+                                <argument name="index" xsi:type="string">name</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="stores">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Stores</argument>
+                                <argument name="index" xsi:type="string">store_ids</argument>
+                                <argument name="sortable" xsi:type="string">0</argument>
+                                <argument name="type" xsi:type="string">options</argument>
+                                <argument name="options" xsi:type="options" model="Magento\Config\Model\Config\Source\Store"/>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="enabled">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Run After a New Order is Placed</argument>
+                                <argument name="index" xsi:type="string">run_after_order_creation</argument>
+                                <argument name="type" xsi:type="string">options</argument>
+                                <argument name="options" xsi:type="options" model="Magento\Config\Model\Config\Source\Yesno"/>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="run_by_cron">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Execution by Cron</argument>
+                                <argument name="index" xsi:type="string">run_by_cron</argument>
+                                <argument name="sortable" xsi:type="string">1</argument>
+                                <argument name="type" xsi:type="string">options</argument>
+                                <argument name="options" xsi:type="options" model="Magento\Config\Model\Config\Source\Yesno"/>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

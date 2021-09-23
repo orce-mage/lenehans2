@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="page-with-filter"/>
+		<referenceContainer name="sidebar.main">
+            <block ifconfig="magebig_shopbybrand/brand_search_form/display_on_search_page" class="MageBig\Shopbybrand\Block\Widget\BrandSearch" name="brand.search.sidebar" after="catalog.leftnav" template="MageBig_Shopbybrand::brand/brand_search.phtml"/>
+			<block ifconfig="magebig_shopbybrand/featured_brands/display_on_search_page" class="MageBig\Shopbybrand\Block\Widget\BrandFeatured" name="brand.sidebar" after="-" template="MageBig_Shopbybrand::brand/brand_sidebar.phtml">
+                <action method="setData">
+                    <argument name="name" xsi:type="string">featured_brands</argument>
+                    <argument name="value" xsi:type="string">1</argument>
+                </action>
+            </block>
+		</referenceContainer>
+	</body>
+</page>

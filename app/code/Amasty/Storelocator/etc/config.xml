@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<!--
+/**
+* Copyright © 2015 Amasty. All rights reserved.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amlocator>
+            <general>
+                <enable_pages>0</enable_pages>
+                <linktext>Available in Stores</linktext>
+                <location_reviews>1</location_reviews>
+                <enable_link>1</enable_link>
+                <label>Store Locator</label>
+                <new_page>0</new_page>
+                <label>Store Locator</label>
+            </general>
+            <geoip>
+                <zoom>14</zoom>
+                <clustering>1</clustering>
+            </geoip>
+            <locator>
+                <visual_settings>
+                    <template><![CDATA[<div class="amlocator-info-popup">
+<h3 class="amlocator-name">{{name}}</h3>
+<div class="amlocator-image">{{photo}}</div>
+City: {{city}} <br>
+Zip: {{zip}} <br>
+Address: {{address}} <br>
+{{ifstate}}State: {{state}} <br>{{/ifstate}}
+Description: {{description}} <br>
+</div>]]></template>
+                    <store_list_template><![CDATA[{{name}} <br />
+City: {{city}} <br>
+Zip: {{zip}} <br>
+State: {{state}} <br>
+Address: {{address}} <br>
+]]></store_list_template>
+                    <radius>Everywhere,1,3,5,10,15,25,50,100,500</radius>
+                </visual_settings>
+                <main_settings>
+                    <meta_title>Store locator</meta_title>
+                    <url>amlocator</url>
+                </main_settings>
+                <store_list_settings>
+                    <close_text>Closed</close_text>
+                    <break_time_text>Break Time</break_time_text>
+                    <convert_time>0</convert_time>
+                </store_list_settings>
+            </locator>
+        </amlocator>
+    </default>
+</config>

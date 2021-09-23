@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_menu = $block->getHtml(0, 'level-top', 'submenu'); ?>
+<div class="mb-navigation-home vertical-menu">
+    <div class="navigation-home">
+        <ul class="smartmenu magebig-nav">
+            <?= /* @escapeNotVerified */ $_menu; ?>
+            <?= /* @escapeNotVerified */ $block->getChildHtml(); ?>
+        </ul>
+    </div>
+</div>

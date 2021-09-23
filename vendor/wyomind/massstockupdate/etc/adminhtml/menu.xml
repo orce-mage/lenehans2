@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+                id="Wyomind_MassStockUpdate::profiles"
+                title="Mass Stock Update"
+                module="Wyomind_MassStockUpdate"
+                sortOrder="100000"
+                parent="Magento_Backend::system_convert"
+                action="massstockupdate/profiles/index"
+                resource="Wyomind_MassStockUpdate::profiles"/>
+    </menu>
+</config>

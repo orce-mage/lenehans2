@@ -1,0 +1,21 @@
+{
+    "name": "amasty/number",
+    "description": "Custom Order Number By Amasty",
+    "require": {
+        "php": "^7.1.0",
+        "amasty/base": ">=1.12.8"
+    },
+    "type": "magento2-module",
+    "version": "1.1.7",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Number\\": ""
+        }
+    }
+}

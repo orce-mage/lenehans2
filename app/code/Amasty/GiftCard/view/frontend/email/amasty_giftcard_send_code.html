@@ -1,0 +1,44 @@
+<!--@subject Gift certificate {{var gcard_email.getGiftCode()}} @-->
+<!--@vars {
+"var store url=\"\"":"Store Url",
+"var gcard_email.getRecipientName()":"Recipient name",
+"var gcard_email.getSenderName()":"Sender name",
+"var gcard_email.getSenderEmail()":"Sender email",
+"var gcard_email.getSenderMessage()":"Sender message",
+"var gcard_email.getBalance()":"Card balance",
+"var gcard_email.getGiftCode()":"Gift Code",
+"var gcard_email.getExpiredDate()":"Gift card expiry date",
+"var gcard_email.getImage()":"Image base64 code"
+} @-->
+<!--@styles
+@-->
+
+{{template config_path="design/email/header_template"}}
+<table cellspacing="0" cellpadding="0" class="message-container">
+    <tr>
+        <td class="amcard-message-body">
+            <p class="amcard-title">{{trans "Dear %recipient_name" recipient_name=$gcard_email.getRecipientName()|escape}},</p>
+            <br/>
+            {{if gcard_email.getSenderName()}}
+                {{trans "%sender_name purchased a" sender_name=$gcard_email.getSenderName()|escape}}
+                {{trans "%balance" balance=$gcard_email.getBalance()|escape}}
+                {{trans "gift card for you at %store_name" store_name=$store.frontend_name|escape}}.<br/>
+            {{else}}
+                {{trans "You have been bought a %balance" balance=$gcard_email.getBalance()|escape}}
+                {{trans "gift card for %customer_name" customer_name=$store.frontend_name|escape}}<br>
+            {{/if}}
+            {{if gcard_email.getSenderMessage()}}
+                {{trans "Please find below message from %sender_name" sender_name=$gcard_email.getSenderName()|escape}}:<br/><br/>
+                <p class="amcard-mesasge">{{var gcard_email.getSenderMessage()|escape}}</p><br/>
+            {{/if}}
+            {{trans "Please use the following gift card code at %store_name:" store_name=$store.frontend_name|escape}}<br/>
+            <p class="amcard-code-container"><span class="amcard-code">{{var gcard_email.getGiftCode()|escape}}</span></p>
+            {{if gcard_email.getImage()}}
+                <img src="{{var gcard_email.getImage()|escape}}"><br/>
+            {{/if}}
+            <br/>
+            {{trans "Look forward to seeing you at our store."}}
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

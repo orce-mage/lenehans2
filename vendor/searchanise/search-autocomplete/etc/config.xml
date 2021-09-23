@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <searchanise>
+            <searchanise_general>
+                <service_url>http://www.searchanise.com</service_url>
+                <search_input_selector>#search,form input[name="q"]</search_input_selector>
+                <request_timeout>30</request_timeout>
+                <server_version>1.3</server_version>
+                <enabled_searchanise_search>1</enabled_searchanise_search>
+                <cron_async_enabled>1</cron_async_enabled>
+                <ajax_async_enabled>1</ajax_async_enabled>
+                <object_async_enabled>0</object_async_enabled>
+                <index_enabled>0</index_enabled>
+                <sync_mode>realtime</sync_mode>
+                <async_memory_limit>512</async_memory_limit>
+                <max_processing_time>120</max_processing_time>
+                <max_error_count>25</max_error_count>
+                <max_search_request_length>8000</max_search_request_length>
+                <max_page_size>100</max_page_size>
+                <search_timeout>3</search_timeout>
+                <products_per_pass>100</products_per_pass>
+                <categories_per_pass>500</categories_per_pass>
+                <pages_per_pass>50</pages_per_pass>
+                <use_direct_image_links>0</use_direct_image_links>
+                <summary_attr>short_description</summary_attr>
+                <render_page_template>0</render_page_template>
+                <enable_debug>0</enable_debug>
+                <enable_customer_usergroups>1</enable_customer_usergroups>
+                <installed_module_version>auto</installed_module_version>
+            </searchanise_general>
+        </searchanise>
+    </default>
+</config>

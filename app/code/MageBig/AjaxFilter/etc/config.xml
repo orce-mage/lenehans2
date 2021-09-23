@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magebig_ajaxfilter>
+			<general>
+				<enable>1</enable>
+				<enable_price_slider>1</enable_price_slider>
+                <max_height_box_state>150px</max_height_box_state>
+                <search_attribute>5</search_attribute>
+                <expand_box_state>4</expand_box_state>
+                <enable_filter_rating>1</enable_filter_rating>
+                <rating_filter_type>interval</rating_filter_type>
+                <enable_sort_rating>1</enable_sort_rating>
+            </general>
+		</magebig_ajaxfilter>
+	</default>
+</config>

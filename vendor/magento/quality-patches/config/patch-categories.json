@@ -1,0 +1,86 @@
+[
+    {
+        "name": "Performance",
+        "description": "Patches related to application performance."
+    },
+    {
+        "name": "Web API",
+        "description": "Patches related to REST/SOAP API requests."
+    },
+    {
+        "name": "GraphQL",
+        "description": "Patches related to GraphQL."
+    },
+    {
+        "name": "B2B",
+        "description": "Patches related to B2B functionality."
+    },
+    {
+        "name": "Content",
+        "description": "Patches related to WYSIWYG, Page Builder, widgets, dynamic blocks, etc."
+    },
+    {
+        "name": "Cache",
+        "description": "Patches related to FPC, Fastly/Varnish, Redis/Memcache, everything related to cache."
+    },
+    {
+        "name": "Cron",
+        "description": "Patches related to issues with cron."
+    },
+    {
+        "name": "Inventory",
+        "description": "Patches related to MSI or inventory in general."
+    },
+    {
+        "name": "Import/Export",
+        "description": "Patches related to Import/Export functionality."
+    },
+    {
+        "name": "Catalog/Product",
+        "description": "Patches related to products, categories, related product rules, everything related to catalog in general."
+    },
+    {
+        "name": "Catalog Search",
+        "description": "Patches related to catalog search, layered navigation, Elasticsearch, Live Search."
+    },
+    {
+        "name": "Payments",
+        "description": "Patches related to payments."
+    },
+    {
+        "name": "Reports",
+        "description": "Patches related to reports."
+    },
+    {
+        "name": "Customer",
+        "description": "Patches related to customer account, login/logout, wishlist."
+    },
+    {
+        "name": "Shipping",
+        "description": "Patches related to shipping methods, shipping labels, tracking, RMA, everything related to shipments."
+    },
+    {
+        "name": "Price/Tax",
+        "description": "Patches related to catalog prices, tier prices, group prices, catalog price rules, currencies, taxes."
+    },
+    {
+        "name": "Order/Checkout",
+        "description": "Patches related to checkout process, placing an order, order status, re-order, order amounts."
+    },
+    {
+        "name": "Shopping Cart",
+        "description": "Patches related to adding products to cart, shopping cart rules, cart totals (discounts, coupons, gift cards)."
+    },
+    {
+        "name": "Emails",
+        "description": "Patches related to emails, newsletters."
+    },
+    {
+        "name": "Admin",
+        "description": "Patches related to admin configuration, ACL, admin UI."
+    },
+    {
+        "name": "Other",
+        "description": "Patches that do not fall into other categories."
+    }
+]

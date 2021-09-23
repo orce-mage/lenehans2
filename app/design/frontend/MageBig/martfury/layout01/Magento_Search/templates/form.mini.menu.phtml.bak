@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    /** @var $block \Magento\Framework\View\Element\Template */
+    /** @var $helper \Magento\Search\Helper\Data */
+    $helper = $this->helper('Magento\Search\Helper\Data');
+?>
+<div class="menusearch-wrapper">
+    <div class="menusearch-content" id="menusearch-content">
+        <div class="menusearch-icon"><span><i class="icon-magnifier"></i></span></div>        
+        
+        <div class="menusearch-form-container" data-mage-init='{"dropdownDialog":{
+            "appendTo":".sticky-icon-group",
+            "triggerEvent":"click",
+            "triggerTarget":".menusearch-icon, .search-close",
+            "closeOnMouseLeave": false,
+            "triggerClass":"active",
+            "parentClass":"active",
+            "buttons":null}}' >
+            <form class="form minisearch" id="mobile_search_mini_form" action="<?= /* @escapeNotVerified */ $helper->getResultUrl() ?>" method="get">
+                <div class="field search">
+                    <div class="control">
+                        <input id="menu_search"
+                        data-mage-init='{"quickSearch":{
+                        "formSelector":"#mobile_search_mini_form",
+                        "url":"<?= /* @escapeNotVerified */ $block->getUrl('search/ajax/suggest'); ?>",
+                        "destinationSelector":"#mobile_search_autocomplete"}
+                        }'
+                        type="text"
+                        name="<?= /* @escapeNotVerified */ $helper->getQueryParamName() ?>"
+                        value="<?= /* @escapeNotVerified */ $helper->getEscapedQueryText() ?>"
+                        placeholder="<?= /* @escapeNotVerified */ __('Search'); ?>..."
+                        class="input-text"
+                        maxlength="<?= /* @escapeNotVerified */ $helper->getMaxQueryLength();?>"
+                        role="combobox"
+                        aria-haspopup="false"
+                        aria-autocomplete="both"
+                        autocomplete="off"
+                        aria-expanded="true"/>
+                        <div id="mobile_search_autocomplete" class="search-autocomplete"></div>
+                        <?= $block->getChildHtml() ?>
+                    </div>
+                    <i aria-hidden="true" class="icon_close search-close"></i>
+                </div>
+                <div class="actions">
+                    <button type="submit"
+                    title="<?= $block->escapeHtml(__('Search')) ?>"
+                    class="action search primary">
+                        <span><?= /* @escapeNotVerified */ __('Search'); ?></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>

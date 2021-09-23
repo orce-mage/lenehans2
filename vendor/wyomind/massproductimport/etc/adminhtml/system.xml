@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/system_file.xsd">
+    <system>
+        <tab id="wyomind" translate="label" sortOrder="1000000" class="wyomind-logo">
+            <label>Wyomind</label>
+        </tab>
+        <!--<section id="massstockupdate" showInDefault="0" showInWebsite="0" showInStore="0">-->
+            
+            
+           
+           
+        <!--</section>-->
+        <section id="massproductimport" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Mass Product Import &amp; Update</label>
+            <tab>wyomind</tab>
+            <resource>Wyomind_MassProductImport::massproductimport_config</resource>
+            
+            <!-- License -->
+
+
+            <group id="license" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>License</label>
+                <field id="extension_version" translate="label" type="label" sortOrder="1" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Extension version</label>
+                </field>
+                <field id="activation_key" translate="label comment" type="label" sortOrder="110" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Activation key</label>
+                    <frontend_model>Wyomind\Framework\Block\Adminhtml\System\Config\Form\Field\ActivationKey</frontend_model>
+                </field>
+                <field id="license_status" translate="label comment" type="label" sortOrder="110" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>License Status</label>
+                    <frontend_model>Wyomind\Framework\Block\Adminhtml\System\Config\Form\Field\LicenseStatus</frontend_model>
+                </field>
+
+            </group>
+            
+            <group id="settings" translate="label" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Settings</label>
+                <field id="log" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable log</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="nb_preview" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Number of rows in mapping preview</label>
+                </field>
+                <field id="enable_reporting" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable cron job reporting</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sender_email" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender Email</label>
+                    <validate>validate-email</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Email\Address</backend_model>
+                    <depends>
+                        <field id="enable_reporting">1</field>
+                    </depends>
+                </field>
+                <field id="sender_name" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender Name</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Email\Sender</backend_model>
+                   
+                    <depends>
+                        <field id="enable_reporting">1</field>
+                    </depends>
+                </field>
+                <field id="emails" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send the reports to</label>
+                    <comment>Emails must be separated with a comma (,).</comment>
+                    <depends>
+                        <field id="enable_reporting">1</field>
+                    </depends>
+                </field>
+                <field id="report_title" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Report title</label>
+                    <depends>
+                        <field id="enable_reporting">1</field>
+                    </depends>
+                </field>
+                <field id="cron_interval" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Interval</label>
+                </field>
+                
+              
+               
+            </group>
+           
+           
+           
+           
+        </section>
+    </system>
+</config>

@@ -1,0 +1,277 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+?>
+<?php /** @var $block \Amasty\GiftCard\Block\Adminhtml\Catalog\Product\Composite\Fieldset\Giftcard */  //todo?>
+<?php $product = $block->getProduct(); ?>
+
+<div id="catalog_product_composite_configure_fields_downloadable" class="am_giftcard <?= $block->getIsLastFieldset() ? 'last-fieldset' : '' ?>">
+    <?php if (!$product->isAvailable() && !$block->isSkipSaleableCheck()): ?>
+        <p class="stock unavailable">
+            <?= $block->escapeHtml(__('Availability:')) ?> <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+        </p>
+    <?php endif; ?>
+    <?php $giftCardType = $block->getDefaultValue(\Amasty\GiftCard\Model\GiftCard\Attributes::GIFTCARD_TYPE); ?>
+    <div class="product options">
+        <fieldset class="admin__fieldset">
+            <?php if (($product->isSaleable() || $block->isSkipSaleableCheck()) && $block->isConfigured($product)): ?>
+                <?php if ($product->getAmGiftcardType() == \Amasty\GiftCard\Model\Config\Source\GiftCardType::TYPE_COMBINED): ?>
+                    <div class="field admin__field required">
+                        <label for="am_giftcard_type" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Choose card type')); ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <select id="am_giftcard_type" name="am_giftcard_type" class="required-entry select admin__control-select" data-amgiftcard-js="amgiftcard-type">
+                                <option value=""><?= $block->escapeHtml(__('-- Please Select --')); ?></option>
+                                <?php foreach ($block->getGiftCardTypes() as $cardType): ?>
+                                    <option value="<?= $block->escapeHtmlAttr($cardType['value']); ?>"
+                                        <?= (($giftCardType == $cardType['value']) ? 'selected' : '') ?>
+                                    >
+                                        <?= $block->escapeHtml($cardType['label']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (!$product->getAmAllowOpenAmount() && (count($block->getAmounts($product)) == 1)): ?>
+                    <?php $amount = $block->getAmounts($product);
+                    $amount = array_shift($amount); ?>
+                    <div class="field fixed amount admin__field">
+                        <label class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Amount')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <div class="admin__field-value">
+                                <span class="control-value price"
+                                      id="product-price-<?= $block->escapeHtmlAttr($product->getId()) ?><?= $block->escapeHtmlAttr($block->getIdSuffix()) ?>"
+                                >
+                                    <input type="hidden"
+                                           value="<?= $block->escapeHtmlAttr($amount) ?>"
+                                           price="<?= $block->escapeHtmlAttr($amount) ?>"
+                                           name="am_giftcard_amount"
+                                    />
+                                    <?= $block->escapeHtml($block->getCurrencyByStore($amount, $product->getStoreId())) ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="am-giftcard-amount admin__fieldset">
+                        <div class="field amount required _required admin__field">
+                            <?php if ($amounts = $block->getAmounts($product)): ?>
+                                <label for="am-giftcard_amount" id="amount_label_select" class="label admin__field-label">
+                                    <span><?= $block->escapeHtml(__('Amount')) ?></span>
+                                </label>
+                                <?php
+                                $configValue = $block->getDefaultValue('am_giftcard_amount');
+                                $isCustomAmount = $configValue == 'custom';
+                                ?>
+                                <div class="control admin__field-control">
+                                    <select name="am_giftcard_amount" id="am_giftcard_amount" class="required-entry select admin__control-select" data-amgiftcard-js="amount">
+                                        <?php foreach ($amounts as $amount): ?>
+                                            <option value="<?= $block->escapeHtmlAttr($amount) ?>"
+                                                    price="<?= $block->escapeHtmlAttr($block->getCurrencyByStore($amount, $product->getStoreId(), false)) ?>"
+                                                <?= (($configValue == $amount) ? 'selected' : '')?>
+                                            >
+                                                <?= $block->escapeHtml($block->getCurrencyByStore($amount, $product->getStoreId(), true, false)) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                        <?php if ($product->getAmAllowOpenAmount()): ?>
+                                            <option value="custom" <?= ($isCustomAmount ? 'selected' : '')?>>
+                                                <?= $block->escapeHtml(__('Other Amount...')) ?>
+                                            </option>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($product->getAmAllowOpenAmount()): ?>
+                            <?php if (count($block->getAmounts($product)) === 0): ?>
+                                <input  type="hidden" name="am_giftcard_amount" value="custom">
+                            <?php endif; ?>
+                            <div class="field amount admin__field <?= $isCustomAmount ? '' : '_am-hide'?>" id="am_giftcard_amount_input_fields" data-amgiftcard-js="custom-amount">
+                                <label for="am_giftcard_amount_input" id="amount_label_input" class="label admin__field-label">
+                                    <span>
+                                        <?= $block->escapeHtml(__('Custom Amount in %1', $block->getCurrentCurrencyCode($product->getStoreId()))) ?>
+                                    </span>
+                                </label>
+                                <div id="am_giftcard_amount_box" class="control admin__field-control">
+                                    <input type="hidden" name="am_giftcard_amount_custom_order" value="1" />
+                                    <input type="text" id="am_giftcard_amount_input" name="am_giftcard_amount_custom"
+                                           class="validate-number input-text admin__control-text <?= $isCustomAmount ? 'required-entry' : ''?>"
+                                           data-amcard-js="field"
+                                           value="<?= $block->escapeHtml($block->getDefaultValue('am_giftcard_amount_custom')) ?>"
+                                           price="<?= $block->escapeHtml($block->getDefaultValue('am_giftcard_amount_custom')) ?>"
+                                           onblur="this.setAttribute('price', this.value);"/>
+
+                                    <?php if ($product->getAmOpenAmountMin() || $product->getAmOpenAmountMax()): ?>
+                                        <?php $min = $block->getCurrencyByStore($product->getAmOpenAmountMin(), $product->getStoreId(), true, false); ?>
+                                        <?php $max = $block->getCurrencyByStore($product->getAmOpenAmountMax(), $product->getStoreId(), true, false); ?>
+                                        <div class="admin__field-note">
+                                            <?php if ($min && $max): ?>
+                                                <span><?= $block->escapeHtml(__('Min: ')) ?><span class="price"><?= $block->escapeHtml($min) ?></span></span>
+                                                <span><?= $block->escapeHtml(__('Max: ')) ?><span class="price"><?= $block->escapeHtml($max) ?></span></span>
+                                            <?php elseif ($min): ?>
+                                                <span><?= $block->escapeHtml(__('Min: ')) ?><span class="price"><?= $block->escapeHtml($min) ?></span></span>
+                                            <?php elseif ($max): ?>
+                                                <span><?= $block->escapeHtml(__('Max: ')) ?><span class="price"><?= $block->escapeHtml($max) ?></span></span>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($images = $block->getImagesArray()): ?>
+                    <div class="field required _required admin__field" data-amgiftcard-js="amgiftcard-images">
+                        <label for="am-giftcard_image" id="image_label_select" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Choose Gift Card Image')) ?></span>
+                        </label>
+                        <?php
+                        $configValue = $block->getDefaultValue('am_giftcard_image');
+                        ?>
+                        <div class="control admin__field-control">
+                            <select name="am_giftcard_image" id="am_giftcard_image" class="required-entry select admin__control-select">
+                                <option value=""><?= $block->escapeHtml(__('--Please Select--')) ?></option>
+                                <?php foreach ($images as $image): ?>
+                                    <option value="<?= $block->escapeHtmlAttr($image['id']) ?>"
+                                        <?= (($configValue == $image['id']) ? 'selected' : '')?>
+                                    >
+                                        <?= $block->escapeHtml($image['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <?php if ($customImage = $block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::CUSTOM_IMAGE)): ?>
+                            <input type="hidden"
+                                   name="am_giftcard_custom_image"
+                                   input="am_giftcard_custom_image"
+                                   value="<?= $block->escapeHtmlAttr($customImage) ?>"
+                            >
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                <?php $skipRecipient = $product->getAmGiftcardType() == \Amasty\GiftCard\Model\Config\Source\GiftCardType::TYPE_PRINTED;
+                $isTypePrinted = $giftCardType == \Amasty\GiftCard\Model\Config\Source\GiftCardType::TYPE_PRINTED; ?>
+                <?php if ($block->isOptionAvailable(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::SENDER_NAME)): ?>
+                    <div class="field required _required admin__field" data-amgiftcard-js="amgiftcard-sender-name">
+                        <label for="am_giftcard_sender_name" id="sender_name_input" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Sender Name')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <input class="required-entry input-text admin__control-text"
+                                   type="text"
+                                   id="am_giftcard_sender_name"
+                                   name="am_giftcard_sender_name"
+                                   value="<?= $block->escapeHtml($block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::SENDER_NAME)) ?>"
+                            >
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($block->isOptionAvailable(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::RECIPIENT_NAME) && !$skipRecipient): ?>
+                    <div class="field required _required admin__field <?= $isTypePrinted ? '_am-hide': ''?>" data-amgiftcard-js="amgiftcard-recipient-name">
+                        <label for="am_giftcard_recipient_name" id="recipient_name_input" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Recipient Name')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <input class="input-text admin__control-text <?= $isTypePrinted ? '': 'required-entry'?>"
+                                   type="text"
+                                   id="am_giftcard_recipient_name"
+                                   name="am_giftcard_recipient_name"
+                                   data-amcard-js="field"
+                                   value="<?= $block->escapeHtmlAttr($block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::RECIPIENT_NAME)) ?>"
+                            >
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (!$skipRecipient): ?>
+                    <div class="field required _required admin__field <?= $isTypePrinted ? '_am-hide': ''?>" data-amgiftcard-js="amgiftcard-recipient-email">
+                        <label for="am_giftcard_recipient_email" id="recipient_email_input" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Recipient Email')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <input class="validate-email input-text admin__control-text <?= $isTypePrinted ? '': 'required-entry'?>"
+                                   type="text"
+                                   id="am_giftcard_recipient_email"
+                                   name="am_giftcard_recipient_email"
+                                   data-amcard-js="field"
+                                   value="<?= $block->escapeHtmlAttr($block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::RECIPIENT_EMAIL)) ?>"
+                            >
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($block->isOptionAvailable(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::MESSAGE)): ?>
+                    <div class="field admin__field" data-amgiftcard-js="amgiftcard-message">
+                        <label for="am_giftcard_message" id="message_textarea" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Message')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <textarea class="input-text admin__control-textarea" cols="5" rows="3"
+                                      type="text"
+                                      id="am_giftcard_message"
+                                      name="am_giftcard_message"
+                            ><?= $block->escapeHtml($block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::MESSAGE)) ?></textarea>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php $isSendLater = $block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::IS_DATE_DELIVERY) == 1; ?>
+                <?php if ($block->isOptionAvailable(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::DELIVERY_DATE)): ?>
+                    <div class="field admin__field" data-amgiftcard-js="amgiftcard-send-later">
+                        <label for="is_date_delivery" id="delivery_date_input" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Send Gift Card Later')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <select name="is_date_delivery" id="is_date_delivery" class="select admin__control-select">
+                                <option value="0" ><?= $block->escapeHtml(__('No')) ?></option>
+                                <option value="1"
+                                    <?= ($isSendLater ? 'selected' : '') ?>
+                                ><?= $block->escapeHtml(__('Yes')) ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field admin__field required _required <?= $isSendLater ? '' : '_am-hide'?>" data-amgiftcard-js="amgiftcard-delivery-date">
+                        <label for="am_giftcard_date_delivery" id="delivery_date_input" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Delivery Date')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <input class="admin__control-text datetime-picker input-text validate-date date <?= $isSendLater ? 'required-entry' : ''?>"
+                                   type="text"
+                                   id="am_giftcard_date_delivery"
+                                   name="am_giftcard_date_delivery"
+                                   data-amcard-js="field"
+                                   data-amgiftcard-js="amgiftcard-datepicker"
+                                   value="<?= $block->escapeHtmlAttr($block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::DELIVERY_DATE)) ?>"
+                            >
+                        </div>
+                    </div>
+                    <div class="field admin__field required _required <?= $isSendLater ? '' : '_am-hide'?>" data-amgiftcard-js="amgiftcard-timezone">
+                        <?php $defaultTimeZone = $block->getDefaultValue(\Amasty\GiftCard\Api\Data\GiftCardOptionInterface::DELIVERY_TIMEZONE); ?>
+                        <label for="am_giftcard_date_delivery_timezone" id="delivery_date_timezone_input" class="label admin__field-label">
+                            <span><?= $block->escapeHtml(__('Select Timezone')) ?></span>
+                        </label>
+                        <div class="control admin__field-control">
+                            <select name="am_giftcard_date_delivery_timezone"
+                                    id="am_giftcard_date_delivery_timezone"
+                                    data-amcard-js="field"
+                                    class="select admin__control-select <?= $isSendLater ? 'required-entry' : ''?>"
+                            >
+                                <option value=""></option>
+                                <?php foreach ($block->getListTimezonesArray() as $timezone): ?>
+                                    <option value="<?= $block->escapeHtmlAttr($timezone['value']); ?>"
+                                        <?= (($defaultTimeZone == $timezone['value']) ? 'selected' : '') ?>
+                                    ><?= $block->escapeHtml($timezone['label']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        </fieldset>
+    </div>
+</div>

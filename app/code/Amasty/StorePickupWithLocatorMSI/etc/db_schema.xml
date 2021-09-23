@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocatorMSI
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_amlocator_location_inventory_source" resource="default" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="location_id" padding="10" unsigned="true" nullable="false" comment="Location ID"/>
+        <column xsi:type="varchar" name="source_code" length="255" nullable="false" comment="Inventory Source Code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AMLOC_LOC_ISOUR_LOC_ID_AMLOC_LOC_ID"
+                    table="amasty_amlocator_location_inventory_source" column="location_id"
+                    referenceTable="amasty_amlocator_location" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AMLOC_LOC_ISOUR_SOUR_CODE_ISOUR_SOUR_CODE"
+                    table="amasty_amlocator_location_inventory_source" column="source_code"
+                    referenceTable="inventory_source" referenceColumn="source_code" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMLOC_LOC_ISOUR_LOCATION_ID_SOURCE_CODE">
+            <column name="location_id"/>
+            <column name="source_code"/>
+        </constraint>
+    </table>
+</schema>

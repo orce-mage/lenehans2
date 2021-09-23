@@ -1,0 +1,24 @@
+<div class="admin__field" css="$data.additionalClasses" visible="$data.visible">
+    <label class="admin__field-label" if="$data.label" attr="for: uid" visible="$data.labelVisible">
+        <span translate="label" attr="'data-config-scope': $data.scopeLabel"/>
+    </label>
+
+    <render args="tooltipTpl" if="$data.tooltip"/>
+
+    <div class="admin__field-control" css="'_with-tooltip': $data.tooltip">
+        <div class="file-uploader" data-role="drop-zone">
+            <label class="admin__field-error" if="error" attr="for: uid" text="error"/>
+
+            <each args="data: value, as: '$file'" render="$parent.getPreviewTmpl($file)"/>
+
+            <div if="isMultipleFiles" class="file-uploader-summary">
+                <label attr="for: uid"
+                       class="file-uploader-placeholder"
+                       css="'placeholder-' + placeholderType">
+                    <span class="file-uploader-placeholder-text"
+                          translate="'Click here or drag and drop to add files.'"/>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

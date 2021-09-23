@@ -1,0 +1,227 @@
+{
+    "fields": {
+        "name": "fields test",
+        "behaviors": {
+            "add": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Add\\Model",
+                "name": "Only add",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test\\Test"
+                    }
+                }
+            },
+            "delete": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Delete\\Model",
+                "name": "Delete",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test2\\Test2"
+                    }
+                }
+            },
+            "custom_behavior": {
+                "class": "Amasty\\ImportCore\\Import\\Test\\CustomBehavior",
+                "name": "",
+                "arguments": []
+            }
+        },
+        "fieldsConfig": {
+            "rowValidation": {
+                "class": "Amasty\\OrderImportEntity\\Import\\Validation\\RowValidator\\OrderRowValidator",
+                "arguments": [],
+                "excludeBehaviors": [
+                    "delete",
+                    "update"
+                ]
+            },
+            "rowActionClass": "Amasty\\ImportCore\\TestRowAction",
+            "fields": {
+                "test": {
+                    "isIdentity": false
+                },
+                "map_test": {
+                    "map": "test3",
+                    "isIdentity": false
+                },
+                "actions_test": {
+                    "isIdentity": false,
+                    "actions": [
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\CustomBehavior",
+                            "apply": "afterValidate",
+                            "arguments": []
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\DataHandling\\FieldModifier\\Explode",
+                            "name": "explode",
+                            "apply": "beforeValidate",
+                            "arguments": {
+                                "separator": {
+                                    "name": "separator",
+                                    "xsi:type": "string",
+                                    "value": ","
+                                }
+                            }
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\DataHandling\\FieldModifier\\DefaultValue",
+                            "name": "Set Default Value",
+                            "apply": "afterValidate",
+                            "arguments": {
+                                "value": {
+                                    "name": "value",
+                                    "xsi:type": "string",
+                                    "value": "5"
+                                },
+                                "force": {
+                                    "name": "force",
+                                    "xsi:type": "boolean",
+                                    "value": false
+                                }
+                            }
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\DataHandling\\FieldModifier\\DefaultValue",
+                            "name": "Set Default Value",
+                            "apply": "afterValidate",
+                            "arguments": {
+                                "value": {
+                                    "name": "value",
+                                    "xsi:type": "string",
+                                    "value": "6"
+                                },
+                                "force": {
+                                    "name": "force",
+                                    "xsi:type": "boolean",
+                                    "value": true
+                                }
+                            }
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\DataHandling\\FieldModifier\\StoreCode2StoreId",
+                            "name": "Convert Store Code To Store Id",
+                            "apply": "beforeValidate",
+                            "arguments": []
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\DataHandling\\FieldModifier\\StoreId2StoreCode",
+                            "name": "Convert Store Id To Store Code",
+                            "apply": "afterValidate",
+                            "arguments": []
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\DataHandling\\FieldModifier\\Trim",
+                            "name": "trim",
+                            "apply": "beforeValidate",
+                            "arguments": []
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\CustomBehavior2",
+                            "apply": "afterValidate",
+                            "arguments": {
+                                "custom2-test-array": {
+                                    "name": "custom2-test-array",
+                                    "xsi:type": "array",
+                                    "item": {
+                                        "custom2-test-array-number": {
+                                            "name": "custom2-test-array-number",
+                                            "xsi:type": "number",
+                                            "value": "111"
+                                        },
+                                        "custom2-test-array-string": {
+                                            "name": "custom2-test-array-string",
+                                            "xsi:type": "string",
+                                            "value": "custom2-test-string"
+                                        }
+                                    }
+                                },
+                                "custom2-test-number": {
+                                    "name": "custom2-test-number",
+                                    "xsi:type": "number",
+                                    "value": "222"
+                                },
+                                "custom2-test-string": {
+                                    "name": "custom2-test-string",
+                                    "xsi:type": "string",
+                                    "value": "custom2-test-string"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "validation_test": {
+                    "isIdentity": false,
+                    "validation": [
+                        {
+                            "class": "Amasty\\ImportCore\\Import\\Validation\\ValueValidator\\Regex",
+                            "error": "Field validation_test alphabetical only",
+                            "arguments": {
+                                "pattern": {
+                                    "name": "pattern",
+                                    "xsi:type": "string",
+                                    "value": "[A-Za-z]+"
+                                }
+                            }
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Test\\Import\\Validation\\ValueValidator\\NotEmpty",
+                            "error": "Field %1 is Empty",
+                            "arguments": {
+                                "isZeroValueAllowed": {
+                                    "name": "isZeroValueAllowed",
+                                    "xsi:type": "boolean",
+                                    "value": false
+                                }
+                            },
+                            "includeBehaviors": [
+                                "delete"
+                            ]
+                        },
+                        {
+                            "class": "Amasty\\ImportCore\\Test\\Import\\Validation\\ValueValidator\\CustomValidation",
+                            "error": "Field %1 is incorrect",
+                            "arguments": {
+                                "custom-test-array": {
+                                    "name": "custom-test-array",
+                                    "xsi:type": "array",
+                                    "item": {
+                                        "custom-test-array-number": {
+                                            "name": "custom-test-array-number",
+                                            "xsi:type": "number",
+                                            "value": "11"
+                                        },
+                                        "custom-test-array-string": {
+                                            "name": "custom-test-array-string",
+                                            "xsi:type": "string",
+                                            "value": "custom-test-string"
+                                        }
+                                    }
+                                },
+                                "custom-test-number": {
+                                    "name": "custom-test-number",
+                                    "xsi:type": "number",
+                                    "value": "22"
+                                },
+                                "custom-test-string": {
+                                    "name": "custom-test-string",
+                                    "xsi:type": "string",
+                                    "value": "custom-test-string"
+                                }
+                            },
+                            "excludeBehaviors": [
+                                "delete",
+                                "custom_behavior"
+                            ],
+                            "rootOnly": false
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

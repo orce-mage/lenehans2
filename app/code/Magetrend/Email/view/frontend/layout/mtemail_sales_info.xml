@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Order Items List" design_abstraction="custom">
+    <body>
+        <block class="Magetrend\Email\Block\Email\Block" name="block" template="Magetrend_Email::email/default/block.phtml">
+            <block class="Magetrend\Email\Block\Email\Block\Sales\Info" name="block.content" template="Magetrend_Email::email/default/block/sales/info.phtml">
+                <action method="changePaymentTemplate">
+                    <argument name="paymentCode" xsi:type="string">checkmo</argument>
+                    <argument name="template" xsi:type="string">Magetrend_Email::email/default/block/sales/info/payment/checkmo.phtml</argument>
+                </action>
+
+                <action method="changePaymentTemplate">
+                    <argument name="paymentCode" xsi:type="string">payflowpro</argument>
+                    <argument name="template" xsi:type="string">Magetrend_Email::email/default/block/sales/info/payment/payflowpro.phtml</argument>
+                </action>
+
+                <action method="changePaymentTemplate">
+                    <argument name="paymentCode" xsi:type="string">paypal_express</argument>
+                    <argument name="template" xsi:type="string">Magetrend_Email::email/default/block/sales/info/payment/paypalexpress.phtml</argument>
+                </action>
+
+                <action method="changePaymentTemplate">
+                    <argument name="paymentCode" xsi:type="string">banktransfer</argument>
+                    <argument name="template" xsi:type="string">Magetrend_Email::email/default/block/sales/info/payment/banktransfer.phtml</argument>
+                </action>
+
+                <action method="changePaymentTemplate">
+                    <argument name="paymentCode" xsi:type="string">braintree</argument>
+                    <argument name="template" xsi:type="string">Magetrend_Email::email/default/block/sales/info/payment/braintree.phtml</argument>
+                </action>
+
+                <action method="changePaymentTemplate">
+                    <argument name="paymentCode" xsi:type="string">purchaseorder</argument>
+                    <argument name="template" xsi:type="string">Magetrend_Email::email/default/block/sales/info/payment/purchaseorder.phtml</argument>
+                </action>
+
+            </block>
+        </block>
+    </body>
+</page>

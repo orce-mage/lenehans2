@@ -1,0 +1,79 @@
+//
+//  Base Styles
+// _______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amstockstatus-status-container {
+        display: inline-block;
+    }
+
+    .amstockstatus-category {
+        margin-bottom: 20px;
+    }
+
+    .amstockstatus-cart {
+        padding: 12px;
+        background: #fdf0d5 none repeat scroll 0 0;
+    }
+
+    .swatch-option.am-stockstatus-disabled:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(to left top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, 1) 43%, rgba(255, 255, 255, 1) 46%, rgba(255, 82, 22, 1) 47%, rgba(255, 82, 22, 1) 53%, rgba(255, 255, 255, 1) 54%, rgba(255, 255, 255, 1) 57%, rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, 0) 100%);
+        content: '';
+        filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr=#00ffffff, endColorstr=#00ffffff, GradientType=1)';
+    }
+
+    .amstock-button {
+        &.-clear {
+            & {
+                padding: 0;
+                border: 0;
+                border-radius: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            ._keyfocus &:focus,
+            &:not([disabled]):focus {
+                box-shadow: none;
+            }
+
+            &:hover,
+            &:focus,
+            &:active {
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+
+        &.-link {
+            & {
+                &:extend(.alink all, .amstock-button.-clear);
+
+                vertical-align: inherit;
+                font-weight: 400;
+                line-height: 1.9rem;
+            }
+
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .product-info-stock-sku > .amstock-button.-link {
+        text-align: right;
+    }
+
+    .amstockstatus-info-link {
+        display: block;
+    }
+}

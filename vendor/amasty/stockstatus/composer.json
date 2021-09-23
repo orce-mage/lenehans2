@@ -1,0 +1,29 @@
+{
+    "name": "amasty/stockstatus",
+    "description": "Custom Stock Status by Amasty",
+    "require": {
+        "php": "^7.1.0",
+        "amasty/base": ">=1.12.9",
+        "amasty/module-mage24fix": ">=1.0.6",
+        "magento/module-checkout": "*"
+    },
+    "suggest": {
+        "amasty/custom-stock-status-msi": "Install stockstatus-msi module to activate MSI and Custom Stock Status integration.",
+        "amasty/stockstatus-graphql": "Install stockstatus-graphql module to activate GraphQl and Custom Stock Status integration.",
+        "amasty/module-stockstatus-mftf-2": "Install stockstatus-mftf-2 module to be able to run Stockstatus MFTF tests for Magento 2.3.5+ version",
+        "amasty/module-stockstatus-mftf-3": "Install stockstatus-mftf-3 module to be able to run Stockstatus MFTF tests for Magento 2.4.0+ version"
+    },
+    "type": "magento2-module",
+    "version": "2.3.3",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Stockstatus\\": ""
+        }
+    }
+}

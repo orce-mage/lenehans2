@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright  Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <!--CDN-->
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+
+                <!--Google-->
+                <value id="google-analytics" type="host">www.google-analytics.com</value>
+                <value id="google-recaptcha" type="host">www.google.com</value>
+                <value id="google-gstatic" type="host">www.gstatic.com</value>
+
+                <!--Functions-->
+                <value id="trustedshops" type="host">*.trustedshops.com</value>
+                <value id="usercentrics" type="host">*.usercentrics.eu</value>
+
+                <value id="addthis" type="host">*.addthis.com</value>
+                <value id="addthisedge" type="host">*.addthisedge.com</value>
+                <value id="moatads" type="host">*.moatads.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <!--Google-->
+                <value id="google-frame" type="host">www.google.com</value>
+                <value id="youtube" type="host">*.youtube.com</value>
+                <value id="youtu-be" type="host">youtu.be</value>
+                <value id="vimeo" type="host">*.vimeo.com</value>
+                <value id="addthis" type="host">*.addthis.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <!--CDN-->
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+
+                <!--Design-->
+                <value id="typekit" type="host">*.typekit.net</value>
+
+                <!--Functions-->
+                <value id="trustedshops" type="host">*.trustedshops.com</value>
+                <value id="usercentrics" type="host">*.usercentrics.eu</value>
+
+                <!--Google-->
+                <value id="googlefont" type="host">fonts.googleapis.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <!--CDN-->
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="klarna-base" type="host">https://cdn.klarna.com</value>
+
+                <!--Payments-->
+                <value id="paypal" type="host">*.paypal.com</value>
+
+                <!--Video-->
+                <value id="vimeocdn" type="host">*.vimeocdn.com</value>
+                <value id="youtube-img" type="host">https://s.ytimg.com</value>
+
+                <!--Functions-->
+                <value id="usercentrics" type="host">*.usercentrics.eu</value>
+
+                <!--Inline Images-->
+                <value id="data" type="host">data:</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <!--CDN-->
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+
+                <!--Payments-->
+                <value id="paypal" type="host">*.paypal.com</value>
+
+                <value id="googlefontapi" type="host">*.googleapis.com</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <!--CDN-->
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+
+                <!--Design-->
+                <value id="typekit" type="host">*.typekit.net</value>
+
+                <!--Functions-->
+                <value id="trustedshops" type="host">*.trustedshops.com</value>
+
+                <!--Font Awesome-->
+                <value id="fontawesome" type="host">*.fontawesome.com</value>
+
+                <!--Google Font-->
+                <value id="googlefont" type="host">fonts.gstatic.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * Template for filter items block
+ *
+ * @var $block \MageBig\AjaxFilter\Block\Navigation\Renderer\PriceSlider
+ */
+?>
+
+<?php if ($block->enablePriceSlider()) : ?>
+    <div class="mb-range-slider" data-role="<?= $block->getDataRole() ?>"
+         data-action="<?= $block->getActionUrl() ?>" data-code="<?= $block->getCode() ?>">
+        <div class="range-slider-label">
+            <div data-role="from-label"></div>
+            <div data-role="to-label"></div>
+        </div>
+        <div class="range-slider-inner">
+            <div data-role="slider-bar"></div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="title"><?= __('Apply filter'); ?></div>
+            <div class="actions-primary">
+                <a class="action primary small" data-role="apply-range">
+                    <span><?= __('OK'); ?></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+        { "[data-role=<?= $block->getDataRole(); ?>]" : { "MageBig_AjaxFilter/js/range-slider" : <?= $block->getJsonConfig(); ?> } }
+    </script>
+<?php else : ?>
+    <?php
+    $filter = $block->getFilter();
+    $filterItems = $filter->getItems();
+    $code = $block->getCode();
+    $selectedOption = $block->getRequest()->getParam($code);
+    $selectedOption = explode(',', $selectedOption);
+    ?>
+    <div class="filter-container" data-role="mb-filter-checkbox"
+         data-action="<?= $block->getActionUrl() ?>" data-code="<?= $code ?>"
+         data-select="0">
+        <ul class="items filter-checkbox-radio">
+            <?php foreach ($filterItems as $filterItem) : ?>
+                <li class="item item-checkbox field">
+                    <?php
+                    $value = $filterItem->getValue();
+                    $value = explode(',', $value);
+                    $value = $value[0];
+                    ?>
+                    <input type="checkbox" id="filter-<?= $code ?>-<?= $value ?>" <?= (in_array($value,
+                        $selectedOption)) ? 'checked' : '' ?> value="<?= $value ?>"/>
+                    <label for="filter-<?= $code ?>-<?= $value ?>">
+                        <span class="text"><?= $filterItem->getLabel(); ?></span>
+                        <?php if ($block->displayProductCount()) : ?>
+                            <span class="count"><?= $filterItem->getCount() ?></span>
+                        <?php endif; ?>
+                    </label>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

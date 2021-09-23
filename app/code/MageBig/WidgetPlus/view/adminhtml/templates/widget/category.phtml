@@ -1,0 +1,58 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+$element = $block->getElement();
+$note = $element->getNote() != '' ? '<div class="note" id="' . $element->getId() . '-note">' . $element->getNote() . '</div>' : '';
+$elementBeforeLabel = $element->getExtType() == 'checkbox admin__control-checkbox' || $element->getExtType() == 'radio admin__control-radio';
+$fieldId = ($element->getHtmlContainerId()) ? ' id="' . $element->getHtmlContainerId() . '"' : '';
+$fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($elementBeforeLabel) ? ' choice' : '';
+$fieldClass .= ($element->getRequired()) ? ' required _required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldClass .= (!$element->getLabelHtml()) ? ' no-label' : '';
+
+$fieldAttributes = $fieldId . ' class="' . $fieldClass . '" '
+    . $block->getUiId('form-field', $element->getId())
+    . ($element->getFieldExtraAttributes() ? ' ' . $element->getFieldExtraAttributes() : '');
+
+$date = new DateTime();
+$scope = 'cat' . $element->getHtmlId(). $date->getTimestamp();
+$vArr = explode(',', $element->getValue());
+$vArr = json_encode($vArr);
+?>
+<div<?= $fieldAttributes ?>>
+    <?= $element->getLabelHtml() ?>
+    <div class="admin__field-control control category-ids" data-bind="scope: '<?= $scope ?>'" id="<?= $scope ?>" data-index="category_ids">
+        <input type="hidden" name="<?= $element->getName() ?>" id="<?= $element->getHtmlId() ?>" value="<?= $element->getValue() ?>" />
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "<?= $scope ?>": {
+                            "component": "MageBig_WidgetPlus/js/select-category",
+                            "template" : "MageBig_WidgetPlus/ui-select",
+                            "dataScope": "category_ids",
+                            "filterOptions": true,
+                            "labelsDecoration": true,
+                            "levelsVisibility": "2",
+                            "multiple": true,
+                            "showCheckbox": true,
+                            "options": <?= $block->getCategoriesTree() ?>,
+                            "value": <?= $vArr ?>,
+                            "inputId": "<?= $element->getHtmlId() ?>",
+                            "inputName": "<?= $element->getName() ?>",
+                            "inputValue": "<?= $element->getValue() ?>",
+                            "catId": "<?= $scope ?>"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>

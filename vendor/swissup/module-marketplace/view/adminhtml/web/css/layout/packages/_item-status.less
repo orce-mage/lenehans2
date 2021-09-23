@@ -1,0 +1,92 @@
+.marketplace-grid-items {
+    .grid-item {
+        [data-index="status"] {
+            font-size: .9em;
+            text-shadow: 1px 1px rgba(0,0,0,0.1);
+
+            .mode-grid& {
+                margin: auto 0 12px;
+                padding-top: 10px;
+            }
+
+            .mode-list& {
+                display: flex;
+                margin-left: auto;
+                > span {
+                    margin-right: 4px;
+                }
+                .action.install,
+                .action.enable {
+                    order: -1;
+                }
+            }
+
+            .version {
+                display: inline-flex;
+            }
+
+            span {
+                text-align: center;
+                display: inline-block;
+                border-radius: 4px;
+            }
+
+            .action,
+            .version {
+                color: rgba(255,255,255,0.9);
+
+                .mode-grid& {
+                    margin: 0 2px 4px 0;
+                }
+            }
+
+            .action,
+            .version span {
+                padding: 2px 7px;
+            }
+
+            .version {
+                cursor: default;
+                background: #8ccc66;
+
+                .time {
+                    background: rgba(255,255,255,0.15);
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+
+                .mode-list& {
+                    .number {
+                        min-width: 45px;
+                    }
+                    .time {
+                        min-width: 90px;
+                    }
+                }
+            }
+
+            &.state-na {
+                .version {
+                    background: #a7a7a7;
+                    .mode-list& {
+                        display: none;
+                    }
+                }
+            }
+            &.state-outdated {
+                .version {
+                    background: #d33c3c;
+                }
+            }
+
+            .action {
+                cursor: pointer;
+                background: #373330;
+
+                &.primary {
+                    background: #0c99ec;
+                }
+            }
+        }
+    }
+}

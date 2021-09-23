@@ -1,0 +1,15 @@
+{
+    "name": "magetrend/email",
+    "autoload": {
+        "psr-4": {"Magetrend\\Email\\":""},
+        "files": ["registration.php"]
+    },
+    "description": "Responsive magento 2 templates with user friendly MTEditor for templates",
+    "type": "magento2-module",
+    "version": "1.3.8",
+    "support": {
+        "email": "info@magetrend.com",
+        "wiki": "http://wiki2.magetrend.com/responsive-emails/",
+        "author": "Edvinas Stulpinas"
+    }
+}

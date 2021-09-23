@@ -1,0 +1,51 @@
+- Api returns pdf encoded in base64.
+
+- Api End Points
+/V1/pdf/order/:incrementId
+/V1/pdf/invoice/:incrementId
+/V1/pdf/shipment/:incrementId
+/V1/pdf/creditmemo/:incrementId
+
+
+- Usage example with CURL:
+
+<?php
+
+$curl = curl_init('http://local.magetrend.com/rest/V1/integration/admin/token');
+
+$data_string = json_encode([
+    'username' => 'edwin',
+    'password' => 'Edas1234'
+]);
+
+curl_setopt($curl, CURLOPT_HEADER, 0);
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
+curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+curl_setopt($curl, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json'
+]);
+
+$responseBody = curl_exec($curl);
+$responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+if ($responseStatus != 200) {
+    exit('unable to login: '.$responseBody);
+}
+$token = str_replace('"', '', $responseBody);
+
+$curl = curl_init('http://local.magetrend.com/rest/V1/pdf/order/000000006');
+curl_setopt($curl, CURLOPT_HEADER, 0 );
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET" );
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
+curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+    "Content-Type: application/json",
+    "Authorization: Bearer ".$token
+) );
+
+$responseBody = curl_exec($curl);
+$responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+if ($responseStatus != 200) {
+    exit($responseBody);
+}
+
+file_put_contents('/var/www/var/PDFOrder000000006.pdf', base64_decode($responseBody));

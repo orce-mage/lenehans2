@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<virtualType name="ShopbybrandGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+		<arguments>
+			<argument name="appliers" xsi:type="array">
+				<item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+				<item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="ShopbybrandGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+		<arguments>
+			<argument name="collection" xsi:type="object" shared="false">MageBig\Shopbybrand\Model\ResourceModel\SelectedBrands\Collection</argument>
+			<argument name="filterPool" xsi:type="object" shared="false">ShopbybrandGirdFilterPool</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="MageBig\Shopbybrand\Model\ResourceModel\Shopbybrand\Grid\Collection" type="MageBig\Shopbybrand\Model\ResourceModel\SelectedBrands\Collection">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">eav_attribute_option</argument>
+			<argument name="resourceModel" xsi:type="string">MageBig\Shopbybrand\Model\ResourceModel\SelectedBrands</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="shopbybrand_listing_data_source" xsi:type="string">MageBig\Shopbybrand\Model\ResourceModel\Shopbybrand\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

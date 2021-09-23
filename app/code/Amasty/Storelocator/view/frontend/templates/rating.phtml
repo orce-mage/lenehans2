@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+?>
+<?php
+/**
+ * @var \Amasty\Storelocator\Block\View\Reviews $block
+ * @var \Amasty\Storelocator\Model\Location $location
+ */
+$location = $block->getLocation();
+$locationReviews = $location->getLocationReviews();
+$countOfRatings =  $locationReviews ? count($locationReviews) : 0;
+$format = $block->getDateFormat() ? : \IntlDateFormatter::MEDIUM;
+$locationAvgRating = ($location->getLocationAverageRating()) ? $location->getLocationAverageRating() : 0;
+if ($block->isReviewsEnabled() && $countOfRatings) : ?>
+    <div class="amlocator-reviews-general">
+        <span><?= (float)round($locationAvgRating/20, 1);?></span>
+            <div class="amstars-rating-container -small -main-page"
+                 title="<?= (float)$locationAvgRating ?>%">
+                <p class="amstars-stars" style="width:<?= (float)$locationAvgRating ?>%">
+                    <span class="hidden"><?= (float)$locationAvgRating ?>%</span>
+                </p>
+            </div>
+        <span class="amlocator-count">(<?= (int)$countOfRatings ?>)</span>
+    </div>
+<?php endif; ?>

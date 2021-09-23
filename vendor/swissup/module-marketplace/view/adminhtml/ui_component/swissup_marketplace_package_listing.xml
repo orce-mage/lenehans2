@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">swissup_marketplace_package_listing.swissup_marketplace_package_listing_data_source</item>
+            <item name="deps" xsi:type="string">swissup_marketplace_package_listing.swissup_marketplace_package_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">swissup_marketplace_package_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="jobs" xsi:type="array">
+                <item name="name" xsi:type="string">jobs</item>
+                <item name="label" xsi:type="string" translate="true">Tasks History</item>
+                <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                <item name="aclResource" xsi:type="string">Swissup_Marketplace::package_manage</item>
+                <item name="url" xsi:type="string">*/jobs/index</item>
+                <item name="on_click" xsi:type="string"></item>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="Magento_Ui/js/form/button-adapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">swissup_marketplace_package_listing.swissup_marketplace_package_listing.marketplace_job</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+            <item name="configuration" xsi:type="array">
+                <item name="name" xsi:type="string">configuration</item>
+                <item name="label" xsi:type="string" translate="true">Configuration</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                <item name="aclResource" xsi:type="string">Swissup_Marketplace::settings_save</item>
+                <item name="url" xsi:type="string">*/settings/index</item>
+                <item name="on_click" xsi:type="string"></item>
+                <item name="data_attribute" xsi:type="array">
+                    <item name="mage-init" xsi:type="array">
+                        <item name="Magento_Ui/js/form/button-adapter" xsi:type="array">
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">swissup_marketplace_package_listing.swissup_marketplace_package_listing.marketplace_settings</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="swissup_marketplace_package_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Swissup\Marketplace\Ui\DataProvider\PackageDataProvider</argument>
+            <argument name="name" xsi:type="string">swissup_marketplace_package_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">name</argument>
+            <argument name="requestFieldName" xsi:type="string">name</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="aclResource" xsi:type="string">Swissup_Marketplace::package_index</item>
+                    <item name="component" xsi:type="string">Swissup_Marketplace/js/packages/grid/provider</item>
+                    <item name="rowsProvider" xsi:type="string">${ $.ns }.${ $.ns }.swissup_marketplace_package_columns</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">uniqid</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <filterSelect name="channel" provider="${ $.parentName }">
+                <settings>
+                    <options class="Swissup\Marketplace\Ui\Component\Listing\Columns\Channel"/>
+                    <label translate="true">Channel</label>
+                    <dataScope>channel</dataScope>
+                </settings>
+            </filterSelect>
+            <filterSelect name="type" provider="${ $.parentName }">
+                <settings>
+                    <options class="Swissup\Marketplace\Ui\Component\Listing\Columns\PackageDisplayMode"/>
+                    <label translate="true">Package Type</label>
+                    <dataScope>type</dataScope>
+                </settings>
+            </filterSelect>
+            <filterSelect name="state" provider="${ $.parentName }">
+                <settings>
+                    <options class="Swissup\Marketplace\Ui\Component\Listing\Columns\PackageState"/>
+                    <label translate="true">State</label>
+                    <dataScope>state</dataScope>
+                </settings>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Swissup_Marketplace/js/packages/grid/massactions</item>
+                </item>
+            </argument>
+            <action name="install">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">install</item>
+                        <item name="label" xsi:type="string" translate="true">Install</item>
+                        <item name="url" xsi:type="url" path="*/*/manage/job/install"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="update">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">update</item>
+                        <item name="label" xsi:type="string" translate="true">Update</item>
+                        <item name="url" xsi:type="url" path="*/*/manage/job/update"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="enable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">enable</item>
+                        <item name="label" xsi:type="string" translate="true">Enable</item>
+                        <item name="url" xsi:type="url" path="*/*/manage/job/enable"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">disable</item>
+                        <item name="label" xsi:type="string" translate="true">Disable</item>
+                        <item name="url" xsi:type="url" path="*/*/manage/job/disable"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Disable packages?</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to disable selected packages?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="uninstall">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">uninstall</item>
+                        <item name="label" xsi:type="string" translate="true">Uninstall</item>
+                        <item name="url" xsi:type="url" path="*/*/manage/job/uninstall"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Uninstall packages?</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to uninstall selected packages?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="swissup_marketplace_package_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="component" xsi:type="string">Swissup_Marketplace/js/packages/grid/listing</item>
+                <item name="template" xsi:type="string">Swissup_Marketplace/packages/grid</item>
+                <item name="listTemplate" xsi:type="string">Swissup_Marketplace/packages/grid</item>
+                <item name="dndConfig" xsi:type="array">
+                    <item name="enabled" xsi:type="boolean">false</item>
+                </item>
+            </item>
+        </argument>
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">name</item>
+                    <item name="component" xsi:type="string">Swissup_Marketplace/js/packages/grid/columns/multiselect</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Image</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="bodyTmpl" xsi:type="string">Swissup_Marketplace/packages/grid/cells/image</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="links" class="Swissup\Marketplace\Ui\Component\Listing\Columns\Links">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Links</item>
+                    <item name="component" xsi:type="string">Swissup_Marketplace/js/packages/grid/columns/actions</item>
+                    <item name="bodyTmpl" xsi:type="string">Swissup_Marketplace/packages/grid/cells/actions</item>
+                    <item name="forceMultiple" xsi:type="boolean">true</item>
+                </item>
+                <item name="links" xsi:type="array">
+                    <item name="docs" xsi:type="array">
+                        <item name="label" xsi:type="string">Read Documentation</item>
+                        <item name="key" xsi:type="string">docs</item>
+                    </item>
+                    <item name="changelog" xsi:type="array">
+                        <item name="label" xsi:type="string">Read Changelog</item>
+                        <item name="key" xsi:type="string">changelog</item>
+                    </item>
+                </item>
+            </argument>
+        </actionsColumn>
+        <column name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Package Name</item>
+                    <item name="bodyTmpl" xsi:type="string">Swissup_Marketplace/packages/grid/cells/name</item>
+                </item>
+            </argument>
+        </column>
+        <column name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="bodyTmpl" xsi:type="string">Swissup_Marketplace/packages/grid/cells/text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="component" xsi:type="string">Swissup_Marketplace/js/packages/grid/columns/status</item>
+                    <item name="bodyTmpl" xsi:type="string">Swissup_Marketplace/packages/grid/cells/status</item>
+                </item>
+            </argument>
+        </column>
+        <!--
+        <column name="keywords">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Keywords</item>
+                    <item name="bodyTmpl" xsi:type="string">Swissup_Marketplace/packages/grid/cells/keywords</item>
+                </item>
+            </argument>
+        </column>
+        -->
+    </columns>
+
+    <modal name="marketplace_installer">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">false</item>
+                <item name="componentType" xsi:type="string">modal</item>
+                <item name="provider" xsi:type="string">swissup_marketplace_package_listing.swissup_marketplace_package_listing_data_source</item>
+                <item name="options" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Install downloaded package(s)</item>
+                    <item name="type" xsi:type="string" translate="true">popup</item>
+                    <item name="modalClass" xsi:type="string" translate="true">marketplace-installer-popup</item>
+                </item>
+            </item>
+        </argument>
+        <container name="installer_form">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Swissup_Marketplace/js/installer/form</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="render_url" xsi:type="url" path="mui/index/render_handle/handle/swissup_marketplace_package_install/buttons/1/id/main"/>
+                    <item name="autoRender" xsi:type="boolean">false</item>
+                    <item name="dataLinks" xsi:type="array">
+                        <item name="imports" xsi:type="boolean">false</item>
+                        <item name="exports" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="realTimeLink" xsi:type="boolean">false</item>
+                    <item name="ns" xsi:type="string">swissup_marketplace_package_install</item>
+                    <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                    <item name="formSubmitType" xsi:type="string">ajax</item>
+                    <item name="modalProvider" xsi:type="string">${ $.parentName }</item>
+                    <item name="externalProvider" xsi:type="string">${ $.ns }.swissup_marketplace_package_install_data_source</item>
+                </item>
+            </argument>
+        </container>
+    </modal>
+
+    <modal name="marketplace_settings">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">false</item>
+                <item name="componentType" xsi:type="string">modal</item>
+                <item name="provider" xsi:type="string">swissup_marketplace_package_listing.swissup_marketplace_package_listing_data_source</item>
+                <item name="options" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Settings</item>
+                </item>
+            </item>
+        </argument>
+        <container name="settings_form">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Swissup_Marketplace/js/settings-form</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="render_url" xsi:type="url" path="mui/index/render_handle/handle/swissup_marketplace_settings/buttons/1/id/main"/>
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="dataLinks" xsi:type="array">
+                        <item name="imports" xsi:type="boolean">false</item>
+                        <item name="exports" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="realTimeLink" xsi:type="boolean">false</item>
+                    <item name="ns" xsi:type="string">swissup_marketplace_settings</item>
+                    <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                    <item name="formSubmitType" xsi:type="string">ajax</item>
+                    <item name="modalProvider" xsi:type="string">${ $.parentName }</item>
+                </item>
+            </argument>
+        </container>
+    </modal>
+
+    <modal name="marketplace_job">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">false</item>
+                <item name="componentType" xsi:type="string">modal</item>
+                <item name="provider" xsi:type="string">swissup_marketplace_package_listing.swissup_marketplace_package_listing_data_source</item>
+                <item name="options" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Tasks History</item>
+                    <item name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string">Refresh List</item>
+                            <item name="class" xsi:type="string">action-primary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">swissup_marketplace_job_listing.swissup_marketplace_job_listing_data_source</item>
+                                    <item name="actionName" xsi:type="string">reload</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <container name="jobs_form">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/insert-listing</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="render_url" xsi:type="url" path="mui/index/render_handle/handle/swissup_marketplace_job_index/buttons/1"/>
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="dataLinks" xsi:type="array">
+                        <item name="imports" xsi:type="boolean">false</item>
+                        <item name="exports" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="realTimeLink" xsi:type="boolean">false</item>
+                    <item name="ns" xsi:type="string">swissup_marketplace_job_listing</item>
+                    <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                </item>
+            </argument>
+        </container>
+    </modal>
+</listing>

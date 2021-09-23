@@ -1,0 +1,15 @@
+{
+    "amasty_amlocator_location_inventory_source": {
+        "column": {
+            "entity_id": true,
+            "location_id": true,
+            "source_code": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMLOC_LOC_ISOUR_LOC_ID_AMLOC_LOC_ID": true,
+            "AMLOC_LOC_ISOUR_SOUR_CODE_ISOUR_SOUR_CODE": true,
+            "AMLOC_LOC_ISOUR_LOCATION_ID_SOURCE_CODE": true
+        }
+    }
+}

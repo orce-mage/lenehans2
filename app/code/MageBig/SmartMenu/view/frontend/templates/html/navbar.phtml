@@ -1,0 +1,27 @@
+<div class="magebig-mobile-menu overlay-contentpush">
+    <div class="nav-bar-wrap">
+        <nav class="nav-bar">
+            <?= $this->getChildHtml('logo-nav') ?>
+            <ul id="mb-collapsible" class="nav-collapse nav-mobile-accordion">
+                <!--<li class="home"><a href="<?/*= $block->getBaseUrl(); */?>"><span><?/*= __('Home') */?></span></a></li>-->
+                <?= $block->getHtml(0, 'level-top', 'nav-mobile'); ?>
+            </ul>
+            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('horizontal-menu-mobile')->toHtml(); ?>
+        </nav>
+        <div class="close-nav"><span aria-hidden="true" class="mbi mbi-arrow-left"></span></div>
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            ".nav-collapse": {
+                "MageBig_SmartMenu/js/jquery.collapsible": {
+                    "accordion": false,
+                    "speed": 400,
+                    "mouseType": 0,
+                    "collapsed": "collapsed mbi mbi-ios-arrow-down",
+                    "expanded": "expanded mbi mbi-ios-arrow-up"
+                }
+            }
+        }
+    </script>
+</div>

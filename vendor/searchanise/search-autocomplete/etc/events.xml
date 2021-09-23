@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- product reviews -->
+    <event name="review_save_after">
+        <observer name="review_save_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+    <event name="review_delete_after">
+        <observer name="review_delete_after" instance="Searchanise\SearchAutocomplete\Model\Observer"/>
+    </event>
+</config>

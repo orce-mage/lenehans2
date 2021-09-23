@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <tsNewsPopup>
+            <general>
+                <enable>1</enable>
+                <show_only_home>1</show_only_home>
+                <behaviour>1</behaviour>
+                <background_image>newsletter.jpg</background_image>
+                <title><![CDATA[Get <span>25%</span> Discount]]></title>
+                <text>Subscribe to the Martfury mailing list to receive updates on new arrivals, special offers and our promotions.</text>
+                <width>830px</width>
+                <height>auto</height>
+                <min_height>400px</min_height>
+            </general>
+        </tsNewsPopup>
+    </default>
+</config>

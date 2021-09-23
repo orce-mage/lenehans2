@@ -1,0 +1,140 @@
+Template,Template
+"Block class","Block class"
+"Cms block ID / Widget code","Cms block ID / Widget code"
+Store,Store
+Expression,Expression
+User-agent,User-agent
+Pages,Pages
+Jobs,Jobs
+"Efficiency Report","Efficiency Report"
+"Warm Rules","Warm Rules"
+"Cache Flushes","Cache Flushes"
+Settings,Settings
+"User Manual","User Manual"
+"Get Support","Get Support"
+"Page Cache Warmer","Page Cache Warmer"
+"Page Cache is disabled in ""Cache Management"".","Page Cache is disabled in ""Cache Management""."
+"All pages were removed","All pages were removed"
+"%1 job(s) was removed","%1 job(s) was removed"
+"Please select job(s)","Please select job(s)"
+"%1 job(s) was executed","%1 job(s) was executed"
+"%1 page(s) was cleaned.","%1 page(s) was cleaned."
+"%1 page(s) was removed","%1 page(s) was removed"
+"%1 page(s) was warmed.","%1 page(s) was warmed."
+"Cache Warmer","Cache Warmer"
+"Page Cache Efficiency Report","Page Cache Efficiency Report"
+"Job Rule was removed","Job Rule was removed"
+"Please select a Job Rule","Please select a Job Rule"
+"This Warm Rule no longer exists","This Warm Rule no longer exists"
+"New Warm Rule","New Warm Rule"
+"This Job Rule no longer exists.","This Job Rule no longer exists."
+"Job Rule was saved.","Job Rule was saved."
+"Cacheable Page Test","Cacheable Page Test"
+"Non-Cacheable Page Test","Non-Cacheable Page Test"
+Disabled,Disabled
+"All pages","All pages"
+Configure,Configure
+ID,ID
+Popularity,Popularity
+URI,URI
+"Page Type","Page Type"
+"Conditions Combination","Conditions Combination"
+"Page Attributes","Page Attributes"
+"Product Type","Product Type"
+"Customer Group","Customer Group"
+Simple,Simple
+Bundle,Bundle
+Downloadable,Downloadable
+Configurable,Configurable
+Grouped,Grouped
+Virtual,Virtual
+"Page Cache Efficiency","Page Cache Efficiency"
+"Inspect Trace","Inspect Trace"
+"Run Job","Run Job"
+Delete,Delete
+"Delete job?","Delete job?"
+"Warm Cache","Warm Cache"
+"Clean Cache","Clean Cache"
+"Show Curl Request","Show Curl Request"
+"Delete the record with ID ""${ $.$data.page_id }""","Delete the record with ID ""${ $.$data.page_id }"""
+"Are you sure you want to delete the record with ID ""${ $.$data.page_id }""?","Are you sure you want to delete the record with ID ""${ $.$data.page_id }""?"
+"%1 days","%1 days"
+"%1 hours","%1 hours"
+"%1 mins","%1 mins"
+Conditions,Conditions
+"Conditions (leave blank for all pages)","Conditions (leave blank for all pages)"
+Back,Back
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Save and Continue Edit","Save and Continue Edit"
+Save,Save
+Edit,Edit
+"Delete Job Rule?","Delete Job Rule?"
+"Make pages cacheable by page type","Make pages cacheable by page type"
+Status,Status
+"Warm by page type","Warm by page type"
+" (Varnish)"," (Varnish)"
+Enabled,Enabled
+"Ignored Pages","Ignored Pages"
+"For example, to exclude pages like /category/page/*, the regular expression should be:
+                        /\/category\/page\//","For example, to exclude pages like /category/page/*, the regular expression should be:
+                        /\/category\/page\//"
+"/\?/ - ignore pages with GET params<br>
+                        /\?[\w]*&[\w]*&[\w]*/ - ignore pages with more than 2 GET params","/\?/ - ignore pages with GET params<br>
+                        /\?[\w]*&[\w]*&[\w]*/ - ignore pages with more than 2 GET params"
+"Ignored User-agents","Ignored User-agents"
+"Ignored Page Types","Ignored Page Types"
+Threads,Threads
+"Delay between requests","Delay between requests"
+"Maximum job run time","Maximum job run time"
+"Job Schedule","Job Schedule"
+"Enable statistics","Enable statistics"
+"Don't run warmer job if average<br/>system load is more than (%)","Don't run warmer job if average<br/>system load is more than (%)"
+"Warmer limit (%)","Warmer limit (%)"
+"Forbid cache flushing","Forbid cache flushing"
+"Forcibly make pages cacheable","Forcibly make pages cacheable"
+Config,Config
+"Use the same cache for new visitor","Use the same cache for new visitor"
+Username,Username
+Password,Password
+"Refresh cache to apply changes. Not all blocks can be excluded using this functionality (for example price block, product listing).","Refresh cache to apply changes. Not all blocks can be excluded using this functionality (for example price block, product listing)."
+"Add template path, block name, cms block ID and store.","Add template path, block name, cms block ID and store."
+"Show cache status","Show cache status"
+"Show cache status only for","Show cache status only for"
+"Log warmer requests","Log warmer requests"
+"Log tags for cache flushing","Log tags for cache flushing"
+"Log backtrace for cache flushing","Log backtrace for cache flushing"
+"Delete job(s)","Delete job(s)"
+"Are you sure you want to delete the job(s)?","Are you sure you want to delete the job(s)?"
+Priority,Priority
+Filter,Filter
+Info,Info
+"Created At (GMT)","Created At (GMT)"
+"Updated At (GMT)","Updated At (GMT)"
+"Started At (GMT)","Started At (GMT)"
+"Finished At (GMT)","Finished At (GMT)"
+Trace,Trace
+"Delete pages","Delete pages"
+"Are you sure you want to delete the selected pages?","Are you sure you want to delete the selected pages?"
+"Warm pages","Warm pages"
+"
+                                Are you sure you want to warm the selected pages?<br/><span style=""color:#007bdb"">Note: More than 20 rows can be stopped by timeout.</span>
+                            ","
+                                Are you sure you want to warm the selected pages?<br/><span style=""color:#007bdb"">Note: More than 20 rows can be stopped by timeout.</span>
+                            "
+"Clean pages","Clean pages"
+"
+                                Are you sure you want to clean the selected pages?<br/> <span style=""color:#007bdb"">Note: More than 20 rows can be stopped by timeout.</span>
+                            ","
+                                Are you sure you want to clean the selected pages?<br/> <span style=""color:#007bdb"">Note: More than 20 rows can be stopped by timeout.</span>
+                            "
+"Applied Warm Rules","Applied Warm Rules"
+"Unsuccessful attempts","Unsuccessful attempts"
+"Vary Data","Vary Data"
+"Cached At (GMT)","Cached At (GMT)"
+"Flush Discovered At (GMT)","Flush Discovered At (GMT)"
+"Fill Rate Change","Fill Rate Change"
+"General Information","General Information"
+Name,Name
+"Is Active","Is Active"
+"HTTP Headers","HTTP Headers"
+"Add Warm Rule","Add Warm Rule"

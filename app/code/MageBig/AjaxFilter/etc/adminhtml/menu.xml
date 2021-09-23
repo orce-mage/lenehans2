@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageBig_AjaxFilter::menu" title="Ajax Filter" translate="title" module="MageBig_AjaxFilter"
+             action="adminhtml/system_config/edit/section/magebig_ajaxfilter" sortOrder="40"
+             parent="MageBig_MbFrame::ext_config" resource="MageBig_AjaxFilter::menu" />
+    </menu>
+</config>

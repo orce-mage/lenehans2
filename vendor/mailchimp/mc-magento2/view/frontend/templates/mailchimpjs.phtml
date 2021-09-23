@@ -1,0 +1,8 @@
+<?php
+/**
+ * @var $block \Ebizmarts\Mailchimp\Block\Mailchimpjs
+ */
+$url = $block->getJsUrl();
+$render = $block->getRender();
+echo $render->renderTag('script',['type'=>'text/javascript','src'=>$url],'',false);
+?>

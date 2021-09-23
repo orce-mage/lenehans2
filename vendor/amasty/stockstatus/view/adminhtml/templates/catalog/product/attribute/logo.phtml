@@ -1,0 +1,25 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+?>
+<?php
+/**
+ * @var \Amasty\Stockstatus\Block\Adminhtml\Product\Attribute\Logo $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+$selector = '';
+foreach ($block->getAffectedIds() as $attributeId) {
+    $selector .= 'tr[title*="attribute_id/' . $attributeId . '"] .col-frontend_label,';
+}
+$selector = rtrim($selector, ',');
+?>
+<style>
+        <?= /** @noEscape */ $selector ?> {
+            background: url(<?= $escaper->escapeUrl($block->getLogoUrl()) ?>) no-repeat 97%;
+        }
+</style>

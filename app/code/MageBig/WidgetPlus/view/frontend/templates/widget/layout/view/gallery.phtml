@@ -1,0 +1,100 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+
+$_mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+?>
+<?php $id = $block->getGalleryId().$block->getProduct()->getId(); ?>
+<div class="gallery-placeholder _block-content-loading gallery-<?= $id; ?>" data-gallery-role="gallery-placeholder">
+    <div data-role="loader" class="loading-mask">
+        <div class="loader"></div>
+    </div>
+</div>
+<!--Fix for jumping content. Loader must be the same size as gallery.-->
+<script>
+    var config = {
+            "width": <?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/base_image_width') ?>,
+            "thumbheight": <?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/thumbnail_height')
+            ?: $_mbHelper->getConfig('mbconfig/product_view/thumbnail_width'); ?>,
+            "navtype": "slides",
+            "thumbwidth": <?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/thumbnail_width')
+            ?: $_mbHelper->getConfig('mbconfig/product_view/thumbnail_width'); ?>,
+            "height": <?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/base_image_height') ?>,
+            "margin": 10
+        },
+        loader = document.querySelectorAll('.gallery-<?= $id; ?> [data-role="loader"]')[0];
+    var widthP = loader.offsetWidth;
+    var heightP = widthP*config.height/config.width;
+    if (config.navtype === 'vertical') {
+        heightP = (widthP - config.thumbwidth - config.margin) * heightP / widthP;
+    }
+    loader.style.paddingBottom = ( heightP / widthP * 100) + "%";
+</script>
+<script type="text/x-magento-init">
+    {
+        ".gallery-<?= $id; ?>": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?= /* @escapeNotVerified */ $block->getMagnifier() ?>,
+                "data": <?= /* @escapeNotVerified */ $block->getGalleryImagesJson() ?>,
+                "options": {
+                    "thumbmargin": 10,
+                    "thumbborderwidth": 1,
+                    "nav": "thumbs",
+                    "loop": 1,
+                    "keyboard": 1,
+                    "arrows": 1,
+                    <?php if ($_mbHelper->getConfig('mbconfig/product_view/allowfullscreen')): ?>
+                        "allowfullscreen": <?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/allowfullscreen') ?>,
+                    <?php endif; ?>
+                    "showCaption": 0,
+                    "width": "<?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/base_image_width') ?>",
+                    "thumbwidth": "<?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/thumbnail_width') ?>",
+                    <?php if ($_mbHelper->getConfig('mbconfig/product_view/thumbnail_height') || $_mbHelper->getConfig('mbconfig/product_view/thumbnail_width')): ?>
+                    "thumbheight": <?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/thumbnail_height') ?: $_mbHelper->getConfig('mbconfig/product_view/thumbnail_width'); ?>,
+                    <?php endif; ?>
+                    <?php if ($_mbHelper->getConfig('mbconfig/product_view/base_image_height') || $_mbHelper->getConfig('mbconfig/product_view/base_image_width')): ?>
+                        "height": <?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/base_image_height') ?: $_mbHelper->getConfig('mbconfig/product_view/base_image_width'); ?>,
+                    <?php endif; ?>
+                    "transitionduration": 500,
+                    "transition": "slide",
+                    "navarrows": 1,
+                    "navtype": "slides",
+                    "navdir": "<?= /* @escapeNotVerified */ $_mbHelper->getConfig('mbconfig/product_view/nav_dir') ?>"
+                },
+                "fullscreen": {
+                    "nav": "thumbs",
+                    "loop": 1,
+                    "navdir": "vertical",
+                    "navtype": "slides",
+                    "arrows": 1,
+                    "showCaption": 1,
+                    "transitionduration": 500,
+                    "transition": "dissolve"
+                },
+                "breakpoints": {
+                    "mobile":{
+                        "conditions":{"max-width":"767px"},
+                        "options": {
+                            "options": {
+                                "nav":"thumbs",
+                                "navdir":"horizontal"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>
+

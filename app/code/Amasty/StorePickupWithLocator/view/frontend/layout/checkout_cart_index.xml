@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.cart.shipping">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-summary" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="block-rates" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="price" xsi:type="array">
+                                            <item name="sortOrder" xsi:type="number">10</item>
+                                        </item>
+                                        <item name="amstorepickup" xsi:type="array">
+                                            <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/pickup/pickup-fieldset</item>
+                                            <item name="displayArea" xsi:type="string">price</item>
+                                            <item name="dataScope" xsi:type="string">amstorepickup</item>
+                                            <item name="sortOrder" xsi:type="number">20</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="deps" xsi:type="array">
+                                                    <item name="0" xsi:type="string">checkoutProvider</item>
+                                                    <item name="1" xsi:type="string">block-summary.block-rates.price</item>
+                                                </item>
+                                            </item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="am_pickup_store" xsi:type="array">
+                                                    <item name="label" translate="true" xsi:type="string">Select a store to collect your order:</item>
+                                                    <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/pickup/pickup-store</item>
+                                                    <item name="dataScope" xsi:type="string">am_pickup_store</item>
+                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                </item>
+                                                <item name="am_pickup_options" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/pickup/pickup-options</item>
+                                                    <item name="dataScope" xsi:type="string">am_pickup_options</item>
+                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="isCart" xsi:type="boolean">true</item>
+                                                    </item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="comment" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/pickup/pickup-options-comment</item>
+                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                            <item name="dataScope" xsi:type="string">curbside_comment</item>
+                                                            <item name="additionalClasses" xsi:type="string">ampickup-comment</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="am_pickup_map" xsi:type="array">
+                                    <item name="component" xsi:type="string">Amasty_StorePickupWithLocator/js/view/locator/locations-map</item>
+                                    <item name="template" xsi:type="string">Amasty_StorePickupWithLocator/locator/locations-map</item>
+                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

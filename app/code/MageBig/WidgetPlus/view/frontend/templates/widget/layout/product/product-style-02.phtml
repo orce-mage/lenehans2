@@ -1,0 +1,30 @@
+<?php
+$i = 0;
+?>
+<?php foreach ($collection as $_product): ?>
+    <?php if ($carousel == 1 && $row > 1 && $i == 0): ?>
+        <div class="owl-carousel owl-theme">
+    <?php endif ?>
+    <?php if (($i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        <div class="category-products">
+        <ol class="product-items <?= $type; ?> <?= $carousel && $row == 1 ? ' owl-carousel owl-theme' : '' ?> <?= !$carousel ? ' row': '' ?>">
+    <?php endif ?>
+
+    <?php $i++ ?>
+    <li class="product-item<?= !$carousel ? ' col-6 col-sm-4 col-md-3' : '' ?>">
+        <div class="product-item-info">
+            <div class="product-show">
+                <a href="<?= $block->getProductUrl($_product) ?>" title="<?= $block->escapeHtml($_product->getName()) ?>" class="product-item-photo">
+                    <?= $block->getImage($_product, $image)->toHtml(); ?>
+                </a>
+            </div>
+        </div>
+    </li>
+    <?php if (($i == $count || $i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        </ol>
+        </div>
+    <?php endif ?>
+    <?php if ($carousel == 1 && $row > 1 && $i == $count): ?>
+        </div>
+    <?php endif ?>
+<?php endforeach ?>

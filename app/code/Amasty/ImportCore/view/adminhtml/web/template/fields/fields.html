@@ -1,0 +1,17 @@
+<!-- ko if: checkedFields().length || isShowFields -->
+<table class="amimportcore-fields-table -selected" data-role="grid" afterRender="renderDefaultFields">
+    <thead class="amimportcore-thead">
+        <tr class="amimportcore-row">
+            <th class="amimportcore-th" data-bind="i18n: 'Magento Field'"></th>
+            <th class="amimportcore-th" data-bind="i18n: 'Import File Field'"></th>
+            <th class="amimportcore-th" data-bind="i18n: 'Default Value'"></th>
+            <th class="amimportcore-th -button"></th>
+        </tr>
+    </thead>
+    <tbody>
+    <!-- ko foreach: $data.elems() -->
+        <!--ko template: getTemplate()--><!-- /ko -->
+    <!-- /ko -->
+    </tbody>
+</table>
+<!-- /ko -->

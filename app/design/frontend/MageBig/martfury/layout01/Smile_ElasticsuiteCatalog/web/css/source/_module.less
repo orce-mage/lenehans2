@@ -1,0 +1,215 @@
+// /**
+//  * DISCLAIMER
+//  *
+//  * Do not edit or add to this file if you wish to upgrade Smile Elastic Suite to newer
+//  * versions in the future.
+//  *
+//  *
+//  * @category  Smile
+//  * @package   Smile\ElasticsuiteCatalog
+//  * @author    Aurelien FOUCRET <aurelien.foucret@smile.fr>
+//  * @copyright 2016 Smile
+//  * @license   Open Software License ("OSL") v. 3.0
+//  */
+& when (@media-common = true) {
+    .smile-es-range-slider {
+
+        [data-role=from-label] {
+            display: block;
+            float: left;
+            padding: 0 0 5px;
+        }
+
+        [data-role=to-label] {
+            display: block;
+            float: right;
+            padding: 0 0 5px;
+        }
+
+        [data-role=message-box] {
+            font-size: 90%;
+            flex: 1;
+            padding: 6px 0 0;
+
+            &.empty {
+                .lib-form-validation-note();
+                padding: 0;
+            }
+        }
+
+        .actions-toolbar {
+            display: flex;
+            margin: 15px 0;
+        }
+
+        .ui-slider {
+            margin: 0 5px;
+            clear: both;
+        }
+
+        .ui-slider-handle {
+            padding: 0;
+            margin: -3px 0 0 -7px;
+            -webkit-border-radius: 15px;
+            width: 15px;
+            height: 15px;
+            background: @active__color;
+        }
+
+        a.action.primary {
+            padding: 0;
+            min-width: 80px;
+        }
+    }
+
+    .filter {
+        .filter-content .item {
+            margin: 10px 0;
+        }
+
+        .block-subtitle {
+            display: none;
+        }
+
+        .field.search {
+            input[type="text"] {
+                width: 100%;
+                height: 32px;
+                border: 1px solid #d1d1d1;
+                margin-bottom: 10px;
+            }
+            .control {
+                position: relative;
+            }
+            label {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                width: 30px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+            }
+        }
+
+        .no-results-message p {
+            margin: 9px 10px 0;
+            background-color: #FFEEEE;
+            padding: 5px;
+            color: #AA0000;
+        }
+    }
+
+    .smile-elasticsuite-autocomplete-result {
+        .product-image-box {
+            float: left;
+            padding: 0;
+            width: 55px;
+            position: absolute;
+            left: 11px;
+        }
+
+        .product-shop {
+            float: left;
+            margin: 0;
+            padding: 0;
+            white-space: normal;
+            width: 100%;
+            padding-left: 55px;
+        }
+
+        .product-item {
+            .price-box {
+                margin: 0;
+            }
+        }
+
+        .category-mini-crumb {
+            font-style: italic;
+            display: block;
+            margin-bottom: 0.2em;
+            font-size: 85%;
+            color: #929292;
+        }
+
+        .product-attribute-label {
+            text-transform: uppercase;
+            vertical-align: super;
+            font-size: 63%;
+            color: #777;
+        }
+
+        .price-box {
+            span.old-price {
+                display: inline-block;
+            }
+        }
+    }
+    .filter-options-item {
+        .item a {
+            position: relative;
+            input[type='checkbox'] {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 1px;
+                height: 1px;
+                opacity: 0;
+            }
+            label {
+                cursor: pointer;
+                margin: 0;
+            }
+            input[type='checkbox'] + label:before {
+                border: 1px solid #d1d1d1;
+                background: #ffffff;
+                display: inline-block;
+                content: " ";
+                white-space: pre;
+                width: 15px;
+                height: 15px;
+                text-align: center;
+                font-size: 10px;
+                line-height: 13px;
+                font-weight: bold;
+                vertical-align: text-bottom;
+            }
+            input[type='checkbox']:checked + label:before {
+                content: "\e934";
+                color: @main_color;
+                font-weight: bold;
+                border-color: #000000;
+                font-family: 'mbicon' !important;
+                speak: none;
+                font-style: normal;
+                font-variant: normal;
+                text-transform: none;
+                letter-spacing: 0;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            input[type='checkbox']:checked + label {
+                color: @main_color;
+            }
+        }
+        .nano > .nano-content {
+            position: relative;
+            max-height: 150px;
+        }
+        .nano>.nano-pane {
+            width: 6px;
+            border-radius: 0;
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0,0,0,0.15);
+        }
+        .nano>.nano-pane>.nano-slider {
+            border-radius: 0;
+            -moz-border-radius: 0;
+            -webkit-border-radius: 0;
+            margin: 0;
+            background: rgba(0,0,0,0.25);
+        }
+    }
+}

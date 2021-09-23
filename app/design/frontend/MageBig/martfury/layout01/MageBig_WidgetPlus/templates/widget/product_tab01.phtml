@@ -1,0 +1,138 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \MageBig\WidgetPlus\Block\ProductTab $block */
+?>
+<?php
+
+$cfHelper   = $this->helper('MageBig\WidgetPlus\Helper\Config');
+$mbHelper   = $this->helper('MageBig\MbFrame\Helper\Data');
+$id         = $block->getWidgetId();
+$title      = $block->escapeHtml($block->getData('widget_title'), ['h2', 'h3', 'h4', 'h5', 'div', 'span', 'i', 'br', 'a']);
+$subtitle   = $block->escapeHtml($block->getData('widget_subtitle'), ['h2', 'h3', 'h4', 'h5', 'div', 'span', 'i', 'br', 'a']);
+$class      = $block->escapeHtmlAttr($block->getData('classes'));
+$isHover    = $mbHelper->getConfig('mbconfig/category_view/product_image_hover');
+$type       = $block->getData('product_type');
+$carousel   = $block->getData('slider');
+$tabs       = $block->getTabs();
+
+?>
+<div class="widgetplus widget-product-tab lazyload <?= $class ?>" id="<?= $id ?>" data-mage-init='{"tabs":{"openedState":"opened"}}'>
+    <?php if ($title): ?>
+        <div class="main-heading">
+            <h2 class="heading-title"><span><?= __($title) ?></span></h2>
+        </div>
+    <?php endif ?>
+    <?php if ($subtitle): ?>
+        <div class="subtitle-widget"><span><?= __($subtitle) ?></span></div>
+    <?php endif ?>
+
+    <div class="tabs-wrap">
+        <div class="tab-mobile h2"><i class="icon-options-vertical icons"></i><span><?= __('Collections') ?></span></div>
+        <ul class="widget-tabs h3">
+            <?php foreach ($tabs as $index => $tab): ?>
+                <li class="<?= $index==0 ? 'active' : '' ?>" data-role="collapsible">
+                    <a href="#<?= $id . '-' . $tab['id'] ?>" tabindex="-1" data-toggle="switch">
+                        <?= $tab['label'] ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <div class="widget-tab-content tab-content-fadein">
+        <?php foreach ($tabs as $index => $tab): ?>
+        <div id="<?= $id . '-' . $tab['id'] ?>" data-role="content" <?= $index==0 ? 'aria-hidden="false"' : '' ?>>
+            <?php
+            $collection    = $block->initializeProductTab($tab['value']);
+            $count         = $collection->count();
+            $type          = 'widget-product-grid';
+            $row           = $block->getData('row') ? (int)$block->getData('row') : 1;
+            $pricePrefixId = $id . $tab['id'];
+            $column        = $carousel == 1 && $row == 1 ? $count : ($carousel == 1 && $row > 1 ? $row : $block->getData('column'));
+            $column        = !$carousel ? $count : $column;
+            $image         = 'new_products_content_widget_grid';
+
+            $showAddCart   = $mbHelper->getConfig('mbconfig/category_view/show_addcart');
+            $showCompare   = $mbHelper->getConfig('mbconfig/category_view/show_compare');
+            $showWishlist  = $mbHelper->getConfig('mbconfig/category_view/show_wishlist');
+            $showRating    = $mbHelper->getConfig('mbconfig/category_view/show_rating');
+            $showQuickview = $mbHelper->getConfig('mbconfig/category_view/show_quickview');
+
+            $templateType    = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+            $description     = false;
+            $viewMode        = 'grid';
+            $showDescription = false;
+
+            $urlHelper   = $this->helper('Magento\Framework\Url\Helper\Data');
+            $labelHelper = $this->helper('MageBig\WidgetPlus\Helper\Config');
+
+            $productStyle = $block->getData('product_style');
+            ?>
+            <?php
+            switch ($productStyle) {
+                case '2' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-02.phtml');
+                    break;
+                case '3' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-03.phtml');
+                    break;
+                case '4' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-04.phtml');
+                    break;
+                case '5' :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-05.phtml');
+                    break;
+                default :
+                    require $block->getTemplateFile('MageBig_WidgetPlus::widget/layout/product/product-style-01.phtml');
+                    break;
+            }
+            ?>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<?php if ($carousel == 1): ?>
+    <?php
+    $autoplay        = is_numeric($block->getData('autoplay')) ? 'true' : 'false';
+    $autoplayTimeout = is_numeric($block->getData('autoplay')) ? (int)$block->getData('autoplay') : 5000;
+    $items           = $carousel == 1 ? (is_numeric($block->getData('column')) ? (int)$block->getData('column') : 4) : 1;
+    $margin          = $carousel == 1 ? (is_numeric($block->getData('margin')) ? (int)$block->getData('margin') : 30) : 0;
+    $nav             = (bool)$block->getData('navigation') ? 'true' : 'false';
+    $dots            = (bool)$block->getData('paging') ? 'true' : 'false';
+    $responsive      = $carousel == 1 ? $cfHelper->getCfRes($this->getData('x0'), $this->getData('x576'), $this->getData('x768'), $this->getData('x992'), $this->getData('x1200'), $this->getData('x1600')) : '{}';
+    $rtl             = $mbHelper->getConfig('mbdesign/general/enable_rtl') ? 'true' : 'false';
+    ?>
+    <script type="text/x-magento-init">
+        {
+            "#<?= $id ?>": {
+                "MageBig_WidgetPlus/js/owl.carousel-set": {
+                    "autoplay"          : <?= $autoplay ?>,
+                    "autoplayTimeout"   : <?= $autoplayTimeout ?>,
+                    "items"             : <?= $items ?>,
+                    "margin"            : <?= $margin ?>,
+                    "nav"               : <?= $nav ?>,
+                    "dots"              : <?= $dots ?>,
+                    "responsive"        : <?= $responsive ?>,
+                    "rtl"               : <?= $rtl ?>
+                }
+            }
+        }
+    </script>
+<?php endif; ?>
+
+<?php if (!$block->isRedirectToCartEnabled()) : ?>
+    <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {}
+            }
+        }
+    </script>
+<?php endif; ?>

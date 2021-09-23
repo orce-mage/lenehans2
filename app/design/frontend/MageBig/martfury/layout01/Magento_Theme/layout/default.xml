@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="layout01"/>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="head.additional.config" template="Magento_Theme::html/head_config.phtml" />
+        </referenceBlock>
+        <move element="main_css_preloader" destination="root" before="-" />
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template" name="header.main.content" template="Magento_Theme::html/header/header-content.phtml">
+                <block class="Magento\Store\Block\Switcher" name="store_language" as="store_language" before="-" template="switch/languages.phtml" />
+                <block class="Magento\Directory\Block\Currency" name="currency" after="store_language" template="currency.phtml" />
+                <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" after="-" template="switch/stores.phtml" />
+                <block class="Magento\Framework\View\Element\Html\Links" name="header.links">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">header links</argument>
+                    </arguments>
+                </block>
+
+                <!--<block class="Magento\Theme\Block\Html\Header\Logo" name="logo">
+                    <arguments>
+                        <argument name="logo_img_width" xsi:type="number">189</argument>
+                        <argument name="logo_img_height" xsi:type="number">64</argument>
+                    </arguments>
+                </block>-->
+
+                <block class="MageBig\SmartMenu\Block\SmartMenu" name="smartmenu.topnav" template="html/topmenu.phtml" />
+                <block class="MageBig\SmartMenu\Block\SmartMenu" name="smartmenu.topnav-hori" template="html/topmenu-hori.phtml" />
+                <block class="Magento\Wishlist\Block\Link" name="wishlist_icon" template="Magento_Wishlist::icon_link.phtml" />
+            </block>
+        </referenceContainer>
+        <move element="logo" destination="header.main.content" before="-"/>
+
+        <referenceBlock name="top.links" remove="true" />
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="default_page_head_components" after='-' template="Magento_Theme::html/components_js.phtml" />
+        </referenceBlock>
+        <referenceBlock name="navigation.sections" remove="true" />
+        <referenceBlock name="catalog.topnav" remove="true" />
+        <referenceBlock name="store.settings">
+            <block class="Magento\Store\Block\Switcher" name="store.settings.switcher" before="-" template="switch/stores.phtml">
+                <arguments>
+                    <argument name="id_modifier" xsi:type="string">nav</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="footer-container">
+            <container name="footer.top" label="Footer Top Full" htmlTag="div" htmlClass="footer-top" before="-">
+                <container name="footer.top.content" htmlTag="div" htmlClass="footer-top-content container" label="Footer Top Container" after="-" />
+            </container>
+            <container name="footer" label="Footer Content" htmlTag="div" htmlClass="footer-content">
+                <block class="Magento\Framework\View\Element\Html\Links" name="footer_links">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">footer links</argument>
+                    </arguments>
+                </block>
+            </container>
+            <container name="footer.bottom" label="Footer Bottom Full" htmlTag="div" htmlClass="footer-bottom" after="-">
+                <container name="footer.bottom.content" htmlTag="div" htmlClass="footer-bottom-content container">
+                    <block class="Magento\Theme\Block\Html\Footer" name="copyright" template="html/copyright.phtml"/>
+                </container>
+            </container>
+        </referenceContainer>
+        <referenceBlock name="footer_links" display="false" />
+        <referenceBlock name="report.bugs" remove="true" />
+
+        <move element="copyright" destination="footer.bottom.content" before="-" />
+        <referenceContainer name="page.wrapper">
+            <container name="gotop" after="footer-container">
+                <block class="Magento\Framework\View\Element\Template" template="Magento_Theme::html/go_top.phtml" ifconfig="mbconfig/footer/go_top"/>
+            </container>
+        </referenceContainer>
+
+        <referenceBlock name="catalog.compare.sidebar" remove="true" />
+        <referenceBlock name="wishlist_sidebar" remove="true" />
+        <referenceBlock name="copyright" remove="true" />
+        <referenceBlock name="sale.reorder.sidebar" remove="true" />
+        <move element="after.body.start" destination="page.wrapper" before="-"/>
+        <move element="page.messages" destination="root" after="-"/>
+    </body>
+</page>

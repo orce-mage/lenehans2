@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="field gender<?php if ($block->isRequired()) echo ' required' ?>">
+    <label class="label" for="<?= /* @escapeNotVerified */ $block->getFieldId('gender')?>"><span><?= /* @escapeNotVerified */ __('Gender') ?></span></label>
+    <div class="control">
+        <select id="<?= /* @escapeNotVerified */ $block->getFieldId('gender')?>" name="<?= /* @escapeNotVerified */ $block->getFieldName('gender')?>" title="<?= /* @escapeNotVerified */ __('Gender') ?>"<?php if ($block->isRequired()):?> class="validate-select" data-validate="{required:true}"<?php endif; ?> <?= /* @escapeNotVerified */ $block->getFieldParams() ?>>
+            <?php $options = $block->getGenderOptions(); ?>
+            <?php $value = $block->getGender();?>
+            <?php foreach ($options as $option):?>
+                <option value="<?= /* @escapeNotVerified */ $option->getValue() ?>"<?php if ($option->getValue() == $value) echo ' selected="selected"' ?>><?= /* @escapeNotVerified */ __($option->getLabel()) ?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+</div>

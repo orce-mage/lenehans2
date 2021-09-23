@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <pdftemplates>
+            <general>
+                <is_active>0</is_active>
+                <dev>0</dev>
+            </general>
+            <items>
+                <columns>
+                    <product>
+                        <label>Name</label>
+                        <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Items\Column\Renderer\ProductName</renderer>
+                        <sort_order>1</sort_order>
+                        <default>
+                            <item_1><![CDATA[<div class="product-name-line-1">Beaumont Summit Kit</div><div class="product-name-line-2">Color: <span>Orange</span>, Size: <span>XS</span></div>]]></item_1>
+                            <item_2><![CDATA[<div class="product-name-line-1">Typhon Performance Fleece-lined Jacket</div><div class="product-name-line-2">Color: <span>Black</span>, Size: <span>S</span></div>]]></item_2>
+                            <item_3><![CDATA[<div class="product-name-line-1">Push It Messenger Bag</div>]]></item_3>
+                            <item_4><![CDATA[<div class="product-name-line-1">Selene Yoga Hoodie</div><div class="product-name-line-2">Color: <span>White</span>, Size: <span>S</span></div>]]></item_4>
+                            <item_5><![CDATA[<div class="product-name-line-1">Affirm Water Bottle</div>]]></item_5>
+                        </default>
+                        <is_active>
+                            <order>1</order>
+                            <invoice>1</invoice>
+                            <creditmemo>1</creditmemo>
+                            <shipment>1</shipment>
+                            <quote>1</quote>
+                        </is_active>
+                    </product>
+
+                    <sku>
+                        <label>Sku</label>
+                        <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Items\Column\Renderer\Sku</renderer>
+                        <sort_order>10</sort_order>
+                        <default>
+                            <item_1>MJ01</item_1>
+                            <item_2>MJ11</item_2>
+                            <item_3>24-WB04</item_3>
+                            <item_4>WH05</item_4>
+                            <item_5>24-UG0</item_5>
+                        </default>
+                        <is_active>
+                            <order>1</order>
+                            <invoice>1</invoice>
+                            <creditmemo>1</creditmemo>
+                            <shipment>1</shipment>
+                            <quote>1</quote>
+                        </is_active>
+                    </sku>
+
+                    <price>
+                        <label>Price</label>
+                        <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Items\Column\Renderer\Price</renderer>
+                        <sort_order>20</sort_order>
+                        <default>
+                            <item_1>$42.00</item_1>
+                            <item_2>$60.00</item_2>
+                            <item_3>$45.00</item_3>
+                            <item_4>$42.00</item_4>
+                            <item_5>$47.00</item_5>
+                        </default>
+                        <is_active>
+                            <order>1</order>
+                            <invoice>1</invoice>
+                            <creditmemo>1</creditmemo>
+                            <shipment>0</shipment>
+                            <quote>1</quote>
+                        </is_active>
+                    </price>
+
+                    <qty>
+                        <label>Qty</label>
+                        <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Items\Column\Renderer\Qty</renderer>
+                        <sort_order>30</sort_order>
+                        <default>
+                            <item_1>1</item_1>
+                            <item_2>3</item_2>
+                            <item_3>2</item_3>
+                            <item_4>1</item_4>
+                            <item_5>1</item_5>
+                        </default>
+                        <is_active>
+                            <order>1</order>
+                            <invoice>1</invoice>
+                            <creditmemo>1</creditmemo>
+                            <shipment>1</shipment>
+                            <quote>1</quote>
+                        </is_active>
+                    </qty>
+
+                    <tax>
+                        <label>Tax</label>
+                        <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Items\Column\Renderer\Tax</renderer>
+                        <sort_order>40</sort_order>
+                        <default>
+                            <item_1>$10.23</item_1>
+                            <item_2>$31.23</item_2>
+                            <item_3>$11.23</item_3>
+                            <item_4>$10.23</item_4>
+                            <item_5>$42.00</item_5>
+                        </default>
+                        <is_active>
+                            <order>1</order>
+                            <invoice>1</invoice>
+                            <creditmemo>1</creditmemo>
+                            <shipment>0</shipment>
+                            <quote>1</quote>
+                        </is_active>
+                    </tax>
+
+                    <subtotal>
+                        <label>Subtotal</label>
+                        <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Items\Column\Renderer\Subtotal</renderer>
+                        <sort_order>50</sort_order>
+                        <!--align>right</align-->
+                        <default>
+                            <item_1>$42.00</item_1>
+                            <item_2>$180.00</item_2>
+                            <item_3>$90.00</item_3>
+                            <item_4>$42.00</item_4>
+                            <item_5>$90.00</item_5>
+                        </default>
+                        <is_active>
+                            <order>1</order>
+                            <invoice>1</invoice>
+                            <creditmemo>1</creditmemo>
+                            <shipment>0</shipment>
+                            <quote>1</quote>
+                        </is_active>
+                    </subtotal>
+                </columns>
+            </items>
+            <track_columns>
+                <columns>
+                    <title>
+                        <label>Title</label>
+                        <sort_order>10</sort_order>
+                        <default>
+                            <item_1>DHL</item_1>
+                            <item_2>DHL</item_2>
+                        </default>
+                    </title>
+
+                    <track_number>
+                        <label>Code</label>
+                        <sort_order>20</sort_order>
+                        <default>
+                            <item_1>XXXX-YYYY-1</item_1>
+                            <item_2>XXXX-YYYY-2</item_2>
+                        </default>
+                    </track_number>
+                </columns>
+            </track_columns>
+
+            <payment>
+                <checkmo>
+                    <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Payment\DefaultRenderer</renderer>
+                </checkmo>
+                <purchaseorder>
+                    <renderer>Magetrend\PdfTemplates\Model\Pdf\Element\Payment\PurchaseOrderRenderer</renderer>
+                </purchaseorder>
+            </payment>
+
+            <additional>
+                <name_order>order_%increment_id.pdf</name_order>
+                <name_order_collection>orders_%date.pdf</name_order_collection>
+
+                <name_invoice>invoice_%increment_id.pdf</name_invoice>
+                <name_invoice_collection>invoices_%date.pdf</name_invoice_collection>
+
+                <name_shipment>shipment_%increment_id.pdf</name_shipment>
+                <name_shipment_collection>shipments_%date.pdf</name_shipment_collection>
+
+                <name_cm>creditmemo_%increment_id.pdf</name_cm>
+                <name_cm_collection>creditmemos_%date.pdf</name_cm_collection>
+            </additional>
+
+            <pdf>
+                <quote_template>121</quote_template>
+            </pdf>
+            <quote>
+                <is_active>0</is_active>
+            </quote>
+
+        </pdftemplates>
+    </default>
+</config>

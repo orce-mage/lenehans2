@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amasty_import" translate="label" type="text" sortOrder="091316" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Import</label>
+            <tab>amasty</tab>
+            <resource>Amasty_ImportCore::config</resource>
+            <group id="multi_process" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Multi-Process Import</label>
+                <field id="enabled" translate="label tooltip" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Enable Multi-Process Import</label>
+                    <tooltip><![CDATA[The 'Multi-Process Import' feature needs the php extension 'pcntl' to be installed on the server. If you enable the feature and no performance boost happens, please ask your hoster/system administrator to check if the 'pcntl' extension installed.]]></tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="max_process_count" translate="label tooltip" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Number of Parallels Processes</label>
+                    <tooltip>The more parallel processes are set, the faster is the import process, as well as the higher is the server load</tooltip>
+                    <validate>validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

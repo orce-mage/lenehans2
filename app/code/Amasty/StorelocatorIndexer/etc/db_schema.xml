@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorelocatorIndexer
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="amasty_amlocator_location_index" resource="default" engine="innodb" comment="Amasty Index Locations Table">
+    <column xsi:type="int" name="location_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Location Id"/>
+    <column xsi:type="int" name="product_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Product ID"/>
+    <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Store ID"/>
+    <index referenceId="AMASTY_AMLOCATOR_LOCATION_IDX_LOCATION_ID_PRD_ID_STORE_ID" indexType="btree">
+      <column name="location_id"/>
+      <column name="product_id"/>
+      <column name="store_id"/>
+    </index>
+  </table>
+</schema>

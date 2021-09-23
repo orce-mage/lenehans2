@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="amasty_giftcard_account">
+        <name>Amasty Gift Card Account</name>
+        <group>Amasty Gift Card</group>
+        <description>Amasty Gift Card Account</description>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Import\FieldsClass\Describe">
+                <arguments>
+                    <argument name="tableName" xsi:type="string">amasty_giftcard_account</argument>
+                </arguments>
+            </fieldsClass>
+            <fields>
+                <field name="account_id">
+                    <actions>
+                        <trim apply="beforeValidate"/>
+                    </actions>
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty>
+                            <excludeBehaviors>
+                                <addDirect/>
+                            </excludeBehaviors>
+                        </notEmpty>
+                    </validation>
+                </field>
+                <field name="code_id">
+                    <validation>
+                        <nonNegative/>
+                        <tableRowExists tableName="amasty_giftcard_code"
+                                        idFieldName="code_id"
+                                        rootOnly="true"
+                                        error="Code with specified 'code_id' doesn't exist">
+                            <excludeBehaviors>
+                                <deleteDirect/>
+                            </excludeBehaviors>
+                        </tableRowExists>
+                    </validation>
+                </field>
+                <field name="website_id">
+                    <validation>
+                        <websiteExists>
+                            <excludeBehaviors>
+                                <deleteDirect/>
+                            </excludeBehaviors>
+                        </websiteExists>
+                    </validation>
+                </field>
+                <field name="status">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="current_value">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="initial_value">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="expired_date">
+                    <actions>
+                        <emptyToNull/>
+                    </actions>
+                    <validation>
+                        <dateFormat/>
+                    </validation>
+                </field>
+                <field name="date_delivery">
+                    <actions>
+                        <emptyToNull/>
+                    </actions>
+                    <validation>
+                        <dateFormat/>
+                    </validation>
+                </field>
+                <field name="is_sent">
+                    <validation>
+                        <boolean/>
+                    </validation>
+                </field>
+            </fields>
+            <sampleData>
+                <row>
+                    <field name="account_id">1</field>
+                    <field name="code_id">1</field>
+                    <field name="image_id">1</field>
+                    <field name="order_item_id"/>
+                    <field name="website_id">1</field>
+                    <field name="status">0</field>
+                    <field name="current_value">500.0000</field>
+                    <field name="initial_value">500.0000</field>
+                    <field name="expired_date">2022-02-22 00:00:00</field>
+                    <field name="comment">Imported From Sample Data</field>
+                    <field name="date_delivery"/>
+                    <field name="is_sent">0</field>
+                    <field name="customer_created_id"/>
+                    <field name="recipient_email">test@test.com</field>
+                </row>
+            </sampleData>
+        </fieldsConfig>
+        <behaviors>
+            <addUpdateDirect name="Add/Update">
+                <tableName>amasty_giftcard_account</tableName>
+            </addUpdateDirect>
+            <addDirect name="Only add">
+                <tableName>amasty_giftcard_account</tableName>
+            </addDirect>
+            <updateDirect name="Only update">
+                <tableName>amasty_giftcard_account</tableName>
+            </updateDirect>
+            <deleteDirect name="Delete">
+                <tableName>amasty_giftcard_account</tableName>
+            </deleteDirect>
+        </behaviors>
+    </entity>
+    <relation code="amasty_giftcard_code_account">
+        <parent_entity>amasty_giftcard_code</parent_entity>
+        <child_entity>amasty_giftcard_account</child_entity>
+        <sub_entity_field_name>amasty_giftcard_account</sub_entity_field_name>
+        <type>one_to_one</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">code_id</argument>
+            <argument name="child_field_name" xsi:type="string">code_id</argument>
+        </arguments>
+    </relation>
+</config>

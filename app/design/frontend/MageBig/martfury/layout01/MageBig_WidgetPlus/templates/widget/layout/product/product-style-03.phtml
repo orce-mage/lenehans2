@@ -1,0 +1,138 @@
+<?php
+use Magento\Framework\App\Action\Action;
+?>
+<?php if (!$carousel) : ?>
+<ol class="product-items row">
+    <?php endif ?>
+    <?php $i = 0; foreach ($collection as $_product): ?>
+        <?php if ($carousel == 1 && $row > 1 && $i == 0): ?>
+            <div class="owl-carousel owl-theme">
+        <?php endif ?>
+        <?php if (($i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        <div class="category-products">
+        <ol class="product-items <?= $type; ?> <?= $carousel && $row == 1 ? ' owl-carousel owl-theme' : '' ?> <?= !$carousel ? ' row': '' ?>">
+    <?php endif ?>
+
+        <?php $i++ ?>
+        <li class="product-item<?= !$carousel ? ' col-6 col-sm-4 col-md-3' : '' ?>">
+            <div class="product-item-info">
+                <div class="product-show">
+                    <?php $productImage = $block->getImage($_product, $image); ?>
+                    <a href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>" class="product photo product-item-photo">
+                        <span class="main-photo">
+                            <?= $productImage->toHtml(); ?>
+                        </span>
+                        <?php if ($isHover) : ?>
+                            <?php $hoverImg = $block->getImage($_product, 'product_grid_hover'); ?>
+                            <?php if (!strpos($hoverImg->getImageUrl(), 'mb_hover_img')) : ?>
+                                <span class="hover-photo">
+                                    <?= $hoverImg->toHtml(); ?>
+                                </span>
+                            <?php endif ?>
+                        <?php endif ?>
+                        <?php if ($labelHelper->getDiscountPercent($_product)) : ?>
+                            <span class="discount-percent"><?= $labelHelper->getDiscountPercent($_product); ?></span>
+                        <?php endif;?>
+                    </a>
+                    <div class="product-btn">
+                        <div class="row no-gutters text-center">
+                            <?php if ($_product->isSaleable()): ?>
+                                <div class="col">
+                                    <?php $url = $block->getAddToCartUrl($_product); ?>
+                                    <form data-role="tocart-form" action="<?= /* @escapeNotVerified */  $url; ?>" method="post">
+                                        <input type="hidden" name="product" value="<?= /* @escapeNotVerified */ $_product->getEntityId(); ?>">
+                                        <input type="hidden" name="<?= /* @escapeNotVerified */ Action::PARAM_NAME_URL_ENCODED; ?>" value="<?= /* @escapeNotVerified */ $urlHelper->getEncodedUrl($url) ?>">
+                                        <?= $block->getBlockHtml('formkey') ?>
+                                        <button type="submit"
+                                                title="<?= $block->escapeHtml(__('Add to Cart')); ?>"
+                                                class="action tocart mb-tooltip"><i class="mbi mbi-bag2"></i></button>
+                                    </form>
+                                </div>
+                            <?php else: ?>
+                                <div class="col">
+                                    <?php if ($_product->getIsSalable()): ?>
+                                        <div class="stock available"><span><?= /* @escapeNotVerified */ __('In stock') ?></span></div>
+                                    <?php else: ?>
+                                        <div class="stock unavailable"><span><?= /* @escapeNotVerified */ __('Out of stock') ?></span></div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="col" <?php if (!$showQuickview) : ?>style="display: none;"<?php endif; ?>>
+                                <?= $this->helper('MageBig\QuickView\Helper\Data')->getQuickViewButton($_product, 'mb-tooltip'); ?>
+                            </div>
+                            <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showWishlist): ?>
+                                <div class="col btn-wishlist">
+                                    <button type="button"
+                                            data-post='<?= /* @escapeNotVerified */ $block->getAddToWishlistParams($_product); ?>'
+                                            class="action towishlist mb-tooltip" data-action="add-to-wishlist"
+                                            title="<?= /* @escapeNotVerified */ __('Add to Wishlist') ?>"><i class="mbi mbi-heart"></i></button>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
+                                <?php $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare'); ?>
+                                <div class="col btn-compare">
+                                    <button type="button" class="action tocompare mb-tooltip"
+                                            data-post='<?= /* @escapeNotVerified */ $compareHelper->getPostDataParams($_product); ?>'
+                                            title="<?= /* @escapeNotVerified */ __('Add to Compare') ?>"><i class="mbi mbi-chart-bars"></i></button>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="product details product-item-details">
+                    <?php if ($_product->getTypeId() == 'configurable') : ?>
+                        <div class="swatches-list">
+                            <?= $this->getLayout()->createBlock("MageBig\WidgetPlus\Block\Product\Renderer\Listing\Configurable")->setProduct($_product)->setSwatchId($id)->setTemplate("MageBig_WidgetPlus::renderer.phtml")->toHtml(); ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="price-wrap">
+                        <?= /* @escapeNotVerified */ $block->getProductPriceHtml(
+                            $_product,
+                            \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE,
+                            \Magento\Framework\Pricing\Render::ZONE_ITEM_LIST,
+                            [
+                                'price_id_suffix' => '-' . $pricePrefixId
+                            ]
+                        ) ?>
+                    </div>
+                    <h3 class="product-item-name">
+                        <a title="<?= $block->escapeHtml($_product->getName()) ?>"
+                           href="<?= /* @escapeNotVerified */ $block->getProductUrl($_product) ?>"
+                           class="product-item-link">
+                            <?= $block->escapeHtml($_product->getName()) ?>
+                        </a>
+                    </h3>
+                    <?php if ($showRating) : ?>
+                        <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+                    <?php endif; ?>
+
+                    <?php if ($_product->isSaleable()) : ?>
+                        <?php
+                        $stockQty = $cfHelper->getStockQty($_product);
+                        $sold = $cfHelper->getSoldQty($_product);
+                        ?>
+                        <?php if ($stockQty) : ?>
+                            <div class="sold-progress">
+                                <div class="sold"
+                                     style="width: <?= $cfHelper->getSoldPercent($_product); ?>%;"></div>
+                            </div>
+                        <?php endif; ?>
+                        <div class="sold-qty">
+                            <?= __('Sold: ') . $sold; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </li>
+        <?php if (($i == $count || $i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        </ol>
+        </div>
+    <?php endif ?>
+        <?php if ($carousel == 1 && $row > 1 && $i == $count): ?>
+            </div>
+        <?php endif ?>
+    <?php endforeach ?>
+    <?php if (!$carousel) : ?>
+</ol>
+<?php endif ?>

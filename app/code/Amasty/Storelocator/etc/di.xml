@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amstorelocator_attributes_listing_data_source" xsi:type="string">Amasty\Storelocator\Model\ResourceModel\Attribute\Grid\Collection</item>
+                <item name="amstorelocator_location_listing_data_source" xsi:type="string">Amasty\Storelocator\Model\ResourceModel\Location\Grid\Collection</item>
+                <item name="amstorelocator_schedule_listing_data_source" xsi:type="string">Amasty\Storelocator\Model\ResourceModel\Schedule\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\Storelocator\Model\ResourceModel\Location\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_amlocator_location</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Storelocator\Model\ResourceModel\Location</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\Storelocator\Model\ResourceModel\Attribute\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_amlocator_attribute</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Storelocator\Model\ResourceModel\Attribute</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\Storelocator\Model\ResourceModel\Schedule\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_amlocator_schedule</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Storelocator\Model\ResourceModel\Schedule</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\ImportExport\Controller\Adminhtml\Import\Download">
+        <plugin name="Amasty_Storelocator::Import" type="Amasty\Storelocator\Plugin\Import\Download" />
+    </type>
+
+    <type name="Amasty\Storelocator\Model\Import\Validator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="country" xsi:type="object">Amasty\Storelocator\Model\Import\Validator\Country</item>
+                <item name="photo" xsi:type="object">Amasty\Storelocator\Model\Import\Validator\Photo</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Storelocator\Model\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">\Amasty\Storelocator\Model\ImageProcessor::AMLOCATOR_MEDIA_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">\Amasty\Storelocator\Model\ImageProcessor::AMLOCATOR_MEDIA_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Storelocator\Controller\Adminhtml\File\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\Storelocator\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Storelocator\Model\ImageProcessor">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\Storelocator\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Storelocator\Model\Import\Location">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\Storelocator\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+
+    <preference for="Amasty\Storelocator\Api\Data\ReviewInterface" type="Amasty\Storelocator\Model\Review" />
+    <preference for="Amasty\Storelocator\Api\ReviewRepositoryInterface" type="Amasty\Storelocator\Model\Repository\ReviewRepository" />
+
+    <preference for="Amasty\Storelocator\Api\Validator\LocationProductValidatorInterface" type="Amasty\Storelocator\Model\Validator\LocationProductComplexValidator"/>
+    <type name="Amasty\Storelocator\Model\Validator\LocationProductComplexValidator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="no_conditions" xsi:type="object">Amasty\Storelocator\Model\Validator\NoConditionsValidator</item>
+                <item name="product_attribute" xsi:type="object">Amasty\Storelocator\Model\Validator\ProductAttributeValidator</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

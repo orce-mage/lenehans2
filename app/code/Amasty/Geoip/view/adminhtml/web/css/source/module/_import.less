@@ -1,0 +1,213 @@
+//
+//  Geo Ip Import Styles
+//  ____________________________________________
+
+//
+//  Common
+//  --------------------------------------------
+& when (@media-common = true) {
+    .amgeoip-import-container {
+        .amgeoip-message {
+            color: red;
+        }
+
+        .amgeoip-button {
+            margin-top: 30px;
+            border: none;
+            border-radius: 3px;
+            background-color: #e3e3e3;
+            transition: background-color .3s ease-in;
+        }
+
+        .amgeoip-button:hover {
+            background: #ccc;
+        }
+
+        .amgeoip-state {
+            position: relative;
+            bottom: 8px;
+            padding: 0;
+            width: 80px;
+            height: 18px;
+            background: #fff;
+            color: #bbb;
+            vertical-align: middle;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .amgeoip-state.-done {
+            color: #514943;
+            font-weight: 600;
+        }
+
+        .amgeoip-state.-endimport {
+            left: 190px;
+        }
+
+        .amgeoip-state.-endimport.-done {
+            left: 184px;
+        }
+
+        .amgeoip-state.-import {
+            left: 94px;
+        }
+    }
+
+    .amgeoip-download-state {
+        & {
+            margin-left: 25px;
+            padding: 0 31px 0 27px;
+            width: 130px;
+            height: 28px;
+        }
+
+        &.-download {
+            position: relative;
+            bottom: 23px;
+            left: 155px;
+        }
+
+        .amgeoip-label {
+            position: relative;
+            z-index: 10;
+            padding: 14px 32px 4px 0;
+        }
+
+        .amgeoip-label.-import {
+            top: 21px;
+            right: 31px;
+        }
+
+        .amgeoip-label.-endimport {
+            bottom: 2px;
+            left: 128px;
+        }
+    }
+
+    .amgeoip-download-state,
+    .amgeoip-download-container {
+        & {
+            position: relative;
+        }
+
+        .amgeoip-begin {
+            position: relative;
+            right: 30px;
+            bottom: 1px;
+            z-index: 10;
+            padding-right: 33px;
+            padding-bottom: 28px;
+            background: @amgeoip-icon-step__initial__background no-repeat center;
+        }
+
+        .amgeoip-begin.-done {
+            background: @amgeoip-icon-download__background no-repeat center;
+        }
+
+        .amgeoip-counter {
+            position: absolute;
+            bottom: 9px;
+            left: 34%;
+            text-align: center;
+        }
+
+        .amgeoip-counter:before {
+            position: absolute;
+            right: ~'calc(100% - 17px)';
+            bottom: 0;
+            left: -17px;
+            width: 34px;
+            height: 21px;
+            background: @amgeoip-icon-counter__background no-repeat center;
+            content: attr(data-count);
+            line-height: 14px;
+        }
+
+        .amgeoip-counter.-hidden {
+            display: none;
+        }
+    }
+
+    .amgeoip-download-container {
+        position: relative;
+        left: 52px;
+        width: 130px;
+    }
+
+    .amgeoip-progressbar-container.-import {
+        .amgeoip-state.-completed {
+            top: 0;
+            left: 100px;
+        }
+
+        .amgeoip-state.-import {
+            top: 0;
+            left: 15px;
+        }
+
+        .amgeoip-download-container {
+            left: 0;
+        }
+
+        .amgeoip-download-state {
+            padding-bottom: 20px;
+        }
+    }
+
+    .amgeoip-line-container {
+        & {
+            position: relative;
+            top: 2px;
+            background: #e3e3e3;
+        }
+
+        .amgeoip-line {
+            position: relative;
+            height: 4px;
+            background-color: #2196f3;
+            background-size: 20px 20px;
+            white-space: nowrap;
+        }
+    }
+
+    .amgeoip-download-state .amgeoip-label.-failed,
+    .amgeoip-download-state .amgeoip-label {
+        background: @amgeoip-icon-step__initial__background no-repeat center;
+    }
+
+    .amgeoip-download-container .amgeoip-label.-completed,
+    .amgeoip-download-state .amgeoip-label.-completed {
+        background: @amgeoip-icon-step__finish__background no-repeat center;
+    }
+
+    .amgeoip-files-container {
+        & {
+            margin-top: 20px;
+        }
+
+        .amgeoip-files {
+            position: relative;
+        }
+
+        .amgeoip-files.-available {
+            padding-left: 25px;
+        }
+
+        .amgeoip-files.-available:before {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background: @amgeoip-icon__available no-repeat center;
+            content: '';
+        }
+    }
+
+    .amgeoip-import-date {
+        display: block;
+        margin-top: 15px;
+        color: #bbb;
+    }
+}

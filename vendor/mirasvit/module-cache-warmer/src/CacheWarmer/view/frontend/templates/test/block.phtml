@@ -1,0 +1,66 @@
+<div class="mst-cache-warmer__test-block">
+    <div class="mst-cache-warmer__status-checker">
+        <span>Checking...</span>
+        <p></p>
+        <time><?= date('M d, Y H:i:s') ?></time>
+    </div>
+    <p>This page refreshes every 5 seconds to check cache status</p>
+
+    <table>
+        <tr>
+            <td class="cacheable" width="50%">
+                For <a href="<?= $block->getUrl('cache_warmer/test/cacheable') ?>">Cacheable Page</a>,
+                time on the page and in the URL should be the <b>same</b>
+            </td>
+            <td class="non-cacheable" width="50%">
+               For <a href="<?= $block->getUrl('cache_warmer/test/nonCacheable') ?>">Non-Cacheable Page</a>,
+                time on the page and in the URL should be <b>different</b>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        function reload() {
+            var interval;
+
+            var time          = document.querySelector('.mst-cache-warmer__test-block time').innerHTML;
+            var status        = document.querySelector('.mst-cache-warmer__test-block span');
+            var statusMessage = document.querySelector('.mst-cache-warmer__test-block p');
+            var url           = window.location.href;
+
+            var origPrevTime = url.indexOf('#') >= 0
+                ? url.substr(url.indexOf('#') + 1)
+                : false;
+
+            if (!origPrevTime) {
+                window.location.href = url + '#' + time;
+            } else {
+                var prevTime = origPrevTime.replace(/%20/gi, ' ');
+
+                if (prevTime == time) {
+                    status.innerHTML = 'CACHED';
+                    status.classList.add('cacheable');
+                    statusMessage.innerHTML += 'Caching is working.';
+                } else {
+                    status.innerHTML = 'NOT CACHED';
+
+                    if (url.indexOf('nonCacheable') >= 0) {
+                        statusMessage.innerHTML = 'Page contains non-cacheable block "cache-warmer.test.cacheable"';
+                        status.classList.add('cacheable');
+                    } else {
+                        statusMessage.innerHTML = 'Caching is not working.';
+                        status.classList.add('non-cacheable');
+                    }
+                }
+            }
+
+            interval = setInterval(function () {
+                window.location.href = window.location.href.replace(origPrevTime, time);
+                window.location.reload();
+            }, 5000)
+        }
+
+        document.addEventListener("DOMContentLoaded", reload);
+
+    </script>
+</div>

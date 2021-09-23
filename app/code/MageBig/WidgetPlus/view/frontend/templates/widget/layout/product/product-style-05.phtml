@@ -1,0 +1,50 @@
+<?php
+use Magento\Framework\App\Action\Action;
+$i = 0;
+?>
+<?php foreach ($collection as $_product): ?>
+    <?php if ($carousel == 1 && $row > 1 && $i == 0): ?>
+        <div class="owl-carousel owl-theme">
+    <?php endif ?>
+    <?php if (($i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        <div class="category-products">
+        <ol class="product-items <?= $type; ?> <?= $carousel && $row == 1 ? ' owl-carousel owl-theme' : '' ?>">
+    <?php endif ?>
+
+    <?php $i++ ?>
+    <li class="product-item product-sidebar">
+        <div class="product-item-info">
+            <div class="product-show">
+                <a href="<?= $block->getProductUrl($_product) ?>" class="product-item-photo">
+                    <?= $block->getImage($_product, 'product_page_image_small')->toHtml(); ?>
+                </a>
+            </div>
+            <div class="product details product-item-details">
+                <h3 class="product-item-name">
+                    <a title="<?= $block->escapeHtml($_product->getName()) ?>"
+                       href="<?= /* @escapeNotVerified */ $block->getProductUrl($_product) ?>"
+                       class="product-item-link">
+                        <?= $block->escapeHtml($_product->getName()) ?>
+                    </a>
+                </h3>
+                <div class="price-wrap">
+                    <?= /* @escapeNotVerified */ $block->getProductPriceHtml(
+                        $_product,
+                        \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE,
+                        \Magento\Framework\Pricing\Render::ZONE_ITEM_LIST,
+                        [
+                            'price_id_suffix' => '-' . $pricePrefixId
+                        ]
+                    ) ?>
+                </div>
+            </div>
+        </div>
+    </li>
+    <?php if (($i == $count || $i % $column == 0 || ($row > 1 && $i % $row == 0)) && $carousel): ?>
+        </ol>
+        </div>
+    <?php endif ?>
+    <?php if ($carousel == 1 && $row > 1 && $i == $count): ?>
+        </div>
+    <?php endif ?>
+<?php endforeach ?>

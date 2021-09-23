@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2019 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<!-- configuration file used for the Wyomind's demo store: https://demo2.wyomind.com -->
+<config>
+    <login>MassProductImport</login>
+    <password>MassProductImport123</password>
+    <acl>
+        Magento_Backend::system
+        Magento_Backend::convert
+        Wyomind_MassProductImport::main
+        Wyomind_MassProductImport::profiles
+        Wyomind_MassProductImport::rules
+        {{system/config}}
+        Wyomind_MassProductImport::massproductimport_config
+        Magento_Catalog::catalog
+        Magento_Catalog::products
+        Magento_Catalog::categories
+    </acl>
+    <scenarii>
+        <scenario type="backend" id="profiles" default="1">
+            <label>Product Update/Import Profiles</label>
+            <comment><![CDATA[]]></comment>
+            <actions>
+                <action type="landing_page">
+                    <param name="url">Wyomind_MassProductImport::profiles</param>
+                </action>
+            </actions>
+        </scenario>
+    </scenarii>
+</config>

@@ -1,0 +1,31 @@
+<!--@subject Your Gift certificate has been sent @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var gcard_email.getRecipientName()":"Recipient name",
+"var gcard_email.getSenderName()":"Sender name",
+"var gcard_email.getSenderMessage()":"Sender message",
+"var gcard_email.getBalance()":"Card balance"}
+@-->
+<!--@styles
+@-->
+
+{{template config_path="design/email/header_template"}}
+<table cellspacing="0" cellpadding="0" class="message-container">
+    <tr>
+        <td>
+            Dear {{var gcard_email.getSenderName()}},<br>
+            <br>
+            You purchased a {{var gcard_email.getBalance()}} gift card for {{var gcard_email.getRecipientName()}} at {{var $store.frontend_name}}.<br>
+
+            {{if gcard_email.getSenderMessage()}}
+            Your message:<br>
+            <br>
+            {{var gcard_email.getSenderMessage()}}<br>
+            {{/if}}
+
+            <br>
+            Look forward to seeing you at our store.
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

@@ -1,0 +1,14 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="col btn-wishlist" if="isAllowed()">
+    <button attr="'data-post': getDataPost($row()),
+                   title: getLabel()"
+            class="action towishlist mb-tooltip"
+            data-action="add-to-wishlist">
+            <i aria-hidden="true" class="mbi mbi-heart"></i>
+    </button>
+</div>

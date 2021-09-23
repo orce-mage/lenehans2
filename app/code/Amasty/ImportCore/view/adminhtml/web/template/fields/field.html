@@ -1,0 +1,19 @@
+<tr class="amimportcore-row">
+    <td class="amimportcore-td">
+        <input class="amimportcore-field -disabled" disabled type="text"
+               data-bind="value: $data.code"/>
+    </td>
+    <td class="amimportcore-td">
+        <input class="amimportcore-field" type="text" data-bind="
+                                                                value: $data.file_field,
+                                                                valueUpdate: 'afterkeydown'"/>
+    </td>
+    <td class="amimportcore-td -label">
+        <input class="amimportcore-field" type="text" data-bind="
+                                                                value: $data.output_value,
+                                                                valueUpdate: 'afterkeydown'"/>
+    </td>
+    <td class="amimportcore-td -code">
+        <span class="amimportcore-delete" data-bind="click: $data.remove.bind($data, $data.index, $index())"></span>
+    </td>
+</tr>

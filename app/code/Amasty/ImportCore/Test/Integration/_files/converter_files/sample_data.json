@@ -1,0 +1,44 @@
+{
+    "sample_data": {
+        "name": "sample_data",
+        "description": "sample_data description",
+        "behaviors": {
+            "add": {
+                "class": "Amasty\\ImportCore\\Import\\Behavior\\Add\\Model",
+                "name": "Only add",
+                "arguments": {
+                    "modelFactory": {
+                        "name": "modelFactory",
+                        "xsi:type": "string",
+                        "value": "Test\\Test"
+                    }
+                }
+            }
+        },
+        "fieldsConfig": {
+            "fields": {
+                "category_id": {
+                    "isIdentity": false
+                },
+                "url_key": {
+                    "isIdentity": false
+                },
+                "title": {
+                    "isIdentity": false
+                }
+            },
+            "sampleData": [
+                {
+                    "category_id": "1",
+                    "url_key": "frequently-asked-questions",
+                    "title": "Frequently Asked"
+                },
+                {
+                    "category_id": "",
+                    "url_key": "delivery",
+                    "title": "Delivery questions"
+                }
+            ]
+        }
+    }
+}

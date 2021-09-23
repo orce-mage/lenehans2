@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Deprecated, stayed for backward compatibility -->
+    <route url="/V1/amstorepickup/:cartId/saveSelectedPickupValues" method="POST">
+        <service class="Amasty\StorePickupWithLocator\Api\GuestLocationPickupValuesInterface" method="saveSelectedPickupValues"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <!-- Deprecated, stayed for backward compatibility -->
+    <route url="/V1/amstorepickup/saveSelectedPickupValues" method="POST">
+        <service class="Amasty\StorePickupWithLocator\Api\LocationPickupValuesInterface" method="saveSelectedPickupValues"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/amstorepickup/:cartId/saveSelectedPickupData" method="POST">
+        <service class="Amasty\StorePickupWithLocator\Api\GuestLocationPickupValuesInterface" method="saveSelectedPickupData"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/amstorepickup/saveSelectedPickupData" method="POST">
+        <service class="Amasty\StorePickupWithLocator\Api\LocationPickupValuesInterface" method="saveSelectedPickupData"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>

@@ -1,0 +1,74 @@
+<?php
+    $htmlBlockId = $block->getNameInLayout();
+    $hideCheckboxes = $block->getHideCheckboxes()
+        || ($block->getRequest()->getFullActionName() !== 'catalog_product_view');
+    $allowedTypes = ['simple', 'configurable'];
+    $tocartCheckboxRendered = false;
+    if (!$block->hasData('image_id')) {
+        $block->setData('image_id', 'category_page_grid');
+    }
+
+    $imageId = $block->getData('image_id');
+?>
+
+<?php if (($items = $block->getItems()) && ($block->getItems()->getSize() > 0)) : ?>
+<div class="block soldtogether-swiper block-carousel block-products-list" id="<?= $htmlBlockId ?>">
+    <div class="block-title title">
+        <strong id="block-soldtogether-heading" role="heading" aria-level="2"><?= __($block->hasData('title') ? $block->getData('title') : 'Customers Who Bought This Item Also Bought') ?></strong>
+    </div>
+    <div class="block-content">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            <?php foreach ($items as $_item) : ?>
+                <div class="item product-item swiper-slide">
+                    <div class="product-item-info ">
+                        <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product photo product-item-photo">
+                            <?= $block->getImage($_item, $imageId)->toHtml(); ?>
+                        </a>
+                        <div class="product details product-item-details">
+                            <strong class="product name product-item-name" style="text-align: center;">
+                                <a class="product-item-link" title="<?= $block->escapeHtml($_item->getName()) ?>" href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>">
+                                <?= $block->escapeHtml($_item->getName()) ?></a>
+                            </strong>
+                            <?= /* @noEscape */ $block->getProductPrice($_item); ?>
+                            <?php if (!$hideCheckboxes && in_array($_item->getTypeId(), $allowedTypes)): ?>
+                                <?php $tocartCheckboxRendered = true; ?>
+                                <div class="field choice">
+                                    <input type="checkbox" class="checkbox soldtogether-tocart" id="soldtogether-tocart-checkbox<?= (int)$_item->getId() ?>" name="soldtogether_tocart[]" value="<?= (int)$_item->getId() ?>" />
+                                    <label class="label" for="soldtogether-tocart-checkbox<?= (int)$_item->getId() ?>"><span><?= /* @escapeNotVerified */ __('Add to Cart') ?></span></label>
+                                    <?= $block->renderDetailsHtml($_item) ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                </div>
+            <?php endforeach; ?>
+            </div>
+            <div class="swiper-button-prev swiper-button-black"></div>
+            <div class="swiper-button-next swiper-button-black"></div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php $jsLayout = $block->getJsLayout(); ?>
+<?php if ($jsLayout !== '[]'): ?>
+<script type="text/x-magento-init">
+{
+    "#<?= str_replace('.', '\\\\.', $htmlBlockId) ?> .swiper-container": <?= /* @noEscape */ $block->getJsLayout() ?>
+}
+</script>
+<?php endif; ?>
+
+<?php if ($tocartCheckboxRendered) : ?>
+<script type="text/x-magento-init">
+{
+    "#<?= str_replace('.', '\\\\.', $htmlBlockId) ?>": {
+        "Swissup_SoldTogether/js/customer-also-bought": {
+            "tocartForm": "#product_addtocart_form"
+        }
+    }
+}
+</script>
+<?php endif; ?>

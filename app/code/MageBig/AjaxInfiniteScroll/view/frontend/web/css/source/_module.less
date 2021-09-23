@@ -1,0 +1,51 @@
+& when (@media-common = true) {
+    .mb-trigger {
+        cursor: pointer;
+        text-align: center;
+    }
+    .mb-trigger-next {
+        margin-bottom: 90px;
+    }
+    .mb-trigger-prev {
+        margin-bottom: 30px;
+    }
+    .all-loaded {
+        letter-spacing: 0.4rem;
+        margin-bottom: 60px;
+    }
+    .mb-spinner {
+        position: relative;
+        margin-bottom: 30px;
+        text-align: center;
+        height: 38px;
+        .loading-mask {
+            position: absolute;
+        }
+        .product-items + & {
+            margin-bottom: 90px;
+        }
+    }
+    .loading-text {
+        letter-spacing: 0.4rem;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        color: #ebebeb;
+        white-space: nowrap;
+    }
+    .loading-text span {
+        top: 0;
+        left: 0;
+        position: absolute;
+        overflow: hidden;
+        max-width: 100%;
+        color: #000;
+        animation: loading 1.4s linear infinite;
+        white-space: nowrap;
+    }
+    @keyframes loading {
+        0% {
+            max-width: 0;
+        }
+    }
+}

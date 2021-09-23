@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- save image -->
+    <route url="/V1/amgcard/image" method="POST">
+        <service class="Amasty\GiftCard\Api\ImageRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_image" />
+        </resources>
+    </route>
+    <!-- save image by id -->
+    <route url="/V1/amgcard/image/:id" method="PUT">
+        <service class="Amasty\GiftCard\Api\ImageRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_image" />
+        </resources>
+    </route>
+    <!-- delete image by id -->
+    <route url="/V1/amgcard/image/:id" method="DELETE">
+        <service class="Amasty\GiftCard\Api\ImageRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_image" />
+        </resources>
+    </route>
+    <!-- get image by id -->
+    <route url="/V1/amgcard/image/:id" method="GET">
+        <service class="Amasty\GiftCard\Api\ImageRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_image" />
+        </resources>
+    </route>
+    <!-- get images list -->
+    <route url="/V1/amgcard/image/all" method="GET">
+        <service class="Amasty\GiftCard\Api\ImageRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_image" />
+        </resources>
+    </route>
+
+    <!-- save code pool -->
+    <route url="/V1/amgcard/code-pool" method="POST">
+        <service class="Amasty\GiftCard\Api\CodePoolRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_code" />
+        </resources>
+    </route>
+    <!-- save code pool by id -->
+    <route url="/V1/amgcard/code-pool/:id" method="PUT">
+        <service class="Amasty\GiftCard\Api\CodePoolRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_code" />
+        </resources>
+    </route>
+    <!-- delete code pool by id -->
+    <route url="/V1/amgcard/code-pool/:id" method="DELETE">
+        <service class="Amasty\GiftCard\Api\CodePoolRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_code" />
+        </resources>
+    </route>
+    <!-- get code pool by id -->
+    <route url="/V1/amgcard/code-pool/:id" method="GET">
+        <service class="Amasty\GiftCard\Api\CodePoolRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_code" />
+        </resources>
+    </route>
+    <!-- get code pools list -->
+    <route url="/V1/amgcard/code-pool/all" method="GET">
+        <service class="Amasty\GiftCard\Api\CodePoolRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_code" />
+        </resources>
+    </route>
+
+    <!-- generate code for code pool -->
+    <route url="/V1/amgcard/code-generator/code-pool/:codePoolId/qty/:qty" method="PUT">
+        <service class="Amasty\GiftCard\Api\CodeGeneratorManagementInterface" method="generateCodesForCodePool" />
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_code" />
+        </resources>
+    </route>
+    <!-- generate code for code pool by template -->
+    <route url="/V1/amgcard/code-generator/code-pool/:codePoolId" method="PUT">
+        <service class="Amasty\GiftCard\Api\CodeGeneratorManagementInterface" method="generateCodesByTemplate" />
+        <resources>
+            <resource ref="Amasty_GiftCard::giftcard_code" />
+        </resources>
+    </route>
+</routes>

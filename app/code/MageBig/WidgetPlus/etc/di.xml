@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Cms\Controller\Adminhtml\Block\Widget\Chooser"
+                type="MageBig\WidgetPlus\Controller\Adminhtml\Block\Widget\Chooser"/>
+    <!--<preference for="Magento\Reports\Model\ResourceModel\Product\Index\Viewed\Collection"
+                type="MageBig\WidgetPlus\Model\ResourceModel\Product\Index\Viewed\Collection"/>
+
+    <type name="Magento\Customer\Model\AbstractAction">
+        <plugin name="magebig-customer-app-action" type="MageBig\WidgetPlus\App\Action\ContextPlugin" sortOrder="15"/>
+    </type>
+
+    <type name="Magento\Customer\Model\Visitor">
+        <plugin name="magebig-customer-visitor" type="MageBig\WidgetPlus\App\Customer\VisitorPlugin" sortOrder="15"/>
+    </type>-->
+
+    <type name="Magento\Cms\Block\Adminhtml\Wysiwyg\Images\Content">
+        <plugin name="comwrap-widget-change-getoninserturl" type="MageBig\WidgetPlus\Model\Plugin\Adminhtml\Wysiwyg\Images\Content" sortOrder="10" />
+    </type>
+
+    <type name="Magento\Cms\Helper\Wysiwyg\Images">
+        <plugin name="comwrap-widget-change-getoninserturl" type="MageBig\WidgetPlus\Model\Plugin\Cms\Helper\Wysiwyg\Images" sortOrder="10" />
+    </type>
+
+    <type name="Magento\Catalog\Ui\DataProvider\Product\ProductRenderCollectorComposite">
+        <arguments>
+            <argument name="productProviders" xsi:type="array">
+                <item name="productdata" xsi:type="object">\MageBig\WidgetPlus\Ui\DataProvider\Product\ProductData</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

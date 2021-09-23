@@ -1,0 +1,42 @@
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<tr class="table-row"
+    click="element.selectShippingMethod">
+    <td class="table-col col-method">
+        <div class="field">
+            <input type="radio"
+                   class="radio"
+                   ifnot="method.error_message"
+                   ko-checked="element.isSelected"
+                   ko-value="method.carrier_code + '_' + method.method_code"
+                   attr="'id': 'input_' + method.carrier_code + '_' + method.method_code, 'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code,
+                    'checked': element.rates().length == 1 || element.isSelected" />
+            <label attr="'for': 'input_' + method.carrier_code + '_' + method.method_code">&nbsp;</label>
+        </div>
+    </td>
+    <td class="table-col col-price">
+        <each args="element.getRegion('price')" render="" />
+    </td>
+    <td class="table-col col-method"
+        attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code"
+        text="method.method_title" />
+    <td class="table-col col-carrier"
+        attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code"
+        text="method.carrier_title" />
+</tr>
+<tr class="table-row row-error"
+    if="method.error_message">
+    <td class="table-col col-error" colspan="4">
+        <div role="alert" class="message error">
+            <div text="method.error_message"></div>
+        </div>
+        <span class="no-display">
+            <input type="radio"
+                   attr="'value' : method.method_code, 'id': 's_method_' + method.method_code" />
+        </span>
+    </td>
+</tr>

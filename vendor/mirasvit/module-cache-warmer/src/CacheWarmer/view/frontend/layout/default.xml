@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Mirasvit\CacheWarmer\Block\TrackJs" name="mst-cache-warmer.track.js"
+                   template="Mirasvit_CacheWarmer::track_js.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="before.body.end">
+            <block class="Mirasvit\CacheWarmer\Block\ToolbarJs" name="mst-cache-warmer.toolbar.js"
+                   template="Mirasvit_CacheWarmer::toolbar_js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

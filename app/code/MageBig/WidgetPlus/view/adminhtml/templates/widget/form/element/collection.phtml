@@ -1,0 +1,44 @@
+<?php
+$element = $block->getElement();
+$note = $element->getNote() ? '<div class="note" id="'.$element->getId().'-note">'.$element->getNote().'</div>' : '';
+$elementBeforeLabel = $element->getExtType() == 'checkbox admin__control-checkbox' || $element->getExtType() == 'radio admin__control-radio';
+$fieldId = ($element->getHtmlContainerId()) ? ' id="'.$element->getHtmlContainerId().'"' : '';
+$fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($elementBeforeLabel) ? ' choice' : '';
+$fieldClass .= ($element->getRequired()) ? ' required _required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldClass .= (!$element->getLabelHtml()) ? ' no-label' : '';
+
+$fieldAttributes = $fieldId.' class="'.$fieldClass.'" '
+    .$block->getUiId('form-field', $element->getId())
+    .($element->getFieldExtraAttributes() ? ' '.$element->getFieldExtraAttributes() : '');
+?>
+<div<?= /* @escapeNotVerified */ $fieldAttributes ?>>
+    <?= $element->getLabelHtml() ?>
+    <div class="admin__field-control control">
+        <?= /* @escapeNotVerified */ $note ?>
+        <ul id="<?= $element->getHtmlId()?>" class="options-list">
+            <?php foreach ($block->getOptions() as $option) : ?>
+                <li class="ui-state-default collection-option">
+                    <input type="checkbox"
+                           name="<?= $element->getName() ?>[]"
+                           value="<?= $option['value'] ?>" <?php if ($option['selected']) : ?>checked<?php endif ?>/>
+                    <span>&nbsp;<?= $option['label'] ?></span>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    ul.options-list li{cursor: move;}
+</style>
+<script>
+    require([
+        "jquery",
+        "jquery/ui",
+        "mage/mage"
+    ], function(jQuery){
+        jQuery('#<?= $element->getHtmlId()?>').sortable();
+        jQuery('#<?= $element->getHtmlId()?>').disableSelection();
+    });
+</script>

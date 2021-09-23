@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="extjs/resources/css/ext-all.css"/>
+        <remove src="extjs/resources/css/ytheme-magento.css"/>
+        <remove src="css/styles-old.css"/>
+        <remove src="css/styles.css"/>
+        <remove  src="requirejs/require.js"/>
+        <remove  src="pub/media/styles.css"/>
+    </head>
+    <body>
+        <referenceContainer name="after.body.start" remove="true"/>
+        <referenceContainer name="menu.wrapper" remove="true"/>
+        <referenceContainer name="notices.wrapper" remove="true"/>
+        <referenceContainer name="legal" remove="true"/>
+        <referenceContainer name="page.menu" remove="true"/>
+        <referenceContainer name="header" remove="true"/>
+        <referenceBlock name="global.notices" remove="true"/>
+        <referenceBlock name="page.messages" remove="true"/>
+        <referenceBlock name="page.title" remove="true"/>
+        <referenceBlock name="user" remove="true"/>
+        <referenceBlock name="global.search" remove="true"/>
+        <referenceBlock name="notification.messages" remove="true"/>
+
+        <referenceContainer name="page.content">
+            <block name="preview.page.content" class="Magetrend\Email\Block\Adminhtml\Mteditor\Preview" template="Magetrend_Email::mteditor/preview.phtml">
+            </block>
+        </referenceContainer>
+        <referenceBlock name="footer" remove="true"/>
+    </body>
+</page>

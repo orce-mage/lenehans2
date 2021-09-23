@@ -1,0 +1,16 @@
+<input class="admin__control-text"
+       readonly
+       type="text"
+       data-bind="
+        event: {change: userChanges},
+        value: value,
+        hasFocus: focused,
+        valueUpdate: valueUpdate,
+        afterRender: initColorPickerCallback,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            id: uid,
+            'aria-describedby': noticeId,
+            disabled: disabled
+    }"/>

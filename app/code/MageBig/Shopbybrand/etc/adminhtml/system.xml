@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+		<section id="magebig_shopbybrand" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Shop by brand</label>
+            <tab>magebig_extensions</tab>
+			<resource>MageBig_Shopbybrand::config</resource>
+			<group id="general" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Genaral</label>
+				<field id="attribute_code" translate="label comment" type="select" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Brand Attribute</label>
+                    <source_model>MageBig\Shopbybrand\Model\Config\Source\AttributeCode</source_model>
+                </field>
+                <field id="brand_route" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Brand Route</label>
+                    <comment>E.g.: "our-brands" will make the page accessible from mystore.com/our-brands</comment>
+                </field>
+                <field id="display_brand_logo" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Brand logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display brand logo on Product page</comment>
+                </field>
+            </group>
+			<group id="our_brands_page" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Our Brands Page</label>
+                <field id="title" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Page Title</label>
+                </field>
+                <field id="description" translate="label" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <frontend_model>MageBig\Shopbybrand\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="display_brand_search" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display brand search form</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="alphabet_table" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Alphabet Table</label>
+                    <comment>Eg: a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z</comment>
+                </field>
+                <field id="meta_title" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Title</label>
+                </field>
+                <field id="meta_keywords" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Keywords</label>
+                </field>
+                <field id="meta_description" translate="label" type="textarea" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Description</label>
+                </field>
+            </group>
+            <group id="brand_page" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Brand View Page</label>
+				<field id="display_thumbnail" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display thumbnail</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="display_description" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display description</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+			</group>
+            <group id="brand_search_form" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Brand Search Form</label>
+                <field id="display_on_brand_page" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display on sidebar of Brand Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_on_cat_page" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display on sidebar of Category Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_on_search_page" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display on sidebar of Search Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="featured_brands" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Featured Brands</label>
+                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                </field>
+                <field id="sort_by" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Sort by</label>
+                    <source_model>MageBig\Shopbybrand\Model\Config\Source\Sortby</source_model>
+                </field>
+                <field id="sort_order" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Sort Order</label>
+                    <source_model>MageBig\Shopbybrand\Model\Config\Source\SortOrder</source_model>
+                </field>
+                <field id="display_on_brand_page" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display on sidebar of Brand Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_on_search_page" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display on sidebar of Search Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_on_cat_page" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display on sidebar of Category Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_on_top_cat_page" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display on Top of Category Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+		</section>
+	</system>
+</config>

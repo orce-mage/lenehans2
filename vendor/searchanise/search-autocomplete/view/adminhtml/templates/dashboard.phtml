@@ -1,0 +1,16 @@
+<?php  /** @var \Searchanise\SearchAutocomplete\Block\Adminhtml\Searchanise $block */ ?>
+
+<div id="searchanise-settings-wrapper">
+    <div class="snize" id="snize_container"></div>
+</div>
+
+<?php $SearchaniseAdmin = $block->getSearchaniseAdmin(); ?>
+<script type="text/javascript">
+    SearchaniseAdmin = <?= /* @noEscape */ json_encode($SearchaniseAdmin) ?>;
+
+    require(['jquery'], function($) {
+        var se_script = document.createElement('script');
+        se_script.setAttribute('src', '<?= /* @noEscape */ $SearchaniseAdmin['host'];?>/js/init.js');
+        document.head.appendChild(se_script);
+    });
+</script>

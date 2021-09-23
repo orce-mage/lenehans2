@@ -1,0 +1,84 @@
+<?php
+/** @var \Mirasvit\CacheWarmer\Block\Toolbar $block */
+$blocks = $block->getNonCacheableBlocks();
+$isHit = $block->getIsHit();
+
+$ignorePattern = $block->getIgnorePattern();
+$ignoreUserAgent = $block->getIgnoredUserAgent();
+$ignorePageType = $block->getIgnoredPageType();
+
+$isIgnored = $ignorePattern || $ignoreUserAgent || $ignorePageType;
+$warmRules = $block->getWarmRules();
+?>
+
+<div class="mst-cache-warmer__toolbar <?= $isHit ? '_hit' : '_miss' ?>">
+    <strong>
+        <?= __('Page Cache Warmer') ?>
+    </strong>
+
+    <div class="mst-cache-warmer__toolbar-body">
+        <strong>Page <u><?= $isHit ? 'HIT' : 'MISS' ?></u></strong>
+    </div>
+
+    <?php if (count($blocks)): ?>
+        <table>
+            <tr>
+                <th colspan="2">Not cacheable blocks</th>
+            </tr>
+            <?php foreach ($blocks as $class => $name): ?>
+                <tr>
+                    <td><?= $name ?></td>
+                    <td><?= $class ?></td>
+                </tr>
+            <?php endforeach ?>
+        </table>
+    <?php endif ?>
+
+    <ul class="mst-cache-warmer__toolbar-info">
+        <li>
+            <div class="__item">Cache type:</div>
+            <div><?= $block->getCacheType() ?></div>
+        </li>
+
+        <?php if ($ignorePattern): ?>
+            <li>
+                <div class="__item">This page is ignored by URI pattern:</div>
+                <div><?= $ignorePattern ?></div>
+            </li>
+        <?php endif ?>
+
+        <?php if ($ignoreUserAgent): ?>
+            <li>
+                <div class="__item">This page is ignored by User-Agent pattern:</div>
+                <div><?= $ignoreUserAgent ?></div>
+            </li>
+        <?php endif ?>
+
+        <?php if ($ignorePageType): ?>
+            <li>
+                <div class="__item">This page is ignored by Page Type:</div>
+                <div><?= $ignorePageType ?></div>
+            </li>
+        <?php endif ?>
+
+        <?php if (!$isIgnored): ?>
+            <li>
+                <div class="__item">Matched Warm Rules:</div>
+                <div><?= $warmRules ?></div>
+            </li>
+        <?php endif ?>
+    </ul>
+
+    <div class="mst-cache-warmer__toolbar-test">
+        <a href="<?= $block->getCacheableTestUrl() ?>">Cacheable</a> | <a
+            href="<?= $block->getNonCacheableTestUrl() ?>">Non-Cacheable</a>
+        Page Test
+    </div>
+
+    <div class="mst-cache-warmer__toolbar-info">
+        Page ID: <?= $block->getPageId() ?>
+        <br/>
+        Page Type: <?= $block->getPageType() ?>
+    </div>
+</div>
+

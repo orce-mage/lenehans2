@@ -1,0 +1,120 @@
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<li class="item product product-item" data-role="product-item">
+    <div class="product">
+        <!-- ko if: product_has_url -->
+        <a data-bind="attr: {href: product_url, title: product_name}" tabindex="-1" class="product-item-photo">
+            <!-- ko foreach: $parent.getRegion('itemImage') -->
+                <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
+            <!-- /ko -->
+        </a>
+        <!-- /ko -->
+        <!-- ko ifnot: product_has_url -->
+        <span class="product-item-photo">
+            <!-- ko foreach: $parent.getRegion('itemImage') -->
+                <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
+            <!-- /ko -->
+        </span>
+        <!-- /ko -->
+
+        <div class="product-item-details">
+            <strong class="product-item-name">
+                <!-- ko if: product_has_url -->
+                <a data-bind="attr: {href: product_url}, html: product_name"></a>
+                <!-- /ko -->
+                <!-- ko ifnot: product_has_url -->
+                    <!-- ko text: product_name --><!-- /ko -->
+                <!-- /ko -->
+            </strong>
+
+            <!-- ko if: options.length -->
+            <div class="product options">
+                <div data-role="content" class="content">
+                    <ul class="product options list">
+                        <!-- ko foreach: { data: options, as: 'option' } -->
+                        <li>
+                            <span class="label"><!-- ko text: option.label --><!-- /ko -->: </span>
+                            <span class="values">
+                                <!-- ko if: Array.isArray(option.value) -->
+                                    <span data-bind="html: option.value.join('<br>')"></span>
+                                <!-- /ko -->
+                                <!-- ko ifnot: Array.isArray(option.value) -->
+                                    <span data-bind="html: option.value"></span>
+                                <!-- /ko -->
+                            </span>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <div class="product-item-pricing">
+                <!-- ko if: canApplyMsrp -->
+
+                <div class="details-map">
+                    <span class="label" data-bind="i18n: 'Price'"></span>
+                    <span class="value" data-bind="i18n: 'See price before order confirmation.'"></span>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: canApplyMsrp -->
+                <!-- ko foreach: $parent.getRegion('priceSidebar') -->
+                    <!-- ko template: {name: getTemplate(), data: item.product_price, as: 'price'} --><!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+
+                <div class="details-qty qty">
+                    <label class="label" data-bind="i18n: 'Qty', attr: {
+                           for: 'cart-item-'+item_id+'-qty'}"></label>
+                    <div class="cart-input-update">
+                        <button type="button"
+                                data-bind="attr: {
+                               'data-cart-item': item_id,
+                               'data-item-qty': qty}"
+                                class="cart-btn-qty minus"><span class="mbi mbi-minus"></span></button>
+                        <input data-bind="attr: {
+                               id: 'cart-item-'+item_id+'-qty',
+                               'data-cart-item': item_id,
+                               'data-item-qty': qty,
+                               'data-cart-item-id': product_sku
+                               }, value: qty"
+                               type="text"
+                               class="item-qty cart-item-qty">
+                        <button type="button"
+                                data-bind="attr: {
+                               'data-cart-item': item_id,
+                               'data-item-qty': qty}"
+                                class="cart-btn-qty plus"><span class="mbi mbi-plus"></span></button>
+                    </div>
+                    <button data-bind="attr: {
+                           id: 'update-cart-item-'+item_id,
+                           'data-cart-item': item_id,
+                           title: $t('Update')
+                           }"
+                            class="update-cart-item"
+                            style="display: none">
+                        <span data-bind="i18n: 'Update'"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="product actions">
+                <!-- ko if: is_visible_in_site_visibility -->
+                <div class="primary">
+                    <a data-bind="attr: {href: configure_url, title: $t('Edit item')}" class="action edit">
+                        <span data-bind="i18n: 'Edit'"></span>
+                    </a>
+                </div>
+                <!-- /ko -->
+                <div class="secondary">
+                    <a href="#" data-bind="attr: {'data-cart-item': item_id, title: $t('Remove item')}"
+                       class="action delete"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

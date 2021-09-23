@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+$menu = $block->getHtml(0, 'level-top', 'cat-pagemenu', true);
+?>
+<?php if ($menu) : ?>
+<div class="block block-nav">
+    <div class="block-title">
+        <strong><span><?= __('Categories'); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul id="categories-nav" class="nav-collapse nav-categories">
+            <?= $menu ?>
+        </ul>
+        <script type="text/x-magento-init">
+            {
+                "#categories-nav": {
+                    "MageBig_SmartMenu/js/jquery.collapsible": {
+                        "id": "#categories-nav",
+                        "accordion": "true",
+                        "speed": 400,
+                        "mouseType": 0,
+                        "collapsed": "collapsed mbi mbi-ios-arrow-down",
+                        "expanded": "expanded mbi mbi-ios-arrow-up"
+                    }
+                }
+            }
+        </script>
+    </div>
+</div>
+<?php endif;?>

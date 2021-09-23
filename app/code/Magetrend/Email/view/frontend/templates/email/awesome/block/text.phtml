@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+?>
+<?php $var = $block->getVarModel();?>
+<table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
+    <tr <?php echo $var->getHtmlAttribute('style', 'secondary-bg-color-text', 'background-color: #f7f7f7;'); ?>
+        <?php echo $var->getHtmlAttribute('bgcolor', 'secondary-bg-color-color-text', '#f7f7f7'); ?> class="mteditor-bgcolor dark-block">
+        <td align="center" valign="top" width="100%"class="content-padding-top">
+            <center>
+                <table cellspacing="0" cellpadding="0" width="600" class="w320">
+                    <tr>
+                        <td <?php echo $var->getHtmlAttribute('style', 'text1_header_text_style', ''); ?>
+                            <?php echo $var->getTextEditAttribute('text1_header_text');?>
+                            class="mteditor-color header-lg">
+                            <?php echo $var->getValue('text1_header_text', 'Lorem Ipsum is simply dummy text', false);?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td <?php echo $var->getTextEditAttribute('text1_text');?>
+                            <?php echo $var->getHtmlAttribute('style', 'text1_text_style', ''); ?>
+                                class="mteditor-color free-text">
+                            <?php echo $var->getValue('text1_text', "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.", false);?>
+                        </td>
+                    </tr>
+
+                </table>
+            </center>
+        </td>
+    </tr>
+</table>

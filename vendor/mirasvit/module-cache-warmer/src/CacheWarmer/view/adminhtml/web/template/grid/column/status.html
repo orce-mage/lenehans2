@@ -1,0 +1,10 @@
+<div class="mst-cache-warmer__status-wrapper">
+    <div class="status" data-bind="css: $col.getLabel($row()), text: $col.getLabel($row())"></div>
+
+    <!-- ko if: ($row().status == 'error' || $row().status == 'missed') -->
+    <br><br>
+    <button class="action-secondary"
+            onclick="jQuery('[data-action=item-trace]', jQuery(this).closest('tr')).click();">View Trace</button>
+    <!-- /ko -->
+
+</div>

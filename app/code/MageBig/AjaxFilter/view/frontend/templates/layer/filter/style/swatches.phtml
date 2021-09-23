@@ -1,0 +1,82 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Swatches\Block\LayeredNavigation\RenderLayered */
+?>
+
+<?php $swatchData = $block->getSwatchData(); ?>
+<div class="mbsw swatch-attribute swatch-layered <?= $block->escapeHtmlAttr($swatchData['attribute_code']) ?>"
+     data-role="mb-filter-checkbox"
+     data-action="<?= $block->getActionUrl() ?>" data-code="<?= $block->escapeHtmlAttr($swatchData['attribute_code']) ?>"
+     data-select="<?= (int)$block->getFilterStyle() ?>">
+    <div class="swatch-attribute-options clearfix">
+        <?php foreach ($swatchData['options'] as $option => $label) : ?>
+            <input type="checkbox" id="filter-sw-<?= $label['value'] ?>" <?= $label['selected'] ? 'checked':'' ?> value="<?= $label['value'] ?>" style="display: none;" />
+            <label for="filter-sw-<?= $label['value'] ?>"
+               aria-label="<?= $block->escapeHtmlAttr($label['label']) ?>"
+               class="swatch-option-link-layered">
+                <?php if (isset($swatchData['swatches'][$option]['type'])) : ?>
+                    <?php switch ($swatchData['swatches'][$option]['type']) {
+                        case '3':
+                            ?>
+                            <span class="swatch-option <?= $block->escapeHtmlAttr($label['custom_style']) ?> <?= $label['selected'] ? 'selected':'' ?>"
+                                 data-option-type="3"
+                                 data-option-id="<?= $block->escapeHtmlAttr($option) ?>"
+                                 data-option-label="<?= $block->escapeHtmlAttr($label['label']) ?>"
+                                 data-option-tooltip-thumb=""
+                                 data-option-tooltip-value=""
+                                ></span>
+                            <?php break;
+                        case '2':
+                            ?>
+                            <?php $swatchThumbPath = $block->getSwatchPath('swatch_thumb', $swatchData['swatches'][$option]['value']); ?>
+                            <?php $swatchImagePath = $block->getSwatchPath('swatch_image', $swatchData['swatches'][$option]['value']); ?>
+                            <span class="swatch-option image <?= $block->escapeHtmlAttr($label['custom_style']) ?> <?= $label['selected'] ? 'selected':'' ?>"
+                                 data-option-type="2"
+                                 data-option-id="<?= $block->escapeHtmlAttr($option) ?>"
+                                 data-option-label="<?= $block->escapeHtmlAttr($label['label']) ?>"
+                                 data-option-tooltip-thumb="<?= $block->escapeUrl($swatchThumbPath) ?>"
+                                 data-option-tooltip-value=""
+                                 style="background: url(<?= $block->escapeUrl($swatchImagePath) ?>) no-repeat center; background-size: initial;"></span>
+                            <?php break;
+                        case '1':
+                            ?>
+                            <span class="swatch-option color <?= $block->escapeHtmlAttr($label['custom_style']) ?> <?= $label['selected'] ? 'selected':'' ?>"
+                                 data-option-type="1"
+                                 data-option-id="<?= $block->escapeHtmlAttr($option) ?>"
+                                 data-option-label="<?= $block->escapeHtmlAttr($label['label']) ?>"
+                                 data-option-tooltip-thumb=""
+                                 data-option-tooltip-value="<?= $block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?>"
+                                 style="background: <?= $block->escapeHtmlAttr($swatchData['swatches'][$option]['value']) ?> no-repeat center; background-size: initial;"></span>
+                            <?php break;
+                        case '0':
+                        default:
+                            ?>
+                            <span class="swatch-option text <?= $block->escapeHtmlAttr($label['custom_style']) ?> <?= $label['selected'] ? 'selected':'' ?>"
+                                 data-option-type="0"
+                                 data-option-id="<?= $block->escapeHtmlAttr($option) ?>"
+                                 data-option-label="<?= $block->escapeHtmlAttr($label['label']) ?>"
+                                 data-option-tooltip-thumb=""
+                                 data-option-tooltip-value=""
+                                ><?= $block->escapeHtml($swatchData['swatches'][$option]['value']) ?></span>
+                        <?php break;
+                    } ?>
+                <?php endif; ?>
+            </label>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php $scriptString = <<<script
+
+    require(["jquery", "Magento_Swatches/js/swatch-renderer"], function ($) {
+        $('.swatch-layered.{$block->escapeJs($swatchData['attribute_code'])}')
+            .find('[data-option-type="1"], [data-option-type="2"], [data-option-type="0"], [data-option-type="3"]')
+            .SwatchRendererTooltip();
+    });
+
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

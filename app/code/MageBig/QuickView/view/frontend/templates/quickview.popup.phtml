@@ -1,0 +1,19 @@
+<?php
+$qvHelper = $this->helper('MageBig\QuickView\Helper\Data');
+$itemClass = $block->escapeHtmlAttr($qvHelper->getConfig('quickview/general/item_class'));
+$target = $block->escapeHtmlAttr($qvHelper->getConfig('quickview/general/target'));
+$autoAddButtons = $qvHelper->getConfig('quickview/general/auto_add_buttons');
+?>
+<script type="text/x-magento-init">
+{
+	"*":{
+		"MageBig_QuickView/js/quickview":{
+			"baseUrl": "<?= $qvHelper->getBaseUrl() ?>",
+			"quickviewLabel": "<i class='mbi mbi-eye'></i>",
+			"itemClass": "<?= (!empty($itemClass))?$itemClass:"" ?>",
+			"target": "<?= (!empty($target))?$target:".product-item-info"; ?>",
+			"autoAddButtons":<?= ($autoAddButtons==1)?"true":"false" ?>
+		}
+	}
+}
+</script>

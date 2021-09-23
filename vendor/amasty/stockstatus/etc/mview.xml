@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="amasty_stockstatus_rule_product" class="Amasty\Stockstatus\Model\Indexer\Rule\RuleIndexer" group="indexer">
+        <subscriptions>
+            <table name="amasty_stockstatus_rule" entity_column="id" />
+        </subscriptions>
+    </view>
+    <view id="amasty_stockstatus_product_rule" class="Amasty\Stockstatus\Model\Indexer\Rule\ProductIndexer" group="indexer">
+        <subscriptions>
+            <table name="catalog_product_entity" entity_column="entity_id" />
+            <table name="catalog_product_entity_datetime" entity_column="entity_id" />
+            <table name="catalog_product_entity_decimal" entity_column="entity_id" />
+            <table name="catalog_product_entity_int" entity_column="entity_id" />
+            <table name="catalog_product_entity_text" entity_column="entity_id" />
+            <table name="catalog_product_entity_tier_price" entity_column="entity_id" />
+            <table name="catalog_product_entity_varchar" entity_column="entity_id" />
+            <table name="catalog_category_product" entity_column="product_id" />
+            <table name="cataloginventory_stock_item" entity_column="product_id" />
+            <table name="inventory_source_item" entity_column="source_item_id" subscription_model="Amasty\Stockstatus\Model\Mview\View\ExistingSubscription" />
+        </subscriptions>
+    </view>
+</config>

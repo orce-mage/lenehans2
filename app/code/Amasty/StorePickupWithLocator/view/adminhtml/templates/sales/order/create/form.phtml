@@ -1,0 +1,64 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+?>
+<?php
+/** @var $block \Amasty\StorePickupWithLocator\Block\Adminhtml\Sales\Order\Create\Shipping\Form */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<section class="admin__page-section -ampickup">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Store Pickup With Locator')) ?></span>
+    </div>
+    <?php foreach ($block->getFormElements() as $element): ?>
+        <?= /* @noEscape */ $element->toHtml() ?>
+    <?php endforeach; ?>
+</section>
+
+<script type="text/javascript">
+    require([
+        "jquery",
+        "domReady!"
+    ], function ($j) {
+        var curbsideMap = <?= /* @noEscape */ $block->getCurbsideLocationsMap() ?>,
+            storeField = $j('#ampickuplocation_id'),
+            curbsideCheckbox = $j('#ampickupcurbside_state'),
+            curbsideFieldset = $j('#ampickupcurbside_fieldset'),
+            curbsideCommentField = $j('#ampickupcurbside_comment'),
+            curbsideCommentBox = curbsideCommentField.closest('.admin__field'),
+            requiredEntryClass = 'required-entry',
+            isCommentRequired = curbsideCommentField.hasClass(requiredEntryClass),
+            isCurbsideCheckboxEnabled = curbsideCheckbox.length > 0;
+
+        curbsideFieldset.hide();
+        curbsideCommentField.removeClass(requiredEntryClass);
+        isCurbsideCheckboxEnabled && curbsideCommentBox.hide();
+
+        storeField.on('change', function (){
+            var storeId = this.value;
+
+            if (curbsideMap[storeId]) {
+                curbsideFieldset.show();
+                isCommentRequired && !isCurbsideCheckboxEnabled && curbsideCommentField.addClass(requiredEntryClass);
+            } else {
+                curbsideFieldset.hide();
+                curbsideCheckbox.prop('checked', false);
+                curbsideCheckbox.trigger('change');
+            }
+        });
+
+        curbsideCheckbox.on('change', function () {
+            if (this.checked) {
+                curbsideCommentBox.show();
+                isCommentRequired && curbsideCommentField.addClass(requiredEntryClass);
+            } else {
+                curbsideCommentBox.hide();
+                curbsideCommentField.val('');
+                isCommentRequired && curbsideCommentField.removeClass(requiredEntryClass);
+            }
+        });
+    });
+</script>

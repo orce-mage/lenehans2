@@ -1,0 +1,12 @@
+#snize_container .nav {
+    display: block;
+}
+
+#snize_container.snize .hidden {
+    visibility: initial;
+}
+
+#se_override_instruction {
+    margin-top: 1em;
+    padding-left: 2em;
+}

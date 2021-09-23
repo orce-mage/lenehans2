@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+?>
+<?php $var = $block->getVarModel();?>
+<table
+    width="100%"
+    style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;width:100% !important;"
+    cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td height="33">&nbsp;</td>
+    </tr>
+    <tr>
+        <td
+            <?php echo $var->getTextEditAttribute('text2_text');?>
+            <?php echo $var->getHtmlAttribute('style', 'text2_text_style', 'font-size: 15px; line-height: 26px; color: #707582; '); ?>
+            class="mteditor-color secondary-text"  align="<?php echo $block->isRTL()?'right':'left';?>">
+            <?php echo $var->getValue('text2_text', "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.", false);?>
+            </td>
+    </tr>
+    <tr>
+        <td  height="15">&nbsp;</td>
+    </tr>
+</table>

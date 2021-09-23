@@ -1,0 +1,164 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+//
+//  Common
+//  _____________________________________________
+@toolbar-mode-icon-font-size: 18px;
+@toolbar-element-background: @panel__background-color;
+& when (@media-common =true) {
+    .toolbar {
+        &:extend(.abs-add-clearfix all);
+    }
+    .toolbar-amount {
+        float: left;
+        line-height: @toolbar-mode-icon-font-size + 2;
+        margin: 0 35px 0 0;
+        padding: 7px 0;
+        vertical-align: middle;
+        .products.wrapper ~ .toolbar & {
+            display: none;
+        }
+    }
+    .toolbar-products {
+        margin-bottom: 35px;
+        padding: 7px 10px;
+        background-color: #f5f5f5;
+        display: inline-block;
+        width: 100%;
+        .font-size(14);
+        .products.wrapper ~ & {
+            padding: 0;
+            background-color: transparent;
+        }
+        &:extend(.abs-add-clearfix all);
+        .pages {
+            display: none;
+            .products.wrapper ~ & {
+                display: block;
+            }
+        }
+        label {
+            margin: 0;
+        }
+        select {
+            height: 31px;
+            cursor: pointer;
+            background-color: transparent;
+        }
+        .limiter {
+            float: left;
+            border: 1px solid #b8b8b8;
+            padding-left: 10px;
+            background: #ffffff;
+            .products.wrapper ~ & {
+                display: none;
+            }
+            .control {
+                display: inline-block;
+            }
+        }
+        .limiter-options {
+            margin: 0;
+            width: auto;
+            border: none;
+        }
+        .sorter {
+            float: left;
+            border: 1px solid #b8b8b8;
+            background-color: #ffffff;
+            padding-left: 10px;
+            position: relative;
+            select {
+                margin-left: -6px;
+                border: none;
+            }
+            .sorter-action {
+                position: absolute;
+                top: 0;
+                right: -30px;
+                color: #000000;
+                font-weight: 500;
+                height: 100%;
+            }
+        }
+        .modes {
+            float: right;
+            padding: 5px 0;
+            .modes-label {
+                float: left;
+                font-weight: normal;
+                padding: 2px 0;
+                margin-right: 5px;
+            }
+            .products.wrapper ~ & {
+                display: none;
+            }
+        }
+        .modes-mode {
+            .lib-css(color, #000000);
+            float: left;
+            font-weight: @font-weight__regular;
+            line-height: 1;
+            text-align: center;
+            &:not(.active) {
+                &:hover {
+                    .lib-css(color, #000000);
+                }
+            }
+            &:last-child {
+                margin-left: 10px;
+            }
+            &.active:before {
+                .lib-css(color, #000000);
+            }
+            .lib-icon-font( @icon-grid, @_icon-font-size: 24px, @_icon-font-text-hide: true, @_icon-font-color: #999999, @_icon-font-color-hover: #000000);
+        }
+        .mode-list {
+            .lib-icon-font-symbol(@icon-list);
+        }
+    }
+    .sorter {
+        margin-right: 65px;
+        .products.wrapper ~ .toolbar & {
+            display: none;
+        }
+    }
+    .sorter-action {
+        vertical-align: top;
+        .lib-icon-font( @icon-arrow-up, @_icon-font-size: 20px, @_icon-font-line-height: 31px, @_icon-font-color: #000000, @_icon-font-color-hover: @main_color, @_icon-font-text-hide: true);
+        &.sort-desc:before {
+            content: @icon-arrow-down;
+        }
+    }
+    .filter-mobile-btn {
+        position: relative;
+        cursor: pointer;
+        padding: 13px 10px;
+        background-color: #f5f5f5;
+        margin-bottom: 5px;
+        .text {
+            font-weight: 500;
+            text-transform: uppercase;
+            .layout-rtl & {
+                text-align: right;
+            }
+        }
+        i {
+            position: absolute;
+            top: 50%;
+            margin-top: -15px;
+            right: 0;
+            height: 30px;
+            width: 40px;
+            line-height: 30px;
+            font-size: 24px;
+            text-align: center;
+            .layout-rtl & {
+                right: auto;
+                left: 0;
+            }
+        }
+    }
+}

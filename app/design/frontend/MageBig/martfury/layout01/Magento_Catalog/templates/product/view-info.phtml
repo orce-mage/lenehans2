@@ -1,0 +1,57 @@
+<?php
+$_mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$productLayout = $_mbHelper->getConfig('mbconfig/product_view/product_layout');
+$social = $_mbHelper->getConfig('mbconfig/product_view/share_social');
+?>
+<div class="product-info-main-top product-info-main">
+    <?php if ($social) : ?>
+    <div class="row align-items-center">
+        <div class="col-12 col-lg-8 col-xl-9">
+            <?= $this->getChildHtml('page.main.title') ?>
+            <div class="info-after-title">
+                <?= $this->getChildHtml('product.info.review') ?>
+                <?= $this->getChildHtml('product.info.sku') ?>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 col-xl-3">
+            <?= $this->getChildHtml('product.info.social.share') ?>
+        </div>
+    </div>
+    <?php else : ?>
+    <?= $this->getChildHtml('page.main.title') ?>
+    <div class="info-after-title">
+        <?= $this->getChildHtml('product.info.review') ?>
+        <?= $this->getChildHtml('product.info.sku') ?>
+    </div>
+    <?php endif ?>
+</div>
+<?php if ($productLayout) : ?>
+<div class="product-info-main-content">
+    <div class="row">
+        <div class="col-12 col-md-6 col-xl-4">
+            <?= $this->getChildHtml('product.info.media') ?>
+        </div>
+        <div class="col-12 col-md-6 col-xl-5">
+            <?= $this->getChildHtml('product.info.main') ?>
+            <?= $_mbHelper->getCategoryStore($block->getProduct()); ?>
+        </div>
+        <div class="col-12 col-xl-3">
+            <div class="sidebar-product-wrap">
+                <?= $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('sidebar-product')->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php else : ?>
+<div class="product-info-main-content">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-5">
+            <?= $this->getChildHtml('product.info.media') ?>
+        </div>
+        <div class="col-12 col-md-6 col-lg-7">
+            <?= $this->getChildHtml('product.info.main') ?>
+            <?= $_mbHelper->getCategoryStore($block->getProduct()); ?>
+        </div>
+    </div>
+</div>
+<?php endif ?>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin">
+
+        <route id="wyomind_framework" frontName="wyomind_framework">
+            <module name="Wyomind_Framework" />
+        </route>
+    </router>
+</config>

@@ -1,0 +1,80 @@
+<?php
+$mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$googleFont = $mbHelper->getConfig('mbdesign/font/enablegooglefont');
+$font_default = $mbHelper->getConfig('mbdesign/font/font_default');
+if ($googleFont) {
+    $_font_1 = $mbHelper->getConfig('mbdesign/font/google_font_1') ? $mbHelper->getConfig('mbdesign/font/google_font_1') : 'Roboto';
+    $_font_weights_1 = $mbHelper->getConfig('mbdesign/font/google_font_weights_1') ? $mbHelper->getConfig('mbdesign/font/google_font_weights_1') : '400,700';
+    $_font_subsets_1 = $mbHelper->getConfig('mbdesign/font/google_font_subset_1') ? $mbHelper->getConfig('mbdesign/font/google_font_subset_1') : 'latin';
+
+    $google_font_1 = $_font_1 . ':' . $_font_weights_1 . ':' . $_font_subsets_1;
+
+    $google_font_2 = '';
+    if ($mbHelper->getConfig('mbdesign/font/enablefont2')) {
+        $_font_2 = $mbHelper->getConfig('mbdesign/font/google_font_2') ? $mbHelper->getConfig('mbdesign/font/google_font_2') : 'Open Sans';
+        $_font_weights_2 = $mbHelper->getConfig('mbdesign/font/google_font_weights_2') ? $mbHelper->getConfig('mbdesign/font/google_font_weights_2') : '400,700';
+        $_font_subsets_2 = $mbHelper->getConfig('mbdesign/font/google_font_subset_2') ? $mbHelper->getConfig('mbdesign/font/google_font_subset_2') : 'latin';
+
+        $google_font_2 = $_font_2 . ':' . $_font_weights_2 . ':' . $_font_subsets_2;
+    }
+
+    $google_font_3 = '';
+    if ($mbHelper->getConfig('mbdesign/font/enablefont3')) {
+        $_font_3 = $mbHelper->getConfig('mbdesign/font/google_font_3') ? $mbHelper->getConfig('mbdesign/font/google_font_3') : 'Lato';
+        $_font_weights_3 = $mbHelper->getConfig('mbdesign/font/google_font_weights_3') ? $mbHelper->getConfig('mbdesign/font/google_font_weights_3') : '400,700';
+        $_font_subsets_3 = $mbHelper->getConfig('mbdesign/font/google_font_subset_3') ? $mbHelper->getConfig('mbdesign/font/google_font_subset_3') : 'latin';
+
+        $google_font_3 = $_font_3 . ':' . $_font_weights_3 . ':' . $_font_subsets_3;
+    }
+}
+?>
+<?php if ($googleFont && $font_default != 'Work Sans') : ?>
+    <?php $iconFont = $block->getViewFileUrl('css/iconfont.css'); ?>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="<?= $iconFont ?>">
+    <script>
+        require(['Magento_Theme/js/webfontloader'], function(WebFont) {
+            WebFont.load({
+                google: {
+                    families: ["<?= $google_font_1 ?>", "<?= $google_font_2 ?>", "<?= $google_font_3 ?>"]
+                },
+                custom: {
+                    families: ["mbicon"],
+                    urls: ["<?= $iconFont ?>"]
+                },
+                classes: true,
+                timeout: 2000
+            });
+        });
+    </script>
+<?php elseif ($googleFont && $font_default == 'Work Sans'): ?>
+    <link rel="preload" as="style" href="<?= $block->getViewFileUrl('css/localfont.css') ?>">
+    <script>
+        require(['Magento_Theme/js/webfontloader'], function(WebFont) {
+            WebFont.load({
+                custom: {
+                    families: ["Work Sans", "mbicon"],
+                    urls: ["<?= $block->getViewFileUrl('css/localfont.css') ?>"]
+                },
+                classes: true,
+                timeout: 2000
+            });
+        });
+    </script>
+<?php else: ?>
+    <?php $iconFont = $block->getViewFileUrl('css/iconfont.css'); ?>
+    <link rel="preload" as="style" href="<?= $iconFont ?>">
+    <script>
+        require(['Magento_Theme/js/webfontloader'], function(WebFont) {
+            WebFont.load({
+                custom: {
+                    families: ["mbicon"],
+                    urls: ["<?= $iconFont ?>"]
+                },
+                classes: true,
+                timeout: 2000
+            });
+        });
+    </script>
+<?php endif ?>

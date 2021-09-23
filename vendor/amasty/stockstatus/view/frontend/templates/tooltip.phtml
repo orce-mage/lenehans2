@@ -1,0 +1,19 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+?>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<span class="amstockstatus-tooltip-block" tabindex="0">
+    <span class="amstockstatus-tooltip-content">
+        <span class="amstockstatus-inner">
+            <?= $escaper->escapeHtml($block->getData('tooltip_text')) ?>
+        </span>
+    </span>
+</span>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Block\Cart\Shipping">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="amastyStorePickup" xsi:type="object">Amasty\StorePickupWithLocator\Block\Cart\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="amastyStorePickup" xsi:type="object">Amasty\StorePickupWithLocator\Block\Cart\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="amasty-storepickup-data" xsi:type="string">Amasty\StorePickupWithLocator\CustomerData\LocationData</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Block\CustomerData">
+        <arguments>
+            <argument name="expirableSectionNames" xsi:type="array">
+                <item name="amasty-storepickup-data" xsi:type="string">amasty-storepickup-data</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Block\SectionConfig">
+        <arguments>
+            <argument name="clientSideSections" xsi:type="array">
+                <item name="amasty-selected-pickup-info" xsi:type="string">amasty-selected-pickup-info</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="checkout_amasty_storepickup_config" xsi:type="object">Amasty\StorePickupWithLocator\Model\CheckoutConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\StorePickupWithLocator\Model\CheckoutConfigProvider">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Storelocator\Model\ConfigHtmlConverter">
+        <arguments>
+            <argument name="variableRenderers" xsi:type="array">
+                <item name="curbside_available_label" xsi:type="object">Amasty\StorePickupWithLocator\Model\ConfigHtmlConverter\VariablesRenderer</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

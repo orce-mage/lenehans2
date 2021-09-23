@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Catalog:etc/catalog_attributes.xsd">
+    <group name="catalog_category">
+        <attribute name="smartmenu_show_on_cat"/>
+        <attribute name="smartmenu_cat_target"/>
+        <attribute name="smartmenu_cat_style"/>
+        <attribute name="smartmenu_cat_position"/>
+        <attribute name="smartmenu_cat_dropdown_width"/>
+        <attribute name="smartmenu_cat_column"/>
+        <attribute name="smartmenu_block_right"/>
+        <attribute name="smartmenu_block_left"/>
+        <attribute name="smartmenu_static_right"/>
+        <attribute name="smartmenu_static_left"/>
+        <attribute name="smartmenu_static_top"/>
+        <attribute name="smartmenu_static_bottom"/>
+        <attribute name="smartmenu_cat_label"/>
+        <attribute name="smartmenu_cat_icon"/>
+        <attribute name="smartmenu_cat_imgicon"/>
+    </group>
+</config>

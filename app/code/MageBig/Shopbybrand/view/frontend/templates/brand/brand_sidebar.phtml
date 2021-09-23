@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+/**
+ * Brand Slider template
+ *
+ * @var $block MageBig\Shopbybrand\Block\Brand\BrandFeatured
+ */ ?>
+<?php
+$orderBy = $block->getConfigValue('magebig_shopbybrand/featured_brands/sort_by');
+$sortOrder = $block->getConfigValue('magebig_shopbybrand/featured_brands/sort_order');
+$brands = $block->getBrandObject($orderBy, $sortOrder, true, 6);
+$count = count($brands);
+?>
+<?php if ($count > 0): ?>
+<div class="block block-featured-brand filter">
+	<div class="block-title"><strong class="title"><?php echo $block->getConfigValue('magebig_shopbybrand/featured_brands/title') ?></strong></div>
+    <div class="block-content">
+        <div class="featured-brands">
+            <div class="brand-featured-wrap row">
+                <?php foreach( $brands as $brand ): ?>
+                <div class="brand-item col-4">
+                    <a class="brank-url" title="<?= strip_tags($brand->getBrandLabel()) ?>" href="<?php echo $brand->getUrl() ?>">
+                        <img class="img-fluid" alt="<?php echo strip_tags($brand->getBrandLabel()) ?>" src="<?php echo $block->getThumbnailImage($brand, ['width' => 150, 'height' => 150]) ?>" />
+                    </a>
+                </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif ?>

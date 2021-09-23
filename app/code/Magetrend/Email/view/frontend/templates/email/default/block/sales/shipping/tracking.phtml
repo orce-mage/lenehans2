@@ -1,0 +1,101 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+
+//@codingStandardsIgnoreFile
+?>
+<?php $var = $block->getVarModel();?>
+<?php $_shipment = $block->getShipment(); ?>
+<?php $_order = $block->getOrder() ?>
+<?php if ($_shipment && $_order && $_shipment->getAllTracks()) : ?>
+
+    <table
+        width="100%"
+        style="width:100% !important;"
+        cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td height="30"></td>
+        </tr>
+        <tr>
+            <td  style="font-size: 15px; line-height: 26px; color: #707582; ">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                    <tr
+                        <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_title_tr_style', "background-color: #e26a0a;"); ?>
+                        <?php echo $var->getHtmlAttribute('bgcolor', 'shipping_tracking_title_tr_bgcolor', '#e26a0a'); ?>
+                        class="mteditor-bgcolor table-head-bg">
+                        <td height="45"  width="2%"></td>
+                        <td
+                            <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_title_td_style', "color: #ffffff; font-weight: bold; font-size: 14px; "); ?>
+                            <?php echo $var->getTextEditAttribute('shipping_tracking_shipped_by_label');?>
+                            class="mteditor-color table-head-color"
+                            height="45"  width="48%"  align="<?php echo $block->isRTL()?'right':'left';?>">
+                            <?php echo $var->getValue('shipping_tracking_shipped_by_label', __('Shipped By'), false);?>
+                        </td>
+                        <td
+                            <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_title_td_style', "color: #ffffff; font-weight: bold; font-size: 14px; "); ?>
+                            <?php echo $var->getTextEditAttribute('shipping_tracking_number_label');?>
+                            class="table-head-color"
+                            height="45"  width="48%"  align="<?php echo $block->isRTL()?'right':'left';?>">
+                            <?php echo $var->getValue('shipping_tracking_number_label', __('Tracking Number'), false);?>
+                        </td>
+
+                        <td height="45"  width="2%"></td>
+
+                    </tr>
+                    <?php $i=0; foreach ($_shipment->getAllTracks() as $_item): $i++ ?>
+
+                        <tr
+                            <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_row_tr_style', "background-color: #ffffff;"); ?>
+                            <?php echo $var->getHtmlAttribute('bgcolor', 'shipping_tracking_row_tr_bgcolor', '#ffffff'); ?>
+                            class="mteditor-bgcolor row-bg-color">
+                            <td colspan="6" height="5"></td>
+                        </tr>
+                        <tr
+                            <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_row_tr_style', "background-color: #ffffff;"); ?>
+                            <?php echo $var->getHtmlAttribute('bgcolor', 'shipping_tracking_row_tr_bgcolor', '#ffffff'); ?>
+                            class="mteditor-bgcolor row-bg-color">
+                            <td></td>
+                            <td
+                                <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_row_shipped_by_style', "color: #707582; font-size: 14px;"); ?>
+                                class="mteditor-color table-row-color"
+                                align="<?php echo $block->isRTL()?'right':'left';?>" height="35" >
+                                <?php echo $this->escapeHtml($_item->getTitle()) ?>
+                            </td>
+                            <td  <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_row_code_style', "color: #707582; font-size: 14px;"); ?>
+                                class="mteditor-color table-row-color"
+                                align="<?php echo $block->isRTL()?'right':'left';?>" height="35" >
+                                    <a href="<?php echo $block->getTrackUrl($_item); ?>"><?php echo $this->escapeHtml($_item->getTrackNumber()) ?></a>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr
+                            <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_row_tr_style', "background-color: #ffffff;"); ?>
+                            <?php echo $var->getHtmlAttribute('bgcolor', 'shipping_tracking_row_tr_bgcolor', '#ffffff'); ?>
+                            class="mteditor-bgcolor row-bg-color">
+                            <td colspan="6" height="5"></td>
+                        </tr>
+
+                        <tr>
+                            <td height="1"
+                                <?php echo $var->getHtmlAttribute('style', 'shipping_tracking_row_line_style', "background-color: #e26a0a; line-height: 0px; font-size: 0 !important; height: 1px !important;"); ?>
+                                <?php echo $var->getHtmlAttribute('bgcolor', 'shipping_tracking_row_line_bgcolor', '#e26a0a'); ?>
+                                class="mteditor-bgcolor item-line-color"
+                                colspan="4" >&nbsp;</td>
+                        </tr>
+                    <?php endforeach ?>
+
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="30"></td>
+        </tr>
+    </table>
+
+<?php endif; ?>
+
+

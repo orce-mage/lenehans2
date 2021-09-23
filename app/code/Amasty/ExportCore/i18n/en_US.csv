@@ -1,0 +1,131 @@
+"Process Identity is not set.","Process Identity is not set."
+"Export File is empty","Export File is empty"
+"Something went wrong","Something went wrong"
+"Amasty Export","Amasty Export"
+Export,Export
+"Process Started","Process Started"
+"Failed to deploy to destination ""%1"". Error ""%2"". Please check your log file for more details","Failed to deploy to destination ""%1"". Error ""%2"". Please check your log file for more details"
+"There are no export results","There are no export results"
+"Entity ""%1"" already exists.","Entity ""%1"" already exists."
+"Fields Class should return ""%1"" interface result","Fields Class should return ""%1"" interface result"
+Append,Append
+"Attribute Set Id To Attribute Set Name","Attribute Set Id To Attribute Set Name"
+Capitalize,Capitalize
+"Capitalize Each Word","Capitalize Each Word"
+"Date Format","Date Format"
+"Default Value","Default Value"
+"Attribute Id To Code","Attribute Id To Code"
+"Option Value To Option Label","Option Value To Option Label"
+Explode,Explode
+"Lower Case","Lower Case"
+Map,Map
+"Absolute Value","Absolute Value"
+Ceil,Ceil
+"Divided By","Divided By"
+Floor,Floor
+Minus,Minus
+Modulo,Modulo
+"Multiplied By","Multiplied By"
+Plus,Plus
+"Price in Base Currency","Price in Base Currency"
+"Round To","Round To"
+Truncate,Truncate
+Prepend,Prepend
+Replace,Replace
+"Replace First","Replace First"
+"Convert Store Code To Store Id","Convert Store Code To Store Id"
+"Convert Store Id To Store Code","Convert Store Id To Store Code"
+"Strip Html Tags","Strip Html Tags"
+Trim,Trim
+"Upper Case","Upper Case"
+"Website Id to Website Code","Website Id to Website Code"
+"Custom Modifiers","Custom Modifiers"
+"Text Modifiers","Text Modifiers"
+"Numeric Modifiers","Numeric Modifiers"
+"Date Modifiers","Date Modifiers"
+"Something went wrong while export. Please review logs","Something went wrong while export. Please review logs"
+"Something went wrong while export","Something went wrong while export"
+"File Path","File Path"
+"The file will be saved in Magento 'var' directory relative to this path.","The file will be saved in Magento 'var' directory relative to this path."
+"File Name on Server","File Name on Server"
+is,is
+"is not","is not"
+"more or equal","more or equal"
+"less or equal","less or equal"
+"greater than","greater than"
+"less than","less than"
+"is null","is null"
+"is not null","is not null"
+"Enter one value per line.","Enter one value per line."
+like,like
+"is one of","is one of"
+"is not one of","is not one of"
+label,label
+"Fields Configuration","Fields Configuration"
+"Custom Entity Key","Custom Entity Key"
+Enabled,Enabled
+"Entity Key","Entity Key"
+"An additional name that is placed before the column name.","An additional name that is placed before the column name."
+"Output Entity Key","Output Entity Key"
+"Replace the name specified in the setting 'Entity Key'.","Replace the name specified in the setting 'Entity Key'."
+"Add %1 Fields","Add %1 Fields"
+"Add Selected Fields","Add Selected Fields"
+"Add Fields","Add Fields"
+"Delete Table","Delete Table"
+"Export File","Export File"
+name,name
+"Wrong file destination form class: %1","Wrong file destination form class: %1"
+"File Name","File Name"
+"Use {{date|format}} to customize filename. Example: Filename-{{date|Y_m_d_h_i_s}}. <a href=""https://www.php.net/manual/en/function.date.php"" target=""_blank"">Here</a> you may find more options for date format.","Use {{date|format}} to customize filename. Example: Filename-{{date|Y_m_d_h_i_s}}. <a href=""https://www.php.net/manual/en/function.date.php"" target=""_blank"">Here</a> you may find more options for date format."
+Filter,Filter
+"Exclude Parent Entity Row If No Results Found","Exclude Parent Entity Row If No Results Found"
+"Enable the setting to exclude parent entity row from the export file if the child entity doesn't have filter results relative to the parent entity.","Enable the setting to exclude parent entity row from the export file if the child entity doesn't have filter results relative to the parent entity."
+"Add Filter","Add Filter"
+"Additional Actions","Additional Actions"
+"Wrong post processor form class: %1","Wrong post processor form class: %1"
+"Export Template","Export Template"
+"File Type","File Type"
+"Wrong template form class: %1","Wrong template form class: %1"
+"NOT LOGGED IN","NOT LOGGED IN"
+"ALL GROUPS","ALL GROUPS"
+"Add Header Row","Add Header Row"
+"Merge Rows into One","Merge Rows into One"
+"Data from multiple rows will be merged into one cell, if enabled.","Data from multiple rows will be merged into one cell, if enabled."
+"Merged Rows Data Delimiter","Merged Rows Data Delimiter"
+"The character that delimits each field of the child rows.","The character that delimits each field of the child rows."
+"Field Delimiter","Field Delimiter"
+"The character that delimits each field of the rows.","The character that delimits each field of the rows."
+"Field Enclosure Character","Field Enclosure Character"
+"The character that encloses each field of the rows.","The character that encloses each field of the rows."
+"Entity Key Delimiter","Entity Key Delimiter"
+"The character that separates the entity key from the column name.","The character that separates the entity key from the column name."
+"XML Item Tag","XML Item Tag"
+Header,Header
+Footer,Footer
+"Directory ""%1"" is not writable","Directory ""%1"" is not writable"
+"Process with specified identity ""%1"" not found.","Process with specified identity ""%1"" not found."
+"Unable to remove batch with ID %1. Error: %2","Unable to remove batch with ID %1. Error: %2"
+"Unable to remove batch. Error: %1","Unable to remove batch. Error: %1"
+Continue,Continue
+Download,Download
+"Regenerate File","Regenerate File"
+"Add Modifier","Add Modifier"
+Modifier,Modifier
+"Field Name","Field Name"
+"Field Name in Export File","Field Name in Export File"
+Action,Action
+"Static Field Value","Static Field Value"
+"Add Static Field","Add Static Field"
+"-- Please Select --","-- Please Select --"
+Search,Search
+Add,Add
+"Multi-Process Export","Multi-Process Export"
+"Enable Multi-Process Export","Enable Multi-Process Export"
+"The 'Multi-Process Export' feature requires the PHP extension 'pcntl' to be installed on the server. If you enable the feature and no performance boost happens, please ask your hoster/system administrator to check if the 'pcntl' extension is installed.","The 'Multi-Process Export' feature requires the PHP extension 'pcntl' to be installed on the server. If you enable the feature and no performance boost happens, please ask your hoster/system administrator to check if the 'pcntl' extension is installed."
+"Number of Parallel Processes","Number of Parallel Processes"
+"The more parallel processes are set, the faster the export process goes, but the higher the server loads.","The more parallel processes are set, the faster the export process goes, but the higher the server loads."
+CSV,CSV
+XML,XML
+"Store Exported File On Server","Store Exported File On Server"
+"Export Settings","Export Settings"
+"Select Entity","Select Entity"

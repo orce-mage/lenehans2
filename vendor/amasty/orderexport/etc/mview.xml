@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="amasty_amorderexport_attribute_index" class="\Amasty\Orderexport\Model\Indexer\Mview\Action" group="indexer">
+        <subscriptions>
+            <table name="sales_order_item" entity_column="item_id" />
+        </subscriptions>
+    </view>
+</config>

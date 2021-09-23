@@ -1,0 +1,23 @@
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<div id="checkout-shipping-method-load">
+    <table class="table-checkout-shipping-method">
+        <thead>
+        <tr class="table-row">
+            <th class="table-col col-method" translate="'Select Method'"></th>
+            <th class="table-col col-price" translate="'Price'"></th>
+            <th class="table-col col-method" translate="'Method Title'"></th>
+            <th class="table-col col-carrier" translate="'Carrier Title'"></th>
+        </tr>
+        </thead>
+        <tbody>
+            <!-- ko foreach: { data: rates(), as: 'method'} -->
+                <!--ko template: { name: element.shippingMethodItemTemplate} --><!-- /ko -->
+            <!-- /ko -->
+        </tbody>
+    </table>
+</div>

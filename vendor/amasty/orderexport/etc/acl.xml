@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Amasty_Orderexport::amasty_orderexport" title="Efficient Order Export" sortOrder="161801"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::system">
+                    <resource id="Amasty_Orderexport::general" title="Efficient Order Export" sortOrder="161801">
+                        <resource id="Amasty_Orderexport::profiles" title="Profiles" sortOrder="161801"/>
+                        <resource id="Amasty_Orderexport::history" title="History" sortOrder="161802"/>
+                        <resource id="Amasty_Orderexport::thirdparty" title="3rd Party Link" sortOrder="161803"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

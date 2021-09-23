@@ -1,0 +1,64 @@
+<if args="locations().length">
+    <div class="ampickupmsi-locations-container ampickupmsi-main-container"
+         css="{'-no-expander': locations().length <= 3}">
+        <div class="ampickupmsi-title">
+            <span translate="'This product is available for Click & Collect at the '"></span>
+            <if args="locations().length === 1">
+                <span translate="'location below'"></span>
+            </if>
+            <if args="locations().length > 1">
+                <span html="locations().length "></span>
+                <span translate="'locations below'"></span>
+            </if>:
+        </div>
+        <div class="ampickupmsi-locations"
+             data-ampickupmsi-js="locations-wrapper"
+             data-bind="event: {
+                scroll: toggleGradient
+             }">
+            <each args="data: locations(), as: 'msiLocation'">
+                <div class="ampickupmsi-location"
+                     attr="'data-ampickupmsi-id': msiLocation.location.id"
+                     css="{
+                         '-hidden': !$parent.expandedState(),
+                         '-allowed': $index() <= $parent.maxLocationsToShowBeforeExpand - 1
+                     }"
+                     click="$parent.setSelectedLocationId">
+                    <div class="ampickupmsi-info">
+                        <span class="ampickupmsi-map"></span>
+                        <div>
+                            <span class="ampickupmsi-name" text="msiLocation.location.name"></span>
+                            <span class="ampickupmsi-address"
+                                  text="msiLocation.location.address
+                                      + ', ' + msiLocation.location.city
+                                      + ', ' + msiLocation.location.country"></span>
+                            <span class="ampickup-curbside-label"
+                                  if="msiLocation.location.curbside_enabled && $parent.curbsideLabelEnabled"
+                                  text="$parent.curbsideLabel"></span>
+                        </div>
+                    </div>
+                    <div class="ampickupmsi-stock">
+                        <span class="ampickupmsi-count">
+                            <span html="msiLocation.qty"></span> <span translate="'pcs.'"></span>
+                        </span>
+                        <span class="ampickupmsi-stock-status" translate="'in stock'"></span>
+                    </div>
+                </div>
+            </each>
+        </div>
+        <if args="locations().length > 3">
+            <div class="ampickupmsi-full-list"
+                 data-ampickup-js="locations-expander"
+                 click="toggleExpandedState"
+                 css="{'-expanded': expandedState(), '-gradient': locations().length > 5}">
+                <span class="ampickupmsi-toggle" translate="'See All'"></span>
+                <span class="ampickupmsi-arrow"></span>
+            </div>
+        </if>
+    </div>
+</if>
+<if args="isConfigurable() && !productId()">
+    <div class="ampickupmsi-main-container ampickupmsi-choose-options">
+        <span translate="'Choose product options to see availability in stores'"></span>
+    </div>
+</if>

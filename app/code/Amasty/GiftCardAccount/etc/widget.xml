@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Amasty\GiftCardAccount\Block\Widget\CodeStatusChecker" id="amasty_giftcard_account_code_checker">
+        <label>Amasty Gift Card Code Status Check</label>
+        <description>Gift Card Code Status Check</description>
+    </widget>
+</widgets>

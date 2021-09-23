@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<li class="item link compare" data-bind="scope: 'compareProducts'" data-role="compare-products-link">
+    <a class="action compare no-display" title="<?= /* @escapeNotVerified */ __('Compare') ?>"
+       data-bind="attr: {'href': compareProducts().listUrl}, css: {'no-display': !compareProducts().count}"
+    >
+        <?= /* @escapeNotVerified */ __('Compare') ?>
+        <!-- ko if: compareProducts().count -->
+        <span class="counter qty" data-bind="text: compareProducts().countCaption"></span>
+         <!-- /ko -->
+    </a>
+</li>
+<script type="text/x-magento-init">
+{"[data-role=compare-products-link]": {"Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout();?>}}
+</script>

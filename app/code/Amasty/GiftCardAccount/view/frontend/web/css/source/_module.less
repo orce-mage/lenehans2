@@ -1,0 +1,187 @@
+//
+//  Gift Card Account
+//  ____________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amcard-codes-list,
+    .amcard-field-container {
+        .amcardacc-template-container & {
+            max-width: 360px;
+        }
+
+        &.-cart {
+            max-width: 500px;
+        }
+
+        &.-paypal {
+            margin: 20px 0;
+        }
+
+        .amcard-check,
+        .amcard-delete {
+            & {
+                position: relative;
+                align-self: flex-start;
+                padding: 0;
+                border: none;
+                background: none;
+                box-shadow: none;
+                color: #1787e0;
+                cursor: pointer;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .amcard-check {
+            margin-top: 10px;
+        }
+    }
+
+    .amcard-field-block {
+        &.-code {
+            margin-top: 10px;
+        }
+
+        .amcard-button {
+            & {
+                font-weight: 600;
+                transition: opacity .3s ease-out;
+            }
+
+            &:hover {
+                opacity: .9;
+            }
+        }
+
+        .amcard-button.-account {
+            background: #3a77bd;
+            color: #fff;
+        }
+
+        .amgcard-datalist-container + .amcard-button {
+            align-self: flex-start;
+            line-height: 16px;
+        }
+    }
+
+    .amcard-card-info {
+        & {
+            display: flex;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e8f6ff;
+        }
+
+        .amcard-field:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+
+    .amcardacc-messages-container {
+        & {
+            display: none;
+        }
+
+        &.-visible {
+            display: block;
+        }
+    }
+
+    .amcard-form-container .amcard-field.-validate {
+        position: absolute;
+        width: 0;
+        opacity: 0;
+    }
+
+    .amgcard-datalist-container {
+        & {
+            position: relative;
+            width: 100%;
+        }
+
+        &.-active .amgcard-datalist-ul {
+            display: block;
+        }
+
+        .amcard-input-arrow:after {
+            position: absolute;
+            top: 14px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-color: #333 transparent transparent transparent;
+            content: '';
+        }
+
+        &.-active .amcard-input-arrow:after {
+            top: 7px;
+            border-color: transparent transparent #333 transparent;
+        }
+
+        .amcard-datalist-message {
+            font-style: italic;
+        }
+
+        .amcard-field.-datalist {
+            height: 32px;
+        }
+    }
+
+    .amgcard-datalist-ul {
+        & {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+            display: none;
+            overflow: hidden;
+            overflow-y: auto;
+            margin: 5px 0 0 0;
+            padding: 0;
+            max-height: 200px;
+            width: 100%;
+            border-radius: 2px;
+            background: #fff;
+            list-style: none;
+        }
+
+        .amcard-datalist-li {
+            display: block;
+            margin-bottom: 0;
+            padding: 6px 10px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color .3s ease-in;
+        }
+
+        .amcard-datalist-li:hover {
+            background-color: rgba(239, 239, 239, .9);
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________________
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .amcard-card-info {
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .amcard-field {
+            flex: 0 50%;
+
+            &:not(:last-child) {
+                margin-right: 0;
+            }
+        }
+    }
+}

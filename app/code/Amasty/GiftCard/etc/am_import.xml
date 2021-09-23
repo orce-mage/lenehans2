@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <include path="Amasty_GiftCard::import_entity/giftcard_account.xml"/>
+    <include path="Amasty_GiftCard::import_entity/giftcard_customer_card.xml"/>
+    <include path="Amasty_GiftCard::import_entity/giftcard_code.xml"/>
+    <include path="Amasty_GiftCard::import_entity/giftcard_code_pool.xml"/>
+    <include path="Amasty_GiftCard::import_entity/giftcard_image.xml"/>
+    <include path="Amasty_GiftCard::import_entity/giftcard_order.xml"/>
+    <include path="Amasty_GiftCard::import_entity/giftcard_invoice.xml"/>
+    <include path="Amasty_GiftCard::import_entity/giftcard_creditmemo.xml"/>
+</config>

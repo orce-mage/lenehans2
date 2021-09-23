@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+$pageInfo = $block->getPageInfo();
+$displayBrandSearch = (bool)$pageInfo->getData('display_brand_search');
+?>
+
+<div class="brand-container">
+    <div class="brand-top">
+        <div class="page-desc"><?= $pageInfo->getData('description') ?></div>
+    </div>
+
+    <div class="brand-main">
+        <div class="block">
+            <div class="block-title">
+                <?php if ($displayBrandSearch) : ?>
+                    <?= $block->getBlockHtml('brand_search_index') ?>
+                <?php endif ?>
+            </div>
+            <div class="block-content"><?= $block->getBlockHtml('brand_alphabet_list'); ?></div>
+        </div>
+    </div>
+</div>

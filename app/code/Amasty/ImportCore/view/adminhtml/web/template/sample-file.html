@@ -1,0 +1,8 @@
+<div class="admin__field" data-bind="visible: visible">
+    <label class="admin__field-label" data-bind="text: $data.label"></label>
+    <div class="admin__field-control" style="line-height: 3.2rem;">
+        <a data-bind="
+            attr: {href: $data.downloadLink, title: $data.linkText || $t('Download')},
+            text: $data.linkText || $t('Download')"></a>
+    </div>
+</div>

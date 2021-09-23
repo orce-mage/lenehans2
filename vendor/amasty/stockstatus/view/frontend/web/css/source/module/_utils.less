@@ -1,0 +1,71 @@
+//
+//  Utils
+// _______________________________________________
+
+.am-scrollbar(
+    @color: #181818,
+    @second-color: #5f5e5e,
+    @direction: y,
+    @width: 4px,
+    @shadow-color: #5f5e5e
+) {
+    & {
+        overflow: hidden;
+        overflow-@{direction}: auto;
+        scrollbar-color: @color rgba(255, 255, 255, .2);
+        scrollbar-width: thin;
+    }
+
+    &::-webkit-scrollbar {
+        background: @second-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: @width;
+        background: @color;
+        cursor: pointer;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px @shadow-color;
+    }
+
+    & when not (@direction = x) {
+        &::-webkit-scrollbar {
+            width: @width;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            width: @width;
+        }
+
+        ::-webkit-scrollbar-track {
+            width: @width;
+        }
+    }
+
+    & when not (@direction = y) {
+        &::-webkit-scrollbar {
+            height: @width;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            height: @width;
+        }
+
+        ::-webkit-scrollbar-track {
+            height: @width;
+        }
+    }
+}
+
+.am-word-break {
+    & {
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .ie11 & {
+        word-break: break-all;
+    }
+}

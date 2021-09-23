@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <storepickup_locator>
+            <time_settings>
+                <same_day_cutoff_time>11:00</same_day_cutoff_time>
+            </time_settings>
+            <curbside_pickup_settings>
+                <checkbox_enabled>0</checkbox_enabled>
+                <checkbox_label>Curbside Pickup</checkbox_label>
+                <display_curbside_conditions>0</display_curbside_conditions>
+                <conditions_label>Conditions</conditions_label>
+                <comments_enabled>0</comments_enabled>
+                <comment_placeholder><![CDATA[Please specify your vehicle details (type, color, license plate number) and preferred contact method.]]></comment_placeholder>
+                <comment_field_required>0</comment_field_required>
+                <labels_enabled>0</labels_enabled>
+                <label_text>Curbside Pickup Available</label_text>
+                <pickup_banner>curbside_pickup_banner</pickup_banner>
+            </curbside_pickup_settings>
+        </storepickup_locator>
+        <carriers>
+            <amstorepickup>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Amasty\StorePickupWithLocator\Model\Carrier\Shipping</model>
+                <name>Store Pickup with Locator</name>
+                <price>0.00</price>
+                <handling_fee>0.00</handling_fee>
+                <title>Store Pickup</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <handling_type>F</handling_type>
+                <type>I</type>
+            </amstorepickup>
+        </carriers>
+        <storepickup_locator>
+            <general>
+                <shipping_template>
+<![CDATA[
+<div class="amlocator-location-info" >
+<div class="amlocator-image">{{photo}}</div>
+{{locatorPage}} <br>
+City: {{city}} <br>
+Zip: {{zip}} <br>
+Address: {{address}} <br>
+{{ifstate}}State: {{state}} <br>{{/ifstate}}
+Description: {{description}}
+{{ifphone}}
+<a href="tel:{{phone}}" class="amlocator-link" title="{{phone}}">
+    <span class="amlocator-icon -phone"></span>{{phone}}
+</a>
+{{/ifphone}}
+{{ifemail}}
+<a href="mailto:{{email}}" class="amlocator-link" title="{{email}}">
+    <span class="amlocator-icon -email"></span>{{email}}
+</a>
+{{/ifemail}}
+{{ifwebsite}}
+<a href="{{website}}" class="amlocator-link" title="{{website}}" target="_blank">
+    <span class="amlocator-icon -website"></span>{{website}}
+</a>
+{{/ifwebsite}}
+</div>
+]]>
+                </shipping_template>
+            </general>
+        </storepickup_locator>
+    </default>
+</config>

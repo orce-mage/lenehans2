@@ -1,0 +1,109 @@
+<script>
+    require([
+        'Magento_Ui/js/lib/view/utils/async',
+        'ko',
+        'domReady!'
+    ], function (jQuery, ko) {
+
+        function loadOptionsWysiwygWidget() {
+            if (typeof (window.WysiwygWidget) !== 'undefined') {
+                window.WysiwygWidget.Widget.prototype.loadOptions = function () {
+                    var optionsContainerId,
+                        params,
+                        msg,
+                        msgTmpl,
+                        $wrapper,
+                        typeName = this.optionValues.get('type_name');
+
+                    if (!this.widgetEl.value) {
+                        if (typeName) {
+                            msgTmpl = jQuery.mage.__('The widget %1 is no longer available. Select a different widget.');
+                            msg = jQuery.mage.__(msgTmpl).replace('%1', typeName);
+
+                            jQuery('body').notification('clear').notification('add', {
+                                error: true,
+                                message: msg,
+
+                                /**
+                                 * @param {String} message
+                                 */
+                                insertMethod: function (message) {
+                                    $wrapper = jQuery('<div/>').html(message);
+
+                                    $wrapper.insertAfter('.modal-slide .page-main-actions');
+                                }
+                            });
+                        }
+                        this.switchOptionsContainer();
+
+                        return;
+                    }
+
+                    optionsContainerId = this.getOptionsContainerId();
+
+                    if ($(optionsContainerId) != undefined) { //eslint-disable-line eqeqeq
+                        this.switchOptionsContainer(optionsContainerId);
+
+                        return;
+                    }
+
+                    this._showWidgetDescription();
+
+                    params = {
+                        'widget_type': this.widgetEl.value,
+                        values: this.optionValues
+                    };
+
+                    // ko.cleanNode(this.widgetOptionsEl);
+
+                    new Ajax.Request(this.optionsUrl, {
+                        parameters: {
+                            widget: Object.toJSON(params)
+                        },
+
+                        /**
+                         * On success.
+                         */
+                        onSuccess: function (transport) {
+                            try {
+                                widgetTools.onAjaxSuccess(transport);
+                                this.switchOptionsContainer();
+
+                                if ($(optionsContainerId) == undefined) { //eslint-disable-line eqeqeq
+                                    var textData = widgetTools.getDivHtml(optionsContainerId, transport.responseText),
+                                        htmlData = jQuery(textData);
+
+                                    // this.widgetOptionsEl.insert({
+                                    //     bottom: widgetTools.getDivHtml(optionsContainerId, transport.responseText)
+                                    // });
+
+                                    var widgetId = jQuery('#'+this.widgetOptionsEl.id);
+                                    widgetId.append(htmlData);
+                                    ko.cleanNode(this.widgetOptionsEl);
+                                    widgetId.trigger('contentUpdated').applyBindings();
+
+                                    // var catIds = widgetId.find('.category-ids');
+                                    // ko.cleanNode(catIds[0]);
+                                    // uiRegistry.remove(catIds[0]);
+                                    // catIds.trigger('contentUpdated').applyBindings();
+                                } else {
+                                    this.switchOptionsContainer(optionsContainerId);
+                                }
+                            } catch (e) {
+                                alert({
+                                    content: e.message
+                                });
+                            }
+                        }.bind(this)
+                    });
+                };
+            }
+        }
+
+        jQuery.async('textarea', function (elem) {
+            setTimeout(function () {
+                loadOptionsWysiwygWidget();
+            }, 2000);
+        });
+    });
+</script>

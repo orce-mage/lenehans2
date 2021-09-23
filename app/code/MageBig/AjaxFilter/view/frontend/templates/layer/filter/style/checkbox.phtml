@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/** @var \MageBig\AjaxFilter\Block\Navigation\Renderer\Attribute */
+?>
+
+<?php
+$filter = $block->getFilter();
+$filterItems = $filter->getItems();
+$code = $block->getCode();
+$selectedOption = $block->getRequest()->getParam($code);
+$selectedOption = explode(',', $selectedOption);
+$filterStyle = $block->getFilterStyle();
+$helper = $this->helper('MageBig\AjaxFilter\Helper\Data');
+?>
+<?php  if ($count = count($filterItems)) : ?>
+    <?php if ($count > 5) : ?>
+    <div class="search-filter-wrap">
+        <input type="text" class="search-filter">
+        <label><span class="mbi mbi-magnifier"></span></label>
+    </div>
+    <?php endif; ?>
+    <div class="filter-options-overflow" style="max-height: <?= $helper->boxMaxHeight() ?>">
+    <?php if ($filterStyle) : ?>
+        <div class="filter-container" data-role="mb-filter-checkbox"
+             data-action="<?= $block->getActionUrl() ?>" data-code="<?= $code ?>"
+             data-select="1">
+            <ul class="items filter-checkbox-multi">
+            <?php foreach ($filterItems as $filterItem) : ?>
+                <li class="item field">
+                    <?php $value = $filterItem->getValue(); ?>
+                    <input type="checkbox" id="filter-<?= $code ?>-<?= $value ?>" <?= (in_array($value, $selectedOption)) ? 'checked':'' ?> value="<?= $value ?>" />
+                    <label for="filter-<?= $code ?>-<?= $value ?>">
+                        <span class="text"><?= $filterItem->getLabel(); ?></span>
+                        <?php if ($block->displayProductCount()) : ?>
+                        <span class="count"><?= $filterItem->getCount() ?></span>
+                        <?php endif; ?>
+                    </label>
+                </li>
+            <?php endforeach ?>
+            </ul>
+        </div>
+    <?php else : ?>
+        <div class="filter-container" data-role="mb-filter-checkbox"
+             data-action="<?= $block->getActionUrl() ?>" data-code="<?= $code ?>"
+             data-select="0">
+            <ul class="items filter-checkbox-radio">
+            <?php foreach ($filterItems as $filterItem) : ?>
+                <li class="item item-checkbox field">
+                    <?php $value = $filterItem->getValue(); ?>
+                    <input type="checkbox" id="filter-<?= $code ?>-<?= $value ?>" <?= (in_array($value, $selectedOption)) ? 'checked':'' ?> value="<?= $value ?>" />
+                    <label for="filter-<?= $code ?>-<?= $value ?>">
+                        <span class="text"><?= $filterItem->getLabel(); ?></span>
+                        <?php if ($block->displayProductCount()) : ?>
+                            <span class="count"><?= $filterItem->getCount() ?></span>
+                        <?php endif; ?>
+                    </label>
+                </li>
+            <?php endforeach ?>
+            </ul>
+        </div>
+    <?php endif ?>
+    </div>
+<?php endif ?>

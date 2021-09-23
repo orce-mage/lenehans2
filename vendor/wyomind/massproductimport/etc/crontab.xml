@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Cron/etc/crontab.xsd">
+    <group id="default">
+        <job name="massproductimport_run" instance="Wyomind\MassProductImport\Cron\Run" method="run">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+        <job name="massstockupdate_run" instance="Wyomind\MassStockUpdate\Cron\Run" method="run">
+            <schedule>* * 31 2 *</schedule>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+                id="Wyomind_MassProductImport::main"
+                title="Mass Product Import &amp; Update"
+                module="Wyomind_MassProductImport"
+                sortOrder="100000"
+                parent="Magento_Backend::system"
+                resource="Wyomind_MassProductImport::main"/>
+        <add
+                id="Wyomind_MassProductImport::profiles"
+                title="Profiles"
+                module="Wyomind_MassProductImport"
+                sortOrder="1"
+                parent="Wyomind_MassProductImport::main"
+                action="massproductimport/profiles/index"
+                resource="Wyomind_MassProductImport::profiles"/>
+        <add
+                id="Wyomind_MassProductImport::rules"
+                title="Replacement Rules"
+                module="Wyomind_MassProductImport"
+                sortOrder="2"
+                parent="Wyomind_MassProductImport::main"
+                action="massproductimport/rules/index"
+                resource="Wyomind_MassProductImport::rules"/>
+
+        <remove id="Wyomind_MassStockUpdate::profiles"/>
+    </menu>
+</config>

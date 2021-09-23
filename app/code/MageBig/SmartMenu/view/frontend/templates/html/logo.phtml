@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+?>
+<?php $storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt(); ?>
+<div class="nav-logo text-hide">
+    <a href="<?= $block->getUrl(''); ?>" title="<?= /* @escapeNotVerified */ $storeName ?>">
+        <strong><?= /* @escapeNotVerified */
+            $block->getLogoAlt() ?></strong>
+        <img class="img-fluid" src="<?= /* @escapeNotVerified */
+        $block->getLogoSrc() ?>"
+             alt="<?= /* @escapeNotVerified */
+             $block->getLogoAlt() ?>"
+            <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+            <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+        />
+    </a>
+</div>

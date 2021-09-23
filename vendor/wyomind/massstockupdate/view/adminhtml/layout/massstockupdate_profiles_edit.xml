@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+
+    </head>
+
+
+    <head>
+        <css src="Wyomind_Framework::css/history.css"/>
+        <link src="Wyomind_Framework::js/history.js"/>
+        <css src="Wyomind_MassStockUpdate::css/edit.css"/>
+        <css src="Wyomind_Framework::js/codemirror/codemirror.css"/>
+
+        <link src="Wyomind_MassStockUpdate::js/edit.js"/>
+
+
+        <css src="jquery/colorpicker/css/colorpicker.css"/>
+
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit" name="massstockupdate_profiles_edit"/>
+            <block class="Magento\Backend\Block\Template" name="blackbox"
+                   template="Wyomind_MassStockUpdate::edit/blackbox.phtml" after="-"/>
+        </referenceContainer>
+
+        <referenceContainer name="left">
+            <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit\Tabs"
+                   name="massstockupdate_profiles_edit_tabs">
+
+                <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit\Tab\Main"
+                       name="massstockupdate_profiles_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">massstockupdate_profiles_edit_tab_main</argument>
+                </action>
+                <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit\Tab\Advanced"
+                       name="massstockupdate_profiles_edit_tab_advanced"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">advanced_section</argument>
+                    <argument name="block" xsi:type="string">massstockupdate_profiles_edit_tab_advanced</argument>
+                </action>
+                <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit\Tab\Mapping"
+                       name="massstockupdate_profiles_edit_tab_mapping"
+                       template="Wyomind_MassStockUpdate::edit/mapping.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mapping_section</argument>
+                    <argument name="block" xsi:type="string">massstockupdate_profiles_edit_tab_mapping</argument>
+                </action>
+
+
+                <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit\Tab\Cron"
+                       name="massstockupdate_profiles_edit_tab_cron"
+                       template="Wyomind_MassStockUpdate::edit/cron.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">cron_section</argument>
+                    <argument name="block" xsi:type="string">massstockupdate_profiles_edit_tab_cron</argument>
+                </action>
+                <!-- History -->
+                <block class="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit\Tab\ActionHistory"
+                       name="massstockupdate_profiles_edit_tab.grid.container"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">action_history_grid</argument>
+                    <argument name="block" xsi:type="string">massstockupdate_profiles_edit_tab.grid.container
+                    </argument>
+                </action>
+
+            </block>
+        </referenceContainer>
+    </body>
+</page>

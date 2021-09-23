@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.cart.totals">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-totals" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="amgiftcard" xsi:type="array">
+                                    <item name="component"  xsi:type="string">Amasty_GiftCardAccount/js/cart/totals/giftcard</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">Gift Card</item>
+                                    </item>
+                                    <item name="sortOrder" xsi:type="string">50</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="checkout.cart.items">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="checkout.cart.amgiftcard"
+                   as="amgiftcard"
+                   template="Amasty_GiftCardAccount::checkout/giftcard.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="types" xsi:type="array"/>
+                        <item name="components" xsi:type="array">
+                            <item name="amcard-giftcards" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_GiftCardAccount/js/view/payment/gift-card</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="isCart" xsi:type="boolean">true</item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                    <item name="errors" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">1</item>
+                                        <item name="component" xsi:type="string">Amasty_GiftCardAccount/js/view/payment/gift-card-messages</item>
+                                        <item name="displayArea" xsi:type="string">messages</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="amcard-cart-render" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_GiftCardAccount/js/view/account/codes</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Amasty_GiftCardAccount/account/codes</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

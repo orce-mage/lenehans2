@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../Magento/Email/etc/email_templates.xsd">
+    <template id="wyomind_massstockupdate_cron_report" label="Cron Report" file="cron_report.html" type="html"
+              module="Wyomind_MassStockUpdate" area="adminhtml"/>
+</config>

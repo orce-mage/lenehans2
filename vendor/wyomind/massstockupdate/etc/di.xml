@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+
+    <!-- PROGRESS BAR CONFIGURATION STARTS -->
+    <virtualType name="Wyomind\MassStockUpdate\Block\Adminhtml\Progress\Status" type="Wyomind\Framework\Block\Adminhtml\Progress\Status">
+        <arguments>
+            <argument name="module" xsi:type="string">MassStockUpdate</argument>
+            <argument name="field" xsi:type="string">cron_settings</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassStockUpdate\Helper\Progress" type="Wyomind\Framework\Helper\Progress">
+        <arguments>
+            <argument name="module" xsi:type="string">MassStockUpdate</argument>
+            <argument name="tempDirectory" xsi:type="string">/var/tmp/MassStockUpdate/</argument>
+            <argument name="filePrefix" xsi:type="string">profile_</argument>
+        </arguments>
+    </virtualType>
+    <!-- PROGRESS BAR CONFIGURATION ENDS -->
+
+
+    <!-- LOGGER CONFIGURATION STARTS -->
+    <virtualType name="Wyomind\MassStockUpdate\Logger\Logger" type="\Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">MassStockUpdate</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="MassStockUpdate" xsi:type="object">Wyomind\MassStockUpdate\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassStockUpdate\Logger\Handler" type="\Wyomind\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/Wyomind_MassStockUpdate.log</argument>
+            <argument name="filePath" xsi:type="string"/>
+        </arguments>
+    </virtualType>
+
+    <!-- LOGGER CONFIGURATION ENDS -->
+
+    <!-- LOGGERCRON CONFIGURATION STARTS -->
+    <virtualType name="Wyomind\MassStockUpdate\Logger\LoggerCron" type="\Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">MassStockUpdateCron</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="MassStockUpdate" xsi:type="object">Wyomind\MassStockUpdate\Logger\HandlerCron</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassStockUpdate\Logger\HandlerCron" type="\Wyomind\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/Wyomind_MassStockUpdateCron.log</argument>
+            <argument name="filePath" xsi:type="string"/>
+        </arguments>
+    </virtualType>
+    <!-- LOGGERCRON CONFIGURATION ENDS -->
+
+    <!-- COMMAND LINE -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="wyomind_massstockupdate_run" xsi:type="object">Wyomind\MassStockUpdate\Console\Command\Run
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="wyomind_massstockupdate_sql" xsi:type="object">Wyomind\MassStockUpdate\Console\Command\Sql
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Action History -->
+    <virtualType name="Wyomind\MassStockUpdate\Model\Profiles\ActionHistory" type="Wyomind\Framework\Model\ActionHistory">
+        <arguments>
+            <argument name="module" xsi:type="string">MassStockUpdate</argument>
+            <argument name="entity" xsi:type="string">Profiles</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassStockUpdate\Model\ResourceModel\Profiles\ActionHistory" type="Wyomind\Framework\Model\ResourceModel\ActionHistory">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massstockupdate_profiles</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassStockUpdate\Model\ResourceModel\Profiles\ActionHistory\Collection" type="Wyomind\Framework\Model\ResourceModel\ActionHistory\Collection">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massstockupdate_profiles</argument>
+        </arguments>
+    </virtualType>
+    <!-- Grid -->
+    <virtualType name="Wyomind\MassStockUpdate\Block\Adminhtml\Profiles\Edit\Tab\ActionHistory" type="Wyomind\Framework\Block\Adminhtml\Edit\Tab\History\ActionHistory">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massstockupdate_profiles</argument>
+            <argument name="module" xsi:type="string">MassStockUpdate</argument>
+            <argument name="entity" xsi:type="string">Profiles</argument>
+        </arguments>
+    </virtualType>
+    <!-- Version History -->
+    <virtualType name="Wyomind\MassStockUpdate\Model\Profiles\VersionHistory" type="Wyomind\Framework\Model\VersionHistory">
+        <arguments>
+            <argument name="module" xsi:type="string">MassStockUpdate</argument>
+            <argument name="entity" xsi:type="string">Profiles</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassStockUpdate\Model\ResourceModel\Profiles\VersionHistory" type="Wyomind\Framework\Model\ResourceModel\VersionHistory">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massstockupdate_profiles</argument>
+        </arguments>
+    </virtualType>
+
+
+
+
+
+    <type name="Wyomind\MassStockUpdate\Controller\Adminhtml\Profiles">
+        <arguments>
+            <argument name="configHelper" xsi:type="object">Wyomind\MassStockUpdate\Helper\Config\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Wyomind\MassStockUpdate\Controller\Adminhtml\Profiles\Ftp">
+        <arguments>
+            <argument name="ftpHelper" xsi:type="object">Wyomind\MassStockUpdate\Helper\Ftp\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Wyomind\MassStockUpdate\Controller\Adminhtml\Profiles\Import">
+        <arguments>
+            <argument name="configHelper" xsi:type="object">Wyomind\MassStockUpdate\Helper\Config\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Wyomind\MassStockUpdate\Controller\Adminhtml\Profiles\Export">
+        <arguments>
+            <argument name="configHelper" xsi:type="object">Wyomind\MassStockUpdate\Helper\Config\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Wyomind\MassStockUpdate\Controller\Adminhtml\Profiles\Preview">
+        <arguments>
+            <argument name="configHelper" xsi:type="object">Wyomind\MassStockUpdate\Helper\Config\Proxy</argument>
+            <argument name="storageHelper" xsi:type="object">Wyomind\MassStockUpdate\Helper\Storage\Proxy</argument>
+        </arguments>
+    </type>
+
+</config>

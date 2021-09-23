@@ -1,0 +1,89 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .price-box {
+        .price-from {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+        .price-to {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+    }
+    .bundle-options-container {
+        clear: both;
+
+        .legend.title {
+            .lib-heading(h2);
+        }
+
+        .price-box {
+            .price {
+                font-size: @font-size__l;
+                font-weight: @font-weight__bold;
+            }
+            > p {
+                display: inline-block;
+            }
+        }
+
+        .price-notice {
+            &:extend(.abs-adjustment-incl-excl-tax all);
+        }
+
+        .nested {
+            .field.qty {
+                .label {
+                    display: inline-block;
+                }
+                input {
+                    display: inline-block;
+                    width: auto;
+                    max-width: 100px;
+                }
+            }
+        }
+        select {
+            width: 100%;
+        }
+        input.qty {
+            height: 32px;
+        }
+        .option-item {
+            padding-right: 15px;
+        }
+        .box-tocart .field {
+            display: none;
+        }
+
+        p.required {
+            .lib-css(color, @form-field-label-asterisk__color);
+        }
+
+        .product-options-bottom {
+            clear: left;
+        }
+    }
+    .fieldset-bundle-options {
+        margin: 0;
+        .option-flex {
+            display: flex;
+        }
+        .qty {
+            text-align: center;
+        }
+    }
+    div.mage-error[generated] + div.mage-error[generated] {
+        display: none !important;
+    }
+}
+

@@ -1,0 +1,49 @@
+<?php
+
+$element = $block->getElement();
+$note = $element->getNote() != '' ? '<div class="note" id="'.$element->getId().'-note">'.$element->getNote().'</div>' : '';
+$elementBeforeLabel = $element->getExtType() == 'checkbox admin__control-checkbox' || $element->getExtType() == 'radio admin__control-radio';
+$fieldId = ($element->getHtmlContainerId()) ? ' id="'.$element->getHtmlContainerId().'"' : '';
+$fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($elementBeforeLabel) ? ' choice' : '';
+$fieldClass .= ($element->getRequired()) ? ' required _required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldClass .= (!$element->getLabelHtml()) ? ' no-label' : '';
+
+$fieldAttributes = $fieldId.' class="'.$fieldClass.'" '
+    .$block->getUiId('form-field', $element->getId())
+    .($element->getFieldExtraAttributes() ? ' '.$element->getFieldExtraAttributes() : '');
+$id = $block->getRandom()->getUniqueHash('products');
+?>
+<div<?= /* @escapeNotVerified */ $fieldAttributes ?>>
+    <?= $element->getLabelHtml() ?>
+    <div class="admin__field-control control chooser-wrap">
+        <input type="text" class="input-text admin__control-text element-value-changer input-text entities <?php if ($this->getElement()->getRequired()) : ?>required-entry<?php endif ?>" name="<?= $element->getName()?>" readonly id="<?= $element->getHtmlId()?>" value="<?= $element->getValue()?>">
+        <div class="btn-chooser">
+            <a class="btn-chooser-open" href="javascript:void(0)" onclick="Mb_Product.showChooserElement('<?= $id ?>')" title="<?= __('Open Chooser')?>">
+            </a>
+            <a class="btn-chooser-apply" href="javascript:void(0)" onclick="Mb_Product.hideChooserElement('<?= $id ?>')" title="<?= __('Apply')?>">
+            </a>
+            <a class="btn-chooser-clean" href="javascript:void(0)" onclick="Mb_Product.cleanChooser('<?= $id ?>')" title="<?= __('Clean')?>">
+            </a>
+        </div>
+    </div>
+    <?= /* @escapeNotVerified */ $note ?>
+    <div id="<?= $id ?>" class="grid-container"></div>
+</div>
+<script type="text/javascript">
+require([
+        "jquery",
+        "prototype",
+        "MageBig_WidgetPlus/js/chooser"
+    ],function(jQuery, prototype, Mb_Chooser) {
+
+    window.Mb_Product = new Mb_Chooser('<?= $this->getProductsChooserUrl()?>');
+
+    jQuery(function(){
+        Event.observe(document, 'productFeatured:changed', function(event){
+            window.Mb_Product.checkProduct(event);
+        });
+    });
+});
+</script>

@@ -1,0 +1,139 @@
+{
+    "amasty_amlocator_location": {
+        "column": {
+            "id": true,
+            "name": true,
+            "country": true,
+            "city": true,
+            "zip": true,
+            "address": true,
+            "status": true,
+            "lat": true,
+            "lng": true,
+            "photo": true,
+            "marker": true,
+            "position": true,
+            "state": true,
+            "description": true,
+            "phone": true,
+            "email": true,
+            "website": true,
+            "category": true,
+            "actions_serialized": true,
+            "store_img": true,
+            "stores": true,
+            "schedule": true,
+            "marker_img": true,
+            "show_schedule": true,
+            "url_key": true,
+            "meta_title": true,
+            "meta_description": true,
+            "meta_robots": true,
+            "short_description": true,
+            "canonical_url": true,
+            "condition_type": true,
+            "curbside_enabled": true,
+            "curbside_conditions_text": true
+        },
+        "index": {
+            "AMASTY_AMLOCATOR_LOCATION_SCHEDULE": true,
+            "AMASTY_AMLOCATOR_LOCATION_STATUS": true,
+            "AMASTY_AMLOCATOR_LOCATION_POSITION": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_619F59240F66661EFD1057D256BF4A4E": true,
+            "AMASTY_AMLOCATOR_LOCATION_SCHEDULE_AMASTY_AMLOCATOR_SCHEDULE_ID": true
+        }
+    },
+    "amasty_amlocator_attribute": {
+        "column": {
+            "attribute_id": true,
+            "frontend_label": true,
+            "attribute_code": true,
+            "frontend_input": true,
+            "is_required": true,
+            "label_serialized": true
+        },
+        "index": {
+            "AMASTY_AMLOCATOR_ATTRIBUTE_FRONTEND_INPUT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_amlocator_attribute_option": {
+        "column": {
+            "value_id": true,
+            "attribute_id": true,
+            "options_serialized": true,
+            "is_default": true,
+            "sort_order": true
+        },
+        "index": {
+            "AMASTY_AMLOCATOR_ATTRIBUTE_OPTION_ATTRIBUTE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_BCB78BE051BDD9D72E600B59A6533E56": true,
+            "AMASTY_AMLOCATOR_ATTR_OPT_ATTR_ID_AMASTY_AMLOCATOR_ATTR_ATTR_ID": true
+        }
+    },
+    "amasty_amlocator_store_attribute": {
+        "column": {
+            "entity_id": true,
+            "attribute_id": true,
+            "store_id": true,
+            "value": true
+        },
+        "index": {
+            "AMASTY_AMLOCATOR_STORE_ATTRIBUTE_ATTRIBUTE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_397A50F051743F1790126DFAE477298D": true,
+            "FK_0A8963F747B80ADE36208EAE3CA6DD97": true,
+            "AMASTY_AMLOCATOR_STORE_ATTRIBUTE_ATTRIBUTE_ID_STORE_ID": true
+        }
+    },
+    "amasty_amlocator_schedule": {
+        "column": {
+            "id": true,
+            "name": true,
+            "schedule": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_amlocator_gallery": {
+        "column": {
+            "id": true,
+            "location_id": true,
+            "image_name": true,
+            "is_base": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_AMLOCATOR_GLR_LOCATION_ID_AMASTY_AMLOCATOR_LOCATION_ID": true,
+            "FK_D9AC99358DF1B12B06EB19D32541807A": true
+        }
+    },
+    "amasty_amlocator_review": {
+        "column": {
+            "id": true,
+            "location_id": true,
+            "customer_id": true,
+            "review_text": true,
+            "rating": true,
+            "placed_at": true,
+            "published_at": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_AMLOCATOR_REVIEW_CSTR_ID_CSTR_ENTT_ENTT_ID": true,
+            "FK_85B98BE1C75F0843C9DC4DC865E06C3B": true
+        }
+    }
+}

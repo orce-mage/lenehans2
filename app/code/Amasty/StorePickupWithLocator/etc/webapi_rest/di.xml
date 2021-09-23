@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Fill data for shipping address-->
+    <type name="\Magento\Quote\Model\Quote\Address">
+        <plugin name="Amasty_StorePickupWithLocator::QuoteAddress" type="Amasty\StorePickupWithLocator\Plugin\Quote\AddressPlugin"/>
+    </type>
+    <!-- Fill data for shipping address-->
+    <type name="\Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="Amasty_Checkout::FillAddressData" type="Amasty\StorePickupWithLocator\Plugin\Quote\AddressDataPlugin" />
+    </type>
+</config>

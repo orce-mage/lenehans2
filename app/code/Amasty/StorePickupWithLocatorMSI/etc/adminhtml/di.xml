@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\Storelocator\Model\Config\Source\ConditionType">
+        <plugin name="Amasty_StorePickupWithLocatorMSI::condition_type" type="Amasty\StorePickupWithLocatorMSI\Plugin\Storelocator\Model\Config\Source\ConditionTypePlugin" />
+    </type>
+
+    <type name="Amasty\Storelocator\Ui\DataProvider\Form\LocationDataProvider">
+        <plugin name="Amasty_StorePickupWithLocatorMSI::locations_form_data_provider" type="Amasty\StorePickupWithLocatorMSI\Plugin\Storelocator\Ui\DataProvider\Form\LocationDataProviderPlugin" />
+    </type>
+
+    <type name="Amasty\Base\Model\ModuleInfoProvider">
+        <plugin name="Amasty_StorePickupWithLocatorMSI::restrict_module_for_notifications" type="Amasty\StorePickupWithLocatorMSI\Plugin\Base\Model\ModuleInfoProviderPlugin" />
+    </type>
+</config>

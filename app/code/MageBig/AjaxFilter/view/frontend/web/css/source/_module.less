@@ -1,0 +1,169 @@
+& when (@media-common = true) {
+    .filter-checkbox-radio .field {
+        position: relative;
+        & > input[type="checkbox"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            border: 0;
+            & + label {
+                position: relative;
+                padding-left: 25px;
+                margin: 0;
+                cursor: pointer;
+                font-weight: normal !important;
+                line-height: 20px;
+                &:before {
+                    content: '';
+                    width: 16px;
+                    height: 16px;
+                    border: 1px solid #000000;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -8px;
+                    left: 0;
+                    border-radius: 50%;
+                    font-size: 16px;
+                }
+            }
+            &:checked + label:after {
+                content: '';
+                width: 8px;
+                height: 8px;
+                position: absolute;
+                top: 50%;
+                margin-top: -4px;
+                left: 4px;
+                border: 1px solid #000000;
+                font-size: 10px;
+                text-align: center;
+                font-weight: bold;
+                border-radius: 50%;
+                background-color: #000000;
+            }
+        }
+    }
+    .mb-range-slider {
+        [data-role=from-label] {
+            display: block;
+            float: left;
+            padding: 0 0 5px;
+        }
+        [data-role=to-label] {
+            display: block;
+            float: right;
+            padding: 0 0 5px;
+        }
+        .title {
+            font-size: 90%;
+            flex: 1;
+            padding: 6px 0 0;
+        }
+        .actions-toolbar {
+            display: flex;
+            margin: 15px 0;
+        }
+        .ui-slider {
+            margin: 0;
+            cursor: pointer;
+            clear: both;
+        }
+        .range-slider-inner {
+            padding: 0 7px;
+        }
+        .ui-slider-handle {
+            padding: 0;
+            margin: -3px 0 0 -7px;
+            -webkit-border-radius: 15px;
+            width: 15px;
+            height: 15px;
+            background: @active__color;
+            cursor: e-resize;
+        }
+        a.action.primary {
+            padding: 0;
+            min-width: 80px;
+        }
+    }
+    .filter-options-overflow {
+        overflow: auto;
+        position: relative;
+    }
+    .filter .filter-options .filter-options-content .item {
+        margin: 0 0 6px 0;
+    }
+    .search-filter-wrap {
+        position: relative;
+        input {
+            width: 100%;
+            height: 32px;
+            border: 1px solid #d1d1d1;
+            margin-bottom: 10px;
+        }
+        label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 32px;
+            margin: 0;
+            display: block;
+            text-align: center;
+            span {
+                display: block;
+                line-height: 32px;
+            }
+        }
+    }
+    .layout-rtl .search-filter-wrap label {
+        right: auto;
+        left: 0;
+    }
+    .now-filter-clone {
+        .block-subtitle {
+            padding: 6px 10px;
+            background: #f1f1f1;
+            font-weight: 500;
+        }
+        .block-subtitle, .items {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .items .item {
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 5px 30px 5px 10px;
+            margin-bottom: 5px;
+            > span {
+                display: inline-block;
+            }
+            .remove {
+                position: absolute;
+                top: 0;
+                right: 0;
+                font-size: 12px;
+                width: 100%;
+                height: 100%;
+                text-align: right;
+                line-height: 20px;
+                span {
+                    position: absolute;
+                    top: 50%;
+                    right: 8px;
+                    font-size: 12px;
+                    width: 20px;
+                    height: 20px;
+                    text-align: right;
+                    margin-top: -11px;
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+}

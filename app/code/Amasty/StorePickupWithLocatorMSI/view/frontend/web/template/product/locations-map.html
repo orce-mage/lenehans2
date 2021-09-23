@@ -1,0 +1,9 @@
+<div class="ampickup-map-popup" data-bind="fadeVisible: visible">
+    <div class="ampickup-overlay" click="hideMap"></div>
+    <div class="ampickup-content">
+        <span class="ampickup-close" click="hideMap" ></span>
+        <!-- ko if:  mapIsLoaded()-->
+        <div class="ampickup-locations" html="locationsMapHtml()"></div>
+        <!-- /ko -->
+    </div>
+</div>

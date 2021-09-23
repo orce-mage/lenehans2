@@ -1,0 +1,110 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View\Description
+ */
+?>
+<?php
+$cfHelper = $this->helper('MageBig\WidgetPlus\Helper\Config');
+$_mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+$_call = $block->getAtCall();
+$_code = $block->getAtCode();
+$_className = $block->getCssClass();
+$_attributeLabel = $block->getAtLabel();
+$_attributeType = $block->getAtType();
+$_attributeAddAttribute = $block->getAddAttribute();
+
+$renderLabel = true;
+// if defined as 'none' in layout, do not render
+if ($_attributeLabel == 'none') {
+    $renderLabel = false;
+}
+
+if ($_attributeLabel && $_attributeLabel == 'default') {
+    $_attributeLabel = $_product->getResource()->getAttribute($_code)->getStoreLabel();
+}
+if ($_attributeType && $_attributeType == 'text') {
+    $_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+} else {
+    $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+}
+?>
+<?php if ($_className == 'overview' && $_mbHelper->getConfig('mbconfig/product_view/enable_countdown') && $cfHelper->getDate($_product)) : ?>
+    <div class="promo-countdown promo-product promo-<?= $_product->getId() ?>">
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <div class="label-cd"><p><?= __("Don't Miss Out! This promotion will expires in"); ?></p></div>
+                <div class="sale-countdown style-box text-center" data-date="<?= $cfHelper->getDate($_product); ?>"></div>
+            </div>
+        </div>
+
+        <?php if ($_product->isSaleable() && $_mbHelper->getConfig('mbconfig/product_view/enable_sold')) : ?>
+            <?php
+            $stockQty = $cfHelper->getStockQty($_product);
+            $sold = $cfHelper->getSoldQty($_product);
+            ?>
+            <?php if ($stockQty) : ?>
+            <div class="sold-wrap">
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <div class="label-cd"><?= __("Sold items") ?></div>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <div class="sold-progress">
+                            <div class="sold"
+                                 style="width: <?= $cfHelper->getSoldPercent($_product); ?>%;"></div>
+                        </div>
+                        <div class="sold-qty-wrap">
+                            <span class="sold-qty"><?= $sold . '/' . ($stockQty+$sold); ?></span><span> <?= __('Sold'); ?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+    <?php
+    $dayText = __('Days');
+    $hourText = __('Hours');
+    $minText = __('Mins');
+    $secText = __('Secs');
+    $daySingularText = __('Day');
+    $hourSingularText = __('Hour');
+    $minSingularText = __('Min');
+    $secSingularText = __('Sec');
+    ?>
+    <script type="text/x-magento-init">
+        {
+            ".promo-<?= $_product->getId() ?> .sale-countdown": {
+                "MageBig_WidgetPlus/js/jcountdown-set": {
+                    "dataAttr"          : "date",
+                    "dayText"           : "<?= $dayText; ?>",
+                    "hourText"          : "<?= $hourText; ?>",
+                    "minText"           : "<?= $minText; ?>",
+                    "secText"           : "<?= $secText; ?>",
+                    "daySingularText"   : "<?= $daySingularText; ?>",
+                    "hourSingularText"  : "<?= $hourSingularText; ?>",
+                    "minSingularText"   : "<?= $minSingularText; ?>",
+                    "secSingularText"   : "<?= $secSingularText; ?>",
+                    "offset"            : <?= $cfHelper->getOffsetTimeZone(); ?>
+                }
+            }
+        }
+    </script>
+<?php endif;?>
+<?php if ($_attributeValue): ?>
+<div class="product attribute <?= /* @escapeNotVerified */ $_className ?>">
+    <?php if ($renderLabel): ?><strong class="type"><?= /* @escapeNotVerified */ $_attributeLabel ?></strong><?php endif; ?>
+    <div class="value" <?= /* @escapeNotVerified */ $_attributeAddAttribute ?>><?= /* @escapeNotVerified */ $_attributeValue ?></div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,94 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+
+$_mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$images = $block->getGalleryImages()->getItems();
+$imgCount = count($images);
+$mainImage = current(array_filter($images, function ($img) use ($block) {
+    return $block->isMainImage($img);
+}));
+
+if (!empty($images) && empty($mainImage)) {
+    $mainImage = $block->getGalleryImages()->getFirstItem();
+}
+
+$helper = $this->helper('Magento\Catalog\Helper\Image');
+$mainImageData = $mainImage ?
+    $mainImage->getData('medium_image_url') :
+    $helper->getDefaultPlaceholderUrl('image');
+
+$thumbType = $_mbHelper->getConfig('mbconfig/product_view/nav_dir');
+$imgs = '';
+$pl = '';
+if ($imgCount > 1) {
+    $imgs = 'imgs';
+    $pl = '<span class="thumb-pl"></span>';
+}
+?>
+<div class="gallery-placeholder _block-content-loading <?= $thumbType ?> <?= $imgs ?>" id="quickview-gallery">
+    <div class="gallery-placeholder__image">
+        <img
+            alt="main product photo"
+            class="img-fluid"
+            src="<?= /* @noEscape */ $mainImageData ?>"
+        />
+        <?= $pl ?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#quickview-gallery": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?= /* @escapeNotVerified */ $block->getMagnifier() ?>,
+                "data": <?= /* @escapeNotVerified */ $block->getGalleryImagesJson() ?>,
+                "options": {
+                    "thumbmargin": <?= $block->getVar("gallery/thumbmargin") ?>,
+                    "thumbborderwidth": 1,
+                    "autoplay": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_autoplay') ?>,
+                    "nav": "<?= $block->getVar("gallery/nav") ?>",
+                    "loop": <?= (int)$block->getVar("gallery/loop") ?>,
+                    "keyboard": <?= (int)$block->getVar("gallery/keyboard") ?>,
+                    "arrows": <?= (int)$block->getVar("gallery/arrows") ?>,
+                    "allowfullscreen": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/allowfullscreen') ?>,
+                    "showCaption": 0,
+                    "width": "<?= $block->getImageAttribute('product_page_image_medium', 'width') ?>",
+                    "thumbwidth": "<?= $block->getImageAttribute('product_page_image_small', 'width') ?>",
+                    "thumbheight": <?= $block->getImageAttribute('product_page_image_small', 'height')
+                        ?: $block->getImageAttribute('product_page_image_small', 'width'); ?>,
+                    "height": <?= $block->getImageAttribute('product_page_image_medium', 'height')
+                        ?: $block->getImageAttribute('product_page_image_medium', 'width'); ?>,
+                    "transitionduration": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_duration') ?>,
+                    "transition": "<?= $_mbHelper->getConfig('mbconfig/product_view/gallery_effect') ?>",
+                    "navarrows": <?= (int)$block->getVar("gallery/navarrows") ?>,
+                    "navtype": "<?= $block->getVar("gallery/navtype") ?>",
+                    "navdir": "<?= $_mbHelper->getConfig('mbconfig/product_view/nav_dir') ?>"
+                },
+                "fullscreen": {
+                    "nav": "<?= $block->getVar("gallery/fullscreen/nav") ?>",
+                    "loop": <?= (int)$block->getVar("gallery/fullscreen/loop") ?>,
+                    "navdir": "<?= $_mbHelper->getConfig('mbconfig/product_view/nav_dir') ?>",
+                    "navarrows": <?= (int)$block->getVar("gallery/fullscreen/navarrows") ?>,
+                    "navtype": "<?= $block->getVar("gallery/fullscreen/navtype") ?>",
+                    "arrows": <?= (int)$block->getVar("gallery/fullscreen/arrows") ?>,
+                    "showCaption": 0,
+                    "transitionduration": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_duration') ?>,
+                    "transition": "<?= $_mbHelper->getConfig('mbconfig/product_view/gallery_effect') ?>"
+                },
+                "breakpoints": <?= $block->getBreakpoints() ?>
+            }
+        }
+    }
+</script>
+

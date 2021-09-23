@@ -1,0 +1,851 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:include schemaLocation="urn:magento:framework:Data/etc/argument/types.xsd" />
+
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="include" type="includeType" />
+                <xs:element name="entity" type="entity" />
+                <xs:element name="relation" type="relation" maxOccurs="unbounded"/>
+            </xs:choice>
+        </xs:complexType>
+        <xs:unique name="uniqueEntityCode">
+            <xs:annotation>
+                <xs:documentation>
+                    Import entity code must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="entity"/>
+            <xs:field xpath="@code"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="includeType">
+        <xs:annotation>
+            <xs:documentation>
+                Include Resource. Recursive complex type
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="path" type="typePath" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="entity">
+        <xs:all>
+            <xs:element name="name" type="translatable" />
+            <xs:element name="isHidden" type="xs:boolean" minOccurs="0" default="true" />
+            <xs:element name="description" type="translatable" minOccurs="0" />
+            <xs:element name="group" type="translatable" minOccurs="0" />
+            <xs:element name="indexer" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" use="required" type="modelName"/>
+                    <xs:attribute name="apply" default="batch" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="fileUploader" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" use="required" type="modelName"/>
+                    <xs:attribute name="storagePath" use="required" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="enabledChecker" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="behaviors" />
+            <xs:element name="fieldsConfig">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="fieldsClass" minOccurs="0" />
+                        <xs:element ref="rowValidation" minOccurs="0" />
+                        <xs:element ref="fields" minOccurs="0" />
+                        <xs:element ref="sampleData" minOccurs="0" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="importEvents" minOccurs="0" />
+        </xs:all>
+        <xs:attribute name="code" use="required" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="translatable">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="translate" default="true" type="xs:boolean"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:element name="behaviors">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="add" minOccurs="0" type="addBehavior"/>
+                <xs:element name="addDirect" minOccurs="0" type="addDirectBehavior"/>
+                <xs:element name="update" minOccurs="0" type="updateBehavior"/>
+                <xs:element name="updateDirect" minOccurs="0" type="updateDirectBehavior"/>
+                <xs:element name="updateEav" minOccurs="0" type="updateEavBehavior"/>
+                <xs:element name="updateEavEM" minOccurs="0" type="updateEavEntityManagerBehavior"/>
+                <xs:element name="updateEavDirect" minOccurs="0" type="updateEavDirectBehavior"/>
+                <xs:element name="delete" minOccurs="0" type="deleteBehavior"/>
+                <xs:element name="deleteDirect" minOccurs="0" type="deleteDirectBehavior"/>
+                <xs:element name="deleteEav" minOccurs="0" type="deleteEavBehavior"/>
+                <xs:element name="deleteEavEM" minOccurs="0" type="deleteEavEntityManagerBehavior"/>
+                <xs:element name="deleteEavDirect" minOccurs="0" type="deleteEavDirectBehavior"/>
+                <xs:element name="addUpdate" minOccurs="0" type="addUpdateBehavior"/>
+                <xs:element name="addUpdateDirect" minOccurs="0" type="addUpdateDirectBehavior"/>
+                <xs:element name="custom" minOccurs="0" maxOccurs="unbounded" type="customBehavior"/>
+            </xs:choice>
+        </xs:complexType>
+        <xs:unique name="uniqueBehaviorCode">
+            <xs:annotation>
+                <xs:documentation>
+                    Entity behavior code must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath=".//*"/>
+            <xs:field xpath="@code"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="addBehavior">
+        <xs:group ref="modelAddBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Add\Model" />
+        <xs:attribute name="code" type="xs:string" fixed="add" />
+        <xs:attribute name="name" type="xs:string" default="Only add" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="addDirectBehavior">
+        <xs:group ref="tableBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Add\Table" />
+        <xs:attribute name="code" type="xs:string" fixed="add_direct" />
+        <xs:attribute name="name" type="xs:string" default="Add Direct" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="updateBehavior">
+        <xs:group ref="modelUpdateBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Update\Model" />
+        <xs:attribute name="code" type="xs:string" fixed="update" />
+        <xs:attribute name="name" type="xs:string" default="Only update" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="updateDirectBehavior">
+        <xs:group ref="tableBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Update\Table" />
+        <xs:attribute name="code" type="xs:string" fixed="update_direct" />
+        <xs:attribute name="name" type="xs:string" default="Update Direct" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="updateEavBehavior">
+        <xs:group ref="eavBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Update\EavModel" />
+        <xs:attribute name="code" type="xs:string" fixed="update_eav" />
+        <xs:attribute name="name" type="xs:string" default="Update" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="updateEavEntityManagerBehavior">
+        <xs:group ref="eavEntityManagerBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Update\EavEntityManager" />
+        <xs:attribute name="code" type="xs:string" fixed="update_eav_em" />
+        <xs:attribute name="name" type="xs:string" default="Update" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="updateEavDirectBehavior">
+        <xs:group ref="eavTablesBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Update\EavTables" />
+        <xs:attribute name="code" type="xs:string" fixed="update_eav_direct" />
+        <xs:attribute name="name" type="xs:string" default="Update Direct" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="deleteBehavior">
+        <xs:group ref="modelDeleteBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Delete\Model" />
+        <xs:attribute name="code" type="xs:string" fixed="delete" />
+        <xs:attribute name="name" type="xs:string" default="Delete" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="deleteDirectBehavior">
+        <xs:group ref="tableBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Delete\Table" />
+        <xs:attribute name="code" type="xs:string" fixed="delete_direct" />
+        <xs:attribute name="name" type="xs:string" default="Delete Direct" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="deleteEavBehavior">
+        <xs:group ref="eavBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Delete\EavModel" />
+        <xs:attribute name="code" type="xs:string" fixed="delete_eav" />
+        <xs:attribute name="name" type="xs:string" default="Delete" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="deleteEavEntityManagerBehavior">
+        <xs:group ref="eavEntityManagerBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Delete\EavEntityManager" />
+        <xs:attribute name="code" type="xs:string" fixed="delete_eav_em" />
+        <xs:attribute name="name" type="xs:string" default="Delete" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="deleteEavDirectBehavior">
+        <xs:group ref="eavTablesBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\Delete\EavTables" />
+        <xs:attribute name="code" type="xs:string" fixed="delete_eav_direct" />
+        <xs:attribute name="name" type="xs:string" default="Delete Direct" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="addUpdateBehavior">
+        <xs:group ref="modelUpdateBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\AddUpdate\Model" />
+        <xs:attribute name="code" type="xs:string" fixed="addUpdate" />
+        <xs:attribute name="name" type="xs:string" default="Add/Update" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="addUpdateDirectBehavior">
+        <xs:group ref="tableBehavior" />
+        <xs:attribute name="class" type="modelName" default="Amasty\ImportCore\Import\Behavior\AddUpdate\Table" />
+        <xs:attribute name="code" type="xs:string" fixed="addUpdate_direct" />
+        <xs:attribute name="name" type="xs:string" default="Add/Update Direct" />
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="customBehavior">
+        <xs:sequence>
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+            <xs:element name="executeOnParent" type="behaviorsReference" minOccurs="0" />
+            <xs:element name="entityType" type="xs:string" minOccurs="0" />
+            <xs:element name="events" type="behaviorEvents" minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="class" type="modelName" use="required" />
+        <xs:attribute name="code" type="xs:string" use="required" />
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="indexerMethod" type="xs:string" />
+    </xs:complexType>
+
+    <xs:group name="modelAddBehavior">
+        <xs:all>
+            <xs:element name="modelFactory" type="modelName" />
+            <xs:element name="repository" minOccurs="0">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="class" type="modelName" />
+                        <xs:element name="saveMethod" type="repositoryMethod"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+
+    <xs:group name="modelUpdateBehavior">
+        <xs:all>
+            <xs:element name="modelFactory" type="modelName" />
+            <xs:element name="repository" minOccurs="0">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="class" type="modelName" />
+                        <xs:element name="loadMethod" type="repositoryMethod" />
+                        <xs:element name="saveMethod" type="repositoryMethod" />
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="insertResourceModel" type="modelName" minOccurs="0" />
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+
+    <xs:group name="modelDeleteBehavior">
+        <xs:all>
+            <xs:element name="modelFactory" type="modelName" />
+            <xs:element name="repository" minOccurs="0">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="class" type="modelName" />
+                        <xs:element name="deleteMethod" type="repositoryMethod" />
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+
+    <xs:group name="eavBehavior">
+        <xs:all>
+            <xs:element name="modelFactory" type="modelName" />
+            <xs:element name="scopeIdentifier" type="xs:string" minOccurs="0" />
+            <xs:element name="executeOnParent" type="behaviorsReference" />
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+
+    <xs:group name="eavEntityManagerBehavior">
+        <xs:all>
+            <xs:element name="entityDataInterface" type="xs:string" />
+            <xs:element name="scopeType" type="xs:string" minOccurs="0" />
+            <xs:element name="scopeIdentifier" type="xs:string" minOccurs="0" />
+            <xs:element name="executeOnParent" type="behaviorsReference" />
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+
+    <xs:simpleType name="repositoryMethod">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:group name="tableBehavior">
+        <xs:all>
+            <xs:element name="tableName">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="idField" type="xs:string" minOccurs="0" />
+            <xs:element name="entityType" type="xs:string" minOccurs="0" />
+            <xs:element name="events" type="behaviorEvents" minOccurs="0" />
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+
+    <xs:group name="eavTablesBehavior">
+        <xs:all>
+            <xs:element name="entityDataInterface" type="xs:string" minOccurs="0" />
+            <xs:element name="scopeType" type="xs:string" minOccurs="0" />
+            <xs:element name="scopeIdentifier" type="xs:string" minOccurs="0" />
+            <xs:element name="eavEntityType" type="xs:string" />
+            <xs:element name="entityTable" type="xs:string" />
+            <xs:element name="executeOnParent" type="behaviorsReference" />
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+
+    <xs:complexType name="behaviorEvents">
+        <xs:sequence>
+            <xs:element name="beforeApply" type="behaviorObserver" minOccurs="0" />
+            <xs:element name="afterApply" type="behaviorObserver" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="behaviorObserver">
+        <xs:sequence>
+            <xs:element name="observer" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" use="required" type="modelName"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="fieldsClass">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+            </xs:sequence>
+            <xs:attribute name="class" use="required" type="modelName" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rowValidation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group ref="for_behavior"/>
+            </xs:sequence>
+            <xs:attribute name="class" use="required" type="modelName" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="fields">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="field" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="rowActionClass" type="modelName" />
+        </xs:complexType>
+        <xs:unique name="uniqueFieldName">
+            <xs:annotation>
+                <xs:documentation>
+                    Field name must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="field"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+    </xs:element>
+    <xs:element name="synchronization">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="item" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="entityName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                            <xs:element name="fieldName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="field">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actions" minOccurs="0" type="fieldActions" />
+                <xs:element name="map" type="xs:string" minOccurs="0" />
+                <xs:element name="validation" type="validation" minOccurs="0" />
+                <xs:element name="isFile" type="xs:boolean" minOccurs="0" default="false" />
+                <xs:element name="remove" type="xs:boolean" minOccurs="0" default="false" />
+                <xs:element ref="required" minOccurs="0" />
+                <xs:element ref="identifier" minOccurs="0" />
+                <xs:element ref="synchronization" minOccurs="0" />
+            </xs:sequence>
+            <xs:attribute name="name" use="required" type="xs:string"/>
+            <xs:attribute name="isIdentity" default="false" type="xs:boolean" />
+        </xs:complexType>
+        <xs:unique name="uniqueFieldNames">
+            <xs:annotation>
+                <xs:documentation>
+                    Field name must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="field"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="fieldActions">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="trim" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\Trim" type="modelName" />
+                    <xs:attribute name="name" default="trim" />
+                    <xs:attribute name="apply" default="beforeValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="defaultValue" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\DefaultValue" type="modelName" />
+                    <xs:attribute name="name" default="Set Default Value" />
+                    <xs:attribute name="force" default="false" type="xs:boolean" />
+                    <xs:attribute name="value" use="required" type="xs:string"/>
+                    <xs:attribute name="apply" default="afterValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="explode" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\Explode" type="modelName" />
+                    <xs:attribute name="name" default="explode" />
+                    <xs:attribute name="separator" default="," />
+                    <xs:attribute name="apply" default="beforeValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="unserialize" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\Unserialize" type="modelName" />
+                    <xs:attribute name="name" default="unserialize" />
+                    <xs:attribute name="apply" default="afterValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="storeCode2StoreId" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\StoreCode2StoreId" type="modelName" />
+                    <xs:attribute name="name" default="Convert Store Code To Store Id" />
+                    <xs:attribute name="apply" default="beforeValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="websiteCode2WebsiteId" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\WebsiteCode2WebsiteId" type="modelName" />
+                    <xs:attribute name="name" default="Convert Website Code To Website Id" />
+                    <xs:attribute name="apply" default="beforeValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="storeId2StoreCode" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\StoreId2StoreCode" type="modelName" />
+                    <xs:attribute name="name" default="Convert Store Id To Store Code" />
+                    <xs:attribute name="apply" default="afterValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="str2float" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\Str2Float" type="modelName" />
+                    <xs:attribute name="name" default="Convert String Value To Float" />
+                    <xs:attribute name="apply" default="afterValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="emptyToNull" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\DataHandling\FieldModifier\EmptyToNull" type="modelName" />
+                    <xs:attribute name="name" default="emptyToNull" />
+                    <xs:attribute name="apply" default="beforeValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName"/>
+                    <xs:attribute name="apply" default="afterValidate" type="actionApply" />
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="validation">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <!-- notEmpty -->
+            <xs:element name="notEmpty" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\ValueValidator\NotEmpty" type="modelName" />
+                    <xs:attribute name="error" default="Field %1 is Empty" />
+                    <xs:attribute name="isZeroValueAllowed" default="false" type="xs:boolean"/>
+                </xs:complexType>
+            </xs:element>
+            <!-- notEmpty end -->
+            <xs:element name="integer" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\ValueValidator\Integer" type="modelName" />
+                    <xs:attribute name="error" default="Incorrect integer value for column %1">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="nonNegative" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\ValueValidator\NonNegative" type="modelName" />
+                    <xs:attribute name="error" default="Column %1 cannot be negative.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="number" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\ValueValidator\Number" type="modelName" />
+                    <xs:attribute name="error" default="Non-numeric value for column %1 found.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="boolean" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\ValueValidator\Boolean" type="modelName" />
+                    <xs:attribute name="error" default="Incorrect boolean value for column %1.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="greaterThanZero" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\ValueValidator\GreaterThanZero" type="modelName" />
+                    <xs:attribute name="error" default="Value of column %1 must be greater then 0.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dateFormat" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" fixed="Amasty\ImportCore\Import\Validation\ValueValidator\DateFormat" type="modelName" />
+                    <xs:attribute name="format" default="Y-m-d H:i:s" type="xs:string" />
+                    <xs:attribute name="error" default="Wrong date format in column %1." type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <!-- Regex -->
+            <xs:element name="regex" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" fixed="Amasty\ImportCore\Import\Validation\ValueValidator\Regex" type="modelName" />
+                    <xs:attribute name="pattern" use="required" type="xs:string" />
+                    <xs:attribute name="error" use="required" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <!-- Regex end -->
+
+            <xs:element name="custom" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                        <xs:group ref="for_behavior"/>
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName" />
+                    <xs:attribute name="error" use="required" type="xs:string" />
+                    <xs:attribute name="rootOnly" default="false" type="xs:boolean"/>
+                </xs:complexType>
+            </xs:element>
+
+            <!-- Out Of Range Validation -->
+            <xs:element name="integerRange" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\OutOfRangeValidator\Integer" type="modelName" />
+                    <xs:attribute name="error" default="Out of range value for column %1.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="smallIntRange" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\OutOfRangeValidator\SmallInt" type="modelName" />
+                    <xs:attribute name="error" default="Out of range value for column %1.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <!-- Out Of Range Validation end -->
+
+            <!-- Existence of Entity Validation -->
+            <xs:element name="customerExists" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\EntityValidator\CustomerId" type="modelName" />
+                    <xs:attribute name="error" default="There is no customer under specified customer_id.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="customerGroupExists" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\EntityValidator\CustomerGroup" type="modelName" />
+                    <xs:attribute name="error" default="The specified customer_group_id doesn't exist.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="storeExists" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\EntityValidator\StoreId" type="modelName" />
+                    <xs:attribute name="error" default="The specified store_id doesn't exist.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="websiteExists" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\EntityValidator\WebsiteId" type="modelName" />
+                    <xs:attribute name="error" default="The specified website_id doesn't exist.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eavAttributeExists" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\EntityValidator\EavAttribute" type="modelName" />
+                    <xs:attribute name="error" default="The specified EAV attribute doesn't exist.">
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tableRowExists" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:group ref="for_behavior"/>
+                    <xs:attribute name="class" default="Amasty\ImportCore\Import\Validation\EntityValidator\TableRowExists" type="modelName" />
+                    <xs:attribute name="error" default="The entity doesn't exist."/>
+                    <xs:attribute name="tableName" type="xs:string" use="required"/>
+                    <xs:attribute name="idFieldName" type="xs:string" use="required"/>
+                    <xs:attribute name="connectionName" default="default" type="xs:string"/>
+                    <xs:attribute name="rootOnly" default="false" type="xs:boolean"/>
+                </xs:complexType>
+            </xs:element>
+            <!-- Existence of Entity Validation -->
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:element name="required">
+        <xs:complexType>
+            <xs:group ref="for_behavior"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="identifier">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="1">
+                <xs:element name="label" type="translatable" minOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:group name="for_behavior">
+        <xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:element name="includeBehaviors" type="behaviorsReference" />
+                <xs:element name="excludeBehaviors" type="behaviorsReference" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="behaviorsReference">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="add" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="add" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addDirect" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="add_direct" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="update" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="update" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateDirect" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="update_direct" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="delete" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="delete" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteDirect" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="delete_direct" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdate" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="addUpdate" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateDirect" minOccurs="0">
+                <xs:complexType>
+                    <xs:attribute name="code" fixed="addUpdate_direct" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="custom" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="code" use="required" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:element name="importEvents">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="beforeImport" type="importEvents" minOccurs="0" />
+                <xs:element name="beforeBatchImport" type="importEvents" minOccurs="0" />
+                <xs:element name="afterBatchImport" type="importEvents" minOccurs="0" />
+                <xs:element name="afterImport" type="importEvents" minOccurs="0" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="importEvents">
+        <xs:sequence>
+            <xs:element name="event" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+                    </xs:sequence>
+                    <xs:attribute name="class" use="required" type="modelName"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="sampleData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="row" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="field" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="name" use="required" />
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    <xs:unique name="uniqueSampleFieldNames">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Field name must be unique.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:selector xpath="field"/>
+                        <xs:field xpath="@name"/>
+                    </xs:unique>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="modelName">
+        <xs:annotation>
+            <xs:documentation>
+                Model name can contain only [A-Za-z_\\].
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9_\\]+" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="typePath">
+        <xs:annotation>
+            <xs:documentation>
+                <![CDATA[
+                    Path identifier. Item can has only [a-zA-Z0-9/_:]. Minimal length 8 symbol. Case sensitive.
+                    For example: <Magento_Module>::path/to/file.xml (path in the "etc" area in module)
+                 ]]>
+            </xs:documentation>
+        </xs:annotation>
+
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]+[a-zA-Z0-9]{1,}_[A-Z]+[A-Z0-9a-z]{1,}::[A-Za-z_0-9/.]{1,}" />
+            <xs:minLength value="8" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="actionApply">
+        <xs:annotation>
+            <xs:documentation>
+                Action apply value can contain only "beforeValidate" or "afterValidate".
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="beforeValidate|afterValidate" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="relation">
+        <xs:all>
+            <xs:element name="parent_entity"/>
+            <xs:element name="child_entity"/>
+            <xs:element name="sub_entity_field_name"/>
+            <xs:element name="type"/>
+            <xs:element name="skip_relation_fields_update" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="validation" type="relationValidation" minOccurs="0" />
+            <xs:element name="action" type="relationAction" minOccurs="0" />
+            <xs:element ref="required" minOccurs="0" />
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:all>
+        <xs:attribute name="code" use="required" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="relationValidation">
+        <xs:group ref="for_behavior"/>
+        <xs:attribute name="class" use="required" type="modelName" />
+    </xs:complexType>
+
+    <xs:complexType name="relationAction">
+        <xs:sequence>
+            <xs:element name="arguments" type="argumentsType" minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="class" use="required" type="modelName" />
+    </xs:complexType>
+</xs:schema>

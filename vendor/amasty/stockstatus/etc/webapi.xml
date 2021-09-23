@@ -1,0 +1,36 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/amasty_stockstatus/rule" method="POST">
+        <service class="Amasty\Stockstatus\Api\RuleRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_stockstatus/rule/:id" method="PUT">
+        <service class="Amasty\Stockstatus\Api\RuleRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_stockstatus/rule/:id" method="DELETE">
+        <service class="Amasty\Stockstatus\Api\RuleRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_stockstatus/rule" method="GET">
+        <service class="Amasty\Stockstatus\Api\RuleRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_stockstatus/rule/all" method="GET">
+        <service class="Amasty\Stockstatus\Api\RuleRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+</routes>

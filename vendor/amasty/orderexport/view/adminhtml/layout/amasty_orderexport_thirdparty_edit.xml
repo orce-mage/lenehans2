@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderexport
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Amasty\Orderexport\Block\Adminhtml\Thirdparty\Edit\Tabs" name="amasty_orderexport_thirdparty_edit_tabs">
+                <block class="Amasty\Orderexport\Block\Adminhtml\Thirdparty\Edit\Tab\Mappings" name="amasty_orderexport_thirdparty_edit_tab_mappings"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mappings_section</argument>
+                    <argument name="block" xsi:type="string">amasty_orderexport_thirdparty_edit_tab_mappings</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Amasty\Orderexport\Block\Adminhtml\Thirdparty\Edit" name="orderexport_thirdparty_edit"/>
+        </referenceContainer>
+    </body>
+</page>

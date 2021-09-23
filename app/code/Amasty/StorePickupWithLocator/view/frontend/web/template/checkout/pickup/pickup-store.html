@@ -1,0 +1,48 @@
+<div class="ampickup-field field -store _required">
+    <label class="label" data-bind="visible:labelVisible, text:label, attr:{for: uid}"></label>
+    <div class="ampickup-wrapper">
+        <select class="ampickup-store select"
+                id="storepickup_stores"
+                data-bind="
+                    attr: {
+                        id: uid,
+                        name: inputName,
+                        disabled: disabled,
+                        'aria-describedby': getDescriptionId(),
+                        'aria-required': required,
+                        'aria-invalid': error() ? true : 'false',
+                        placeholder: placeholder
+                    },
+                    hasFocus: focused,
+                    value: value,
+                    options: options,
+                    optionsValue: 'id',
+                    optionsText: 'name',
+                    optionsCaption: caption,
+                    event: {change: onChangeStore(value())}
+                    ">
+        </select>
+        <span class="ampickup-separator -checkout"></span>
+        <span class="ampickup-choosemap"
+           data-bind="i18n: 'Choose on map', attr: {title: 'Choose on map'},
+           click: openMap"/>
+    </div>
+
+    <!-- ko if: notice -->
+    <div class="field-note" data-bind="attr: {id: noticeId}">
+        <span data-bind="text: notice"/>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: error() -->
+    <div class="field-error" data-bind="attr: {id: errorId}" generated="true">
+        <span data-bind="text: error"/>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: warn() -->
+    <div role="alert" class="message warning" data-bind="attr: {id: warningId}" generated="true">
+        <span data-bind="text: warn"/>
+    </div>
+    <!-- /ko -->
+</div>

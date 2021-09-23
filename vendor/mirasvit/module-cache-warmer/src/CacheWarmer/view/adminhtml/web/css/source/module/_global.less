@@ -1,0 +1,87 @@
+.mst-cache-warmer__status-wrapper {
+    text-align: center;
+
+    .status {
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 11px;
+        border-radius: 2px;
+        padding: 1px 15px;
+        color: #fff;
+        font-weight: bold;
+        text-transform: capitalize;
+
+        &.cache, &.Cached, &.completed {
+            background: #47cd4a;
+        }
+
+        &.pending, &.Pending, &.scheduled {
+            background: #f0b700;
+        }
+
+        &.running, &.error, &.Uncacheable, &.missed {
+            background: #ff2525;
+        }
+    }
+}
+
+//.cache-warmer__grid-table, .col-info {
+//    width: 100%;
+//    tr {
+//        td {
+//            padding: .2rem 1rem !important;
+//            border: none !important;
+//            max-width: 100px;
+//            overflow: hidden;
+//
+//            &:first-child {
+//                text-transform: capitalize;
+//                padding-left: 0 !important;
+//            }
+//
+//            &:last-child {
+//                text-align: right;
+//                padding-right: 0 !important;
+//            }
+//        }
+//
+//        &:first-child {
+//            td {
+//                padding-top: 0 !important;
+//            }
+//        }
+//        &:last-child {
+//            td {
+//                padding-bottom: 0 !important;
+//            }
+//        }
+//    }
+//}
+//
+//.cache-warmer-job-index .page-main-actions,
+//.cache-warmer-page-index .page-main-actions {
+//    display: none;
+//}
+//
+//.cache-warmer-job-index .page-main-actions._hidden,
+//.cache-warmer-page-index .page-main-actions._hidden {
+//    display: block !important;
+//}
+//
+//.cache-warmer-job-index .page-main-actions._hidden .page-actions._fixed,
+//.cache-warmer-page-index .page-main-actions._hidden .page-actions._fixed {
+//    height: 78px;
+//}
+//
+//body.cache-warmer-page-index {
+//    .data-grid-cell-content {
+//        white-space: nowrap;
+//        max-width: 60rem;
+//        overflow: hidden;
+//        text-overflow: ellipsis;
+//
+//        &:hover {
+//            white-space: normal;
+//        }
+//    }
+//}

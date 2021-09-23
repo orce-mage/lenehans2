@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+$filter = $this->getFilter();
+$filterItems = $filter->getItems();
+$helper = $this->helper('MageBig\AjaxFilter\Helper\Data');
+?>
+<?php  if (count($filterItems)) : ?>
+<ul class="items rating-container">
+    <?php foreach ($filterItems as $filterItem) : ?>
+    <?php
+    $value = (float)$filterItem->getValue();
+    $width = 100*$value/5;
+    ?>
+    <li class="item">
+        <a title="<?= $filterItem->getLabel() ?>" href="<?= $block->escapeUrl($filterItem->getUrl()); ?>">
+            <span class="rating-summary">
+                <span class="rating-result">
+                    <span class="rating" style="width: <?= $width ?>%;"></span>
+                </span>
+                <?php if ($value < 5 && $helper->getRatingTypes() == 'up') : ?>
+                <span class="text"><?= __('& up') ?></span>
+                <?php endif; ?>
+            </span>
+            <?php if ($block->displayProductCount()) : ?>
+            <span class="count"><?= $filterItem->getCount() ?></span>
+            <?php endif; ?>
+        </a>
+    </li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>

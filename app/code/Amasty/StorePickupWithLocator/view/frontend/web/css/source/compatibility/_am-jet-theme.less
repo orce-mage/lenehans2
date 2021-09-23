@@ -1,0 +1,30 @@
+//
+//  Compatibility with Amasty Jet Theme
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amasty-jet-theme {
+        .ampickup-conditions-container.block {
+            > .title {
+                display: flex;
+                align-items: center;
+            }
+
+            > .title:after {
+                margin-left: auto;
+                width: @cart-shipping-tax-arrow-icon__size;
+                height: @cart-shipping-tax-arrow-icon__size;
+                background: ~'url("../svg/min/arrow-bottom.svg") no-repeat 100% / contain';
+                content: '';
+            }
+
+            &.active > .title:after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

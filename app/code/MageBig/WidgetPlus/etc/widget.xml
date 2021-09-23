@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="widgetplus_static" class="MageBig\WidgetPlus\Block\StaticPlus" is_email_compatible="true"
+            placeholder_image="MageBig_WidgetPlus::images/magebig.png">
+        <label translate="true">Widget++ Static Block</label>
+        <description>Show static block on page</description>
+        <parameters>
+            <parameter name="block_id" xsi:type="block" visible="true" required="true">
+                <label>Static Block</label>
+                <block class="MageBig\WidgetPlus\Block\Adminhtml\Block\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Block...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="widget_title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="classes" xsi:type="text" required="false" visible="true">
+                <label translate="true">Custom Class</label>
+                <description>Add your custom html class</description>
+            </parameter>
+            <parameter name="countdown" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Countdown</label>
+                <description translate="true">
+                    <![CDATA[Enable countdown and put html code to static block<div><code>&lt;div class="promo-count" data-date="November 30, 2020"&gt;&lt;/div&gt;</code></div>]]></description>
+            </parameter>
+            <parameter name="slider" xsi:type="select" visible="true"
+                       source_model="MageBig\WidgetPlus\Model\Widget\Source\Carousel">
+                <label translate="true">Carousel / Slideshow</label>
+                <description translate="true">Enable Carousel or Slideshow</description>
+            </parameter>
+            <parameter name="column" xsi:type="text" visible="true">
+                <label translate="true">Columns</label>
+                <description translate="true">The number of items show on the screen. Default: 4</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>4</value>
+            </parameter>
+            <parameter name="margin" xsi:type="text" visible="true">
+                <label translate="true">Margin</label>
+                <description translate="true">Margin item. Default: 30</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>30</value>
+            </parameter>
+            <parameter name="autoplay" xsi:type="text" visible="true">
+                <label translate="true">Autoplay (ms)</label>
+                <description translate="true">Default 5000 to play every 5 seconds. Leave empty to disable autoplay.
+                </description>
+                <depends>
+                    <parameter name="slider" value="1|2"/>
+                </depends>
+            </parameter>
+            <parameter name="navigation" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Navigation</label>
+                <description translate="true">Show next/prev buttons</description>
+                <depends>
+                    <parameter name="slider" value="1|2"/>
+                </depends>
+            </parameter>
+            <parameter name="paging" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Paging</label>
+                <description translate="true">Show dots navigation</description>
+                <depends>
+                    <parameter name="slider" value="1|2"/>
+                </depends>
+            </parameter>
+            <parameter name="x1600" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1600px</label>
+                <description translate="true">Ex: items:6,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x1200" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1200px</label>
+                <description translate="true">Ex: items:4,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x992" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥992px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x768" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥768px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x576" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥576px</label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x0" xsi:type="text" visible="true">
+                <label translate="true"><![CDATA[Viewport <576px]]></label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="background_type" xsi:type="select" visible="true"
+                       source_model="MageBig\WidgetPlus\Model\Widget\Source\Background">
+                <label translate="true">Enable Background</label>
+                <description translate="true">Enable Background</description>
+            </parameter>
+            <parameter name="parallax_background_image" xsi:type="block" visible="true">
+                <label translate="true">Background image</label>
+                <depends>
+                    <parameter name="background_type" value="1|2"/>
+                </depends>
+                <block class="MageBig\WidgetPlus\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="background_video" xsi:type="block" visible="true">
+                <label translate="true">Video</label>
+                <depends>
+                    <parameter name="background_type" value="3"/>
+                </depends>
+                <block class="MageBig\WidgetPlus\Block\Adminhtml\Widget\VideoChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose mp4 file</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="background_video_poster" xsi:type="block" visible="true">
+                <label translate="true">Video Poster</label>
+                <depends>
+                    <parameter name="background_type" value="3"/>
+                </depends>
+                <block class="MageBig\WidgetPlus\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="background_video_autoplay" xsi:type="select" visible="true">
+                <label translate="true">Autoplay Video</label>
+                <description translate="true">Auto play video only for desktop browser</description>
+                <depends>
+                    <parameter name="background_type" value="3"/>
+                </depends>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="background_video_type" xsi:type="select" visible="true">
+                <label translate="true">Video Type</label>
+                <description translate="true">Video display</description>
+                <depends>
+                    <parameter name="background_type" value="3"/>
+                </depends>
+                <options>
+                    <option name="contain" value="contain" selected="true">
+                        <label translate="true">Contain</label>
+                    </option>
+                    <option name="fullscreen" value="fullscreen">
+                        <label translate="true">Full Screen</label>
+                    </option>
+                    <option name="auto" value="auto">
+                        <label translate="true">Auto</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="background_video_mute" xsi:type="select" visible="true">
+                <label translate="true">Mute</label>
+                <description translate="true">Mute the video</description>
+                <depends>
+                    <parameter name="background_type" value="3"/>
+                </depends>
+                <options>
+                    <option name="mute" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="muted" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="background_property" xsi:type="text" visible="true">
+                <label translate="true"><![CDATA[Background Property]]></label>
+                <description translate="true">#ffffff repeat scroll left top</description>
+                <depends>
+                    <parameter name="background_type" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="background_size" xsi:type="text" visible="true">
+                <label translate="true"><![CDATA[Background Size]]></label>
+                <description translate="true">cover or content or auto</description>
+                <depends>
+                    <parameter name="background_type" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true" required="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="block" value="widget/static_block.phtml" selected="true">
+                        <label translate="true">Static Block</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="widgetplus_product" class="MageBig\WidgetPlus\Block\Product" is_email_compatible="true"
+            placeholder_image="MageBig_WidgetPlus::images/magebig.png">
+        <label translate="true">Widget++ Products</label>
+        <description>Show products in widget</description>
+        <parameters>
+            <parameter name="widget_title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Widget Title</label>
+            </parameter>
+            <parameter name="classes" xsi:type="text" required="false" visible="true">
+                <label translate="true">Widget Classes</label>
+                <description translate="true">Add your custom html class</description>
+            </parameter>
+            <parameter name="product_type" xsi:type="select" visible="true" required="true"
+                       source_model="MageBig\WidgetPlus\Model\Widget\Source\Type">
+                <label translate="true">Product Type</label>
+            </parameter>
+            <parameter name="product_ids" xsi:type="conditions"
+                       class="MageBig\WidgetPlus\Block\Adminhtml\Widget\Renderer\Product" required="true"
+                       visible="true">
+                <label translate="true">Select Products</label>
+                <depends>
+                    <parameter name="product_type" value="featured"/>
+                </depends>
+            </parameter>
+            <parameter name="period" xsi:type="select" required="true" visible="true">
+                <label translate="true">Period</label>
+                <description translate="true"><![CDATA[Select the option to filter bestseller products. For accurate filtering, be sure to refresh lifetime statistics in REPORTS > Statistics > Refresh Statistics]]></description>
+                <depends>
+                    <parameter name="product_type" value="bestseller"/>
+                </depends>
+                <options>
+                    <option name="current_year" value="current_year" selected="true">
+                        <label translate="true">Current Year</label>
+                    </option>
+                    <option name="last_year" value="last_year">
+                        <label translate="true">Last Year</label>
+                    </option>
+                    <option name="current_month" value="current_month">
+                        <label translate="true">Current Month</label>
+                    </option>
+                    <option name="last_month" value="last_month">
+                        <label translate="true">Last Month</label>
+                    </option>
+                    <option name="yesterday" value="yesterday">
+                        <label translate="true">Yesterday</label>
+                    </option>
+                    <option name="all_time" value="all_time">
+                        <label translate="true">All Time</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="category_ids" xsi:type="conditions"
+                       class="MageBig\WidgetPlus\Block\Adminhtml\Widget\Renderer\Category" visible="true">
+                <label translate="true">Categories</label>
+                <description translate="true">Product collections will be filtered by selected categories
+                </description>
+                <depends>
+                    <parameter name="product_type" value="newcreated|newupdated|newfromdate|bestseller|mostviewed|discount|rating"/>
+                </depends>
+            </parameter>
+            <parameter name="product_style" xsi:type="select" visible="true">
+                <label translate="true">Display Type</label>
+                <description translate="true">Select the template to display the product</description>
+                <options>
+                    <option name="style1" value="1" selected="true">
+                        <label translate="true">Template 01</label>
+                    </option>
+                    <option name="style2" value="2">
+                        <label translate="true">Template 02 (Show only image)</label>
+                    </option>
+                    <option name="style3" value="3">
+                        <label translate="true">Template 03 (Discount)</label>
+                    </option>
+                    <option name="style4" value="4">
+                        <label translate="true">Template 04 (Gallery)</label>
+                    </option>
+                    <option name="style5" value="5">
+                        <label translate="true">Template 05 (Sidebar)</label>
+                    </option>
+                    <option name="style6" value="6">
+                        <label translate="true">Template 06</label>
+                    </option>
+                    <option name="style7" value="7">
+                        <label translate="true">Template 07 - Grid</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="cache_lifetime" xsi:type="text" required="false" visible="true">
+                <label translate="true">Cache Lifetime</label>
+                <description translate="true">If set, caching this widget (in seconds)</description>
+                <depends>
+                    <parameter name="product_type" value="featured|newcreated|newupdated|newfromdate|bestseller|mostviewed|discount|rating"/>
+                </depends>
+                <value>86400</value>
+            </parameter>
+            <parameter name="limit" xsi:type="text" visible="true" required="true">
+                <label translate="true">Number of Products</label>
+                <description translate="true">Number of Products to Display</description>
+                <value>12</value>
+            </parameter>
+            <parameter name="countdown" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Countdown</label>
+                <description translate="true">Enable countdown if available</description>
+            </parameter>
+            <parameter name="slider" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Carousel</label>
+            </parameter>
+            <parameter name="row" xsi:type="text" visible="true">
+                <label translate="true">Rows</label>
+                <description translate="true">Number of rows to show product</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>1</value>
+            </parameter>
+            <parameter name="margin" xsi:type="text" visible="true">
+                <label translate="true">Margin</label>
+                <description translate="true">Margin item. Default: 30</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>30</value>
+            </parameter>
+            <parameter name="autoplay" xsi:type="text" visible="true">
+                <label translate="true">Autoplay (millisecond)</label>
+                <description translate="true">Auto play carousel, E.g: 5000 (5 seconds).</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="navigation" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show next/prev buttons</label>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="paging" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show dots navigation</label>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="column" xsi:type="text" visible="true">
+                <label translate="true">Columns</label>
+                <description translate="true">The number of products you want to see on the screen.</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>4</value>
+            </parameter>
+            <parameter name="x1600" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1600px</label>
+                <description translate="true">Ex: items:6,nav:true . This option only for full width layout.</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x1200" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1200px</label>
+                <description translate="true">Ex: items:4,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x992" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥992px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x768" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥768px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x576" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥576px</label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x0" xsi:type="text" visible="true">
+                <label translate="true"><![CDATA[Viewport <576px]]></label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true" required="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="block" value="widget/product01.phtml" selected="true">
+                        <label translate="true">Product Style</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="widgetplus_product_tab" class="MageBig\WidgetPlus\Block\ProductTab" is_email_compatible="true"
+            placeholder_image="MageBig_WidgetPlus::images/magebig.png">
+        <label translate="true">Widget++ Products Tab</label>
+        <description>Show products tab in widget</description>
+        <parameters>
+            <parameter name="widget_title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Widget Title</label>
+            </parameter>
+            <parameter name="classes" xsi:type="text" required="false" visible="true">
+                <label translate="true">Widget Classes</label>
+                <description translate="true">Add your custom html class</description>
+            </parameter>
+            <parameter name="widget_tab" xsi:type="select" visible="true"
+                       source_model="MageBig\WidgetPlus\Model\Widget\Source\Tab">
+                <label translate="true">Product Tabs</label>
+            </parameter>
+            <parameter name="collections" xsi:type="conditions" class="MageBig\WidgetPlus\Block\Adminhtml\Widget\Form\Element\Collection" required="true" visible="true">
+                <label translate="true">Product Collections</label>
+                <description translate="true"><![CDATA[DRAG & DROP to arrange the collection]]></description>
+                <depends>
+                    <parameter name="widget_tab" value="collections" />
+                </depends>
+            </parameter>
+            <parameter name="category_ids" xsi:type="conditions" class="MageBig\WidgetPlus\Block\Adminhtml\Widget\Renderer\Category" visible="true">
+                <label translate="true">Categories</label>
+            </parameter>
+            <parameter name="labels" xsi:type="text"  visible="true">
+                <label translate="true">Custom Labels Tab</label>
+                <description translate="true">Separator by: // . Ex: LabelTab1 // LabelTab2 // LabelTab3</description>
+            </parameter>
+            <parameter name="period" xsi:type="select" required="true" visible="true">
+                <label translate="true">Period</label>
+                <description translate="true"><![CDATA[Select the option to filter bestseller products. For accurate filtering, be sure to refresh lifetime statistics in REPORTS > Statistics > Refresh Statistics]]></description>
+                <depends>
+                    <parameter name="widget_tab" value="collections"/>
+                </depends>
+                <options>
+                    <option name="current_year" value="current_year" selected="true">
+                        <label translate="true">Current Year</label>
+                    </option>
+                    <option name="last_year" value="last_year">
+                        <label translate="true">Last Year</label>
+                    </option>
+                    <option name="current_month" value="current_month">
+                        <label translate="true">Current Month</label>
+                    </option>
+                    <option name="last_month" value="last_month">
+                        <label translate="true">Last Month</label>
+                    </option>
+                    <option name="yesterday" value="yesterday">
+                        <label translate="true">Yesterday</label>
+                    </option>
+                    <option name="all_time" value="all_time">
+                        <label translate="true">All Time</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="product_style" xsi:type="select" visible="true">
+                <label translate="true">Display Type</label>
+                <description translate="true">Select the template to display the product</description>
+                <options>
+                    <option name="style1" value="1" selected="true">
+                        <label translate="true">Template 01</label>
+                    </option>
+                    <option name="style2" value="2">
+                        <label translate="true">Template 02 (Show only image)</label>
+                    </option>
+                    <option name="style3" value="3">
+                        <label translate="true">Template 03 (Discount)</label>
+                    </option>
+                    <option name="style4" value="4">
+                        <label translate="true">Template 04 (Gallery)</label>
+                    </option>
+                    <option name="style5" value="5">
+                        <label translate="true">Template 05 (Sidebar)</label>
+                    </option>
+                    <option name="style6" value="6">
+                        <label translate="true">Template 06</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="cache_lifetime" xsi:type="text" required="false" visible="true">
+                <label translate="true">Cache Lifetime</label>
+                <description translate="true">If set, caching this widget (in seconds)</description>
+                <value>86400</value>
+            </parameter>
+            <parameter name="limit" xsi:type="text" visible="true" required="true">
+                <label translate="true">Number of Products</label>
+                <description translate="true">Number of Products to Display</description>
+                <value>12</value>
+            </parameter>
+            <parameter name="slider" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Carousel</label>
+            </parameter>
+            <parameter name="row" xsi:type="text" visible="true">
+                <label translate="true">Rows</label>
+                <description translate="true">Number of rows to show product</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>1</value>
+            </parameter>
+            <parameter name="margin" xsi:type="text" visible="true">
+                <label translate="true">Margin</label>
+                <description translate="true">Margin item. Default: 30</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>30</value>
+            </parameter>
+            <parameter name="autoplay" xsi:type="text" visible="true">
+                <label translate="true">Autoplay (millisecond)</label>
+                <description translate="true">Auto play carousel, E.g: 5000 (5 seconds).</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="navigation" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show next/prev buttons</label>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="paging" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show dots navigation</label>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="column" xsi:type="text" visible="true">
+                <label translate="true">Columns</label>
+                <description translate="true">The number of products you want to see on the screen.</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>4</value>
+            </parameter>
+            <parameter name="x1600" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1600px</label>
+                <description translate="true">Ex: items:6,nav:true . This option only for full width layout.</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x1200" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1200px</label>
+                <description translate="true">Ex: items:4,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x992" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥992px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x768" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥768px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x576" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥576px</label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x0" xsi:type="text" visible="true">
+                <label translate="true"><![CDATA[Viewport <576px]]></label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true" required="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="block" value="widget/product_tab01.phtml" selected="true">
+                        <label translate="true">Product Tab Style</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="catalog_recently_viewed" class="Magento\Catalog\Block\Widget\RecentlyViewed"
+            placeholder_image="MageBig_WidgetPlus::images/magebig.png">
+        <label translate="true">Widget++ Recently Viewed Products</label>
+        <description translate="true">List of Products Recently Viewed by Visitor</description>
+        <parameters>
+            <parameter name="uiComponent" xsi:type="text" required="false" visible="false">
+                <label translate="true">UI Component</label>
+                <value>widget_recently_viewed</value>
+            </parameter>
+            <parameter name="page_size" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Products to display</label>
+                <value>5</value>
+            </parameter>
+            <parameter name="show_attributes" xsi:type="multiselect" required="true" visible="true">
+                <label translate="true">Product attributes to show</label>
+                <options>
+                    <option name="name" value="name">
+                        <label translate="true">Name</label>
+                    </option>
+                    <option name="image" value="image">
+                        <label translate="true">Image</label>
+                    </option>
+                    <option name="price" value="price">
+                        <label translate="true">Price</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_buttons" xsi:type="multiselect" required="false" visible="true">
+                <label translate="true">Buttons to show</label>
+                <options>
+                    <option name="none" value="">
+                        <label translate="true">None</label>
+                    </option>
+                    <option name="add_to_cart" value="add_to_cart">
+                        <label translate="true">Add to Cart</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label>Template</label>
+                <options>
+                    <option name="grid" value="product/widget/viewed/grid.phtml" selected="true">
+                        <label translate="true">Viewed Products Grid Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="content">
+                <template name="grid" value="grid" />
+            </container>
+            <container name="content.bottom">
+                <template name="grid" value="grid" />
+            </container>
+            <container name="page.bottom.content">
+                <template name="grid" value="grid" />
+            </container>
+        </containers>
+    </widget>
+
+    <widget id="widgetplus_crosssell" class="MageBig\WidgetPlus\Block\Crosssell" is_email_compatible="true"
+            placeholder_image="MageBig_WidgetPlus::images/magebig.png">
+        <label translate="true">Widget++ Cross-Sell Products</label>
+        <description>Show cross-sell products in widget</description>
+        <parameters>
+            <parameter name="widget_title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Widget Title</label>
+            </parameter>
+            <parameter name="classes" xsi:type="text" required="false" visible="true">
+                <label translate="true">Widget Classes</label>
+                <description translate="true">Custom classes</description>
+            </parameter>
+            <parameter name="product_type" xsi:type="text" visible="false" required="true">
+                <label translate="true">Product Type</label>
+                <value>crosssell</value>
+            </parameter>
+            <parameter name="product_style" xsi:type="select" visible="true">
+                <label translate="true">Display Type</label>
+                <description translate="true">Select the template to display the product</description>
+                <options>
+                    <option name="style1" value="1" selected="true">
+                        <label translate="true">Template 01</label>
+                    </option>
+                    <option name="style2" value="2">
+                        <label translate="true">Template 02 (Show only image)</label>
+                    </option>
+                    <option name="style3" value="3">
+                        <label translate="true">Template 03 (Discount)</label>
+                    </option>
+                    <option name="style5" value="5">
+                        <label translate="true">Template 05 (Sidebar)</label>
+                    </option>
+                    <option name="style6" value="6">
+                        <label translate="true">Template 06</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="limit" xsi:type="text" visible="true" required="true">
+                <label translate="true">Number of Products</label>
+                <description translate="true">Number of Products to Display</description>
+                <value>12</value>
+            </parameter>
+            <parameter name="countdown" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Countdown</label>
+                <description translate="true">Enable countdown if available</description>
+            </parameter>
+            <parameter name="slider" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Carousel</label>
+            </parameter>
+            <parameter name="row" xsi:type="text" visible="true">
+                <label translate="true">Rows</label>
+                <description translate="true">Number of rows to show product</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>1</value>
+            </parameter>
+            <parameter name="margin" xsi:type="text" visible="true">
+                <label translate="true">Margin</label>
+                <description translate="true">Margin item. Default: 30</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>30</value>
+            </parameter>
+            <parameter name="autoplay" xsi:type="text" visible="true">
+                <label translate="true">Autoplay (millisecond)</label>
+                <description translate="true">Auto play carousel, E.g: 5000 (5 seconds).</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="navigation" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show next/prev buttons</label>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="paging" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show dots navigation</label>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="column" xsi:type="text" visible="true">
+                <label translate="true">Columns</label>
+                <description translate="true">The number of products you want to see on the screen.</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+                <value>4</value>
+            </parameter>
+            <parameter name="x1600" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1600px</label>
+                <description translate="true">Ex: items:6,nav:true . This option only for full width layout.</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x1200" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥1200px</label>
+                <description translate="true">Ex: items:4,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x992" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥992px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x768" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥768px</label>
+                <description translate="true">Ex: items:3,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x576" xsi:type="text" visible="true">
+                <label translate="true">Viewport ≥576px</label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="x0" xsi:type="text" visible="true">
+                <label translate="true"><![CDATA[Viewport <576px]]></label>
+                <description translate="true">Ex: items:2,nav:true</description>
+                <depends>
+                    <parameter name="slider" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true" required="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="block_crosssell" value="widget/product01.phtml" selected="true">
+                        <label translate="true">Product Style</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="checkout.cart.widget">
+                <template name="default" value="block_crosssell" />
+            </container>
+            <container name="checkout.cart.form.before">
+                <template name="default" value="block_crosssell" />
+            </container>
+        </containers>
+    </widget>
+</widgets>

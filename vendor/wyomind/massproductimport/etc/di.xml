@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <!-- PROGRESS BAR CONFIGURATION STARTS -->
+    <virtualType name="Wyomind\MassProductImport\Block\Adminhtml\Progress\Status" type="Wyomind\Framework\Block\Adminhtml\Progress\Status">
+        <arguments>
+            <argument name="module" xsi:type="string">MassProductImport</argument>
+            <argument name="field" xsi:type="string">cron_settings</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassProductImport\Helper\Progress" type="Wyomind\Framework\Helper\Progress">
+        <arguments>
+            <argument name="module" xsi:type="string">MassProductImport</argument>
+            <argument name="tempDirectory" xsi:type="string">/var/tmp/MassProductImport/</argument>
+            <argument name="filePrefix" xsi:type="string">profile_</argument>
+        </arguments>
+    </virtualType>
+    <!-- PROGRESS BAR CONFIGURATION ENDS -->
+
+
+    <!-- LOGGER CONFIGURATION STARTS -->
+    <virtualType name="Wyomind\MassProductImport\Logger\Logger" type="\Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">MassProductImport</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="MassProductImport" xsi:type="object">Wyomind\MassProductImport\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassProductImport\Logger\Handler" type="\Wyomind\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/Wyomind_MassProductImport.log</argument>
+            <argument name="filePath" xsi:type="string"/>
+        </arguments>
+    </virtualType>
+
+    <!-- LOGGER CONFIGURATION ENDS -->
+
+    <!-- LOGGERCRON CONFIGURATION STARTS -->
+    <virtualType name="Wyomind\MassProductImport\Logger\LoggerCron" type="\Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">MassProductImportCron</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="MassProductImport" xsi:type="object">Wyomind\MassProductImport\Logger\HandlerCron</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassProductImport\Logger\HandlerCron" type="\Wyomind\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/Wyomind_MassProductImportCron.log</argument>
+            <argument name="filePath" xsi:type="string"/>
+        </arguments>
+    </virtualType>
+    <!-- LOGGERCRON CONFIGURATION ENDS -->
+
+    <!-- COMMAND LINE -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="wyomind_massproductimport_run" xsi:type="object">Wyomind\MassProductImport\Console\Command\Run</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="wyomind_massproductimport_sql" xsi:type="object">Wyomind\MassProductImport\Console\Command\Sql</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Action History -->
+    <virtualType name="Wyomind\MassProductImport\Model\Profiles\ActionHistory" type="Wyomind\Framework\Model\ActionHistory">
+        <arguments>
+            <argument name="module" xsi:type="string">MassProductImport</argument>
+            <argument name="entity" xsi:type="string">Profiles</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassProductImport\Model\ResourceModel\Profiles\ActionHistory" type="Wyomind\Framework\Model\ResourceModel\ActionHistory">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massproductimport_profiles</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassProductImport\Model\ResourceModel\Profiles\ActionHistory\Collection" type="Wyomind\Framework\Model\ResourceModel\ActionHistory\Collection">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massproductimport_profiles</argument>
+        </arguments>
+    </virtualType>
+    <!-- Grid -->
+    <virtualType name="Wyomind\MassProductImport\Block\Adminhtml\Profiles\Edit\Tab\ActionHistory" type="Wyomind\Framework\Block\Adminhtml\Edit\Tab\History\ActionHistory">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massproductimport_profiles</argument>
+            <argument name="module" xsi:type="string">MassProductImport</argument>
+            <argument name="entity" xsi:type="string">Profiles</argument>
+        </arguments>
+    </virtualType>
+    <!-- Version History -->
+    <virtualType name="Wyomind\MassProductImport\Model\Profiles\VersionHistory" type="Wyomind\Framework\Model\VersionHistory">
+        <arguments>
+            <argument name="module" xsi:type="string">MassProductImport</argument>
+            <argument name="entity" xsi:type="string">Profiles</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\MassProductImport\Model\ResourceModel\Profiles\VersionHistory" type="Wyomind\Framework\Model\ResourceModel\VersionHistory">
+        <arguments>
+            <argument name="tableName" xsi:type="string">massproductimport_profiles</argument>
+        </arguments>
+    </virtualType>
+    
+    <preference for="Wyomind\MassStockUpdate\Helper\Data" type="Wyomind\MassProductImport\Helper\Data"/>
+    <preference for="Wyomind\MassStockUpdate\Helper\Storage" type="Wyomind\MassProductImport\Helper\Storage"/>
+    <preference for="Wyomind\MassStockUpdate\Helper\Config" type="Wyomind\MassProductImport\Helper\Config"/>
+    <preference for="Wyomind\MassStockUpdate\Helper\Ftp" type="Wyomind\MassProductImport\Helper\Ftp"/>
+    <preference for="Wyomind\MassStockUpdate\Model\ResourceModel\Profiles\Collection" type="Wyomind\MassProductImport\Model\ResourceModel\Profiles\Collection"/>
+    <preference for="Wyomind\MassStockUpdate\Model\Profiles" type="Wyomind\MassProductImport\Model\Profiles"/>
+
+
+
+
+</config>

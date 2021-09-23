@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+?>
+<?php
+/**
+ * @var \Amasty\Stockstatus\Block\Adminhtml\Product\Attribute\Edit\Form\Preview\Image $block
+ * @var \Magento\Framework\Escaper $escaper
+ **/
+
+$isUseDefaultImage = $block->isImageUseDefault();
+$imageUrl = $block->getImageUrl();
+?>
+
+<div class="amstockstatus-image-preview">
+    <br>
+    <input type="checkbox" id="delete_image" name="delete_image" value="1" class="amstockstatus-delete-image"
+        <?php if ($isUseDefaultImage): ?>
+            disabled="disabled"
+        <?php endif; ?>
+    />
+    <label for="delete_image"><?= $escaper->escapeHtml(__('Delete Image')) ?></label>
+    <br>
+    <br>
+    <img src="<?= $escaper->escapeUrl($block->getImageUrl()) ?>"  class="amstockstatus-preview" type="hidden"/>
+</div>

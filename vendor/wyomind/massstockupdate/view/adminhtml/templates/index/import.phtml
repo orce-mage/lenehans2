@@ -1,0 +1,25 @@
+<div id="file-import" style="display: none;" class="messages">
+
+    <?php $action = $block->getUrl('*/*/import'); ?>
+    <form novalidate="novalidate" id="import-form" class="admin__scope-old" action="<?php echo $action; ?>"
+          method="post" enctype="multipart/form-data">
+
+        <fieldset class="fieldset admin__fieldset">
+            <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>"/>
+
+            <div class="admin__field field required _required">
+                <label class="label admin__field-label" for="file">
+                    <span><?php echo __("Profile to import"); ?></span>
+                </label>
+                <div class="admin__field-control control">
+                    <input aria-required="true" id="file" name="file" value=""
+                           title="<?php echo __("Profile to import"); ?>"
+                           class="input-text admin__control-text required-entry _required" type="file">
+                </div>
+            </div>
+
+        </fieldset>
+
+    </form>
+
+</div>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amgiftcard" translate="label" type="text" sortOrder="70903" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="allow_refund_for_orders" translate="label tooltip" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Refund for Orders Paid with Gift Card</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Enable the setting to refund Gift Card balance. Please note, only the initial balance value may be returned to Gift Card Account upon refund process</tooltip>
+                </field>
+            </group>
+            <group id="gift_card_account" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gift Card Account</label>
+                <field id="checkout_position" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position On Checkout</label>
+                    <source_model>Amasty\GiftCardAccount\Model\Config\Source\CheckoutPosition</source_model>
+                </field>
+                <field id="checkout_view_type" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>View On Checkout</label>
+                    <source_model>Amasty\GiftCardAccount\Model\Config\Source\CheckoutViewType</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

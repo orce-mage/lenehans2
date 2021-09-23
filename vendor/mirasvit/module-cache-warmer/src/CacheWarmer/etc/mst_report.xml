@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../module-report/src/ReportApi/etc/mst_report.xsd">
+    <table name="mst_cache_warmer_log">
+            <column name="created_at" label="Date" type="date"/>
+
+            <column name="response_time_data" label="Response Time / ms" fields="response_time"
+                    type="number" expr="ROUND(AVG(%1), 0)"/>
+
+            <column name="response_time_hit" label="Hit Response Time / ms" fields="response_time,is_hit"
+                    type="number" expr="ROUND(AVG(case when %2=1 then %1 else null end), 0)"/>
+
+            <column name="response_time_miss" label="Miss Response Time / ms" fields="response_time,is_hit"
+                    type="number" expr="ROUND(AVG(case when %2=0 then %1 else null end), 0)"/>
+
+            <column name="hit" label="Hits / %" fields="is_hit"
+                    type="percent"  expr="SUM(case when %1=1 then 1 else null end) / COUNT(%1) * 100"/>
+
+            <column name="miss" label="Misses / %" fields="is_hit"
+                    type="percent" expr="SUM(case when %1=0 then 1 else null end) / COUNT(%1) * 100"/>
+
+            <column name="visit_count" label="Visits" fields="is_hit"
+                    type="number" expr="COUNT(%1)"/>
+    </table>
+</config>

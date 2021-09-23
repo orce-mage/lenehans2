@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\Stockstatus\Model\Rule">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="condition_factory" xsi:type="object">Amasty\Stockstatus\Model\Rule\ConditionFactory</item>
+                <item name="amasty_serializer" xsi:type="object">Amasty\Base\Model\Serializer</item>
+                <item name="store_manager" xsi:type="object">Magento\Store\Model\StoreManagerInterface</item>
+                <item name="rule_processor" xsi:type="object">Amasty\Stockstatus\Model\Indexer\Rule\RuleProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Ui\DataProvider\Product\Listing\DataProvider">
+        <arguments>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="stockstatus_rule_condition" xsi:type="object">Amasty\Stockstatus\Ui\DataProvider\Product\Filter\RuleConditionFilter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="stockstatusMainRanges" type="Amasty\Stockstatus\Ui\DataProvider\Rule\Form\Modifier\Ranges">
+        <arguments>
+            <argument name="rangeProvider" xsi:type="object">Amasty\Stockstatus\Ui\DataProvider\Rule\Form\Data\Range\MainRangeProvider</argument>
+            <argument name="tabName" xsi:type="string">general</argument>
+            <argument name="containerName" xsi:type="string">qty_ranges</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\Stockstatus\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="main_ranges" xsi:type="array">
+                    <item name="class" xsi:type="string">stockstatusMainRanges</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Stockstatus\Ui\DataProvider\Rule\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Amasty\Stockstatus\Ui\DataProvider\Product\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ShopbyBase\Block\Adminhtml\Catalog\Product\Attribute\Edit">
+        <plugin name="Amasty_Stockstatus::disable-filter-setting-for-stockstatus"
+                type="Amasty\Stockstatus\Plugin\ShopbyBase\Block\Adminhtml\Catalog\Product\Attribute\EditPlugin"/>
+    </type>
+
+    <type name="Amasty\Mage24Fix\Observer\FixStoreSwitcher">
+        <arguments>
+            <argument name="handles" xsi:type="array">
+                <item xsi:type="string" name="stockstatus-settings">amstockstatus_product_attribute_settings</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="amStockstatusUploaderStatusIcon" type="Magento\MediaStorage\Model\File\Uploader">
+        <arguments>
+            <argument name="validator" xsi:type="object">
+                Amasty\Stockstatus\Model\Backend\StockstatusSettings\Form\Image\Uploader\Validator\NotProtectedExtension
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="amStockstatusUploaderStatusFactoryIcon" type="Magento\MediaStorage\Model\File\UploaderFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">amStockstatusUploaderStatusIcon</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Stockstatus\Model\StockstatusSettings\UploadStockstatusIconFile">
+        <arguments>
+            <argument name="uploaderFactory" xsi:type="object">amStockstatusUploaderStatusFactoryIcon</argument>
+        </arguments>
+    </type>
+</config>

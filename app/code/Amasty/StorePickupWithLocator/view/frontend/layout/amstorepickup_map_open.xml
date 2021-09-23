@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="amstorepickup_extra_filters"/>
+    <body>
+        <referenceBlock name="content">
+            <block class="Magento\Framework\View\Element\Template" name="pickup_here_button" template="Amasty_StorePickupWithLocator::map/button.phtml"/>
+            <block class="Amasty\StorePickupWithLocator\Block\Location" name="storepickup_locations">
+                <container name="extra.filters" as="extra_filters" />
+            </block>
+        </referenceBlock>
+    </body>
+</page>

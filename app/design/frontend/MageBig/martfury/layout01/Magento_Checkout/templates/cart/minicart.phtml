@@ -1,0 +1,54 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Checkout\Block\Cart\Sidebar */
+?>
+
+<div class="col">
+    <div class="minicart-action">
+        <a class="action showcart" href="<?= /* @escapeNotVerified */
+        $block->getShoppingCartUrl() ?>"
+           data-bind="scope: 'minicart_content'">
+            <i class="mbi mbi-bag2"></i>
+            <span class="counter qty empty"
+                  data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
+                <span class="counter-number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
+                <span class="counter-label">
+                <!-- ko if: getCartParam('summary_count') -->
+                    <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
+                    <!-- ko i18n: 'items' --><!-- /ko -->
+                    <!-- /ko -->
+                </span>
+            </span>
+        </a>
+    </div>
+    <div data-block="minicart" class="minicart-wrapper minicart-slide mfp-hide">
+        <?php if ($block->getIsNeedToDisplaySideBar()): ?>
+            <div class="block block-minicart empty" style="display: block;">
+                <div id="minicart-content-wrapper" data-bind="scope: 'minicart_content'">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
+                <?= $block->getChildHtml('minicart.addons') ?>
+            </div>
+        <?php endif ?>
+        <script>
+            window.checkout = <?= /* @escapeNotVerified */ $block->getSerializedConfig() ?>;
+        </script>
+        <script type="text/x-magento-init">
+            {
+                "[data-block='minicart']": {
+                    "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout() ?>
+                },
+                "*": {
+                    "Magento_Ui/js/block-loader": "#"
+                }
+            }
+        </script>
+    </div>
+</div>
+

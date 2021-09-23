@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <container name="root" label="Root">
+        <block name="mteditor.content" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor" template="Magetrend_PdfTemplates::mteditor.phtml">
+            <block class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Message" name="mteditor.message" template="Magetrend_PdfTemplates::mteditor/message.phtml"/>
+            <block class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Fonts" name="mteditor.fonts" template="Magetrend_PdfTemplates::mteditor/fonts.phtml"/>
+
+            <block name="order_elements" class="Magento\Backend\Block\Template">
+                <block name="order.element_text" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/text.phtml"/>
+                <block name="order.element_items" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element\Items" template="Magetrend_PdfTemplates::mteditor/element/items.phtml"/>
+                <block name="order.element_total" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/total.phtml"/>
+                <block name="order.element_image" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/image.phtml"/>
+                <block name="order.element_shape" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/shape.phtml"/>
+                <block name="order.element_barcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/barcode.phtml"/>
+                <block name="order.element_qrcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/qrcode.phtml"/>
+                <block name="order.element_page" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/page.phtml"/>
+            </block>
+
+            <block name="invoice_elements" class="Magento\Backend\Block\Template">
+                <block name="invoice.element_text" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/text.phtml"/>
+                <block name="invoice.element_items" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element\Items" template="Magetrend_PdfTemplates::mteditor/element/items.phtml"/>
+                <block name="invoice.element_total" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/total.phtml"/>
+                <block name="invoice.element_image" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/image.phtml"/>
+                <block name="invoice.element_shape" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/shape.phtml"/>
+                <block name="invoice.element_barcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/barcode.phtml"/>
+                <block name="invoice.element_qrcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/qrcode.phtml"/>
+                <block name="invoice.element_page" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/page.phtml"/>
+            </block>
+
+            <block name="shipment_elements" class="Magento\Backend\Block\Template">
+                <block name="shipment.element_text" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/text.phtml"/>
+                <block name="shipment.element_items" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element\Items" template="Magetrend_PdfTemplates::mteditor/element/items.phtml"/>
+                <block name="shipment.element_track" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element\Track" template="Magetrend_PdfTemplates::mteditor/element/track.phtml"/>
+                <block name="shipment.element_image" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/image.phtml"/>
+                <block name="shipment.element_shape" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/shape.phtml"/>
+                <block name="shipment.element_barcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/barcode.phtml"/>
+                <block name="shipment.element_qrcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/qrcode.phtml"/>
+                <block name="shipment.element_page" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/page.phtml"/>
+            </block>
+
+            <block name="creditmemo_elements" class="Magento\Backend\Block\Template">
+                <block name="creditmemo.element_text" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/text.phtml"/>
+                <block name="creditmemo.element_items" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element\Items" template="Magetrend_PdfTemplates::mteditor/element/items.phtml"/>
+                <block name="creditmemo.element_total" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/total.phtml"/>
+                <block name="creditmemo.element_image" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/image.phtml"/>
+                <block name="creditmemo.element_shape" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/shape.phtml"/>
+                <block name="creditmemo.element_barcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/barcode.phtml"/>
+                <block name="creditmemo.element_qrcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/qrcode.phtml"/>
+                <block name="creditmemo.element_page" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/page.phtml"/>
+            </block>
+
+            <block name="quote_elements" class="Magento\Backend\Block\Template">
+                <block name="quote.element_text" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/text.phtml"/>
+                <block name="quote.element_items" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element\Items" template="Magetrend_PdfTemplates::mteditor/element/items.phtml"/>
+                <block name="quote.element_total" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/total.phtml"/>
+                <block name="quote.element_image" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/image.phtml"/>
+                <block name="quote.element_shape" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/shape.phtml"/>
+                <block name="quote.element_barcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/barcode.phtml"/>
+                <block name="quote.element_qrcode" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/qrcode.phtml"/>
+                <block name="quote.element_page" class="Magetrend\PdfTemplates\Block\Adminhtml\Mteditor\Element" template="Magetrend_PdfTemplates::mteditor/element/page.phtml"/>
+            </block>
+        </block>
+    </container>
+</layout>

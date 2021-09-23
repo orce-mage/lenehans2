@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+/**  @var $block \Magento\Checkout\Block\Cart */
+?>
+<div class="cart-empty text-center">
+    <?= $block->getChildHtml('checkout_cart_empty_widget') ?>
+    <div class="no-item-cart">
+        <span class="img-lazy-wrap" style="padding-bottom: 53.76%">
+            <img class="media-lazy lazyload" src="#"
+            data-src="<?php echo $block->getViewFileUrl('images/empty-cart.svg') ?>" alt="empty cart" style="max-width: 360px;" />
+        </span>
+    </div>
+    <h2><?= /* @escapeNotVerified */ __('You have no items in your shopping cart.') ?></h2>
+    <p>
+        <a class="action primary" href="<?= $block->escapeUrl($block->getContinueShoppingUrl()) ?>"><?= __('Continue shopping')?></a>
+    </p>
+    <?= $block->getChildHtml('shopping.cart.table.after') ?>
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Checkout/js/empty-cart": {}
+    }
+}
+</script>

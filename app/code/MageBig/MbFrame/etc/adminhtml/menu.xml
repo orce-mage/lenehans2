@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageBig_MbFrame::themes_config" title="Themes" module="MageBig_MbFrame" sortOrder="10" parent="MageBig_MbFrame::magebig_config" resource="MageBig_MbFrame::themes_config"/>
+    </menu>
+</config>

@@ -1,0 +1,167 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--DATA-->
+    <preference for="Mirasvit\CacheWarmer\Api\Data\PageInterface" type="Mirasvit\CacheWarmer\Model\Page"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Data\JobInterface" type="Mirasvit\CacheWarmer\Model\Job"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Data\WarmRuleInterface" type="Mirasvit\CacheWarmer\Model\WarmRule"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Data\LogInterface" type="Mirasvit\CacheWarmer\Model\Log"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Data\PageTypeInterface" type="Mirasvit\CacheWarmer\Model\PageType"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Data\TraceInterface" type="Mirasvit\CacheWarmer\Model\Trace"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Data\SourceInterface" type="Mirasvit\CacheWarmer\Model\Source"/>
+
+    <!--REPOSITORY-->
+    <preference for="Mirasvit\CacheWarmer\Api\Repository\PageRepositoryInterface" type="Mirasvit\CacheWarmer\Repository\PageRepository"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Repository\JobRepositoryInterface" type="Mirasvit\CacheWarmer\Repository\JobRepository"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Repository\WarmRuleRepositoryInterface" type="Mirasvit\CacheWarmer\Repository\WarmRuleRepository"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Repository\LogRepositoryInterface" type="Mirasvit\CacheWarmer\Repository\LogRepository"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Repository\PageTypeRepositoryInterface" type="Mirasvit\CacheWarmer\Repository\PageTypeRepository"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Repository\TraceRepositoryInterface" type="Mirasvit\CacheWarmer\Repository\TraceRepository"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Repository\SourceRepositoryInterface" type="Mirasvit\CacheWarmer\Repository\SourceRepository"/>
+
+    <!--SERVICE-->
+    <preference for="Mirasvit\CacheWarmer\Api\Service\PageServiceInterface" type="Mirasvit\CacheWarmer\Service\PageService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\JobServiceInterface" type="Mirasvit\CacheWarmer\Service\JobService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\LogServiceInterface" type="Mirasvit\CacheWarmer\Service\LogService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\WarmerServiceInterface" type="Mirasvit\CacheWarmer\Service\WarmerService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\SessionServiceInterface" type="Mirasvit\CacheWarmer\Service\SessionService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\BlockTagsGeneratorServiceInterface" type="Mirasvit\CacheWarmer\Service\BlockTagsGeneratorService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\ScheduleJobServiceInterface" type="Mirasvit\CacheWarmer\Service\ScheduleJobService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\CliStoreCurrencyServiceInterface" type="Mirasvit\CacheWarmer\Service\CliStoreCurrencyService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\FilterServiceInterface" type="Mirasvit\CacheWarmer\Service\FilterService"/>
+    <preference for="Mirasvit\CacheWarmer\Api\Service\MigrateServiceInterface" type="Mirasvit\CacheWarmer\Service\MigrateService"/>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\CacheWarmer\Api\Data\PageInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\PageInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\PageInterface::ID</item>
+                </item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\JobInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\JobInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\JobInterface::ID</item>
+                </item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\WarmRuleInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\WarmRuleInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\WarmRuleInterface::ID</item>
+                </item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\LogInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\LogInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\LogInterface::ID</item>
+                </item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\PageTypeInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\PageTypeInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\PageTypeInterface::ID</item>
+                </item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\TraceInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\TraceInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\TraceInterface::ID</item>
+                </item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\SourceInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\SourceInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\CacheWarmer\Api\Data\SourceInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\CacheWarmer\Api\Data\PageInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\JobInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\WarmRuleInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\LogInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\PageTypeInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\TraceInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\CacheWarmer\Api\Data\SourceInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--UI-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="cache_warmer_page_listing_data_source" xsi:type="string">Mirasvit\CacheWarmer\Model\ResourceModel\Page\Grid</item>
+                <item name="cache_warmer_job_listing_data_source" xsi:type="string">Mirasvit\CacheWarmer\Model\ResourceModel\Job\Grid</item>
+                <item name="cache_warmer_warm_rule_data_source" xsi:type="string">Mirasvit\CacheWarmer\Model\ResourceModel\WarmRule\Grid</item>
+                <item name="cache_warmer_trace_data_source" xsi:type="string">Mirasvit\CacheWarmer\Model\ResourceModel\Trace\Grid</item>
+                <item name="cache_warmer_source_listing_data_source" xsi:type="string">Mirasvit\CacheWarmer\Model\ResourceModel\Source\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mstCacheWarmer" xsi:type="object">Mirasvit\CacheWarmer\Console\Command\Command</item>
+                <item name="mstCacheWarmerCrawl" xsi:type="object">Mirasvit\CacheWarmer\Console\Command\CrawlCommand</item>
+                <item name="mstCacheWarmerTest" xsi:type="object">Mirasvit\CacheWarmer\Console\Command\TestCommand</item>
+                <item name="mstCacheWarmerCron" xsi:type="object">Mirasvit\CacheWarmer\Console\Command\CronCommand</item>
+                <item name="mstCacheWarmerSyncSource" xsi:type="object">Mirasvit\CacheWarmer\Console\Command\SynchronizeSourceCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Report\Api\Repository\ReportRepositoryInterface">
+        <arguments>
+            <argument name="reports" xsi:type="array">
+                <item name="cache_warmer_efficiency" xsi:type="string">Mirasvit\CacheWarmer\Reports\Efficiency</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--LOGGER-->
+    <type name="Mirasvit\CacheWarmer\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\CacheWarmer\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">CacheWarmerLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Mirasvit\CacheWarmer\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\CacheWarmer\Logger\FlushHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\CacheWarmer\Logger\FlushLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">CacheWarmerFlushLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="flush" xsi:type="object">Mirasvit\CacheWarmer\Logger\FlushHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\CacheWarmer\Logger\PageStatusVarnishHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\CacheWarmer\Logger\PageStatusVarnishLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">CacheWarmerPageStatusVarnishLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="flush" xsi:type="object">Mirasvit\CacheWarmer\Logger\PageStatusVarnishHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--Forbid flush FPC cache-->
+    <preference for="Magento\Framework\Cache\Frontend\Decorator\TagScope" type="Mirasvit\CacheWarmer\Preference\Framework\Cache\Frontend\Decorator\TagScopePreference"/>
+
+    <!--Delete cacheable="false" for home, category and product pages-->
+    <preference for="Magento\Framework\View\Model\Layout\Merge" type="Mirasvit\CacheWarmer\Preference\DeleteCacheableFalse"/>
+
+    <!-- Forbid cache flushing for Varnish -->
+    <type name="Magento\CacheInvalidate\Observer\InvalidateVarnishObserver">
+        <plugin name="mstCacheWarmerInvalidateVarnish" type="Mirasvit\CacheWarmer\Plugin\InvalidateVarnishPlugin" sortOrder="1000"/>
+    </type>
+</config>

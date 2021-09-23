@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageBig_SocialLogin::settings" title="Social Login" translate="title" module="MageBig_SocialLogin" action="adminhtml/system_config/edit/section/sociallogin/" sortOrder="170" parent="MageBig_MbFrame::ext_config" resource="MageBig_SocialLogin::settings"/>
+    </menu>
+</config>

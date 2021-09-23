@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ExportCore:etc/am_export.xsd">
+    <entity code="amasty_giftcard_code">
+        <name>Amasty Gift Card Code</name>
+        <group>Amasty Gift Card</group>
+        <collectionFactory class="Amasty\GiftCard\Model\Code\ResourceModel\CollectionFactory"/>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ExportCore\Export\FieldsClass\Describe"/>
+            <fields>
+                <field name="code_pool_id">
+                    <actions>
+                        <optionValue2OptionLabel>
+                            <arguments>
+                                <argument name="optionSource" xsi:type="object">Amasty\GiftCard\Model\Config\Source\GiftCardCodePool</argument>
+                            </arguments>
+                        </optionValue2OptionLabel>
+                    </actions>
+                    <filter>
+                        <type>select</type>
+                        <options>
+                            <class>Amasty\GiftCard\Model\Config\Source\GiftCardCodePool</class>
+                        </options>
+                    </filter>
+                </field>
+                <field name="status">
+                    <actions>
+                        <optionValue2OptionLabel>
+                            <arguments>
+                                <argument name="optionSource" xsi:type="object">Amasty\GiftCard\Model\OptionSource\Status</argument>
+                            </arguments>
+                        </optionValue2OptionLabel>
+                    </actions>
+                    <filter>
+                        <type>select</type>
+                        <options>
+                            <class>Amasty\GiftCard\Model\OptionSource\Status</class>
+                        </options>
+                    </filter>
+                </field>
+            </fields>
+        </fieldsConfig>
+    </entity>
+    <relation code="giftcard_account_giftcard_code">
+        <parent_entity>amasty_giftcard_account</parent_entity>
+        <child_entity>amasty_giftcard_code</child_entity>
+        <sub_entity_field_name>amasty_giftcard_code</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">code_id</argument>
+            <argument name="child_field_name" xsi:type="string">code_id</argument>
+        </arguments>
+    </relation>
+    <relation code="giftcard_code_giftcard_account">
+        <parent_entity>amasty_giftcard_code</parent_entity>
+        <child_entity>amasty_giftcard_account</child_entity>
+        <sub_entity_field_name>amasty_giftcard_account</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">code_id</argument>
+            <argument name="child_field_name" xsi:type="string">code_id</argument>
+        </arguments>
+    </relation>
+</config>

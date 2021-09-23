@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+?>
+<?php
+/** @var \Amasty\StorePickupWithLocator\ViewModel\Location\CurbsideLabel $viewModel */
+/** @var \Amasty\Storelocator\Block\View\Location $block */
+$location = $block->getCurrentLocation();
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel && $location): ?>
+    <?= $viewModel->getCurbsideLabelHtml($location) ?>
+<?php endif; ?>

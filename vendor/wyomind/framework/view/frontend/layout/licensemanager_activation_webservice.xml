@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="core_webservice" remove="true"/>
+        <referenceContainer name="content">
+            <block template="Wyomind_Framework::webservice.phtml" class="Wyomind\Framework\Block\Webservice"
+                   name="framework_webservice"/>
+        </referenceContainer>
+    </body>
+</page>

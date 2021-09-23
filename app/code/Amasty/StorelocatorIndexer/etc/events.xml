@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorelocatorIndexer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_save_after">
+        <observer name="amlocator_product_save" instance="Amasty\StorelocatorIndexer\Observer\ProductSave"/>
+    </event>
+    <event name="amasty_storelocator_location_save_after">
+        <observer name="amlocator_location_save" instance="Amasty\StorelocatorIndexer\Observer\LocationSave"/>
+    </event>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Amasty\ImportCore\Api\Config\ProfileConfigInterface">
+        <attribute code="csv_source" type="Amasty\ImportCore\Import\Source\Type\Csv\ConfigInterface" />
+        <attribute code="xml_source" type="Amasty\ImportCore\Import\Source\Type\Xml\ConfigInterface" />
+
+        <attribute code="server_file_resolver" type="Amasty\ImportCore\Import\FileResolver\Type\ServerFile\ConfigInterface" />
+        <attribute code="upload_file_resolver" type="Amasty\ImportCore\Import\FileResolver\Type\UploadFile\ConfigInterface" />
+    </extension_attributes>
+</config>

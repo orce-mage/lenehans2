@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+?>
+<?php /** @var \Amasty\Storelocator\Block\Adminhtml\RatingStars $block */ ?>
+<div class="admin__field admin__field-rating">
+    <?php $checked = $block->getRating();
+    $iterator = 5;
+    ?>
+    <div class="admin__field-control" data-widget="ratingControl">
+        <?php for ($i = 100; $i > 0; $i -= 20) : ?>
+            <input type="radio"
+                   name="rating"
+                   id="rating_<?= (int)$iterator ?>"
+                   value="<?= (int)$i ?>"
+                <?php if ($checked == $i) : ?>
+                    checked="checked"
+                <?php endif; ?>
+            />
+            <label for="rating_<?= (int) $iterator ?>">&#9733;</label>
+            <?php $iterator-- ?>
+        <?php endfor; ?>
+    </div>
+</div>
+    <input type="hidden" name="validate_rating" class="validate-rating" value="" />
+
+    <script>
+        require([
+            "jquery",
+            "mage/mage",
+            "Magento_Review/js/rating"
+        ], function($){
+            "use strict";
+
+            $('[data-widget=ratingControl]').ratingControl();
+        });
+    </script>

@@ -1,0 +1,42 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name ="Magento\Catalog\Model\Product">
+        <plugin name ="Amasty_Stockstatus::ProductGetName" type ="Amasty\Stockstatus\Plugin\Catalog\Model\Product" />
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="Amasty_Stockstatus::ListStatus" type="Amasty\Stockstatus\Plugin\Catalog\Block\Product\ListProductPlugin" />
+    </type>
+
+    <type name="Amasty\HidePrice\Helper\Data">
+        <plugin name="Amasty_Stockstatus::CheckStockStatus" type="Amasty\Stockstatus\Plugin\HidePrice\Helper\Data" />
+    </type>
+
+    <type name="Magento\InventoryConfigurableProduct\Plugin\Model\ResourceModel\Attribute\IsSalableOptionSelectBuilder">
+        <plugin name="Amasty_Stockstatus::out-of-stock-options-msi" type="Amasty\Stockstatus\Plugin\InventoryConfigurableProduct\Plugin\Model\ResourceModel\Attribute\IsSalableOptionSelectBuilderPlugin" />
+    </type>
+
+    <type name="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable">
+        <plugin name="Amasty_Stockstatus::StockstatusConfigurable" type="Amasty\Stockstatus\Plugin\Product\View\Type\Configurable" sortOrder="-1"/>
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="Amasty_Stockstatus::Addstatus" type="Amasty\Stockstatus\Plugin\Catalog\Block\Product\AbstractProductPlugin" />
+    </type>
+
+    <type name="Magento\ConfigurableProduct\Helper\Data">
+        <plugin name="Amasty_Stockstatus::FixOutOfStock234" type="Amasty\Stockstatus\Plugin\ConfigurableProduct\Helper\DataPlugin" />
+    </type>
+
+    <type name="Magento\GroupedProduct\Model\Product\Type\Grouped">
+        <plugin name="Amasty_Stockstatus::Grouped" type="Amasty\Stockstatus\Plugin\GroupedProduct\Model\Product\Type\GroupedPlugin" />
+    </type>
+
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="Amasty_Stockstatus::add-stockstatus-block" xsi:type="object">Amasty\Stockstatus\Model\Stockstatus\Checkout\LayoutRenderer</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

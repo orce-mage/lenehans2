@@ -1,0 +1,96 @@
+"Searchanise was successfully installed. Catalog indexation in process. <a href=""%1"">Searchanise Admin Panel</a>.","Searchanise was successfully installed. Catalog indexation in process. <a href=""%1"">Searchanise Admin Panel</a>."
+"Searchanise was successfully updated. Catalog indexation in process. <a href=""%1"">Searchanise Admin Panel</a>.","Searchanise was successfully updated. Catalog indexation in process. <a href=""%1"">Searchanise Admin Panel</a>."
+Notice,Notice
+"Search results","Search results"
+Home,Home
+"Go to Home Page","Go to Home Page"
+"Incorrect product or quantity parameter","Incorrect product or quantity parameter"
+"Option type is not supported: ","Option type is not supported: "
+"Error [%1] %2","Error [%1] %2"
+"Module is disabled","Module is disabled"
+"Cron: Starting indexer","Cron: Starting indexer"
+"Cron error: [%1] %2","Cron error: [%1] %2"
+"Cron: Starting reimporter","Cron: Starting reimporter"
+"Searchanise: ApiKey is not valid","Searchanise: ApiKey is not valid"
+"Warning: Root product id: %1 not found","Warning: Root product id: %1 not found"
+"Error: Script couldn't get product'","Error: Script couldn't get product'"
+"ALL GROUPS","ALL GROUPS"
+Category,Category
+"Stock Availability","Stock Availability"
+Bestselling,Bestselling
+"Sales total","Sales total"
+created,created
+"Related Products","Related Products"
+"Up-Sell Products","Up-Sell Products"
+"Cross-Sell Products","Cross-Sell Products"
+"Searchanise: Congratulations, you've just connected to Searchanise","Searchanise: Congratulations, you've just connected to Searchanise"
+"Error: ApiSe::parseResponse(): [%1] %2","Error: ApiSe::parseResponse(): [%1] %2"
+Error,Error
+"Searchanise: [%1] %2","Searchanise: [%1] %2"
+"Error: queueImport(): [%1] %2","Error: queueImport(): [%1] %2"
+"Searchanise: Unable to start catalog import. Please contact Searchanise <a href=""mailto:%1"">%2</a> technical support","Searchanise: Unable to start catalog import. Please contact Searchanise <a href=""mailto:%1"">%2</a> technical support"
+"Searchanise: The product catalog is queued for syncing with Searchanise","Searchanise: The product catalog is queued for syncing with Searchanise"
+"Catalog indexation is complete. Configure Searchanise via the <a href=""%1"">Admin Panel</a>.","Catalog indexation is complete. Configure Searchanise via the <a href=""%1"">Admin Panel</a>."
+Searchanise,Searchanise
+"Async error: %1","Async error: %1"
+Warning,Warning
+"There is no connection to Searchanise server! For Searchanise to work properly, the store server must be able to access %1. Please contact Searchanise <a href=""mailto: %2"">%3</a> technical support or your system administrator.","There is no connection to Searchanise server! For Searchanise to work properly, the store server must be able to access %1. Please contact Searchanise <a href=""mailto: %2"">%3</a> technical support or your system administrator."
+"Searchanise: We found an issue with the export of changes in your store catalog. To resolve the issue please contact the Searchanise <a href=""mailto: %1"">%2</a> technical support.","Searchanise: We found an issue with the export of changes in your store catalog. To resolve the issue please contact the Searchanise <a href=""mailto: %1"">%2</a> technical support."
+"Did you mean: ","Did you mean: "
+"Short Description","Short Description"
+Description,Description
+"When catalog updates","When catalog updates"
+"Periodically via cron","Periodically via cron"
+Manual,Manual
+"Searchanise queue index error: [%1] %2","Searchanise queue index error: [%1] %2"
+"Error: Observer::Execute() for method '%1': [%2] %3","Error: Observer::Execute() for method '%1': [%2] %3"
+"Searchanise: Unable to add object data to queue. Please contact Searchanise <a href=""mailto:%1"">%2</a> technical support","Searchanise: Unable to add object data to queue. Please contact Searchanise <a href=""mailto:%1"">%2</a> technical support"
+"Searchanise: New search engine for %1 created. Catalog import started","Searchanise: New search engine for %1 created. Catalog import started"
+"Searchanise: New search engine for [language] created. Catalog import started","Searchanise: New search engine for [language] created. Catalog import started"
+"Searchanise: Empty response was returned by server.","Searchanise: Empty response was returned by server."
+"Searchanise: Decode response error occurs.","Searchanise: Decode response error occurs."
+"Searchanise: Invalid search result.","Searchanise: Invalid search result."
+General,General
+Configuration,Configuration
+"Search input jQuery selector","Search input jQuery selector"
+"jQuery selector of search input field.<br /><br />
+                            <b>Important!:</b> Edit only if your custom theme changes the default search input ID!","jQuery selector of search input field.<br /><br />
+                            <b>Important!:</b> Edit only if your custom theme changes the default search input ID!"
+"Use Searchanise for full-text search","Use Searchanise for full-text search"
+"Disable in case of invalid search operation.<br>The instant search widget will <strong>remain active</strong>.","Disable in case of invalid search operation.<br>The instant search widget will <strong>remain active</strong>."
+"Sync mode","Sync mode"
+"Select <strong>When catalog updates</strong> to keep track of catalog changes and index them automatically.<br>
+                            Select <strong>Periodically via cron</strong> to index catalog changes every day in at 3 o'clock in the morning. You can read how to configure a cron <a href=""https://devdocs.magento.com/guides/v2.3/config-guide/cli/config-cli-subcommands-cron.html"" target=""_blank"">here</a>
+                            <br>Select <strong>Manually</strong> to index catalog changes manually by clicking <i>FORCE RE-INDEXATION</i> button in the Searchanise control panel (<i>Catalog → Searchanise</i>).","Select <strong>When catalog updates</strong> to keep track of catalog changes and index them automatically.<br>
+                            Select <strong>Periodically via cron</strong> to index catalog changes every day in at 3 o'clock in the morning. You can read how to configure a cron <a href=""https://devdocs.magento.com/guides/v2.3/config-guide/cli/config-cli-subcommands-cron.html"" target=""_blank"">here</a>
+                            <br>Select <strong>Manually</strong> to index catalog changes manually by clicking <i>FORCE RE-INDEXATION</i> button in the Searchanise control panel (<i>Catalog → Searchanise</i>)."
+"Use indexing queue","Use indexing queue"
+"When set to 'Yes', all synchronization operations will be performed via magento indexer.<br /><br />
+                            To schedule the run searchanise queue you need to add the code to your crontab:<br />
+                            <code>*/1 * * * * php <magento-root>/bin/magento indexer:reindex searchanise_queue</code><br />","When set to 'Yes', all synchronization operations will be performed via magento indexer.<br /><br />
+                            To schedule the run searchanise queue you need to add the code to your crontab:<br />
+                            <code>*/1 * * * * php <magento-root>/bin/magento indexer:reindex searchanise_queue</code><br />"
+"Use prices for usergroups","Use prices for usergroups"
+"If disabled, prices for customer usergroups will <b>NOT</b> be indexed. It may increase indexation speed significantly.","If disabled, prices for customer usergroups will <b>NOT</b> be indexed. It may increase indexation speed significantly."
+"Use direct images links","Use direct images links"
+"When set to ‘Yes’, Searchanise will index full size images instead of thumbnails.
+                           It may help decrease indexation time and avoid some server side issues occurring during thumbnail generation.
+                           But it may also increase widget loading time on frontend.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes.","When set to ‘Yes’, Searchanise will index full size images instead of thumbnails.
+                           It may help decrease indexation time and avoid some server side issues occurring during thumbnail generation.
+                           But it may also increase widget loading time on frontend.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes."
+"Description attribute","Description attribute"
+"Select an attribute to use as product description for indexation to display in Searchanise widgets.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes","Select an attribute to use as product description for indexation to display in Searchanise widgets.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes"
+"Render page templates","Render page templates"
+"When set to ‘Yes’ , CMS page template custom variables like '{{config path=""web/unsecure/base_url""}}' will be rendered and indexed.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes.","When set to ‘Yes’ , CMS page template custom variables like '{{config path=""web/unsecure/base_url""}}' will be rendered and indexed.<br /><br />
+                            <b>Important!:</b> Catalog should be re-indexed on Catalog->Searchanise page after changes."
+"Searchanise queue","Searchanise queue"
+"
+            Processes the indexing queue.
+        ","
+            Processes the indexing queue.
+        "

@@ -1,0 +1,84 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-field-validation__border-color: red;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .field {
+        .control {
+            &._with-tooltip {
+                &:extend(.abs-field-tooltip all);
+            }
+        }
+
+        &.choice {
+            .field-tooltip {
+                display: inline-block;
+                margin-left: @indent__s;
+                position: relative;
+                top: -3px;
+            }
+
+            .field-tooltip-action {
+                .lib-css(line-height, @checkout-tooltip-icon__font-size);
+            }
+        }
+
+        &._error {
+            .control {
+                input,
+                select,
+                textarea {
+                    .lib-css(border-color, @checkout-field-validation__border-color);
+                }
+            }
+        }
+        &.required, &._required {
+            > .label {
+                position: relative;
+                &:after {
+                    content: "*";
+                    display: inline-block;
+                    color: red;
+                    margin: 0 3px;
+                }
+            }
+        }
+    }
+    .hidden-fields .label {
+        &:after {
+            content: "*";
+            display: inline-block;
+            color: red;
+            margin: 0 3px;
+        }
+    }
+
+    .opc-wrapper {
+        .fieldset {
+            > .field {
+                 .label {
+                    font-weight: 500;
+                    .font-size(14);
+                    margin-bottom: 5px;
+                }
+            }
+            .field-tooltip {
+                display: none;
+            }
+            select {
+                width: 100%;
+            }
+        }
+    }
+}

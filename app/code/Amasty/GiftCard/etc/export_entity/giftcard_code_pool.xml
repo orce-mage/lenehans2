@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ExportCore:etc/am_export.xsd">
+    <entity code="amasty_giftcard_code_pool">
+        <name>Amasty Gift Card Code Pool</name>
+        <group>Amasty Gift Card</group>
+        <collectionFactory class="Amasty\GiftCard\Model\CodePool\ResourceModel\CollectionFactory"/>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ExportCore\Export\FieldsClass\Describe"/>
+        </fieldsConfig>
+    </entity>
+    <relation code="giftcard_code_giftcard_code_pool">
+        <parent_entity>amasty_giftcard_code</parent_entity>
+        <child_entity>amasty_giftcard_code_pool</child_entity>
+        <sub_entity_field_name>amasty_giftcard_code_pool</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">code_pool_id</argument>
+            <argument name="child_field_name" xsi:type="string">pool_id</argument>
+        </arguments>
+    </relation>
+    <relation code="giftcard_code_pool_giftcard_code">
+        <parent_entity>amasty_giftcard_code_pool</parent_entity>
+        <child_entity>amasty_giftcard_code</child_entity>
+        <sub_entity_field_name>amasty_giftcard_code</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">pool_id</argument>
+            <argument name="child_field_name" xsi:type="string">code_pool_id</argument>
+        </arguments>
+    </relation>
+</config>

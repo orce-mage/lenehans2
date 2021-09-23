@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <quickview>
+            <general>
+                <active>1</active>
+                <label><![CDATA[<i aria-hidden="true" class="arrow_expand"></i>]]></label>
+                <auto_add_buttons>0</auto_add_buttons>
+                <item_class><![CDATA[.product-item]]></item_class>
+                <target><![CDATA[.product-item-info]]></target>
+            </general>
+        </quickview>
+    </default>
+</config>

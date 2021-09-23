@@ -1,0 +1,34 @@
+body{background-color:#fff;background-image:none;background-repeat:repeat;background-position:0px 0px;}
+.header, .nav-container .navpro, .main{background-color:#fff;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+.top-toolbar-container{background-color:#eaeaea;background-image:url(../images/nav_container_1_1.gif);background-repeat:repeat;background-position:0% 100%;}
+.header-container, .header-container #search_mini_form.active .form-search{background-color:transparent;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+.nav-container{background-color:#fff;background-image:url(../images/nav_container_1.gif);background-repeat:repeat;background-position:50% 100%;}
+.nav-container .navpro{background-color:transparent;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+.main-container{background-color:transparent;background-image:none;background-repeat:no-repeat;background-position:0px 0px;}
+.footer-toolbar-container{background-color:#dfdfdf;background-image:url(../images/footer_toolbar_container.gif);background-repeat:repeat-x;background-position:0px 100%;}
+.footer-cms-container{background-color:#fff;background-image:url(../images/footer_cms_container.gif);background-repeat:repeat-x;background-position:0px 0px;}
+.footer-container{background-color:transparent;background-image:url(../images/body.gif);background-repeat:repeat;background-position:0px 0px;}
+#scroll-up a{background-color:#eeeeee;}
+#scroll-up a:hover{background-color:#dddddd;}
+.nav-container .navpro a.level-top, .nav-container .navpro div.level-top a, .nav-container .navpro .nav-span, .nav-container .navpro .nav-sibling-title, .nav-container .navpro .nav-sibling-title a{font-family:'Source Sans Pro',sans-serif;font-size:13px;text-transform:none;}
+.nav-container .navpro li a.level-top, .nav-container .navpro div.level-top a{color:#272E3D;}
+.nav-container .navpro li a.nav-a:hover, .nav-container .navpro li .nav-sibling-title a:hover, .nav-container .navpro .over > a.level-top, .nav-container .navpro .over > div.level-top a{color:#000000;}
+.nav-container .navpro .active > a.level-top, .nav-container .navpro .active > div.level-top a, #nav li.active a.level-top:hover, #nav li.active a.level-top.over, .nav-container .navpro li.active a.level-top:hover, .nav-container .navpro li.active a.level-top.over{color:#000000;}
+.nav-container .navpro ul .nav-a, .nav-container .navpro ul .nav-span, .nav-container .navpro ul .nav-sibling-title, .nav-container .navpro ul .nav-sibling-title a{font-family:Arial,Helvetica,sans-serif;font-size:13px;text-transform:none;}
+.nav-container .navpro .nav-ul .nav-a, .nav-container .navpro .nav-ul .nav-sibling-title{background-color:transparent;color:#000000;}
+.nav-container .navpro .nav-ul .nav-a:hover, .nav-container .navpro .nav-ul .nav-sibling-title:hover{background-color:#eeeeee;color:#000000;}
+.nav-container .navpro .nav-ul .active > .nav-a{background-color:transparent;color:#D96708;}
+.navpro-mobile a.level-top, .navpro-mobile div.level-top a{font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:18px;text-transform:none;color:#272E3D;}
+.navpro-mobile .active > a.level-top, .navpro-mobile .active > div.level-top a{color:#EB5E00;}
+.navpro-mobile .nav-ul .nav-a, .navpro-mobile .nav-ul .nav-sibling-title a{font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:18px;text-transform:none;background-color:#ffffff;color:#272E3D;}
+.navpro-mobile .nav-ul .active > .nav-a, .navpro-mobile .nav-ul .active > .nav-sibling-title a{background-color:#f5f5f5;color:#EB5E00;}
+.easytabs li .easytabs-a, .tab-container .tabs li .block-title{padding:9px 12px;font-family:Tahoma,Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:12px;font-weight:normal;text-transform:none;color:#023761;}
+.easytabs li:hover .easytabs-a, .tab-container .tabs li.over .block-title{color:#444444;}
+.easytabs li.active .easytabs-a, .easytabs li.active .easytabs-a:hover, .tab-container .tabs li.active .block-title{color:#ef6e00;}
+h1, .h1, .page-title h1, .page-title h2{font-family:'Source Sans Pro',sans-serif;font-size:24px;font-weight:normal;color:#000000;}
+.sidebar .block .block-title span strong, .sidebar .block .block-title span span, .sidebar .block .block-title strong, .sidebar .block .block-title span{font-family:'Source Sans Pro',sans-serif;font-size:16px;font-weight:normal;color:#000000;}
+.products-list .product-name a, .products-grid .product-name a{font-family:'Source Sans Pro',sans-serif;font-size:15px;font-weight:normal;color:#023761;}
+.products-list .product-name a:hover, .products-grid .product-name a:hover{color:#023761;}
+.product-view .box-collateral .h2{font-family:'Source Sans Pro',sans-serif;font-size:18px;font-weight:normal;color:#000000;}
+.nav-container .nav-dropdown .easycatalogimg .parent-category {text-align: left;} 
+.sidebar .block-currency { display: none }

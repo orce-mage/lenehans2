@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="Data8" translate="label" sortOrder="1000">
+			<label>Data8</label>
+		</tab>
+		<section id="Data8" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Data Capture &amp; Validation Settings</label>
+			<tab>Data8</tab>
+      <resource>Data8_DataCaptureValidation::config_section</resource>
+      <group id="Logo" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label><![CDATA[<img src="https://umbracoliveadmin.data-8.co.uk/media/1655/d81.png" width="100px"/> &nbsp Data Capture &amp; Validation]]></label>
+        <attribute type="expanded">0</attribute>
+        <field id="logo" translate="label" type="hidden" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" >
+        </field>
+      </group>
+      <group id="d8_General" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Settings</label>
+        <attribute type="expanded">1</attribute>
+        <field id="key" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" >
+          <label>Client-Side API Key</label>
+          <comment><![CDATA[Please enter your client-side Data8 API key. Haven't got a Data8 account yet? <a href="https://www.data-8.co.uk/register/" target="_blank">Start a free trial now</a>.]]></comment>
+        </field>
+        </group>
+        <group id="d8_AddressCaptureGroup" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Address Capture</label>
+        <attribute type="expanded">1</attribute>
+
+        <field id="usePredictiveAddress" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label><![CDATA[Use Data8 <a href="https://www.data-8.co.uk/services/data-validation/address-validation" target="_blank">PredictiveAddress&#8482;</a>]]></label>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          <comment>Use auto-complete for addresses instead of Postcode Lookup.</comment>
+        </field>
+        <field id="predictiveAddress_options" translate="label" type="textarea" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label><![CDATA[PredictiveAddress <a href="https://www.data-8.co.uk/resources/code-samples/predictiveaddress/#AdvancedOptions" target="_blank">Options</a>]]></label>
+          <comment>Options to further configure predictiveAddress (one option per line, no commas at end of line). E.g. allowedCountries:["GB", "US"]</comment>
+          <depends>
+            <field id="usePredictiveAddress">1</field>
+          </depends>
+        </field>
+
+        <field id="license" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Postcode Lookup License Type</label>
+          <comment>Select the type of Postcode Lookup license you have purchased.</comment>
+          <source_model>Data8\DataCaptureValidation\Config\Model\LicenseTypeList</source_model>
+          <depends>
+            <field id="usePredictiveAddress">0</field>
+          </depends>
+        </field>
+        </group>
+        <group id="d8_ValidationServicesGroup" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Validation Services</label>
+        <attribute type="expanded">1</attribute>
+        <field id="useOnBlur" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label><![CDATA[Data8 Validation Method]]></label>
+          <comment>Select the method used to validate fields. "On form submission" : validation occurs when the user submits the form. "On change" : validation occurs when the user makes a change to the field.</comment>
+          <source_model>Data8\DataCaptureValidation\Config\Model\ValidationMethodTypeList</source_model>
+        </field>
+        <field id="emailValidationLevel" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label><![CDATA[Data8 <a href="https://www.data-8.co.uk/data-validation/email-validation/" target="_blank">Email Validation</a> level]]></label>
+          <comment>Select the level to validate email addresses to. Higher validation levels give better accuracy but take longer.</comment>
+          <source_model>Data8\DataCaptureValidation\Config\Model\EmailValidationTypeList</source_model>
+        </field>
+        <field id="telephoneValidation" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label><![CDATA[Use Data8 <a href="https://www.data-8.co.uk/data-validation/phone-validation/" target="_blank">Phone Validation</a>]]></label>
+          <comment>Validate international telephone numbers</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="defaultCountryCode" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Default telephone country code</label>
+          <comment>Country code to assume when validating telephone numbers, e.g. 44 for UK, 1 for US. Any telephone numbers for other countries will need to be fully specified including the +(country code) prefix in order to be correctly validated</comment>			
+          <depends>
+            <field id="telephoneValidation">1</field>
+          </depends>
+        </field>
+        <field id="useSalaciousName" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label><![CDATA[Use Data8 <a href="https://www.data-8.co.uk/data-validation/name-validation/" target="_blank">Name Validation</a>]]></label>
+          <comment>Validate name fields.</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+      </group>
+    </section>
+	</system>
+</config>

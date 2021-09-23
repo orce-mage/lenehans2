@@ -1,0 +1,28 @@
+<tr class="amexportcore-row">
+    <td class="amexportcore-td"></td>
+    <td class="amexportcore-td"></td>
+    <td class="amexportcore-td">
+        <select class="admin__control-select amexportcore-field" data-bind="value: $data.select_value">
+            <option value="" data-bind="i18n: '-- Please Select --', disable: $data.selectedType() !== null"></option>
+            <!-- ko foreach: { data: options, as: 'optgroup' } -->
+                <optgroup data-bind="attr: {label: optgroup.label}">
+                    <!-- ko foreach: optgroup.value -->
+                    <option data-bind="value: $data.value,
+                                       text: $data.label">
+                    </option>
+                    <!-- /ko -->
+                </optgroup>
+            <!-- /ko -->
+        </select>
+    </td>
+    <td class="amexportcore-td -fields">
+        <!-- ko if: $data.elems() -->
+            <!-- ko foreach: $data.elems() -->
+                <!--ko template: getTemplate()--><!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </td>
+    <td class="amexportcore-td -button" afterRender="$data.setDefaultValue.bind($data)">
+        <span class="amexportcore-delete" data-bind="click: $data.remove.bind($data, $data.index, $index())"></span>
+    </td>
+</tr>

@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">shopbybrand_listing.shopbybrand_listing_data_source</item>
+			<item name="deps" xsi:type="string">shopbybrand_listing.shopbybrand_listing_data_source</item>
+		</item>
+		<item name="spinner" xsi:type="string">shopbybrand_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">clear_cache</item>
+                <item name="label" xsi:type="string" translate="true">Flush Brand Image Cache</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/clearCache</item>
+            </item>
+        </item>
+	</argument>
+
+	<dataSource name="shopbybrand_listing_data_source">
+		<argument name="dataProvider" xsi:type="configurableObject">
+			<argument name="class" xsi:type="string">ShopbybrandGridDataProvider</argument>
+			<argument name="name" xsi:type="string">shopbybrand_listing_data_source</argument>
+			<argument name="primaryFieldName" xsi:type="string">option_id</argument>
+			<argument name="requestFieldName" xsi:type="string">id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+					<item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">option_id</item>
+                    </item>
+				</item>
+			</argument>
+		</argument>
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+			</item>
+		</argument>
+	</dataSource>
+
+	<container name="listing_top">
+        <argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="template" xsi:type="string">ui/grid/toolbar</item>
+			</item>
+		</argument>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filterSearch name="fulltext"/>
+        <paging name="listing_paging"/>
+		<filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+	</container>
+	<columns name="shopbybrand_columns">
+		<argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="childDefaults" xsi:type="array">
+					<item name="fieldAction" xsi:type="array">
+						<item name="provider" xsi:type="string">shopbybrand_listing.shopbybrand_listing.shopbybrand_columns.actions</item>
+						<item name="target" xsi:type="string">applyAction</item>
+						<item name="params" xsi:type="array">
+							<item name="0" xsi:type="string">edit</item>
+							<item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+						</item>
+					</item>
+				</item>
+			</item>
+		</argument>
+		<column name="brand_thumnail" class="MageBig\Shopbybrand\Ui\Component\Listing\Column\Thumbnail">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="altField" xsi:type="string">name</item>
+                    <item name="has_preview" xsi:type="string">1</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="label" xsi:type="string" translate="true">Thumbnail</item>
+				</item>
+			</argument>
+		</column>
+		<column name="option_id">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="filter" xsi:type="string">textRange</item>
+					<item name="sorting" xsi:type="string">asc</item>
+					<item name="resizeEnabled" xsi:type="boolean">false</item>
+					<item name="resizeDefaultWidth" xsi:type="string">107</item>
+					<item name="label" xsi:type="string" translate="true">Option ID</item>
+				</item>
+			</argument>
+		</column>
+        <column name="brand_label">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="filter" xsi:type="string">text</item>
+					<item name="editor" xsi:type="array">
+						<item name="editorType" xsi:type="string">text</item>
+						<item name="validation" xsi:type="array">
+							<item name="required-entry" xsi:type="boolean">true</item>
+						</item>
+					</item>
+					<item name="label" xsi:type="string" translate="true">Label</item>
+				</item>
+			</argument>
+		</column>
+        <column name="sort_order">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="filter" xsi:type="string">textRange</item>
+					<item name="sorting" xsi:type="string">asc</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+					<item name="label" xsi:type="string" translate="true">Sort Order</item>
+				</item>
+			</argument>
+		</column>
+        <column name="mb_brand_is_featured" class="MageBig\Shopbybrand\Ui\Component\Listing\Column\IsFeatured">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Is Featured</item>
+				</item>
+			</argument>
+		</column>
+        <actionsColumn name="preview" class="MageBig\Shopbybrand\Ui\Component\Listing\Column\ShopbybrandPreview">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="resizeEnabled" xsi:type="boolean">false</item>
+					<item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">option_id</item>
+                    <item name="label" xsi:type="string" translate="true">Preview</item>
+				</item>
+			</argument>
+		</actionsColumn>
+		<actionsColumn name="actions" class="MageBig\Shopbybrand\Ui\Component\Listing\Column\ShopbybrandActions">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="resizeEnabled" xsi:type="boolean">false</item>
+					<item name="resizeDefaultWidth" xsi:type="string">107</item>
+					<item name="indexField" xsi:type="string">option_id</item>
+				</item>
+			</argument>
+		</actionsColumn>
+	</columns>
+</listing>

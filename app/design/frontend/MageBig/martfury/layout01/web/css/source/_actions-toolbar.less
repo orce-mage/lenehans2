@@ -1,0 +1,31 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .account {
+        .actions-toolbar > .secondary .action.back {
+            display: none;
+        }
+        .toolbar .limiter {
+            float: right;
+            .limiter-text {
+                display: none;
+            }
+            .limiter-label {
+                font-weight: normal;
+            }
+        }
+        .toolbar, .actions-toolbar {
+            margin-bottom: 30px;
+        }
+        .account-nav {
+            margin-bottom: 30px !important;
+        }
+    }
+}

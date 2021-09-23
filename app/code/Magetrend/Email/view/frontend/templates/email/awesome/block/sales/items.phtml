@@ -1,0 +1,60 @@
+<?php
+/**
+ * Copyright © 2016 MB Vienas bitas. All rights reserved.
+ * @website    www.magetrend.com
+ * @package    MT Email for M2
+ * @author     Edvinas Stulpinas <edwin@magetrend.com>
+ */
+?>
+<?php $_order = $block->getOrder(); ?>
+<?php $var = $block->getVarModel();?>
+<?php $items = $block->getItems();?>
+<table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
+    <tr <?php echo $var->getHtmlAttribute('style', 'secondary-bg-color-sales-items', 'background-color: #ffffff;  border-top: 1px solid #e5e5e5; '); ?>
+        <?php echo $var->getHtmlAttribute('bgcolor', 'secondary-bg-color-color-sales-items', '#e5e5e5'); ?> class="mteditor-bgcolor light-block">
+        <td align="center" valign="top" width="100%" class="content-padding-top">
+            <center>
+                <table cellpadding="0" cellspacing="0" width="600" class="w320">
+                    <tr>
+                        <td class="item-table">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td
+                                        <?php echo $var->getTextEditAttribute('order_item_name');?>
+                                        <?php echo $var->getHtmlAttribute('style', 'order_item_name_head_style'); ?>
+                                            class="mteditor-color title-dark" width="auto">
+                                        <?php echo $var->getValue('order_item_name', __("Item"));?>
+                                    </td>
+                                    <td
+                                        <?php echo $var->getTextEditAttribute('order_item_qty');?>
+                                        <?php echo $var->getHtmlAttribute('style', 'order_item_qty_head_style', 'text-align: right'); ?>
+                                            class="mteditor-color title-dark" width="40" align="right">
+                                        <?php echo $var->getValue('order_item_qty', __("Qty"));?>
+                                    </td>
+
+                                    <?php if (!$this->hasData('shipment')) : ?>
+                                    <td
+                                        <?php echo $var->getTextEditAttribute('order_item_subtotal');?>
+                                        <?php echo $var->getHtmlAttribute('style', 'order_item_subtotal_head_style', 'text-align: right'); ?>
+                                            class="mteditor-color title-dark" width="80" align="right">
+                                        <?php echo $var->getValue('order_item_subtotal', __("Subtotal"));?>
+                                    </td>
+                                    <?php endif; ?>
+                                </tr>
+
+                                <?php $i=0; foreach ($items as $_item) : ?>
+                                    <?php if ($block->hasParent($_item)) : continue; else : $i++; endif; ?>
+                                    <tr>
+                                        <?php echo $block->getItemHtml($_item); ?>
+                                    </tr>
+                                <?php endforeach; ?>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+
+        </td>
+    </tr>
+</table>

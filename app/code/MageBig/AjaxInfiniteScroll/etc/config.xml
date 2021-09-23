@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magebig_ajaxinfinitescroll>
+            <general>
+                <enabled>1</enabled>
+            </general>
+            <instances>
+                <grid>1</grid>
+                <layer>1</layer>
+                <search>1</search>
+                <advanced>1</advanced>
+            </instances>
+            <design>
+                <buffer_px>150</buffer_px>
+                <load_more_text>LOAD MORE</load_more_text>
+                <load_more_text_prev>LOAD PREVIOUS</load_more_text_prev>
+                <load_more_threshold>1</load_more_threshold>
+            </design>
+            <memory>
+                <enabled>1</enabled>
+            </memory>
+        </magebig_ajaxinfinitescroll>
+    </default>
+</config>

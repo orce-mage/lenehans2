@@ -1,0 +1,25 @@
+{
+  "name": "magebig/magento-2-social-login",
+  "description": "Magento 2 Social Login",
+  "require": {
+    "hybridauth/hybridauth": "^2.11.0"
+  },
+  "type": "magento2-module",
+  "version": "2.0.0",
+  "authors": [
+    {
+      "name": "MageBig",
+      "email": "support@magebig.com",
+      "homepage": "https://www.magebig.com",
+      "role": "Technical Support"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "MageBig\\SocialLogin\\": ""
+    }
+  }
+}

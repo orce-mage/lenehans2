@@ -1,0 +1,47 @@
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+#colorpicker {
+    padding: 5px;
+    background-color: #FFFFFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    position: absolute;
+    z-index: 100;
+    max-width: 200px;
+    display: none;
+}
+
+#colorpicker ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#colorpicker ul li {
+    float: left;
+    display: inline-block;
+    line-height: 0;
+}
+
+#colorpicker ul li span {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 2px solid #ffffff;
+    font-size: 0;
+}
+#colorpicker ul li:hover span {
+    border: 2px solid #a2a2a2;
+}
+

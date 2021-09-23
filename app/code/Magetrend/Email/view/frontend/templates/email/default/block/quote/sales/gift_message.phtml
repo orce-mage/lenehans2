@@ -1,0 +1,86 @@
+<?php
+$oder = $block->getOrder();
+$message = $block->getMessage();
+$var = $block->getVarModel();
+?>
+<?php if ($message) : ?>
+<table
+    width="100%"
+    style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;width:100% !important;"
+    cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td height="30" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;width: 100% !important;" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td colspan="2">
+                        <span
+                            <?php echo $var->getTextEditAttribute('order_giftmessage_title');?>
+                            <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_title_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                            class="mteditor-color gift-message">
+                            <?php echo $var->getValue('order_giftmessage_title', __('Gift Message for this Order:'), false);?>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       <span
+                           <?php echo $var->getTextEditAttribute('order_giftmessage_from');?>
+                           <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_from_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                           class="mteditor-color gift-message">
+                            <?php echo $var->getValue('order_giftmessage_from', __('From:'), false);?>
+                        </span>
+                        <span
+                            <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_from_text2_style', "color: #707582; font-size: 14px; font-weight: normal;"); ?>
+                            class="mteditor-color gift-message">
+                            <?php echo $message->getSender() ?>
+                        </span>
+                    </td>
+                    <td>
+                        <span
+                            <?php echo $var->getTextEditAttribute('order_giftmessage_to');?>
+                            <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_to_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                            class="mteditor-color gift-message">
+                            <?php echo $var->getValue('order_giftmessage_to', __('To:'), false);?>
+                        </span>
+                        <span
+                            <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_to_text2_style', "color: #707582; font-size: 14px; font-weight: normal;"); ?>
+                            class="mteditor-color gift-message">
+                            <?php echo $message->getRecipient() ?>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span
+                            <?php echo $var->getTextEditAttribute('order_giftmessage_message');?>
+                            <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_message_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                            class="mteditor-color gift-message">
+                            <?php echo $var->getValue('order_giftmessage_message', __('Message:'), false);?>
+                        </span> <span
+                            <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_message_text_style', "color: #707582; font-size: 14px; font-weight: normal;"); ?>
+                                class="mteditor-color gift-message">
+                             <?php echo $this->escapeHtml($message->getMessage()) ?>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" style="height: 30px; font-size: 5px; line-height: 5px">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="1"
+            <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_table_bottom_line_style', 'background-color: #e26a0a; font-size:1px; line-height:1px; height:1px;'); ?>
+            <?php echo $var->getHtmlAttribute('bgcolor', 'order_giftmessage_table_bottom_line_bg', '#e26a0a'); ?>
+            class="mteditor-bgcolor item-line-color"
+            colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+        <td  height="15">&nbsp;</td>
+    </tr>
+</table>
+<?php endif; ?>

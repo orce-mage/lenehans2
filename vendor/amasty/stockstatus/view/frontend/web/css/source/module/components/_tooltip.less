@@ -1,0 +1,199 @@
+//
+//  Tooltip styles
+// _______________________________________________
+
+//
+//  Local variables
+//  ----------------------------------------------
+
+@amstockstatus-tooltip__background-color: #383838;
+@amstockstatus-tooltip__border-color: @amstockstatus-tooltip__background-color;
+@amstockstatus-tooltip__text__color: #ececec;
+@amstockstatus-tooltip__checkout__offset: 88px;
+@amstockstatus-icon-help__size: 20px;
+@amstockstatus-icon-help: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMCAwQzQuNDc3IDAgMCA0LjQ3NyAwIDEwYzAgNS41MjIgNC40NzcgMTAgMTAgMTBzMTAtNC40NzggMTAtMTBjMC01LjUyMy00LjQ3OC0xMC0xMC0xMHptLjg2NyAxNi40M2MtLjI0NS4yMzgtLjU0LjM2LS44ODMuMzYtLjE2NiAwLS4zMjYtLjAzMi0uNDc4LS4wOTVhMS4zOTcgMS4zOTcgMCAwMS0uMzk3LS4yNDggMS4xNyAxLjE3IDAgMDEtLjI3NC0uMzc1IDEuMDkzIDEuMDkzIDAgMDEtLjEwMi0uNDdjMC0uMzMzLjEyMy0uNjE5LjM2OC0uODU4LjI0NC0uMjM4LjU0LS4zNi44ODItLjM2LjMzNCAwIC42MjYuMTE3Ljg3NS4zNDMuMjUuMjMuMzczLjUxLjM3My44NDYgMCAuMzM0LS4xMjIuNjE4LS4zNjYuODU3aC4wMDJ6bTIuOTI0LTkuMDcyYTIuODIgMi44MiAwIDAxLS4zNS43NzJjLS4xNTIuMjM0LS4zMzguNDYtLjU1NC42NzYtLjIxNi4yMTYtLjQ2LjQ0MS0uNzI4LjY3NS0uMjM0LjItLjQyNS4zNzQtLjU3LjUyNy0uMTQ3LjE1LS4yNjQuMzA0LS4zNTIuNDU2YTEuNiAxLjYgMCAwMC0uMTg0LjQ5Yy0uMDM1LjE3Ny0uMDU0IDEuMDE3LS4wNTQgMS4yNzV2LjQ1Nkg4LjkyN3YtLjY2N2MwLS4yOC4wMi0xLjE1Ny4wNjItMS4zOGEyLjc0NCAyLjc0NCAwIDAxLjU0NS0xLjIxMWMuMTQ3LS4xODYuMzMyLS4zODUuNTUzLS41OTZsLjc5LS43NTRjLjIyMS0uMi40MTItLjQyMi41NzEtLjY2Ny4xNTgtLjI0Ny4yMzYtLjU0NS4yMzYtLjg5NiAwLS40NTYtLjE0My0uODQtLjQzLTEuMTQ4LS4yODgtLjMxMS0uNjkzLS40NjctMS4yMi0uNDY3YTEuNzE1IDEuNzE1IDAgMDAtMS42NDkgMS4xNDIgMi4yOCAyLjI4IDAgMDAtLjE0MS42ODRsLTIuMTU4LS4xOTNjLjA3LS41NjIuMjItMS4wNjIuNDQ4LTEuNTAxLjIyNy0uNDM5LjUyMy0uODA5Ljg4NS0xLjExNmEzLjg0MiAzLjg0MiAwIDAxMS4yNDctLjY5M2MuNDY4LS4xNTcuOTcxLS4yMzYgMS41MDktLjIzNi41MDIgMCAuOTguMDczIDEuNDMuMjJhMy41NyAzLjU3IDAgMDExLjE5NC42NDljLjM0NS4yODYuNjE4LjY0LjgxNiAxLjA2LjE5OS40MjMuMjk4LjkwOS4yOTggMS40NTcgMCAuMzc1LS4wNC43MDYtLjEyMi45ODV2LjAwMXoiIGZpbGw9IiM2NjYiLz48L3N2Zz4=') center/@amstockstatus-icon-help__size no-repeat;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amstockstatus-tooltip-block {
+        & {
+            display: inline-block;
+            margin-left: 8px;
+            min-width: @amstockstatus-icon-help__size;
+            width: @amstockstatus-icon-help__size;
+            height: @amstockstatus-icon-help__size;
+            background: @amstockstatus-icon-help;
+            vertical-align: bottom;
+            cursor: pointer;
+        }
+
+        &:hover,
+        &:focus {
+            position: relative;
+            z-index: 500;
+        }
+
+        .amstockstatus-status-container & {
+            vertical-align: text-bottom;
+        }
+    }
+
+    .amstockstatus-tooltip-content {
+        & {
+            position: absolute;
+            right: -1rem;
+            bottom: 3rem;
+            z-index: 1;
+            display: none;
+            box-sizing: border-box;
+            padding: 1rem 1.5rem;
+            border: 1px solid @amstockstatus-tooltip__border-color;
+            border-radius: 5px;
+            background: @amstockstatus-tooltip__background-color;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
+            color: @amstockstatus-tooltip__text__color;
+            font-weight: 400;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            cursor: default;
+        }
+
+        &:before {
+            position: absolute;
+            top: 100%;
+            right: 1.2rem;
+            z-index: 3;
+            display: block;
+            box-sizing: border-box;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-top-color: @amstockstatus-tooltip__border-color;
+            content: '';
+        }
+
+        &:after {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            height: 10px;
+            content: '';
+        }
+
+        .amstockstatus-tooltip-block:hover &,
+        .amstockstatus-tooltip-block:focus & {
+            display: block;
+        }
+
+        > .amstockstatus-inner {
+            .am-scrollbar();
+
+            display: block;
+            overflow: hidden auto;
+            min-width: 230px;
+            max-width: 320px;
+            max-height: 140px;
+            text-align: left;
+        }
+    }
+
+    .product-info-stock-sku > .amstockstatus-tooltip-block {
+        margin-bottom: 3px;
+    }
+
+    .amstockstatus-status-container.-checkout {
+        padding-left: @amstockstatus-tooltip__checkout__offset;
+    }
+
+    .amstockstatus-status-container.-checkout .amstockstatus-tooltip-block {
+        & {
+            position: static;
+        }
+
+        > .amstockstatus-tooltip-content {
+            & {
+                right: 0;
+                bottom: 30px;
+                left: @amstockstatus-tooltip__checkout__offset;
+            }
+
+            &:before {
+                content: none;
+            }
+        }
+
+        > .amstockstatus-tooltip-content > .amstockstatus-inner {
+            max-height: 65px;
+        }
+    }
+
+    .opc-block-summary .amstockstatus-status-container.-checkout {
+        padding-left: @amstockstatus-tooltip__checkout__offset + 30px;
+    }
+
+    .am-checkout .amstockstatus-tooltip-block {
+        & {
+            &:extend(.amstockstatus-status-container.-checkout .amstockstatus-tooltip-block all);
+        }
+
+        .amstockstatus-tooltip-content {
+            bottom: 70px;
+        }
+    }
+}
+
+//
+//  Mobile only
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .amstockstatus-tooltip-content {
+        & {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: inherit;
+            left: 0;
+            width: 100%;
+        }
+
+        > .amstockstatus-inner {
+            max-width: 100%;
+            max-height: 30vh;
+        }
+
+        &:before,
+        &:after {
+            display: none;
+        }
+
+        .amstockstatus-status-container.-checkout .amstockstatus-tooltip-block > & {
+            right: 0;
+            bottom: inherit;
+            left: 0;
+            margin: 10px;
+            width: ~'calc(100% - 20px)';
+        }
+
+        .am-checkout .amstockstatus-tooltip-block {
+            &:extend(.amstockstatus-status-container.-checkout .amstockstatus-tooltip-block all);
+        }
+    }
+
+    .header.content {
+        html:not(.nav-open) & .nav-toggle,
+        .logo {
+            z-index: 1; // Magento header overflow fix
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .cart.table-wrapper {
+        overflow: hidden; // Magento zindex overflow fix
+    }
+}

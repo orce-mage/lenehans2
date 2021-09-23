@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType
+        name="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Pool"
+        type="Magento\Ui\DataProvider\Modifier\Pool"
+    />
+    <type name="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="marketplaceChannelListCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelListCommand</item>
+                <item name="marketplaceChannelCleanCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelCleanCommand</item>
+                <item name="marketplaceChannelEnableCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelEnableCommand</item>
+                <item name="marketplaceChannelDisableCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelDisableCommand</item>
+                <item name="marketplaceChannelAuthKeyAddCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelAuthKeyAddCommand</item>
+                <item name="marketplaceChannelAuthKeyRemoveCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelAuthKeyRemoveCommand</item>
+                <item name="marketplaceChannelAuthSetCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelAuthSetCommand</item>
+                <item name="marketplaceChannelAuthShowCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelAuthShowCommand</item>
+                <item name="marketplaceChannelAuthCheckCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ChannelAuthCheckCommand</item>
+                <item name="marketplaceComposerAuthCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ComposerAuthCommand</item>
+                <item name="marketplaceComposerAuthImportCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ComposerAuthImportCommand</item>
+                <item name="marketplaceComposerAuthPathCommand" xsi:type="object">Swissup\Marketplace\Console\Command\ComposerAuthPathCommand</item>
+                <item name="marketplacePackageInstallCommand" xsi:type="object">Swissup\Marketplace\Console\Command\PackageInstallCommand</item>
+                <item name="marketplacePackageRequireCommand" xsi:type="object">Swissup\Marketplace\Console\Command\PackageRequireCommand</item>
+                <item name="marketplacePackageRemoveCommand" xsi:type="object">Swissup\Marketplace\Console\Command\PackageRemoveCommand</item>
+                <item name="marketplacePackageShowCommand" xsi:type="object">Swissup\Marketplace\Console\Command\PackageShowCommand</item>
+                <item name="marketplacePackageUpdateCommand" xsi:type="object">Swissup\Marketplace\Console\Command\PackageUpdateCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Swissup\Marketplace\Model\HandlerFactory">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="ChannelsSave" xsi:type="string">Swissup\Marketplace\Model\Handler\ChannelsSave</item>
+                <item name="PackageDisable" xsi:type="string">Swissup\Marketplace\Model\Handler\PackageDisable</item>
+                <item name="PackageEnable" xsi:type="string">Swissup\Marketplace\Model\Handler\PackageEnable</item>
+                <item name="PackageInstall" xsi:type="string">Swissup\Marketplace\Model\Handler\PackageInstall</item>
+                <item name="PackageUninstall" xsi:type="string">Swissup\Marketplace\Model\Handler\PackageUninstall</item>
+                <item name="PackageUpdate" xsi:type="string">Swissup\Marketplace\Model\Handler\PackageUpdate</item>
+
+                <item name="CleanupFilesystem" xsi:type="string">Swissup\Marketplace\Model\Handler\Additional\CleanupFilesystem</item>
+                <item name="MaintenanceDisable" xsi:type="string">Swissup\Marketplace\Model\Handler\Additional\MaintenanceDisable</item>
+                <item name="MaintenanceEnable" xsi:type="string">Swissup\Marketplace\Model\Handler\Additional\MaintenanceEnable</item>
+                <item name="ProductionDisable" xsi:type="string">Swissup\Marketplace\Model\Handler\Additional\ProductionDisable</item>
+                <item name="ProductionEnable" xsi:type="string">Swissup\Marketplace\Model\Handler\Additional\ProductionEnable</item>
+                <item name="SetupUpgrade" xsi:type="string">Swissup\Marketplace\Model\Handler\Additional\SetupUpgrade</item>
+                <item name="Wrapper" xsi:type="string">Swissup\Marketplace\Model\Handler\Additional\Wrapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Swissup\Marketplace\Model\Logger\Handler">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/marketplace.log</argument>
+        </arguments>
+    </type>
+    <virtualType name="Swissup\Marketplace\Model\Logger\QueueLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Swissup\Marketplace\Model\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Swissup\Marketplace\Service\QueueDispatcher">
+        <arguments>
+            <argument name="logger" xsi:type="object">Swissup\Marketplace\Model\Logger\QueueLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Magento Marketplace Channel -->
+    <virtualType name="Swissup\Marketplace\Model\Channel\Magento"
+                 type="Swissup\Marketplace\Model\Channel\Composer">
+        <arguments>
+            <argument name="title" xsi:type="string">Magento Marketplace</argument>
+            <argument name="url" xsi:type="string">https://repo.magento.com/</argument>
+            <argument name="hostname" xsi:type="string">repo.magento.com</argument>
+            <argument name="identifier" xsi:type="string">magento</argument>
+            <argument name="data" xsi:type="array">
+                <item name="authType" xsi:type="string">http-basic</item>
+                <item name="authNotice" xsi:type="string"><![CDATA[Get your credentials at <a href="https://marketplace.magento.com/customer/accessKeys/" title="Access Keys">marketplace.magento.com</a>]]></item>
+                <item name="cliAuthNotice" xsi:type="string"><![CDATA[Get your credentials at https://marketplace.magento.com/customer/accessKeys/]]></item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Swissup\Marketplace\Model\ChannelRepository">
+        <arguments>
+            <argument name="channels" xsi:type="array">
+                <item name="magento" xsi:type="object">Swissup\Marketplace\Model\Channel\Magento</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Magento"
+                 type="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\HttpBasicAuth">
+        <arguments>
+            <argument name="channel" xsi:type="object">Swissup\Marketplace\Model\Channel\Magento</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="magento" xsi:type="array">
+                    <item name="class" xsi:type="string">Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Magento</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Swissup, Argento, and Firecheckout Channel -->
+    <type name="Magento\Csp\Model\Collector\DynamicCollector">
+        <plugin name="swissup_marketplace" type="Swissup\Marketplace\Plugin\CspPolicyCollector"/>
+    </type>
+    <virtualType name="Swissup\Marketplace\Model\Channel\Swissup"
+                 type="Swissup\Marketplace\Model\Channel\Composer">
+        <arguments>
+            <argument name="title" xsi:type="string">Swissup, Argento, and Firecheckout</argument>
+            <argument name="url" xsi:type="string">https://ci.swissuplabs.com/api/packages.json</argument>
+            <argument name="hostname" xsi:type="string">ci.swissuplabs.com</argument>
+            <argument name="identifier" xsi:type="string">swissuplabs</argument>
+            <argument name="data" xsi:type="array">
+                <!-- Public url is used to get latest versions and gallery -->
+                <item name="publicUrl" xsi:type="string">https://docs.swissuplabs.com/packages/</item>
+                <item name="authType" xsi:type="string">http-basic</item>
+                <item name="authDomain" xsi:type="boolean">true</item>
+                <item name="authKeys" xsi:type="boolean">true</item>
+                <item name="authNotice" xsi:type="string"><![CDATA[
+1. Navigate to your account ("Activation Information" section) on the site where you've made a purchase:<br/> - <a href="https://argentotheme.com/license/customer/activation/">https://argentotheme.com/</a><br/>
+- <a href="https://firecheckout.net/license/customer/activation/">https://firecheckout.net/</a></br>
+- <a href="https://swissuplabs.com/license/customer/activation/">https://swissuplabs.com/</a><br/>
+2. Activate domain from the field above.<br/>
+3. Copy your access key and paste it here.]]></item>
+                <item name="cliAuthNotice" xsi:type="string"><![CDATA[
+1. Navigate to your account on the site where you've made a purchase:
+   - <fg=blue>https://argentotheme.com/license/customer/activation/</>
+   - <fg=blue>https://firecheckout.net/license/customer/activation/</>
+   - <fg=blue>https://swissuplabs.com/license/customer/activation/</>
+2. Activate <fg=green;options=bold>{{username}}</> domain.
+3. Copy your access key and paste it here.]]></item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Swissup\Marketplace\Model\ChannelRepository">
+        <arguments>
+            <argument name="channels" xsi:type="array">
+                <item name="swissup" xsi:type="object">Swissup\Marketplace\Model\Channel\Swissup</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Swissup"
+                 type="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\KeysAsPassword">
+        <arguments>
+            <argument name="channel" xsi:type="object">Swissup\Marketplace\Model\Channel\Swissup</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="swissup" xsi:type="array">
+                    <item name="class" xsi:type="string">Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Swissup</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

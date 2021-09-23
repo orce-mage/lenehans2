@@ -1,0 +1,208 @@
+/* ============================================ *
+ * Blog
+ * ============================================ */
+& when (@media-common = true) {
+    .blog-index-index, .blog-post-view, .blog-category-view {
+        .page-title {
+            text-align: center;
+            margin: 30px 0;
+        }
+    }
+    .widget.blog-search.block .action.search {
+        right: 0;
+    }
+    .widget.blog-search.block .action.search:before {
+        font-family: mbicon;
+        content: "\e922";
+        overflow: visible;
+        right: 0;
+        padding: 0 10px;
+        width: auto;
+        line-height: 32px;
+        background: transparent;
+        opacity: 1;
+    }
+    .post-list {
+        margin-bottom: 0;
+    }
+    #blog_search_mini_form {
+        position: relative;
+    }
+    .blog-categories {
+        .block-content {
+            ul {
+                list-style: none;
+                margin: 0;
+                padding-left: 15px;
+                padding-right: 0;
+                li {
+                    display: inline-block;
+                    width: 100%;
+                    a {
+                        display: inline-block;
+                        padding: 5px 0 5px 0;
+                        position: relative;
+                        &:before {
+                            .abs-iconfont(@mbi-ios-arrow-right, 14px);
+                            position: absolute;
+                            top: 50%;
+                            margin-top: -7px;
+                            left: -15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .sidebar .widget.block .block-title {
+        text-transform: capitalize;
+    }
+
+    .widget.blog-search, .sidebar .widget.block {
+        margin-bottom: 30px;
+    }
+    .widget.block-recent-posts .block-content .item {
+        padding: 0;
+        margin-bottom: 5px;
+    }
+    .widget.block-tagclaud .tagclaud-hld .largest {
+        font-size: 1.2rem;
+    }
+    div.post-content .post-description .post-ftimg-hld img {
+        float: left;
+        width: auto;
+        margin-right: 25px;
+    }
+    .post-view, .post-list {
+        .post-holder {
+            background: transparent;
+            padding: 0;
+            border: none;
+            &:hover {
+                box-shadow: none;
+            }
+        }
+        .post-content .post-description .post-ftimg-hld {
+            margin-left: 0;
+            margin-bottom: 3px;
+        }
+        .post-content {
+            text-align: justify;
+            .widgetplus {
+                text-align: initial;
+            }
+        }
+    }
+    .share-tag {
+        margin: 40px 0;
+        text-align: center;
+        .post-categories {
+            margin-bottom: 20px;
+        }
+        .item .label {
+            font-weight: 500;
+        }
+    }
+    .addthis_toolbox {
+        > a {
+            float: none !important;
+            display: inline-block;
+            svg, > .at-icon-wrapper {
+                width: 45px !important;
+                height: 45px !important;
+                line-height: 45px !important;
+                text-align: center;
+                border-radius: 3px;
+            }
+            svg {
+                padding: 10px;
+            }
+        }
+    }
+    .post-view img {
+        max-width: 100%;
+        height: auto;
+    }
+    .post-view, .post-list-wrapper {
+        padding-right: 100px;
+    }
+    .img-featured img {
+        width: 100%;
+    }
+    .post-list-wrapper {
+        .title {
+            font-weight: 500;
+            .font-size(16);
+            a {
+                color: @page_link;
+                &:hover {
+                    color: @main_color;
+                }
+            }
+        }
+        .post-categories {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            a {
+                color: @page_link;
+                &:hover {
+                    color: @main_color;
+                }
+            }
+        }
+        .post-posed-date {
+            color: #999999;
+        }
+        .post-item {
+            margin-bottom: 30px;
+        }
+    }
+    .toolbar-blog-posts {
+        margin-bottom: 60px;
+    }
+    .blog-post-wrap {
+        .post-list-wrapper {
+            padding: 0;
+        }
+    }
+    .block-blog-main {
+        border-bottom: 1px solid #d8d8d8;
+        padding: 30px 0 0;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: -1px;
+    }
+    .recently-viewed.block-viewed-products-grid {
+        padding: 30px 0;
+        display: inline-block;
+        width: 100%;
+    }
+    .post-item-date {
+        font-style: italic;
+    }
+
+    .layout-rtl {
+        .post-view, .post-list-wrapper {
+            padding-left: 100px;
+            padding-right: 0;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .post-view, .post-list-wrapper {
+            padding-right: 0;
+        }
+        .layout-rtl {
+            .post-view, .post-list-wrapper {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        .post-list-wrapper {
+            .title {
+                font-weight: 500;
+                .font-size(18);
+            }
+        }
+    }
+}

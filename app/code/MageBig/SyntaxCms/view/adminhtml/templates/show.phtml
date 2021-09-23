@@ -1,0 +1,21 @@
+<script>
+    require([
+        'Magento_Ui/js/lib/view/utils/async',
+        'MageBig_SyntaxCms/js/editor',
+        'domReady!'
+    ], function ($, editor) {
+        <?php foreach($block->getElements() as $element):?>
+        $.async('<?php echo $element['selector'];?>', function (elem) {
+            setTimeout(function () {
+                editor.checkForVisible(elem,
+                    '<?= (is_array($element['type']) ? $element['type'][0] : $element['type']);?>',
+                    <?= $block->getJsonOption();?>
+                );
+            }, 1000);
+        });
+        <?php endforeach; ?>
+        setTimeout(function () {
+            editor.initWinWidget();
+        }, 5000);
+    });
+</script>

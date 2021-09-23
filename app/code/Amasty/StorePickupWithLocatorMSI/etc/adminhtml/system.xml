@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocatorMSI
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="storepickup_locator">
+            <group id="general">
+                <field id="show_locations_with_msi" translate="label tooltip" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Relevant Locations List for Products with Assigned MSI Stock</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>
+                        <![CDATA[
+                            Enables Location List at Product pages.
+                            Location should have assigned MSI Source to appear in the list.
+                            The list will appear for Products, assigned Stocks of which are assotiated with any available Location's Source.
+                            Only locations where Product is In Stock would appear by default.
+                        ]]>
+                    </tooltip>
+                </field>
+                <field id="include_out_of_stock_locations" translate="label tooltip" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Locations at which Product is Out Of Stock into Product Location List</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>
+                        <![CDATA[
+                            Allows displaying Locations at which the product is not available immediately (Out Of Stock).
+                        ]]>
+                    </tooltip>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

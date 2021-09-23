@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © www.magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+		<section id="magebig_ajaxfilter" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Ajax Filter</label>
+            <tab>magebig_extensions</tab>
+            <resource>MageBig_AjaxFilter::settings</resource>
+			<group id="general" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+				<field id="enable" translate="label,comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Filter by Ajax</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_price_slider" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Price Slider</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="search_attribute" translate="label,comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Search Box</label>
+                    <comment>The minimum number of attributes to display Search box in Box state</comment>
+                </field>
+                <field id="max_height_box_state" translate="label,comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Box state max height</label>
+                    <comment>E.g.: 150px</comment>
+                </field>
+                <field id="expand_box_state" translate="label,comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Expand box state</label>
+                    <comment>The number of box states is expanded</comment>
+                </field>
+                <field id="enable_filter_rating" translate="label,comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Filter by rating</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="rating_filter_type" translate="label,comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Rating type</label>
+                    <source_model>MageBig\AjaxFilter\Model\Config\Source\RatingTypes</source_model>
+                </field>
+                <field id="enable_sort_rating" translate="label,comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Sort by rating</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+			</group>
+		</section>
+	 </system>
+</config>

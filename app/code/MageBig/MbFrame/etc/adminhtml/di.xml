@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="MageBig\MbFrame\Controller\Adminhtml\System\Config\Save">
+		<arguments>
+			<argument name="cache" xsi:type="object">Magento\Framework\App\Cache\Type\Layout</argument>
+		</arguments>
+	</type>
+	<type name="Magento\Backend\Model\Menu\Builder">
+		<plugin name="magebig_backend_model_menu_builder"
+				type="MageBig\MbFrame\Framework\Model\Menu\Builder\Plugin"
+				sortOrder="10"
+				disabled="false"/>
+	</type>
+	<type name="Magento\Ui\Component\Wysiwyg\ConfigInterface">
+		<plugin disabled="false" name="MageBig_MbFrame_Wysiwyg_ConfigInterface" sortOrder="10" type="MageBig\MbFrame\Framework\Cms\Plugin\Wysiwyg"/>
+	</type>
+</config>

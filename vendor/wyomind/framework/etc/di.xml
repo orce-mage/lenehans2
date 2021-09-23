@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020 Wyomind. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- LOGGER CONFIGURATION STARTS -->
+    <virtualType name="Wyomind\Framework\Log\License" type="\Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">License</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="framework" xsi:type="object">Wyomind\Framework\Logger\Handlerlicense</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Wyomind\Framework\Logger\Handlerlicense" type="\Wyomind\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/Wyomind_License.log</argument>
+            <argument name="filePath" xsi:type="string"/>
+        </arguments>
+    </virtualType>
+    <!-- LOGGER CONFIGURATION ENDS -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="wyomind_framework_license_activate" xsi:type="object">Wyomind\Framework\Console\Command\License\Activate</item>
+                <item name="wyomind_framework_license_status" xsi:type="object">Wyomind\Framework\Console\Command\License\Status</item>
+                <item name="wyomind_framework_license_request" xsi:type="object">Wyomind\Framework\Console\Command\License\Request</item>
+                <item name="wyomind_framework_license_insertcode" xsi:type="object">Wyomind\Framework\Console\Command\License\InsertCode</item>
+                <item name="wyomind_framework_license_insertkey" xsi:type="object">Wyomind\Framework\Console\Command\License\InsertKey</item>
+                <item name="wyomind_framework_tools_pub" xsi:type="object">Wyomind\Framework\Console\Command\Tools\Pub</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+
+</config>

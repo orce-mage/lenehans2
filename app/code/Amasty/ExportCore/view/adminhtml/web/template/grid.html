@@ -1,0 +1,24 @@
+<div class="admin__control-table-wrapper">
+    <table class="admin__dynamic-rows data-grid" data-role="grid">
+        <thead>
+        <tr>
+            <!-- ko foreach: $data.header -->
+            <th class="data-grid-th">
+                <span data-bind="i18n: $data"></span>
+            </th>
+            <!-- /ko -->
+        </tr>
+        </thead>
+        <tbody>
+            <!-- ko if: $data.elems() -->
+                <!-- ko foreach: $data.elems() -->
+                <tr class="data-row" data-bind="css: {'_odd-row': $index() % 2}">
+                    <!-- ko foreach: $data.elems() -->
+                    <td><!-- ko template: $data.elementTmpl --><!-- /ko --></td>
+                    <!-- /ko -->
+                </tr>
+                <!-- /ko -->
+            <!-- /ko -->
+        </tbody>
+    </table>
+</div>

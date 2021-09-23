@@ -1,0 +1,23 @@
+<if args="method.carrier_code === 'amstorepickup'
+    && $parents[2].selectedShippingMethod() === 'amstorepickup_amstorepickup'">
+    <if args="pickupData().stores && pickupData().stores.length">
+        <div class="ampickup-store-container -cart">
+            <each args="data:elems(), as: 'element'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </each>
+        </div>
+    </if>
+    <ifnot args="!pickupData().stores || pickupData().stores.length">
+        <div class="ampickup-nostores-message">
+            <p>
+                <span translate="'We regret to inform you that products you\'d like to buy can\'t be received at single pickup location. Please consider '"></span>
+                <a attr="{href: pickupData().multiple_addresses_url, title: $t('Check Out with Multiple Addresses')}"
+                   translate="'splitting your Order'"></a>
+                <span translate="', using alternative shipping method (if available) or '"></span>
+                <a attr="{href: pickupData().contact_us_url, title: $t('Contact Us')}"
+                   translate="'contacting store owner'"></a>
+                <span translate="' for negotiating other options'"></span>
+            </p>
+        </div>
+    </ifnot>
+</if>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <media>
+        <images module="Magento_Catalog">
+            <image id="product_grid_hover" type="mb_hover_img">
+                <width>270</width>
+                <height>270</height>
+            </image>
+            <image id="product_grid_hover_thumb" type="mb_hover_img">
+                <width>65</width>
+                <height>65</height>
+            </image>
+            <image id="product_grid_hover_large" type="mb_hover_img">
+                <width>600</width>
+                <height>600</height>
+            </image>
+            <image id="product_list_hover" type="mb_hover_img">
+                <width>270</width>
+                <height>270</height>
+            </image>
+            <image id="product_list_hover_thumb" type="mb_hover_img">
+                <width>65</width>
+                <height>65</height>
+            </image>
+            <image id="product_list_hover_large" type="mb_hover_img">
+                <width>600</width>
+                <height>600</height>
+            </image>
+        </images>
+    </media>
+</view>

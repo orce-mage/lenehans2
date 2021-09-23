@@ -1,0 +1,232 @@
+"Amasty Orders Export History","Amasty Orders Export History"
+"Download Archive","Download Archive"
+"Download File","Download File"
+"Efficient Order Export","Efficient Order Export"
+"Add to Options","Add to Options"
+"Select ""Yes"" to add this attribute to the list of options in the efficient order export.","Select ""Yes"" to add this attribute to the list of options in the efficient order export."
+"Amasty Orders Export Profiles","Amasty Orders Export Profiles"
+"Add New Profile","Add New Profile"
+"Save and Continue Edit","Save and Continue Edit"
+"Run Profile Now","Run Profile Now"
+"Profile Information","Profile Information"
+"Run At","Run At"
+"File Size","File Size"
+"Exported File","Exported File"
+"Exported Archive","Exported Archive"
+"Export File Options","Export File Options"
+"File Properties","File Properties"
+"File Name","File Name"
+"Just name, with no extension. Will be used both for file saved to local folder and for one uploaded via FTP.' . ""\r\n"" . '<b>NOTE:</b> if ""Add Timestamp"" is disabled, file will be overwritten on each export run!","Just name, with no extension. Will be used both for file saved to local folder and for one uploaded via FTP.' . ""\r\n"" . '<b>NOTE:</b> if ""Add Timestamp"" is disabled, file will be overwritten on each export run!"
+"File Path (Local)","File Path (Local)"
+"Absolute path, or relative to Magento install root, ex. ""var/export/"". Please make sure that this directory exists and is writeable.","Absolute path, or relative to Magento install root, ex. ""var/export/"". Please make sure that this directory exists and is writeable."
+"Add Timestamp","Add Timestamp"
+"Timestamp will be added as a prefix to the file or as a new folder in which file will be saved","Timestamp will be added as a prefix to the file or as a new folder in which file will be saved"
+"Do not add","Do not add"
+"Add timestamp to file name as a prefix","Add timestamp to file name as a prefix"
+"Create new folder and place file in it","Create new folder and place file in it"
+"Data Format","Data Format"
+"File Format","File Format"
+"CSV - Comma Separated Values","CSV - Comma Separated Values"
+XML,XML
+"MS Excel XML","MS Excel XML"
+"Field Names In The First Row","Field Names In The First Row"
+Yes,Yes
+No,No
+"Split Order Items","Split Order Items"
+"Order Items Delimiter","Order Items Delimiter"
+"CSV Configuration","CSV Configuration"
+Delimiter,Delimiter
+"Enclose Values In","Enclose Values In"
+"Warning! Empty value can cause problems with CSV format.","Warning! Empty value can cause problems with CSV format."
+"XML Configuration","XML Configuration"
+"XML Main Tag","XML Main Tag"
+"XML Order Tag","XML Order Tag"
+"XML Order Items Tag","XML Order Items Tag"
+"XML Order Item Tag","XML Order Item Tag"
+"FTP/SFTP Configuration","FTP/SFTP Configuration"
+"Upload Exported File By FTP","Upload Exported File By FTP"
+"FTP Hostname","FTP Hostname"
+"If you use non-standard port (not 21), please specify hostname like example.com:23, where 23 is your custom port","If you use non-standard port (not 21), please specify hostname like example.com:23, where 23 is your custom port"
+Type,Type
+FTP,FTP
+SFTP,SFTP
+"FTP Login","FTP Login"
+"FTP Password","FTP Password"
+"Use Passive Mode","Use Passive Mode"
+"File Path (FTP)","File Path (FTP)"
+"Delete Local File After FTP Upload","Delete Local File After FTP Upload"
+"E-mail Settings","E-mail Settings"
+"Send Exported File to E-mail","Send Exported File to E-mail"
+"E-mail From","E-mail From"
+"E-mail Address","E-mail Address"
+"E-mail Message Subject","E-mail Message Subject"
+"Compress Exported File in ZIP","Compress Exported File in ZIP"
+"Orders Filters","Orders Filters"
+"Order Number Filters","Order Number Filters"
+"Use Order Number Filters","Use Order Number Filters"
+"Last Order Exported: %s <br />","Last Order Exported: %s <br />"
+"Starting From #","Starting From #"
+". 'Order number to start export from. Ex. 100000040. Leave empty to ignore.'",". 'Order number to start export from. Ex. 100000040. Leave empty to ignore.'"
+"Ending With #","Ending With #"
+"Order number to end export with. Leave empty to ignore.","Order number to end export with. Leave empty to ignore."
+"Skip Starting From","Skip Starting From"
+"In case of ""Yes"" export will start from the order, next to the specified in the ""Starting From #"" field. Else specified order will be exported as well.","In case of ""Yes"" export will start from the order, next to the specified in the ""Starting From #"" field. Else specified order will be exported as well."
+"Automatically Increment Starting From","Automatically Increment Starting From"
+"Automatically fill ""Starting From #"" field with the last exported order number after each profile run","Automatically fill ""Starting From #"" field with the last exported order number after each profile run"
+"Invoice Number Filters","Invoice Number Filters"
+"Use Invoice NumberFilter","Use Invoice NumberFilter"
+"Use Invoice Number Filter","Use Invoice Number Filter"
+"Last Invoice Exported: %s  <br />","Last Invoice Exported: %s  <br />"
+". 'Invoice number to start export from. Ex. 100000040. Leave empty to ignore.'",". 'Invoice number to start export from. Ex. 100000040. Leave empty to ignore.'"
+"Invoice number to end export with. Leave empty to ignore.","Invoice number to end export with. Leave empty to ignore."
+"Shipment Number Filters","Shipment Number Filters"
+"Use Shipment Number Filters","Use Shipment Number Filters"
+"Starting From Shipment #","Starting From Shipment #"
+"Filter orders by shipment numbers.","Filter orders by shipment numbers."
+"Ending With Shipment #","Ending With Shipment #"
+"Date Range","Date Range"
+"Use Date Range","Use Date Range"
+"From Date","From Date"
+"To Date","To Date"
+"Customer Groups","Customer Groups"
+"Filter by Customer Group","Filter by Customer Group"
+"For Customer Groups","For Customer Groups"
+"Other Export Filters","Other Export Filters"
+"Order Status","Order Status"
+"Run History","Run History"
+General,General
+Name,Name
+"Skip Child Products","Skip Child Products"
+"Skip Parent Products","Skip Parent Products"
+"Status For Processed Orders","Status For Processed Orders"
+"- Do not change -","- Do not change -"
+"Change Status With","Change Status With"
+"Exported orders will get specified status after export","Exported orders will get specified status after export"
+"Store View","Store View"
+"Automatic Execution","Automatic Execution"
+"Run After Each New Order is Placed","Run After Each New Order is Placed"
+"Run Profile by Cron","Run Profile by Cron"
+"Profile Cron Schedule","Profile Cron Schedule"
+"Enter cron expression<br/>
+                        <br/>
+                        * * * * *<br/>
+                        | | | | |<br/>
+                        | | | | +---- Day of the Week   (range: 0-6, 1 standing for Monday)<br/>
+                        | | | +------ Month of the Year (range: 1-12)<br/>
+                        | | +-------- Day of the Month  (range: 1-31)<br/>
+                        | +---------- Hour              (range: 0-23)<br/>
+                        +------------ Minute            (range: 0-59)<br/>
+                        Example: */5 * * * * - every five minutes<br/>
+                        <br/>
+                        Read more about cron expressions - <a href=""https://en.wikipedia.org/wiki/Cron"" target=""_blank"">here</a>","Enter cron expression<br/>
+                        <br/>
+                        * * * * *<br/>
+                        | | | | |<br/>
+                        | | | | +---- Day of the Week   (range: 0-6, 1 standing for Monday)<br/>
+                        | | | +------ Month of the Year (range: 1-12)<br/>
+                        | | +-------- Day of the Month  (range: 1-31)<br/>
+                        | +---------- Hour              (range: 0-23)<br/>
+                        +------------ Minute            (range: 0-59)<br/>
+                        Example: */5 * * * * - every five minutes<br/>
+                        <br/>
+                        Read more about cron expressions - <a href=""https://en.wikipedia.org/wiki/Cron"" target=""_blank"">here</a>"
+"Field Mappings","Field Mappings"
+"Field Mapping","Field Mapping"
+"Export each product custom option in a separate column","Export each product custom option in a separate column"
+"You need to select ""product.product_options"" in the list of fields to export custom options selected","You need to select ""product.product_options"" in the list of fields to export custom options selected"
+"Fields To Export","Fields To Export"
+"Export All Fields","Export All Fields"
+"Export Specified Fields Only","Export Specified Fields Only"
+"Static Fields","Static Fields"
+"Profile Configuration","Profile Configuration"
+"Amasty Orders Export Thirdparty","Amasty Orders Export Thirdparty"
+"Add New Thirdparty Profile","Add New Thirdparty Profile"
+"Thirdparty Profile Information","Thirdparty Profile Information"
+"Table to join","Table to join"
+"Base Table Key","Base Table Key"
+"Indicate field from sales_flat_order table based on which the foreign table will be joined (in most cases it is entity_id field).","Indicate field from sales_flat_order table based on which the foreign table will be joined (in most cases it is entity_id field)."
+"Referenced Table Key","Referenced Table Key"
+"Field from the foreign table (the one indicated in the `Table to join`), by which the table will be joined to the order table.","Field from the foreign table (the one indicated in the `Table to join`), by which the table will be joined to the order table."
+"Thirdparty Profile Configuration","Thirdparty Profile Configuration"
+History,History
+"This history entry is deleted.","This history entry is deleted."
+"Can't delete item right now. Please review the log and try again.","Can't delete item right now. Please review the log and try again."
+"Can't find a item to delete.","Can't find a item to delete."
+"File is no longer exists on server.","File is no longer exists on server."
+"Can't download item right now. Please review the log and try again.","Can't download item right now. Please review the log and try again."
+"Can't find a item to download.","Can't find a item to download."
+Amasty,Amasty
+"Items were deleted successfully.","Items were deleted successfully."
+"We can't delete history entry(-ies) right now. Please review the log and try again.","We can't delete history entry(-ies) right now. Please review the log and try again."
+"We can't find history entry(-ies) to delete.","We can't find history entry(-ies) to delete."
+"This profile is deleted.","This profile is deleted."
+"Edit Amasty Efficient Order Export Profile","Edit Amasty Efficient Order Export Profile"
+"New Profile","New Profile"
+System,System
+"Manage Profiles","Manage Profiles"
+Profiles,Profiles
+"Profile Run Success.","Profile Run Success."
+"Profile Run Failed.","Profile Run Failed."
+"Invalid crontab.","Invalid crontab."
+"The profile is saved.","The profile is saved."
+"Something went wrong while saving the item data. Please review the error log.","Something went wrong while saving the item data. Please review the error log."
+"3rd Party Link","3rd Party Link"
+"This item no longer exists.","This item no longer exists."
+"Edit 3rd Party Link","Edit 3rd Party Link"
+"New 3rd Party Link","New 3rd Party Link"
+"Manage 3rd Party Link","Manage 3rd Party Link"
+Thirdparty,Thirdparty
+"This 3rd Party Link does not exist","This 3rd Party Link does not exist"
+"The 3rd Party Link has been saved","The 3rd Party Link has been saved"
+"Running by direct URL is disabled.","Running by direct URL is disabled."
+"Incorrect security code.","Incorrect security code."
+"Successfully complete.","Successfully complete."
+"Incorrect profile ID.","Incorrect profile ID."
+"Profile ID not specified.","Profile ID not specified."
+"Customer Support Email","Customer Support Email"
+"We could not create file for export. Please, check file path and folder rights for write.","We could not create file for export. Please, check file path and folder rights for write."
+"Amasty Orderexport processing","Amasty Orderexport processing"
+"Message was sent from Amasty OrderExport and includes orders export file attached.","Message was sent from Amasty OrderExport and includes orders export file attached."
+"Please, do not answer on this email.","Please, do not answer on this email."
+"There is no orders to export in profile with ID %1.","There is no orders to export in profile with ID %1."
+"Sorry, something went wrong. You can find out more in the error log.","Sorry, something went wrong. You can find out more in the error log."
+"Profile with id ""%1"" does not exist.","Profile with id ""%1"" does not exist."
+"Could not delete the profile with id %1: %2","Could not delete the profile with id %1: %2"
+"Could not delete the queue item with id %1: %2","Could not delete the queue item with id %1: %2"
+"Manage Mappings","Manage Mappings"
+"DataBase Field","DataBase Field"
+Mapping,Mapping
+Delete,Delete
+"Add Mapping","Add Mapping"
+"Sort Option","Sort Option"
+"Field Label","Field Label"
+"Field Value","Field Value"
+Position,Position
+"At The Beginning","At The Beginning"
+"At The End","At The End"
+"General Settings","General Settings"
+"Enable Automatic Execution","Enable Automatic Execution"
+"Automatic execution of appropriate profiles after new order is placed (appropriate setting for a profile should be enabled)","Automatic execution of appropriate profiles after new order is placed (appropriate setting for a profile should be enabled)"
+"Run Profile By URL","Run Profile By URL"
+"Allow to run profile by direct URL","Allow to run profile by direct URL"
+"This option can be useful when running profiles by cron (using wget for example) or with the help of the external software.
+                        The URL format to use is the following: http://yourmagentourl/amasty_orderexport/index/run/id/[profile_id]/sec/[code]/ ,
+                        where [code] is the value specified in the next setting","This option can be useful when running profiles by cron (using wget for example) or with the help of the external software.
+                        The URL format to use is the following: http://yourmagentourl/amasty_orderexport/index/run/id/[profile_id]/sec/[code]/ ,
+                        where [code] is the value specified in the next setting"
+"Security code","Security code"
+"You should provide this code in the URL to run profile. If security code is empty, profile will not run!
+                        It is recommended to use combination of letters and digits, something about 10 symbols.","You should provide this code in the URL to run profile. If security code is empty, profile will not run!
+                        It is recommended to use combination of letters and digits, something about 10 symbols."
+CSV,CSV
+"Excel XML","Excel XML"
+"Amasty: Efficient Order Export - Product Attributes","Amasty: Efficient Order Export - Product Attributes"
+"Rebuild attributes index","Rebuild attributes index"
+"Are you sure?","Are you sure?"
+"History ID","History ID"
+"Profile ID","Profile ID"
+"Run at","Run at"
+Stores,Stores
+"Run After a New Order is Placed","Run After a New Order is Placed"
+"Execution by Cron","Execution by Cron"
+"Thirdparty ID","Thirdparty ID"

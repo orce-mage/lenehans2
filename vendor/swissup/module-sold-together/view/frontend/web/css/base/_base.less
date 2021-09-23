@@ -1,0 +1,210 @@
+.addtocart-checkboxes {
+
+    .products-grid .item {
+        padding-bottom: 50px;
+    }
+
+    .product-image-wrapper {
+        position: relative;
+
+        .checkbox {
+            position: absolute;
+            .right(0);
+            bottom: 0;
+        }
+
+    }
+}
+
+.soldtogether-block {
+
+    clear: both;
+
+    .amazonstyle{
+
+        &-images {
+            margin: 10px 0;
+            padding: 0;
+            zoom: 1;
+
+            &::after {
+                clear: both;
+                content: '.';
+                display: block;
+                font-size: 0;
+                height: 0;
+                visibility: hidden;
+            }
+
+            li {
+                display: inline-block;
+                opacity: 1;
+                transition: opacity .25s ease-in-out;
+                -webkit-transition: opacity .25s ease-in-out;
+
+                &.item {
+                    overflow: hidden;
+                    .soldtogether-plus();
+                }
+
+                &.item-inactive {
+                    opacity: 0.3;
+                }
+
+            }
+
+        }
+
+        &-checkboxes {
+            clear: both;
+            padding: 0;
+
+            .price-box {
+                display: inline;
+                margin: 10px 0;
+
+                .minimal-price-link,
+                p {
+                    display: inline;
+                }
+
+            }
+
+            .minimal-price .price-label {
+                font-weight: normal;
+            }
+
+            li {
+                margin: 0;
+                padding: 2px 5px;
+                list-style: none;
+
+
+            }
+
+            .button-cart {
+                display: inline-block;
+                margin: 10px 0 0 0;
+            }
+        }
+    }
+
+    .product-items-list {
+        padding: 0;
+        margin: 0;
+    }
+
+    .price {
+        &-including-tax,
+        &-excluding-tax {
+            display: inline;
+        }
+    }
+
+    .product-item-name {
+        display: inline;
+        .padding-right(5px);
+    }
+
+    .totalprice {
+        display: inline;
+        font-weight: bold;
+        margin: 0 10px;
+        vertical-align: middle;
+
+        h5 {
+            display: inline;
+            margin: 5px;
+        }
+
+    }
+
+    .details-toggler {
+        display: none;
+
+        + label {
+            font-size: .9em;
+            cursor: pointer;
+            color: #006bb4;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &::before {
+                content: attr(data-show);
+            }
+        }
+
+        &:checked + label {
+            &::before {
+                content: attr(data-hide);
+            }
+        }
+
+        &:not(:checked) + label  ~ * {
+            display: none;
+        }
+    }
+}
+
+.soldtogether-swiper {
+    clear: both;
+    max-width: 100%;
+
+    .swiper-container {
+        .swiper-slide {
+            width: auto;
+        }
+
+        &:not(.swiper-container-initialized) {
+            .swiper-slide:nth-child(n+2) {
+                visibility: hidden;
+            }
+        }
+    }
+
+    .product {
+        &-item {
+            text-align: center;
+
+            &-info {
+                margin: 0 auto;
+                width: auto;
+            }
+        }
+
+        &-item-name,
+        &.name a {
+            min-height: 40px;
+            overflow: hidden;
+        }
+    }
+}
+
+/* WORKAROUND for rtl (porto_rtl) -- START */
+html:not([lang="he-IL"]) .soldtogether-block .amazonstyle-images .first {
+    padding-left: 0;
+    margin-left: 0;
+
+    &::before {
+        display: none;
+    }
+}
+
+html[lang="he-IL"] .soldtogether-block .amazonstyle-images li {
+    float: right;
+
+    &:last-child {
+        padding-left: 0;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+/* WORKAROUND for rtl (porto_rtl) -- END */
+
+@media screen and (max-width: 770px) {
+    .soldtogether-block .amazonstyle-images .product-image-container { width: 100px !important; }
+}

@@ -1,0 +1,40 @@
+<!-- ko if: visible() -->
+    <div>
+        <!-- ko if: status() === 'running' && proceed() > 0 -->
+        <div class="messages">
+            <div class="message message-success">
+                Proceed Rows: <span data-bind="text: proceed()"></span>
+                <!-- ko if: total() > 0 -->
+                of <span data-bind="text: total()"></span>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $data.messages() -->
+        <div class="messages" style="margin: 20px 0">
+            <!-- ko foreach: $data.messages() -->
+            <div class="message" data-bind="text: $data.message,
+                css: {
+                     'message-error error': $data.type === 40 || $data.type === 50,
+                     'message-warning warning': $data.type === 30
+                     }">
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <!-- ko if: !status() || status() === 'failed' -->
+    <div>
+        <button data-bind="i18n:'Continue', click: exportData, attr:{disabled: exportButtonDisabled}" class="action- scalable primary"></button>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: status() === 'success' -->
+    <div>
+        <a data-bind="i18n:'Download', attr:{href: getDownloadLink()}" target="_blank" class="abs-action-primary"></a>
+        <button data-bind="i18n:'Regenerate File', click: regenerateExport" class="action- scalable"></button>
+    </div>
+    <!-- /ko -->
+<!-- /ko -->

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magebig_syntaxcms>
+            <general>
+                <enabled>1</enabled>
+                <line_wrapping>1</line_wrapping>
+                <theme>darcula</theme>
+                <wysi_options>[{"name":"entity_encoding","value":"raw"},{"name":"forced_root_block","value":""},{"name":"allow_html_in_named_anchor","value":true},{"name":"extended_valid_elements","value":"div[*],span[*],i[*],script[*],a[*]"}]
+                </wysi_options>
+                <bgelements>[
+                    {"selector":"div.admin__control-wysiwig > textarea","type":"magento","comment":"Wysiwig Editor"},
+                    {"selector":"textarea[name=\"layout_update_xml\"]","type":"xml","comment":"Layout Update XML"},
+                    {"selector":"textarea[name=\"product[custom_layout_update]\"]","type":"xml","comment":"Product Layout Update XML"},
+                    {"selector":"textarea[name=\"custom_layout_update\"]","type":"xml","comment":"Category Layout Update XML"},
+                    {"selector":"textarea[data-ui-id=\"template-edit-form-fieldset-element-textarea-template-text\"]","type":"magento","comment":"Email Template"},
+                    {"selector":"textarea[data-ui-id=\"template-edit-form-fieldset-element-textarea-template-styles\"]","type":"css","comment":"Email Styles"},
+                    {"selector":"textarea[data-ui-id=\"adminhtml-template-edit-form-0-fieldset-element-textarea-styles\"]","type":"css","comment":"NL Styles"},
+                    {"selector":"textarea[data-ui-id=\"adminhtml-agreement-edit-0-form-fieldset-element-textarea-content\"]","type":"magento","comment":"Terms and Conditions"},
+                    {"selector":"#category_form_description","type":"magento","comment":"Category Description"},
+                    {"selector":"#product_form_description","type":"magento","comment":"Product Description"},
+                    {"selector":"#product_form_short_description","type":"magento","comment":"Product Short Description"},
+                    {"selector":"#mbdesign_general_custom_css_less","type":"css","comment":"Custom Css"}
+                    ]
+                </bgelements>
+                <frontend>0</frontend>
+            </general>
+        </magebig_syntaxcms>
+    </default>
+</config>

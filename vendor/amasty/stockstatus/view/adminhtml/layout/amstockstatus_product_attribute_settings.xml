@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="formkey"/>
+    <body>
+        <container name="root">
+            <container name="page.main.actions" as="page_main_actions" htmlTag="div" htmlClass="page-main-actions">
+                <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                    <arguments>
+                        <argument name="use_confirm" xsi:type="string">1</argument>
+                        <argument name="is_using_iframe" xsi:type="string">1</argument>
+                    </arguments>
+                </block>
+            </container>
+
+            <container name="messages.wrapper" as="messages.wrapper" htmlTag="div" htmlId="messages">
+                <container name="page.messages" as="page.messages">
+                    <block class="Magento\Framework\View\Element\Messages" name="messages" as="messages"/>
+                </container>
+            </container>
+
+            <container name="content">
+                <block class="Amasty\Stockstatus\Block\Adminhtml\Product\Attribute\Edit\Form\StoreSwitcher"
+                       name="adminhtml.amasty.stockstatus.attribute.additional.settings.switcher"/>
+                <block class="Amasty\Stockstatus\Block\Adminhtml\Product\Attribute\Edit\Form\StockstatusSettings"
+                       name="adminhtml.amasty.stockstatus.attribute.additional.settings"/>
+            </container>
+        </container>
+    </body>
+</page>

@@ -1,0 +1,79 @@
+//
+//  Base Styles
+// _______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amstockstatus-rule-edit .admin__control-table .data-row td {
+        & {
+            width: 25%;
+        }
+
+        .admin__field[data-index='status_id'] .admin__control-select {
+            width: 100%;
+        }
+
+        > .action-delete {
+            display: block;
+            margin-left: auto;
+        }
+    }
+
+    .amstockstatus-settings-button-wrapper .amstockstatus-settings-button {
+        & {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        &:before {
+            font-family: 'MUI-Icons';
+            font-style: normal;
+            speak: none;
+            font-weight: normal;
+            font-size: 18px;
+            -webkit-font-smoothing: antialiased;
+            color: #b7b3ad;
+        }
+
+        &.delete-option:before {
+            content: '\e07f';
+        }
+
+        &.amstockstatus-settings:before {
+            content: '\e07e';
+        }
+    }
+
+    .amasty-stockstatus-loader-spinner {
+        position: absolute;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+        background-color: rgba(255,255,255,0.5);
+    }
+
+    .amstockstatus-attribute-settings-popup .modal-inner-wrap {
+        width: 40%;
+        max-width: 130rem;
+    }
+
+    .admin__fieldset > .admin__field > .admin__field-control .amstockstatus-image-preview {
+        .amstockstatus-delete-image {
+            margin-top: 0;
+        }
+
+        .amstockstatus-preview {
+            margin-top: 1em;
+        }
+    }
+}

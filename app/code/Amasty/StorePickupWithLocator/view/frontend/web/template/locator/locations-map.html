@@ -1,0 +1,10 @@
+<div class="ampickup-map-popup" data-bind="fadeVisible: visible">
+    <div class="ampickup-overlay" data-bind="click: hidePopup"></div>
+    <div class="ampickup-content">
+        <span class="ampickup-close" data-bind="click: hidePopup"></span>
+        <span class="ampickup-title" data-bind="i18n: 'Choose a Store'"></span>
+        <!-- ko if:  mapIsLoaded()-->
+        <div class="ampickup-locations" data-bind="html: locationsMap"></div>
+        <!-- /ko -->
+    </div>
+</div>

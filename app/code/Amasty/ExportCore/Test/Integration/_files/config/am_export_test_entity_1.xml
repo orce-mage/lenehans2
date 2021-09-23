@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ExportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ExportCore:etc/am_export.xsd">
+    <entity code="test">
+        <name>Test entity</name>
+        <description>test description</description>
+        <collectionFactory class="Amasty\ExportCore\Test\Integration\TestModule\Model\ResourceModel\CollectionFactory"/>
+        <fieldsConfig>
+            <fields>
+                <field name="text_field">
+                    <label>Sample text field</label>
+                    <filter>
+                        <type>text</type>
+                    </filter>
+                </field>
+                <field name="date_field">
+                    <filter>
+                        <type>date</type>
+                    </filter>
+                </field>
+                <field name="select_field">
+                    <filter>
+                        <type>select</type>
+                        <options>
+                            <option>
+                                <value>option1</value>
+                                <label>Option1</label>
+                            </option>
+                            <option>
+                                <value>option2</value>
+                                <label>Option2</label>
+                            </option>
+                        </options>
+                    </filter>
+                </field>
+            </fields>
+        </fieldsConfig>
+    </entity>
+</config>

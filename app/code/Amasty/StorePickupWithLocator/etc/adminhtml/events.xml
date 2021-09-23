@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- For add information in admin order  -->
+    <event name="core_layout_render_element">
+        <observer name="Amasty_StorePickupWithLocator::amasty_storepickup_view" instance="Amasty\StorePickupWithLocator\Observer\Admin\ViewInformation" />
+    </event>
+
+    <!-- For save pickup data after create order -->
+    <event name="sales_order_save_after">
+        <observer name="amasty_ampickup_save_order" instance="Amasty\StorePickupWithLocator\Observer\Admin\Order\Save" />
+    </event>
+</config>

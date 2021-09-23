@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ExportCore
+ */
+-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amexport_export_form.amexport_export_form_data_source</item>
+            <item name="deps" xsi:type="string">amexport_export_form.amexport_export_form_data_source</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="ajaxSave" xsi:type="boolean">true</item>
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">amexport_export_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Export</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="amexport_export_form.amexport_export_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Amasty\ExportCore\Ui\DataProvider\Export\Form</argument>
+            <argument name="name" xsi:type="string">amexport_export_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">test</argument>
+            <argument name="requestFieldName" xsi:type="string">test</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/export"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Amasty_ExportCore/js/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Export Settings</item>
+            </item>
+        </argument>
+        <field name="entity_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Select Entity</item>
+                    <item name="component" xsi:type="string">Amasty_ExportCore/js/entity-select</item>
+                    <item name="entityUrl" xsi:type="url" path="amexport/export/index/entity_code/__entity_code__"/>
+                    <item name="indexUrl" xsi:type="url" path="amexport/export/index"/>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="source" xsi:type="string">entity_code</item>
+                    <item name="labelsDecoration" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">0</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="optgroupTmpl" xsi:type="string">ui/grid/filters/elements/ui-select-optgroup</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                </item>
+                <item name="options" xsi:type="object">Amasty\ExportCore\Export\Config\OptionSource\Entities</item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

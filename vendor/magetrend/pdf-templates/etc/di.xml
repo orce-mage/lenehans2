@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Model\Order\Pdf\Invoice">
+        <plugin name="magetrend-invoice-pdf"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Model\Order\Pdf\Invoice"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Pdf\Creditmemo">
+        <plugin name="magetrend-creditmemo-pdf"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Model\Order\Pdf\Creditmemo"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Pdf\Shipment">
+        <plugin name="magetrend-shipment-pdf"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Model\Order\Pdf\Shipment"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Order\PrintAction">
+        <plugin name="magetrend-order-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Order\PrintAction"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Order\PrintInvoice">
+        <plugin name="magetrend-invoice-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Order\PrintInvoice"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Order\PrintCreditmemo">
+        <plugin name="magetrend-creditmemo-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Order\PrintCreditmemo"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Order\PrintShipment">
+        <plugin name="magetrend-shipment-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Order\PrintShipment"
+                sortOrder="10"/>
+    </type>
+
+    <!-- Print Guests PDF -->
+    <type name="Magento\Sales\Controller\Guest\PrintAction">
+        <plugin name="magetrend-guest-order-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Guest\PrintAction"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Guest\PrintInvoice">
+        <plugin name="magetrend-guest-invoice-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Guest\PrintInvoice"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Guest\PrintCreditmemo">
+        <plugin name="magetrend-guest-creditmemo-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Guest\PrintCreditmemo"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Guest\PrintShipment">
+        <plugin name="magetrend-guest-shipment-pdf-replace-print"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Guest\PrintShipment"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Framework\Mail\TransportInterfaceFactory">
+        <plugin name="magetrend-pdf-transport-interface" type="Magetrend\PdfTemplates\Plugin\Framework\Mail\TransportInterfaceFactory"/>
+    </type>
+
+    <type name="Magento\Framework\Mail\Template\TransportBuilder">
+        <plugin name="magetrend-pdf-transport-builder" type="Magetrend\PdfTemplates\Plugin\Framework\Mail\Template\TransportBuilder"/>
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Pdf\Total\DefaultTotal">
+        <plugin name="magetrend-pdf-default-total" type="Magetrend\PdfTemplates\Plugin\Sales\Model\Order\Pdf\Total\DefaultTotal"/>
+    </type>
+
+    <!-- Replace pdf name for invoice -->
+    <type name="Magento\Sales\Controller\Adminhtml\Invoice\AbstractInvoice\Pdfinvoices">
+        <plugin name="magetrend-pdf-mass-pdf-invoice-list"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Adminhtml\AbstractInvoice\Pdfinvoices"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Adminhtml\Invoice\AbstractInvoice\PrintAction">
+        <plugin name="magetrend-pdf-mass-pdf-invoice"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Adminhtml\AbstractInvoice\PrintAction"/>
+    </type>
+
+    <!-- Replace pdf name for shipment -->
+    <type name="Magento\Sales\Controller\Adminhtml\Shipment\AbstractShipment\Pdfshipments">
+        <plugin name="magetrend-pdf-mass-pdf-shipment-list"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Adminhtml\AbstractShipment\Pdfshipments"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Adminhtml\Shipment\AbstractShipment\PrintAction">
+        <plugin name="magetrend-pdf-mass-pdf-shipment"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Adminhtml\AbstractShipment\PrintAction"/>
+    </type>
+
+    <!-- Replace pdf name for creditmemo -->
+    <type name="Magento\Sales\Controller\Adminhtml\Creditmemo\AbstractCreditmemo\Pdfcreditmemos">
+        <plugin name="magetrend-pdf-mass-pdf-creditmemo-list"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Adminhtml\AbstractCreditmemo\Pdfcreditmemos"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Adminhtml\Creditmemo\AbstractCreditmemo\PrintAction">
+        <plugin name="magetrend-pdf-mass-pdf-creditmemo"
+                type="Magetrend\PdfTemplates\Plugin\Sales\Controller\Adminhtml\AbstractCreditmemo\PrintAction"/>
+    </type>
+
+    <!-- Api -->
+    <preference for="Magetrend\PdfTemplates\Api\PdfManagementInterface" type="Magetrend\PdfTemplates\Model\Api\PdfManagement" />
+    <!-- Since magento 2.3.2 -->
+    <type name="Magento\Framework\Mail\Message">
+        <plugin name="magetrend-pdf-message" type="Magetrend\PdfTemplates\Plugin\Framework\Mail\Message"/>
+    </type>
+    <!-- Since magento 2.3.3 -->
+    <type name="Magento\Framework\Mail\MimeMessage">
+        <plugin name="magetrend-pdf-mime-message" type="Magetrend\PdfTemplates\Plugin\Framework\Mail\MimeMessage"/>
+    </type>
+
+    <!-- Magento 2.4.1 bug fix -->
+    <type name="Magento\MediaGalleryIntegration\Plugin\SaveImageInformation">
+        <plugin name="magetrend-241-bugfix" type="Magetrend\PdfTemplates\Plugin\MediaGalleryIntegration\Plugin\SaveImageInformation"/>
+    </type>
+
+    <!-- Before Magento 2.4.1 fix Failed: Network Error-->
+    <type name="Magento\Framework\App\Response\Http">
+        <plugin name="magetrend-network-error-fix" type="Magetrend\PdfTemplates\Plugin\Framework\App\Response\Http"/>
+    </type>
+
+    <!-- amasty smtp fix -->
+    <!--type name="Amasty\Smtp\Model\Transport">
+        <plugin name="magetrend-amasty-smtp-compatibility" type="Magetrend\PdfTemplates\Plugin\Amasty\Smtp\Transport"/>
+    </type-->
+</config>

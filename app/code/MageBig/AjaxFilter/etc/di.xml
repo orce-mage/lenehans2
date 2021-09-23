@@ -1,0 +1,57 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper">
+        <arguments>
+            <argument name="fields" xsi:type="array">
+                <item name="rating" xsi:type="string">integer</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Elasticsearch\Model\Adapter\FieldMapper\FieldMapperResolver">
+        <plugin name="MageBig_AjaxFilter::AdditionalFieldMapper"
+                type="MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper"/>
+    </type>
+    <type name="Magento\Elasticsearch\Elasticsearch5\Model\Adapter\FieldMapper\ProductFieldMapperProxy">
+        <plugin name="MageBig_AjaxFilter::AdditionalFieldMapper5"
+                type="MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper"/>
+    </type>
+    <type name="MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="rating" xsi:type="object">MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\DataMapper\RatingSummary</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Elasticsearch\Model\Adapter\BatchDataMapper\ProductDataMapper">
+        <plugin name="MageBig_AjaxFilter::AdditionalBatchDataMapper"
+                type="MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper"/>
+    </type>
+    <type name="Magento\Elasticsearch\Elasticsearch5\Model\Adapter\DataMapper\ProductDataMapper">
+        <plugin name="MageBig_AjaxFilter::AdditionalBatchDataMapper5"
+                type="MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper"/>
+    </type>
+    <type name="Magento\Elasticsearch\SearchAdapter\Aggregation\Builder\Term">
+        <plugin name="MageBig_AjaxFilter::AggregationTermAddTotals"
+                type="MageBig\AjaxFilter\Plugin\Elasticsearch\SearchAdapter\Aggregation\Builder\Term"/>
+    </type>
+    <type name="MageBig\AjaxFilter\Plugin\Elasticsearch\SearchAdapter\Aggregation\Builder\Term">
+        <arguments>
+            <argument name="bucketBuilders" xsi:type="array">
+                <item name="rating"
+                      xsi:type="object">MageBig\AjaxFilter\Plugin\Elasticsearch\Model\Adapter\BucketBuilder\Rating</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Adapter\Mysql\Aggregation\DataProvider">
+        <plugin name="MageBig_AjaxFilter::stockAndRatingAggregation"
+                type="MageBig\AjaxFilter\Plugin\CatalogSearch\Model\Adapter\Mysql\Aggregation\DataProvider"/>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Adapter\Mysql\Filter\Preprocessor">
+        <plugin name="MageBig_AjaxFilter::PrepareWhereCauseForCustomFilters"
+                type="MageBig\AjaxFilter\Plugin\CatalogSearch\Model\Adapter\Mysql\Filter\Preprocessor"/>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Search\IndexBuilder">
+        <plugin name="MageBig_AjaxFilter::ApplyCustomFiltersToBaseSearchSelect"
+                type="MageBig\AjaxFilter\Plugin\CatalogSearch\Model\Search\IndexBuilder"/>
+    </type>
+</config>

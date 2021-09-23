@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Swissup_CheckoutSuccess::css/checkout-success.css" media="screen, print"/>
+        <title>Success Page</title>
+    </head>
+    <update handle="customer_account"/>
+    <update handle="sales_order_item_renderers"/>
+    <update handle="sales_order_item_price"/>
+    <body>
+        <referenceBlock name="page.main.title" remove="true" />
+
+        <referenceBlock name="checkout.success" template="Swissup_CheckoutSuccess::success.phtml">
+            <block class="Magento\Sales\Block\Order\Info" name="order.date" template="Magento_Sales::order/order_date.phtml"/>
+            <block class="Magento\Sales\Block\Order\View" name="sales.order.view" cacheable="false">
+                <block class="Magento\Sales\Block\Order\Items" name="order_items" template="order/items.phtml">
+                    <block class="Magento\Framework\View\Element\RendererList" name="sales.order.items.renderers" as="renderer.list"/>
+                    <block class="Magento\Sales\Block\Order\Totals" name="order_totals" template="order/totals.phtml">
+                        <arguments>
+                            <argument name="label_properties" xsi:type="string">colspan="4" class="mark"</argument>
+                            <argument name="value_properties" xsi:type="string">class="amount"</argument>
+                        </arguments>
+                        <block class="Magento\Tax\Block\Sales\Order\Tax" name="tax" template="order/tax.phtml"/>
+                    </block>
+                    <block class="Swissup\CheckoutSuccess\Block\Order\Items\Image" name="email.order.image.renderer" as="imageRenderer">
+                        <arguments>
+                            <argument name='product_image_id' xsi:type="string">mini_cart_product_thumbnail</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+            <block class="Magento\Sales\Block\Order\Info" name="sales.order.info"/>
+            <block class="Swissup\CheckoutSuccess\Block\CmsBlock" name="checkout.additional.cms.top">
+                <arguments>
+                    <argument name="block_type" xsi:type="string">block_top</argument>
+                </arguments>
+            </block>
+            <block class="Swissup\CheckoutSuccess\Block\CmsBlock" name="checkout.additional.cms.bottom">
+                <arguments>
+                    <argument name="block_type" xsi:type="string">block_bottom</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="thank.you" template="Swissup_CheckoutSuccess::thank-you.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="create.account" template="Swissup_CheckoutSuccess::create-account.phtml" />
+        </referenceBlock>
+
+        <referenceBlock name="checkout.registration" remove="false" />
+        <move element="checkout.registration" destination="create.account" />
+
+        <referenceContainer name="before.body.end">
+            <block class="Swissup\CheckoutSuccess\Block\MiscellaneousScripts" name="checkout.success.miscellaneous.scripts" />
+        </referenceContainer>
+    </body>
+</page>

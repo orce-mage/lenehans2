@@ -1,0 +1,31 @@
+<table class="marketplace-grid-multiselect">
+    <tr>
+        <!--ko foreach: {data: getVisible(), as: '$col'}-->
+            <!-- ko if: index === 'ids' -->
+                <!-- ko template: getHeader() --><!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </tr>
+</table>
+
+<div class="marketplace-mode-switcher">
+    <render args="viewSwitcherTmpl"/>
+</div>
+
+<ol class="marketplace-grid-items" css="'mode-' + displayMode">
+    <li class="grid-item" repeat="foreach: rows, item: '$row'" data-bind="
+        css: {
+            busy: $row().busy,
+            hidden: $row().hidden,
+            noimage: !$row().image_src
+        }
+    ">
+        <!--ko foreach: {data: getVisible(), as: '$col'}-->
+            <!-- ko template: getBody() --><!-- /ko -->
+        <!-- /ko -->
+    </li>
+</ol>
+
+<div ifnot="hasData()" class="marketplace-no-items">
+    <!-- ko i18n: 'No items found.' --><!-- /ko -->
+</div>

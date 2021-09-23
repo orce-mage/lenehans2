@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Number
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amnumber" translate="label" type="text" sortOrder="161809" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_Number::config</resource>
+            <class>separator-top</class>
+            <label>Order Number</label>
+            <tab>amasty</tab>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="offset" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Timezone offset</label>
+                    <source_model>Amasty\Number\Model\Source\Offset</source_model>
+                </field>
+                <field id="separate_connection" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Use Separate Connection For Counter Generation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="order" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Order</label>
+                <field id="format" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number Format</label>
+                    <comment><![CDATA[You can use variables {counter}, {store}, {yyyy}, {yy}, {m}, {mm}, {d}, {dd}, {rand}, {country_code}. If you type ORD-{yy}-{mm}-{dd}-{counter} in the field, you will have order numbers of the kind: ORD-13-08-15-000077]]></comment>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Number</backend_model>
+                </field>
+                <field id="start" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Counter From</label>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Start</backend_model>
+                    <tooltip>Please mind that changing the counter may temporary slow down the order creation process in case of counter reset process.</tooltip>
+                </field>
+                <field id="increment" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment Step</label>
+                    <comment><![CDATA[E.g. the last number is 00015. If increment step is 4, the next number will be 00019]]></comment>
+                </field>
+                <field id="pad" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Padding</label>
+                    <comment><![CDATA[Total number of digits in the order number. If the order id is 24 and padding is 6, the result will be 000024. Set to 0 (zero) not to add leading zeros.]]></comment>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset Counter on Date Change</label>
+                    <source_model>Amasty\Number\Model\Source\Reset</source_model>
+                </field>
+                <field id="per_website" translate="label" type="select" sortOrder="60" showInDefault="0" showInWebsite="1" showInStore="0">
+                    <label>Separate Counter per Website</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="per_store" translate="label" type="select" sortOrder="70" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Separate Counter per Store View</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="reset_button" translate="label" type="button" sortOrder="80" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Reset Order Counter</label>
+                    <frontend_model>AmastyOrderResetButton</frontend_model>
+                </field>
+            </group>
+            <group id="invoice" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Invoice</label>
+                <field id="same" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Same as Order Number</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="prefix" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Prefix</label>
+                    <comment><![CDATA[Will be added before the order number]]></comment>
+                    <depends>
+                        <field id="same">1</field>
+                    </depends>
+                </field>
+                <field id="replace" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Part of the order number to replace with the prefix</label>
+                    <comment><![CDATA[If you have the order number as `11/13-order`, you can replace the `-order` part with the prefix instead of adding it in the beginning.]]></comment>
+                    <depends>
+                        <field id="same">1</field>
+                    </depends>
+                </field>
+                <field id="format" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number Format</label>
+                    <comment><![CDATA[You can use variables {counter}, {store}, {yyyy}, {yy}, {m}, {mm}, {d}, {dd}, {rand}, {order_id}, {country_code}. If you type INV-{yy}-{mm}-{dd}-{counter} in the field, you will have invoice numbers of the kind: INV-13-08-15-000077]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Number</backend_model>
+                </field>
+                <field id="start" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Counter From</label>
+                    <validate>validate-zero-or-greater</validate>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Start</backend_model>
+                    <tooltip>Please mind that changing the counter may temporary slow down the order creation process in case of counter reset process.</tooltip>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="increment" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment Step</label>
+                    <comment><![CDATA[E.g. the last number is 00015. If increment step is 4, the next number will be 00019]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="pad" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Padding</label>
+                    <comment><![CDATA[Total number of digits in the order number. If the order id is 24 and padding is 6, the result will be 000024. Set to 0 (zero) not to add leading zeros.]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset Counter on Date Change</label>
+                    <source_model>Amasty\Number\Model\Source\Reset</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="per_website" translate="label" type="select" sortOrder="60" showInDefault="0" showInWebsite="1" showInStore="0">
+                    <label>Separate Counter per Website</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="per_store" translate="label" type="select" sortOrder="70" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Separate Counter per Store View</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="reset_button" translate="label" type="button" sortOrder="80" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Reset Invoice Counter</label>
+                    <frontend_model>AmastyInvoiceResetButton</frontend_model>
+                </field>
+            </group>
+            <group id="shipment" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipping</label>
+                <field id="same" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Same as Order Number</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="prefix" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Prefix</label>
+                    <comment><![CDATA[Will be added before the order number]]></comment>
+                    <depends>
+                        <field id="same">1</field>
+                    </depends>
+                </field>
+                <field id="replace" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Part of the order number to replace with the prefix</label>
+                    <comment><![CDATA[If you have the order number as `11/13-order`, you can replace the `-order` part with the prefix instead of adding it in the beginning.]]></comment>
+                    <depends>
+                        <field id="same">1</field>
+                    </depends>
+                </field>
+                <field id="format" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number Format</label>
+                    <comment><![CDATA[You can use variables {counter}, {store}, {yyyy}, {yy}, {m}, {mm}, {d}, {dd}, {rand}, {order_id}, {country_code}. If you type SHI-{yy}-{mm}-{dd}-{counter} in the field, you will have invoice numbers of the kind: INV-13-08-15-000077]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Number</backend_model>
+                </field>
+                <field id="start" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Counter From</label>
+                    <validate>validate-zero-or-greater</validate>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Start</backend_model>
+                    <tooltip>Please mind that changing the counter may temporary slow down the order creation process in case of counter reset process.</tooltip>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="increment" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment Step</label>
+                    <comment><![CDATA[E.g. the last number is 00015. If increment step is 4, the next number will be 00019]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="pad" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Padding</label>
+                    <comment><![CDATA[Total number of digits in the order number. If the order id is 24 and padding is 6, the result will be 000024. Set to 0 (zero) not to add leading zeros.]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset Counter on Date Change</label>
+                    <source_model>Amasty\Number\Model\Source\Reset</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="per_website" translate="label" type="select" sortOrder="60" showInDefault="0" showInWebsite="1" showInStore="0">
+                    <label>Separate Counter per Website</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="per_store" translate="label" type="select" sortOrder="70" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Separate Counter per Store View</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="reset_button" translate="label" type="button" sortOrder="80" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Reset Shipping Counter</label>
+                    <frontend_model>AmastyShippingResetButton</frontend_model>
+                </field>
+            </group>
+            <group id="creditmemo" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Credit Memo</label>
+                <field id="same" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Same as Order Number</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="prefix" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Prefix</label>
+                    <comment><![CDATA[Will be added before the order number]]></comment>
+                    <depends>
+                        <field id="same">1</field>
+                    </depends>
+                </field>
+                <field id="replace" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Part of the order number to replace with the prefix</label>
+                    <comment><![CDATA[If you have the order number as `11/13-order`, you can replace the `-order` part with the prefix instead of adding it in the beginning.]]></comment>
+                    <depends>
+                        <field id="same">1</field>
+                    </depends>
+                </field>
+                <field id="format" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number Format</label>
+                    <comment><![CDATA[You can use variables {counter}, {store}, {yyyy}, {yy}, {m}, {mm}, {d}, {dd}, {rand}, {rand}, {order_id}, {country_code}. If you type MEMO-{yy}-{mm}-{dd}-{counter} in the field, you will have invoice numbers of the kind: INV-13-08-15-000077]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Number</backend_model>
+                </field>
+                <field id="start" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Counter From</label>
+                    <validate>validate-zero-or-greater</validate>
+                    <backend_model>Amasty\Number\Model\Config\Backend\Start</backend_model>
+                    <tooltip>Please mind that changing the counter may temporary slow down the order creation process in case of counter reset process.</tooltip>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="increment" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment Step</label>
+                    <comment><![CDATA[E.g. the last number is 00015. If increment step is 4, the next number will be 00019]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="pad" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Padding</label>
+                    <comment><![CDATA[Total number of digits in the order number. If the order id is 24 and padding is 6, the result will be 000024. Set to 0 (zero) not to add leading zeros.]]></comment>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset Counter on Date Change</label>
+                    <source_model>Amasty\Number\Model\Source\Reset</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="per_website" translate="label" type="select" sortOrder="60" showInDefault="0" showInWebsite="1" showInStore="0">
+                    <label>Separate Counter per Website</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="per_store" translate="label" type="select" sortOrder="70" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Separate Counter per Store View</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="same">0</field>
+                    </depends>
+                </field>
+                <field id="reset_button" translate="label" type="button" sortOrder="80" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Reset Shipping Counter</label>
+                    <frontend_model>AmastyCreditMemoResetButton</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

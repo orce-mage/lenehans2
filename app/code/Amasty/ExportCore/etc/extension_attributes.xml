@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ExportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Amasty\ExportCore\Api\Config\ProfileConfigInterface">
+        <attribute code="csv_template" type="Amasty\ExportCore\Export\Template\Type\Csv\ConfigInterface" />
+        <attribute code="xml_template" type="Amasty\ExportCore\Export\Template\Type\Xml\ConfigInterface" />
+
+        <attribute code="server_file_destination" type="Amasty\ExportCore\Export\FileDestination\Type\ServerFile\ConfigInterface" />
+    </extension_attributes>
+
+    <extension_attributes for="Amasty\ExportCore\Api\Config\Profile\FieldFilterInterface">
+        <attribute code="dateFilter" type="Amasty\ExportCore\Export\Filter\Type\Date\ConfigInterface" />
+        <attribute code="selectFilter" type="Amasty\ExportCore\Export\Filter\Type\Select\ConfigInterface" />
+        <attribute code="textFilter" type="Amasty\ExportCore\Export\Filter\Type\Text\ConfigInterface" />
+        <attribute code="toggleFilter" type="Amasty\ExportCore\Export\Filter\Type\Toggle\ConfigInterface" />
+    </extension_attributes>
+
+    <extension_attributes for="Amasty\ExportCore\Api\Config\Profile\FieldInterface">
+        <attribute code="value" type="string" />
+    </extension_attributes>
+
+    <extension_attributes for="Amasty\ExportCore\Api\ExportProcessInterface">
+        <attribute code="helper" type="Amasty\ExportCore\Export\Temp\Helper"/>
+    </extension_attributes>
+</config>

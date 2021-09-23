@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amlocator" translate="label" type="text" sortOrder="192012" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_Storelocator::config</resource>
+            <class>separator-top</class>
+            <label>Store Locator</label>
+            <tab>amasty</tab>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google API Key</label>
+                    <tooltip>Please make sure to fill in the Google API Key field in order to make the extension work correctly.
+                        Please don't forget also to check whether the Google API and Places API are enabled.
+                    </tooltip>
+                    <comment><![CDATA[Please use this <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">page</a> to get a key.<br>
+                        This <a href="https://console.cloud.google.com/projectselector2/google/maps-apis/api-list" target="_blank">page</a> would help you to check what API's are enabled.]]>
+                    </comment>
+                </field>
+                <field id="enable_pages" translate="label" type="select" sortOrder="15" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable Location Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="location_reviews" translate="label" type="select" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable Customers Reviews for Locations</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_link" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Store Locator's Link on Product Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>The link will redirect customer to the store locator's page with locations where the product is available.</tooltip>
+                </field>
+                <field id="linktext" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>'Available in Stores' Link Text</label>
+                    <tooltip>Customers can find locations where the product is available clicking on the link within the product page.
+                        You can set the title for the link here. The default title is “Available in Stores”.
+                    </tooltip>
+                    <depends>
+                        <field id="enable_link">1</field>
+                    </depends>
+                </field>
+                <field id="new_page" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Open 'Available in Stores' Page in a New Tab</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_link">1</field>
+                    </depends>
+                </field>
+                <field id="label" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <tooltip>The title of the Store Locator page will be displayed in the top (breadcrumbs) and bottom menu (footer).</tooltip>
+                </field>
+                <field id="add_to_toolbar_menu" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add Store Locator Link to the Toolbar</label>
+                    <tooltip>Link to the Store Locator page will be added to the toolbar</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="add_to_footer_menu" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add Store Locator Link to the Footer</label>
+                    <tooltip>Link to the Store Locator page will be added to the footer</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="geoip" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Map and Customer's Geolocation</label>
+                <field id="usebrowserip" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Browser Location</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Please set this option to ‘Yes’ to identify customer’s location using browser location data.</tooltip>
+                </field>
+                <field id="use" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use Geo IP</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>The setting allows to use Geo IP data to detect customer's location.
+                        Geo IP data could be useful in cases when the browser doesn’t provide location data.
+                    </tooltip>
+                </field>
+                <field id="automatic_locate" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Nearest Location by Default</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>The nearest location will be displayed to a customer by default if the option is enabled.</tooltip>
+                </field>
+                <field id="zoom" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Map Zoom</label>
+                    <validate>required-entry validate-number-range number-range-1-20</validate>
+                    <comment>The initial resolution at which a map will be displayed.</comment>
+                    <tooltip><![CDATA[You can set the desired zoom level. For example, the most popular values of Google Map zoom level are as follows:<br/>
+                        1: World<br/>
+                        5: Landmass/continent<br/>
+                        10: City<br/>
+                        15: Streets<br/>
+                        20: Buildings]]></tooltip>
+                </field>
+                <field id="clustering" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Clustering</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Locations situated close to each other will be grouped in one cluster on the map.
+                        A cluster marker will comprise a few locations inside.
+                        A cluster will disappear while zooming the map.
+                    </tooltip>
+                </field>
+                <field id="suggestion_click_search" translate="label tooltip" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Autosuggestions Click Search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Search locations by clicking on the suggestions item.
+                        If set to NO search occurs after pressing an "Enter" button.
+                    </tooltip>
+                </field>
+            </group>
+
+            <group id="locator" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Store Locator Page</label>
+                <group id="main_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Main Settings</label>
+                    <field id="url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>URL Key</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="meta_title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Meta Title</label>
+                    </field>
+                    <field id="meta_description" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Meta Description</label>
+                    </field>
+                    <field id="pagination_limit" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Locations on a Page</label>
+                        <validate>validate-number-range</validate>
+                        <tooltip>The list of locations within the sidebar of the Locator Page is divided into pages.
+                            That helps to load the page faster when a website has a wide range of locations.
+                            The option defines the number of locations on one page.
+                            Leave empty field to switch off the pagination for locations list.
+                        </tooltip>
+                    </field>
+                    <field id="description_limit" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Description Length Limit</label>
+                    </field>
+                    <field id="allowed_countries" translate="label comment" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Address Autosuggestion Restrictions</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <can_be_empty>1</can_be_empty>
+                        <comment><![CDATA[
+                            Please use the field if you need to show only specific countries in the list of offered addresses for the 'Current Location' field on the Store locator's page.
+                            Please mind that Google Service allows to choose no more than 5 countries (you can find more information <a href="https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete" target="_blank">here</a>).
+                            Or leave the field blank to show all possible countries in the list of offered addresses.]]>
+                        </comment>
+                    </field>
+                </group>
+                <group id="visual_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>General Visual Settings</label>
+                    <field id="distance" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Distance Units</label>
+                        <source_model>Amasty\Storelocator\Model\Config\Source\Distance</source_model>
+                    </field>
+                    <field id="radius_type" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Radius Type</label>
+                        <source_model>Amasty\Storelocator\Model\Config\Source\RadiusType</source_model>
+                    </field>
+                    <field id="radius_min_value" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Value for Radius Range</label>
+                        <validate>validate-number-range</validate>
+                        <depends>
+                            <field id="radius_type">range</field>
+                        </depends>
+                    </field>
+                    <field id="radius_max_value" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Value for Radius Range</label>
+                        <validate>validate-number-range</validate>
+                        <depends>
+                            <field id="radius_type">range</field>
+                        </depends>
+                    </field>
+                    <field id="radius" translate="label comment" type="text" canRestore="1" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Search Radius</label>
+                        <comment>If you would like to use other search radius, you may list them above, separated with comma</comment>
+                        <depends>
+                            <field id="radius_type">select</field>
+                        </depends>
+                    </field>
+                    <field id="template" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Google Mark Template</label>
+                        <tooltip><![CDATA[When a customer clicks on a location mark on the map, a popup with the details appears.
+                            The setting allows to customize the attributes displayed in the popup.
+                            To add an attribute please use the construction {{attribute_code}}.<br>
+                            Allowed fields:<br>
+                            {{name}}<br>
+                            {{rating}}<br>
+                            {{country}}<br>
+                            {{state}}<br>
+                            {{city}}<br>
+                            {{zip}}<br>
+                            {{address}}<br>
+                            {{phone}}<br>
+                            {{email}}<br>
+                            {{website}}<br>
+                            {{description}}<br>
+                            {{short_description}}<br>
+                            {{lat}}<br>
+                            {{lng}}<br>]]>
+                        </tooltip>
+                    </field>
+                    <field id="store_list_template" translate="label" type="textarea" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Store List Template</label>
+                        <tooltip><![CDATA[Allowed fields:<br>
+                            {{name}}<br>
+                            {{rating}}<br>
+                            {{country}}<br>
+                            {{state}}<br>
+                            {{city}}<br>
+                            {{zip}}<br>
+                            {{address}}<br>
+                            {{phone}}<br>
+                            {{email}}<br>
+                            {{website}}<br>
+                            {{description}}<br>
+                            {{short_description}}<br>
+                            {{lat}}<br>
+                            {{lng}}<br>
+                            The setting is responsible for a location attributes displayed in the sidebar list of locations.
+                            To add an attribute please use the construction {{attribute_code}}]]>
+                        </tooltip>
+                    </field>
+                </group>
+                <group id="store_list_settings" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sidebar Store List Visual Configuration</label>
+                    <field id="close_text" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Day Off Text</label>
+                        <tooltip>The text will be displayed in a location schedule for days off.</tooltip>
+                    </field>
+                    <field id="break_time_text" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Break Time Text</label>
+                        <tooltip>The text will be displayed in a location schedule for breaks.</tooltip>
+                    </field>
+                    <field id="convert_time" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Time Format</label>
+                        <source_model>Amasty\Storelocator\Model\Config\Source\TimeFormat</source_model>
+                        <tooltip>Time format for locations Schedule (12h/24h).</tooltip>
+                    </field>
+                    <field id="count_distance" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Distance to the Location</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <tooltip>Distance to the location will be displayed at the bottom of the info container of each store in the sidebar.</tooltip>
+                    </field>
+                    <field id="collapse_filter" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Collapse Locations Filter by Default</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

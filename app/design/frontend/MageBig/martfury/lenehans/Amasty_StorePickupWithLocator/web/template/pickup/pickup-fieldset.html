@@ -1,0 +1,17 @@
+<if args="method.carrier_code === 'amstorepickup'
+    && $parents[2].selectedShippingMethod() === 'amstorepickup_amstorepickup'">
+    <if args="pickupData().stores && pickupData().stores.length">
+        <div class="ampickup-store-container -cart">
+            <each args="data:elems(), as: 'element'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </each>
+        </div>
+    </if>
+    <ifnot args="!pickupData().stores || pickupData().stores.length">
+        <div class="ampickup-nostores-message">
+            <p>
+                <span translate="'Unfortunately the products you\'d like to purchase cannot be collected at a single location. Please edit your order to enable a single store collection or choose delivery to have you order delivered directly to you.'"></span>
+            </p>
+        </div>
+    </ifnot>
+</if>

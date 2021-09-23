@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="amasty_stockstatus_rule_product" view_id="amasty_stockstatus_rule_product" class="Amasty\Stockstatus\Model\Indexer\Rule\RuleIndexer" shared_index="amasty_stockstatus_rule">
+        <title translate="true">Amasty Stockstatus Products</title>
+        <description translate="true">Indexed rule/product association</description>
+    </indexer>
+    <indexer id="amasty_stockstatus_product_rule" view_id="amasty_stockstatus_product_rule" class="Amasty\Stockstatus\Model\Indexer\Rule\ProductIndexer" shared_index="amasty_stockstatus_rule">
+        <title translate="true">Amasty Stockstatus Products</title>
+        <description translate="true">Indexed product/rule association</description>
+        <dependencies>
+            <indexer id="cataloginventory_stock" />
+        </dependencies>
+    </indexer>
+</config>

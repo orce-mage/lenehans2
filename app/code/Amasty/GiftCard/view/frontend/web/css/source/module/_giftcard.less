@@ -1,0 +1,559 @@
+//
+//  Gift Card page
+//  ____________________________________________
+
+//
+//  Variables
+//  --------------------------------------------
+
+@amgiftcard-checkbox__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjE1IiBoZWlnaHQ9IjE1IiByeD0iMSIgZmlsbD0iIzE5NzlDMyIvPjxwYXRoIGQ9Ik0zLjc1IDcuNWwzIDMgNC41LTUuMjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==');
+@amgiftcard-radio-button__checked: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNy41IiBjeT0iNy41IiByPSI3LjUiIGZpbGw9IiMxOTc5QzMiLz48ZyBmaWx0ZXI9InVybCgjZmlsdGVyMF9kKSI+PGNpcmNsZSBjeD0iNy41IiBjeT0iNy41IiBmaWxsPSIjZmZmIiByPSIzIi8+PC9nPjxkZWZzPjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZCIgeD0iMi45MjQiIHk9IjIuOTI0IiB3aWR0aD0iOS4xNTEiIGhlaWdodD0iOS4xNTEiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj48ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxMjcgMCIvPjxmZU9mZnNldC8+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iLjc4OCIvPjxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMC4yIDAiLz48ZmVCbGVuZCBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJlZmZlY3QxX2Ryb3BTaGFkb3ciLz48ZmVCbGVuZCBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3ciIHJlc3VsdD0ic2hhcGUiLz48L2ZpbHRlcj48L2RlZnM+PC9zdmc+');
+@amgiftcard-icon__datepicker: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00Ljk4IDEwLjcwNWgxLjYzOFY5LjA2OUg0Ljk4djEuNjM2em0yLjMwNyAyLjE5aDEuNjM2di0xLjYzNkg3LjI4N3YxLjYzNXptLTIuMzA3IDBoMS42Mzh2LTEuNjM2SDQuOTh2MS42MzV6bTAtNC4zOGgxLjYzOFY2Ljg4SDQuOTh2MS42MzR6bTcuMDI4LTQuODIyYS42NzguNjc4IDAgMDAuNjc5LS42NzhWLjY3OGEuNjc4LjY3OCAwIDEwLTEuMzU4IDB2Mi4zMzdjMCAuMzc2LjMwMy42NzguNjc5LjY3OHptLTguMDE5IDBhLjY3OC42NzggMCAwMC42NzgtLjY3OFYuNjc4YS42NzguNjc4IDAgMTAtMS4zNTcgMHYyLjMzN2MwIC4zNzYuMzAzLjY3OC42NzkuNjc4em0tMS4zMTcgNy4wMTJINC4zMVY5LjA2OUgyLjY3MnYxLjYzNnptMCAyLjE5SDQuMzF2LTEuNjM2SDIuNjcydjEuNjM1em00LjYxNS0yLjE5aDEuNjM2VjkuMDY5SDcuMjg3djEuNjM2em00LjYxIDBoMS42MzlWOS4wNjloLTEuNjM4djEuNjM2em0wLTIuMTloMS42MzlWNi44OGgtMS42Mzh2MS42MzR6bTEuMDEzLTcuMzl2Ljc1NkExLjM2MiAxLjM2MiAwIDExMTAuNjQ1IDIuOWMwLS40MDcuMTgtLjc3MS40Ni0xLjAydi0uNzU0SDQuODkxdi43NTVhMS4zNjIgMS4zNjIgMCAxMS0xLjgwNCAwdi0uNzU1SDBWMTZoMTZWMS4xMjZoLTMuMDl6TTEuNTE3IDVoMTIuOTk2djkuNDgzSDEuNTE3VjV6bTUuNzcgMy41MTRoMS42MzZWNi44OEg3LjI4N3YxLjYzNHptMi4zMDcgMGgxLjYzNVY2Ljg4SDkuNTk0djEuNjM0em0wIDQuMzhoMS42MzV2LTEuNjM2SDkuNTk0djEuNjM2em0wLTIuMTloMS42MzVWOS4wN0g5LjU5NHYxLjYzNnoiIGZpbGw9IiM1NzU4NTUiLz48L3N2Zz4=');
+@amgiftcard-icon__camera: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQuODIxIDBsLS44MDMgMi4xNDNIMi4xNDNBMi4xMzggMi4xMzggMCAwMDAgNC4yODZ2Ni40MjhjMCAxLjE4Ny45NTYgMi4xNDMgMi4xNDMgMi4xNDNoMTAuNzE0QTIuMTM4IDIuMTM4IDAgMDAxNSAxMC43MTRWNC4yODZhMi4xMzggMi4xMzggMCAwMC0yLjE0My0yLjE0M2gtMS44NzVMMTAuMTggMEg0Ljgyek03LjUgMy43NWEzLjc2MiAzLjc2MiAwIDAxMy43NSAzLjc1IDMuNzYyIDMuNzYyIDAgMDEtMy43NSAzLjc1QTMuNzYyIDMuNzYyIDAgMDEzLjc1IDcuNSAzLjc2MiAzLjc2MiAwIDAxNy41IDMuNzV6bTAgMS42MDdBMi4xMyAyLjEzIDAgMDA1LjM1NyA3LjUgMi4xMyAyLjEzIDAgMDA3LjUgOS42NDMgMi4xMyAyLjEzIDAgMDA5LjY0MyA3LjUgMi4xMyAyLjEzIDAgMDA3LjUgNS4zNTd6IiBmaWxsPSIjZmZmIi8+PC9zdmc+');
+@amgiftcard-icon__delete: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xLjUzNCAxMmg2Ljk1MWwuODc0LTcuMTY2SC43TDEuNTM0IDEyek02Ljk1MiAxLjc4M1YuNDA5QzYuOTUyLjE4MyA2Ljc0MyAwIDYuNDg2IDBIMy41MzVjLS4yNTggMC0uNDY2LjE4My0uNDY2LjQxdjEuMzVjLS45OTcuMDk5LTIuMDM1LjI5LTMuMDY5LjYxN3YxLjI2aDEwVjIuMzQ0cy0xLjIyLS4zNy0zLjA0OS0uNTZoLjAwMXptLS45MjctLjA3NmExOS4xMDcgMTkuMTA3IDAgMDAtMi4wNzctLjAxMlYuOTcxYzAtLjExMi4xMDMtLjIwNC4yMzItLjIwNGgxLjYxMWMuMTMgMCAuMjM0LjA5Mi4yMzQuMjA0di43MzZ6IiBmaWxsPSIjMTc4N0UwIi8+PC9zdmc+');
+@amgiftcard-icon__question: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTciIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOC41IiBjeT0iOC41IiByPSI4LjUiIGZpbGw9IiMzODlERkUiLz48cGF0aCBkPSJNNy40ODggMTAuMDc0YzAtLjYwNi4wNzUtMS4wODkuMjI2LTEuNDQ5LjE1LS4zNi40NDYtLjc1NC44ODktMS4xODMuNDQ2LS40MzMuNzI5LS43NC44NDctLjkyMi4xODItLjI3OC4yNzQtLjU4LjI3NC0uOTAzIDAtLjQyOC0uMTA3LS43NTQtLjMyMi0uOTc3LS4yMS0uMjI4LS41Mi0uMzQyLS45My0uMzQyLS4zOTEgMC0uNzA4LjExMi0uOTUuMzM1LS4yMzcuMjE5LS4zNTUuNTE3LS4zNTUuODk1SDUuNTA2Yy4wMDktLjgwNi4yODItMS40NDQuODItMS45MTQuNTQyLS40NyAxLjI1OC0uNzA0IDIuMTQ3LS43MDQuOTE2IDAgMS42MjkuMjMzIDIuMTQuNjk3LjUxNC40NjUuNzcyIDEuMTE1Ljc3MiAxLjk0OSAwIC43NDItLjM0NyAxLjQ3NC0xLjA0IDIuMTk0bC0uODQuODI3Yy0uMy4zNDItLjQ1Ni44NDEtLjQ2NSAxLjQ5N0g3LjQ4OHpNNy4zNzIgMTIuMmMwLS4yNjkuMDg0LS40ODUuMjUzLS42NS4xNjktLjE2OC4zOTYtLjI1Mi42ODQtLjI1Mi4yOTEgMCAuNTIxLjA4Ni42OS4yNmEuODcuODcgMCAwMS4yNTMuNjQyYzAgLjI1LS4wODIuNDYtLjI0Ni42My0uMTY0LjE2OC0uMzk3LjI1Mi0uNjk3LjI1Mi0uMzAxIDAtLjUzNC0uMDg0LS42OTgtLjI1M2EuODguODggMCAwMS0uMjM5LS42Mjl6IiBmaWxsPSIjZmZmIi8+PC9zdmc+');
+@amgiftcard-button__border: 1px solid #dadada;
+@amgiftcard-button__color: #1e79c2;
+@amgiftcard-field__border: 1px solid #d4d4d4;
+@amgiftcard-field__color: #d4d4d4;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amcard-checkbox-container {
+        & {
+            position: relative;
+        }
+
+        &:first-child {
+            margin-right: 30px;
+        }
+
+        > .amcard-checkbox {
+            display: none;
+        }
+
+        > .amcard-name {
+            margin-left: 23px;
+            line-height: 20px;
+        }
+
+        > .amcard-label {
+            & {
+                padding-left: 21px;
+                cursor: pointer;
+            }
+
+            &:before {
+                position: absolute;
+                top: 2px;
+                left: 0;
+                box-sizing: border-box;
+                width: 16px;
+                height: 16px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                background: #fff;
+                content: '';
+            }
+        }
+
+        > .amcard-checkbox:checked + .amcard-label:before {
+            border: none;
+            background: @amgiftcard-checkbox__background no-repeat left;
+            background-size: 16px;
+        }
+    }
+
+    .amcard-flex-container {
+        & {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &.-checkbox {
+            justify-content: flex-start;
+        }
+    }
+
+    .amcard-form-container {
+        & {
+            position: relative;
+            margin-top: 25px;
+            border-top: 1px solid #c1c1c1;
+        }
+
+        &.-interior {
+            border: none;
+        }
+
+        .amcard-title {
+            display: block;
+            margin: 20px 0 10px;
+            color: #363636;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 19px;
+        }
+
+        > .amcard-button {
+            & {
+                box-sizing: border-box;
+                padding: 7px 10px;
+                border: @amgiftcard-button__border;
+                border-radius: 2px;
+                background: #eee;
+                font-size: 14px;
+                transition: background-color .3s ease;
+            }
+
+            &:hover {
+                background-color: @amgiftcard-button__color;
+                box-shadow: 0 2px 4px rgba(45, 147, 226, .1);
+                color: #fff;
+            }
+        }
+
+        .amcard-radio {
+            display: none;
+        }
+
+        .amcard-input.-hidden {
+            position: absolute;
+            display: inline;
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+    }
+
+    .amcard-field-container {
+        flex-basis: 48%;
+        margin-top: 0;
+        border: none;
+        text-align: left;
+    }
+
+    .amcard-field-block {
+        & {
+            display: block;
+        }
+
+        > .amcard-button {
+            padding: 7px 17px;
+            border: @amgiftcard-field__border;
+            border-left: none;
+            border-radius: 0 2px 2px 0;
+        }
+
+        &.-datepicker .amcard-label {
+            & {
+                position: relative;
+            }
+
+            &:before {
+                position: absolute;
+                top: 2px;
+                left: 10px;
+                width: 16px;
+                height: 16px;
+                background: @amgiftcard-icon__datepicker;
+                content: '';
+                cursor: pointer;
+            }
+        }
+
+        &.-datepicker {
+            margin-bottom: 20px;
+        }
+
+        > .amcard-field {
+            & {
+                box-sizing: border-box;
+                border: @amgiftcard-field__border;
+                border-radius: 2px;
+                background: #fff;
+            }
+
+            &::-webkit-input-placeholder {
+                /* Edge */
+                color: @amgiftcard-field__color;
+            }
+
+            &:-ms-input-placeholder {
+                /* Internet Explorer 10-11 */
+                color: @amgiftcard-field__color;
+            }
+
+            &::placeholder {
+                color: @amgiftcard-field__color;
+            }
+
+            &:focus {
+                z-index: 5;
+            }
+        }
+
+        > .amcard-field.mage-error {
+            border-color: #ed8380;
+        }
+
+        &.-datepicker .amcard-field {
+            padding-left: 36px;
+            height: 32px;
+        }
+
+        &.-double {
+            display: flex;
+        }
+
+        &.-double > .amcard-field {
+            border-radius: 2px 0 0 2px;
+        }
+    }
+
+    .amcard-price-container {
+        & {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        > .amcard-button {
+            margin: 0 10px 5px 0;
+        }
+    }
+
+    .amcard-label-block {
+        & {
+            position: relative;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        > .amcard-name {
+            margin-left: 25px;
+        }
+
+        > .amcard-radio:checked + .amcard-icon {
+            border: none;
+            background: @amgiftcard-radio-button__checked;
+        }
+
+        > .amcard-icon {
+            position: absolute;
+            top: 2px;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #c2c2c2;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        &.-price {
+            & {
+                box-sizing: border-box;
+                margin: 0 10px 5px 0;
+                padding: 6px 8px;
+                border: @amgiftcard-button__border;
+                background-color: #f0f0f0;
+                font-size: 14px;
+                transition: background-color .3s ease, border .3s ease;
+            }
+
+            &.-active,
+            &:hover {
+                border: 1px solid @amgiftcard-button__color;
+                background-color: @amgiftcard-button__color;
+                box-shadow: 0 2px 4px rgba(45, 147, 226, .1);
+                color: #fff;
+            }
+        }
+
+        .amcard-radio-container &:not(:last-child) {
+            margin-right: 30px;
+        }
+
+        .amcard-upload-container & {
+            & {
+                padding: 5px 13px 5px 38px;
+                background: @amgiftcard-button__color;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color .3s ease-out;
+            }
+
+            &:hover {
+                background: #2d93e5;
+            }
+
+            &:before {
+                position: absolute;
+                top: 7px;
+                left: 11px;
+                width: 16px;
+                height: 15px;
+                background: @amgiftcard-icon__camera no-repeat center;
+                content: '';
+            }
+        }
+    }
+
+    .amcard-customer-image,
+    .amcard-image-container {
+        > .amcard-container,
+        > .amcard-image {
+            & {
+                padding: 7px;
+                max-width: 100px;
+                cursor: pointer;
+            }
+
+            &.-active,
+            &:hover {
+                padding: 6px;
+                border: 1px solid #026bb3;
+                border-radius: 2px;
+                box-shadow: 0 4px 4px #e2f0fb;
+            }
+        }
+    }
+
+    .amcard-upload-container {
+        & {
+            position: relative;
+            display: flex;
+            margin: 10px 0;
+        }
+
+        .amcard-input {
+            display: none;
+        }
+    }
+
+    .amcard-customer-image {
+        & {
+            display: flex;
+            padding: 15px;
+            background: #e8f6ff;
+        }
+
+        > .amcard-container {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            max-width: 100px;
+            cursor: pointer;
+        }
+
+        .amcard-image {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .amcard-image-information {
+        & {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        > .amcard-description,
+        > .amcard-title {
+            margin: 0;
+        }
+
+        > .amcard-delete {
+            & {
+                position: relative;
+                align-self: flex-start;
+                padding: 0 15px;
+                border: none;
+                background: none;
+                box-shadow: none;
+                color: #1787e0;
+                cursor: pointer;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &:before {
+                position: absolute;
+                top: 3px;
+                left: 0;
+                width: 12px;
+                height: 10px;
+                background: @amgiftcard-icon__delete no-repeat center;
+                content: '';
+            }
+        }
+    }
+
+    .amcard-preview-container {
+        & {
+            margin-top: 15px;
+        }
+
+        > .amcard-button {
+            & {
+                box-sizing: border-box;
+                padding: 6px 15px;
+                border: 1px solid #4190c6;
+                border-radius: 2px;
+                background: none;
+                color: #026bb3;
+                font-size: 14px;
+                transition: background-color .3s ease-out;
+            }
+
+            &:hover {
+                background: #026bb3;
+                color: #fff;
+            }
+        }
+    }
+
+    .amcard-general-container {
+        & {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        &.-visible {
+            display: block;
+        }
+
+        .amcard-warning {
+            color: #e02b27;
+            font-size: 12px;
+        }
+    }
+
+    .amcard-tooltip-container {
+        & {
+            position: absolute;
+            bottom: 25px;
+            left: 98px;
+            z-index: 10;
+            display: none;
+            padding: 10px;
+            width: 200px;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, .15);
+        }
+
+        .amcard-question-container:hover & {
+            display: block;
+        }
+
+        &:after {
+            position: absolute;
+            bottom: -8px;
+            left: 20px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            content: '';
+            transform: rotate(45deg);
+        }
+
+        & > .amgiftcard-text {
+            color: #575757;
+            font-weight: 400;
+            font-size: 12px;
+        }
+    }
+
+    .amcard-question-container {
+        align-self: center;
+        margin: 0 20px;
+        width: 17px;
+        height: 17px;
+        background: @amgiftcard-icon__question no-repeat center;
+    }
+
+    .amcard-carousel-container .slick-arrow {
+        z-index: 10;
+    }
+
+    .amgiftcard-modal-container {
+        pointer-events: auto;
+    }
+
+    //override magento style start
+    .amcard-page-product .modal-inner-wrap {
+        max-width: 900px;
+    }
+
+    .amcard-page-product .product-info-main .price-final_price .price-wrapper .price {
+        color: #575757;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 36px;
+    }
+
+    .amcard-page-product .amcard-preview {
+        .header {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer,
+        .header {
+            background: #fff !important;
+        }
+
+        .main {
+            border-collapse: separate;
+            border-top: 6px solid #1787e0;
+            border-radius: 10px;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, .1);
+        }
+
+        .logo {
+            margin: 0;
+        }
+    }
+
+    .amcard-page-product .product-info-main {
+        .product-reviews-summary {
+            float: none;
+        }
+
+        .product-info-price {
+            margin-bottom: 0;
+            border: 0;
+        }
+
+        .product-add-form {
+            clear: none;
+            margin-bottom: 20px;
+            padding-top: 0;
+            border: 0;
+        }
+    }
+
+    .gallery-placeholder.-amcard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ammodal-aside-container {
+        pointer-events: auto;
+    }
+
+    .am-datepicker .ui-datepicker-header .ui-datepicker-title select {
+        width: unset;
+    }
+
+    .am-datepicker .ui-datepicker-header .ui-datepicker-title {
+        display: flex;
+    }
+    //override magento style end
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="layout05"/>
+
+	    <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template" name="selling_feature" template="Magento_Theme::selling-feature.phtml" before="breadcrumbs" />
+        </referenceContainer>
+
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_width" xsi:type="number">300</argument>
+            </arguments>
+        </referenceBlock>
+
+
+
+    </body>
+</page>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="sample_data">
+        <name>sample_data</name>
+        <description>sample_data description</description>
+        <behaviors>
+            <add>
+                <modelFactory>Test\Test</modelFactory>
+            </add>
+        </behaviors>
+        <fieldsConfig>
+            <fields>
+                <field name="category_id"/>
+                <field name="url_key"/>
+                <field name="title"/>
+            </fields>
+            <sampleData>
+                <row>
+                    <field name="category_id">1</field>
+                    <field name="url_key">frequently-asked-questions</field>
+                    <field name="title">Frequently Asked</field>
+                </row>
+                <row>
+                    <field name="category_id"/>
+                    <field name="url_key">delivery</field>
+                    <field name="title">Delivery questions</field>
+                </row>
+            </sampleData>
+        </fieldsConfig>
+    </entity>
+</config>

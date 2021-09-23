@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Amasty_StorePickupWithLocator" setup_version="2.0.0">
+        <sequence>
+            <module name="Amasty_Base"/>
+            <module name="Amasty_Storelocator"/>
+            <module name="Amasty_StorePickup"/>
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_Stockstatus::stockstatus" title="Amasty Custom Stock Status" module="Amasty_Stockstatus" parent="Magento_Catalog::catalog" sortOrder="150" resource="Amasty_Stockstatus::stockstatus" />
+        <add id="Amasty_Stockstatus::rule" title="Manage Custom Stock Status Rules" sortOrder="10" module="Amasty_Stockstatus" parent="Amasty_Stockstatus::stockstatus" action="amstockstatus/rule/index" resource="Amasty_Stockstatus::rule" />
+    </menu>
+</config>

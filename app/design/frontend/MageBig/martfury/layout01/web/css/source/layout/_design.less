@@ -1,0 +1,158 @@
+// MageBig Variables
+& when (@media-common = true) {
+    .border-bottom (@a) when (@a = transparent) {
+        border-bottom: none;
+    }
+    .border-bottom (@a) when not (@a = transparent) {
+        border-bottom: 1px solid @a;
+    }
+
+    .background-image (@a; @b; @c; @d) when (@a = 0) and (@b = 0) {
+        background-image: none;
+    }
+    .background-image (@a; @b; @c; @d) when (isstring(@a)), (isstring(@b)) {
+        & when (@b = 0) {
+            background-image: url("@{a}");
+            background-position: top left;
+            background-repeat: repeat;
+        }
+        & when not (@b = 0) {
+            background: url("@{b}") @c;
+            background-size: @d;
+        }
+    }
+
+    body {
+        font-family: @font_default,'Segoe UI','Helvetica Neue';
+        background-color: @page_background;
+        color: @page_text;
+        .background-image(@page_background_pattern; @page_background_file; @page_background_image_option; @page_background_image_size);
+    }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .smartmenu {
+        font-family: @font_default,'Segoe UI','Helvetica Neue';
+    }
+    input, textarea {
+        font-family: @font_h,'Segoe UI','Helvetica Neue';
+    }
+    .font-special {
+        font-family: @font_special,'Segoe UI','Helvetica Neue';
+    }
+    .font-text, .std, .desc, .text {
+        font-family: @font_text,'Segoe UI','Helvetica Neue';
+    }
+
+    a {
+        color: @page_link;
+        &:hover {
+            color: @main_color;
+        }
+    }
+
+    blockquote {
+        border-left-color: @main_color;
+    }
+
+    .post-content a {
+        color: @main2_color;
+        &:hover {
+            color: @main_color;
+        }
+    }
+
+    .page-header {
+        background-color: @header_background;
+        color: @header_text;
+        .background-image(@header_background_pattern; @header_background_file; @header_background_image_option; @header_background_image_size);
+        .wishlist-icon, .showcart {
+            color: @header_text;
+            &:hover {
+                color: @main_color;
+            }
+        }
+        a {
+            color: @header_link;
+            &:hover {
+                color: @main_color;
+            }
+        }
+    }
+
+    .page-footer {
+        background-color: @footer_background;
+        color: @footer_text;
+        .background-image(@footer_background_pattern; @footer_background_file; @footer_background_image_option; @footer_background_image_size);
+        a {
+            color: @footer_link;
+            &:hover {
+                color: @main_color;
+            }
+        }
+    }
+
+    .header-top-inner {
+        color: @headertop_text_color;
+        background-color: @headertop_background;
+        .border-bottom(@headertop_border_color);
+        a, .title, .log-in {
+            color: @headertop_link_color;
+            &:hover {
+                color: @main_color;
+            }
+        }
+    }
+
+    .dropdown a, .mage-dropdown-dialog a {
+        color: #000;
+        &:hover {
+            color: @main_color;
+        }
+    }
+    .mage-dropdown-dialog {
+        color: #000;
+    }
+
+    .owl-carousel.owl-theme .owl-dots .owl-dot.active span, .owl-carousel.owl-theme .owl-dots .owl-dot:hover span {
+        background: @main_color;
+    }
+    .maincolor {
+        color: @main_color;
+    }
+
+    // main menu
+    .header-menu-content {
+        background: @menu_background;
+    }
+    .horizontal-menu .magebig-nav li.level0 > a {
+        color: @menu_link_color;
+        &:hover {
+            color: @menu_link_hover_color;
+        }
+        + .mbi {
+            color: @menu_link_color;
+        }
+    }
+    .vertical-menu .title, .hotline-top {
+        color: @menu_link_color;
+    }
+
+    @media (min-width: 768px) {
+        .header-content-action .authorization-link a {
+            color: @headertop_link_color;
+            &:hover {
+                color: @main_color;
+            }
+        }
+        .header-content-action .authorization-link + li a {
+            color: fade(@header_text, 60%);
+        }
+        .sticky-menu.active .header-content-action .authorization-link + li a {
+            color: fade(#000, 60%);
+        }
+        .sticky-menu.active .header-content-action .authorization-link a {
+            color: #000000;
+            &:hover {
+                color: @main_color;
+            }
+        }
+    }
+}

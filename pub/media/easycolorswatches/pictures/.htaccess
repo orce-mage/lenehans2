@@ -1,0 +1,101 @@
+DirectoryIndex index.php
+
+
+
+<ifmodule mod_deflate.c>
+############################################
+## enable apache served files compression
+## http://developer.yahoo.com/performance/rules.html#gzip
+# Insert filter
+SetOutputFilter DEFLATE
+# Netscape 4.x has some problems...
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+# Netscape 4.06-4.08 have some more problems
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+# MSIE masquerades as Netscape, but it is fine
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+# Don't compress images
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+# Make sure proxies don't deliver the wrong content
+Header append Vary User-Agent env=!dont-vary
+</ifmodule>
+
+
+
+<IfModule mod_security.c>
+    SecFilterEngine Off
+    SecFilterScanPOST Off
+</IfModule>
+
+<IfModule mod_ssl.c>
+    SSLOptions StdEnvVars
+</IfModule>
+
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !\.(css|gif|jpg|jpeg|png)$ 
+
+#RewriteCond %{REMOTE_ADDR} !193\.120\.165\.70
+#RewriteCond %{REMOTE_ADDR} !86\.47\.9\.44
+#RewriteCond %{REMOTE_ADDR} !86\.43\.91\.219
+#RewriteCond %{REMOTE_ADDR} !127\.0\.0\.1
+#RewriteCond %{REMOTE_ADDR} !46\.22\.131\.138
+#RewriteCond %{REMOTE_ADDR} !83\.71\.63\.8
+#RewriteCond %{REMOTE_ADDR} !89\.101\.202\.74
+#RewriteCond %{REMOTE_ADDR} !83\.71\.39\.166
+#RewriteCond %{REMOTE_ADDR} !86\.47\.55\.133
+#RewriteCond %{REMOTE_ADDR} !87\.232\.78\.18
+#RewriteCond %{REMOTE_ADDR} !83\.70\.233\.230
+#RewriteCond %{REMOTE_ADDR} !86\.43\.93\.135
+
+#RewriteCond %{REMOTE_ADDR} !182\.73\.182\.194
+#RewriteCond %{REMOTE_ADDR} !58\.97\.141\.7
+#RewriteCond %{REMOTE_ADDR} !202\.164\.62\.210 
+#RewriteCond %{REMOTE_ADDR} !202\.164\.62\.211
+#RewriteCond %{REMOTE_ADDR} !112\.196\.36\.178
+#RewriteCond %{REMOTE_ADDR} !112\.196\.36\.179
+#RewriteCond %{REMOTE_ADDR} !112\.196\.36\.180
+#RewriteCond %{REMOTE_ADDR} !86\.46\.101\.32
+#RewriteCond %{REMOTE_ADDR} !86\.43\.93\.135
+#RewriteCond %{REMOTE_ADDR} !86\.47\.8\.143
+
+#RewriteRule !^maintenance/ http://www.diydirect.ie/maintenance/ [R,L]
+	
+
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_URI} \.(gif|jpg|jpeg|png)$ 
+RewriteRule .* skin/frontend/diytools/default/images/1x1.gif [L]
+
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+RewriteCond %{HTTP_HOST} 127.0.0.1
+RewriteRule ^ - [E=MAGE_RUN_CODE:diydirect_ie,E=MAGE_RUN_TYPE:website]
+RewriteCond %{REQUEST_URI} !^/livezilla/ 
+RewriteCond %{REQUEST_URI} !^suggest.php 
+RewriteCond %{REQUEST_URI} !^/(media|skin|js)/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php [L]
+</IfModule>
+
+
+AddDefaultCharset UTF-8
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 month"
+</IfModule>
+
+
+Order allow,deny
+Allow from all
+
+
+<Files RELEASE_NOTES.txt>
+	order allow,deny
+	deny from all
+</Files>

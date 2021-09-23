@@ -1,0 +1,7 @@
+<span class="product-image-container"
+      data-bind="attr: {'style': 'height: ' + getHeight($parents[1]) + 'px; width: ' + getWidth($parents[1]) + 'px;' }">
+    <span class="product-image-wrapper img-lazy-wrap" data-bind="attr: {'style': 'padding-bottom: ' + getHeight($parents[1])/getWidth($parents[1])*100 + '%;'}">
+        <img class="media-lazy lazyload"
+            data-bind="attr: {'data-src': getSrc($parents[1]), 'width': getWidth($parents[1]), 'height': getHeight($parents[1]), 'alt': getAlt($parents[1]), 'title': getAlt($parents[1]) }"/>
+    </span>
+</span>

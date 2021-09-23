@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="amasty_giftcard_customer_card">
+        <name>Amasty Gift Card Customer Card</name>
+        <group>Amasty Gift Card</group>
+        <description>Amasty Gift Card Customer Card</description>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Import\FieldsClass\Describe">
+                <arguments>
+                    <argument name="tableName" xsi:type="string">amasty_giftcard_customer_card</argument>
+                </arguments>
+            </fieldsClass>
+            <fields>
+                <field name="customer_card_id">
+                    <actions>
+                        <trim apply="beforeValidate"/>
+                    </actions>
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty>
+                            <excludeBehaviors>
+                                <addDirect/>
+                            </excludeBehaviors>
+                        </notEmpty>
+                    </validation>
+                </field>
+                <field name="account_id">
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty/>
+                        <tableRowExists tableName="amasty_giftcard_account"
+                                        idFieldName="account_id"
+                                        rootOnly="true"
+                                        error="Gift Card Account with specified 'account_id' doesn't exist">
+                            <excludeBehaviors>
+                                <deleteDirect/>
+                            </excludeBehaviors>
+                        </tableRowExists>
+                    </validation>
+                </field>
+                <field name="customer_id">
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty/>
+                        <customerExists>
+                            <excludeBehaviors>
+                                <deleteDirect/>
+                            </excludeBehaviors>
+                        </customerExists>
+                    </validation>
+                </field>
+            </fields>
+            <sampleData>
+                <row>
+                    <field name="customer_card_id">1</field>
+                    <field name="account_id">1</field>
+                    <field name="customer_id">1</field>
+                </row>
+            </sampleData>
+        </fieldsConfig>
+        <behaviors>
+            <addUpdateDirect name="Add/Update">
+                <tableName>amasty_giftcard_customer_card</tableName>
+            </addUpdateDirect>
+            <addDirect name="Only add">
+                <tableName>amasty_giftcard_customer_card</tableName>
+            </addDirect>
+            <updateDirect name="Only update">
+                <tableName>amasty_giftcard_customer_card</tableName>
+            </updateDirect>
+            <deleteDirect name="Delete">
+                <tableName>amasty_giftcard_customer_card</tableName>
+            </deleteDirect>
+        </behaviors>
+    </entity>
+    <relation code="amasty_giftcard_account_customer_card">
+        <parent_entity>amasty_giftcard_account</parent_entity>
+        <child_entity>amasty_giftcard_customer_card</child_entity>
+        <sub_entity_field_name>amasty_giftcard_customer_card</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">account_id</argument>
+            <argument name="child_field_name" xsi:type="string">account_id</argument>
+        </arguments>
+    </relation>
+</config>

@@ -1,0 +1,33 @@
+<div class="cache-warmer__info">
+    <div class="server-load-history">
+        <div class="server-load-general-info">
+            <p><strong>Average system load</strong></p>
+        </div>
+        <svg width="100%" height="65px" preserveAspectRatio="none" viewBox="0 0 100 100" version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <polygon id="chart" fill="#" data-bind="attr:{points: history}"></polygon>
+
+            </defs>
+
+            <g>
+                <use fill="#47cd4a" fill-rule="evenodd" xlink:href="#chart"></use>
+            </g>
+
+            <path d="M99,10 L100,10" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,20 L100,20" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,30 L100,30" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,40 L100,40" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,50 L100,50" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,60 L100,60" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,70 L100,70" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,80 L100,80" stroke="#e3e3e3" stroke-width="1"></path>
+            <path d="M99,90 L100,90" stroke="#e3e3e3" stroke-width="1"></path>
+        </svg>
+        <div class="label from" data-bind="text: serverHistoryFrom"></div>
+        <div class="label to" data-bind="text: serverHistoryTo"></div>
+        <div class="label min">0%</div>
+        <div class="label max">100%</div>
+    </div>
+</div>

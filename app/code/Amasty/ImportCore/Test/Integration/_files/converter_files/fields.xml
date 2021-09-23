@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="fields">
+        <name>fields test</name>
+        <behaviors>
+            <add>
+                <modelFactory>Test\Test</modelFactory>
+            </add>
+            <delete>
+                <modelFactory>Test2\Test2</modelFactory>
+            </delete>
+            <custom class="Amasty\ImportCore\Import\Test\CustomBehavior" code="custom_behavior"/>
+        </behaviors>
+        <fieldsConfig>
+            <rowValidation class="Amasty\OrderImportEntity\Import\Validation\RowValidator\OrderRowValidator">
+                <excludeBehaviors>
+                    <delete/>
+                    <update/>
+                </excludeBehaviors>
+            </rowValidation>
+            <fields rowActionClass="Amasty\ImportCore\TestRowAction">
+                <field name="test" />
+                <field name="map_test">
+                    <map>test3</map>
+                </field>
+                <field name="actions_test">
+                    <actions>
+                        <custom class="Amasty\ImportCore\Import\CustomBehavior"/>
+                        <explode/>
+                        <defaultValue value="5"/>
+                        <defaultValue value="6" force="true"/>
+                        <storeCode2StoreId/>
+                        <storeId2StoreCode/>
+                        <trim/>
+                        <custom class="Amasty\ImportCore\Import\CustomBehavior2">
+                            <arguments>
+                                <argument name="custom2-test-array" xsi:type="array">
+                                    <item name="custom2-test-array-number" xsi:type="number">111</item>
+                                    <item name="custom2-test-array-string" xsi:type="string">custom2-test-string</item>
+                                </argument>
+                                <argument name="custom2-test-number" xsi:type="number">222</argument>
+                                <argument name="custom2-test-string" xsi:type="string">custom2-test-string</argument>
+                            </arguments>
+                        </custom>
+                    </actions>
+                </field>
+                <field name="validation_test">
+                    <validation>
+                        <regex pattern="[A-Za-z]+" error="Field validation_test alphabetical only"/>
+                        <notEmpty class="Amasty\ImportCore\Test\Import\Validation\ValueValidator\NotEmpty">
+                            <includeBehaviors>
+                                <delete/>
+                            </includeBehaviors>
+                        </notEmpty>
+                        <custom class="Amasty\ImportCore\Test\Import\Validation\ValueValidator\CustomValidation" error="Field %1 is incorrect">
+                            <arguments>
+                                <argument name="custom-test-array" xsi:type="array">
+                                    <item name="custom-test-array-number" xsi:type="number">11</item>
+                                    <item name="custom-test-array-string" xsi:type="string">custom-test-string</item>
+                                </argument>
+                                <argument name="custom-test-number" xsi:type="number">22</argument>
+                                <argument name="custom-test-string" xsi:type="string">custom-test-string</argument>
+                            </arguments>
+                            <excludeBehaviors>
+                                <delete/>
+                                <custom code="custom_behavior"/>
+                            </excludeBehaviors>
+                        </custom>
+                    </validation>
+                </field>
+            </fields>
+        </fieldsConfig>
+    </entity>
+</config>

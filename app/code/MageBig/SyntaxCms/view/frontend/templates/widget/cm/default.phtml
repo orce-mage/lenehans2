@@ -1,0 +1,22 @@
+<?php
+/**
+ *
+ */ ?>
+<div id="<?php echo $block->getHtmlId(); ?>"></div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'MageBig_SyntaxCms/cm/lib/codemirror',
+        'MageBig_SyntaxCms/cm/mode/htmlmixed/htmlmixed',
+        'MageBig_SyntaxCms/cm/mode/magento/magento'
+    ], function ($, cm) {
+        cm(document.getElementById("<?php echo $block->escapeHtml($block->getHtmlId());?>"),
+            {
+                lineNumbers: true,
+                readOnly: true,
+                value: <?php /* @noEscape */ echo json_encode($block->getDecodeCode());?>,
+                mode: '<?php /* @noEscape */ echo $block->getMode();?>'
+            }
+        );
+    });
+</script>

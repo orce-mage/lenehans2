@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <update handle="1column"/>
+    <referenceContainer name="columns">
+        <container name="main.before.desktop.after.mobile" htmlTag="div" htmlClass="main-before-after col-12 order-3 order-md-1" label="Main Before Desktop After Mobile"/>
+        <container name="sidebar.wrap" htmlTag="div" htmlClass="sidebar-wrap col-12 col-lg-4 col-xl-3 order-1 order-md-3" after="main.wrap">
+            <container name="div.sidebar.main" htmlTag="div" htmlClass="sidebar sidebar-main">
+                <container name="sidebar.main" as="sidebar_main" label="Sidebar Main"/>
+            </container>
+            <container name="div.sidebar.additional" htmlTag="div" htmlClass="sidebar sidebar-additional" after="div.sidebar.main">
+                <container name="sidebar.additional" as="sidebar_additional" label="Sidebar Additional"/>
+            </container>
+        </container>
+        <container name="main.wrap" htmlTag="div" htmlClass="main-wrap col-12 col-lg-8 col-xl-9 order-2 order-md-2">
+            <container name="main" label="Main Content Container" htmlTag="div" htmlClass="column main"/>
+        </container>
+    </referenceContainer>
+</layout>

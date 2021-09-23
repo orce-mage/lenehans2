@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 MageBig, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_category_view"/>
+    <update handle="catalog_category_view_type_layered"/>
+    <body>
+		<referenceContainer name="sidebar.main">
+            <block ifconfig="magebig_shopbybrand/brand_search_form/display_on_brand_page" class="MageBig\Shopbybrand\Block\Widget\BrandSearch" name="brand.search.sidebar" template="MageBig_Shopbybrand::brand/brand_search.phtml" before="categorymenu"/>
+			<block ifconfig="magebig_shopbybrand/featured_brands/display_on_brand_page" class="MageBig\Shopbybrand\Block\Widget\BrandFeatured" name="brand.sidebar" template="MageBig_Shopbybrand::brand/brand_sidebar.phtml">
+                <action method="setData">
+                    <argument name="name" xsi:type="string">featured_brands</argument>
+                    <argument name="value" xsi:type="string">1</argument>
+                </action>
+            </block>
+		</referenceContainer>
+        <referenceContainer name="content">
+			<block class="MageBig\Shopbybrand\Block\Brand\BrandInformation" name="brand.information" template="MageBig_Shopbybrand::brand/infomation.phtml" before="-" />
+            <block class="MageBig\Shopbybrand\Block\Brand\View" name="category.products" template="MageBig_Shopbybrand::brand/products.phtml">
+				<block class="Magento\Catalog\Block\Product\ListProduct" name="category.products.list"  as="product_list" template="Magento_Catalog::product/list.phtml">
+					<container name="category.product.list.additional" as="additional" />
+                    <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                        <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">
+                        <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="category.product.addto.compare" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    </block>
+					<block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                        <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName">
+                        <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                    </action>
+				</block>
+			</block>
+
+			<block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
+                <arguments>
+                    <argument name="triggers" xsi:type="array">
+                        <item name="addToWishlistLink" xsi:type="string">.action.towishlist</item>
+                    </argument>
+                </arguments>
+            </block>
+            <referenceBlock name="category.product.addto">
+                <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                       name="category.product.addto.wishlist" as="wishlist" before="compare"
+                       template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>
+            </referenceBlock>
+            <referenceContainer name="category.product.list.additional">
+                <block class="Magento\Wishlist\Block\AddToWishlist" template="Magento_Wishlist::addto.phtml" />
+            </referenceContainer>
+
+			<referenceBlock name="category.product.type.details.renderers">
+            	<!--<block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magento_Swatches::product/listing/renderer.phtml" />-->
+                <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable"
+                       name="category.product.type.details.renderers.configurable" as="configurable"
+                       template="Magento_Swatches::product/listing/renderer.phtml"
+                       ifconfig="catalog/frontend/show_swatches_in_product_list">
+                    <arguments>
+                        <argument name="configurable_view_model"
+                                  xsi:type="object">Magento\Swatches\ViewModel\Product\Renderer\Configurable</argument>
+                    </arguments>
+                </block>
+        	</referenceBlock>
+
+        </referenceContainer>
+        <referenceBlock name="page.main.title">
+            <arguments>
+                <argument name="id" xsi:type="string">page-title-heading</argument>
+                <argument name="add_base_attribute_aria" xsi:type="string">page-title-heading toolbar-amount</argument>
+            </arguments>
+        </referenceBlock>
+	</body>
+</page>

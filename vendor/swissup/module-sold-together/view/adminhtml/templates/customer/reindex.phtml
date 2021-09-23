@@ -1,0 +1,9 @@
+<script type="text/javascript">
+    require([
+        'jquery',
+        'soldIndexing'
+    ], function ($, soldIndexing) {
+        var applyUrl = '<?php echo $block->getIndexingUrl() ?>';
+        soldIndexing.init(applyUrl, '#apply_customer');
+    });
+</script>

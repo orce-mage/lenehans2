@@ -1,0 +1,47 @@
+<?php
+$version = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\App\ProductMetadataInterface')->getVersion();
+$isMage23 = (version_compare($version, '2.3.0', '>=') ||  version_compare($version, '2.3.0-dev', '>='));
+?>
+<?php if ($isMage23) : ?>
+<script>
+require.config({
+    map: {
+        '*': {
+            tinymce: 'tiny_mce_4/tinymce.min'
+        }
+    }
+});
+</script>
+<?php endif ?>
+<?php
+$mediaUrl = $this->helper('MageBig\Shopbybrand\Helper\Wysiwyg\Images')->getBaseUrl();
+$defaultThumbnail = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\View\Asset\Repository')->getUrl('MageBig_Shopbybrand/images/placeholder_thumbnail.jpg');
+?>
+<script>
+if (typeof MageBig == 'undefined') {
+    var MageBig = {};
+}
+MageBig.mediaUrl = '<?php echo $mediaUrl; ?>';
+require(['jquery', 'MageBig_Shopbybrand/js/browser'], function($) {
+    var mediaUrl = MageBig.mediaUrl;
+    var defaultThumbnail = '<?php echo $defaultThumbnail ?>';
+    window.changePreviewImage = function(obj) {
+        var $_input = $(obj);
+        if ($_input.parent().find('.attached_image img').length > 0) {
+            var $_img = $_input.parent().find('.attached_image img').first();
+            $_img.attr('src', mediaUrl + $_input.val());
+        }
+    };
+    window.clearValue = function(obj) {
+        $_btn = $(obj);
+        if ($_btn.parent().find('.input-image').length > 0) {
+            var $_input = $_btn.parent().find('.input-image').first();
+            $_input.val('');
+        }
+        if ($_btn.parent().find('.attached_image img').length > 0) {
+            var $_img = $_btn.parent().find('.attached_image img').first();
+            $_img.attr('src', defaultThumbnail);
+        }
+    }
+});
+</script>

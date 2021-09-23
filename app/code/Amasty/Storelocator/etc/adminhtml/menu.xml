@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_Storelocator::storelocator"
+             title="Amasty Store Locator"
+             module="Amasty_Storelocator"
+             parent="Magento_Backend::content"
+             sortOrder="110"
+             resource="Amasty_Storelocator::storelocator"
+        />
+        <add id="Amasty_Storelocator::location"
+             title="Locations"
+             sortOrder="10"
+             module="Amasty_Storelocator"
+             parent="Amasty_Storelocator::storelocator"
+             action="amasty_storelocator/location/"
+             resource="Amasty_Storelocator::location"
+        />
+
+        <add id="Amasty_Storelocator::attributes"
+             title="Location Attributes"
+             module="Amasty_Storelocator"
+             sortOrder="20"
+             parent="Amasty_Storelocator::storelocator"
+             action="amasty_storelocator/attributes/"
+             resource="Amasty_Storelocator::attributes"
+        />
+
+        <add id="Amasty_Storelocator::schedule"
+             title="Location Schedules"
+             module="Amasty_Storelocator"
+             sortOrder="30"
+             parent="Amasty_Storelocator::storelocator"
+             action="amasty_storelocator/schedule/"
+             resource="Amasty_Storelocator::schedule"
+        />
+
+        <add id="Amasty_Storelocator::reviews"
+             title="Location Reviews"
+             module="Amasty_Storelocator"
+             sortOrder="40"
+             parent="Amasty_Storelocator::storelocator"
+             action="amasty_storelocator/reviews/"
+             resource="Amasty_Storelocator::reviews"
+        />
+    </menu>
+</config>

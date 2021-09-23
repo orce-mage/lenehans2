@@ -1,0 +1,27 @@
+{
+    "name": "amasty/module-store-pickup-with-locator",
+    "description": "Store Pickup with Locator by Amasty",
+    "require": {
+        "php": "^7.1.0",
+        "amasty/module-store-locator": ">=2.5.1",
+        "amasty/module-store-locator-indexer": ">=1.0.2",
+        "amasty/base": ">=1.12.11",
+        "amasty/geoip": ">=1.5.5"
+    },
+    "suggest": {
+        "amasty/module-store-pickup-with-locator-msi": "To use the functionality of the module-store-pickup-with-locator to the max, please install the module-store-pickup-with-locator-msi to version 1.0.3 or above. You will experience all benefits provided by MSI including advanced functionality of Store Pickup Option feature."
+    },
+    "type": "magento2-module",
+    "version": "2.5.3",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\StorePickupWithLocator\\": ""
+        }
+    }
+}

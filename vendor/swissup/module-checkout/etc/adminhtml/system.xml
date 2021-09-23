@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="swissup_checkout" sortOrder="295" class="swissup-mover-tab swissup-checkout-tab">
+            <label>Swissup Checkout</label>
+        </tab>
+
+        <section id="swissup_checkout" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>swissup-checkout-config-item</class>
+            <label>Checkout</label>
+            <tab>swissup</tab>
+            <resource>Swissup_Checkout::config</resource>
+
+            <include path="Swissup_Checkout::system/checkout_modules.xml"/>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Customer:etc/sections.xsd">
+    <action name="sales/guest/reorder">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="sales/order/reorder">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="paypal/express/placeOrder">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="paypal/payflowexpress/placeOrder">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="paypal/express/onAuthorization">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="checkout/cart/add">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="checkout/cart/delete">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="checkout/cart/updatePost">
+        <section name="amasty-storepickup-data"/>
+    </action>
+    <action name="checkout/cart/updateItemOptions">
+        <section name="amasty-storepickup-data"/>
+    </action>
+    <action name="checkout/cart/estimatePost">
+        <section name="amasty-storepickup-data"/>
+    </action>
+    <action name="checkout/cart/estimateUpdatePost">
+        <section name="amasty-storepickup-data"/>
+    </action>
+    <action name="checkout/onepage/saveOrder">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="checkout/sidebar/removeItem">
+        <section name="amasty-storepickup-data"/>
+    </action>
+    <action name="checkout/sidebar/updateItemQty">
+        <section name="amasty-storepickup-data"/>
+    </action>
+    <action name="braintree/paypal/placeOrder">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="authorizenet/directpost_payment/place">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+    <action name="multishipping/checkout/overviewPost">
+        <section name="amasty-storepickup-data"/>
+        <section name="amasty-selected-pickup-info"/>
+    </action>
+</config>

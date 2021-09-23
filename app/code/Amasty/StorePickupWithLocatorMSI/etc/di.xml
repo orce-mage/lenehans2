@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocatorMSI
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\StorePickupWithLocatorMSI\Api\Data\LocationSourceInterface" type="Amasty\StorePickupWithLocatorMSI\Model\LocationSource"/>
+    <preference for="Amasty\StorePickupWithLocatorMSI\Api\LocationSourceRepositoryInterface" type="Amasty\StorePickupWithLocatorMSI\Model\LocationSourceRepository"/>
+    <preference for="Amasty\StorePickupWithLocatorMSI\Api\LocationSourceManagementInterface" type="Amasty\StorePickupWithLocatorMSI\Model\LocationSourceManagement"/>
+    <preference for="Amasty\StorePickupWithLocatorMSI\Api\Data\LocationSourceSearchResultInterface" type="Amasty\StorePickupWithLocatorMSI\Model\Data\LocationSourceSearchResult" />
+    <preference for="Amasty\StorePickupWithLocatorMSI\Api\Data\LocationDataInterface" type="Amasty\StorePickupWithLocatorMSI\Model\Data\LocationData" />
+    <preference for="Amasty\StorePickupWithLocatorMSI\Api\Data\LocationWithQtyInterface" type="Amasty\StorePickupWithLocatorMSI\Model\Data\LocationWithQty" />
+
+    <type name="Amasty\StorePickupWithLocatorMSI\Model\Location\Filter\MSIConditionFilter">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\StorePickupWithLocator\Model\Location\LocationProductFilterApplier">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="msi" xsi:type="object">Amasty\StorePickupWithLocatorMSI\Model\Location\Filter\MSIConditionFilter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\StorePickupWithLocatorMSI\Block\Location">
+        <arguments>
+            <argument name="blockPager" xsi:type="string">0</argument>
+            <argument name="locationCollectionForMapProvider" xsi:type="object">Amasty\StorePickupWithLocatorMSI\Model\Location\MapProvider\LocationCollectionForMapProvider</argument>
+        </arguments>
+    </type>
+</config>

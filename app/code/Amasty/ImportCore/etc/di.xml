@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Import Strategies -->
+    <virtualType name="AmastyImportValidate" type="Amasty\ImportCore\Import\ImportStrategy">
+        <arguments>
+            <argument name="actionGroups" xsi:type="array">
+                <item name="dataPrepareActions" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="source" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Source\SourceAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="mapping" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Mapping\MappingAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="data_handling_before_validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                        <item name="validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Validation\ValidationAction</item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                        </item>
+                        <item name="data_handling_after_validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction</item>
+                            <item name="sortOrder" xsi:type="number">50</item>
+                            <item name="modifiersGroup" xsi:type="const">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction::GROUP_AFTER_VALIDATE</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AmastyImportValidateAndSave" type="Amasty\ImportCore\Import\ImportStrategy">
+        <arguments>
+            <argument name="actionGroups" xsi:type="array">
+                <item name="cleanup" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="cleanup" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Cleanup\CleanupAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="dataPrepareActions" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="source" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Source\SourceAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="mapping" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Mapping\MappingAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="data_handling_before_validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                        <item name="validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Validation\ValidationAction</item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                        </item>
+                        <item name="data_handling_after_validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction</item>
+                            <item name="sortOrder" xsi:type="number">50</item>
+                            <item name="modifiersGroup" xsi:type="const">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction::GROUP_AFTER_VALIDATE</item>
+                        </item>
+                        <item name="data_save" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataSaveAction</item>
+                            <item name="sortOrder" xsi:type="number">60</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AmastyImportValidateAndImport" type="Amasty\ImportCore\Import\ImportStrategy">
+        <arguments>
+            <argument name="actionGroups" xsi:type="array">
+                <item name="cleanup" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="cleanup" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Cleanup\CleanupAction</item>
+                            <item name="sortOrder" xsi:type="number">0</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="dataPrepareActions" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="source" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Source\SourceAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="mapping" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Mapping\MappingAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="data_handling_before_validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                        <item name="validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Validation\ValidationAction</item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                        </item>
+                        <item name="data_handling_after_validate" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction</item>
+                            <item name="sortOrder" xsi:type="number">50</item>
+                            <item name="modifiersGroup" xsi:type="const">Amasty\ImportCore\Import\Action\DataPrepare\DataHandling\DataHandlingAction::GROUP_AFTER_VALIDATE</item>
+                        </item>
+                        <item name="data_save" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\DataSaveAction</item>
+                            <item name="sortOrder" xsi:type="number">60</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="importActions" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="data_load" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\DataLoadAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="import" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\Import\ImportAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="file_upload_action" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\File\UploadAction</item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                        </item>
+                        <item name="index" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\IndexAction</item>
+                            <item name="sortOrder" xsi:type="number">50</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="final-cleanup" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="cleanup" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Cleanup\CleanupAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AmastyImport" type="Amasty\ImportCore\Import\ImportStrategy">
+        <arguments>
+            <argument name="actionGroups" xsi:type="array">
+                <item name="importActions" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="data_load" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\DataLoadAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="import" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\Import\ImportAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="file_upload_action" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\File\UploadAction</item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                        </item>
+                        <item name="index" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\Import\IndexAction</item>
+                            <item name="sortOrder" xsi:type="number">50</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="final-cleanup" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="cleanup" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ImportCore\Import\Action\DataPrepare\Cleanup\CleanupAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- /Import Strategies -->
+
+    <type name="Amasty\ImportCore\Import\Run">
+        <arguments>
+            <argument name="strategies" xsi:type="array">
+                <item name="validate" xsi:type="object">AmastyImportValidate</item>
+                <item name="validate_and_save" xsi:type="object">AmastyImportValidateAndSave</item>
+                <item name="validate_and_import" xsi:type="object">AmastyImportValidateAndImport</item>
+                <item name="import" xsi:type="object">AmastyImport</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ImportCore\Api\FileResolver\FileResolverConfigInterface">
+        <arguments>
+            <argument name="fileResolverConfig" xsi:type="array">
+                <item name="server" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ImportCore\Import\FileResolver\Type\ServerFile\Meta::TYPE_ID</item>
+                    <item name="fileResolverClass" xsi:type="string">Amasty\ImportCore\Import\FileResolver\Type\ServerFile\FileResolver</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ImportCore\Import\FileResolver\Type\ServerFile\Meta</item>
+                    <item translatable="true" name="name" xsi:type="string">Local Directory</item>
+                </item>
+                <item name="upload" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ImportCore\Import\FileResolver\Type\UploadFile\Meta::TYPE_ID</item>
+                    <item name="fileResolverClass" xsi:type="string">Amasty\ImportCore\Import\FileResolver\Type\UploadFile\FileResolver</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ImportCore\Import\FileResolver\Type\UploadFile\Meta</item>
+                    <item translatable="true" name="name" xsi:type="string">File Upload</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ImportCore\Api\Source\SourceConfigInterface">
+        <arguments>
+            <argument name="sourceConfig" xsi:type="array">
+                <item name="csv" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ImportCore\Import\Source\Type\Csv\Reader::TYPE_ID</item>
+                    <item name="readerClass" xsi:type="string">Amasty\ImportCore\Import\Source\Type\Csv\Reader</item>
+                    <item name="sampleFileGenerator" xsi:type="string">Amasty\ImportCore\Import\Source\Type\Csv\Generator</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ImportCore\Import\Source\Type\Csv\Meta</item>
+                    <item translatable="true" name="name" xsi:type="string">CSV</item>
+                    <item name="mimeTypes" xsi:type="array">
+                        <item name="0" xsi:type="string">csv</item>
+                        <item name="1" xsi:type="string">text/plain</item>
+                    </item>
+                </item>
+                <item name="xml" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ImportCore\Import\Source\Type\Xml\Reader::TYPE_ID</item>
+                    <item name="readerClass" xsi:type="string">Amasty\ImportCore\Import\Source\Type\Xml\Reader</item>
+                    <item name="sampleFileGenerator" xsi:type="string">Amasty\ImportCore\Import\Source\Type\Xml\Generator</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ImportCore\Import\Source\Type\Xml\Meta</item>
+                    <item translatable="true" name="name" xsi:type="string">XML</item>
+                    <item name="mimeTypes" xsi:type="array">
+                        <item name="0" xsi:type="string">text/xml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ImportCore\Import\Config\EntityConfigProvider">
+        <arguments>
+            <argument name="entitySources" xsi:type="array">
+                <item name="xml" xsi:type="object">Amasty\ImportCore\Import\Config\EntitySource\Xml</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ImportCore\Import\Config\RelationConfigProvider">
+        <arguments>
+            <argument name="relationSources" xsi:type="array">
+                <item name="xml" xsi:type="object">Amasty\ImportCore\Import\Config\RelationSource\Xml</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ImportCore\Import\Validation\CompositeValidationProvider">
+        <arguments>
+            <argument name="defaultProvider" xsi:type="object">Amasty\ImportCore\Import\Action\DataPrepare\Validation\ValidationProvider</argument>
+        </arguments>
+    </type>
+
+    <!-- Meta -->
+    <virtualType name="AmastyBasicImportMeta" type="Amasty\ImportCore\Import\Form\CompositeForm">
+        <arguments>
+            <argument name="metaProviders" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ImportCore\Import\Form\General</item>
+                    <item name="arguments" xsi:type="array">
+                        <item name="fieldsProvider" xsi:type="string">amimport_import_form.amimport_import_form.fieldsConfigAdvanced</item>
+                    </item>
+                </item>
+                <item name="source" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ImportCore\Import\Form\Source</item>
+                </item>
+                <item name="fileResolver" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ImportCore\Import\Form\FileResolver</item>
+                </item>
+                <item name="fields" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ImportCore\Import\Form\FieldsAdvanced</item>
+                </item>
+                <item name="event" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ImportCore\Import\Form\Event</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\ImportCore\Import\FormProvider">
+        <arguments>
+            <argument name="compositeForm" xsi:type="array">
+                <item name="basic" xsi:type="object">AmastyBasicImportMeta</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- /Meta -->
+
+    <!-- Reader Config Start -->
+    <type name="Amasty\ImportCore\SchemaReader\Config\Reader">
+        <arguments>
+            <argument name="schemaLocator" xsi:type="object">Amasty\ImportCore\SchemaReader\Config\SchemaLocator</argument>
+            <argument name="converter" xsi:type="object">Amasty\ImportCore\SchemaReader\Config\Converter</argument>
+            <argument name="fileName" xsi:type="string">am_import.xml</argument>
+            <argument name="compiler" xsi:type="object">AmastyImportExportCompiler</argument>
+        </arguments>
+    </type>
+    <!-- Reader Config End -->
+    <!-- CLI Configuration Start -->
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="amImportRunJob" xsi:type="object">Amasty\ImportCore\Console\Command\RunJob</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\ImportCore\Console\Command\RunJob">
+        <arguments>
+            <argument name="runJob" xsi:type="object">Amasty\ImportCore\Console\Command\Operation\RunJob\Proxy</argument>
+        </arguments>
+    </type>
+    <!-- CLI Configuration End -->
+
+    <!-- Preferences  -->
+    <preference for="Amasty\ImportCore\Api\ImportProcessInterface" type="Amasty\ImportCore\Import\ImportProcess" />
+    <preference for="Amasty\ImportCore\Api\ImportResultInterface" type="Amasty\ImportCore\Import\ImportResult" />
+    <preference for="Amasty\ImportCore\Api\Config\EntityConfigInterface" type="Amasty\ImportCore\Import\Config\EntityConfig" />
+    <preference for="Amasty\ImportCore\Api\Source\SourceConfigInterface" type="Amasty\ImportCore\Import\Source\SourceConfig" />
+    <preference for="Amasty\ImportCore\Api\FileResolver\FileResolverConfigInterface" type="Amasty\ImportCore\Import\FileResolver\FileResolverConfig" />
+    <preference for="Amasty\ImportCore\Api\Config\ProfileConfigInterface" type="Amasty\ImportCore\Import\Config\ProfileConfig" />
+    <preference for="Amasty\ImportCore\Api\Config\Profile\EntitiesConfigInterface" type="Amasty\ImportCore\Import\Config\Profile\EntitiesConfig" />
+    <preference for="Amasty\ImportCore\Api\Config\Profile\FieldInterface" type="Amasty\ImportCore\Import\Config\Profile\Field" />
+
+    <preference for="Amasty\ImportCore\Api\Config\Relation\RelationConfigInterface" type="Amasty\ImportCore\Import\Config\RelationConfig"/>
+    <preference for="Amasty\ImportCore\Api\Config\Relation\RelationActionInterface" type="Amasty\ImportCore\Import\Config\Relation\Action"/>
+    <preference for="Amasty\ImportCore\Api\Config\Relation\RelationValidationInterface" type="Amasty\ImportCore\Import\Config\Relation\Validation"/>
+
+    <preference for="Amasty\ImportCore\Import\Source\Type\Csv\ConfigInterface" type="Amasty\ImportCore\Import\Source\Type\Csv\Config"/>
+    <preference for="Amasty\ImportCore\Import\Source\Type\Xml\ConfigInterface" type="Amasty\ImportCore\Import\Source\Type\Xml\Config"/>
+    <preference for="Amasty\ImportCore\Import\FileResolver\Type\ServerFile\ConfigInterface" type="Amasty\ImportCore\Import\FileResolver\Type\ServerFile\Config"/>
+    <preference for="Amasty\ImportCore\Import\FileResolver\Type\UploadFile\ConfigInterface" type="Amasty\ImportCore\Import\FileResolver\Type\UploadFile\Config"/>
+
+    <preference for="Amasty\ImportCore\Api\Config\Entity\BehaviorInterface" type="Amasty\ImportCore\Import\Config\Entity\Behavior"/>
+    <preference for="Amasty\ImportCore\Api\Config\Entity\IndexerConfigInterface" type="Amasty\ImportCore\Import\Config\Entity\IndexerConfig"/>
+    <preference for="Amasty\ImportCore\Api\Config\Entity\FileUploaderConfigInterface" type="Amasty\ImportCore\Import\Config\Entity\FileUploaderConfig"/>
+
+    <preference for="Amasty\ImportCore\Api\Config\Entity\FieldsConfigInterface" type="Amasty\ImportCore\Import\Config\Entity\FieldsConfig"/>
+    <preference for="Amasty\ImportCore\Api\Config\Entity\Field\FieldInterface" type="Amasty\ImportCore\Import\Config\Entity\Field\Field"/>
+    <preference for="Amasty\ImportCore\Api\Config\Entity\Field\ActionInterface" type="Amasty\ImportCore\Import\Config\Entity\Field\Action"/>
+    <preference for="Amasty\ImportCore\Api\Config\Entity\Field\ValidationInterface" type="Amasty\ImportCore\Import\Config\Entity\Field\Validation"/>
+    <preference for="Amasty\ImportCore\Api\Config\Entity\Field\Configuration\PreselectedInterface" type="Amasty\ImportCore\Import\Config\Entity\Field\Preselected" />
+    <preference for="Amasty\ImportCore\Api\Config\Entity\Field\Configuration\IdentificationInterface" type="Amasty\ImportCore\Import\Config\Entity\Field\Identification" />
+    <preference for="Amasty\ImportCore\Api\Config\Entity\Field\Configuration\SyncFieldInterface" type="Amasty\ImportCore\Import\Config\Entity\Field\SyncField" />
+
+    <preference for="Amasty\ImportCore\Api\Config\Entity\Row\ValidationInterface" type="Amasty\ImportCore\Import\Config\Row\Validation"/>
+
+    <preference for="Amasty\ImportCore\Api\Config\Entity\SampleData\RowInterface" type="Amasty\ImportCore\Import\Config\Entity\SampleData\Row"/>
+    <preference for="Amasty\ImportCore\Api\Config\Entity\SampleData\ValueInterface" type="Amasty\ImportCore\Import\Config\Entity\SampleData\Value"/>
+
+    <preference for="Amasty\ImportCore\Api\Behavior\BehaviorResultInterface" type="Amasty\ImportCore\Import\Behavior\BehaviorResult" />
+    <!-- Preferences End  -->
+</config>

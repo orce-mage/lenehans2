@@ -1,0 +1,36 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+?>
+<?php /** @var $block \Amasty\GiftCardAccount\Block\Widget\CodeStatusChecker */ ?>
+<div data-amcardacc-js="template" data-bind="scope: 'amcard-giftcards-checker'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-amcardacc-js='template']": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "amcard-giftcards-checker": {
+                        "component": "Amasty_GiftCardAccount/js/view/widget/checker",
+                        "template" : "Amasty_GiftCardAccount/widget/checker",
+                        "checkCardUrl": "<?= $block->escapeUrl($block->getUrl('amgcard/cart/check')) ?>",
+                        "children": {
+                            "errors": {
+                                "component": "Amasty_GiftCardAccount/js/view/widget/messages/checker-messages",
+                                "displayArea": "messages"
+                            }
+                        }
+                    },
+                    "amcard-cart-checker-render": {
+                        "component": "Amasty_GiftCardAccount/js/view/widget/codes",
+                        "template": "Amasty_GiftCardAccount/account/codes"
+                    }
+                }
+            }
+        }
+    }
+</script>

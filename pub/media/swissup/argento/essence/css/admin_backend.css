@@ -1,0 +1,6 @@
+.nav-sections{background-color:#458500;}
+.nav-sections .navigation a.level-top{color:#ffffff;}
+.navigation .level0 > .level-top:hover,.navigation .level0 > .level-top.ui-state-focus{color:#ffffff;}
+.navigation .level0.active > .level-top,.navigation .level0.has-active > .level-top{color:#ffffff;}
+.nav-sections .navigation .parent a.level-top:after{font-size:13px;}
+.nav-sections .navigation .level0 .submenu a{font-family:Arial,Helvetica,sans-serif;}

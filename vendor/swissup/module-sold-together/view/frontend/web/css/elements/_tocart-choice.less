@@ -1,0 +1,31 @@
+@tocart-choice__background: false;
+@tocart-choice__border: 1px solid rgba(0, 0, 0, 0.1);
+@tocart-choice__border-radius: 3px;
+@tocart-choice__padding: 0 0 0 7px;
+
+@tocart-choice__hover__border: 1px solid rgba(0, 0, 0, 0.12);
+@tocart-choice__hover__background: rgba(0, 0, 0, 0.05);
+
+@tocart-choice-label__cursor: pointer;
+@tocart-choice-label__padding: 7px 7px 7px 0;
+
+.soldtogether-swiper {
+    .field.choice {
+        .lib-css(background, @tocart-choice__background);
+        .lib-css(border, @tocart-choice__border);
+        .lib-css(border-radius, 3px);
+        display: inline-block;
+        .padding(@tocart-choice__padding);
+
+        &:hover {
+            .lib-css(background, @tocart-choice__hover__background);
+            .lib-css(border, @tocart-choice__hover__border);
+        }
+
+        label {
+            display: inline-block;
+            .lib-css(cursor, @tocart-choice-label__cursor);
+            .padding(@tocart-choice-label__padding);
+        }
+    }
+}

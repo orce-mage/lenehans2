@@ -1,0 +1,844 @@
+<?php
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+?>
+<?php $previewItems = $block->getAvailablePreviewObject(); ?>
+<!doctype html>
+<html lang="en">
+<head>
+    <script>
+        var FORM_KEY = '<?php echo $block->getFormKey();?>';
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="robots" content="NOINDEX,NOFOLLOW"/>
+    <meta name="viewport" content="width=1024"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>MT Editor / Magento Admin / Magento Admin</title>
+    <link  rel="icon" type="image/x-icon" href="<?php echo $block->getViewFileUrl('Magento_Theme::favicon.ico'); ?>" />
+    <link  rel="shortcut icon" type="image/x-icon" href="<?php echo $block->getViewFileUrl('Magento_Theme::favicon.ico'); ?>" />
+
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::css/mteditor/bootstrap.min.css'); ?>" />
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::css/mteditor/jquery-ui.css'); ?>" />
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::css/mteditor/jquery.fileupload.css'); ?>" />
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::css/mteditor/mteditor.css'); ?>" />
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::css/mteditor/colorpicker.css'); ?>" />
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::css/mteditor/popup.css'); ?>" />
+
+
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/jquery-2.1.3.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/bootstrap.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/jquery.cookie.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/jquery-ui.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/jquery.ui.widget.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/jquery.iframe-transport.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/jquery.fileupload.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/text_edit_helper.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/colorpicker.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/popup.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/jquery.metisMenu.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/editor.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/helper/pdfElement.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_PdfTemplates::js/mteditor/helper/save.js'); ?>"></script>
+</head>
+<body>
+    <div id="editor_wrapper">
+        <div class="sidebar">
+            <nav class="navbar-default navbar-side" role="navigation">
+                <ul class="nav" id="main-menu">
+                    <li class="active">
+                        <a href="#">
+                            <span class="menu-icon glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            Edit
+                            <span class="glyphicon glyphicon-chevron-right next-level" aria-hidden="true"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li  class="first">
+                                <a href="#" class="active open-tools" data-selector="edit-layout">
+                                    <span class="menu-icon  glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                                    Elements
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"  class="open-tools" data-selector="edit-properties">
+                                    <span class="menu-icon glyphicon glyphicon-tasks" aria-hidden="true"></span>
+                                    Properties
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"  class="open-tools" data-selector="edit-image">
+                                    <span class="menu-icon glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                    Images
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"  class="open-color" data-selector="edit-color">
+                                    <span class="menu-icon glyphicon glyphicon-tint" aria-hidden="true"></span>
+                                    Color Scheme
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="open-tools" data-selector="edit-settings">
+                                    <span class="menu-icon glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    Settings
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-action="preview-full-screen">
+                            <span class="menu-icon glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+                            Preview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-action="preview-variables">
+                            <span class="menu-icon glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                            Variables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-icon glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            Manage
+                            <span class="next-level glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        </a>
+
+                        <ul class="nav nav-second-level">
+                            <li class="first">
+                                <?php if (!empty($block->getAvailableTemplate())) : ?>
+                                <a href="#" data-action="additional-page">
+                                    <span class="menu-icon glyphicon glyphicon-file" aria-hidden="true"></span>
+                                    Additional Pages
+                                </a>
+                            </li>
+                            <li>
+                                <?php endif; ?>
+                                <a href="#" data-action="export-template">
+                                    <span class="menu-icon glyphicon glyphicon-export" aria-hidden="true"></span>
+                                    Export
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-action="import-template">
+                                    <span class="menu-icon glyphicon glyphicon-import" aria-hidden="true"></span>
+                                    Import
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-action="change-info">
+                                    <span class="menu-icon glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    Change info
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="#" data-action="delete-template">
+                                    <span class="menu-icon glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    Delete template
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="actions">
+                <button type="button" class="btn btn-complete btn-cons" data-action="save">
+                    Save
+                </button>
+                <button type="button" class="btn btn-default btn-cons" data-action="back" >
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back to Magento
+                </button>
+            </div>
+        </div>
+        <div class="tools edit-layout active">
+            <div class="mteditor-panel-scroll">
+                <div class="mteditor-panel-container">
+                    <div class="tools-container">
+                        <div class="title">Drag block to the right</div>
+                        <div class="block-list" id="draggable"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tools edit-properties edit-style">
+            <div class="empty-style-panel">
+                Select an element on the right
+            </div>
+            <div class="mteditor-panel-scroll">
+                <div class="mteditor-panel-container">
+                    <div class="tools-container">
+                        <div class="title">Element Properties</div>
+                        <ul>
+                            <li id="pdf_element_action">
+                                <span>General Options</span>
+                                <ul></ul>
+                            </li>
+                            <li id="pdf_element_general">
+                                <span>Position & Size</span>
+                                <ul></ul>
+                            </li>
+
+                            <li id="pdf_element_color">
+                                <span>Colors</span>
+                                <ul></ul>
+                            </li>
+                            <li id="pdf_element_border">
+                                <span>Borders</span>
+                                <ul></ul>
+                            </li>
+                            <li id="pdf_element_border_inside">
+                                <span>Inside Borders</span>
+                                <ul></ul>
+                            </li>
+                            <li id="pdf_element_border_outside">
+                                <span>Outside Borders</span>
+                                <ul></ul>
+                            </li>
+
+                            <li id="pdf_element_attributes">
+                                <span>Settings</span>
+                                <ul></ul>
+                            </li>
+
+                            <li id="pdf_element_font">
+                                <span>Fonts</span>
+                                <ul></ul>
+                            </li>
+
+                            <li id="pdf_element_padding">
+                                <span>Padding</span>
+                                <ul></ul>
+                            </li>
+                            <li id="pdf_element_additional">
+                                <span>Additional Options</span>
+                                <ul></ul>
+                            </li>
+
+                            <li id="pdf_element_image">
+                                <span>Product Image</span>
+                                <ul></ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tools edit-color edit-style">
+            <div class="mteditor-panel-scroll">
+                <div class="mteditor-panel-container">
+                    <div class="tools-container">
+                        <div class="title">Color Scheme</div>
+                        <ul>
+                            <li id="color_scheme_bg">
+                                <span>Background Colors</span>
+                                <ul></ul>
+                            </li>
+                            <li id="color_scheme_font">
+                                <span>Font Colors</span>
+                                <ul></ul>
+                            </li>
+                            <li id="color_scheme_border">
+                                <span>Border Colors</span>
+                                <ul></ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tools edit-settings edit-style">
+            <div class="mteditor-panel-scroll">
+                <div class="mteditor-panel-container">
+                    <div class="tools-container">
+                        <div class="title">Other Settings</div>
+                        <ul>
+                            <li id="pdf_element_options">
+                                <span>Content</span>
+                                <ul>
+                                    <li class="pdf_option_checkbox">
+                                        <input type="checkbox" class="checkbox template_options" name="hide_overflow" value="1">
+                                        <span><?php echo __('Hide Owerflow'); ?></span>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li id="pdf_element_options">
+                                <span>Header & Footer</span>
+                                <ul>
+                                    <li>
+                                        <span><?php echo __('Header Height'); ?></span>
+                                        <input type="text" class="template_options" name="header_height" value="">
+                                    </li>
+                                    <li >
+                                        <span><?php echo __('Footer Height'); ?></span>
+                                        <input type="text" class="template_options" name="footer_height" value="">
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tools edit-image">
+            <div class="mteditor-panel-scroll">
+                <div class="mteditor-panel-container">
+                    <div class="tools-container">
+
+                        <div class="mteditor_upload_new">
+                            <div class="option">
+                                <span class="mteditor-option-title">Upload new image</span>
+                                <div class="mteditor-option-container">
+                                    <form id="imageupload" action="" method="POST" enctype="multipart/form-data">
+                                        <div class="fileupload-buttonbar">
+                                            <span class="btn btn-complete btn-cons fileinput-button">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                                <span class="mteditor_upload_button">Select image</span>
+                                                <input type="file" name="files">
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <ul class="mteditor-image-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="page-wrapper">
+            <div class="scroll-wrapper">
+                    <?php echo $block->getChildHtml('mteditor.message');?>
+                    <?php echo $block->getChildHtml('mteditor.fonts');?>
+                <div id="doc_content">
+                    <div class="paperA4 active pdf-page-1">
+                        <div id="pdf_settings">
+                            <div id="pdf_header">
+                                <div class="ui-resizable-handle ui-resizable-s hsgrip" id="hsgrip"></div>
+                            </div>
+                            <div id="pdf_footer">
+                                <div class="ui-resizable-handle ui-resizable-n fngrip" id="fngrip"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="hidden_content">
+        <div id="mteditor_tmp"></div>
+        <div id="empty_placeholder">
+            <div class="empty-placeholder">
+                <div class="drag-here">
+                    <span class="glyphicon glyphicon-plus"></span> Drag your blocks here
+                </div>
+            </div>
+        </div>
+        <div id="block_placeholder">
+            <table class="block-placeholder" width="100%"><tr><td></td></tr></table>
+        </div>
+        <div id="hidden_content_block"></div>
+        <div id="confirm_popup">
+
+            <div class="esns_box_block_1 normal-width">
+                <div class="popup-msg"></div>
+            </div>
+            <div class="popup-actions">
+                <ul>
+                    <li><a class="btn btn-success btn-cons" href="#" data-action="1">Yes</a> </li>
+                    <li><a class="btn btn-danger btn-cons" href="#" data-action="0">No</a> </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="content_popup">
+            <div class="popup-content"></div>
+
+        </div>
+        <div id="change_info">
+            <div class="popup-form normal-width">
+                <div class="form-group">
+                    <label><em>*</em>Template Name</label>
+                    <span class="help">e.g. "New Invoice US"</span>
+                    <input name="template_name" type="text" class="form-control">
+                </div>
+
+                <div class="form-group form-template-locale">
+                    <label><em>*</em>Locale</label>
+                    <select class="form-control init-template" name="template_locale">
+                        <?php
+                        $localeList = $block->getLocaleOptions();
+                        $currentLocale = $block->getCurrentLocale();
+                        ?>
+                        <?php foreach ($localeList as $locale) : ?>
+                            <?php $selected = $currentLocale==$locale['value']?'selected="selected"':''; ?>
+                            <option <?php echo $block->escapeHtml($selected);?>
+                                    value="<?php echo $block->escapeHtml($locale['value']);?>">
+                                <?php echo $block->escapeHtml($locale['label']);?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group form-template-store">
+                    <label><em>*</em>Store </label>
+                    <select class="form-control init-template" name="template_store_id">
+                        <?php $storeList = $block->getStoreOptions(); ?>
+                        <?php foreach ($storeList as $store) : ?>
+                            <?php if (is_array($store['value'])) : ?>
+                                <optgroup label="<?php echo $block->escapeHtml($store['label']);?>"></optgroup>
+                                <?php foreach ($store['value'] as $store2) : ?>
+                                    <option  value="<?php echo $block->escapeHtml($store2['value']);?>">
+                                        <?php echo $block->escapeHtml($store2['label']);?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif;?>
+                            <?php if (is_numeric($store['value'])) : ?>
+                                <option  value="<?php echo $block->escapeHtml($store['value']);?>">
+                                    <?php echo $block->escapeHtml($store['label']);?>
+                                </option>
+                            <?php endif;?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="response-error"></div>
+            <div class="response-success"></div>
+            <div class="popup-actions">
+                <ul>
+                    <li><a class="btn btn-success btn-cons" href="#" data-action="1">Save</a> </li>
+                    <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Cancel</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div id="edit_link_form">
+            <div class="popup-form normal-width">
+                <div class="form-group link-title">
+                    <label>Title</label>
+                    <span class="help">e.g. "Get it now!"</span>
+                    <input name="editor_link_title" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Url</label>
+                    <span class="help">e.g. "http://www.example.com"</span>
+                    <input name="editor_link_href" type="text"  class="form-control">
+                </div>
+            </div>
+            <div class="popup-actions">
+                <ul>
+                    <li><a class="btn btn-success btn-cons" href="#" data-action="1">Apply</a> </li>
+                    <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Remove Link</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div id="edit_var_form">
+            <div class="popup-form normal-width">
+                <div class="form-group link-title">
+                    <label>Variables</label>
+                    <span class="help">Select one</span>
+                    <select name="editor_var" class="form-control"></select>
+                </div>
+            </div>
+            <div class="popup-actions">
+                <ul>
+                    <li><a class="btn btn-success btn-cons" href="#" data-action="1">Insert</a> </li>
+                    <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Cancel</a> </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="edit_html">
+            <div class="popup-form">
+                <div class="form-group link-title">
+                    <label>HTML editor</label>
+                    <textarea name="html" class="form-control big-textarea"></textarea>
+                </div>
+            </div>
+            <div class="popup-actions">
+                <ul>
+                    <li><a class="btn btn-success btn-cons" href="#" data-action="1">Update</a> </li>
+                    <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Cancel</a> </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="edit_css">
+            <div class="popup-form">
+                <div class="form-group link-title">
+                    <label>Email CSS</label>
+                    <textarea name="css" class="form-control big-textarea"></textarea>
+                </div>
+            </div>
+            <div class="popup-actions">
+                <ul>
+                    <li><a class="btn btn-success btn-cons" href="#" data-action="1">Update</a> </li>
+                    <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Cancel</a> </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="email_css"></div>
+
+        <div id="init_new_template">
+            <div class="popup-with-form normal-width">
+                <div class="popup-form ">
+                    <input name="template_type" type="hidden" value="<?php echo $block->getTemplateType();?>">
+                    <div class="form-group">
+                        <label><em>*</em>Template name</label>
+                        <span class="help">e.g. "Invoice Luma"</span>
+                        <input name="template_name" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label><em>*</em>Paper Size</label>
+                        <select class="form-control init-template" name="template_size">
+                            <?php $paperSizeList = $block->getPaperSizeList(); ?>
+                            <?php foreach ($paperSizeList as $size) : ?>
+                                <option value="<?php echo $block->escapeHtml($size['value']);?>">
+                                    <?php echo $block->escapeHtml($size['label']);?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-template-size">
+                        <label><em>*</em>PDF Design</label>
+                        <select class="form-control init-template" name="template_design">
+                            <option value=""><?php echo __('Empty')?></option>
+                            <?php $templateList = $block->getTemplateList(); ?>
+                            <?php foreach ($templateList as $template) : ?>
+                                <option value="<?php echo $block->escapeHtml($template->getName());?>">
+                                    <?php echo $block->escapeHtml($template->getLabel());?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-template-locale">
+                        <label><em>*</em>Locale</label>
+                        <select class="form-control init-template" name="template_locale">
+                            <?php
+                            $localeList = $block->getLocaleOptions();
+                            $currentLocale = $block->getCurrentLocale();
+                            ?>
+                            <?php foreach ($localeList as $locale) : ?>
+                                <?php $selected = $currentLocale==$locale['value']?'selected="selected"':''; ?>
+                                <option <?php echo $block->escapeHtml($selected);?>
+                                    value="<?php echo $block->escapeHtml($locale['value']);?>">
+                                    <?php echo $block->escapeHtml($locale['label']);?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-template-store">
+                        <label><em>*</em>Store </label>
+                        <select class="form-control init-template" name="template_store_id">
+                            <?php foreach ($storeList as $store) : ?>
+                                <?php if (is_array($store['value'])) : ?>
+                                    <optgroup label="<?php echo $block->escapeHtml($store['label']);?>"></optgroup>
+                                    <?php foreach ($store['value'] as $store2) : ?>
+                                        <option  value="<?php echo $block->escapeHtml($store2['value']);?>">
+                                            <?php echo $block->escapeHtml($store2['label']);?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php endif;?>
+                                <?php if (is_numeric($store['value'])) : ?>
+                                    <option  value="<?php echo $block->escapeHtml($store['value']);?>">
+                                        <?php echo $block->escapeHtml($store['label']);?>
+                                    </option>
+                                <?php endif;?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="response-error"></div>
+                <div class="popup-actions">
+                    <ul>
+                        <li>
+                            <button class="btn btn-success btn-cons" data-action="1" disabled="disabled">Create new</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-danger btn-cons" data-action="0">Back to Magento</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="export_template">
+            <div class="popup-with-form normal-width">
+                <div class="popup-form ">
+
+                    <div class="form-group">
+                        <label><em>*</em>Design Name</label>
+                        <span class="help">e.g. "Default DE"</span>
+                        <input name="template[name]" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="response-success"></div>
+                <div class="response-error"></div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><button class="btn btn-success btn-cons" data-action="1" disabled="disabled">Export</button> </li>
+                        <li><button class="btn btn-danger btn-cons" data-action="0">Cancel</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="additional_page">
+            <div class="popup-with-form normal-width additional-page-form">
+                <div class="popup-form ">
+
+                    <div class="form-group">
+                        <label>Additional Pages</label>
+                        <div class="form-multiselect-items">
+                            <div class="form-multiselect">
+                                <select class="form-control init-template" name="additional_page[]">
+                                    <option value="0"> - Choose PDF Template -</option>
+                                    <?php $templateList = $block->getAvailableTemplate(); ?>
+                                    <?php if (!empty($templateList)) : ?>
+                                        <?php foreach ($templateList as $template) : ?>
+                                            <option value="<?php echo $block->escapeHtml($template->getId());?>">
+                                                <?php echo $block->escapeHtml($template->getName());?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+                                <a href="#" class="form-multiselect-remove">
+                                    <span class="glyphicon glyphicon-remove aria-hidden="true"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="#" class="form-multiselect-more">
+                            <span class="glyphicon glyphicon-plus aria-hidden="true"></span>Add More
+                        </a>
+                        <br/>
+                        <span class="help" style="margin-top: 5px">
+                            Additional pages will be added in the end of PDF
+                        </span>
+                    </div>
+                </div>
+                <div class="response-success"></div>
+                <div class="response-error"></div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><button class="btn btn-success btn-cons" data-action="1">Save</button> </li>
+                        <li><button class="btn btn-danger btn-cons" data-action="0">Cancel</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="preview_form">
+            <div class="popup-with-form normal-width">
+                <div class="popup-form ">
+
+                    <div class="form-group">
+                        <label><em>*</em><?php echo $block->getPreviewTitle(); ?></label>
+
+                        <select class="form-control init-template" name="preview_invoice_id">
+                            <?php if ($previewItems) : ?>
+                                <?php foreach ($previewItems as $item) : ?>
+                                    <option value="<?php echo $item->getId();?>">
+                                        <?php if (empty($item->getIncrementId())) : ?>
+                                            <?php echo $block->escapeHtml('#'.$item->getId());?>
+                                        <?php else : ?>
+                                            <?php echo $block->escapeHtml('#'.$item->getIncrementId());?>
+                                        <?php endif; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                        <br/>
+                        <span class="help" style="margin-top: 5px">If there is no any available item, please create dummy one.</span>
+                    </div>
+                </div>
+                <div class="response-success"></div>
+                <div class="response-error"></div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><button class="btn btn-success btn-cons" data-action="1" disabled="disabled">Preview</button> </li>
+                        <li><button class="btn btn-danger btn-cons" data-action="0">Cancel</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="variable_form">
+            <div class="popup-with-form normal-width">
+                <div class="popup-form ">
+                    <div class="form-group">
+                        <label><em>*</em><?php echo $block->getPreviewTitle(); ?></label>
+
+                        <select class="form-control init-template" name="preview_invoice_id">
+                            <?php if ($previewItems) : ?>
+                                <?php foreach ($previewItems as $item) : ?>
+                                    <option value="<?php echo $item->getId();?>">
+                                        <?php if (empty($item->getIncrementId())) : ?>
+                                            <?php echo $block->escapeHtml('#'.$item->getId());?>
+                                        <?php else : ?>
+                                            <?php echo $block->escapeHtml('#'.$item->getIncrementId());?>
+                                        <?php endif; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                        <br/>
+                        <span class="help" style="margin-top: 5px">If there is no any available item, please create dummy one.</span>
+                    </div>
+                </div>
+                <div class="response-success"></div>
+                <div class="response-error"></div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><button class="btn btn-success btn-cons" data-action="1" disabled="disabled">Get Variable List</button> </li>
+                        <li><button class="btn btn-danger btn-cons" data-action="0">Cancel</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="import_template">
+            <div class="popup-with-form normal-width">
+                <div class="popup-form ">
+                    <div class="form-group">
+                        <label>
+                            Current template data will be destroyed and replaced to the data from file.
+                        </label>
+                        <form class="importupload" id="importupload" action="" method="POST" enctype="multipart/form-data">
+                            <div class="fileupload-buttonbar">
+                                <span class="btn btn-complete btn-cons fileinput-button" style="width: 100%">
+                                    <i class="glyphicon glyphicon-cloud-upload"></i>
+                                    <span class="mteditor_upload_button">Choose design file (.xml)</span>
+                                    <input type="file" name="files">
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="response-success"></div>
+                <div class="response-error"></div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><button class="btn btn-success btn-cons" data-action="1" disabled="disabled">Import</button> </li>
+                        <li><button class="btn btn-danger btn-cons" data-action="0">Cancel</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="block-action">
+        <ul>
+            <li>
+                <a href="#" class="block-action-move" title="move"><span class="glyphicon glyphicon-move"></span></a>
+            </li>
+            <li>
+                <a href="#" class="block-action-delete" title="delete" ><span class="glyphicon glyphicon-remove"></span></a>
+            </li>
+        </ul>
+    </div>
+    <div id="esns_background_layer">
+        <div id="esns_box_layer">
+            <div id="esns_box_close"></div>
+            <div id="esns_box_content"></div>
+        </div>
+    </div>
+
+    <div id="editor_helper">
+        <div class="helper helper-text">
+            <ul>
+                <li><a href="#" data-action="bold"><span class="glyphicon glyphicon-bold"></span></a></li>
+                <li><a href="#" data-action="italic"><span class="glyphicon glyphicon-italic"></span></a></li>
+                <li><a href="#"  data-action="align-left"><span class="glyphicon glyphicon-align-left"></span></a></li>
+                <li><a href="#" data-action="align-center"><span class="glyphicon glyphicon-align-center"></span></a></li>
+                <li><a href="#" data-action="align-right"><span class="glyphicon glyphicon-align-right"></span></a></li>
+                <li><a href="#" data-action="align-justify"><span class="glyphicon glyphicon-align-justify"></span></a></li>
+                <li>
+                    <a href="#" data-action="link" data-link-type="text"><span class="glyphicon glyphicon-link"></span></a>
+                </li>
+                <li><a href="#" data-action="var"><span class="text-icon">{{}}</span></a></li>
+                <li><a href="#" data-action="html"><span class="text-icon small">HTML</span></a></li>
+                <li><a href="#" data-action="image"><span class="glyphicon glyphicon-picture"></span></a></li>
+            </ul>
+        </div>
+        <div class="helper helper-image">
+            <ul>
+                <li>
+                    <a href="#"  data-action="align-left" data-image-editable="true">
+                        <span class="glyphicon glyphicon-align-left"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-action="align-center" data-image-editable="true">
+                        <span class="glyphicon glyphicon-align-center"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-action="align-right" data-image-editable="true">
+                        <span class="glyphicon glyphicon-align-right"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-action="align-justify" data-image-editable="true">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-action="link"  data-link-type="image">
+                        <span class="glyphicon glyphicon-link"></span>
+                    </a>
+                </li>
+                <li><a href="#" data-action="remove-image"  data-image-editable="true">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="helper helper-link">
+            <ul>
+                <li><a href="#" data-action="bold"><span class="glyphicon glyphicon-bold"></span></a></li>
+                <li><a href="#" data-action="italic"><span class="glyphicon glyphicon-italic"></span></a></li>
+                <li>
+                    <a href="#" data-action="link" data-link-type="text">
+                        <span class="glyphicon glyphicon-link"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="loading" style="">
+        <span class="loading-animation" style="
+
+        ">Please Wait....</span>
+    </div>
+
+    <?php
+    //@codingStandardsIgnoreStart
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            mtEditor.init(<?php echo $this->getJsonConfig(); ?>);
+        });
+    </script>
+</body>
+</html>
+<?php
+//@codingStandardsIgnoreEnd
+?>
+

@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="1column">
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="page.main.title">
+                <action method="setPageTitle">
+                    <argument translate="true" name="title" xsi:type="string">Search results</argument>
+                </action>
+            </referenceBlock>
+            <block class="Searchanise\SearchAutocomplete\Block\Resultwidget" name="searchanise_resultwidget" template="resultwidget.phtml" />
+        </referenceContainer>
+    </body>
+</page>

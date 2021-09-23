@@ -1,0 +1,64 @@
+<?php
+$mbHelper = $this->helper('MageBig\NewsPopup\Helper\Data');
+
+$enable = $mbHelper->getConfig('tsNewsPopup/general/enable');
+$title = $mbHelper->getConfig('tsNewsPopup/general/title');
+$text = $mbHelper->getConfig('tsNewsPopup/general/text');
+$behaviour = $mbHelper->getConfig('tsNewsPopup/general/behaviour');
+$showhome = $mbHelper->getConfig('tsNewsPopup/general/show_only_home');
+$bgImage = $mbHelper->getConfig('tsNewsPopup/general/background_image');
+$bgImageUrl = $mbHelper->getBaseMediaUrl().'wysiwyg/magebig/newsletter/'.$bgImage;
+$width = $mbHelper->getConfig('tsNewsPopup/general/width');
+$height = $mbHelper->getConfig('tsNewsPopup/general/height');
+$min_height = $mbHelper->getConfig('tsNewsPopup/general/min_height');
+?>
+<?php if ($showhome == 1 && $mbHelper->isHomePage() || $showhome == 0) : ?>
+<div id="magebig_newsletter" <?php if ($bgImage) : ?> style="max-width: <?= $width; ?>; height: <?= $height; ?>; min-height: <?= $min_height; ?>; background: url(<?= $bgImageUrl; ?>) right 0 no-repeat; background-size: cover;"<?php endif; ?> class="zoom-anim-dialog mfp-hide">
+    <div class="newsletter-content">
+        <div class="newsletter-inner clearfix">
+            <div class="text-center col-12 col-sm-7 col-md-7 col-lg-7">
+                <div class="newsletter-title">
+                    <h3 class="text-center"><?= $title; ?></h3>
+                </div>
+                <div class="newsletter_text">
+                    <div class="text_desc">
+                        <?= $text; ?>
+                    </div>
+                    <form class="form"
+                        novalidate
+                        action="<?= /* @escapeNotVerified */ $block->getFormActionUrl() ?>"
+                        method="post"
+                        data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                        id="mb-newsletter-form">
+                        <div class="input-box field">
+                            <input name="email" type="text" id="mb-newsletter" value="<?= __('Enter your email address') ?>" onclick="this.value=='<?= __('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?= __('Enter your email address') ?>':''" class="input-text" data-validate="{required:true, 'validate-email':true}"/>
+                            <button type="submit" title="<?= __('Subscribe') ?>" class="btn action primary">
+                                    <span><span><?= __('Subscribe') ?></span></span></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="not-show-popup field">
+                    <input type="checkbox" id="discheck"/>
+                    <label class="subcriber_label" for="discheck"><span><?= __('Don’t show this popup'); ?></span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#magebig_newsletter": {
+            "MageBig_NewsPopup/js/newsletter": {
+                "idPopup": "#magebig_newsletter",
+                "cookieName": "magebig_newsletter",
+                "cookieLifetime": <?= $behaviour ?>,
+                "showHome": <?= $showhome ?>,
+                "cookieFlag": "magebig_newsletter_Flag",
+                "isSuccess": ".messages .message-success",
+                "notShow": ".not-show-popup input",
+                "submitButton": "#magebig_newsletter .input-box button.button"
+            }
+        }
+    }
+</script>
+<?php endif; ?>

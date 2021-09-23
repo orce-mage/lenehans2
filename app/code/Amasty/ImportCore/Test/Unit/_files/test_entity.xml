@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ImportCore
+ */
+-->
+<items>
+    <item>
+        <entity_id>1</entity_id>
+        <state>test</state>
+        <sales_order_item>
+            <item>
+                <item_id>1</item_id>
+                <order_id>1</order_id>
+                <sku>test1</sku>
+            </item>
+            <item>
+                <item_id>2</item_id>
+                <order_id>1</order_id>
+                <sku>test2</sku>
+            </item>
+        </sales_order_item>
+        <sales_shipment>
+            <item>
+                <entity_id>1</entity_id>
+                <order_id>1</order_id>
+                <sales_shipment_item>
+                    <item>
+                        <entity_id>1</entity_id>
+                        <parent_id>1</parent_id>
+                    </item>
+                    <item>
+                        <entity_id>2</entity_id>
+                        <parent_id>1</parent_id>
+                    </item>
+                </sales_shipment_item>
+            </item>
+            <item>
+                <entity_id>2</entity_id>
+                <order_id>1</order_id>
+                <sales_shipment_item>
+                    <item>
+                        <entity_id>3</entity_id>
+                        <parent_id>2</parent_id>
+                    </item>
+                </sales_shipment_item>
+            </item>
+            <item>
+                <entity_id>3</entity_id>
+                <order_id>1</order_id>
+                <sales_shipment_item>
+                    <item>
+                        <entity_id>4</entity_id>
+                        <parent_id>3</parent_id>
+                    </item>
+                    <item>
+                        <entity_id>5</entity_id>
+                        <parent_id>3</parent_id>
+                    </item>
+                </sales_shipment_item>
+            </item>
+        </sales_shipment>
+        <sales_invoice>
+        </sales_invoice>
+    </item>
+</items>

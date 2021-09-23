@@ -1,0 +1,426 @@
+//
+//  Import Core
+//  ____________________________________________
+
+@amimportcore-reset-icon__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMCAuNzc1TDkuMjI0IDAgNSA0LjIyNS43NzYgMCAwIC43NzUgNC4yMjUgNSAwIDkuMjI1Ljc3NiAxMCA1IDUuNzc1IDkuMjI0IDEwIDEwIDkuMjI1IDUuNzc1IDUgMTAgLjc3NXoiIGZpbGw9IiNCODM4NTEiLz48L3N2Zz4=');
+@amimportcore-delete-icon__background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1IDIuNXYxYzAgLjI3Ni0uMjEuNS0uNDY5LjVILjQ3Qy4yMDkgNCAwIDMuNzc2IDAgMy41di0xYzAtLjI3Ni4yMS0uNS40NjktLjVoNC4yMThWMWMwLS41NTIuNDItMSAuOTM4LTFoMy43NWMuNTE4IDAgLjkzOC40NDguOTM4IDF2MWg0LjIxOGMuMjYgMCAuNDY5LjIyNC40NjkuNXpNMS43NTMgMTguMTRjLjA3IDEuMDUuODg5IDEuODYzIDEuODc1IDEuODZoNy43NjNjLjk4Ni4wMDMgMS44MDYtLjgxIDEuODc1LTEuODZMMTQuMDYyIDZILjkzOGwuODE1IDEyLjE0eiIgZmlsbD0iI0IzQjNCMyIvPjwvc3ZnPg==');
+@amimportcore-delete-icon__background__hover: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1IDIuNXYxYzAgLjI3Ni0uMjEuNS0uNDY5LjVILjQ3Qy4yMDkgNCAwIDMuNzc2IDAgMy41di0xYzAtLjI3Ni4yMS0uNS40NjktLjVoNC4yMThWMWMwLS41NTIuNDItMSAuOTM4LTFoMy43NWMuNTE4IDAgLjkzOC40NDguOTM4IDF2MWg0LjIxOGMuMjYgMCAuNDY5LjIyNC40NjkuNXpNMS43NTMgMTguMTRjLjA3IDEuMDUuODg5IDEuODYzIDEuODc1IDEuODZoNy43NjNjLjk4Ni4wMDMgMS44MDYtLjgxIDEuODc1LTEuODZMMTQuMDYyIDZILjkzOGwuODE1IDEyLjE0eiIgZmlsbD0iIzg4ODc4NyIvPjwvc3ZnPg==');
+
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amimportcore-dynamic-rows {
+        // Override magento styles start
+        & {
+            margin-top: 0!important;
+        }
+
+        & > .admin__field-label {
+            margin-bottom: 20px!important;
+            font-size: 20px!important;
+        }
+
+        .amimportcore-remove .action-delete:before {
+            position: absolute;
+            top: 18px;
+            right: 30px;
+            width: 15px;
+            height: 20px;
+            background: @amimportcore-delete-icon__background no-repeat center;
+            content: '';
+        }
+
+        td.-amwidth30 {
+            width: 30%;
+        }
+
+        td.amimportcore-filter {
+            padding: 13px 15px;
+            border-bottom: 5px solid #fff;
+        }
+
+        td.amwidth40px {
+            width: 40px;
+            border-bottom: 5px solid #fff;
+        }
+
+        td.-amwidth30 .admin__control-select,
+        td.-amwidth30 .admin__control-multiselect {
+            width: 100%;
+        }
+
+        .admin__control-table-wrapper .admin__action-multiselect-wrap .action-menu {
+            z-index: 10;
+        }
+
+        // Override magento styles end
+
+        .amimportcore-remove {
+            position: relative;
+            text-align: right;
+        }
+    }
+
+    .amimportcore-fields-table {
+        & {
+            width: 100%;
+        }
+
+        .amimportcore-row {
+            padding: 3px 10px;
+            border-bottom: 5px solid #fff;
+        }
+
+        .amimportcore-td {
+            padding: 7px 10px;
+            background: #f1f1f1;
+            color: #403630;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .amimportcore-td.-checkbox {
+            width: 35px;
+        }
+
+        .amimportcore-td.-button {
+            text-align: right;
+        }
+
+        .amimportcore-td.-button .amimportcore-td {
+            padding-left: 15px;
+        }
+
+        .amimportcore-td.-button .amimportcore-button {
+            padding: 5px 31px;
+        }
+
+        .amimportcore-delete {
+            margin: 0 23px 0 8px;
+            padding: 10px;
+            width: 6px;
+            height: 30px;
+            background: @amimportcore-delete-icon__background no-repeat center;
+            transition: background-color .3s ease-in;
+            cursor: pointer;
+        }
+
+        .amimportcore-delete:hover {
+            background: @amimportcore-delete-icon__background__hover no-repeat center;
+        }
+    }
+
+    .amimportcore-fields-table .amimportcore-thead.-search {
+        .amimportcore-row {
+            background: #e3e3e3;
+        }
+
+        .amimportcore-th {
+            padding: 6px 10px;
+            text-align: left;
+        }
+
+        .amimportcore-th.-button {
+            max-width: 120px;
+            width: 120px;
+            text-align: right;
+        }
+
+        .amimportcore-th.-button .action-primary {
+            padding: 5px 19px;
+            font-size: 16px;
+        }
+    }
+
+    .amimportcore-fields-table.-selected {
+        & {
+            margin-bottom: 30px;
+            background: #f1f1f1;
+        }
+
+        .amimportcore-thead .amimportcore-row {
+            border-bottom: 5px solid #fff;
+            text-align: left;
+        }
+
+        .amimportcore-row {
+            border: none;
+        }
+
+        .amimportcore-th {
+            padding: 15px 30px 15px;
+            width: 30%;
+            font-weight: 700;
+        }
+
+        .amimportcore-td {
+            padding: 0 0 30px 30px;
+        }
+
+        .amimportcore-row:first-child .amimportcore-td {
+            padding-top: 20px;
+        }
+
+        .amimportcore-field {
+            padding: 5px 8px;
+            width: 100%;
+        }
+
+        .amimportcore-field.-disabled {
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            background: #e5e5e5;
+            color: #828282;
+        }
+    }
+
+    .amimportcore-fields-container {
+        margin-top: 30px;
+        background: #f1f1f1;
+    }
+
+    .amimportcore-fields-container {
+        .amimportcore-header {
+            display: flex;
+            margin-bottom: 5px;
+            background: #f1f1f1;
+        }
+
+        .amimportcore-title {
+            display: block;
+            padding: 15px;
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .amimportcore-title.-button {
+            padding: 0 25px;
+        }
+    }
+
+    .amimportcore-button-container {
+        margin-bottom: 30px;
+        padding: 30px;
+        background: #f1f1f1;
+    }
+
+    .amimportcore-button:active,
+    .amimportcore-button {
+        border-color: #adadad;
+        background: #e3e3e3;
+        box-shadow: none;
+        color: #514943;
+        text-shadow: none;
+    }
+
+    .amimportcore-button {
+        &.-margin {
+            margin-bottom: 20px;
+        }
+
+        &.-primary {
+            margin-left: 20px;
+            border-color: #eb5202;
+            background-color: #eb5202;
+            color: #fff;
+        }
+
+        &:hover {
+            background-color: #dbdbdb;
+            box-shadow: none;
+            color: #514943;
+        }
+
+        &.-primary:hover,
+        &.-primary:active,
+        &.-primary:focus {
+            border-color: #b84002;
+            background-color: #ba4000;
+            color: #fff;
+        }
+    }
+
+    .amimportcore-flex-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .amimportcore-search-container {
+        .amimportcore-search {
+            padding: 5px 25px 5px 10px;
+            min-width: 250px;
+            width: 100%;
+            border: 1px solid #ccc;
+            font-weight: 400;
+        }
+
+        .amimportcore-reset.-hidden {
+            display: none;
+        }
+
+        .amimportcore-reset {
+            position: absolute;
+            right: 5px;
+            width: 20px;
+            height: 32px;
+            background: @amimportcore-reset-icon__background no-repeat center;
+        }
+    }
+
+    .amimportcore-search-input {
+        position: relative;
+    }
+
+    .amimportcore-modal-fields {
+        .modal-header .page-main-actions {
+            background: #fff;
+            border: none;
+        }
+
+        .modal-title {
+            font-size: 30px;
+        }
+    }
+
+    .amimportpro-importjob-edit,
+    .amimport-import-index,
+    .amorderimport-profile-edit {
+        .admin__action-multiselect-wrap,
+        .amimportcore-import-source .admin__control-text,
+        .amimportcore-field .admin__control-text,
+        .amimportcore-field .admin__control-select,
+        .amimportpro-fieldset .admin__control-text,
+        .amimportpro-fieldset .admin__control-select,
+        .amimportcore-fieldset .admin__control-select,
+        .amimportcore-fieldset .admin__control-text,
+        .amimportcore-fieldset ul.ui-widget,
+        .amimportcore-textarea .admin__control-textarea,
+        .amcron-select .admin__control-select {
+            width: ~'calc(100% - 45px - 4px)';
+        }
+
+        .admin__fieldset .admin__field._required span:after {
+            margin: 1px 0 0 5px;
+            word-wrap: normal;
+        }
+
+        .admin__field.-child {
+            margin-left: 60px;
+        }
+
+        .admin__field-tooltip:not(.amimportcore-tooltip) .admin__field-tooltip-content {
+            width: 28rem;
+        }
+
+        .amimportcore-field.-sourceconfig {
+            margin-bottom: 0;
+        }
+    }
+
+    .amimportcore-import-source .admin__fieldset > .fieldset-wrapper .admin__fieldset {
+        padding-top: 0;
+    }
+
+    .amimportcore-fieldset ul.ui-widget {
+        & {
+            margin-bottom: 0;
+            border: 1px solid #adadad;
+        }
+
+        .tagit-new {
+            margin: 0;
+        }
+    }
+
+    .amimportpro-importjob-edit,
+    .amorderimport-profile-edit,
+    .amcustomerimport-profile-edit,
+    .amproductimport-profile-edit {
+        .admin__fieldset > .admin__field .amcron-schedule-container {
+            width: ~'calc( (100%) * 0.5 - 79px )';
+        }
+
+        .amcron-schedule-container {
+            .admin__field-control .admin__control-text {
+                width: 100%;
+            }
+
+            .admin__field-tooltip {
+                margin-right: 5px;
+                position: absolute;
+                padding-left: 5px;
+            }
+
+            .admin__field-tooltip .admin__field-tooltip-content {
+                right: -5rem;
+            }
+        }
+
+        .amcronschedule-fieldset .admin__fieldset {
+            padding-top: 0;
+        }
+    }
+
+    .amimportcore-checkbox,
+    .amimportcore-fieldset-container {
+        .fieldset-wrapper-title .title {
+            font-size: 2rem;
+            font-weight: 400;
+        }
+    }
+
+    .amimportcore-fieldset-container.-child {
+        .admin__fieldset {
+            padding-top: 0;
+        }
+    }
+
+    .amimportcore-template-type .admin__fieldset,
+    .amimportcore-compress-file .admin__fieldset {
+        padding-top: 0;
+    }
+
+    .amimportcore-tooltip .admin__field-tooltip-content {
+        & {
+            top: 40px;
+            bottom: inherit;
+            width: 45vw;
+        }
+
+        &:after,
+        &:before {
+            top: -32px;
+            transform: rotate(180deg);
+        }
+
+        &:after {
+            margin-top: 1px;
+        }
+    }
+
+    .admin__fieldset-wrapper-content .admin__field.amimportpro-notice-field {
+        margin-top: 15px;
+    }
+}
+
+//
+//  Desktop +
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    // Override magento styles start
+    .amimportcore-modal-fields {
+        left: 50%;
+    }
+    // Override magento styles end
+
+    .amimportcore-dynamic-rows {
+        td.amimportcore-filter {
+            width: 32%;
+        }
+    }
+}

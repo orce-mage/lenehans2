@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <container name="root">
+        <container name="page.wrapper" as="page_wrapper" htmlTag="div" htmlClass="page-wrapper magebig-container">
+            <container name="after.body.start" as="after.body.start" before="-" label="Page Top"/>
+            <container name="global.notices" as="global_notices" before="-"/>
+            <container name="main.content" htmlTag="main" htmlId="maincontent" htmlClass="page-main">
+                <container name="main.slider.full" label="Main Slider Full" htmlTag="div" htmlClass="main-slider-full">
+                    <container name="main.slider.container" label="Main Slider Container" htmlTag="div" htmlClass="container main-slider-container" />
+                </container>
+                <container name="main.container.wrap" htmlTag="div" htmlClass="container main-container">
+                    <container name="columns.top" label="Before Main Columns"/>
+                    <container name="columns" htmlTag="div" htmlClass="columns row">
+                        <container name="main.before.desktop.after.mobile" htmlTag="div" htmlClass="main-before-after col-12 order-3 order-md-1" label="Main Before Desktop After Mobile"/>
+                        <container name="main.wrap" htmlTag="div" htmlClass="main-wrap col-12">
+                            <container name="main" label="Main Content Container" htmlTag="div" htmlClass="column main"/>
+                        </container>
+                    </container>
+                </container>
+                <container name="content.bottom.full"  label="Main Content Bottom Full" htmlTag="div" htmlClass="main-bottom" after="main.container.wrap" />
+                <container name="page.bottom.full"  label="Page Bottom Full" htmlTag="div" htmlClass="page-bottom" after="content.bottom.full">
+                    <container name="page.bottom.content"  label="Page Bottom Container" htmlTag="div" htmlClass="page-bottom-content container" after="-" />
+                </container>
+            </container>
+            <container name="page.bottom.container" as="page_bottom_container" label="Before Page Footer Container" after="main.content" htmlTag="div" htmlClass="page-bottom"/>
+            <container name="before.body.end" as="before_body_end" after="-" label="Page Bottom"/>
+        </container>
+    </container>
+</layout>

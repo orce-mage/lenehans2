@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <success_page>
+            <general>
+                <enabled>0</enabled>
+            </general>
+            <layout>
+                <layout>[{"name":"top","children":[{"name":"checkout.additional.cms.top"}]},{"name":"middleleft","children":[{"name":"thank.you"},{"name":"create.account"}]},{"name":"middleright","children":[{"name":"sales.order.view"},{"name":"order.date"},{"name":"sales.order.info"}]},{"name":"bottom","children":[{"name":"order.success.additional.info"},{"name":"checkout.additional.cms.bottom"}]}]</layout>
+            </layout>
+            <blocks>
+                <block_top>0</block_top>
+                <block_bottom>0</block_bottom>
+            </blocks>
+        </success_page>
+    </default>
+</config>

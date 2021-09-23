@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block
+                    class="Amasty\Storelocator\Block\Location"
+                    name="amlocator.link" as="amlocator_link"
+                    template="Amasty_Storelocator::link.phtml"
+                    after="page.main.title"
+                    ifconfig="amlocator/general/enable_link"
+            />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="amasty_giftcard_invoice">
+        <name>Amasty Gift Card Invoice</name>
+        <group>Amasty Gift Card</group>
+        <description>Amasty Gift Card Invoice</description>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Import\FieldsClass\Describe">
+                <arguments>
+                    <argument name="tableName" xsi:type="string">amasty_giftcard_invoice</argument>
+                </arguments>
+            </fieldsClass>
+            <fields>
+                <field name="entity_id">
+                    <actions>
+                        <trim apply="beforeValidate"/>
+                    </actions>
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty>
+                            <excludeBehaviors>
+                                <addDirect/>
+                            </excludeBehaviors>
+                        </notEmpty>
+                    </validation>
+                </field>
+                <field name="invoice_id">
+                    <validation>
+                        <nonNegative/>
+                        <tableRowExists tableName="sales_invoice"
+                                        idFieldName="entity_id"
+                                        rootOnly="true"
+                                        error="Invoice with specified 'invoice_id' doesn't exist">
+                            <excludeBehaviors>
+                                <deleteDirect/>
+                            </excludeBehaviors>
+                        </tableRowExists>
+                    </validation>
+                </field>
+                <field name="gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+                <field name="base_gift_amount">
+                    <validation>
+                        <nonNegative/>
+                    </validation>
+                </field>
+            </fields>
+            <sampleData>
+                <row>
+                    <field name="entity_id">1</field>
+                    <field name="invoice_id">1</field>
+                    <field name="gift_amount">50.0000</field>
+                    <field name="base_gift_amount">50.0000</field>
+                </row>
+            </sampleData>
+        </fieldsConfig>
+        <behaviors>
+            <addUpdateDirect name="Add/Update">
+                <tableName>amasty_giftcard_invoice</tableName>
+            </addUpdateDirect>
+            <addDirect name="Only add">
+                <tableName>amasty_giftcard_invoice</tableName>
+            </addDirect>
+            <updateDirect name="Only update">
+                <tableName>amasty_giftcard_invoice</tableName>
+            </updateDirect>
+            <deleteDirect name="Delete">
+                <tableName>amasty_giftcard_invoice</tableName>
+            </deleteDirect>
+        </behaviors>
+    </entity>
+    <relation code="amasty_giftcard_invoice">
+        <parent_entity>sales_invoice</parent_entity>
+        <child_entity>amasty_giftcard_invoice</child_entity>
+        <sub_entity_field_name>amasty_giftcard_invoice</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">entity_id</argument>
+            <argument name="child_field_name" xsi:type="string">invoice_id</argument>
+        </arguments>
+    </relation>
+</config>

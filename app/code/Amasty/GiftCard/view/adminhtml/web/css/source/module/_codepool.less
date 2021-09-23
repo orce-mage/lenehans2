@@ -1,0 +1,50 @@
+//
+//  Gift Card codepool
+//  ____________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    //override magento styles start
+    .amcard-codes-template .admin__additional-info {
+        font-size: 1.2rem;
+    }
+
+    .amcard-codes-setting .admin__fieldset,
+    .amcard-general-settings .admin__fieldset {
+        padding-left: 0;
+    }
+
+    .amgcard-codepool-edit .amcard-codes-setting .amcard-codes-grid {
+        border: none;
+    }
+
+    .amgcard-codepool-edit .amcard-codes-setting .amcard-codes-grid .fieldset-wrapper-title {
+        & {
+            padding-left: 0;
+            background: none;
+            border-bottom: 1px solid #cac3b4;
+        }
+
+        .title {
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+    }
+
+    .amcard-codes-grid .admin__data-grid-header {
+        box-sizing: border-box;
+    }
+
+    .amcard-codes-grid .admin__data-grid-wrap .data-grid-actions-cell .action-menu-item{
+        cursor: pointer;
+    }
+
+    .amcard-codes-grid .selectmenu .selectmenu-value input {
+        height: auto;
+        padding: 0;
+    }
+    //override magento styles end
+}

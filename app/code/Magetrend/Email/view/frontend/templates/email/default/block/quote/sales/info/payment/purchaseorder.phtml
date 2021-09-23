@@ -1,0 +1,8 @@
+<?php
+$specificInfo = $block->getInstructions();
+$title = $block->escapeHtml($block->getMethod()->getTitle());
+?>
+<?php echo $title; ?><br/>
+<?php echo $block->escapeHtml(__('Purchase Order Number')) ?>:
+<span class="number"> <?php echo $block->escapeHtml($block->getInfo()->getPoNumber()) ?></span>
+

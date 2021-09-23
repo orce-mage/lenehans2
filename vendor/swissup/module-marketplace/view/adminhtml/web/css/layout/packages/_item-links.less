@@ -1,0 +1,99 @@
+.marketplace-grid-items {
+    .grid-item [data-index="links"] {
+        right: 0;
+        top: 0;
+
+        .mode-grid& {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .mode-list& {
+            order: 1000;
+        }
+
+        .action-select-wrap {
+            .action-select {
+                padding: 0;
+                border: 0;
+                background: none;
+                width: 30px;
+                height: 40px;
+                border-radius: 0 3px 0 3px;
+                cursor: pointer;
+                text-indent: -9999px;
+                transition: opacity 200ms ease-in;
+
+                &::before,
+                &::after {
+                    display: none;
+                    border: 0;
+                }
+
+                &::before {
+                    transform: none !important;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: -9px;
+                    margin-left: -2px;
+
+                    display: block;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: #bdb9b5;
+                    box-shadow: 0 7px 0 #bdb9b5,
+                                0 14px 0 #bdb9b5;
+                }
+            }
+
+            &:hover,
+            &._active {
+                .action-select {
+                    opacity: .5;
+                }
+            }
+
+            .action-menu {
+                left: auto;
+                right: 8px;
+                width: 180px;
+                border: 0;
+                margin: -2px 0 0;
+                border-radius: 3px;
+                box-shadow: 0 0 3px rgba(0, 0, 0, 0.1),
+                            0 5px 15px -3px rgba(0, 0, 0, 0.2);
+
+                .action-menu-item-separator {
+                    padding: 0;
+                    height: 1px;
+                    margin: 7px 1em;
+                    background: #f4f4f4;
+                    pointer-events: none;
+                    &:first-child,
+                    &:last-child {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .mode-grid& {
+        .grid-item:not(.noimage) [data-index="image"] ~ [data-index="links"] {
+            .action-select-wrap {
+                .action-select {
+                    &::before {
+                        background: #fff;
+                        box-shadow: 0 0 1px rgba(0, 0, 0, 0.2),
+                                    0 7px 0 #fff,
+                                    0 7px 1px rgba(0, 0, 0, 0.2),
+                                    0 14px 0 #fff,
+                                    0 14px 1px rgba(0, 0, 0, 0.2);
+                    }
+                }
+            }
+        }
+    }
+}

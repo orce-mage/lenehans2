@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.mailto" remove="true" />
+        <referenceBlock name="product.info.addto" remove="true" />
+        <referenceBlock name="catalog.product.related" remove="true" />
+        <referenceBlock name="product.info.upsell" remove="true" />
+        <referenceBlock name="product.info.addtocart">
+            <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist"
+                       template="Magento_Catalog::product/view/addto/wishlist.phtml" />
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist.bottom"
+                   template="Magento_Catalog::product/view/addto/wishlist.phtml" />
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.wrap" template="Magento_Catalog::product/view-info.phtml" before="-">
+                <block class="Magento\Catalog\Block\Product\View" name="product.info.social.share" template="Magento_Catalog::product/view/social.phtml" after="-" />
+            </block>
+        </referenceContainer>
+        <referenceContainer name="product.info.media">
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.discount.percent" template="Magento_Catalog::product/view/discount_percent.phtml" after="-" />
+        </referenceContainer>
+        <move element="product.info.main" destination="product.info.wrap" />
+        <move element="product.info.media" destination="product.info.wrap" />
+        <move element="page.main.title" destination="product.info.wrap" />
+        <move element="product.info.review" destination="product.info.wrap" />
+        <move element="product.info.sku" destination="product.info.wrap" />
+        <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final" />
+        <move element="product.info.overview" destination="product.info.price" after="product.info.stock.sku" />
+    </body>
+</page>

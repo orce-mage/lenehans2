@@ -1,0 +1,18 @@
+<div class="ampickup-field -store">
+    <label class="label" data-bind="visible:labelVisible, text:label, attr:{for: uid}"></label>
+    <div class="ampickup-wrapper">
+        <select data-bind="attr: {id: uid},
+                   options: options,
+                   optionsValue: 'id',
+                   optionsText: 'name',
+                   optionsCaption: caption,
+                   value: value,
+                   event: {change: onChangeStore(value())};"
+                class="ampickup-store">
+        </select>
+        <span class="ampickup-separator -cart"></span>
+        <span class="ampickup-choosemap"
+              data-bind="i18n: 'Choose on map', attr: {title: 'Choose on map'},
+       click: openMap"/>
+    </div>
+</div>

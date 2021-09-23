@@ -1,0 +1,25 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Mirasvit\Core\Block\Adminhtml\Menu">
+        <arguments>
+            <argument name="menu" xsi:type="array">
+                <item name="cache_warmer" xsi:type="object">Mirasvit\CacheWarmer\Block\Adminhtml\Menu</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Api\Data\ProductInterface">
+        <plugin name="cache-warmer-plugin" type="Mirasvit\CacheWarmer\Plugin\ProductPlugin" />
+    </type>
+
+    <type name="Magento\Catalog\Api\Data\CategoryInterface">
+        <plugin name="cache-warmer-plugin" type="Mirasvit\CacheWarmer\Plugin\CategoryPlugin" />
+    </type>
+
+    <type name="Magento\Config\Model\Config">
+        <plugin name="cache-warmer-plugin" type="Mirasvit\CacheWarmer\Plugin\ConfigPlugin"/>
+    </type>
+
+    <type name="Magento\Customer\Api\GroupRepositoryInterface">
+        <plugin name="cache-warmer-plugin" type="Mirasvit\CacheWarmer\Plugin\CustomerGroup\UpdateDefaultSourcePlugin"/>
+    </type>
+</config>

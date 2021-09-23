@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MB "Vienas bitas" (Magetrend.com)
+ *
+ * @category MageTrend
+ * @package  Magetend/PdfTemplates
+ * @author   Edvinas Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-pdf-invoice-pro
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magetrend_PdfTemplates::css/adminhtml.css"/>
+    </head>
+    <update handle="formkey"/>
+    <update handle="pdftemplates_template_block"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magetrend\PdfTemplates\Block\Adminhtml\Template" name="adminhtml.pdftemplates.template.container"/>
+        </referenceContainer>
+    </body>
+</page>

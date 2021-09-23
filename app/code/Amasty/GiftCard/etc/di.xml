@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\GiftCard\Api\CodePoolRepositoryInterface" type="Amasty\GiftCard\Model\CodePool\Repository" />
+    <preference for="Amasty\GiftCard\Api\Data\CodePoolInterface" type="Amasty\GiftCard\Model\CodePool\CodePool" />
+    <preference for="Amasty\GiftCard\Api\Data\CodePoolRuleInterface" type="Amasty\GiftCard\Model\CodePool\CodePoolRule" />
+
+    <preference for="Amasty\GiftCard\Api\CodeRepositoryInterface" type="Amasty\GiftCard\Model\Code\Repository" />
+    <preference for="Amasty\GiftCard\Api\Data\CodeInterface" type="Amasty\GiftCard\Model\Code\Code" />
+    <preference for="Amasty\GiftCard\Api\CodeGeneratorManagementInterface" type="Amasty\GiftCard\Model\Code\CodeGeneratorManagement" />
+
+    <preference for="Amasty\GiftCard\Api\ImageRepositoryInterface" type="Amasty\GiftCard\Model\Image\Repository" />
+    <preference for="Amasty\GiftCard\Api\Data\ImageInterface" type="Amasty\GiftCard\Model\Image\Image" />
+    <preference for="Amasty\GiftCard\Api\Data\ImageBakingInfoInterface" type="Amasty\GiftCard\Model\Image\ImageBakingInfo" />
+
+    <preference for="Amasty\GiftCard\Api\GiftCardPriceRepositoryInterface" type="Amasty\GiftCard\Model\GiftCard\GiftCardPriceRepository" />
+    <preference for="Amasty\GiftCard\Api\Data\GiftCardPriceInterface" type="Amasty\GiftCard\Model\GiftCard\GiftCardPrice" />
+
+    <preference for="Amasty\GiftCard\Api\Data\GiftCardOptionInterface" type="Amasty\GiftCard\Model\GiftCard\GiftCardOption" />
+    <preference for="Amasty\GiftCard\Api\Data\GiftCardEmailInterface" type="Amasty\GiftCard\Model\GiftCard\GiftCardEmail" />
+
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="appendGiftCardDataToOrder" type="Amasty\GiftCard\Plugin\Quote\Item\ToOrderItemPlugin"/>
+    </type>
+    <type name="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist">
+        <plugin name="addGiftCardDataWishlist" type="Amasty\GiftCard\Plugin\Wishlist\Block\Product\View\ConfigureWishlistPlugin" />
+    </type>
+
+    <type name="Magento\Wishlist\Block\Item\Configure">
+        <plugin name="addGiftCardDataWishlist" type="Amasty\GiftCard\Plugin\Wishlist\Block\Product\View\ConfigureWishlistPlugin" />
+    </type>
+    <type name="Amasty\GiftCard\Model\Code\ResourceModel\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">\Amasty\GiftCard\Model\Code\ResourceModel\Code::TABLE_NAME</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\GiftCard\Model\Code\ResourceModel\Code</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\Catalog\Api\Data\ProductInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="amgiftcard_creator" xsi:type="string">Amasty\GiftCard\Model\GiftCard\Handlers\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="amgiftcard_reader" xsi:type="string">Amasty\GiftCard\Model\GiftCard\Handlers\ReadHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="amgiftcard_updater" xsi:type="string">Amasty\GiftCard\Model\GiftCard\Handlers\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\Repository">
+        <arguments>
+            <argument name="cartItemProcessors" xsi:type="array">
+                <item name="amgiftcard" xsi:type="object">Amasty\GiftCard\Model\GiftCard\Quote\Item\CartItemProcessor\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
+        <arguments>
+            <argument name="processorPool" xsi:type="array">
+                <item name="amgiftcard" xsi:type="object">Amasty\GiftCard\Model\GiftCard\ProductOptionProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Model\Order\ProductOption">
+        <arguments>
+            <argument name="processorPool" xsi:type="array">
+                <item name="amgiftcard" xsi:type="object">Amasty\GiftCard\Model\GiftCard\ProductOptionProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\SalesRule\Model\Validator\Pool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="discount" xsi:type="array">
+                    <item name="am_giftcard_validator" xsi:type="object">Amasty\GiftCard\Model\GiftCard\Validator\Discount</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\GiftCard\Pricing\Price\Collection" type="Magento\Framework\Pricing\Price\Collection">
+        <arguments>
+            <argument name="pool" xsi:type="object">Amasty\GiftCard\Pricing\Price\Pool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\GiftCard\Pricing\Price\Pool" type="Magento\Framework\Pricing\Price\Pool">
+        <arguments>
+            <argument name="prices" xsi:type="array">
+                <item name="regular_price" xsi:type="string">Magento\Catalog\Pricing\Price\RegularPrice</item>
+                <item name="final_price" xsi:type="string">Amasty\GiftCard\Pricing\Price\FinalPrice</item>
+                <item name="tier_price" xsi:type="string">Magento\Catalog\Pricing\Price\TierPrice</item>
+                <item name="special_price" xsi:type="string">Magento\Catalog\Pricing\Price\SpecialPrice</item>
+                <item name="msrp_price" xsi:type="string">Magento\Msrp\Pricing\Price\MsrpPrice</item>
+                <item name="custom_option_price" xsi:type="string">Magento\Catalog\Pricing\Price\CustomOptionPrice</item>
+                <item name="base_price" xsi:type="string">Magento\Catalog\Pricing\Price\BasePrice</item>
+                <item name="configured_price" xsi:type="string">Amasty\GiftCard\Pricing\Price\ConfiguredPrice</item>
+                <item name="configured_regular_price" xsi:type="string">Magento\Bundle\Pricing\Price\ConfiguredRegularPrice</item>
+                <item name="bundle_option" xsi:type="string">Magento\Bundle\Pricing\Price\BundleOptionPrice</item>
+                <item name="bundle_option_regular_price" xsi:type="string">Magento\Bundle\Pricing\Price\BundleOptionRegularPrice</item>
+                <item name="wishlist_configured_price" xsi:type="string">Amasty\GiftCard\Pricing\Price\ConfiguredPrice</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\Pricing\PriceInfo\Factory">
+        <arguments>
+            <argument name="types" xsi:type="array">
+                <item name="amgiftcard" xsi:type="array">
+                    <item name="infoClass" xsi:type="string">Magento\Framework\Pricing\PriceInfo\Base</item>
+                    <item name="prices" xsi:type="string">Amasty\GiftCard\Pricing\Price\Collection</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\GiftCard\Block\Checkout\Cart\Item\Renderer">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

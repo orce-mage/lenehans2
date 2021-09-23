@@ -1,0 +1,35 @@
+<?php /** @var $block \Magento\Framework\View\Element\Template */ ?>
+<?php
+    $helper = $this->helper('Swissup\CheckoutSuccess\Helper\Data');
+    $successBlock = $block->getLayout()->getBlock('checkout.success');
+?>
+<div class="block thank-you-note">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2" class="check-mark">
+        <circle class="path circle" fill="none" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"></circle>
+        <polyline class="path check" fill="none" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "></polyline>
+    </svg>
+
+    <div class="block-title">
+        <strong><?= __('Thank you for your purchase!') ?></strong>
+    </div>
+
+    <div class="block-content">
+        <?php if ($successBlock->getOrderId()):?>
+            <?php if ($successBlock->getCanViewOrder()) :?>
+                <p><?= __('Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeHtml($successBlock->getViewOrderUrl()), $block->escapeHtml($successBlock->getOrderId()))) ?></p>
+            <?php  else :?>
+                <p><?= __('Your order # is: <span>%1</span>.', $block->escapeHtml($successBlock->getOrderId())) ?></p>
+            <?php endif;?>
+                <p><?= /* @escapeNotVerified */ __('We\'ll email you an order confirmation with details and tracking info.') ?></p>
+            <?php if ($successBlock->getCanPrintOrder() && $successBlock->getCanViewOrder()) :?>
+                <p><?= /* @escapeNotVerified */ __('Click <a href="%1" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $successBlock->getPrintUrl()) ?></p>
+            <?php endif;?>
+        <?php endif;?>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <a class="action primary continue" href="<?= /* @escapeNotVerified */ $successBlock->getContinueUrl() ?>"><span><?= /* @escapeNotVerified */ __('Continue Shopping') ?></span></a>
+            </div>
+        </div>
+    </div>
+</div>

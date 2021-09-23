@@ -1,0 +1,23 @@
+<?php
+    /** @var \Searchanise\SearchAutocomplete\Block\Async $block */
+?>
+
+<?php if ($block->getIsObjectAsync()) { ?>
+<object class="snize-async" data="<?= /* @noEscape */ $block->getAsyncUrl(); ?>" width="0" height="0" type="text/html"></object>
+<?php } ?>
+
+<?php if ($block->getIsAjaxAsync()) { ?>
+<script>
+    require([
+        "jquery"
+    ], function($){
+        $.ajax({
+            url: '<?= /* @noEscape */ $block->getAsyncUrl(); ?>',
+            method: 'get',
+            async: true,
+            timeout: 5 * 60 * 1000, // 5 minues,
+            cache: false
+        });
+    });
+</script>
+<?php } ?>

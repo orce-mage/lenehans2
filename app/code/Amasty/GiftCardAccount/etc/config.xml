@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCardAccount
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amgiftcard>
+            <general>
+                <allow_refund_for_orders>0</allow_refund_for_orders>
+            </general>
+            <gift_card_account>
+                <checkout_position>0</checkout_position>
+                <checkout_view_type>0</checkout_view_type>
+            </gift_card_account>
+        </amgiftcard>
+    </default>
+</config>

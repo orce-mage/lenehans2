@@ -1,0 +1,4 @@
+"The file ""%1"" does not exist","The file ""%1"" does not exist"
+"Invalid XML in file %1:\n%2","Invalid XML in file %1:\n%2"
+.,.
+"Error occurred during ""%field_name"" processing. %details","Error occurred during ""%field_name"" processing. %details"

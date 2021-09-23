@@ -1,0 +1,14 @@
+<script type="text/x-magento-init">
+{
+    ".swissup-checkout-tab": {
+        "Swissup_Core/js/system-config/section-mover": {
+            "destination": ".section-config.swissup-checkout-container",
+            "itemToActivateWhenSelected": ".swissup-checkout-config-item",
+            "title": {
+                "selected": "<?= $block->escapeJs(__('Checkout module: <strong>{{itemName}}</strong> <small><a href="#">Change</a></small>')) ?>",
+                "no": "<?= $block->escapeJs(__('Please select Checkout module')) ?>"
+            }
+        }
+    }
+}
+</script>

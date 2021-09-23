@@ -1,0 +1,180 @@
+/* BASICS */
+.hide-textarea {
+    display: none !important;
+}
+.snm-cm-wrap {
+    position: relative;
+    min-height: 20em;
+}
+.snm-cm-wrap .ui-icon-gripsmall-diagonal-se:before {
+    content: '\e644';
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Admin Icons';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    speak: none;
+    color: #15bcff;
+    transform: rotate(90deg);
+    display: block;
+}
+
+.snm-cm-wrap .ui-resizable-se {
+    bottom: 1px;
+    right: 1px;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    z-index: 9 !important;
+}
+
+.snm-cm-wrap.ui-resizable:after {
+    content: 'Press F11 to Full Screen Editing';
+    top: -20px;
+    right: 0;
+    position: absolute;
+    font-size: 13px;
+}
+
+.snm-cm-wrap .CodeMirror-vscrollbar {
+    overflow-y: auto;
+}
+
+.snm-cm-wrap .cm-s-default .cm-header {
+    color: blue;
+}
+
+.snm-cm-wrap .cm-s-default .cm-quote {
+    color: #090;
+}
+
+.snm-cm-wrap .cm-negative {
+    color: #d44;
+}
+
+.snm-cm-wrap .cm-positive {
+    color: #292;
+}
+
+.snm-cm-wrap .cm-header, .cm-strong {
+    font-weight: bold;
+}
+
+.snm-cm-wrap .cm-em {
+    font-style: italic;
+}
+
+.snm-cm-wrap .cm-link {
+    text-decoration: underline;
+}
+
+.snm-cm-wrap .cm-strikethrough {
+    text-decoration: line-through;
+}
+
+.snm-cm-wrap .cm-s-default .cm-keyword {
+    color: #aa00be;
+}
+
+.snm-cm-wrap .cm-s-default .cm-atom {
+    color: #219;
+}
+
+.snm-cm-wrap .cm-s-default .cm-number {
+    color: #164;
+}
+
+.snm-cm-wrap .cm-s-default .cm-def {
+    color: #00f;
+}
+
+.snm-cm-wrap .cm-s-default .cm-variable {
+    color: #00f;
+}
+
+.snm-cm-wrap .cm-s-default .cm-punctuation,
+.snm-cm-wrap .cm-s-default .cm-property,
+.snm-cm-wrap .cm-s-default .cm-operator {
+}
+
+.snm-cm-wrap .cm-s-default .cm-variable-2 {
+    color: #05a;
+}
+
+.snm-cm-wrap .cm-s-default .cm-variable-3 {
+    color: #085;
+}
+
+.snm-cm-wrap .cm-s-default .cm-comment {
+    color: #a50;
+}
+
+.snm-cm-wrap .cm-s-default .cm-string {
+    color: #a11;
+}
+
+.snm-cm-wrap .cm-s-default .cm-string-2 {
+    color: #f50;
+}
+
+.snm-cm-wrap .cm-s-default .cm-meta {
+    color: #555;
+}
+
+.snm-cm-wrap .cm-s-default .cm-qualifier {
+    color: #555;
+}
+
+.snm-cm-wrap .cm-s-default .cm-builtin {
+    color: #30a;
+}
+
+.snm-cm-wrap .cm-s-default .cm-bracket {
+    color: #997;
+}
+
+.snm-cm-wrap .cm-s-default .cm-tag {
+    color: #17ae00;
+}
+
+.snm-cm-wrap .cm-s-default .cm-attribute {
+    color: #00c;
+}
+
+.snm-cm-wrap .cm-s-default .cm-hr {
+    color: #999;
+}
+
+.snm-cm-wrap .cm-s-default .cm-link {
+    color: #00c;
+}
+
+.cm-s-default .cm-error {
+    color: #f00;
+    text-decoration: underline;
+}
+
+.cm-invalidchar {
+    color: #f00;
+}
+
+.CodeMirror-foldmarker {
+    color: blue;
+    text-shadow: #b9f 1px 1px 2px, #b9f -1px -1px 2px, #b9f 1px -1px 2px, #b9f -1px 1px 2px;
+    font-family: arial;
+    line-height: .3;
+    cursor: pointer;
+}
+.CodeMirror-foldgutter {
+    width: .7em;
+}
+.CodeMirror-foldgutter-open,
+.CodeMirror-foldgutter-folded {
+    cursor: pointer;
+}
+.CodeMirror-foldgutter-open:after {
+    content: "\25BE";
+}
+.CodeMirror-foldgutter-folded:after {
+    content: "\25B8";
+}

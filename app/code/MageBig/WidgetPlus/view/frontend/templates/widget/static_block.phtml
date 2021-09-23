@@ -1,0 +1,120 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+$cfHelper = $this->helper('MageBig\WidgetPlus\Helper\Config');
+$static   = $block->getStatic();
+$id       = $block->getWidgetId();
+$slider   = $block->getData('slider');
+$title    = $block->escapeHtml($block->getData('widget_title'), ['h2', 'h3', 'h4', 'h5', 'div', 'span', 'i', 'br', 'a']);
+$class    = $block->escapeQuote($block->getData('classes'));
+$bType    = $block->getData('background_type');
+$bvType   = $block->getData('background_video_type');
+
+?>
+<div class="widgetplus widgetplus-block slider-<?= $slider ?> <?= $class ?> <?php if ($bvType == 'fullscreen') echo 'video-fullscreen' ?>"
+     id="<?= $id ?>"
+     <?php if ($bvType) : ?>data-videosrc="<?= $cfHelper->getBaseMediaUrl() . $block->getData('background_video') ?>"<?php endif; ?> >
+    <div class="block-static <?= $slider != 0 ? 'clearfix' : '' ?>">
+        <?php if ($title): ?>
+            <div class="main-heading">
+                <h2 class="heading-title"><span><?= __($title) ?></span></h2>
+            </div>
+        <?php endif ?>
+        <div class="<?= $slider != 0 ? 'owl-carousel owl-theme ' : 'block-wrap' ?>">
+            <?= $static; ?>
+        </div>
+    </div>
+
+    <?php if ($bType == 1) : ?>
+        <script>
+            require(['jquery'], function ($) {
+                $(document).ready(function ($) {
+                    $('#<?= $id ?>').css({
+                        background: '<?= $block->getData('background_property') ?>',
+                        backgroundImage: 'url(<?= $cfHelper->getBaseMediaUrl() . $block->getData('parallax_background_image') ?>)'
+                    });
+                });
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if ($slider == 1 || $slider == 2): ?>
+        <?php
+        $autoplay        = is_numeric($block->getData('autoplay')) ? 'true' : 'false';
+        $autoplayTimeout = is_numeric($block->getData('autoplay')) ? (int)$block->getData('autoplay') : 5000;
+        $items           = $slider == 1 ? (is_numeric($block->getData('column')) ? (int)$block->getData('column') : 4) : 1;
+        $margin          = $slider == 1 ? (is_numeric($block->getData('margin')) ? (int)$block->getData('margin') : 30) : 0;
+        $nav             = (bool)$block->getData('navigation') ? 'true' : 'false';
+        $dots            = (bool)$block->getData('paging') ? 'true' : 'false';
+        $responsive      = $slider == 1 ? $cfHelper->getCfRes($this->getData('x0'), $this->getData('x576'), $this->getData('x768'), $this->getData('x992'), $this->getData('x1200'), $this->getData('x1600')) : '{}';
+        ?>
+        <script type="text/x-magento-init">
+            {
+                "#<?= $id ?>": {
+                    "MageBig_WidgetPlus/js/owl.carousel-set": {
+                        "autoplay"          : <?= $autoplay ?>,
+                        "autoplayTimeout"   : <?= $autoplayTimeout ?>,
+                        "items"             : <?= $items ?>,
+                        "margin"            : <?= $margin ?>,
+                        "nav"               : <?= $nav ?>,
+                        "dots"              : <?= $dots ?>,
+                        "responsive"        : <?= $responsive ?>
+                    }
+                }
+            }
+
+        </script>
+    <?php endif; ?>
+
+    <?php if ($block->getData('countdown')): ?>
+        <script type="text/x-magento-init">
+            {
+                "#<?= $id ?> > .block-static .promo-count": {
+                    "MageBig_WidgetPlus/js/jcountdown-set": {
+                        "dataAttr"          : "date",
+                        "dayText"           : "d",
+                        "hourText"          : "h",
+                        "minText"           : "m",
+                        "secText"           : "s",
+                        "daySingularText"   : "d",
+                        "hourSingularText"  : "h",
+                        "minSingularText"   : "m",
+                        "secSingularText"   : "s",
+                        "offset"            : <?= $cfHelper->getOffsetTimeZone(); ?>
+                    }
+                }
+            }
+        </script>
+    <?php endif ?>
+
+    <?php if ($bType == 2): ?>
+        <script type="text/x-magento-init">
+            {
+                "#<?= $id ?>": {
+                    "MageBig_WidgetPlus/js/parallax-set": {
+                        "imageSrc": "<?= $cfHelper->getBaseMediaUrl() . $block->getData('parallax_background_image') ?>"
+                    }
+                }
+            }
+        </script>
+    <?php endif ?>
+
+    <?php if ($bType == 3): ?>
+        <script type="text/x-magento-init">
+            {
+                "#<?= $id ?>": {
+                    "MageBig_WidgetPlus/js/videobackground": {
+                        "videoType": "<?= $bvType ?>",
+                        "autoplay": "<?= $block->getData('background_video_autoplay') ? 'autoplay' : '' ?>",
+                        "muted": "<?= $block->getData('background_video_mute') ? 'muted' : '' ?>",
+                        "controls": "<?= $bvType == 'auto' ? 'controls' : '' ?>"
+                    }
+                }
+            }
+        </script>
+    <?php endif ?>
+</div>

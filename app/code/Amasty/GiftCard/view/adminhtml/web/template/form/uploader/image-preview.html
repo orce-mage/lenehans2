@@ -1,0 +1,35 @@
+<div class="admin__field">
+    <div class="admin__field-control">
+        <div class="file-uploader-summary">
+            <div class="file-uploader-preview" data-amgiftcard-js="uploader">
+                <img
+                        data-amgiftcard-js="image"
+                        tabindex="0"
+                        event="load: $parent.onPreviewLoad.bind($parent)"
+                        attr="
+                        src: $parent.getFilePreview($file),
+                        alt: $file.name">
+                <div data-amgiftcard-js="code" class="ui-draggable amcard-draggable -code">
+                    <span translate="'Code'" />
+                </div>
+                <div data-amgiftcard-js="expiry-date" class="ui-draggable amcard-draggable -date">
+                    <span translate="'Expiry Date'" />:
+                    <span translate="'01 January 2021'" />
+                </div>
+                <div data-amgiftcard-js="balance" class="ui-draggable amcard-draggable -balance">
+                    <span translate="'$100'" />
+                </div>
+                <div class="actions">
+                    <button
+                            type="button"
+                            class="action-remove"
+                            data-role="delete-button"
+                            attr="title: $t('Delete image')"
+                            click="$parent.removeFile.bind($parent, $file)">
+                        <span translate="'Delete image'"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

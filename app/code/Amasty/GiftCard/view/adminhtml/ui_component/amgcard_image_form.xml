@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amgcard_image_form.amgcard_image_form_data_source</item>
+            <item name="deps" xsi:type="string">amgcard_image_form.amgcard_image_form_data_source</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">amgcard_image_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/</item>
+            </item>
+            <item name="delete" xsi:type="string">Amasty\GiftCard\Block\Adminhtml\Buttons\Image\DeleteButton</item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">save primary</item>
+            </item>
+            <item name="save_and_continue" xsi:type="array">
+                <item name="name" xsi:type="string">save_and_continue</item>
+                <item name="label" xsi:type="string" translate="true">Save and Continue Edit</item>
+                <item name="class" xsi:type="string">save_and_continue</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="amgcard_image_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Amasty\GiftCard\Model\Image\DataProvider\Form</argument>
+            <argument name="name" xsi:type="string">amgcard_image_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">image_id</argument>
+            <argument name="requestFieldName" xsi:type="string">image_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Settings</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+            </item>
+        </argument>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Image Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Enabled</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="source" xsi:type="string">general</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="string">1</item>
+                        <item name="false" xsi:type="string">0</item>
+                    </item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="source" xsi:type="string">image</item>
+                    <item name="label" xsi:type="string" translate="true">Upload Image</item>
+
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="template" xsi:type="string">Amasty_GiftCard/form/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Amasty_GiftCard/form/uploader/image-preview</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/file-uploader</item>
+                    <item name="maxFileSize" xsi:type="string">2097152</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg png gif</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="amgcard/image/uploadtemp"/>
+                    </item>
+                    <item name="deleteUrl" xsi:type="url" path="amgcard/image/deletetemp"/>
+                    <item name="notice" xsi:type="string" translate="true">Allowed image types: jpg, jpeg, png and gif. Recommended image size is 446x217px.</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="textColorField" xsi:type="string">amgcard_image_form.amgcard_image_form.general.code_text_color</item>
+                </item>
+            </argument>
+        </field>
+        <field name="expiry_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/checkbox</item>
+                    <item name="elementSelector" xsi:type="string" translate="true">[data-amgiftcard-js="expiry-date"]</item>
+                    <item name="label" xsi:type="string" translate="true">Add Expiry Date to Gift Card</item>
+                    <item name="links" xsi:type="array">
+                        <item name="value" xsi:type="string">${ $.provider }:data.baking_data.expiry_date.is_enabled</item>
+                        <item name="positionY" xsi:type="string">${ $.provider }:data.baking_data.expiry_date.pos_y</item>
+                        <item name="positionX" xsi:type="string">${ $.provider }:data.baking_data.expiry_date.pos_x</item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <item name="imageValue" xsi:type="string">${ $.provider }:data.image</item>
+                        <item name="imageRendered" xsi:type="string">${ $.parentName }.image_draggable:imageRendered</item>
+                    </item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">If enabled, a draggable element ‘Expiry Date: 01 January 2021’ will be added to Gift Card Image for you to specify the position of expiry date on Gift Card.</item>
+                    </item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amgcard_image_form.amgcard_image_form.general.date_text_color</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amgcard_image_form.amgcard_image_form.general.date_text_color</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="date_text_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/color-select</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="elementTmpl" xsi:type="string">Amasty_GiftCard/form/color-select</item>
+                    <item name="links" xsi:type="array">
+                        <item name="value" xsi:type="string">${ $.provider }:data.baking_data.expiry_date.text_color</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Expiry Date Text Color</item>
+                    <item name="notice" xsi:type="string" translate="true">Click the field to choose color.</item>
+                    <item name="labelVisible" xsi:type="boolean">true</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">color_picker</item>
+                </item>
+            </argument>
+        </field>
+        <field name="balance">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/checkbox</item>
+                    <item name="label" xsi:type="string" translate="true">Add Balance to Gift Card</item>
+                    <item name="elementSelector" xsi:type="string" translate="true">[data-amgiftcard-js="balance"]</item>
+                    <item name="links" xsi:type="array">
+                        <item name="value" xsi:type="string">${ $.provider }:data.baking_data.balance.is_enabled</item>
+                        <item name="positionY" xsi:type="string">${ $.provider }:data.baking_data.balance.pos_y</item>
+                        <item name="positionX" xsi:type="string">${ $.provider }:data.baking_data.balance.pos_x</item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <item name="imageValue" xsi:type="string">${ $.provider }:data.image</item>
+                        <item name="imageRendered" xsi:type="string">${ $.parentName }.image_draggable:imageRendered</item>
+                    </item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">If enabled, a draggable element ‘$100’ will be added to Gift Card Image for you to specify the position of balance on Gift Card.</item>
+                    </item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amgcard_image_form.amgcard_image_form.general.balance_text_color</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amgcard_image_form.amgcard_image_form.general.balance_text_color</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="balance_text_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/color-select</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="elementTmpl" xsi:type="string">Amasty_GiftCard/form/color-select</item>
+                    <item name="links" xsi:type="array">
+                        <item name="value" xsi:type="string">${ $.provider }:data.baking_data.balance.text_color</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Balance Text Color</item>
+                    <item name="notice" xsi:type="string" translate="true">Click the field to choose color.</item>
+                    <item name="labelVisible" xsi:type="boolean">true</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">color_picker</item>
+                </item>
+            </argument>
+        </field>
+        <field name="image_draggable">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Specify Position for Code and Other Elements</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="additionalClasses" xsi:type="string">amcard-upload-image</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/image-uploader</item>
+                    <item name="template" xsi:type="string">Amasty_GiftCard/form/uploader/image</item>
+                    <item name="isEnabled" xsi:type="string">1</item>
+                    <item name="previewTmpl" xsi:type="string">Amasty_GiftCard/form/uploader/image-preview</item>
+                    <item name="maxFileSize" xsi:type="string">2097152</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg png gif</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="amgcard/image/uploadtemp"/>
+                    </item>
+                    <item name="deleteUrl" xsi:type="url" path="amgcard/image/deletetemp"/>
+                    <item name="links" xsi:type="array">
+                        <item name="value" xsi:type="string">${ $.provider }:data.image</item>
+                        <item name="codePosX" xsi:type="string">${ $.provider }:data.baking_data.code.pos_x</item>
+                        <item name="codePosY" xsi:type="string">${ $.provider }:data.baking_data.code.pos_y</item>
+                        <item name="isEnabled" xsi:type="string">${ $.provider }:data.baking_data.code.is_enabled</item>
+                    </item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Please, specify the position for code and other elements (if enabled) on Gift Card by dragging them into the appropriate places.</item>
+                    </item>
+                    <item name="textColorField" xsi:type="string">amgcard_image_form.amgcard_image_form.general.code_text_color</item>
+                    <item name="imageField" xsi:type="string">amgcard_image_form.amgcard_image_form.general.image_draggable</item>
+                    <item name="dateField" xsi:type="string">amgcard_image_form.amgcard_image_form.general.expiry_date</item>
+                    <item name="balanceField" xsi:type="string">amgcard_image_form.amgcard_image_form.general.balance</item>
+                </item>
+            </argument>
+        </field>
+        <field name="code_text_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Amasty_GiftCard/js/form/element/color-select</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="elementTmpl" xsi:type="string">Amasty_GiftCard/form/color-select</item>
+                    <item name="links" xsi:type="array">
+                        <item name="value" xsi:type="string">${ $.provider }:data.baking_data.code.text_color</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Code Text Color</item>
+                    <item name="notice" xsi:type="string" translate="true">Click the field to choose color.</item>
+                    <item name="labelVisible" xsi:type="boolean">true</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">color_picker</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

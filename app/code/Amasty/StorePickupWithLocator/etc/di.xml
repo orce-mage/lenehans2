@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\StorePickupWithLocator\Api\Data\QuoteInterface" type="Amasty\StorePickupWithLocator\Model\Quote" />
+    <preference for="Amasty\StorePickupWithLocator\Api\QuoteRepositoryInterface" type="Amasty\StorePickupWithLocator\Model\QuoteRepository" />
+    <preference for="Amasty\StorePickupWithLocator\Api\Data\QuoteSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Amasty\StorePickupWithLocator\Api\Data\OrderInterface" type="Amasty\StorePickupWithLocator\Model\Order" />
+    <preference for="Amasty\StorePickupWithLocator\Api\OrderRepositoryInterface" type="Amasty\StorePickupWithLocator\Model\OrderRepository" />
+
+    <preference for="Amasty\StorePickupWithLocator\Api\GuestLocationPickupValuesInterface" type="Amasty\StorePickupWithLocator\Model\GuestLocationPickupValues" />
+    <preference for="Amasty\StorePickupWithLocator\Api\LocationPickupValuesInterface" type="Amasty\StorePickupWithLocator\Model\LocationPickupValues" />
+
+    <type name="Amasty\StorePickupWithLocator\Block\Cart\LayoutProcessor">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\StorePickupWithLocator\Model\Carrier\Shipping">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <!-- for save store pickup data -->
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="Amasty_StorePickupWithLocator::ShippingInformationManagementPlugin" type="Amasty\StorePickupWithLocator\Plugin\Checkout\Model\ShippingInformationManagementPlugin"/>
+    </type>
+
+    <!-- for correct section time updates -->
+    <type name="Magento\Customer\CustomerData\Section\Identifier">
+        <plugin name="Amasty_StorePickupWithLocator::IdentifierPlugin" type="Amasty\StorePickupWithLocator\Plugin\Customer\CustomerData\Section\IdentifierPlugin"/>
+    </type>
+
+    <type name="Amasty\StorePickupWithLocator\Model\LocationProvider">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <!-- for disable shipping address validation -->
+    <type name="Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule">
+        <plugin name="Amasty_StorePickupWithLocator::disableShippingValidation" type="Amasty\StorePickupWithLocator\Plugin\Quote\Model\ValidationRules\ShippingAddressValidationRulePlugin"/>
+    </type>
+
+    <!-- For disable shipping address validation 2.2.x -->
+    <type name="Magento\Quote\Model\QuoteValidator">
+        <plugin name="Amasty_StorePickupWithLocator::disableShippingValidationOldVersion" type="Amasty\StorePickupWithLocator\Plugin\Quote\Model\QuoteValidatorPlugin"/>
+    </type>
+
+    <!-- Set Shipping Address To Billing if select Braintree payment -->
+    <type  name="Magento\Quote\Model\QuoteManagement">
+        <plugin name="Amasty_StorePickupWithLocator::BraintreeBillingAddressResolver" type="Amasty\StorePickupWithLocator\Plugin\Quote\Model\QuoteManagementPlugin"/>
+    </type>
+
+    <!-- For reset shipping address before place order via paypal express review -->
+    <type  name="Magento\Paypal\Model\Express">
+        <plugin name="Amasty_StorePickupWithLocator::PaypalShippingAddressReplacement" type="Amasty\StorePickupWithLocator\Plugin\Paypal\Model\ExpressPlugin"/>
+    </type>
+
+    <type name="Amasty\StorePickupWithLocator\Block\Component\PickupDetails">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="cache_lifetime" xsi:type="number">86400</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\StorePickupWithLocator\Model\Location\LocationsAvailability">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\StorePickupWithLocator\Model\Location\LocationProductFilterApplier">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="no_condition" xsi:type="object">Amasty\StorePickupWithLocator\Model\Location\Filter\NoConditionFilter</item>
+                <item name="product_attribute" xsi:type="object">Amasty\StorePickupWithLocator\Model\Location\Filter\ProductAttributeConditionFilter</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\StorePickupWithLocator\Block\Location">
+        <arguments>
+            <argument name="locationCollectionForMapProvider" xsi:type="object">Amasty\StorePickupWithLocator\Model\Location\MapProvider\LocationCollectionForMapProvider</argument>
+        </arguments>
+    </type>
+
+    <!-- add store pickup information to shipping description -->
+    <type  name="Magento\Sales\Model\Order">
+        <plugin name="Amasty_StorePickupWithLocator::AddShippingDescription" type="Amasty\StorePickupWithLocator\Plugin\Sales\Model\AddShippingDescription"/>
+    </type>
+</config>

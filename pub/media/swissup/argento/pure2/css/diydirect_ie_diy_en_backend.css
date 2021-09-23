@@ -1,0 +1,5 @@
+.nav-sections .navigation .level0 .submenu a{font-size:14px;}
+.action.primary{background:transparent;border-color:#F86706;color:#F86706;}
+.action.primary:hover, .action.primary:focus, .action.primary:active{background:#FF8724;border-color:#F86706;color:#ffffff;}
+.cart-summary .checkout-methods-items .action.primary.checkout, .box-tocart .actions .action.primary, .block-minicart .actions .action.primary{background:transparent;border-color:#F86706;color:#F86706;}
+.cart-summary .checkout-methods-items .action.primary.checkout:hover, .box-tocart .actions .action.primary:hover, .block-minicart .actions .action.primary:hover, .cart-summary .checkout-methods-items .action.primary.checkout:active, .box-tocart .actions .action.primary:active, .block-minicart .actions .action.primary:active{background:#FF8724;border-color:#FF8724;color:#FFFFFF;}

@@ -1,0 +1,60 @@
+@import 'abstracts/_icons.less';
+
+@tile-abstract__background-image: linear-gradient(#FC5748, #FF7A5B);
+@tile-module__background-image: url(@icon__document), @tile-abstract__background-image;
+@tile-module__background-size: 64px, auto;
+
+@tile--address_autocomplete__background-image:  url(@icon__globe), @tile-abstract__background-image;
+@tile--checkout_cart__background-image:         url(@icon__cart), @tile-abstract__background-image;
+@tile--checkoutfields__background-image:        url(@icon__list), @tile-abstract__background-image;
+@tile--firecheckout__background-image:          url(@icon__fire), @tile-abstract__background-image;
+@tile--delivery_date__background-image:         url(@icon__calendar), @tile-abstract__background-image;
+@tile--geoip__background-image:                 url(@icon__location), @tile-abstract__background-image;
+@tile--orderattachments__background-image:      url(@icon__paper-clip), @tile-abstract__background-image;
+@tile--subscribe_at_checkout__background-image: url(@icon__mail), @tile-abstract__background-image;
+@tile--success_page__background-image:          url(@icon__clipboard-check), @tile-abstract__background-image;
+@tile--taxvat__background-image:                url(@icon__tax), @tile-abstract__background-image;
+
+.swissup-checkout-container {
+    .admin__page-nav-link {
+        &::before {
+            content: '';
+            background-image: @tile-module__background-image;
+            background-size: @tile-module__background-size;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: block;
+            height: 120px;
+            width: 120px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 20px -3px rgba(0,0,0,0.35);
+            overflow: hidden;
+
+        }
+
+        @__modules: address_autocomplete, checkout_cart, checkoutfields, delivery_date, firecheckout, geoip, orderattachments, subscribe_at_checkout, success_page, taxvat;
+        .__loop (0) {}
+        .__loop (@index) when (@index > 0) {
+            @__module: extract(@__modules, @index);
+            &[href*=@{__module}]::before {
+                @__background-image: "tile--@{__module}__background-image";
+                background-image: @@__background-image;
+            }
+            .__loop (@index - 1);
+        }
+
+        .__loop(length(@__modules));
+
+        span {
+            display: inline-block;
+            max-width: 120px;
+        }
+    }
+
+    ._active {
+        .admin__page-nav-link::before {
+            box-shadow: 0 3px 20px -3px rgba(0,0,0,0.35), 0 0 0 4px #e4e4e4;
+        }
+    }
+}

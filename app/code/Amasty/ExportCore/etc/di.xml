@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_ExportCore
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Export Strategies -->
+    <virtualType name="AmastyExport" type="Amasty\ExportCore\Export\ExportStrategy">
+        <arguments>
+            <argument name="actionGroups" xsi:type="array">
+                <item name="preparation" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="cleanup" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\CleanupAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="initialize" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Preparation\InitializeAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="prepareCollection" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Preparation\PrepareCollectionAction</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="export" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="fetch" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Export\Fetch\FetchAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="data_handling" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Export\DataHandling\DataHandlingAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="static_fields" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Export\DataHandling\StaticFieldsAction</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                        <item name="mapping" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Export\Mapping\MappingAction</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                        <item name="virtualFieldGenerators" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Export\VirtualFields\VirtualFieldsAction</item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                        </item>
+                        <item name="data-cleanup" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Export\DataCleanUpAction</item>
+                            <item name="sortOrder" xsi:type="number">50</item>
+                        </item>
+                        <item name="generation" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Export\Generation\SaveAction</item>
+                            <item name="sortOrder" xsi:type="number">60</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="finalization" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="merge" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Conclusion\RenderAction</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                        <item name="postProcessing" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Conclusion\PostProcessingAction</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                        </item>
+                        <item name="delivery" xsi:type="array">
+                            <item name="class" xsi:type="string">Amasty\ExportCore\Export\Action\Conclusion\DeliveryAction</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- /Export Strategies -->
+
+    <!-- Subentity Fetch Actions -->
+<!--    <type name="Amasty\ExportCore\Export\Action\Export\Fetch\FetchAction">-->
+<!--        <arguments>-->
+<!--            <argument name="subentityActions" xsi:type="array">-->
+<!--                <item name=""></item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
+    <!-- /Subentity Fetch Actions -->
+
+    <type name="Amasty\ExportCore\Export\Run">
+        <arguments>
+            <argument name="strategies" xsi:type="array">
+                <item name="export" xsi:type="object">AmastyExport</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ExportCore\Api\Template\TemplateConfigInterface">
+        <arguments>
+            <argument name="templateConfig" xsi:type="array">
+                <item name="csv" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ExportCore\Export\Template\Type\Csv\Renderer::TYPE_ID</item>
+                    <item name="rendererClass" xsi:type="string">Amasty\ExportCore\Export\Template\Type\Csv\Renderer</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ExportCore\Export\Template\Type\Csv\Meta</item>
+                    <item translatable="true" name="name" xsi:type="string">CSV</item>
+                </item>
+                <item name="xml" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ExportCore\Export\Template\Type\Xml\Renderer::TYPE_ID</item>
+                    <item name="rendererClass" xsi:type="string">Amasty\ExportCore\Export\Template\Type\Xml\Renderer</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ExportCore\Export\Template\Type\Xml\Meta</item>
+                    <item translatable="true" name="name" xsi:type="string">XML</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ExportCore\Api\PostProcessing\PostProcessingConfigInterface">
+        <arguments>
+            <argument name="postProcessingConfig" xsi:type="array"/>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ExportCore\Api\Filter\FilterConfigInterface">
+        <arguments>
+            <argument name="filterConfig" xsi:type="array">
+                <item name="text" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ExportCore\Export\Filter\Type\Text\Filter::TYPE_ID</item>
+                    <item name="filterClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Text\Filter</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Text\Meta</item>
+                </item>
+                <item name="date" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ExportCore\Export\Filter\Type\Date\Filter::TYPE_ID</item>
+                    <item name="filterClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Date\Filter</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Date\Meta</item>
+                </item>
+                <item name="select" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ExportCore\Export\Filter\Type\Select\Filter::TYPE_ID</item>
+                    <item name="filterClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Select\Filter</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Select\Meta</item>
+                </item>
+                <item name="toggle" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ExportCore\Export\Filter\Type\Toggle\Filter::TYPE_ID</item>
+                    <item name="filterClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Toggle\Filter</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ExportCore\Export\Filter\Type\Toggle\Meta</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ExportCore\Api\FileDestination\FileDestinationConfigInterface">
+        <arguments>
+            <argument name="fileDestinationConfig" xsi:type="array">
+                <item name="server" xsi:type="array">
+                    <item name="code" xsi:type="const">Amasty\ExportCore\Export\FileDestination\Type\ServerFile\Meta::TYPE_ID</item>
+                    <item name="fileDestinationClass" xsi:type="string">Amasty\ExportCore\Export\FileDestination\Type\ServerFile\FileDestination</item>
+                    <item name="metaClass" xsi:type="string">Amasty\ExportCore\Export\FileDestination\Type\ServerFile\Meta</item>
+                    <item translatable="true" name="name" xsi:type="string">Store Exported File On Server</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Meta -->
+    <virtualType name="AmastyBasicExportMeta" type="Amasty\ExportCore\Export\Form\CompositeForm">
+        <arguments>
+            <argument name="metaProviders" xsi:type="array">
+                <item name="template" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ExportCore\Export\Form\Template</item>
+                </item>
+                <item name="filename" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ExportCore\Export\Form\Filename</item>
+                </item>
+                <item name="postProcessing" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ExportCore\Export\Form\PostProcessing</item>
+                </item>
+                <item name="fileDestination" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ExportCore\Export\Form\FileDestination</item>
+                </item>
+                <item name="fields" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ExportCore\Export\Form\FieldsAdvanced</item>
+                </item>
+                <item name="filter" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="metaClass" xsi:type="object">Amasty\ExportCore\Export\Form\Filter</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\ExportCore\Export\FormProvider">
+        <arguments>
+            <argument name="compositeForm" xsi:type="array">
+                <item name="basic" xsi:type="object">AmastyBasicExportMeta</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- /Meta -->
+
+    <type name="Amasty\ExportCore\Export\Config\EntityConfigProvider">
+        <arguments>
+            <argument name="entitySources" xsi:type="array">
+                <item name="xml" xsi:type="object">Amasty\ExportCore\Export\Config\EntitySource\Xml</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ExportCore\Export\Config\RelationConfigProvider">
+        <arguments>
+            <argument name="relationSources" xsi:type="array">
+                <item name="xml" xsi:type="object">Amasty\ExportCore\Export\Config\RelationSource\Xml</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Reader Config Start -->
+    <type name="Amasty\ExportCore\SchemaReader\Config\Reader">
+        <arguments>
+            <argument name="schemaLocator" xsi:type="object">Amasty\ExportCore\SchemaReader\Config\SchemaLocator</argument>
+            <argument name="converter" xsi:type="object">Amasty\ExportCore\SchemaReader\Config\Converter</argument>
+            <argument name="fileName" xsi:type="string">am_export.xml</argument>
+            <argument name="compiler" xsi:type="object">AmastyImportExportCompiler</argument>
+        </arguments>
+    </type>
+    <!-- Reader Config End -->
+
+    <!-- CLI Configuration Start -->
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="amExportRunJob" xsi:type="object">Amasty\ExportCore\Console\Command\RunJob</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\ExportCore\Console\Command\RunJob">
+        <arguments>
+            <argument name="runJob" xsi:type="object">Amasty\ExportCore\Console\Command\Operation\RunJob\Proxy</argument>
+        </arguments>
+    </type>
+    <!-- CLI Configuration End -->
+
+    <!-- Preferences  -->
+    <preference for="Amasty\ExportCore\Api\Config\EntityConfigInterface" type="Amasty\ExportCore\Export\Config\EntityConfig" />
+    <preference for="Amasty\ExportCore\Api\Config\ProfileConfigInterface" type="Amasty\ExportCore\Export\Config\ProfileConfig" />
+    <preference for="Amasty\ExportCore\Api\Config\Profile\FieldsConfigInterface" type="Amasty\ExportCore\Export\Config\Profile\FieldsConfig" />
+    <preference for="Amasty\ExportCore\Api\Config\Profile\ModifierInterface" type="Amasty\ExportCore\Export\Config\Profile\Modifier" />
+    <preference for="Amasty\ExportCore\Api\Config\Profile\FieldInterface" type="Amasty\ExportCore\Export\Config\Profile\Field" />
+    <preference for="Amasty\ExportCore\Api\Config\Profile\FieldFilterInterface" type="Amasty\ExportCore\Export\Config\Profile\FieldFilter" />
+    <preference for="Amasty\ExportCore\Api\Template\TemplateConfigInterface" type="Amasty\ExportCore\Export\Template\TemplateConfig" />
+    <preference for="Amasty\ExportCore\Api\ChunkStorageInterface" type="Amasty\ExportCore\Export\Parallelization\ChunkStorage" />
+    <preference for="Amasty\ExportCore\Api\ExportResultInterface" type="Amasty\ExportCore\Export\ExportResult" />
+    <preference for="Amasty\ExportCore\Api\ExportProcessInterface" type="Amasty\ExportCore\Export\ExportProcess" />
+    <preference for="Amasty\ExportCore\Api\FileDestination\FileDestinationConfigInterface" type="Amasty\ExportCore\Export\FileDestination\FileDestinationConfig" />
+    <preference for="Amasty\ExportCore\Api\Filter\FilterConfigInterface" type="Amasty\ExportCore\Export\Filter\FilterConfig" />
+    <preference for="Amasty\ExportCore\Api\PostProcessing\PostProcessingConfigInterface" type="Amasty\ExportCore\Export\PostProcessing\PostProcessingConfig" />
+    <preference for="Amasty\ExportCore\Api\Config\Relation\RelationInterface" type="Amasty\ExportCore\Export\SubEntity\Relation\RelationConfig"/>
+
+    <preference for="Amasty\ExportCore\Api\Config\Entity\FieldsConfigInterface" type="Amasty\ExportCore\Export\Config\Entity\FieldsConfig" />
+    <preference for="Amasty\ExportCore\Api\Config\Entity\Field\FieldInterface" type="Amasty\ExportCore\Export\Config\Entity\Field\Field" />
+    <preference for="Amasty\ExportCore\Api\Config\Entity\Field\FilterInterface" type="Amasty\ExportCore\Export\Config\Entity\Field\Filter" />
+    <preference for="Amasty\ExportCore\Api\Config\Entity\Field\ActionInterface" type="Amasty\ExportCore\Export\Config\Entity\Field\Action" />
+    <preference for="Amasty\ExportCore\Api\Config\Entity\Field\VirtualFieldInterface" type="Amasty\ExportCore\Export\Config\Entity\Field\VirtualField" />
+
+    <preference for="Amasty\ExportCore\Export\Filter\Type\Date\ConfigInterface" type="Amasty\ExportCore\Export\Filter\Type\Date\Config" />
+    <preference for="Amasty\ExportCore\Export\Filter\Type\Select\ConfigInterface" type="Amasty\ExportCore\Export\Filter\Type\Select\Config" />
+    <preference for="Amasty\ExportCore\Export\Filter\Type\Text\ConfigInterface" type="Amasty\ExportCore\Export\Filter\Type\Text\Config" />
+    <preference for="Amasty\ExportCore\Export\Filter\Type\Toggle\ConfigInterface" type="Amasty\ExportCore\Export\Filter\Type\Toggle\Config" />
+
+    <preference for="Amasty\ExportCore\Export\Template\Type\Csv\ConfigInterface" type="Amasty\ExportCore\Export\Template\Type\Csv\Config"/>
+    <preference for="Amasty\ExportCore\Export\Template\Type\Xml\ConfigInterface" type="Amasty\ExportCore\Export\Template\Type\Xml\Config"/>
+
+    <preference for="Amasty\ExportCore\Export\FileDestination\Type\ServerFile\ConfigInterface" type="Amasty\ExportCore\Export\FileDestination\Type\ServerFile\Config"/>
+    <!-- Preferences End  -->
+
+    <type name="Amasty\ExportCore\Api\ExportProcessInterface">
+        <plugin name="Amasty_ExportCore::helper_initialize" type="Amasty\ExportCore\Export\Temp\HelperInitializePlugin"/>
+    </type>
+
+    <type name="Magento\Setup\Module\Di\App\Task\Operation\ProxyGenerator">
+        <plugin name="Amasty_ExportCore::addFactories" type="Amasty\ExportCore\Plugin\GenerateFactories"/>
+    </type>
+</config>

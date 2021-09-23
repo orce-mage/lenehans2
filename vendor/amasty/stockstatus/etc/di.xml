@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Amasty\Stockstatus\Model\Rule">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="store_manager" xsi:type="object">Magento\Store\Model\StoreManagerInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Model\Stockstatus\Processor">
+        <arguments>
+            <argument name="specifications" xsi:type="array">
+                <item name="manual" xsi:type="array">
+                    <item name="sort_order" xsi:type="number">10</item>
+                    <item name="object" xsi:type="object">Amasty\Stockstatus\Model\Stockstatus\Specification\ManualStatus</item>
+                </item>
+                <item name="range" xsi:type="array">
+                    <item name="sort_order" xsi:type="number">20</item>
+                    <item name="object" xsi:type="object">Amasty\Stockstatus\Model\Stockstatus\Specification\RangeStatus</item>
+                </item>
+                <item name="rule" xsi:type="array">
+                    <item name="sort_order" xsi:type="number">30</item>
+                    <item name="object" xsi:type="object">Amasty\Stockstatus\Model\Stockstatus\Specification\RuleStatus</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Stockstatus\Model\Rule\Condition\CombineFactory"
+                 type="Magento\CatalogRule\Model\Rule\Condition\CombineFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Stockstatus\Model\Rule\Condition\Combine</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Stockstatus\Model\Rule\Condition">
+        <arguments>
+            <argument name="combineFactory" xsi:type="object">Amasty\Stockstatus\Model\Rule\Condition\CombineFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Model\Rule\Condition\Product\InStock">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="inventory" xsi:type="object">Amasty\Stockstatus\Model\ResourceModel\Inventory</item>
+                <item name="storeManager" xsi:type="object">Magento\Store\Model\StoreManagerInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Model\Rule\Condition\Product\IsNew">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="localeDate" xsi:type="object">Magento\Framework\Stdlib\DateTime\TimezoneInterface</item>
+                <item name="moduleManager" xsi:type="object">Magento\Framework\Module\Manager</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amasty_stockstatus_rule_listing_data_source" xsi:type="string">Amasty\Stockstatus\Model\ResourceModel\Rule\Grid\Collection</item>
+                <item name="amasty_stockstatus_rule_form_data_source" xsi:type="string">Amasty\Stockstatus\Model\ResourceModel\Rule\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Amasty\Stockstatus\Api\Data\RuleInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="ranges" xsi:type="string">Amasty\Stockstatus\Model\Extensions\Range\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="ranges" xsi:type="string">Amasty\Stockstatus\Model\Extensions\Range\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="ranges" xsi:type="string">Amasty\Stockstatus\Model\Extensions\Range\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Ui\Component\Listing\Column\Store">
+        <arguments>
+            <argument name="storeKey" xsi:type="string">stores</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Block\Cart\AbstractCart">
+        <plugin name="Amasty_Stockstatus::ShowStatusonCart" type="Amasty\Stockstatus\Plugin\Cart\AbstractCart" />
+    </type>
+
+    <type name="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder">
+        <plugin name="Amasty_Stockstatus::EmailStatus" type="Amasty\Stockstatus\Plugin\Order\Email\Items\DefaultOrder" />
+    </type>
+
+    <type name="Magento\Bundle\Block\Sales\Order\Items\Renderer">
+        <plugin name="Amasty_Stockstatus::EmailStatusBundle" type="Amasty\Stockstatus\Plugin\Order\Email\Items\DefaultOrder" />
+    </type>
+
+    <type name="Magento\GroupedProduct\Block\Product\View\Type\Grouped">
+        <plugin name="Amasty_Stockstatus::Grouped" type="Amasty\Stockstatus\Plugin\GroupedProduct\Block\Product\View\Type\GroupedPlugin" />
+    </type>
+
+    <type name="Magento\ConfigurableProduct\Plugin\Model\ResourceModel\Attribute\InStockOptionSelectBuilder">
+        <plugin name="Amasty_Stockstatus::disable-stock-filter"
+                type="Amasty\Stockstatus\Plugin\ConfigurableProduct\Model\ResourceModel\Attribute\InStockOptionSelectBuilder"/>
+    </type>
+
+    <type name="Magento\CatalogInventory\Model\Indexer\Stock\CacheCleaner">
+        <plugin name="Amasty_Stockstatus::clean-cache-after-order"
+                type="Amasty\Stockstatus\Plugin\CatalogInventory\Model\Indexer\Stock\CacheCleaner"/>
+    </type>
+
+    <type name="Amasty\Stockstatus\Model\Backend\UpdaterAttribute">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="attribute_creator" xsi:type="object">Amasty\Stockstatus\Model\Attribute\Creator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Block\Adminhtml\System\Config\Form\Field\OutOfStock">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="module_manager" xsi:type="object">Magento\Framework\Module\Manager</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Model\Backend\Rule\Initialization">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="rule" xsi:type="object">Amasty\Stockstatus\Model\Backend\Rule\Initialization\RuleProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Stockstatus\Model\Stockstatus\Renderer\Status">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="default" xsi:type="object">Amasty\Stockstatus\Model\Stockstatus\Renderer\Status\DefaultProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- should be in system di - because it is plugin to virtual type -->
+    <type name="Magento\CatalogSearch\Block\SearchResult\ListProduct">
+        <plugin name="Amasty_Stockstatus::SearchListStatus" type="Amasty\Stockstatus\Plugin\Catalog\Block\Product\ListProductPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Cart\Totals\ItemConverter">
+        <plugin name="Amasty_Stockstatus::add-stockstatus-info-to-totals-item" type="Amasty\Stockstatus\Plugin\Quote\Model\Cart\Totals\ItemConverter\AddStockstatusInformation" />
+    </type>
+
+    <preference for="Amasty\Stockstatus\Api\Data\RuleInterface" type="Amasty\Stockstatus\Model\Rule" />
+    <preference for="Amasty\Stockstatus\Api\RuleRepositoryInterface" type="Amasty\Stockstatus\Model\Repository\RuleRepository" />
+    <preference for="Amasty\Stockstatus\Api\Data\RangeInterface" type="Amasty\Stockstatus\Model\Range" />
+    <preference for="Amasty\Stockstatus\Api\RangeRepositoryInterface" type="Amasty\Stockstatus\Model\Repository\RangeRepository" />
+    <preference for="Amasty\Stockstatus\Api\Data\StockstatusInformationInterface" type="Amasty\Stockstatus\Model\Stockstatus\Information" />
+    <preference for="Amasty\Stockstatus\Api\Icon\GetByOptionIdInterface" type="Amasty\Stockstatus\Model\Icon\GetByOptionId" />
+    <preference for="Amasty\Stockstatus\Api\Icon\SaveIconInterface" type="Amasty\Stockstatus\Model\Icon\SaveIcon" />
+    <preference for="Amasty\Stockstatus\Api\Icon\GetNewInterface" type="Amasty\Stockstatus\Model\Icon\GetNew" />
+    <preference for="Amasty\Stockstatus\Api\Icon\RemoveIconEntityInterface" type="Amasty\Stockstatus\Model\Icon\RemoveIconEntity" />
+    <preference for="Amasty\Stockstatus\Api\Icon\RemoveIconFileInterface" type="Amasty\Stockstatus\Model\Icon\RemoveIconFile" />
+    <preference for="Amasty\Stockstatus\Api\Icon\UploadIconInterface" type="Amasty\Stockstatus\Model\Icon\UploadIcon" />
+    <preference for="Amasty\Stockstatus\Api\Icon\GetIconUrlInterface" type="Amasty\Stockstatus\Model\Icon\GetIconUrl" />
+    <preference for="Amasty\Stockstatus\Api\Data\StockstatusSettingsInterface" type="Amasty\Stockstatus\Model\StockstatusSettings" />
+    <preference for="Amasty\Stockstatus\Api\StockstatusSettingsRepositoryInterface" type="Amasty\Stockstatus\Model\Repository\StockstatusSettingsRepository" />
+    <preference for="Amasty\Stockstatus\Api\Icon\GetByStockstatusSettingInterface" type="Amasty\Stockstatus\Model\Icon\GetByStockstatusSetting" />
+    <preference for="Amasty\Stockstatus\Api\StockstatusSettings\GetByOptionIdAndStoreIdInterface" type="Amasty\Stockstatus\Model\StockstatusSettings\GetByOptionIdAndStoreIdCacheable" />
+    <preference for="Amasty\Stockstatus\Api\StockstatusSettings\GetIconUrlByStockstatusSettingInterface" type="Amasty\Stockstatus\Model\StockstatusSettings\GetIconUrlByStockstatusSetting" />
+    <preference for="Amasty\Stockstatus\Api\StockstatusSettings\UploadStockstatusIconFileInterface" type="Amasty\Stockstatus\Model\StockstatusSettings\UploadStockstatusIconFile" />
+    <preference for="Amasty\Stockstatus\Api\StockstatusSettings\RemoveStockstatusSettingsIconFileInterface" type="Amasty\Stockstatus\Model\StockstatusSettings\RemoveStockstatusSettingsIconFile" />
+    <preference for="Amasty\Stockstatus\Api\Rule\GetByProductIdAndStoreIdInterface" type="Amasty\Stockstatus\Model\Rule\GetRuleForProduct" />
+</config>

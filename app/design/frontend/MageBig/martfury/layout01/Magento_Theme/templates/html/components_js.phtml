@@ -1,0 +1,17 @@
+<?php
+$mbHelper = $this->helper('MageBig\MbFrame\Helper\Data');
+$sticky_header = $mbHelper->getConfig('mbconfig/header/sticky_header') ? 1 : 0;
+$sticky_type = $mbHelper->getConfig('mbconfig/header/sticky_type') ?: 0;
+$sticky_offset = (int)$mbHelper->getConfig('mbconfig/header/sticky_type') ?: 500;
+?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Theme/js/magebig": {
+            "sticky_header": <?= $sticky_header ?>,
+            "sticky_type": <?= $sticky_type ?>,
+            "sticky_offset": <?= $sticky_offset ?>
+        }
+    }
+}
+</script>

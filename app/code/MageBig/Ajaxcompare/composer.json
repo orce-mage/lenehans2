@@ -1,0 +1,15 @@
+{
+    "name": "magebig/ajaxcompare",
+    "description": "Ajax Compare for Magento 2",
+    "type": "magento2-module",
+    "version": "2.0.0",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": {
+            "MageBig\\Ajaxcompare\\": ""
+        }
+    }
+}

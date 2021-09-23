@@ -1,0 +1,268 @@
+<!--@subject {{trans "%store_name - Your pickup was canceled" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order.getEmailCustomerNote()":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.getShippingDescription()":"Shipping Description",
+
+"layout handle=\"mtemail_header\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_header\"  noborder=\"1\" margintop=30 ":"mtemail_header",
+"layout handle=\"mtemail_text\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_text\" ":"mtemail_text",
+"layout handle=\"mtemail_empty\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_empty\" ":"mtemail_empty",
+"layout handle=\"mtemail_button\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_button\" ":"mtemail_button",
+"layout handle=\"mtemail_footer\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_footer\" noborder=\"1\" ":"mtemail_footer",
+
+"layout handle=\"mtemail_sales_items\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_items\" order=$order ":"mtemail_sales_items",
+"layout handle=\"mtemail_sales_info\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_info\" order=$order  is_pickup_order=$is_pickup_order pickup_address=$pickupAddress shipping_msg=$shipping_msg":"mtemail_sales_info",
+"layout handle=\"mtemail_sales_totals\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_totals\" order=$order ":"mtemail_sales_totals",
+"layout handle=\"mtemail_sales_gift_message\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_gift_message\" order=$order ":"mtemail_sales_gift_message",
+"layout handle=\"mtemail_sales_static_products\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_static_products\" noborder=\"1\" order=$order":"mtemail_sales_static_products",
+"layout handle=\"mtemail_sales_related_products\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_sales_related_products\" noborder=\"1\" order=$order":"mtemail_sales_related_products",
+
+"layout handle=\"mtemail_note\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_note\" ":"mtemail_note",
+"layout handle=\"mtemail_box\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_box\" ":"mtemail_box",
+"layout handle=\"mtemail_space\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_space\" ":"mtemail_space",
+"layout handle=\"mtemail_space2\" area=\"frontend\" theme=\"awesome\" template_id=$this.template_id block_id=0 block_name=\"mtemail_space\" ":"mtemail_space2"
+
+
+} @-->
+
+
+<!--@styles
+
+.mini-block {
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 12px 15px 15px;
+    text-align: left;
+    width: 253px;
+}
+
+.mini-container-left {
+    width: 278px;
+    padding: 10px 0 10px 15px;
+}
+
+.mini-container-right {
+    width: 278px;
+    padding: 10px 14px 10px 15px;
+}
+
+.product {
+  text-align: left;
+  vertical-align: top;
+  width: auto;
+}
+
+.total-space {
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.item-table {
+  padding: 50px 20px 0px;
+  width: 560px;
+}
+
+
+.total-table {
+  padding: 0px 20px 50px;
+  width: 560px;
+}
+
+
+
+.item {
+  width: 300px;
+}
+
+.mobile-hide-img {
+  text-align: left;
+  width: 125px;
+}
+
+.mobile-hide-img img {
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+}
+
+.title-dark {
+  text-align: left;
+  border-bottom: 1px solid #cccccc;
+  color: #4d4d4d;
+  font-weight: 700;
+  padding-bottom: 5px;
+}
+
+.item-col {
+  padding-top: 20px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.total-grand_total td {
+    font-weight: bold;
+    color: #4d4d4d;
+}
+
+
+
+  .info-block {
+      padding: 0 20px;
+      width: 260px;
+    }
+
+    .block-rounded {
+      width: 260px;
+    }
+
+    .info-img {
+      width: 258px;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .force-width-img {
+      width: 480px;
+      height: 1px !important;
+    }
+
+    .force-width-full {
+      width: 600px;
+      height: 1px !important;
+    }
+
+    .user-img img {
+      width: 130px;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
+
+    .user-img {
+      text-align: center;
+      border-radius: 100px;
+      color: #ff6f6f;
+      font-weight: 700;
+    }
+
+    .user-msg {
+      padding-top: 10px;
+      font-size: 14px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .mini-img {
+      padding: 5px;
+      width: 140px;
+    }
+
+    .mini-img img {
+      border-radius: 5px;
+      width: 140px;
+    }
+
+    .force-width-gmail {
+      min-width:600px;
+      height: 0px !important;
+      line-height: 1px !important;
+      font-size: 1px !important;
+    }
+
+    .mini-imgs {
+      padding: 25px 0 30px;
+    }
+
+
+@media only screen and (max-width: 480px) {
+
+      table[class*="container-for-gmail-android"] {
+        min-width: 290px !important;
+        width: 100% !important;
+      }
+
+      img[class="force-width-gmail"] {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+
+      table[class="w320"] {
+        width: 320px !important;
+      }
+
+      td[class*="mobile-header-padding-left"] {
+        width: 160px !important;
+        padding-left: 0 !important;
+      }
+
+      td[class*="mobile-header-padding-right"] {
+        width: 160px !important;
+        padding-right: 0 !important;
+      }
+
+      td[class="header-lg"] {
+        font-size: 24px !important;
+        padding-bottom: 5px !important;
+      }
+
+      td[class="content-padding"] {
+        padding: 5px 0 5px !important;
+      }
+
+       td[class="button"] {
+        padding: 5px 5px 30px !important;
+      }
+
+      td[class*="free-text"] {
+        padding: 10px 18px 30px !important;
+      }
+
+      td[class~="mobile-hide-img"] {
+        display: none !important;
+        height: 0 !important;
+        width: 0 !important;
+        line-height: 0 !important;
+      }
+
+      td[class~="item"] {
+        width: 140px !important;
+        vertical-align: top !important;
+      }
+
+      td[class~="quantity"] {
+        width: 50px !important;
+      }
+
+      td[class~="price"] {
+        width: 90px !important;
+      }
+
+      td[class="item-table"] {
+        padding: 30px 20px 0 !important;
+      }
+
+      td[class="total-table"] {
+        padding: 0 20px 30px !important;
+      }
+
+      td[class="mini-container-left"],
+      td[class="mini-container-right"] {
+        padding: 0 15px 15px !important;
+        display: block !important;
+        width: 290px !important;
+      }
+
+}
+
+@-->
+
+{{layout handle="mtemail_header" theme="awesome" template_id=$this.template_id block_id=641 block_name="mtemail_header" noborder=1 margintop=30 }}
+{{layout handle="mtemail_text" theme="awesome" template_id=$this.template_id block_id=642 block_name="mtemail_text" }}
+{{layout handle="mtemail_sales_info" theme="awesome" template_id=$this.template_id block_id=115 block_name="mtemail_sales_info" order=$order is_pickup_order=$is_pickup_order pickup_address=$pickupAddress shipping_msg=$shipping_msg}}
+{{layout handle="mtemail_sales_items" theme="awesome" template_id=$this.template_id block_id=113 block_name="mtemail_sales_items" order=$order }}
+{{layout handle="mtemail_sales_totals" theme="awesome" template_id=$this.template_id block_id=114 block_name="mtemail_sales_totals" order=$order totals_type="order" }}
+{{layout handle="mtemail_footer" theme="awesome" template_id=$this.template_id block_id=117 block_name="mtemail_footer"  noborder=1 }}
+

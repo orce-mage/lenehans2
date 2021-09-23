@@ -1,0 +1,57 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Geoip
+ */
+?>
+<?php
+/**
+ * @var \Amasty\Geoip\Block\Adminhtml\Settings\Import $block
+ */
+?>
+<div class="amgeoip-import-container" data-bind="scope: 'import'">
+    <div class="amgeoip-progressbar-container -import">
+        <span class="amgeoip-state -import" data-bind="css: {'-done': isDownloadCompleted()}">
+            <?= $block->escapeHtml(__('Import')) ?>
+        </span>
+        <span class="amgeoip-state -completed" data-bind="css: {'-done': importDone()}">
+            <?= $block->escapeHtml(__("Completed")) ?>
+        </span>
+        <div class="amgeoip-download-state">
+            <span class="amgeoip-begin -done" data-bind="css: {'-done': isDownloadCompleted()}"></span>
+            <div class="amgeoip-line-container">
+                <span class="amgeoip-counter -hidden"
+                      data-bind="
+                      attr: {'data-count': importCounter},
+                      style: {left: importStatusWidth() + '%'},
+                      css: {'-hidden': !isShowImportCounter()}"></span>
+                <div class="amgeoip-line"
+                     data-bind="style: {width: importStatusWidth() + '%'}"
+                     style="width: <?= (int)$block->getWidth() ?>%"></div>
+            </div>
+            <span class="<?= $block->escapeHtml($block->getImportedClass()) ?> amgeoip-label -endimport"
+                  data-bind="css: {'-completed': importDone()}"></span>
+        </div>
+    </div>
+
+    <div class="amgeoip-files-container">
+        <div class="amgeoip-files <?= $block->getBlockFileExist() ? '-available' : '' ?>">
+            var/amasty/geoip/GeoLite2-City-Blocks-IPv4.csv
+        </div>
+        <div class="amgeoip-files <?= $block->getBlockV6FileExist() ? '-available' : '' ?>">
+            var/amasty/geoip/GeoLite2-City-Blocks-IPv6.csv
+        </div>
+        <div class="amgeoip-files <?= $block->getLocationFileExist() ? '-available' : '' ?>">
+            var/amasty/geoip/GeoLite2-City-Locations-en.csv
+        </div>
+    </div>
+    <button class="amgeoip-button action-default"
+            type="button"
+            data-bind="
+                disable: !initialStatus(),
+                click: initImport.bind($data),
+                i18n: 'Import',
+                attr: {title: $t('Import')}">
+    </button>
+</div>

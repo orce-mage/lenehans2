@@ -1,0 +1,50 @@
+<div id="ajaxsearch" class="ajaxsearch" data-bind="visible: loadPopup()">
+
+    <div data-bind="visible: anyResultCount()">
+        <div class="suggest" data-bind="visible: result.suggest.data().length > 0">
+            <div class="title"><!-- ko i18n: 'Suggested'--><!-- /ko --></div>
+            <ul id="suggest" role="listbox" data-bind="foreach: result.suggest.data">
+                <li >
+                    <a data-bind="attr: { href: url, title: title }">
+                        <span data-bind="text: title"></span> (<span data-bind="text: num_results"></span>)
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="product" data-bind="visible: result.product.data().length > 0">
+            <div class="title">
+                <span data-bind="text: result.product.size"></span>
+                <!-- ko if: result.product.data().length==1 -->
+                    <!-- ko i18n: 'product'--><!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: result.product.data().length>1 -->
+                    <!-- ko i18n: 'products'--><!-- /ko -->
+                <!-- /ko -->
+                <a class="see-all" data-bind="attr: {href: result.product.url}">
+                    <!-- ko i18n: 'View all' --><!-- /ko -->
+                </a>
+            </div>
+            <ul id="product-search-list" role="listbox" data-bind="foreach: result.product.data">
+                <li>
+                    <a data-bind="attr: { href: url, title: name }">
+                        <div class="qs-option-image" data-bind="visible: image">
+                            <img data-bind="attr: { src: image, title: name }" />
+                        </div>
+                        <div class="qs-option-info" data-bind="css: {noimage: !image}">
+                            <div class="qs-option-title" data-bind="visible: name">
+                                <span data-bind="text: name"></span>
+                            </div>
+                            <div class="qs-option-reviews" data-bind="html: reviews_rating, visible: reviews_rating"></div>
+                            <div class="qs-option-sku" data-bind="visible: sku"><!-- ko i18n: 'SKU'--><!-- /ko -->: <span data-bind="text: sku"></span></div>
+                            <div class="qs-option-price" data-bind="html: price, visible: price"></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="no-result" data-bind="visible: !anyResultCount()"><!-- ko i18n: 'No Result'--><!-- /ko --></div>
+
+</div>

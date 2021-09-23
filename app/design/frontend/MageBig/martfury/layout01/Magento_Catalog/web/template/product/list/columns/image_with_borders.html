@@ -1,0 +1,18 @@
+<if args="isAllowed()">
+    <a if="imageExists($row())"
+       class="product-item-photo"
+       attr="href: $row().url">
+        <span class="product-image-container"
+              data-bind="style: {width: getWidth($row()) + 'px'}">
+            <span class="product-image-wrapper img-lazy-wrap"
+                  data-bind="style: {'padding-bottom': getHeight($row())/getWidth($row()) * 100 + '%'}">
+                <img class="product-image-photo media-lazy lazyload"
+                     data-bind="attr: {'data-src': getImageUrl($row()),
+                                       alt: getLabel($row()), title: getLabel($row())}" />
+            </span>
+        </span>
+        <if args="$parent.getPercentDiscount($row())">
+            <span class="discount-percent" html="$parent.getPercentDiscount($row())"/>
+        </if>
+    </a>
+</if>

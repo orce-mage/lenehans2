@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block class="Amasty\Storelocator\Block\Location" name="amlocator_ajax" template="Amasty_Storelocator::left.phtml">
+            <block class="Amasty\Storelocator\Block\View\Schedule" name="amasty_store_locator_schedule" template="Amasty_Storelocator::schedule.phtml"/>
+            <block class="Amasty\Storelocator\Block\View\Reviews" name="amasty_store_locator_rating" template="Amasty_Storelocator::rating.phtml"/>
+        </block>
+    </body>
+</page>

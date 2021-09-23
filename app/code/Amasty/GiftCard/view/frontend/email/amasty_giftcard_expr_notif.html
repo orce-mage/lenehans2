@@ -1,0 +1,22 @@
+<!--@subject Gift certificate {{var gift_code}} is expires @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var gcard_email.getRecipientName()":"Recipient name",
+"var gcard_email.getGiftCode()":"Gift Code",
+"var gcard_email.getExpiryDays()":"Days of expiry"}
+@-->
+<!--@styles
+@-->
+
+{{template config_path="design/email/header_template"}}
+<table cellspacing="0" cellpadding="0" class="message-container">
+    <tr>
+        <td>
+            Dear {{var gcard_email.getRecipientName()}},<br>
+            <br>
+            Your gift card {{var gcard_email.getGiftCode()}} expires in {{var gcard_email.getExpiryDays()}} day(s).
+            Please be aware that you will not be able to use the certificate at {{var $store.frontend_name}} after it expires.
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

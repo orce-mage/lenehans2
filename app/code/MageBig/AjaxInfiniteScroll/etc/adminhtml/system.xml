@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="magebig_ajaxinfinitescroll" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Ajax Infinite Scroll</label>
+            <tab>magebig_extensions</tab>
+            <resource>MageBig_AjaxInfiniteScroll::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="design" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Design</label>
+                <field id="loading_text" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Loading Text</label>
+                </field>
+                <field id="done_text" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Done Text</label>
+                </field>
+                <field id="buffer_px" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Buffer (px)</label>
+                    <validate>validate-digits</validate>
+                    <comment>Set an offset before page end from which the content will start to load. A high number will load the next page a long time before the user reaches the bottom of the screen.</comment>
+                </field>
+                <field id="load_more_threshold" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load More Threshold</label>
+                    <validate>validate-digits</validate>
+                    <comment>When this page number is reached, a button to load more products will be shown instead of continue loading products automatically with the scroll (this could be useful to help the user to reach the footer). TIP: use a high number to disable this feature.</comment>
+                </field>
+                <field id="load_more_text" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load More Button Text</label>
+                </field>
+                <field id="load_more_text_prev" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load Previous button text</label>
+                </field>
+            </group>
+            <group id="memory" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Scroll History</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable History</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This feature automatically uploads the browser URL with the location of the page the user is watching. This allows users to use the "Back" browser button after viewing a product to return directly to the page where they left off.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

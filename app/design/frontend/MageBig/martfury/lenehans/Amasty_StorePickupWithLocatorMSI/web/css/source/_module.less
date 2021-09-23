@@ -1,0 +1,162 @@
+//
+//  Amasty Store Pickup with MSI
+//  ___________________________________________
+
+//
+//  Variables
+//  -------------------------------------------
+
+@ampickupmsi-map-mark-icon__background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNCA3YzAgNS02IDEzLTcgMTNTMCAxMiAwIDdhNyA3IDAgMDExNCAwem0tNyAzYTMgMyAwIDEwMC02IDMgMyAwIDAwMCA2eiIgZmlsbD0iIzI3ODU2MCIvPjwvc3ZnPg==);
+@ampickupmsi-arrow-icon__background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNi41ODIgNi45NzNsNS45NjEtNS43OTctLjk1Ny0xLjAxMi01LjAwNCA0Ljg2N0wxLjQxNC4wMjdsLS45NTcuOTg1IDUuNzcgNS42MzMuMzU1LjMyOHoiIGZpbGw9IiMwMDZCQjQiLz48L3N2Zz4=);
+@ampickupmsi-main-container__background-color: #f6f6f6;
+@ampickupmsi-locations-container__padding-horizontal: 5px;
+@ampickupmsi-locations-container-text-secondary__color: #6d6d6d;
+
+//
+//  Common
+//  -------------------------------------------
+
+& when (@media-common = true) {
+    .ampickupmsi-main-container {
+        margin-top: 20px;
+        padding: 20px;
+        background: @ampickupmsi-main-container__background-color;
+    }
+
+    .ampickupmsi-choose-options {
+        font-weight: 600;
+    }
+
+    .ampickupmsi-locations-container {
+        & {
+            padding: 20px @ampickupmsi-locations-container__padding-horizontal 0;
+        }
+
+        &.-no-expander {
+            padding-bottom: 20px;
+        }
+
+        .ampickupmsi-title {
+            margin: 0 0 15px 15px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .ampickupmsi-locations {
+            overflow: auto;
+            max-height: 300px;
+        }
+
+        .ampickupmsi-location {
+            & {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            &:hover {
+                background: #fff;
+            }
+        }
+
+        .ampickupmsi-location.-hidden:not(.-allowed) {
+            display: none;
+        }
+
+        .ampickupmsi-info {
+            display: flex;
+            box-sizing: border-box;
+            width: 80%;
+        }
+
+        .ampickupmsi-map {
+            margin: 2px 10px 0 0;
+            min-width: 20px;
+            width: 14px;
+            height: 20px;
+            background: @ampickupmsi-map-mark-icon__background-image no-repeat center;
+            background-size: contain;
+        }
+
+        .ampickupmsi-name {
+            display: block;
+            font-weight: 600;
+        }
+
+        .ampickupmsi-address {
+            color: @ampickupmsi-locations-container-text-secondary__color;
+        }
+
+        .ampickupmsi-stock {
+            width: 20%;
+        }
+
+        .ampickupmsi-count {
+            display: block;
+        }
+
+        .ampickupmsi-stock-status {
+            color: @ampickupmsi-locations-container-text-secondary__color;
+        }
+    }
+
+    .ampickupmsi-full-list {
+        & {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #006bb4;
+            cursor: pointer;
+        }
+
+        .ampickupmsi-arrow {
+            margin-left: 10px;
+            width: 12px;
+            height: 7px;
+            background: @ampickupmsi-arrow-icon__background-image no-repeat center;
+            background-size: contain;
+        }
+
+        &.-expanded .ampickupmsi-arrow {
+            transform: rotate(180deg);
+        }
+
+        &.-expanded.-gradient:after {
+            position: absolute;
+            bottom: 100%;
+            display: block;
+            width: ~'calc(100% + @{ampickupmsi-locations-container__padding-horizontal} * 2)';
+            height: 100px;
+            background: linear-gradient(to top, @ampickupmsi-main-container__background-color, rgba(255, 255, 255, 0));
+            content: '';
+            pointer-events: none;
+        }
+    }
+
+    .ampickupmsi-loader-container {
+        & {
+            position: relative;
+            margin-bottom: 20px;
+            min-height: 70px;
+        }
+
+        &.-hidden {
+            display: none;
+        }
+
+        > .loading-mask {
+            position: absolute;
+        }
+
+        > .loading-mask > .loader > img {
+            position: absolute;
+        }
+    }
+
+    .ampickupmsi-link-wrapper.-hidden {
+        display: none;
+    }
+}

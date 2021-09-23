@@ -1,0 +1,23 @@
+<div class="file-uploader-summary">
+    <div class="file-uploader-preview">
+        <a class="preview-link"
+           data-bind="css: 'preview-' + $file.previewType, attr: {href: $parent.getFilePreview($file), title: $file.name, disabled: $parent.disabled}" target="_blank">
+            <img
+                    if="$file.previewType === 'image'"
+                    tabindex="0"
+                    event="load: $parent.onPreviewLoad.bind($parent)"
+                    data-bind="attr: {src: $parent.getFilePreview($file), alt: $file.name}">
+        </a>
+
+        <div class="actions">
+            <button type="button"
+                    class="action-remove"
+                    data-role="delete-button"
+                    data-bind="attr: {disabled: $parent.disabled, title: $t('Delete image')}, click: $parent.removeFile.bind($parent, $file)">
+                <span data-bind="i18n: 'Delete image'"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="file-uploader-filename" data-bind="text: $file.name"></div>
+</div>

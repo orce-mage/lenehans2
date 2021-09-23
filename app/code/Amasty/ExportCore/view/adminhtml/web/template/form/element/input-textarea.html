@@ -1,0 +1,11 @@
+<!-- ko if: isTextarea() -->
+    <!-- ko template: textareaElementTmpl --><!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot: isTextarea() -->
+    <!-- ko template: inputElementTmpl --><!-- /ko -->
+<!-- /ko -->
+<!-- ko if: notice() -->
+<div class="admin__field-note">
+    <span data-bind="i18n: notice()"></span>
+</div>
+<!-- /ko -->

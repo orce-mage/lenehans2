@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_ImportCore:etc/am_import.xsd">
+    <entity code="amasty_giftcard_code">
+        <name>Amasty Gift Card Code</name>
+        <group>Amasty Gift Card</group>
+        <description>Amasty Gift Card Code</description>
+        <fieldsConfig>
+            <fieldsClass class="Amasty\ImportCore\Import\FieldsClass\Describe">
+                <arguments>
+                    <argument name="tableName" xsi:type="string">amasty_giftcard_code</argument>
+                </arguments>
+            </fieldsClass>
+            <fields>
+                <field name="code_id">
+                    <actions>
+                        <trim apply="beforeValidate"/>
+                    </actions>
+                    <validation>
+                        <nonNegative/>
+                        <notEmpty>
+                            <excludeBehaviors>
+                                <addDirect/>
+                            </excludeBehaviors>
+                        </notEmpty>
+                    </validation>
+                </field>
+                <field name="code_pool_id">
+                    <validation>
+                        <nonNegative/>
+                        <tableRowExists tableName="amasty_giftcard_code_pool"
+                                        idFieldName="pool_id"
+                                        rootOnly="true"
+                                        error="Code Pool with specified 'code_pool_id' doesn't exist">
+                            <excludeBehaviors>
+                                <deleteDirect/>
+                            </excludeBehaviors>
+                        </tableRowExists>
+                    </validation>
+                </field>
+                <field name="status">
+                    <validation>
+                        <boolean/>
+                    </validation>
+                </field>
+            </fields>
+            <sampleData>
+                <row>
+                    <field name="code_id">1</field>
+                    <field name="code">SPD_482_PC57</field>
+                    <field name="code_pool_id">1</field>
+                    <field name="status">1</field>
+                </row>
+            </sampleData>
+        </fieldsConfig>
+        <behaviors>
+            <addUpdateDirect name="Add/Update">
+                <tableName>amasty_giftcard_code</tableName>
+            </addUpdateDirect>
+            <addDirect name="Only add">
+                <tableName>amasty_giftcard_code</tableName>
+            </addDirect>
+            <updateDirect name="Only update">
+                <tableName>amasty_giftcard_code</tableName>
+            </updateDirect>
+            <deleteDirect name="Delete">
+                <tableName>amasty_giftcard_code</tableName>
+            </deleteDirect>
+        </behaviors>
+    </entity>
+    <relation code="amasty_giftcard_code_pool_code">
+        <parent_entity>amasty_giftcard_code_pool</parent_entity>
+        <child_entity>amasty_giftcard_code</child_entity>
+        <sub_entity_field_name>amasty_giftcard_code</sub_entity_field_name>
+        <type>one_to_many</type>
+        <arguments>
+            <argument name="parent_field_name" xsi:type="string">pool_id</argument>
+            <argument name="child_field_name" xsi:type="string">code_pool_id</argument>
+        </arguments>
+    </relation>
+</config>

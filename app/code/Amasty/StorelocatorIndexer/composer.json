@@ -1,0 +1,22 @@
+{
+    "name": "amasty/module-store-locator-indexer",
+    "description": "Store Locator Indexer by Amasty",
+    "require": {
+        "php": "^7.1.0",
+        "amasty/module-store-locator": ">=2.4.5",
+        "amasty/base": ">=1.0.6"
+    },
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\StorelocatorIndexer\\": ""
+        }
+    }
+}
