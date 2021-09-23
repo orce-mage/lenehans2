@@ -6,8 +6,8 @@
 .sidebar-product-wrap .related.widget-heading-center .heading-title{background-color: #fff;}
 .page-product-configurable .configurable-variation-qty { display: none !important;}
 .soldtogether-swiper .field.choice label {
-    padding: 0 0 0 25px;
+    padding: 0 0 0 25px !important;
 }
 .soldtogether-swiper .field.choice {
-    padding: 7px;
+    padding: 7px !important;
 }
