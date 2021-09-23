@@ -40,6 +40,9 @@ node_modules/
 /data/
 /skin/
 /stats/
+/mediaold/
+/collectinstore/
+/upload/
 /.htaccess
 /auth.json
 /.php_cs.dist
