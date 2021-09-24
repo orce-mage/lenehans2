@@ -80,7 +80,7 @@ class Collection extends \MageBig\WidgetPlus\Model\ResourceModel\Widget\Collecti
         // \Magento\Framework\Module\Manager $moduleManager,
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $localeDate,
         CustomerSession $customerSession,
-        \MageBig\WidgetPlus\Model\Rule $rule              
+        \MageBig\WidgetPlus\Model\Rule $rule
     ) {
         $this->_resource                 = $resource;
         $this->_customerSession          = $customerSession;
@@ -94,7 +94,7 @@ class Collection extends \MageBig\WidgetPlus\Model\ResourceModel\Widget\Collecti
         // $this->_moduleManager            = $moduleManager;
         $this->_localeDate               = $localeDate;
         $this->_productsFactory          = $productsFactory;
-        $this->_rule                     = $rule;         
+        $this->_rule                     = $rule;
         parent::__construct($entityFactory,
 							$productCollectionFactory,
 							$catalogProductVisibility,
@@ -108,9 +108,9 @@ class Collection extends \MageBig\WidgetPlus\Model\ResourceModel\Widget\Collecti
 							// $moduleManager,
 							$localeDate,
 							$customerSession,
-							$rule 
+							$rule
 							);
-    }    
+    }
 
     /**
      * @param $type
@@ -168,7 +168,7 @@ class Collection extends \MageBig\WidgetPlus\Model\ResourceModel\Widget\Collecti
         }
 
         return $collection;
-    }   
+    }
 
     protected function _getBestSeller($params, $limit)
     {
@@ -234,7 +234,7 @@ class Collection extends \MageBig\WidgetPlus\Model\ResourceModel\Widget\Collecti
         }
 
         return false;
-    }   
+    }
 
     protected function _getRelated($limit = 12)
     {
@@ -270,71 +270,71 @@ class Collection extends \MageBig\WidgetPlus\Model\ResourceModel\Widget\Collecti
         if(!empty($categoryPath))
         {
 			$_categories = $product->getCategory()->getPath();
-			//$logger->info($_categories);  
-			$categoriesids = explode('/', $_categories);			
-			
+			//$logger->info($_categories);
+			$categoriesids = explode('/', $_categories);
+
 			if((!$collection->getSize()) && (!empty($categoriesids)))
 			{
 				$currentCatId = end($categoriesids);
 				$collection = $this->_categoryFactory->create()->load($currentCatId)->getProductCollection()
 							 ->addAttributeToFilter('visibility', \Magento\Catalog\Model\Product\Visibility::VISIBILITY_BOTH)
 							 ->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED)
-							 ->addAttributeToSelect('*')->setPageSize(10)->setCurPage(1);			
+							 ->addAttributeToSelect('*')->setPageSize(10)->setCurPage(1);
 				$in_stockIDS = array();
 				foreach($collection as $item)
-				{				
+				{
 					if ($item->isSaleable() && $product->getId()!= $item->getId()) {
 					  $in_stockIDS[] =  $item->getId();
-					}				 
+					}
 				}
 				$collection = $this->_productCollectionFactory->create()
 										->addAttributeToSelect('*')
-										->addAttributeToFilter('entity_id',array('in' => $in_stockIDS)); 
+										->addAttributeToFilter('entity_id',array('in' => $in_stockIDS));
 				return $collection;
 			}
 		}
 		else
 		{
-			$categaries = $product->getCategoryIds();        
-			$ct_cat = count($categaries);       
+			$categaries = $product->getCategoryIds();
+			$ct_cat = count($categaries);
 			if($ct_cat > 1){
 					$loadCt = $ct_cat -1;
 			} else {
 					$loadCt = 0;
-			}	
+			}
 			if((!$collection->getSize()) && count($categaries))
 			{
 				$collection = $this->_categoryFactory->create()->load($categaries[$loadCt])->getProductCollection()
 							 ->addAttributeToFilter('visibility', \Magento\Catalog\Model\Product\Visibility::VISIBILITY_BOTH)
-							 ->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED)                                                 
-							 ->addAttributeToSelect('*')->setPageSize(30)->setCurPage(1);			
-				$in_stockIDS = array();			
+							 ->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED)
+							 ->addAttributeToSelect('*')->setPageSize(30)->setCurPage(1);
+				$in_stockIDS = array();
 				foreach($collection as $item)
-				{				
+				{
 					if ($item->isSaleable() && $product->getId()!= $item->getId()) {
 					  $in_stockIDS[] =  $item->getId();
-					}				 
+					}
 				}
 				if(empty($in_stockIDS)&& $loadCt >0)
 				{
 					$collection = $this->_categoryFactory->create()->load($categaries[$loadCt-1])->getProductCollection()
 							 ->addAttributeToFilter('visibility', \Magento\Catalog\Model\Product\Visibility::VISIBILITY_BOTH)
-							 ->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED)                                                 
-							 ->addAttributeToSelect('*')->setPageSize(30)->setCurPage(1);							
+							 ->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED)
+							 ->addAttributeToSelect('*')->setPageSize(30)->setCurPage(1);
 					foreach($collection as $item)
-					{				
+					{
 						if ($item->isSaleable() && $product->getId()!= $item->getId()) {
 						  $in_stockIDS[] =  $item->getId();
 						}				 
 					}
 				}
-				$in_stockIDS = array_slice($in_stockIDS, 0, 9, true);
+				$in_stockIDS = array_slice($in_stockIDS, 0, $limit, true);
 				$collection = $this->_productCollectionFactory->create()->addAttributeToSelect('*')->addAttributeToFilter('entity_id',array('in' => $in_stockIDS));
 			}
 		}
 
         return $collection;
-    } 
+    }
     /**
      * @param array $params
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
@@ -365,6 +365,6 @@ class Collection extends \MageBig\WidgetPlus\Model\ResourceModel\Widget\Collecti
 		}
 
         return $collection;
-    }  
+    }
 }
 ?>
