@@ -6,7 +6,7 @@
  */
 -->
 <config>
-    <skin>default</skin>
+    <skin>lenehans</skin>
     <report>
         <!--
             "action" can be set to "print" to show exception on screen and "email"
