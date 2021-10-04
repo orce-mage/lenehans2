@@ -11,4 +11,5 @@
 
     <preference for="Amasty\Feed\Model\Rule\GetValidFeedProducts" type="MidoriWeb\Inventory\Model\Rule\GetValidFeedProducts" />
     <preference for="Amasty\Feed\Model\InventoryResolver" type="MidoriWeb\Inventory\Model\InventoryResolver" />
+    <preference for="Amasty\Feed\Model\Export\RowCustomizer\Image" type="MidoriWeb\Inventory\Model\Export\RowCustomizer\Image" />
 </config>
