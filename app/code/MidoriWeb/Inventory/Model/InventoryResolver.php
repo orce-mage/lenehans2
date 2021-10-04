@@ -19,8 +19,9 @@ use Magento\InventoryCatalog\Model\GetStockIdForCurrentWebsite;
 use Magento\InventoryIndexer\Model\StockIndexTableNameResolverInterface;
 use Magento\InventorySalesApi\Api\Data\SalesChannelInterface;
 use Magento\InventorySalesApi\Api\StockResolverInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
-class InventoryResolver
+class InventoryResolver extends \Amasty\Feed\Model\InventoryResolver
 {
     const MAGENTO_INVENTORY_MODULE_NAMESPACE = 'Magento_Inventory';
 
@@ -55,17 +56,21 @@ class InventoryResolver
         ResourceConnection $resource,
         Manager $moduleManager,
         ObjectManagerInterface $objectManager,
-        StockResolverInterface $stockResolver
+        StockResolverInterface $stockResolver,
+        StoreManagerInterface $storeManager
     ) {
         $this->resource = $resource;
         $this->moduleManager = $moduleManager;
         $this->connection = $resource->getConnection();
         $this->stockResolver = $stockResolver;
+        $this->storeManager = $storeManager;
 
         if ($this->isMagentoInventoryEnable()) {
             $this->stockIndexTableNameResolver = $objectManager->get(StockIndexTableNameResolverInterface::class);
             $this->getStockIdForCurrentWebsite = $objectManager->get(GetStockIdForCurrentWebsite::class);
         }
+
+        parent::__construct($resource, $moduleManager, $objectManager);
     }
 
     /**
@@ -131,8 +136,7 @@ class InventoryResolver
         }else {
             $stockId = $this->getStockIdForCurrentWebsite->execute();
         }
-
-        //$stockId = 2;
+        
         return $this->stockIndexTableNameResolver->execute($stockId);
     }
 
@@ -188,11 +192,6 @@ class InventoryResolver
                 'stock_index.is_salable = ?',
                 0
             );
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/fa.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info($select->assemble());
 
         return $this->connection->fetchCol($select);
     }

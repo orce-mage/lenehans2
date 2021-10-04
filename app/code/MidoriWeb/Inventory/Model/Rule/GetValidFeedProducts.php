@@ -15,6 +15,7 @@ use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\DB\Select;
 use Magento\Rule\Model\Condition\Sql\Builder;
+use Amasty\Feed\Model\Rule\RuleFactory;
 
 class GetValidFeedProducts extends \Amasty\Feed\Model\Rule\GetValidFeedProducts
 {
@@ -56,6 +57,35 @@ class GetValidFeedProducts extends \Amasty\Feed\Model\Rule\GetValidFeedProducts
         $this->inventoryResolver = $inventoryResolver;
 
         parent::__construct($ruleFactory, $productCollectionFactory, $sqlBuilder, $inventoryResolver);
+    }
+
+    public function updateIndex(\Amasty\Feed\Model\Feed $model, array $ids = [])
+    {
+        /** @var $productCollection \Magento\Catalog\Model\ResourceModel\Product\Collection */
+        $productCollection = $this->prepareCollection($model, $ids);
+        $this->productIds = [];
+
+        $conditions = $model->getRule()->getConditions();
+        $conditions->collectValidatedAttributes($productCollection);
+        $this->sqlBuilder->attachConditionToCollection($productCollection, $conditions);
+        /**
+         * Prevent retrieval of duplicate records. This may occur when multiselect product attribute matches
+         * several allowed values from condition simultaneously
+         */
+        $productCollection->distinct(true);
+        $productCollection->getSelect()->reset(Select::COLUMNS);
+        $select = $productCollection->getSelect()->columns(
+            [
+                'entity_id' => new \Zend_Db_Expr('null'),
+                'feed_id' => new \Zend_Db_Expr((int)$model->getEntityId()),
+                'valid_product_id' => 'e.' . $productCollection->getEntity()->getIdFieldName()
+            ]
+        );
+        //fix for magento 2.3.2 for big number of products
+        $select->reset(Select::ORDER);
+
+        $query = $select->insertFromSelect($productCollection->getResource()->getTable(ValidProduct::TABLE_NAME));
+        $productCollection->getConnection()->query($query);
     }
 
     private function prepareCollection(\Amasty\Feed\Model\Feed $model, $ids = [])

@@ -117,7 +117,7 @@ class InventoryResolver
     private function getStockIndexTableName(): string
     {
         $stockId = $this->getStockIdForCurrentWebsite->execute();
-
+        $stockId = 2;
         return $this->stockIndexTableNameResolver->execute($stockId);
     }
 
@@ -173,6 +173,7 @@ class InventoryResolver
                 'stock_index.is_salable = ?',
                 0
             );
+
 
         return $this->connection->fetchCol($select);
     }
