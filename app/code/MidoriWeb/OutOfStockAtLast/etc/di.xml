@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Elasticsearch\Model\Adapter\BatchDataMapper\ProductDataMapper">
+        <plugin sortOrder="10" name="MidoriWeb_OutOfStockAtLast::add_data_to_mappers_result"
+                type="MidoriWeb\OutOfStockAtLast\Plugin\Model\Adapter\BatchDataMapper\ProductDataMapperPlugin"/>
+    </type>
+    <type name="Smile\ElasticsuiteCatalog\Model\Product\Indexer\Fulltext\Datasource\AttributeData">
+        <plugin sortOrder="10" name="MidoriWeb_OutOfStockAtLast::smile_add_data_to_mappers_result"
+                type="MidoriWeb\OutOfStockAtLast\Plugin\Model\Product\Indexer\Fulltext\Datasource\AttributeDataPlugin"/>
+    </type>
+</config>

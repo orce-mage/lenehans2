@@ -136,7 +136,7 @@ class InventoryResolver extends \Amasty\Feed\Model\InventoryResolver
         }else {
             $stockId = $this->getStockIdForCurrentWebsite->execute();
         }
-        
+
         return $this->stockIndexTableNameResolver->execute($stockId);
     }
 
