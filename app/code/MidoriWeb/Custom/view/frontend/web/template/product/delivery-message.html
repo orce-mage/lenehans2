@@ -1,0 +1,25 @@
+<if args="deliveryMessage() != ''">
+    <div class="mwdeliverymsg-content-container mwdeliverymsg-main-container">
+        <br/>
+            <span translate="'This product will be dispatched '"></span>
+            <b class="col_green" text="deliveryMessage().from_day"></b>
+
+            <if args="deliveryMessage().to_date != ''">
+                <br/>
+                <b class="col_green">Expected delivery to you:</b>
+            </if>
+
+            <if args="deliveryMessage().to_day != ''">
+                <span text="deliveryMessage().to_day"></span>
+            </if>
+
+            <if args="deliveryMessage().to_date != ''">
+                <b class="col_green" text="deliveryMessage().to_date"></b>
+            </if>
+    </div>
+</if>
+<if args="isConfigurable() && !productId()">
+    <div class="mwdeliverymsg-main-container mwdeliverymsg-empty">
+
+    </div>
+</if>

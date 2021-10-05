@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_StorePickupWithLocatorMSI
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MidoriWeb\Custom\Api\DeliveryMessageManagementInterface" type="MidoriWeb\Custom\Model\DeliveryMessageManagement"/>
+    <preference for="MidoriWeb\Custom\Api\Data\DeliveryMessageDataInterface" type="MidoriWeb\Custom\Model\Data\DeliveryMessageData" />
+    <preference for="MidoriWeb\Custom\Api\Data\DeliveryMessageContentInterface" type="MidoriWeb\Custom\Model\Data\DeliveryMessageContent" />
+</config>
