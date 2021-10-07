@@ -1,0 +1,50 @@
+<?php
+$lid = $block->getOrderId();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$order = $objectManager->create('Magento\Sales\Model\Order')->loadByIncrementId($lid);
+$shippingAddress = $order->getShippingAddress();
+
+?>
+<script type='text/javascript'>
+    _ss.push(['_setTransaction', {
+        'transactionID': '<?php echo $lid; ?>',
+        'storeName': 'Lenehans',
+        'total': '<?php echo $order->getGrandTotal(); ?>',
+        'tax': '<?php echo $order->getTaxAmount(); ?>',
+        'shipping': '<?php echo $order->getShippingAmount(); ?>',
+        'city': '<?php echo $shippingAddress->getCity(); ?>',
+        'state': '<?php echo $shippingAddress->getRegion(); ?>',
+        'zipcode': '<?php echo $shippingAddress->getPostcode(); ?>',
+        'country': '<?php echo $shippingAddress->getCountryId(); ?>',
+        'firstName' : '<?php echo $shippingAddress->getFirstname(); ?>',
+        'lastName' : '<?php echo $shippingAddress->getLastname(); ?>',
+        'emailAddress' : '<?php echo $order->getCustomerEmail(); ?>'
+    }]);
+</script>
+<?php
+$items = $order->getAllItems();
+foreach($items as $i):
+    $_product = $objectManager->create('Magento\Catalog\Model\Product')->load($i->getProductId())->getSku();
+    $_price = $objectManager->create('Magento\Catalog\Model\Product')->load($i->getProductId())->getPrice();
+    $_name = $objectManager->create('Magento\Catalog\Model\Product')->load($i->getProductId())->getName();
+
+    ?>
+    <script type='text/javascript'>
+        _ss.push(['_addTransactionItem', {
+            'transactionID': '<?php echo $lid; ?>',
+            'itemCode': '<?php echo $_product; ?>',
+            'productName': '<?php echo $_name; ?>',
+            'category': 'General',
+            'price': '<?php echo $_price; ?>',
+            'quantity': '<?php echo intval($i->getQtyOrdered()); ?>',
+        }]);
+    </script>
+<?php
+endforeach;
+?>
+<script type='text/javascript'>
+    _ss.push(['_completeTransaction', {
+        'transactionID': '<?php echo $lid; ?>'
+    }]);
+</script>
