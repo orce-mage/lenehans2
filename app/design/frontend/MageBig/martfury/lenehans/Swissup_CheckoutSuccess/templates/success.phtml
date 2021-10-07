@@ -1,0 +1,17 @@
+<?php
+$helper = $this->helper('Swissup\CheckoutSuccess\Helper\Data');
+$checkoutSuccessLayout = json_decode($helper->getConfigValue('layout/layout'));
+?>
+<div class="checkout-success">
+    <?php foreach ($checkoutSuccessLayout as $container): ?>
+        <div class="checkout-success-container" data-name="<?= $container->name ?>">
+            <?php
+            foreach ($container->children as $child) {
+                /** @var $block \Magento\Checkout\Block\Onepage\Success */
+                echo isset($child->name) ? $block->getChildHtml($child->name) : '';
+            }
+            ?>
+        </div>
+    <?php endforeach; ?>
+    <?php echo $block->getChildHtml('tracking_ss') ?>
+</div>
