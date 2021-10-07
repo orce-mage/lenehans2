@@ -6,9 +6,8 @@ define([
     'jquery',
     'ko',
     'mage/storage',
-    'Amasty_StorePickupWithLocatorMSI/js/action/locations-loader',
     'Amasty_StorePickupWithLocatorMSI/js/model/url-builder'
-], function ($, ko, storage, locationsLoaderActions, urlBuilder) {
+], function ($, ko, storage, urlBuilder) {
     'use strict';
 
     return {
@@ -30,8 +29,6 @@ define([
                 productId: productId
             });
 
-            locationsLoaderActions.show();
-
             storage
                 .get(deliveryMessageApiUrl)
                 .success(function (response) {
@@ -46,7 +43,7 @@ define([
                     console.log(response);
                 })
                 .always(function () {
-                    locationsLoaderActions.hide();
+
                 });
         },
 
