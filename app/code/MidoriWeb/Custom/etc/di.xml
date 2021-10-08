@@ -11,9 +11,10 @@
     <preference for="MidoriWeb\Custom\Api\DeliveryMessageManagementInterface" type="MidoriWeb\Custom\Model\DeliveryMessageManagement"/>
     <preference for="MidoriWeb\Custom\Api\Data\DeliveryMessageDataInterface" type="MidoriWeb\Custom\Model\Data\DeliveryMessageData" />
     <preference for="MidoriWeb\Custom\Api\Data\DeliveryMessageContentInterface" type="MidoriWeb\Custom\Model\Data\DeliveryMessageContent" />
-
+    <!--
     <type name="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder">
         <plugin name="Amasty_Stockstatus::EmailStatus" disabled="true" />
         <plugin name="MidoriWeb_Custom::EmailStatusBundle" type="MidoriWeb\Custom\Plugin\Order\Email\Items\DefaultOrder" sortOrder="1" />
     </type>
+    -->
 </config>
