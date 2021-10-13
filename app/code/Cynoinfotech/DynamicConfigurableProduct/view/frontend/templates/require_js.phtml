@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author CynoInfotech Team
+ * @package Cynoinfotech_DynamicConfigurableProduct
+ */
+ 
+$helper=$this->helper('Cynoinfotech\DynamicConfigurableProduct\Helper\Data');
+$dynamicConfigurableProductEnable = $helper->getConfig('cynoinfotech_dynamicconfigurableproduct/general/enable');
+if(!$dynamicConfigurableProductEnable){
+	$dynamicConfigurableProductEnable = 0;
+}
+?>
+<script>
+    var BASE_URL = '<?= $block->escapeUrl($block->getBaseUrl()) ?>';
+    var require = {
+        "baseUrl": "<?= /* @escapeNotVerified */ $block->getViewFileUrl('/') ?>"
+    };
+</script>
+<script>
+    var dynamicConfigurableProductEnable = "<?php echo $dynamicConfigurableProductEnable ?>";
+</script>

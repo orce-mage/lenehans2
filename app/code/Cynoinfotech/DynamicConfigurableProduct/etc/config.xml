@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author CynoInfotech Team
+ * @package Cynoinfotech_DynamicConfigurableProduct
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <cynoinfotech_dynamicconfigurableproduct>
+            <general>
+				<enable>1</enable>	
+				<dynamic_sku>1</dynamic_sku>				
+				<dynamic_Name>1</dynamic_Name>				
+				<dynamic_description>1</dynamic_description>				
+				<dynamic_shortdescription>1</dynamic_shortdescription>				
+            </general>
+        </cynoinfotech_dynamicconfigurableproduct>
+    </default>
+</config>

@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author CynoInfotech Team
+ * @package Cynoinfotech_DynamicConfigurableProduct
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+       <tab id="cynoinfotech" translate="label" sortOrder="300">
+            <label>CynoInfotech</label>
+        </tab>		
+		<section id="cynoinfotech_dynamicconfigurableproduct" translate="label" type="text" sortOrder="125" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Dynamic Configurable Product</label>
+            <tab>cynoinfotech</tab> 
+			
+			<resource>Cynoinfotech_DynamicConfigurableProduct::Config_DynamicConfigurableProduct</resource>
+			
+			<group id='general' translate='label' sortOrder='1' showInDefault='1' showInWebsite='1' showInStore='1'>
+				<label>General Configuration</label>
+				
+				<field id='enable' translate='label' type='select' sortOrder='1' showInDefault='1' showInWebsite='1' showInStore='1'>
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				
+				<field id='dynamic_sku' translate='label' type='select' sortOrder='1' showInDefault='1' showInWebsite='1' showInStore='1'>
+					<label>Dynamic Product Sku</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				
+				<field id='dynamic_Name' translate='label' type='select' sortOrder='1' showInDefault='1' showInWebsite='1' showInStore='1'>
+					<label>Dynamic Product Name</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				
+				<field id='dynamic_description' translate='label' type='select' sortOrder='1' showInDefault='1' showInWebsite='1' showInStore='1'>
+					<label>Dynamic Product Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				
+				<field id='dynamic_shortdescription' translate='label' type='select' sortOrder='1' showInDefault='1' showInWebsite='1' showInStore='1'>
+					<label>Dynamic Product Short Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				
+				
+			</group>			
+		</section>
+	</system>
+</config>
