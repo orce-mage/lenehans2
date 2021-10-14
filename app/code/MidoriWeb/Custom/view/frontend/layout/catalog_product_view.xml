@@ -22,5 +22,9 @@
                 </arguments>
             </block>
         </referenceContainer>
+        <referenceBlock name="breadcrumbs" remove="true" />
+        <referenceContainer name="page.top">
+            <block class="MidoriWeb\Custom\Block\Breadcrumbs" name="midoriweb.breadcrumbs" as="midoriweb_breadcrumbs" template="MidoriWeb_Custom::product/breadcrumbs.phtml"/>
+        </referenceContainer>
     </body>
 </page>
