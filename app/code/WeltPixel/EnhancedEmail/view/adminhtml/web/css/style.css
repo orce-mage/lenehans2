@@ -1,0 +1,29 @@
+.send-test-email-container {
+    float: right;
+    display: inline-block;
+}
+
+.send-test-email-container label {
+    font-weight: bold;
+}
+
+.send-test-email-container input {
+    min-width: 200px;
+    padding: 5px;
+}
+
+.preheader {
+    diplay: none !important;
+    visibility: hidden;
+    font-size: 1px;
+    color: #ffffff;
+    line-height: 1px;
+    max-height: 0px;
+    max-width: 0px;
+    opacity: 0;
+    overflow: hidden;
+}
+.small-image-preview {
+    width: 100px;
+    height: auto
+}

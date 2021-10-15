@@ -1,0 +1,38 @@
+<!--@subject {{trans "Your %store_name email has been changed" store_name=$store.frontend_name}} @-->
+<!--@vars {} @-->
+{{template config_path="design/email/header_template"}}
+
+<table align="center" style="background-color:#000; text-align:center; width: 660px">
+    <tbody style="display: block">
+    <tr style="display: block">
+        <td class="dark"  style="display: block; padding-bottom:8px; padding-top:5px; background-color:#000">
+            <h3 style="text-align: center;">
+                {{trans "Hello,"}}
+            </h3>
+        </td>
+    </tr>
+    <tr style="display: block">
+        <td class="dark" align="center" style="display: block; padding-bottom:0px; background-color:#000">
+            <h1 style="text-align: center; margin: 0 !important">
+                {{trans 'Do you want to change your email address?' }}
+            </h1>
+        </td>
+    </tr>
+    <tr style="display: block">
+        <td class="dark" align="center" style="display: block; padding-bottom:8px; background-color:#000">
+            <h3 style="text-align: center; letter-spacing: 0.025em;">
+                {{trans 'Okay, we’re cool with that.'}}
+            </h3>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<p style="margin: 20px 0 !important">
+    {{trans "We have received a request to change the following information associated with your account at %store_name: email." store_name=$store.frontend_name}}
+    {{trans 'If you have not authorized this action, please contact us immediately at <a href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw}}
+</p>
+
+
+{{template config_path="design/email/footer_template"}}

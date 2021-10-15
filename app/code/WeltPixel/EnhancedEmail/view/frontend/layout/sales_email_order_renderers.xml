@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      label="WeltPixel EnhancedEmail Email Order Items List" design_abstraction="custom">
+    <body>
+        <referenceBlock name="sales.email.order.renderers">
+            <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder"
+                   name="sales.email.order.renderers.default"
+                   as="default"
+                   template="WeltPixel_EnhancedEmail::email/items/order/default.phtml"/>
+
+            <block class="Magento\Downloadable\Block\Sales\Order\Email\Items\Order\Downloadable"
+                   name="sales.email.order.renderers.downloadable"
+                   as="downloadable"
+                   template="WeltPixel_EnhancedEmail::email/items/order/downloadable.phtml"/>
+
+            <block class="Magento\GroupedProduct\Block\Order\Email\Items\Order\Grouped"
+                   name="sales.email.order.renderers.grouped"
+                   as="grouped"
+                   template="WeltPixel_EnhancedEmail::email/items/order/default.phtml"/>
+
+            <block class="Magento\Bundle\Block\Sales\Order\Items\Renderer"
+                   name="sales.email.order.renderers.bundle"
+                   as="bundle"
+                   template="WeltPixel_EnhancedEmail::email/items/order/default.phtml"/>
+
+        </referenceBlock>
+    </body>
+</page>

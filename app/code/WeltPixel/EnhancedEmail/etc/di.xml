@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Email\Model\Template">
+        <plugin name="weltpixel-enhancedemail-getvariables-after"
+                type="WeltPixel\EnhancedEmail\Plugin\TemplateVariablesPlugin" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Email\Block\Adminhtml\Template\Edit\Form">
+        <plugin name="weltpixel_enhancedemail_email_template_form"
+                type="WeltPixel\EnhancedEmail\Plugin\EmailTemplateFormPlugin" sortOrder="2"/>
+    </type>
+
+    <type name="Magento\Email\Model\Template\Filter">
+        <plugin name="weltpixel_enhancedemail_css_directive"
+                type="WeltPixel\EnhancedEmail\Plugin\CssDirective"/>
+    </type>
+
+    <type name="Magento\Framework\Css\PreProcessor\Adapter\CssInliner">
+        <plugin name="weltpixel_enhancedemail_css_inliner"
+                type="WeltPixel\EnhancedEmail\Plugin\CssInliner"/>
+    </type>
+
+    <type name="Magento\Framework\Mail\Template\TransportBuilder">
+        <plugin name="weltpixel_enhancedemail_email_transportbuilder"
+                type="WeltPixel\EnhancedEmail\Plugin\TransportBuilder"/>
+    </type>
+
+    <preference for="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder"
+                type="WeltPixel\EnhancedEmail\Block\Order\Email\Items\Order\DefaultOrder"/>
+
+    <preference for="Magento\Sales\Block\Order\Email\Items\DefaultItems"
+                type="WeltPixel\EnhancedEmail\Block\Order\Email\Items\DefaultItems"/>
+
+    <preference for="Magento\GroupedProduct\Block\Order\Email\Items\Order\Grouped"
+                type="WeltPixel\EnhancedEmail\Block\Order\Email\Items\GroupedItems"/>
+
+    <preference for="Magento\GroupedProduct\Block\Order\Item\Renderer\Grouped"
+                type="WeltPixel\EnhancedEmail\Block\Order\Email\Items\Order\GroupedItems"/>
+
+    <preference for="Magento\Downloadable\Block\Sales\Order\Email\Items\Order\Downloadable"
+                type="WeltPixel\EnhancedEmail\Block\Sales\Order\Email\Items\Order\Downloadable"/>
+
+    <preference for="Magento\Downloadable\Block\Sales\Order\Email\Items\Downloadable"
+                type="WeltPixel\EnhancedEmail\Block\Sales\Order\Email\Items\Downloadable"/>
+
+    <preference for="Magento\Bundle\Block\Sales\Order\Items\Renderer"
+                type="WeltPixel\EnhancedEmail\Block\Order\Email\Items\BundleItems"/>
+
+    <preference for="Magento\Sales\Block\Order\Totals"
+                type="WeltPixel\EnhancedEmail\Block\Order\Totals" />
+
+    <preference for="Magento\Sales\Block\Order\Invoice\Totals"
+                type="WeltPixel\EnhancedEmail\Block\Order\Invoice\Totals" />
+
+    <preference for="Magento\Sales\Block\Order\Creditmemo\Totals"
+                type="WeltPixel\EnhancedEmail\Block\Order\Creditmemo\Totals" />
+
+</config>

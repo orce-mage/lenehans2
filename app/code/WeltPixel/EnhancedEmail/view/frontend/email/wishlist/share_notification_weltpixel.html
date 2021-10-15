@@ -1,0 +1,69 @@
+<!--@subject {{trans "Take a look at %customer_name's Wish List" customer_name=$customerName}} @-->
+<!--@vars {
+"var customerName":"Customer Name",
+"var viewOnSiteLink":"View Wish List URL",
+"var items|raw":"Wish List Items",
+"var message|raw":"Wish List Message"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+{{layout handle="wishlist_sharing_action" area="frontend"}}
+<table align="center" style="background-color:#000; text-align:center; width: 660px">
+    <tbody>
+    <tr>
+        <td class="dark"  style="padding-bottom:8px; padding-top:5px; background-color:#000">
+            <h3 style="text-align: center;">
+                {{trans "Hello, %customer_name wants to share this" customer_name=$customerName}}
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td class="dark" align="center" style="padding-bottom:0px; background-color:#000">
+            <h1 style="text-align: center; margin: 0 !important">
+                {{trans 'Wish List'}}
+            </h1>
+        </td>
+    </tr>
+    <tr>
+        <td class="dark" align="center" style="padding-bottom:8px; background-color:#000">
+            <h3 style="text-align: center; letter-spacing: 0.025em;">
+                {{trans 'with somebody special like you!'}}
+            </h3>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p style="margin: 25px 0 !important">{{trans "To begin see what %customer_name found and wants to share with you click on the button below :)" customer_name=$customerName }}</p>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                <tr>
+                    <td align="center" style="padding: 8px 0 !important">
+                        <a href="{{var viewOnSiteLink}}" style="font-weight: bold">{{trans "View all items"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{depend message}}
+<table class="message-info">
+    <tr>
+        <td>
+            <h3>{{trans "Message from %customer_name:" customer_name=$customerName}}</h3>
+            {{var message|raw}}
+        </td>
+    </tr>
+</table>
+<br />
+{{/depend}}
+
+{{var items|raw}}
+<br/>
+
+
+{{template config_path="design/email/footer_template"}}

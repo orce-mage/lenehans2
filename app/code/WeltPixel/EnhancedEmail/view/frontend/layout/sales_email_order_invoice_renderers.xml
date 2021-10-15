@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      label="WeltPixel EnhancedEmail" design_abstraction="custom">
+    <body>
+        <referenceBlock name="sales.email.order.invoice.renderers">
+            <block class="Magento\Sales\Block\Order\Email\Items\DefaultItems"
+                   name="sales.email.order.invoice.renderers.default" as="default"
+                   template="WeltPixel_EnhancedEmail::email/items/invoice/default.phtml"/>
+
+            <block class="Magento\Downloadable\Block\Sales\Order\Email\Items\Downloadable"
+                    name="sales.email.order.invoice.renderers.downloadable"
+                    as="downloadable"
+                    template="WeltPixel_EnhancedEmail::email/items/invoice/downloadable.phtml"/>
+
+            <block class="WeltPixel\EnhancedEmail\Block\Order\Email\Items\DefaultItems"
+                   name="sales.email.order.invoice.renderers.grouped"
+                   as="grouped"
+                   template="WeltPixel_EnhancedEmail::email/items/invoice/default.phtml"/>
+
+            <block class="WeltPixel\EnhancedEmail\Block\Order\Email\Items\DefaultItems"
+                   name="sales.email.order.invoice.renderers.bundle"
+                   as="bundle"
+                   template="WeltPixel_EnhancedEmail::email/items/invoice/default.phtml"/>
+
+        </referenceBlock>
+    </body>
+</page>

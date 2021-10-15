@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Email\Block\Adminhtml\Template\Edit"
+                type="WeltPixel\EnhancedEmail\Block\Adminhtml\Template\Edit"/>
+    <preference for="Magento\Email\Controller\Adminhtml\Email\Template\Save"
+                type="WeltPixel\EnhancedEmail\Controller\Adminhtml\Email\Template\Save"/>
+    <type name="Magento\Sales\Block\Order\Totals">
+        <arguments>
+            <argument name="label_properties" xsi:type="string">colspan="3"</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Email\Model\Template\Config">
+        <plugin name="weltpixel_enhancedemail_email_template_config"
+                type="WeltPixel\EnhancedEmail\Plugin\EmailTemplateConfig"/>
+    </type>
+    <type name="Magento\Backend\App\AbstractAction">
+        <plugin name="weltpixel-enhancedemail-utility" type="WeltPixel\EnhancedEmail\Plugin\Utility" sortOrder="1000" />
+    </type>
+</config>

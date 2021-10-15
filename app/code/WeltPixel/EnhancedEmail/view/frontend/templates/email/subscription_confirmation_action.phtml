@@ -1,0 +1,21 @@
+<?php
+$subscriber = $this->getSubscriber();
+$markup = '';
+if ($subscriber) {
+
+    $subscriberUrl = $this->getSubscriberConfirmationUrl();
+    $markup = '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "EmailMessage",
+                  "potentialAction": {
+                    "@type": "ViewAction",
+                    "target": "' . $subscriberUrl . '",
+                    "name": "Confirm Email"
+                  },
+                  "description": "Confirm Email"
+                }
+            </script>';
+}
+?>
+<?= $markup ?>

@@ -1,0 +1,70 @@
+<!--@subject {{trans "Update to your %store_name shipment" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var billing.name":"Guest Customer Name",
+"var comment":"Order Comment",
+"var order.increment_id":"Order Id",
+"var order_data.frontend_status_label":"Order Status",
+"var shipment.increment_id":"Shipment Id"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<table align="center" style="display: block; background-color:#000; text-align:center; width: 660px">
+    <tbody style="display: block">
+    <tr style="display: block">
+        <td class="dark"  style="display: block; padding-bottom:8px; padding-top:5px; background-color:#000">
+            <h3 style="text-align: center;">
+                {{trans "Hi %name," name=$billing.name}}
+            </h3>
+        </td>
+    </tr>
+    <tr style="display: block">
+        <td class="dark" align="center" style="display: block; padding-bottom:0px; background-color:#000">
+            <h1 style="text-align: center; margin: 0 !important">
+                {{trans "ORDER %order_status" order_status=$order_data.frontend_status_label}}
+            </h1>
+        </td>
+    </tr>
+    <tr style="display: block">
+        <td class="dark" align="center" style="display: block; padding-bottom:8px; background-color:#000">
+            <h3 style="text-align: center; letter-spacing: 0.025em;">
+                {{trans "ORDER NUMBER: %increment_id " increment_id=$order.increment_id |raw}}
+            </h3>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table align="center" style="padding-bottom:5px; padding-top:20px; width: 660px">
+    <tbody>
+    <tr>
+        <td align="center" style="padding-top: 10px;padding-bottom:10px;">
+            <h2 style="text-align: center; margin: 0 0 20px 0 !important">
+                {{trans 'Your order has been updated!'}}
+            </h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="margin-left: 0px">
+            <p style="">
+                {{trans 'If you have questions about your order, you can email us at <a href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw}}
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table style="width: 660px">
+    <tr class="email-information">
+        <td>
+            {{depend comment}}
+            <table class="message-info">
+                <tr>
+                    <td>
+                        {{var comment|escape|nl2br}}
+                    </td>
+                </tr>
+            </table>
+            {{/depend}}
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

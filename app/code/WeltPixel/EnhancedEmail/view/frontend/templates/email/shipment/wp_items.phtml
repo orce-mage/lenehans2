@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_shipment = $block->getShipment() ?>
+<?php $_order    = $block->getOrder() ?>
+<?php if ($_shipment && $_order): ?>
+    <table class="email-items">
+        <thead>
+        <tr>
+            <th colspan="2"><h3><?= __('WHAT’S INSIDE')?></h3></th>
+            <th  style="text-align: right"><h3><?= __('ITEMS')?> (<?= /* @escapeNotVerified */ $_order->getTotalItemCount() ?>) </h3></th>
+        </tr>
+        </thead>
+        <?php foreach ($_shipment->getAllItems() as $_item): ?>
+            <?php
+            if ($_item->getOrderItem()->getParentItem()) {
+                continue;
+            }
+            ?>
+            <tbody>
+            <?= $block->getItemHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>

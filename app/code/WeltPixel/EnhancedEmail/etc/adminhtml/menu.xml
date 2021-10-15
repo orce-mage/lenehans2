@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+                id="WeltPixel_EnhancedEmail::EnhancedEmail_Label"
+                title="Email Template Editor"
+                module="WeltPixel_EnhancedEmail"
+                sortOrder="290"
+                parent="WeltPixel_Backend::WeltPixel"
+                resource="WeltPixel_EnhancedEmail::EnhancedEmail_Label"
+        />
+        <add
+                id="WeltPixel_EnhancedEmail::EnhancedEmail_General"
+                title="Email Template Editor Settings"
+                module="WeltPixel_EnhancedEmail"
+                action="adminhtml/system_config/edit/section/weltpixel_enhancedemail/"
+                sortOrder="10"
+                parent="WeltPixel_EnhancedEmail::EnhancedEmail_Label"
+                resource="WeltPixel_EnhancedEmail::EnhancedEmail_General"
+        />
+    </menu>
+</config>

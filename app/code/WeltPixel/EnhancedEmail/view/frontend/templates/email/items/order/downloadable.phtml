@@ -1,0 +1,75 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Downloadable\Block\Sales\Order\Email\Items\Order\Downloadable */ ?>
+<?php $_item = $block->getItem() ?>
+<?php $_order = $block->getItem()->getOrder() ?>
+<?php $prodImg = $block->getImage($block->getProductForThumbnail(), 'cart_page_product_thumbnail'); ?>
+<?php
+/** @var  $wpHelper \WeltPixel\EnhancedEmail\Helper\Data */
+$wpHelper = $this->helper('WeltPixel\EnhancedEmail\Helper\Data');
+if ($wpHelper->displaySalesPricesExclTax()) {
+    $itemPrice = $_item->getPrice();
+} else {
+    $itemPrice = $_item->getPriceInclTax();
+}
+?>
+<tr>
+    <?php if($prodImg) :?>
+        <td class="img" style="width: 140px; border-top: 0 none !important; padding: 35px 10px; border-bottom: 1px dotted #000000;">
+            <img class="photo image"
+                 src="<?= /* @escapeNotVerified */ $prodImg ?>"
+                 width="130"
+                 alt="<?= $block->escapeHtml($_item->getName()) ?>">
+        </td>
+    <?php endif; ?>
+    <td class="item-info has-extra" colspan="2" style="position: relative !important; border-top: 0 none !important; padding: 35px 10px; border-bottom: 1px dotted #000000;">
+        <p class="item-name" style="margin-top: 0 !important;"><?= $block->escapeHtml($_item->getName()) ?></p>
+        <div class="item-detail" style="margin: 5px 0; font-size: 12px;">
+            <p style="color: #aaaaaa;"><?= /* @escapeNotVerified */  __('Item') ?>: <?= $block->escapeHtml($block->getSku($_item)) ?></p>
+
+
+            <?php if ($block->getItemOptions()): ?>
+                <?php foreach ($block->getItemOptions() as $option): ?>
+                    <p style="color: #aaaaaa"><?= /* @escapeNotVerified */  $option['label']. ': ' . nl2br($option['value'])?></p>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if ($links = $block->getLinks()->getPurchasedItems()): ?>
+                <p style="color: #aaaaaa"><?= /* @escapeNotVerified */  $block->getLinksTitle() ?></p>
+                <?php foreach ($links as $link): ?>
+                    <p style="color: #aaaaaa">
+                        <?= $block->escapeHtml($link->getLinkTitle()) ?>&nbsp;
+                        (<a href="<?= /* @escapeNotVerified */  $block->getPurchasedLinkUrl($link) ?>"><?= /* @escapeNotVerified */  __('download') ?></a>)
+                    </p>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?= $block->escapeHtml($_item->getDescription()) ?>
+            <p style="color: #aaaaaa"> &nbsp; </p>
+        </div>
+
+        <div class="item-price" style="position: absolute !important; bottom: 15px; text-align: left !important; margin-bottom: 25px !important">
+            <p style="font-size: 14px; font-family: arial, helvetica, sans-serif, serif;"><?= /* @escapeNotVerified */ $_order->formatPrice($itemPrice) ?> x <?= /* @escapeNotVerified */  $_item->getQtyOrdered() * 1 ?></p>
+        </div>
+    </td>
+    <td class="item-subtotal" style="vertical-align: bottom; text-align: right; border-top: 0 none !important; padding: 40px 10px; border-bottom: 1px dotted #000000;">
+        <p style="font-weight: bold; font-size: 14px; font-family: arial, helvetica, sans-serif, serif;"><?= /* @escapeNotVerified */  $block->getItemPrice($_item)?></p>
+    </td>
+</tr>
+<?php if ($_item->getGiftMessageId() && $_giftMessage = $this->helper('Magento\GiftMessage\Helper\Message')->getGiftMessage($_item->getGiftMessageId())): ?>
+    <tr>
+        <td colspan="3" class="item-extra">
+            <table class="message-gift">
+                <tr>
+                    <td>
+                        <h3><?= /* @escapeNotVerified */  __('Gift Message') ?></h3>
+                        <strong><?= /* @escapeNotVerified */  __('From:') ?></strong> <?= $block->escapeHtml($_giftMessage->getSender()) ?>
+                        <br /><strong><?= /* @escapeNotVerified */  __('To:') ?></strong> <?= $block->escapeHtml($_giftMessage->getRecipient()) ?>
+                        <br /><strong><?= /* @escapeNotVerified */  __('Message:') ?></strong>
+                        <br /><?= $block->escapeHtml($_giftMessage->getMessage()) ?>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+<?php endif; ?>
+

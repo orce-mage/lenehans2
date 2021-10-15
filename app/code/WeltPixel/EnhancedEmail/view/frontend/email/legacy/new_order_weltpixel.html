@@ -1,0 +1,139 @@
+<!--@subject {{trans "Your %store_name order confirmation" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order.getEmailCustomerNote()":"Email Order Note",
+"var order.getBillingAddress().getName()":"Guest Customer Name",
+"var order.getCreatedAtFormatted(1)":"Order Created At (datetime)",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.getShippingDescription()":"Shipping Description",
+"var shipping_msg":"Shipping message"
+} @-->
+{{template config_path="design/email/header_template"}}
+{{layout handle="order_markup" order=$order area="frontend"}}
+
+<table align="center" style="background-color:#000; text-align:center; width: 660px">
+    <tbody>
+        <tr>
+            <td class="dark"  style="padding-bottom:8px; padding-top:5px; background-color:#000">
+                <h3 style="text-align: center;">
+                    {{trans 'We\'re on it.'}}
+                </h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="dark" align="center" style="padding-bottom:0px; background-color:#000">
+                <h1 style="text-align: center; margin: 0 !important">
+                    {{trans 'We just received your order!'}}
+                </h1>
+            </td>
+        </tr>
+        <tr>
+            <td class="dark" align="center" style="padding-bottom:8px; background-color:#000">
+                <h3 style="text-align: center; letter-spacing: 0.025em;">
+                    {{trans 'ORDER NUMBER: <span class="no-link">%increment_id</span>' increment_id=$order.increment_id |raw}}
+                </h3>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table align="center" style="padding-bottom:5px; padding-top:20px; width: 660px">
+    <tbody>
+        <tr>
+            <td align="center" style="padding-top: 10px;padding-bottom:10px;">
+                <h2 style="text-align: center; margin: 0 0 20px 0 !important">
+                    {{trans 'Stay close! We will send you update along the way!'}}
+                </h2>
+            </td>
+        </tr>
+        <tr>
+            <td style="margin-left: 0px">
+                <p style="margin: 0 !important;">
+                    {{trans 'You can view the entire status of your order by checking <a href="%account_url">your account</a>.' account_url=$this.getUrl($store,'customer/account/',[_nosid:1]) |raw}}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="margin-left: 0px">
+                <p style="margin: 0 0 50px 0 !important;">
+                    {{trans 'If you have questions about your order, you can email us at <a href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw}}
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table style="width: 660px">
+    <tr class="email-information">
+        <td>
+            {{depend order.getEmailCustomerNote()}}
+            <table class="message-info">
+                <tr>
+                    <td>
+                        {{var order.getEmailCustomerNote()|escape|nl2br}}
+                    </td>
+                </tr>
+            </table>
+            {{/depend}}
+
+            {{layout handle="weltpixel_sales_email_order_items" order=$order area="frontend"}}
+
+            <table class="order-details" style="border-top: 5px solid #000000">
+                <tr>
+                    <td class="address-details" style="padding-top: 60px !important">
+                        <h3 style="color: #555656;">{{trans "BILLING ADDRESS"}}</h3>
+                        <p style="color: #555656;">{{var formattedBillingAddress|raw}}</p>
+                    </td>
+                    {{depend order.getIsNotVirtual()}}
+                    <td class="address-details" style="padding-top: 60px !important">
+                        <h3 style="color: #555656;">{{trans "SHIPPING ADDRESS"}}</h3>
+                        <p style="color: #555656;">{{var formattedShippingAddress|raw}}</p>
+                    </td>
+                    {{/depend}}
+                </tr>
+                <tr>
+                    <td class="method-info wp-method-info" style="padding-bottom: 60px !important">
+                        <h3 style="color: #555656;">{{trans "PAYMENT METHOD"}}</h3>
+                        {{var payment_html|raw}}
+                    </td>
+                    {{depend order.getIsNotVirtual()}}
+                    <td class="method-info" style="padding-bottom: 60px !important">
+                        <h3 style="color: #555656;">{{trans "SHIPPING METHOD"}}</h3>
+                        <p style="color: #555656;">{{var order.getShippingDescription()}}</p>
+                        {{if shipping_msg}}
+                        <p style="color: #555656;">{{var shipping_msg}}</p>
+                        {{/if}}
+                    </td>
+                    {{/depend}}
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                            <tr>
+                                <td align="center" style="padding: 8px 0 !important">
+                                    <a href="{{var this.getUrl($store,'customer/account/',[_nosid:1])}}" target="_blank" style="font-weight: bold">{{trans "VIEW ORDER"}}</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="padding-top: 35px">
+            {{block class="Magento\Cms\Block\Block" area="frontend" block_id="weltpixel_custom_block_returns"}}
+        </td>
+    </tr>
+</table>
+
+
+
+{{template config_path="design/email/footer_template"}}

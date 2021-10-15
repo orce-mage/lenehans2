@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_invoice = $block->getInvoice() ?>
+<?php $_order   = $block->getOrder() ?>
+<?php if ($_invoice && $_order): ?>
+    <table class="email-items">
+        <thead>
+            <th colspan="2"><h3><?= __('WHAT’S INSIDE')?></h3></th>
+            <th colspan="2" style="text-align: right"><h3><?= __('ITEMS')?> (<?= /* @escapeNotVerified */ $_order->getTotalItemCount() ?>) </h3></th>
+        </thead>
+        <?php foreach ($_invoice->getAllItems() as $_item): ?>
+            <?php
+                if ($_item->getOrderItem()->getParentItem()) {
+                    continue;
+                }
+            ?>
+            <tbody>
+                <?= $block->getItemHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+        <tfoot class="order-totals" style="border-top: 1px solid #ccc">
+            <?= $block->getChildHtml('invoice_totals') ?>
+        </tfoot>
+    </table>
+<?php endif; ?>

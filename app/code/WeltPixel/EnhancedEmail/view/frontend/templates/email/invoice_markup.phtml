@@ -1,0 +1,38 @@
+<?php
+$_invoice = $block->getInvoice();
+$markup = '';
+if (is_object($_invoice)) {
+    $_order = $_invoice->getOrder();
+    $_store = $this->getStoreData();
+    $_payment = $_order->getPayment();
+    $_paymentInfo = $_order->getPayment()->getMethodInstance();
+    $markup = '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "Invoice",
+                  "accountId": "' . $_order->getCustomerId() . '",
+                  "url": "' . $this->getFrontUrl('sales/order/invoice', array('order_id' => $_order->getId())) . '",
+                  "potentialAction": {
+                    "@type": "ViewAction",
+                    "url": "' . $this->getFrontUrl('sales/order/invoice', array('order_id' => $_order->getId())) . '"
+                  },
+                  "minimumPaymentDue": {
+                    "@type": "PriceSpecification",
+                    "price": "' . $this->getFormatedPrice($_invoice->getGrandTotal()) . '"
+                  },
+                  "paymentDue": "' . $this->getFormatedDate($_order->getCreatedAt()) . '",
+                  "paymentMethod": "' . $_paymentInfo->getTitle() . '",
+                  "paymentMethodId": "' . $_payment->getMethod() . '",
+                  "provider": {
+                    "@type": "Organization",
+                    "name": "' . $_store->getFrontendName() . '"
+                  },
+                  "totalPaymentDue": {
+                    "@type": "PriceSpecification",
+                    "price": "' . $this->getFormatedPrice($_invoice->getGrandTotal()) . '"
+                  }
+                }
+            </script>';
+}
+?>
+<?= $markup ?>

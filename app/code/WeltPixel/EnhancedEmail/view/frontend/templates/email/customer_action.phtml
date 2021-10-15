@@ -1,0 +1,27 @@
+<?php
+$customer = $block->getCustomer();
+$token = ($this->isLoggedIn()) ? $customer->getRpToken() : $this->getCustomerToken();
+$markup = '';
+if ($customer) {
+    $queryParams = [
+        '_query' => [
+            'id' => $customer->getId(),
+            'token' => $token
+        ],
+        '_nosid' => 1
+    ];
+    $markup = '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "EmailMessage",
+                  "potentialAction": {
+                    "@type": "ViewAction",
+                    "target": "' . $this->getFrontendUrl('customer/account/createPassword', $queryParams) . '",
+                    "name": "Reset Password"
+                  },
+                  "description": "Reset Your Password"
+                }
+            </script>';
+}
+?>
+<?= $markup ?>

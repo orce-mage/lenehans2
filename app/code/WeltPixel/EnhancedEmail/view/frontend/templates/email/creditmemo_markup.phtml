@@ -1,0 +1,21 @@
+<?php
+$_cm = $block->getCreditmemo();
+$markup = '';
+if (is_object($_cm)) {
+    $_order = $_cm->getOrder();
+    $_store = $this->getStoreData();
+    $markup = '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "EmailMessage",
+                  "potentialAction": {
+                    "@type": "ViewAction",
+                    "target": "' . $this->getFrontUrl('sales/order/creditmemo', array('order_id' => $_order->getId())) . '",
+                    "name": "View Creditmemo"
+                  },
+                  "description": "View Your Credit Memo"
+                }
+            </script>';
+}
+?>
+<?= $markup ?>

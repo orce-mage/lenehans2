@@ -1,0 +1,62 @@
+<?php
+$_order = $block->getOrder();
+$_store = $this->getStoreData();
+
+$markup = '';
+if (is_object($_order) && is_object($_store)) {
+
+    $acceptedOfferHtml = '"acceptedOffer": [';
+    $_items = $_order->getAllItems();
+    $itemsCount = count($_items);
+    $ctr = 1;
+    foreach ($_items as $_item) {
+
+        if ($_item->getParentItem()) {
+            continue;
+        }
+        $_product = $_item->getProduct();
+        $_productUrl = $_product->getProductUrl();
+        $_productImgUrl = $this->getProductImgUrl($_product);
+        $acceptedOfferHtml .= '{
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "' . $_item->getName() . '",
+                        "sku": "' . $_item->getSku() . '",
+                        "url": "' . $_productUrl . '",
+                        "image": "' . $_productImgUrl . '"
+                    },
+                    "price": "' . $_item->getPrice() . '",
+                    "priceCurrency": "' . $_store->getCurrentCurrencyCode() . '",
+                    "eligibleQuantity": {
+                        "@type": "QuantitativeValue",
+                        "value": "' . $_item->getQtyOrdered() . '"
+                    }
+                },';
+        $ctr++;
+    }
+    $acceptedOfferHtml = rtrim($acceptedOfferHtml, ',');
+    $acceptedOfferHtml .= ']';
+    $markup .= '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "Order",
+                  "merchant": {
+                    "@type": "Organization",
+                    "name": "' . $_store->getFrontendName() . '"
+                  },
+                  "orderNumber": "' . $_order->getIncrementId() . '",
+                  "orderStatus": "http://schema.org/OrderProcessing",
+                  "priceCurrency": "' . $_store->getCurrentCurrencyCode() . '",
+                  "price": "' . $_order->getGrandTotal() . '",
+                  ' . $acceptedOfferHtml . ',
+                  "url": "' . $this->getUrl('sales/order/view', array('order_id' => $_order->getId())) . '",
+                  "potentialAction": {
+                    "@type": "ViewAction",
+                    "url": "' . $this->getUrl('sales/order/view', array('order_id' => $_order->getId())) . '"
+                  }
+                }
+                </script>';
+}
+?>
+<?= $markup ?>

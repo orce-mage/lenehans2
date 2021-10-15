@@ -1,0 +1,715 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="weltpixel_enhancedemail" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="210"
+                 translate="label">
+            <label>Email Template Editor</label>
+            <tab>weltpixel</tab>
+            <resource>WeltPixel_EnhancedEmail::EnhancedEmail</resource>
+
+            <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>General Settings</label>
+                <comment>
+                    <![CDATA[<p>In order to configure your email templates there are a few steps to be completed, described in
+                        detail in <a
+                                href="https://www.weltpixel.com/magento-2-email-template-editor-with-gmail-markup-support.html"
+                                target="_blank">product documentation</a>. Here is a short summary of the steps:
+                    </p>
+                    <ul style="margin-left: 40px; list-style-type: none">
+                        <li>Step 1:  Set your store email addresses</li>
+                        <li>Step 2:  Set your store information</li>
+                        <li>Step 3:  Enable Enhanced Email Extension and start configuring</li>
+                        <li>Step 4:  Setup each email template</li>
+                        <li>Step 5:  Assign your templates for each email</li>
+                        <li>Step 6:  Submit to Gmail, for Mark-ups (optional)</li>
+                    </ul>]]>
+                </comment>
+                <field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label"
+                       type="select">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Email Template Editor.</comment>
+                </field>
+
+                <field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30"
+                       translate="label" type="select">
+                    <label>Show Product Image In Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show product image in sales order/invoice/creditmemo emails.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="light_logo" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+                <label>Logo Light</label>
+                <field id="logo_light" translate="label" type="image" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Upload Logo Light</label>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[ The image must be in .jpg, .png, or. gif format. 1 <br> <b>Note</b>: This logo will only display when using the WeltPixel Header Template.]]></comment>
+                    <backend_model>WeltPixel\EnhancedEmail\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">weltpixel/enhanced_email</upload_dir>
+                    <base_url type="media" scope_info="1">weltpixel/enhanced_email</base_url>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_light_link" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Light Link</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_light_alt" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Light Alt</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_light_width" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Light Width</label>
+                    <comment>Example: 150 (values in pixels)</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_light_height" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Light Height</label>
+                    <comment>Example: 150 (values in pixels)</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="dark_logo" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="25" translate="label">
+                <label>Logo Dark</label>
+                <field id="logo_dark" translate="label" type="image" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Upload Logo Dark</label>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[ The image must be in .jpg, .png, or. gif format. 1 <br> <b>Note</b>: This logo will only display when using the WeltPixel Header Template.]]></comment>
+                    <backend_model>WeltPixel\EnhancedEmail\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">weltpixel/enhanced_email</upload_dir>
+                    <base_url type="media" scope_info="1">weltpixel/enhanced_email</base_url>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_dark_link" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Dark Link</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_dark_alt" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Dark Alt</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_dark_width" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Dark Width</label>
+                    <comment>Example: 150 (values in pixels)</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="logo_dark_height" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logo Dark Height</label>
+                    <comment>Example: 150 (values in pixels)</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="email_header" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30"
+                   translate="label">
+                <label>Email Header Options</label>
+                <field id="header__bg____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Header Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for Email Header. Example: #303030</comment>
+                </field>
+            </group>
+
+            <group id="email_footer" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40"
+                   translate="label">
+                <label>Email Footer Options</label>
+                <field id="footer__bg____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Footer Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment><![CDATA[ Set the background color for Email Footer. Example: #303030
+                            <br/> You can change email Social Media Links from CMS Block: "EnhancedEmail Social Media Block"]]>
+                    </comment>
+                </field>
+            </group>
+
+            <group id="email_topmenu" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50"
+                   translate="label">
+                <label>Email Top Menu</label>
+                <field id="topmenu__font____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Top Menu Font Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the font color for Email Top Menu. Example: #303030</comment>
+                </field>
+                <field id="topmenu__bg____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Top Menu Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for Email Top Menu. Example: #303030</comment>
+                </field>
+                <field id="topmenu__padding___top_bottom" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Top Menu Padding Top/Bottom</label>
+                    <comment>Set the padding (top/bottom) for Email Top menu. Example: 10px</comment>
+                </field>
+                <field id="topmenu__padding" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Top Menu Items Padding</label>
+                    <comment>Set the padding for Email Top Menu Items. Example: 10px</comment>
+                </field>
+            </group>
+
+            <group id="email_body" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label">
+                <label>Email Body Options</label>
+                <field id="body_wrapper__bg____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Wrapper Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for Email Wrapper Body. Example: #303030</comment>
+                </field>
+                <field id="body__bg____color" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Content Body Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for Email Body. Example: #303030</comment>
+                </field>
+                <field id="body__text____color" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Body Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for Email Body. Example: #303030</comment>
+                </field>
+                <field id="body__link____color" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Body Link Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the link color for Email Body. Example: #303030</comment>
+                </field>
+                <field id="body__ordertotal_bg____color" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Body Order Total Section Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for Email Body Order Total section. Example: #303030</comment>
+                </field>
+
+            </group>
+
+            <group id="h1" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label">
+                <label>H1</label>
+                <field id="h1__font____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for H1 heading. Example: #303030</comment>
+                </field>
+                <field id="h1__use_google_fonts" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label"
+                       type="select">
+                    <label>Use Google Fonts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Google Fonts on H1 Heading.</comment>
+                </field>
+                <field id="h1__font____family" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Googlefonts</source_model>
+                    <comment><![CDATA[ Set font family for H1 heading. Example: Questrial. Please check
+                    <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank" >this</a>
+                    for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="h1__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h1__font____family_characterset" translate="label" type="multiselect" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Font Character Set</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Characterset</source_model>
+                    <comment><![CDATA[ Set character set for H1 heading. Example: Latin. <br/> Please check
+                    <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank">this</a>
+                    for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="h1__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h1__font____family_websafe" translate="label" type="multiselect" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Font Family (websafe)</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[ Set Websafe Fonts on H1 Heading]]>
+                    </comment>
+                    <depends>
+                        <field id="h1__use_google_fonts">0</field>
+                    </depends>
+                </field>
+                <field id="h1__font____family_fallback" translate="label" type="multiselect" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Fallback Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[ Set fallback Fonts on H1 Heading]]>
+                    </comment>
+                    <depends>
+                        <field id="h1__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h1__font____weight" translate="label" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Weight</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontWeight</source_model>
+                    <comment><![CDATA[ Set font weight for H1 heading. <br/>Please check
+                    <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank" >this</a>
+                    for more details on google fonts.<br/> ]]>
+                    </comment>
+                    <tooltip>The font-weight property sets how thick or thin characters in text should be displayed.
+                        Can be defined from thin to thick characters. For example 400 is the same as normal,
+                        and 700 is the same as bold
+                    </tooltip>
+                </field>
+                <field id="h1__font____size" translate="label" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Size</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontSize</source_model>
+                    <comment>Set the font size for H1 heading.</comment>
+                </field>
+                <field id="h1__font____style" translate="label" type="select" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Style</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontStyle</source_model>
+                    <comment>Set font style for H1 heading.</comment>
+                </field>
+                <field id="h1__line____height" translate="label" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Line Height</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LineHeight</source_model>
+                    <comment>Set line height for H1 heading.</comment>
+                </field>
+                <field id="h1__letter____spacing" translate="label" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Letter Spacing</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LetterSpacing</source_model>
+                    <comment>Set letter-spacing for H1 heading.</comment>
+                </field>
+            </group>
+
+            <group id="h2" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="80" translate="label">
+                <label>H2</label>
+
+                <field id="h2__font____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for H2 heading.</comment>
+                </field>
+                <field id="h2__use_google_fonts" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label"
+                       type="select">
+                    <label>Use Google Fonts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Google Fonts on H2 Heading.</comment>
+                </field>
+                <field id="h2__font____family" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Googlefonts</source_model>
+                    <comment>
+                        <![CDATA[Set font family for H2 heading. Please check <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank" >this</a> for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="h2__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h2__font____family_characterset" translate="label" type="multiselect" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Font Character Set</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Characterset</source_model>
+                    <comment>
+                        <![CDATA[ Set character set for H2 heading. Please check <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank">this</a> for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="h2__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h2__font____family_websafe" translate="label" type="multiselect" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Font Family (websafe)</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[Set Websafe Fonts on H2 Heading]]></comment>
+                    <depends>
+                        <field id="h2__use_google_fonts">0</field>
+                    </depends>
+                </field>
+                <field id="h2__font____family_fallback" translate="label" type="multiselect" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Fallback Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[ Set fallback fonts for H2 Heading]]>
+                    </comment>
+                    <depends>
+                        <field id="h2__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h2__font____weight" translate="label" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Weight</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontWeight</source_model>
+                    <comment><![CDATA[ Set font weight for H1 heading. <br/>Please check
+                    <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank" >this</a>
+                    for more details on google fonts.<br/> ]]>
+                    </comment>
+                    <tooltip>The font-weight property sets how thick or thin characters in text should be displayed.
+                        Can be defined from thin to thick characters. For example 400 is the same as normal,
+                        and 700 is the same as bold
+                    </tooltip>
+                </field>
+                <field id="h2__font____size" translate="label" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Size</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontSize</source_model>
+                    <comment>Set the font size for H2 heading.</comment>
+                </field>
+                <field id="h2__font____style" translate="label" type="select" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Style</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontStyle</source_model>
+                    <comment>Set font style for H2 heading.</comment>
+                </field>
+                <field id="h2__line____height" translate="label" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Line Height</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LineHeight</source_model>
+                    <comment>Set line height for H2 heading.</comment>
+
+                </field>
+                <field id="h2__letter____spacing" translate="label" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Letter Spacing</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LetterSpacing</source_model>
+                    <comment>Set letter-spacing for H2 heading.</comment>
+                </field>
+            </group>
+
+            <group id="h3" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label">
+                <label>H3</label>
+
+                <field id="h3__font____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for H3 heading. Example: #303030</comment>
+                </field>
+                <field id="h3__use_google_fonts" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label"
+                       type="select">
+                    <label>Use Google Fonts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Google Fonts on H3 Heading.</comment>
+                </field>
+                <field id="h3__font____family" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Googlefonts</source_model>
+                    <comment><![CDATA[ Set font family for H3 heading. Example: Questrial.
+                    Please check <a href="https://developers.google.com/fonts/docs/getting_started"
+                    target="_blank" >this</a> for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="h3__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h3__font____family_characterset" translate="label" type="multiselect" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Font Character Set</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Characterset</source_model>
+                    <comment>
+                        <![CDATA[Set character set for H3 heading. Example: Latin. Please check <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank">this</a> for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="h3__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h3__font____family_websafe" translate="label" type="multiselect" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Font Family (websafe)</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[Set Websafe Fonts on H3 Heading]]>
+                    </comment>
+                    <depends>
+                        <field id="h3__use_google_fonts">0</field>
+                    </depends>
+                </field>
+                <field id="h3__font____family_fallback" translate="label" type="multiselect" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Fallback Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[ Set fallback fonts for H3 Heading]]>
+                    </comment>
+                    <depends>
+                        <field id="h3__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="h3__font____weight" translate="label" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Weight</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontWeight</source_model>
+                    <comment><![CDATA[ Set font weight for H3 heading. <br/>Please check
+                    <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank" >this</a>
+                    for more details on google fonts.<br/> ]]>
+                    </comment>
+                    <tooltip>The font-weight property sets how thick or thin characters in text should be displayed.
+                        Can be defined from thin to thick characters. For example 400 is the same as normal,
+                        and 700 is the same as bold
+                    </tooltip>
+                </field>
+                <field id="h3__font____size" translate="label" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Size</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontSize</source_model>
+                    <comment>Set the font size for H3 heading.</comment>
+                </field>
+                <field id="h3__font____style" translate="label" type="select" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Style</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontStyle</source_model>
+                    <comment>Set font style for H3 heading.</comment>
+                </field>
+                <field id="h3__line____height" translate="label" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Line Height</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LineHeight</source_model>
+                    <comment>Set line height for H3 heading.</comment>
+                </field>
+                <field id="h3__letter____spacing" translate="label" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Letter Spacing</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LetterSpacing</source_model>
+                    <comment>Set letter-spacing for H3 heading.</comment>
+                </field>
+            </group>
+
+            <group id="paragraph" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label">
+                <label>Paragraph</label>
+                <field id="paragraph__font____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for Paragraph. Example: #303030</comment>
+                </field>
+                <field id="paragraph__use_google_fonts" showInDefault="1" showInStore="1" showInWebsite="1"
+                       sortOrder="20"
+                       translate="label"
+                       type="select">
+                    <label>Use Google Fonts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Google Fonts on Paragraph.</comment>
+                </field>
+                <field id="paragraph__font____family" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Googlefonts</source_model>
+                    <comment><![CDATA[ Set font family for Paragraph. Example: Questrial.
+                    Please check <a href="https://developers.google.com/fonts/docs/getting_started"
+                    target="_blank" >this</a> for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="paragraph__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="paragraph__font____family_characterset" translate="label" type="multiselect" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Font Character Set</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\Characterset</source_model>
+                    <comment>
+                        <![CDATA[Set character set for Paragraph. Example: Latin. Please check <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank">this</a> for more details on google fonts]]>
+                    </comment>
+                    <depends>
+                        <field id="paragraph__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="paragraph__font____family_websafe" translate="label" type="multiselect" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Font Family (websafe)</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[Set Websafe Fonts on Paragraph]]>
+                    </comment>
+                    <depends>
+                        <field id="paragraph__use_google_fonts">0</field>
+                    </depends>
+                </field>
+                <field id="paragraph__font____family_fallback" translate="label" type="multiselect" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Fallback Font Family</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\WebsafeFonts</source_model>
+                    <comment><![CDATA[ Set fallback fonts for Paragraph]]>
+                    </comment>
+                    <depends>
+                        <field id="paragraph__use_google_fonts">1</field>
+                    </depends>
+                </field>
+                <field id="paragraph__font____weight" translate="label" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Weight</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontWeight</source_model>
+                    <comment><![CDATA[ Set font weight for Paragraph. <br/>Please check
+                    <a href="https://developers.google.com/fonts/docs/getting_started" target="_blank" >this</a>
+                    for more details on google fonts.<br/> ]]>
+                    </comment>
+                    <tooltip>The font-weight property sets how thick or thin characters in text should be displayed.
+                        Can be defined from thin to thick characters. For example 400 is the same as normal,
+                        and 700 is the same as bold
+                    </tooltip>
+                </field>
+                <field id="paragraph__font____size" translate="label" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Size</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontSize</source_model>
+                    <comment>Set the font size for Paragraph.</comment>
+                </field>
+                <field id="paragraph__font____style" translate="label" type="select" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Font Style</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\FontStyle</source_model>
+                    <comment>Set font style for Paragraph.</comment>
+                </field>
+                <field id="paragraph__line____height" translate="label" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Line Height</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LineHeight</source_model>
+                    <comment>Set line height for Paragraph.</comment>
+                </field>
+                <field id="paragraph__letter____spacing" translate="label" type="select" sortOrder="1100"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Letter Spacing</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\LetterSpacing</source_model>
+                    <comment>Set letter-spacing for Paragraph.</comment>
+                </field>
+            </group>
+
+            <group id="button" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110" translate="label">
+                <label>Buttons</label>
+                <field id="buttons__font____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Buttons Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for Buttons. Example: #303030</comment>
+                </field>
+                <field id="buttons__bg____color" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Buttons Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for Buttons. Example: #303030</comment>
+                </field>
+                <field id="buttons__border____color" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Buttons Border Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the border color for Buttons. Example: #303030</comment>
+                </field>
+                <field id="buttons__hover__font____color" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Buttons Hover Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for Buttons. Example: #303030</comment>
+                </field>
+                <field id="buttons__hover__bg____color" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Buttons Hover Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for Buttons. Example: #303030</comment>
+                </field>
+                <field id="buttons__hover__border____color" translate="label" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Buttons Hover Border Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the border color for Buttons. Example: #303030</comment>
+                </field>
+            </group>
+
+            <group id="email_comment" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                   translate="label">
+                <label>Email Body Messages (eg. order/invoice comment)</label>
+                <field id="email_comment__font____color" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Comment Section Text Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the text color for the Email Body Comment section (eg. order/invoice comments).
+                        Example: #303030
+                    </comment>
+                </field>
+                <field id="email_comment__bg____color" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Comment Section Background Color</label>
+                    <validate>color {required:false, hash:true}</validate>
+                    <comment>Set the background color for the Email body Comment Section (eg. order/invoice comments).
+                        Example: #303030
+                    </comment>
+                </field>
+            </group>
+
+            <group id="products_grid" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="120"
+                   translate="label">
+                <label>Products Grid</label>
+                <field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10"
+                       translate="label"
+                       type="select">
+                    <label>Enable Products Grid</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label"
+                       type="text">
+                    <label>Grid Title</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="products_type" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30"
+                       translate="label"
+                       type="select">
+                    <label>Products Type</label>
+                    <source_model>WeltPixel\EnhancedEmail\Model\Config\Source\GridProductsType</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="number_of_products" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40"
+                       translate="label comment"
+                       type="text">
+                    <label>Number of products</label>
+                    <comment>Leave 0 to list all products.</comment>
+                    <validate>required-entry validate-number</validate>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

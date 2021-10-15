@@ -1,0 +1,149 @@
+<?php
+$_order = $block->getOrder();
+$_shipment = $block->getShipment();
+$_store = $this->getStoreData();
+$trackData = $this->getTrackingData();
+$origin = $this->getShippingOrigin();
+
+$markup = '';
+if (is_object($_order) && is_object($_store) && is_object($_shipment) && $trackData) {
+    $deliveryAddress = $_order->getShippingAddress();
+    $billingAddress = $_order->getBillingAddress();
+
+    $itemShipped = '"itemShipped": [';
+    $_items = $_order->getAllItems();
+    $itemsCount = count($_items);
+    $ctr = 1;
+    foreach ($_items as $_item) {
+
+        if ($_item->getParentItem()) {
+            continue;
+        }
+        $_product = $_item->getProduct();
+        $_productUrl = $_product->getProductUrl();
+        $_productImgUrl = $this->getProductImgUrl($_product);
+        $itemShipped .= '{
+                    "@type": "Product",
+                    "name": "' . $_item->getName() . '",
+                    "sku": "' . $_item->getSku() . '",
+                    "url": "' . $_productUrl . '",
+                    "image": "' . $_productImgUrl . '"
+                    },';
+        $ctr++;
+    }
+    $itemShipped = rtrim($itemShipped, ',');
+    $itemShipped .= ']';
+    $markup .= '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "ParcelDelivery",
+                  "deliveryAddress": {
+                    "@type": "PostalAddress",
+                    "name": "' . $deliveryAddress->getFirstname() . ' ' .$deliveryAddress->getLastname() . '",
+                    "streetAddress": "' . $deliveryAddress->getStreet()[0] . '",
+                    "addressLocality": "' . $deliveryAddress->getCity() . '",
+                    "addressRegion": "' . $deliveryAddress->getRegion(). '",
+                    "addressCountry": "' . $deliveryAddress->getCountryId() . '",
+                    "postalCode": "' . $deliveryAddress->getPostcode() . '"
+                  },
+                  "originAddress": {
+                    "@type": "PostalAddress",
+                    "name": "' . $origin['name'] . '",
+                    "streetAddress": "' . $origin['streetAddress'] . '",
+                    "addressLocality": "' . $origin['addressLocality'] . '",
+                    "addressRegion": "' . $origin['addressRegion']. '",
+                    "addressCountry": "' . $origin['addressCountry'] . '",
+                    "postalCode": "' . $origin['postalCode'] . '"
+                  },
+                  "expectedArrivalUntil": "' . $block->escapeHtml($this->getExpectedArrivalUntil()) . '",
+                  "carrier": {
+                    "@type": "Organization",
+                    "name": "' . $_order->getShippingDescription(). '"
+                  },
+                  ' . $itemShipped . ',
+                  "trackingNumber": "' . $block->escapeHtml($trackData->getTracking()) . '",
+                  "trackingUrl": "' . $block->escapeHtml($trackData->getUrl()) . '",
+                  "potentialAction": {
+                    "@type": "TrackAction",
+                    "url": "' . $block->escapeHtml($trackData->getUrl()) . '"
+                  },
+                  "partOfOrder": {
+                    "@type": "Order",
+                    "orderNumber": "' . $_order->getIncrementId() . '",
+                    "merchant": {
+                      "@type": "Organization",
+                      "name": "' . $_store->getName() . '"
+                    },
+                    "orderStatus": "http://schema.org/OrderProcessing"
+                  }
+                }</script>';
+}
+elseif(is_object($_order) && is_object($_store) && is_object($_shipment) && !$trackData) {
+    $deliveryAddress = $_order->getShippingAddress();
+    $billingAddress = $_order->getBillingAddress();
+
+    $itemShipped = '"itemShipped": [';
+    $_items = $_order->getAllItems();
+    $itemsCount = count($_items);
+    $ctr = 1;
+    foreach ($_items as $_item) {
+
+        if ($_item->getParentItem()) {
+            continue;
+        }
+        $_product = $_item->getProduct();
+        $_productUrl = $_product->getProductUrl();
+        $_productImgUrl = $this->getProductImgUrl($_product);
+        $itemShipped .= '{
+                    "@type": "Product",
+                    "name": "' . $_item->getName() . '",
+                    "sku": "' . $_item->getSku() . '",
+                    "url": "' . $_productUrl . '",
+                    "image": "' . $_productImgUrl . '"
+                    },';
+        $ctr++;
+    }
+    $itemShipped = rtrim($itemShipped, ',');
+    $itemShipped .= ']';
+    $markup .= '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "ParcelDelivery",
+                  "deliveryAddress": {
+                    "@type": "PostalAddress",
+                    "name": "' . $deliveryAddress->getFirstname() . ' ' .$deliveryAddress->getLastname() . '",
+                    "streetAddress": "' . $deliveryAddress->getStreet()[0] . '",
+                    "addressLocality": "' . $deliveryAddress->getCity() . '",
+                    "addressRegion": "' . $deliveryAddress->getRegion(). '",
+                    "addressCountry": "' . $deliveryAddress->getCountryId() . '",
+                    "postalCode": "' . $deliveryAddress->getPostcode() . '"
+                  },
+                  "originAddress": {
+                    "@type": "PostalAddress",
+                    "name": "' . $origin['name'] . '",
+                    "streetAddress": "' . $origin['streetAddress'] . '",
+                    "addressLocality": "' . $origin['addressLocality'] . '",
+                    "addressRegion": "' . $origin['addressRegion']. '",
+                    "addressCountry": "' . $origin['addressCountry'] . '",
+                    "postalCode": "' . $origin['postalCode'] . '"
+                  },
+                  "expectedArrivalUntil": "' . $block->escapeHtml($this->getExpectedArrivalUntil()) . '",
+                  "carrier": {
+                    "@type": "Organization",
+                    "name": "' . $_order->getShippingDescription(). '"
+                    
+                  },
+                  ' . $itemShipped . ',                 
+                  "partOfOrder": {
+                    "@type": "Order",
+                    "orderNumber": "' . $_order->getIncrementId() . '",
+                    "merchant": {
+                      "@type": "Organization",
+                      "name": "' . $_store->getName() . '"
+                    },
+                    "orderStatus": "http://schema.org/OrderProcessing"
+                  }
+                }</script>';
+}
+?>
+<?= $markup ?>

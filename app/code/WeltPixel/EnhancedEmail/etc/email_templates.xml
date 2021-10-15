@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+
+    <template id="new_order_weltpixel" label="New Order - WeltPixel" file="new_order_weltpixel.html"
+              type="html" module="WeltPixel_EnhancedEmail" area="frontend"/>
+    <template id="new_order_guest_weltpixel" label="New Order Guest - WeltPixel"
+              file="new_order_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail" area="frontend"/>
+    <template id="new_invoice_weltpixel" label="New Invoice - WeltPixel" file="new_invoice_weltpixel.html"
+              type="html" module="WeltPixel_EnhancedEmail" area="frontend"/>
+    <template id="new_invoice_guest_weltpixel" label="New Invoice Guest - WeltPixel"
+              file="new_invoice_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail" area="frontend"/>
+    <template id="new_creditmemo_weltpixel" label="New Creditmemo - WeltPixel"
+              file="new_creditmemo_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail" area="frontend"/>
+    <template id="new_creditmemo_guest_weltpixel" label="New Creditmemo Guest - WeltPixel"
+              file="new_creditmemo_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="new_shipment_weltpixel" label="New Shipment - WeltPixel"
+              file="new_shipment_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail" area="frontend"/>
+    <template id="new_shipment_guest_weltpixel" label="New Shipment Guest - WeltPixel"
+              file="new_shipment_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="creditmemo_update_weltpixel" label="Creditmemo Update - WeltPixel"
+              file="creditmemo_update_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="creditmemo_update_guest_weltpixel" label="Creditmemo Update Guest - WeltPixel"
+              file="creditmemo_update_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="invoice_update_weltpixel" label="Invoice Update - WeltPixel"
+              file="invoice_update_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="invoice_update_guest_weltpixel" label="Invoice Update Guest - WeltPixel"
+              file="invoice_update_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="order_update_weltpixel" label="Order Update - WeltPixel"
+              file="order_update_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="order_update_guest_weltpixel" label="Order Update Guest - WeltPixel"
+              file="order_update_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="shipment_update_weltpixel" label="Shipment Update - WeltPixel"
+              file="shipment_update_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="shipment_update_guest_weltpixel" label="Shipment Update Guest - WeltPixel"
+              file="shipment_update_guest_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="header_weltpixel" label="Header - WeltPixel"
+              file="header_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="footer_weltpixel" label="Footer - WeltPixel"
+              file="footer_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="customer_new_account_weltpixel" label="Customer New Account - WeltPixel"
+              file="customer/new_account_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_new_account_confirmed_weltpixel" label="Customer New Account Confirmed - WeltPixel"
+              file="customer/account_new_confirmed_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_password_reset_confirmation_weltpixel" label="Customer Password Reset Confirmation - WeltPixel"
+              file="customer/password_reset_confirmation_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_new_account_no_password_weltpixel" label="Customer New Account No Password - WeltPixel"
+              file="customer/account_new_no_password_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_new_account_confirmation_weltpixel" label="Customer New Account Confirmation Key - WeltPixel"
+              file="customer/account_new_confirmation_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_change_email_weltpixel" label="Customer Change Email - WeltPixel"
+              file="customer/change_email_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_change_email_pass_weltpixel" label="Customer Change Email and Password - WeltPixel"
+              file="customer/change_email_and_password_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_reset_pass_weltpixel" label="Customer Reset Password - WeltPixel"
+              file="customer/password_reset_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+    <template id="customer_new_pass_weltpixel" label="Customer New Password - WeltPixel"
+              file="customer/password_new_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="newsletter_subscription_confirm_weltpixel" label="Newsletter Subscription Confirm - WeltPixel"
+              file="newsletter/subscription_confirm_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+    <template id="wishlist_share_notification_weltpixel" label="Wishlist Share Notification - WeltPixel"
+              file="wishlist/share_notification_weltpixel.html" type="html" module="WeltPixel_EnhancedEmail"
+              area="frontend"/>
+
+</config>

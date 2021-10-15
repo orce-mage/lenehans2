@@ -1,0 +1,20 @@
+<?php
+$customer = $block->getCustomer();
+$markup = '';
+if ($customer) {
+
+    $markup = '<script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "EmailMessage",
+                  "potentialAction": {
+                    "@type": "ViewAction",
+                    "target": "' . $this->getFrontendUrl('customer/account') . '",
+                    "name": "Sign In"
+                  },
+                  "description": "Sign In"
+                }
+            </script>';
+}
+?>
+<?= $markup ?>

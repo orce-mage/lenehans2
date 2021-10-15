@@ -1,0 +1,66 @@
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<table align="center" style="background-color:#000; text-align:center; width: 660px">
+    <tbody>
+    <tr>
+        <td class="dark"  style="padding-bottom:8px; padding-top:5px; background-color:#000">
+            <h3 style="text-align: center;">
+                {{trans "Hi %name," name=$customer.name}}
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td class="dark" align="center" style="padding-bottom:0px; background-color:#000">
+            <h1 style="text-align: center; margin: 0 !important">
+                {{trans 'You\'re in :)' }}
+            </h1>
+        </td>
+    </tr>
+    <tr>
+        <td class="dark" align="center" style="padding-bottom:8px; background-color:#000">
+            <h3 style="text-align: center; letter-spacing: 0.025em;">
+                {{trans 'Your account is now active.'}}
+            </h3>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p style="margin: 20px 0 !important">
+    {{trans
+    'To sign in, use these credentials during checkout or when logging into <a href="%customer_url">your account</a>.'
+    customer_url=$this.getUrl($store,'customer/account/',[_nosid:1])
+    |raw}}
+</p>
+<ul>
+    <li><strong>{{trans "Email:"}}</strong> {{var customer.email}}</li>
+    <li><strong>{{trans "Password:"}}</strong> <em>{{trans "Password you set when creating account"}}</em></li>
+</ul>
+<p style="margin: 20px 0 !important">
+    {{trans
+        'Forgot your account password? Click <a href="%reset_url">here</a> to reset it.'
+
+        reset_url="$this.getUrl($store,'customer/account/createPassword/',[_query:[id:$customer.id,token:$customer.rp_token],_nosid:1])"
+    |raw}}
+</p>
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                <tr>
+                    <td align="center" style="padding: 8px 0 !important">
+                        <a href="{{var this.getUrl($store,'/',[_nosid:1])}}" target="_blank" style="font-weight: bold">{{trans "START SHOPPING"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}
