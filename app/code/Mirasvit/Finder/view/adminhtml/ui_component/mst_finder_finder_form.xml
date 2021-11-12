@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mst_finder_finder_form.mst_finder_finder_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="save" class="Mirasvit\Finder\Ui\Finder\Form\Control\SaveButton"/>
+            <button name="delete" class="Mirasvit\Finder\Ui\Finder\Form\Control\DeleteButton"/>
+            <button name="reindex" class="Mirasvit\Finder\Ui\Finder\Form\Control\ReindexButton"/>
+            <button name="back" class="Mirasvit\Finder\Ui\Finder\Form\Control\BackButton"/>
+        </buttons>
+        <namespace>mst_finder_finder_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>mst_finder_finder_form.mst_finder_finder_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="mst_finder_finder_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="mst_finder/finder/save"/>
+        </settings>
+        <dataProvider class="Mirasvit\Finder\Ui\Finder\Form\DataProvider" name="mst_finder_finder_form_data_source">
+            <settings>
+                <requestFieldName>finder_id</requestFieldName>
+                <primaryFieldName>finder_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label/>
+        </settings>
+
+        <field name="finder_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>finder_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="is_active" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Finder</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="name" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+            </settings>
+        </field>
+
+        <field name="destination_url" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Destination URL</label>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="appearance" sortOrder="20">
+        <settings>
+            <label translate="true">Appearance</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+
+        <field name="block_template" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Template</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Mirasvit\Finder\Ui\Finder\Source\TemplateSource"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="block_title" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Block Title</label>
+            </settings>
+        </field>
+
+        <field name="block_description" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Block Description</label>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="display" sortOrder="40">
+        <settings>
+            <label translate="true">Display</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+
+        <field name="display_xml" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <disabled>true</disabled>
+                <label translate="true">Layout Update XML</label>
+            </settings>
+            <formElements>
+                <textarea>
+                    <settings>
+                        <rows>5</rows>
+                    </settings>
+                </textarea>
+            </formElements>
+        </field>
+        <field name="display_widget" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <disabled>true</disabled>
+                <label translate="true">Widget</label>
+            </settings>
+            <formElements>
+                <textarea>
+                    <settings>
+                        <rows>1</rows>
+                    </settings>
+                </textarea>
+            </formElements>
+        </field>
+        <field name="display_phtml" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <disabled>true</disabled>
+                <label translate="true">Template .phtml</label>
+            </settings>
+            <formElements>
+                <textarea>
+                    <settings>
+                        <rows>1</rows>
+                    </settings>
+                </textarea>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="import">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Import</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+
+        <container name="button_set">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="boolean">false</item>
+                    <item name="template" xsi:type="string">ui/form/components/complex</item>
+                </item>
+            </argument>
+
+            <button name="mst_finder_import_button" component="Mirasvit_Finder/js/finder/form/import/button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="buttonClasses" xsi:type="string">mst_finder-import-button</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">mst_finder_finder_form.mst_finder_finder_form.import.modal.mst_finder_finder_form_import_form_loader</item>
+                                <item name="actionName" xsi:type="string">destroyInserted</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">mst_finder_finder_form.mst_finder_finder_form.import.modal</item>
+                                <item name="actionName" xsi:type="string">openModal</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="targetName" xsi:type="string">mst_finder_finder_form.mst_finder_finder_form.import.modal.mst_finder_finder_form_import_form_loader</item>
+                                <item name="actionName" xsi:type="string">render</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <title translate="true">Import Products</title>
+                    <imports>
+                        <link name="finder_id">${ $.provider}:data.finder_id</link>
+                    </imports>
+                </settings>
+            </button>
+        </container>
+
+        <modal name="modal">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string">Import</option>
+                </options>
+            </settings>
+
+            <insertForm name="mst_finder_finder_form_import_form_loader" component="Mirasvit_Finder/js/finder/form/import/insert-form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="finderListingProvider" xsi:type="string">ns = mst_finder_finder_product_listing, index = mst_finder_finder_product_listing</item>
+                        <item name="finderModalProvider" xsi:type="string">${ $.parentName }</item>
+                    </item>
+                </argument>
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render_handle">
+                        <param name="handle">mst_finder_import_form</param>
+                        <param name="buttons">1</param>
+                    </renderUrl>
+                    <loading>false</loading>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <externalProvider>${ $.ns }.mst_finder_import_form_data_source</externalProvider>
+                    <ns>mst_finder_import_form</ns>
+                    <exports>
+                        <link name="finder_id">${ $.externalProvider }:data.finder_id</link>
+                    </exports>
+                    <imports>
+                        <link name="finder_id">${ $.provider}:data.finder_id</link>
+                    </imports>
+                </settings>
+            </insertForm>
+        </modal>
+
+        <insertListing name="mst_finder_finder_product_listing">
+            <settings>
+                <externalProvider>mst_finder_finder_product_listing.mst_finder_finder_product_listing_data_source</externalProvider>
+                <autoRender>true</autoRender>
+                <dataScope>mst_finder_finder_product_listing</dataScope>
+                <ns>mst_finder_finder_product_listing</ns>
+                <exports>
+                    <link name="finder_id">${ $.externalProvider }:params.finder_id</link>
+                </exports>
+                <imports>
+                    <link name="finder_id">${ $.provider }:data.finder_id</link>
+                    <link name="params.finder_id">${ $.provider }:data.finder_id</link>
+                </imports>
+            </settings>
+        </insertListing>
+
+    </fieldset>
+</form>

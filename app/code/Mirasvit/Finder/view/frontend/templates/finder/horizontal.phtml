@@ -1,0 +1,35 @@
+<?php
+/** @var \Mirasvit\Finder\Block\Finder $block */
+$finder  = $block->getFinder();
+$filters = $block->getFilters();
+?>
+<div class="mst-finder__finder mst-finder__finder-horizontal _col-<?= count($filters) ?>" data-finder="<?= $finder->getId() ?>">
+    <div class="mst-finder__finder-header">
+        <h3><?= $finder->getBlockTitle() ?></h3>
+    </div>
+
+    <div class="mst-finder__finder-filters">
+        <?php foreach ($filters as $filter): ?>
+            <?= $block->getFilterHtml($filter) ?>
+        <?php endforeach ?>
+    </div>
+
+    <div class="mst-finder__finder-footer">
+        <button class="action" data-action-reset><?= __('Reset') ?></button>
+        <button class="action primary" data-action-find><?= __('Find') ?></button>
+    </div>
+
+    <?= $block->getJsHtml() ?>
+</div>
+
+<link rel="stylesheet" type="text/css" media="all" href="<?= $block->getCssAsset() ?>">
+<script>
+    require([
+        'jquery',
+        'Mirasvit_Finder/js/chosen.jquery'
+    ], function ($) {
+        $().ready(function() {
+            $('.mst-finder__finder-filters select').chosen();
+        });
+    });
+</script>

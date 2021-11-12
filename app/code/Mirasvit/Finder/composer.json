@@ -1,0 +1,21 @@
+{
+    "name": "mirasvit/module-finder",
+    "description": "Product Finder",
+    "require": {
+        "magento/framework": "102.0.*|103.0.*",
+        "mirasvit/module-core": "^1.2|dev-master"
+    },
+    "type": "magento2-module",
+    "version": "1.0.18",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "src/Finder/registration.php"
+        ],
+        "psr-4": {
+            "Mirasvit\\Finder\\": "src/Finder"
+        }
+    }
+}

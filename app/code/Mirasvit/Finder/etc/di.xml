@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mirasvit\Finder\Api\Data\FinderInterface" type="Mirasvit\Finder\Model\Finder"/>
+    <preference for="Mirasvit\Finder\Api\Data\FilterInterface" type="Mirasvit\Finder\Model\Filter"/>
+    <preference for="Mirasvit\Finder\Api\Data\FilterOptionInterface" type="Mirasvit\Finder\Model\FilterOption"/>
+    <preference for="Mirasvit\Finder\Api\Data\IndexInterface" type="Mirasvit\Finder\Model\Index"/>
+
+    <!--Entity Manager-->
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\Finder\Api\Data\FinderInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Finder\Api\Data\FinderInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Finder\Api\Data\FinderInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Finder\Api\Data\FilterInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Finder\Api\Data\FilterInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Finder\Api\Data\FilterInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Finder\Api\Data\FilterOptionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Finder\Api\Data\FilterOptionInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Finder\Api\Data\FilterOptionInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Finder\Api\Data\IndexInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Finder\Api\Data\IndexInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Finder\Api\Data\IndexInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\Finder\Api\Data\FinderInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Finder\Api\Data\FilterInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Finder\Api\Data\FilterOptionInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Finder\Api\Data\IndexInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--UI-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mst_finder_finder_listing_data_source" xsi:type="string">Mirasvit\Finder\Model\ResourceModel\Finder\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mstFinderImport" xsi:type="object">Mirasvit\Finder\Console\Command\ImportCommand</item>
+                <item name="mstFinderReindex" xsi:type="object">Mirasvit\Finder\Console\Command\ReindexCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Plugin -->
+    <type name="Magento\Framework\Search\Request\Binder">
+        <plugin name="mst_finder_m23_compatibility" type="Mirasvit\Finder\Plugin\SearchRequestCompatibilityPlugin" sortOrder="1000"/>
+    </type>
+</config>

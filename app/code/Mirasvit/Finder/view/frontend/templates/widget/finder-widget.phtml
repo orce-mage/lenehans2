@@ -1,0 +1,8 @@
+<?php
+/** @var \Mirasvit\Finder\Block\Widget\FinderWidget $block */
+$finderBlock = $block->getFinderBlock();
+if (!$finderBlock) {
+    return;
+}
+?>
+<?= $finderBlock->toHtml() ?>

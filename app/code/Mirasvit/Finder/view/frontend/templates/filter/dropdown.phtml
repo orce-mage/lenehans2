@@ -1,0 +1,31 @@
+<?php
+
+use Mirasvit\Finder\Api\Data\FilterInterface;
+
+/** @var \Mirasvit\Finder\Block\Filter\DropdownFilter $block */
+$filter  = $block->getFilter();
+$options = $block->isDisabled() ? [] : $block->getOptions();
+?>
+<div class="mst-finder__filter-dropdown" data-filter="<?= $filter->getId() ?>">
+    <strong class="<?= $filter->isRequired() ? 'required' : ''; ?>"><?= $filter->getName() ?></strong>
+
+    <select data-select <?= $filter->isMultiselect() ? 'multiple' : ''; ?> data-placeholder="<?= __('Please select...'); ?>">
+        <?php if (!$filter->isMultiselect()): ?>
+            <option value=""><?= __('Please select...') ?></option>
+        <?php endif; ?>
+        <?php foreach ($options as $option): ?>
+            <option value="<?= $option->getUrlKey() ?>" <?= in_array($option->getId(), $block->getValue()) ? 'selected' : '' ?>>
+                <?= $option->getName() ?>
+            </option>
+        <?php endforeach ?>
+    </select>
+</div>
+<script type="text/x-magento-init"><?= \Zend_Json::encode([
+        '[data-filter="' . $filter->getId() . '"]' => [
+            'Mirasvit_Finder/js/filter/dropdownFilter' => [
+                FilterInterface::ID          => $filter->getId(),
+                FilterInterface::URL_KEY     => $filter->getUrlKey(),
+                FilterInterface::IS_REQUIRED => $filter->isRequired(),
+            ],
+        ],
+    ]) ?></script>

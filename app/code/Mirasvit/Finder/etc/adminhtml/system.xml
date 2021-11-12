@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mst_finder" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="label" sortOrder="450">
+            <label>Finder</label>
+            <tab>mirasvit</tab>
+            <resource>Mirasvit_Finder::config_finder</resource>
+            <group id="url" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="1000">
+                <label>URL Configuration</label>
+
+                <field id="is_friendly_url" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10">
+                    <label>Friendly URLs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+<!--                Magento cannot parse params separate with slash -->
+<!--                <field id="url_format" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10">-->
+<!--                    <label>URL Format</label>-->
+<!--                    <options>-->
+<!--                        <option label="filter1 - filter2 - filter3">1</option>-->
+<!--                        <option label="filter1 / filter2 / filter3">2</option>-->
+<!--                    </options>-->
+<!--                    <depends>-->
+<!--                        <field id="mst_finder/url/is_friendly_url">1</field>-->
+<!--                    </depends>-->
+<!--                </field>-->
+
+            </group>
+        </section>
+    </system>
+</config>

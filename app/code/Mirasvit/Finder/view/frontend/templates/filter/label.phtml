@@ -1,0 +1,41 @@
+<?php
+
+use Mirasvit\Finder\Api\Data\FilterInterface;
+
+/** @var \Mirasvit\Finder\Block\Filter\DropdownFilter $block */
+$filter     = $block->getFilter();
+$isDisabled = $block->isDisabled();
+
+$selected = [];
+foreach ($block->getOptions() as $option) {
+    if (in_array($option->getId(), $block->getValue())) {
+        $selected[] = $option->getName();
+    }
+}
+?>
+<div class="mst-finder__filter-label" data-filter="<?= $filter->getId() ?>">
+    <strong><?= $filter->getName() ?></strong>
+
+    <span class="part-label" data-label>
+        <?= count($selected) ? implode(', ', $selected) : __('Please select...') ?>
+    </span>
+
+    <div class="part-dropdown" data-dropdown>
+        <div class="items" data-items>
+            <?php foreach ($block->getOptions() as $option): ?>
+                <div class="<?= in_array($option->getId(), $block->getValue()) ? '_selected' : '' ?>" data-value="<?= $option->getUrlKey() ?>" data-item>
+                    <?= $option->getName() ?>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init"><?= \Zend_Json::encode([
+        '[data-filter="' . $filter->getId() . '"]' => [
+            'Mirasvit_Finder/js/filter/labelFilter' => [
+                FilterInterface::ID          => $filter->getId(),
+                FilterInterface::URL_KEY     => $filter->getUrlKey(),
+                FilterInterface::IS_REQUIRED => $filter->isRequired(),
+            ],
+        ],
+    ]) ?></script>

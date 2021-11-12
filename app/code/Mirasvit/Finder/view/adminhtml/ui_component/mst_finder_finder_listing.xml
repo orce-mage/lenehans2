@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mst_finder_finder_listing.mst_finder_finder_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/edit"/>
+                <class>primary</class>
+                <label translate="true">Add New Finder</label>
+            </button>
+        </buttons>
+        <spinner>finder_columns</spinner>
+        <deps>
+            <dep>mst_finder_finder_listing.mst_finder_finder_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="mst_finder_finder_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">finder_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Mirasvit\Finder\Ui\Finder\Listing\DataProvider" name="mst_finder_finder_listing_data_source">
+            <settings>
+                <requestFieldName>finder_id</requestFieldName>
+                <primaryFieldName>finder_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="finder_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">mst_finder_finder_listing.mst_finder_finder_listing.finder_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">edit</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+
+        <column name="finder_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Cms\Model\Block\Source\IsActive"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" class="Mirasvit\Finder\Ui\Finder\Listing\Column\ActionsColumn">
+            <settings>
+                <indexField>finder_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

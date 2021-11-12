@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="form-builder-form" class="Mirasvit\Finder\Block\Widget\FinderWidget" placeholder_image="Magento_Cms::images/widget_page_link.png">
+        <label>Product Finder</label>
+        <description>Product Finder Block</description>
+
+        <parameters>
+            <parameter name="finder_id" xsi:type="select" visible="true" required="true" source_model="Mirasvit\Finder\Model\Config\Source\FinderSource">
+                <label>Finder</label>
+            </parameter>
+
+            <parameter name="block_template" xsi:type="select" visible="true" source_model="Mirasvit\Finder\Ui\Finder\Source\TemplateSource">
+                <label>Template</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

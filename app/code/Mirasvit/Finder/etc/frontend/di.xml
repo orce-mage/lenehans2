@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Layer\Resolver">
+        <plugin name="mstFinderApplyFilter" type="Mirasvit\Finder\Plugin\Frontend\ApplyFilterPlugin"/>
+    </type>
+
+    <!-- router for changed urls -->
+    <type name="Magento\Framework\App\Router\Base">
+        <plugin name="Mirasvit_Finder::routerPlugin" type="Mirasvit\Finder\Plugin\Frontend\MakeRequestBeforeRouteMatchPlugin" sortOrder="1000"/>
+    </type>
+
+    <!-- compatibility for 2.3.x -->
+    <type name="Magento\Catalog\Block\Category\View">
+        <plugin name="Mirasvit_Finder::changeViewArguments" type="Mirasvit\Finder\Plugin\Frontend\CategoryViewBeforeHtmlPlugin" sortOrder="1000"/>
+    </type>
+    <type name="Magento\LayeredNavigation\Block\Navigation\FilterRenderer">
+        <plugin name="Mirasvit_Finder::changeFilterArguments" type="Mirasvit\Finder\Plugin\Frontend\FilterRendererBeforeRenderPlugin" sortOrder="1000"/>
+    </type>
+    <!-- end of the compatibility for 2.3.x -->
+</config>

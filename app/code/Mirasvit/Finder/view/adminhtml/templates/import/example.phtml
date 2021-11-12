@@ -1,0 +1,10 @@
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+?>
+<?php
+$url = $block->getUrl('mst_finder/import/example', ['finder_id' => (int)$block->getRequest()->getParam('finder_id')]);
+?>
+<div>
+    <?= __('Here you can import product properties using CSV file. For more information check this ') ?><a href="<?= $url ?>" target="_blank"><?= __('Download Sample File') ?></a>
+</div>
+<br/>

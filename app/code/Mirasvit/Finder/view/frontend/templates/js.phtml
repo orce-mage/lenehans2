@@ -1,0 +1,14 @@
+<?php
+/** @var \Mirasvit\Finder\Block\Js $block */
+$finder = $block->getFinder();
+?>
+<script type="text/x-magento-init"><?= \Zend_Json::encode([
+        '[data-finder="' . $finder->getId() . '"]' => [
+            'Mirasvit_Finder/js/finder' => [
+                'finderId' => $finder->getId(),
+                'findUrl'  => $block->getFindUrl(),
+                'resetUrl' => $block->getResetUrl(),
+                'ajaxUrl'  => $block->getUrl('mst_finder/filter/findOptions'),
+            ],
+        ],
+    ]) ?></script>
