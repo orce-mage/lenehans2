@@ -8,9 +8,9 @@
 
 <span class="product-image-container"
       style="width:<?= $block->escapeHtmlAttr($block->getWidth()) ?>px;">
-    <span class="product-image-wrapper img-lazy-wrap"
+    <span class="product-image-wrapper"
           style="padding-bottom: <?= ($block->getRatio() * 100) ?>%;">
-        <img class="<?= $block->escapeHtmlAttr($block->getClass()) ?> media-lazy lazyload"
+        <img class="<?= $block->escapeHtmlAttr($block->getClass()) ?>"
             <?php if (is_array($block->getCustomAttributes())) : ?>
                 <?php foreach ($block->getCustomAttributes() as $name => $value): ?>
                     <?= $block->escapeHtmlAttr($name) ?>="<?= $block->escapeHtmlAttr($value) ?>"
@@ -18,8 +18,8 @@
             <?php else : ?>
                 <?= $block->getCustomAttributes() ?>
             <?php endif; ?>
-            src="#"
-            data-src="<?= $block->escapeUrl($block->getImageUrl()) ?>"
+            src="<?= $block->escapeUrl($block->getImageUrl()) ?>"
+            loading="lazy"
             width="<?= $block->escapeHtmlAttr($block->getWidth()) ?>"
             height="<?= $block->escapeHtmlAttr($block->getHeight()) ?>"
             alt="<?= /* @noEscape */ $block->stripTags($block->getLabel(), null, true) ?>"/></span>
