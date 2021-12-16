@@ -1,0 +1,21 @@
+{
+    "name": "mirasvit/module-sorting",
+    "description": "Improved Sorting",
+    "require": {
+        "magento/framework": "102.0.*|103.0.*",
+        "mirasvit/module-core": ">=1.2.112"
+    },
+    "type": "magento2-module",
+    "version": "1.1.14",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "src/Sorting/registration.php"
+        ],
+        "psr-4": {
+            "Mirasvit\\Sorting\\": "src/Sorting"
+        }
+    }
+}

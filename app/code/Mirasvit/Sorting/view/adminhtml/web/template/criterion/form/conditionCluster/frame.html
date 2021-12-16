@@ -1,0 +1,19 @@
+<li class="condition-frame">
+    <!-- ko if: $index() == 0 -->
+    <label>Sort By</label>
+    <!-- /ko -->
+
+    <!-- ko if: $index() > 0 -->
+    <label>Then Sort By</label>
+    <!-- /ko -->
+
+    <ul>
+        <!-- ko foreach: {data: frame.items, as: 'nod' } -->
+        <!-- ko template: 'Mirasvit_Sorting/criterion/form/conditionCluster/node' --><!-- /ko -->
+        <!-- /ko -->
+    </ul>
+
+    <button data-bind="click: function() { element.addNode(frame); }, visible: frame.items()[0] && frame.items()[0].sortBy() == 'ranking_factor'" class="action-add">
+        Add New Sub Condition
+    </button>
+</li>

@@ -1,0 +1,101 @@
+<?php
+declare(strict_types=1);
+
+/** @var \Mirasvit\Sorting\Block\DebugInPage $block */
+
+$logs = $block->getLogs();
+?>
+
+<div class="mst-sorting__debug-in-page">
+    <?php foreach ($logs as $collection): ?>
+        <pre><?= get_class($collection) ?></pre>
+        <pre> <?= $collection->getSelect()->assemble() ?></pre>
+
+        <table>
+            <tr>
+                <th>Position</th>
+                <th>Score</th>
+                <th>Product Details</th>
+                <th>Global Score Details</th>
+                <th>Criterion Score Details</th>
+            </tr>
+            <?php $idx = 1 ?>
+            <?php foreach ($collection as $product): ?>
+                <?php $scoreData = $block->getScoresByProduct($product) ?>
+                <tr>
+                    <th>
+                        #<?= $idx ?>
+                    </th>
+                    <td>
+                        <?php $step = 1 ?>
+                        <p>Step <?= $step; ?> (Global): <strong><?= $block->getTotalScore($scoreData['global']) ?></strong></p>
+                        <?php foreach ($scoreData['criterion'] as $scope => $scopeData): ?>
+                            <?php $step++; ?>
+                            <p>Step <?= $step; ?> (<?= ucfirst($scope) ?>): <?= $block->getTotalScore($scopeData) ?></p>
+                        <?php endforeach; ?>
+                    </td>
+                    <td class="product-info">
+                        <img src="<?= $block->getProductImageUrl($product) ?>" alt="" width="100px">
+                        <p><?= __('ID: %1', $product->getId()) ?></p>
+                        <p><?= __('SKU: %1', $product->getSku()) ?></p>
+                        <p><?= __('Name: %1', $product->getName()) ?></p>
+                        <p><?= __('Price: %1', $block->getProductPrice($product)) ?></p>
+                        <p><?= __('Rating: %1%', (int)$product->getRatingSummary()) ?> </p>
+                    </td>
+                    <td>
+                        <?php foreach ($scoreData['global'] as $data): ?>
+                            <?= $block->getScoresBlockHtml($product, $data) ?>
+                            <?php if (is_null($data['score'])) {
+                                break;
+                            } ?>
+                        <?php endforeach ?>
+                    </td>
+                    <td>
+                        <div class="mst-sorting__debug-in-page__criterion">
+                            <?php foreach ($scoreData['criterion'] as $scope => $scopeData): ?>
+                                <p><?= $block->getScopeLabel($scope) . ' (' . ucfirst($scope) . ')' ?></p>
+                                <?php foreach ($scopeData as $data): ?>
+                                    <?= $block->getScoresBlockHtml($product, $data) ?>
+                                    <?php if (is_null($data['score'])) {
+                                        break;
+                                    } ?>
+                                <?php endforeach; ?>
+                            <?php endforeach ?>
+                        </div>
+                    </td>
+                </tr>
+                <?php $idx++ ?>
+            <?php endforeach; ?>
+        </table>
+    <?php endforeach ?>
+</div>
+<style>
+    .mst-sorting__debug-in-page {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .mst-sorting__debug-in-page * {
+        font-size: 12px;
+    }
+
+    .mst-sorting__debug-in-page table {
+        border: 1px solid #eee;
+    }
+
+    .mst-sorting__debug-in-page table td, .mst-sorting__debug-in-page table th {
+        border: 1px solid #eee;
+    }
+
+    .mst-sorting__debug-in-page .product-info img {
+        float: left;
+    }
+
+    .mst-sorting__debug-in-page pre {
+        white-space: normal;
+    }
+
+    .mst-sorting__debug-in-page__criterion > div {
+        margin-left: 2rem;
+    }
+</style>

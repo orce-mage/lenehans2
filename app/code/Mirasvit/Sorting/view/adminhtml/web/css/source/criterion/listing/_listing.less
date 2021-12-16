@@ -1,0 +1,104 @@
+.mst-sorting-criterion-listing__cluster-html {
+    @blue:     #007dbd;
+    @orange:   #03ab72;
+
+    display:   flex;
+    flex-wrap: wrap;
+    width:     100%;
+
+    > div {
+        display: inline-flex;
+        margin:  2px 0;
+
+        > div {
+            background:  @blue;
+            padding:     1px 8px;
+            height:      24px;
+            display:     flex;
+            align-items: center;
+            white-space: nowrap;
+
+            i {
+                display:    block;
+                font-style: normal;
+                width:      8rem;
+            }
+
+            small {
+                display:          block;
+                background-color: rgba(255, 255, 255, .3);
+                border-radius:    8px;
+                color:            #ffffff;
+                font-size:        11px;
+                line-height:      16px;
+                font-weight:      500;
+                margin:           2px 0 2px 8px;
+                padding:          0 8px;
+                vertical-align:   middle;
+            }
+
+            b {
+                display:     block;
+                margin:      0 2rem 0 0;
+                font-weight: 600;
+                color:       #ffffff;
+            }
+        }
+
+        svg {
+            fill:      @blue;
+            stroke:    @blue;
+            min-width: 12px;
+            width:     12px;
+            height:    24px;
+        }
+
+        &:first-child {
+            div {
+                border-left-width:         1px;
+                border-top-left-radius:    2px;
+                border-bottom-left-radius: 2px;
+            }
+
+            svg.before {
+                display: none;
+            }
+        }
+
+        &:last-child {
+            div {
+                border-right-width:         1px;
+                border-top-right-radius:    2px;
+                border-bottom-right-radius: 2px;
+            }
+
+            svg.after {
+                display: none;
+            }
+        }
+
+        &.attribute {
+            > div {
+                background-color: @orange;
+            }
+
+            svg {
+                fill:   @orange;
+                stroke: @orange;
+            }
+        }
+    }
+}
+
+body.sorting-criterion-index .mst-sorting__popularity {
+    .data-grid-cell-content {
+        text-align: right;
+
+        &:after {
+            content:     "usages";
+            margin-left: 3px;
+            font-size:   12px;
+            color:       #938e8b;
+        }
+    }
+}

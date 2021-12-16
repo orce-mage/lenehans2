@@ -1,0 +1,88 @@
+"Criteria have been removed","Criteria have been removed"
+"Please select criteria","Please select criteria"
+"This criteria no longer exists.","This criteria no longer exists."
+"Criteria ""%1""","Criteria ""%1"""
+"New Criteria","New Criteria"
+"You have saved the criteria.","You have saved the criteria."
+"Improved Sorting","Improved Sorting"
+"Sorting Criteria","Sorting Criteria"
+"Ranking Factor was removed","Ranking Factor was removed"
+"Please select factor","Please select factor"
+"This factor no longer exists.","This factor no longer exists."
+"Ranking Factor ""%1""","Ranking Factor ""%1"""
+"New Ranking Factor","New Ranking Factor"
+"Reindex has been completed.","Reindex has been completed."
+"You saved the factor.","You saved the factor."
+"Ranking Factors","Ranking Factors"
+"<b>%2</b> <small>%3</small>","<b>%2</b> <small>%3</small>"
+Position,Position
+Back,Back
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Preview,Preview
+"Save and Continue Edit","Save and Continue Edit"
+Save,Save
+Edit,Edit
+"Delete ""${ $.$data.title }""","Delete ""${ $.$data.title }"""
+"Are you sure you want to delete a ""${ $.$data.title }"" record?","Are you sure you want to delete a ""${ $.$data.title }"" record?"
+Conditions,Conditions
+"Conditions (leave blank for all products)","Conditions (leave blank for all products)"
+Reindex,Reindex
+"Delete ""${ $.$data.name }""","Delete ""${ $.$data.name }"""
+"Are you sure you want to delete a ""${ $.$data.name }"" record?","Are you sure you want to delete a ""${ $.$data.name }"" record?"
+"Sorting criteria","Sorting criteria"
+Criterion,Criterion
+"Is Enabled","Is Enabled"
+Default,Default
+Direction,Direction
+"Global Score","Global Score"
+"Sorting Score","Sorting Score"
+"Sorting Sub Score","Sorting Sub Score"
+"%1 attribute: %2","%1 attribute: %2"
+"Apply sorting for all collection","Apply sorting for all collection"
+"Catalog Products List","Catalog Products List"
+"List of Products","List of Products"
+"Sort By","Sort By"
+Name,Name
+Active,Active
+"Default for Search","Default for Search"
+Code,Code
+"Add New","Add New"
+ID,ID
+Attribute,Attribute
+Mapping,Mapping
+Magento_Ui/js/dynamic-rows/record,Magento_Ui/js/dynamic-rows/record
+Mirasvit_Sorting/js/ui/form/element/weight,Mirasvit_Sorting/js/ui/form/element/weight
+"Attribute Sets","Attribute Sets"
+"Past Days","Past Days"
+"Number of days the Order takes influences the products' ranking","Number of days the Order takes influences the products' ranking"
+days,days
+Date,Date
+"Zero Point","Zero Point"
+"Number of days from the 'Created At/Updated At' date influences the products' ranking","Number of days from the 'Created At/Updated At' date influences the products' ranking"
+"Number of days that influence of the products' ranking","Number of days that influence of the products' ranking"
+Thumbnail,Thumbnail
+"Attribute Set","Attribute Set"
+Status,Status
+Type,Type
+SKU,SKU
+Price,Price
+"
+                        Internal name of ranking factor. Used for Sorting Criteria configuration.
+                    ","
+                        Internal name of ranking factor. Used for Sorting Criteria configuration.
+                    "
+Global,Global
+"
+                        The Global Factor will be applied before all other conditions for all Sorting Criteria.
+                    ","
+                        The Global Factor will be applied before all other conditions for all Sorting Criteria.
+                    "
+Weight,Weight
+"
+                        The influence of a particular factor on the overall sorting score.
+                    ","
+                        The influence of a particular factor on the overall sorting score.
+                    "
+"Is Active","Is Active"
+"Is Global","Is Global"

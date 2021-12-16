@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mirasvit_Sorting::sorting" title="Improved Sorting" module="Mirasvit_Sorting"
+             sortOrder="50" parent="Magento_Backend::system" resource="Mirasvit_Sorting::sorting"/>
+
+        <add id="Mirasvit_Sorting::sorting_criterion" title="Sorting Criteria" module="Mirasvit_Sorting"
+             sortOrder="10" parent="Mirasvit_Sorting::sorting" action="sorting/criterion/index"
+             resource="Mirasvit_Sorting::sorting"/>
+
+        <add id="Mirasvit_Sorting::sorting_factor" title="Ranking Factors" module="Mirasvit_Sorting"
+             sortOrder="10" parent="Mirasvit_Sorting::sorting" action="sorting/rankingFactor/index"
+             resource="Mirasvit_Sorting::sorting"/>
+    </menu>
+</config>

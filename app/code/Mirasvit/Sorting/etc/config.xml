@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mst_sorting>
+            <general>
+                <apply_if_empty>1</apply_if_empty>
+                <dev_mode>1</dev_mode>
+            </general>
+        </mst_sorting>
+    </default>
+</config>

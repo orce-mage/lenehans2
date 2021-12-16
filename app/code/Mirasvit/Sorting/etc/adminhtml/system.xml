@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mst_sorting" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="label"
+                 sortOrder="100">
+            <label>Improved Sorting</label>
+            <tab>mirasvit</tab>
+            <resource>Mirasvit_Sorting::sorting_config</resource>
+            <group id="general" showInDefault="1" sortOrder="10">
+                <label>General Settings</label>
+
+                <field id="apply_if_empty" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Apply sorting for all collection</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                        If enabled - sorting (global ranking factors and default sorting criteria) will be applied for all product collections (including custom widgets with products).
+                        <br/>If disabled - only for product listing collection (product listing page).
+                        ]]>
+                    </comment>
+                </field>
+
+                <field id="dev_mode" translate="label" type="select" sortOrder="20" showInDefault="1">
+                    <label>Developer Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enabled - you can use URL parameter `?debug=sorting` in the frontend.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

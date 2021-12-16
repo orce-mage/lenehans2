@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="mst_sorting" view_id="mst_sorting" class="Mirasvit\Sorting\Model\Indexer">
+        <title>Mirasvit Improved Sorting</title>
+        <description>Rebuild sorting indexes</description>
+    </indexer>
+
+    <indexer id="catalogsearch_fulltext">
+        <dependencies>
+            <indexer id="mst_sorting"/>
+        </dependencies>
+    </indexer>
+</config>

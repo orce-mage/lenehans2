@@ -1,0 +1,19 @@
+{
+    "label": "Sort by Rating",
+    "name": "Rating",
+    "code": "sort-by-rating",
+    "is_active": true,
+    "is_default": false,
+    "is_search_default": false,
+    "position": 1,
+    "config_serialized": [
+        [
+            {
+                "sortBy": "ranking_factor",
+                "rankingFactor": "rating",
+                "direction": "desc",
+                "weight": 50
+            }
+        ]
+    ]
+}

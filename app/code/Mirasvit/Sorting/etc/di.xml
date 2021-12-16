@@ -1,0 +1,96 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Mirasvit\Sorting\Api\Data\RankingFactorInterface" type="Mirasvit\Sorting\Model\RankingFactor"/>
+
+    <preference for="Mirasvit\Sorting\Api\Data\CriterionInterface" type="Mirasvit\Sorting\Model\Criterion"/>
+
+    <type name="Mirasvit\Sorting\Repository\RankingFactorRepository">
+        <arguments>
+            <argument name="pool" xsi:type="array">
+                <item name="alphanumeric" xsi:type="object">Mirasvit\Sorting\Factor\AlphanumericFactor</item>
+                <item name="date" xsi:type="object">Mirasvit\Sorting\Factor\DateFactor</item>
+                <item name="attributeSet" xsi:type="object">Mirasvit\Sorting\Factor\AttributeSetFactor</item>
+                <item name="attribute" xsi:type="object">Mirasvit\Sorting\Factor\AttributeFactor</item>
+                <item name="image" xsi:type="object">Mirasvit\Sorting\Factor\ImageFactor</item>
+                <item name="rating" xsi:type="object">Mirasvit\Sorting\Factor\RatingFactor</item>
+                <item name="bestseller" xsi:type="object">Mirasvit\Sorting\Factor\BestsellerFactor</item>
+                <item name="profit" xsi:type="object">Mirasvit\Sorting\Factor\ProfitFactor</item>
+                <item name="rule" xsi:type="object">Mirasvit\Sorting\Factor\RuleFactor</item>
+                <item name="stock" xsi:type="object">Mirasvit\Sorting\Factor\StockFactor</item>
+                <item name="stockQty" xsi:type="object">Mirasvit\Sorting\Factor\StockQtyFactor</item>
+                <item name="spv" xsi:type="object">Mirasvit\Sorting\Factor\SpvFactor</item>
+                <item name="popularity" xsi:type="object">Mirasvit\Sorting\Factor\PopularityFactor</item>
+                <item name="discount" xsi:type="object">Mirasvit\Sorting\Factor\DiscountFactor</item>
+                <item name="is_new" xsi:type="object">Mirasvit\Sorting\Factor\IsNewFactor</item>
+                <item name="backorder" xsi:type="object">Mirasvit\Sorting\Factor\BackorderFactor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Sorting\Ui\RankingFactor\Form\DataProvider">
+        <arguments>
+            <argument name="modifier" xsi:type="array">
+                <item name="attributeSet" xsi:type="object">Mirasvit\Sorting\Ui\RankingFactor\Form\Modifier\AttributeSetModifier</item>
+                <item name="attribute" xsi:type="object">Mirasvit\Sorting\Ui\RankingFactor\Form\Modifier\AttributeModifier</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--Entity Manager-->
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\Sorting\Api\Data\RankingFactorInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Sorting\Api\Data\RankingFactorInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Sorting\Api\Data\RankingFactorInterface::ID</item>
+                </item>
+                <item name="Mirasvit\Sorting\Api\Data\CriterionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Sorting\Api\Data\CriterionInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Sorting\Api\Data\CriterionInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\Sorting\Api\Data\RankingFactorInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Mirasvit\Sorting\Api\Data\CriterionInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--UI-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sorting_rankingFactor_listing_data_source" xsi:type="string">Mirasvit\Sorting\Model\ResourceModel\RankingFactor\Grid</item>
+                <item name="sorting_criterion_listing_data_source" xsi:type="string">Mirasvit\Sorting\Model\ResourceModel\Criterion\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Indexer\Model\Indexer">
+        <plugin name="mstSortingSwitchMviewState" type="Mirasvit\Sorting\Plugin\SwitchMviewStateBeforeSetScheduledPlugin"/>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mstSortingReindex" xsi:type="object">Mirasvit\Sorting\Console\Command\ReindexCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Elasticsearch\Model\Adapter\Elasticsearch">
+        <plugin name="mstSortingElasticPutScore" type="Mirasvit\Sorting\Plugin\PutScoreAfterPrepareDocsPerStorePlugin" />
+    </type>
+
+    <type name="Amasty\ElasticSearch\Model\Client\Elasticsearch">
+        <plugin name="mstSortingElasticPutScoreAmasty" type="Mirasvit\Sorting\Plugin\PutScoreAfterPrepareDocsAmastyPlugin" />
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product">
+        <plugin name="mstSortingReindex" type="Mirasvit\Sorting\Plugin\ReindexProduct"/>
+    </type>
+</config>

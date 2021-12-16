@@ -1,0 +1,19 @@
+{
+    "label": "Sort by Date",
+    "name": "Date",
+    "code": "sort-by-date",
+    "is_active": true,
+    "is_default": false,
+    "is_search_default": false,
+    "position": 1,
+    "config_serialized": [
+        [
+            {
+                "sortBy": "ranking_factor",
+                "rankingFactor": "date",
+                "direction": "desc",
+                "weight": 50
+            }
+        ]
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "Bestseller",
+    "type": "bestseller",
+    "is_active": true,
+    "is_global": false,
+    "weight": 0,
+    "config_serialized": {
+        "zero_point": 180
+    }
+}

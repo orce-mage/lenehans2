@@ -1,0 +1,33 @@
+.mst-sorting-ui-form-element__weight {
+    .bar {
+        @height: .5rem;
+        width: 100%;
+        height: @height;
+        background: #d6d6d6;
+        position: relative;
+
+        &:after {
+            position: absolute;
+            right: 50%;
+            width: 1px;
+            height: @height;
+            content: '';
+            background: #fff;
+        }
+
+        .positive, .negative {
+            height: @height;
+            position: absolute;
+        }
+
+        .positive {
+            background: #87BC24;
+            left: 50%;
+        }
+
+        .negative {
+            background: #D91A00;
+            right: 50%;
+        }
+    }
+}

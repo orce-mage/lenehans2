@@ -1,0 +1,18 @@
+{
+    "label": "Sort by Price",
+    "name": "Price",
+    "code": "sort-by-price",
+    "is_active": true,
+    "is_default": false,
+    "is_search_default": false,
+    "position": 1,
+    "config_serialized": [
+        [
+            {
+                "sortBy": "attribute",
+                "attribute": "price",
+                "direction": "asc"
+            }
+        ]
+    ]
+}

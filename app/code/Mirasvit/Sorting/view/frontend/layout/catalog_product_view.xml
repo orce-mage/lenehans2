@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Mirasvit\Sorting\Block\ProductImpressionJs" name="mst-sorting.product-impression-js"
+                   template="Mirasvit_Sorting::product_impression_js.phtml" before="-"/>
+        </referenceContainer>
+    </body>
+</page>

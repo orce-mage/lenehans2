@@ -1,0 +1,13 @@
+{
+    "name": "Adding Date",
+    "type": "date",
+    "is_active": true,
+    "is_global": false,
+    "weight": 0,
+    "config_serialized": {
+        "field": "created_at",
+        "zero_point": "360",
+        "_": "1",
+        "date_field": "created_at"
+    }
+}

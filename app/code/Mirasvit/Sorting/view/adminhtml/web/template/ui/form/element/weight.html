@@ -1,0 +1,26 @@
+<div class="mst-sorting-ui-form-element__weight">
+    <input class="admin__control-text" type="text"
+           data-bind="
+            event: {change: userChanges},
+            value: value,
+            hasFocus: focused,
+            valueUpdate: valueUpdate,
+            attr: {
+                name: inputName,
+                placeholder: placeholder,
+                'aria-describedby': noticeId,
+                id: uid,
+                disabled: disabled,
+                maxlength: 255
+        }"/>
+
+    <div class="bar">
+        <!-- ko if: value() > 0 -->
+        <div class="positive" data-bind="style: { width: value() / 2 + '%' }"/>
+        <!-- /ko -->
+
+        <!-- ko if: value() < 0 -->
+        <div class="negative" data-bind="style: { width: Math.abs(value()) / 2 + '%' }"/>
+        <!-- /ko -->
+    </div>
+</div>

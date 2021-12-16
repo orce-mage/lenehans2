@@ -1,0 +1,44 @@
+<?php
+declare(strict_types=1);
+
+/** @var \Mirasvit\Sorting\Block\DebugInPageScore $block */
+$score = $block->getScore();
+$name  = $block->getName();
+$value = $block->getProductData($name);
+
+if (!$value) {
+    $value = $name == 'position' ? 0 : 'N/A';
+}
+?>
+
+<div class="debug-in-page-score__ranking">
+    <?php if (is_null($score)): ?>
+        <div style="font-size: 13px;line-height: 16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; margin-bottom: 2px;">
+            <?= __("%1 attribute: %2", ucfirst($name), $value) ?>
+        </div>
+    <?php else: ?>
+        <strong><?= $name ?></strong>
+        <?php
+        $weight      = $block->getWeight();
+        $factorScore = $score * $weight;
+        $width       = abs($score / 100 * 50);
+        if ($width > 50) {
+            $width = 50;
+        }
+        ?>
+        <div class="score">
+            Score: <?= number_format((float)$score, 3, '.', ' ') ?> * <?= $weight ?>
+            = <?= number_format((float)$factorScore, 3, '.', ' ') ?>
+        </div>
+        <div class="value">
+            Value: <?= $block->getValue() ?>
+        </div>
+    <?php endif ?>
+</div>
+<style>
+    .debug-in-page-score__ranking {
+        padding: 5px 0;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 1rem;
+    }
+</style>

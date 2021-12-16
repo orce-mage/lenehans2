@@ -1,0 +1,19 @@
+{
+    "label": "Sort by Bestselling",
+    "name": "Bestselling",
+    "code": "sort-by-bestselling",
+    "is_active":  true,
+    "is_default": false,
+    "is_search_default": false,
+    "position": 1,
+    "config_serialized": [
+        [
+            {
+                "sortBy": "ranking_factor",
+                "rankingFactor": "bestseller",
+                "direction": "desc",
+                "weight": 50
+            }
+        ]
+    ]
+}

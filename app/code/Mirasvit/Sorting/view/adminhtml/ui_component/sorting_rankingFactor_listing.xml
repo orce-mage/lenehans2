@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">sorting_rankingFactor_listing.sorting_rankingFactor_listing_data_source</item>
+            <item name="deps" xsi:type="string">sorting_rankingFactor_listing.sorting_rankingFactor_listing_data_source</item>
+        </item>
+
+        <item name="spinner" xsi:type="string">columns</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="reindex" xsi:type="array">
+                <item name="name" xsi:type="string">reindex</item>
+                <item name="label" xsi:type="string" translate="true">Reindex All</item>
+                <item name="url" xsi:type="string">*/*/reindex</item>
+            </item>
+
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="sorting_rankingFactor_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Listing\DataProvider</argument>
+            <argument name="name" xsi:type="string">sorting_rankingFactor_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">factor_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sticky" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+        <massaction name="listing_massaction">
+            <action name="edit">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">edit</item>
+                        <item name="label" xsi:type="string" translate="true">Edit</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">sorting_rankingFactor_listing.sorting_rankingFactor_listing.columns_editor</item>
+                            <item name="target" xsi:type="string">editSelected</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+
+    <columns name="columns" class="Magento\Ui\Component\Listing\Columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="editorConfig" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">sorting_rankingFactor_listing.sorting_rankingFactor_listing.columns.ids</item>
+                    <item name="enabled" xsi:type="boolean">true</item>
+                    <item name="indexField" xsi:type="string">factor_id</item>
+                    <item name="clientConfig" xsi:type="array">
+                        <item name="saveUrl" xsi:type="url" path="sorting/rankingFactor/inlineEdit"/>
+                        <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+                <item name="childDefaults" xsi:type="array">
+                    <item name="fieldAction" xsi:type="array">
+                        <item name="provider" xsi:type="string">sorting_rankingFactor_listing.sorting_rankingFactor_listing.columns_editor</item>
+                        <item name="target" xsi:type="string">startEdit</item>
+                        <item name="params" xsi:type="array">
+                            <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                            <item name="1" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">factor_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+
+        <column name="factor_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="editor" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Sorting\Model\Config\Source\FactorSource</item>
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Is Active</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="editor" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="is_global">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Is Global</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="editor" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+
+        <actionsColumn name="actions" class="Mirasvit\Sorting\Ui\RankingFactor\Listing\Column\Actions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">factor_id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

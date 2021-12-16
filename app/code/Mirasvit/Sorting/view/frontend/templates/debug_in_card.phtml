@@ -1,0 +1,162 @@
+<?php
+declare(strict_types=1);
+/** @var \Mirasvit\Sorting\Block\DebugInCard $block */
+
+$types = [
+    'global' => __('Global Score'),
+    'frame1' => __('Sort by'),
+    'frame2' => __('Then sort by'),
+]
+?>
+<div class="mst-sorting__debug">
+    <p><small><?= $block->getProduct()->getSku() ?> [id: <?= $block->getProduct()->getId() ?>]</small></p>
+
+    <?php foreach ($types as $type => $typeName): ?>
+        <div class="mst-sorting__debug-score <?= $type ?>">
+            <span><?= $typeName ?></span>
+            <strong><?= $block->getScore($type) ?></strong>
+        </div>
+    <?php endforeach ?>
+
+    <div class="mst-sorting__debug-ranking">
+        <?php foreach ($types as $type => $typeName): ?>
+            <?php foreach ($block->getScores($type) as $name => $score): ?>
+                <div class="ranking">
+                    <?php if ($score == "-"): ?>
+                        <div style="font-size: 13px;line-height: 16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; margin-bottom: 2px;">
+                            <?= __("%1 attribute: %2", ucfirst($name), $block->getProduct()->getData($name)) ?>
+                        </div>
+                        <?php break; //we use only first attribute for sorting?>
+                    <?php else: ?>
+                        <?php
+                        $values = $block->getValues($type);
+                        $value  = $values[$name];
+                        ?>
+
+                        <div class="ranking-name">
+                            <?= $name ?>
+                        </div>
+                        <?php
+                        $weights     = $block->getWeights($type);
+                        $factorScore = $score * $weights[$name];
+                        $width       = abs($score / 100 * 50);
+                        if ($width > 50) {
+                            $width = 50;
+                        }
+                        ?>
+                        <div class="score">
+                            Score: <?= number_format((float)$score, 3, '.', ' ') ?> * <?= $weights[$name] ?> = <?= number_format((float)$factorScore, 3, '.', ' ') ?>
+                        </div>
+                        <div class="ranking-bar">
+                            <?php if ($score > 0): ?>
+                                <div class="positive" style="width: <?= $width ?>%"></div>
+                            <?php else: ?>
+                                <div class="negative" style="width: <?= $width ?>%"></div>
+                            <?php endif ?>
+                        </div>
+                        <div class="value">
+                            Value: <?= $value ?>
+                        </div>
+                    <?php endif ?>
+                </div>
+            <?php endforeach ?>
+        <?php endforeach ?>
+    </div>
+</div>
+<?php
+if ($block->isApplyStyles()): ?>
+    <style>
+        .mst-sorting__debug {
+            position: relative;
+            cursor: help;
+        }
+
+        .mst-sorting__debug-score {
+            border: 1px solid #d6d6d6;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            display: flex;
+            color: #949494;
+            font-size: 1.3rem;
+        }
+
+        .mst-sorting__debug-score strong {
+            margin-left: auto;
+            color: #999;
+        }
+
+        .mst-sorting__debug-score.global strong {
+            color: #ff5b5b;
+        }
+
+        .mst-sorting__debug-score.criterion strong {
+            color: #e80808;
+        }
+
+        .mst-sorting__debug-ranking {
+            display: none;
+            position: absolute;
+            top: 137px;
+            left: 0;
+            background: #fff;
+            border: 1px solid #d6d6d6;
+            z-index: 10000;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px 10px;
+        }
+
+        .mst-sorting__debug-ranking .ranking {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .mst-sorting__debug-ranking .ranking .ranking-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .mst-sorting__debug-ranking .ranking .value {
+            font-size: 10px;
+            color: #999;
+        }
+
+        .mst-sorting__debug-ranking .ranking .score {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .mst-sorting__debug-ranking .ranking .ranking-bar {
+            position: relative;
+            background: #eee;
+            height: 5px;
+            margin-bottom: 5px;
+        }
+
+        .mst-sorting__debug-ranking .ranking .ranking-bar .positive {
+            background: #87BC24;
+            height: 5px;
+            left: 50%;
+            top: 0;
+            position: absolute;
+        }
+
+        .mst-sorting__debug-ranking .ranking .ranking-bar .negative {
+            background: #D91A00;
+            height: 5px;
+            right: 50%;
+            top: 0;
+            position: absolute;
+        }
+
+        .mst-sorting__debug:hover .mst-sorting__debug-ranking {
+            display: block;
+        }
+
+        .mst-sorting__debug:hover .mst-sorting__debug-score {
+            border-color: #bbb;
+        }
+    </style>
+<?php
+endif ?>

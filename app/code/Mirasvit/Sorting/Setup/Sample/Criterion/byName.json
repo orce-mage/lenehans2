@@ -1,0 +1,18 @@
+{
+    "label": "Sort by Name",
+    "name": "Name",
+    "code": "sort-by-name",
+    "is_active": true,
+    "is_default": false,
+    "is_search_default": false,
+    "position": 1,
+    "config_serialized": [
+        [
+            {
+                "sortBy": "attribute",
+                "attribute": "name",
+                "direction": "asc"
+            }
+        ]
+    ]
+}

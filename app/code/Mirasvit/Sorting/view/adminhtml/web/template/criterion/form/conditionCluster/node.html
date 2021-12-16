@@ -1,0 +1,56 @@
+<li class="condition-node">
+    <div class="expand" data-bind="click: function() { nod.expanded(!nod.expanded()) },
+        visible: nod.sortBy() == 'ranking_factor',
+        css: { _expanded: nod.expanded() }"/>
+
+    <div class="general">
+        <div class="switcher">
+            <!-- ko foreach: {data: element.sortBySource, as: 'source' } -->
+            <div data-bind="text: source.label,
+                    css: { _active: nod.sortBy() == source.value },
+                    click: function() { nod.sortBy(source.value) }"/>
+            <!-- /ko -->
+        </div>
+
+        <select data-bind="options: element.sortByAttributeSource,
+                optionsText: 'label',
+                optionsValue: 'value',
+                value: nod.attribute,
+                visible: nod.sortBy() == 'attribute'" class="admin__control-select"
+        />
+
+        <select data-bind="options: element.sortByRankingFactorSource,
+                optionsText: 'label',
+                optionsValue: 'value',
+                value: nod.rankingFactor,
+                visible: nod.sortBy() == 'ranking_factor'" class="admin__control-select"
+        />
+
+        <div class="switcher">
+            <div data-bind="css: { _active: nod.direction() == 'asc' },
+                    click: function() { nod.direction('asc') }">
+                ASC <span>A-Z, 0-9</span>
+            </div>
+            <div data-bind="css: { _active: nod.direction() == 'desc' },
+                    click: function() { nod.direction('desc') }">
+                DESC <span>Z-A, 9-0</span>
+            </div>
+        </div>
+
+        <button data-bind="click: function() { element.removeNode(nod) }" class="action-delete"/>
+    </div>
+
+    <div class="advance" data-bind="visible: nod.expanded()">
+        <div class="admin__fieldset" data-bind="visible: nod.sortBy() == 'ranking_factor'">
+            <div class="admin__field">
+                <div class="admin__field-label">
+                    <label><span>Weight</span></label>
+                </div>
+
+                <div class="admin__field-control">
+                    <input data-bind="value: nod.weight" class="admin__control-text" placeholder="50" type="number"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

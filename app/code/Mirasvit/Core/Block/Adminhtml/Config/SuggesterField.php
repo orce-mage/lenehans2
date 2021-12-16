@@ -9,7 +9,7 @@
  *
  * @category  Mirasvit
  * @package   mirasvit/module-core
- * @version   1.2.125
+ * @version   1.3.1
  * @copyright Copyright (C) 2021 Mirasvit (https://mirasvit.com/)
  */
 

@@ -1,0 +1,140 @@
+.mst-sorting-criterion-form__cluster {
+    min-width: 80rem;
+
+    ul {
+        list-style: none;
+        margin: 0;
+    }
+
+    > ul {
+        margin-bottom: 1rem;
+
+        li.condition-frame {
+            border: 2px solid #ccc;
+            border-bottom-width: 0;
+            background: #f8f8f8;
+            padding: 1rem 0 1rem 1rem;
+
+            &:last-child {
+                border-bottom-width: 2px;
+            }
+
+            > label {
+                display: block;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+
+            ul {
+                li.condition-node {
+                    padding: 1rem 0 1rem 2rem;
+                    margin-left: 3rem;
+                    border-bottom: 2px solid #ccc;
+                    position: relative;
+
+                    &:last-child {
+                        border: 0;
+                    }
+
+                    .expand {
+                        position: absolute;
+                        left: -2rem;
+                        top: 1.8rem;
+                        cursor: pointer;
+
+                        &:after {
+                            width: 2rem;
+                            height: 2rem;
+                            display: block;
+                            content: '\e615';
+                            -webkit-font-smoothing: antialiased;
+                            font-family: 'Admin Icons';
+                            font-style: normal;
+                            font-weight: normal;
+                            line-height: 1;
+                            font-size: 1.8rem;
+                        }
+
+                        &._expanded {
+                            &:after {
+                                content: '\e616';
+                            }
+                        }
+                    }
+
+                    .general {
+                        display: flex;
+                        align-items: center;
+
+                        select, .switcher {
+                            margin: 0 2rem 0 0;
+                        }
+
+                        input[type="text"] {
+                            max-width: 5rem;
+                        }
+
+                        .action-delete {
+                            padding: 0;
+                            margin-left: auto;
+                            margin-right: 1rem;
+                            opacity: 0.3;
+                        }
+                    }
+
+                    &:hover {
+                        .action-delete {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            .action-add {
+                margin-left: auto;
+                display: block;
+                margin-right: 1.5rem;
+            }
+        }
+    }
+
+    .switcher {
+        display: flex;
+
+        > div {
+            white-space: nowrap;
+            background: #fff;
+            border: 1px solid #adadad;
+            margin-left: -1px;
+            padding: .6rem 1em .6rem;
+            cursor: pointer;
+            z-index: 10;
+            position: relative;
+
+            span {
+                display: none;
+            }
+
+            &._active {
+                background: #ffeca6;
+                border-color: #c7b882;
+                z-index: 11;
+
+                span {
+                    font-size: 1rem;
+                    display: inline-block;
+                }
+            }
+
+            &:first-child {
+                border-top-left-radius: .2rem;
+                border-bottom-left-radius: .2rem;
+            }
+
+            &:last-child {
+                border-top-right-radius: .2rem;
+                border-bottom-right-radius: .2rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Config">
+        <plugin name="mstSortingReplaceOptions" type="Mirasvit\Sorting\Plugin\Frontend\AddSortingCriteriaToSortByPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="mstSortingInitDefaultOrder" type="Mirasvit\Sorting\Plugin\Frontend\InitDefaultOrderBeforeSetCollectionOnToolbarPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="mstSortingApplySorting" type="Mirasvit\Sorting\Plugin\Frontend\ApplySortingToCollectionPlugin"/>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection">
+        <plugin name="mstSortingApplySorting" type="Mirasvit\Sorting\Plugin\Frontend\ApplySortingToCollectionPlugin"/>
+    </type>
+
+    <type name="Mirasvit\LayeredNavigation\Model\ResourceModel\Fulltext\Collection">
+        <plugin name="sortLrnCollection" type="Mirasvit\Sorting\Plugin\Frontend\ApplySortingToCollectionPlugin"/>
+    </type>
+
+    <type name="Mirasvit\LayeredNavigation\Model\ResourceModel\Fulltext\SearchCollection">
+        <plugin name="sortLrnCollection" type="Mirasvit\Sorting\Plugin\Frontend\ApplySortingToCollectionPlugin"/>
+    </type>
+
+    <type name="Magento\CatalogWidget\Block\Product\ProductsList">
+        <plugin name="mstSortingApplySorting" type="Mirasvit\Sorting\Plugin\Frontend\ApplySortingAfterCreateCollectionPlugin"/>
+        <plugin name="mstSortingDebug" type="Mirasvit\Sorting\Plugin\Frontend\DebugPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="mstSortingDebug" type="Mirasvit\Sorting\Plugin\Frontend\DebugPlugin"/>
+    </type>
+
+    <type name="Mirasvit\SearchAutocomplete\Index\Magento\Catalog\Product">
+        <plugin name="mstAutocompleteInitDefault" type="Mirasvit\Sorting\Plugin\Frontend\InitDefaultCriterionAfterGetCollectionPlugin"/>
+    </type>
+
+    <type name="Magento\Framework\Search\RequestInterface">
+        <plugin name="mstSorting\RemoveSort" type="Mirasvit\Sorting\Plugin\Frontend\RemoveSortOnSearchRequestPlugin"/>
+    </type>
+
+    <type name="Magento\Framework\Api\SearchCriteria">
+        <plugin name="mstSortingElasticReplaceOrder" type="Mirasvit\Sorting\Plugin\Frontend\ApplyCriteriaToElasticsearchPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="mstSortingPerformSorting" type="Mirasvit\Sorting\Plugin\Frontend\PerformSortingPlugin" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection\SearchResultApplierInterface">
+        <plugin name="mstSortingPerformSortingSearch" type="Mirasvit\Sorting\Plugin\Frontend\PerformSortingPlugin" />
+    </type>
+</config>

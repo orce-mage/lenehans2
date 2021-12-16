@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="component" xsi:type="string">Mirasvit_Sorting/js/rankingFactor/form</item>
+            <item name="provider" xsi:type="string">sorting_rankingFactor_form.sorting_rankingFactor_form_data_source</item>
+            <item name="deps" xsi:type="string">sorting_rankingFactor_form.sorting_rankingFactor_form_data_source</item>
+        </item>
+
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">sorting_rankingFactor_form</item>
+        </item>
+
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Form\Control\BackButton</item>
+            <item name="delete" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Form\Control\DeleteButton</item>
+            <item name="reindex" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Form\Control\ReindexButton</item>
+            <item name="preview" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Form\Control\PreviewButton</item>
+            <item name="save" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Form\Control\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Form\Control\SaveAndContinueButton</item>
+        </item>
+    </argument>
+
+    <dataSource name="sorting_rankingFactor_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Sorting\Ui\RankingFactor\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">sorting_rankingFactor_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">factor_id</argument>
+            <argument name="requestFieldName" xsi:type="string">factor_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">General Information</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="factor_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Sorting\Model\Config\Source\FactorSource</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="notice" xsi:type="string" translate="true">
+                        Internal name of ranking factor. Used for Sorting Criteria configuration.
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Active</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="is_global">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Global</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="notice" xsi:type="string" translate="true">
+                        The Global Factor will be applied before all other conditions for all Sorting Criteria.
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="weight">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Weight</item>
+                    <item name="placeholder" xsi:type="string">60</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="component" xsi:type="string" translate="true">Mirasvit_Sorting/js/ui/form/element/weight</item>
+                    <item name="notice" xsi:type="string" translate="true">
+                        The influence of a particular factor on the overall sorting score.
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <container name="continue">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_Sorting/js/rankingFactor/form/continue-button</item>
+                </item>
+            </argument>
+        </container>
+    </fieldset>
+
+    <modal name="preview_modal">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">false</item>
+                <item name="imports" xsi:type="array">
+                    <item name="state" xsi:type="string">!index=preview_modal:responseStatus</item>
+                </item>
+                <item name="options" xsi:type="array">
+                    <item name="type" xsi:type="string">slide</item>
+                    <item name="title" xsi:type="string" translate="true">Preview</item>
+                </item>
+            </item>
+        </argument>
+
+        <insertListing name="preview_listing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">false</item>
+                    <item name="dataScope" xsi:type="string">sorting_preview</item>
+                    <item name="ns" xsi:type="string">sorting_preview</item>
+                    <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                    <item name="cssclass" xsi:type="string">preview</item>
+                </item>
+            </argument>
+        </insertListing>
+    </modal>
+</form>

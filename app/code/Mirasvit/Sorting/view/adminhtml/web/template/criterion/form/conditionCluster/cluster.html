@@ -1,0 +1,23 @@
+<div class="admin__field _required">
+    <div class="admin__field-label">
+        <label>Conditions</label>
+    </div>
+    <div class="admin__field-control">
+        <div class="mst-sorting-criterion-form__cluster admin__control-table">
+            <div data-bind="visible: cluster().length == 0" class="message message-warning">
+                Please add at least one sorting condition.
+            </div>
+
+            <ul>
+                <!-- ko foreach: {data: cluster, as: 'frame' } -->
+                <!-- ko template: 'Mirasvit_Sorting/criterion/form/conditionCluster/frame' --><!-- /ko -->
+                <!-- /ko -->
+            </ul>
+            <button data-bind="click: function() {addFrame();}" class="action-add secondary">Add New Condition</button>
+        </div>
+    </div>
+</div>
+<div class="message">
+    <p><b>ASC</b> - <b>Ascending</b> - A-Z, 0-9, ☆ - ☆☆☆☆☆, Jan - Dec</p>
+    <p><b>DESC</b> - <b>Descending</b> - Z-A, 9-0, ☆☆☆☆☆ - ☆, Dec - Jan</p>
+</div>

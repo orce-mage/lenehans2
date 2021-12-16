@@ -1,0 +1,8 @@
+{
+    "name": "Without image",
+    "type": "image",
+    "is_active": true,
+    "is_global": true,
+    "weight": 50,
+    "config_serialized": []
+}

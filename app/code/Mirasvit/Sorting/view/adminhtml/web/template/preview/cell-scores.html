@@ -1,0 +1,26 @@
+<div class="mst-sorting-preview__cell-scores">
+
+    <!-- ko if: $row().sorting_score_criterion -->
+    <div class="score _0" text="$row().sorting_score_criterion"/>
+    <!-- /ko -->
+
+     <!-- ko if: $row().sorting_score_0 -->
+    <div class="score _0" text="$row().sorting_score_0"/>
+    <!-- /ko -->
+
+    <!-- ko if: $row().sorting_score_1 -->
+    <div class="score _1" text="$row().sorting_score_1"/>
+    <!-- /ko -->
+
+    <!-- ko if: $row().sorting_score_2 -->
+    <div class="score _2" text="$row().sorting_score_2"/>
+    <!-- /ko -->
+
+    <!-- ko if: $row().sorting_score_3 -->
+    <div class="score _3" text="$row().sorting_score_3"/>
+    <!-- /ko -->
+
+    <!-- ko if: $row().sorting_score_global -->
+    <div class="score _global" text="$row().sorting_score_global" title="Score for Global Ranking Factors"/>
+    <!-- /ko -->
+</div>
