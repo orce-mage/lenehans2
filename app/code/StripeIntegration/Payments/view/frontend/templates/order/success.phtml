@@ -1,0 +1,111 @@
+<?php $fontUrl = $block->getViewFileUrl('StripeIntegration_Payments::fonts/LibreBarcode128Text-Regular.ttf', ['_current' => true, '_use_rewrite' => true]); ?>
+
+<style type="text/css">
+  @font-face {
+    font-family: 'LibreBarcode128Text-Regular';
+    src: URL('<?php echo $fontUrl; ?>') format('truetype');
+  }
+</style>
+
+<?php if ($block->isWechatPaymentMethod()): ?>
+  <div class="stripe-success-section">
+    <h2 class="sub-title"> <?php echo __('Your order is pending!') ?> </h2>
+    <?php $qrCodeUrl = $block->getRedirectUrl(); ?>
+
+    <p><?php echo __('To complete the order, please pay <b>%1</b> by scanning the QR code below with your mobile device', $block->getFormattedGrandTotal()) ?></p>
+    <div class="actions-toolbar">
+      <div class="img-qr">
+        <p><a href="<?php echo $qrCodeUrl; ?>" target="_blank" rel="noopener noreferrer"><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?php echo $qrCodeUrl; ?>&choe=UTF-8"/></a></p>
+      </div>
+      <br>
+    </div>
+
+    <div style="clear: both;">&nbsp;</div>
+  </div>
+<?php endif; ?>
+
+<?php if ($block->isSepaCreditPaymentMethod()): ?>
+  <div class="stripe-success-section">
+    <h2 class="sub-title"> <?php echo __('Your order is pending!') ?> </h2>
+
+    <p><?php echo __("Your order is pending! To complete the order, please transfer <b>%1</b> to the following bank account:", $block->getFormattedGrandTotal()); ?>
+
+    <table class="data table history" id="stripe-sepa-credit-bank-account-table">
+      <caption class="table-caption"><?php echo $block->escapeHtml(__('Bank Account Details')); ?></caption>
+      <tbody>
+        <tr>
+          <td data-th="Bank" class="col bank-header">
+            <b><?php echo __('Bank'); ?></b>
+          </td>
+          <td data-th="Bank" class="col bank">
+            <?php echo $block->getSepaCreditBankName(); ?>
+          </td>
+        </tr>
+        <tr>
+          <td data-th="IBAN" class="col iban-header">
+            <b><?php echo __('IBAN'); ?></b>
+          </td>
+          <td data-th="IBAN" class="col iban">
+            <?php echo $block->getSepaCreditIban(); ?>
+          </td>
+        </tr>
+        <tr>
+          <td data-th="BIC" class="col bic-header">
+            <b><?php echo __('BIC'); ?></b>
+          </td>
+          <td data-th="BIC" class="col bic">
+            <?php echo $block->getSepaCreditBic(); ?>
+          </td>
+        </tr>
+        <tr>
+          <td data-th="Reference" class="col reference-header">
+            <b><?php echo __('Reference'); ?></b>
+          </td>
+          <td data-th="Reference" class="col reference">
+            <?php echo $block->getOrderNumber(); ?>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="clear: both;">&nbsp;</div>
+  </div>
+<?php endif; ?>
+
+
+<?php if ($block->isOxxoPaymentMethod()): ?>
+  <?php $info = $this->getSourceInfo(); ?>
+  <div class="stripe-success-section oxxo">
+    <h2 class="sub-title"> <?php echo __('Your order is pending!') ?> </h2>
+
+    <p><?php echo __("To complete the order, please use the voucher below to pay at an OXXO convenience store."); ?>
+
+    <div class="oxxo-voucher">
+      <div class="oxxo-logo">
+        <img src="<?php echo $block->getOxxoLogoUrl(); ?>" />
+      </div>
+      <div class="oxxo-amount">
+          <?php echo $block->getFormattedGrandTotal(); ?>
+      </div>
+      <div class="oxxo-expires">
+          <span><?php echo __("Expires"); ?></span> <?php echo $info["Valid Until"]; ?>
+      </div>
+      <div class="oxxo-number">
+          <?php echo $info["Voucher Number"]; ?>
+      </div>
+      <div class="print-button">
+        <button class="action primary" onclick="window.print()"><?php echo __("Print"); ?></button>
+      </div>
+    </div>
+
+    <h2 class="sub-title"><?php echo __('OXXO payment instructions') ?></h2>
+    <ol>
+        <li><?php echo __('Give the voucher to the cashier to scan the barcode.') ?></li>
+        <li><?php echo __('Provide cash payment to the cashier.') ?></li>
+        <li><?php echo __('After the payment is complete, keep the receipt of your payment for your records.') ?></li>
+        <li><?php echo __('For any questions or clarification, please contact us.') ?></li>
+    </ol>
+
+    <div style="clear: both;">&nbsp;</div>
+  </div>
+<?php endif; ?>

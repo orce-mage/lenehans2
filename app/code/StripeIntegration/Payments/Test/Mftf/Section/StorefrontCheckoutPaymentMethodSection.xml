@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="StorefrontCheckoutPaymentMethodSection">
+        <element name="checkPaymentMethodByName" type="radio" selector="//div[@id='checkout-payment-method-load']//div[contains(@class,'payment-method')]//label//span[contains(., '{{methodName}}')]/../..//input" parameterized="true"/>
+        <element name="cardNumberIframe" type="iframe" selector="//div[@id='stripe-payments-card-number']//iframe" />
+        <element name="cardNumberField" type="input" selector="//input[@name='cardnumber']" />
+        <element name="expDateIframe" type="iframe" selector="//div[@id='stripe-payments-card-expiry']//iframe" />
+        <element name="expDateField" type="input" selector="//input[@name='exp-date']" />
+        <element name="cvcIframe" type="iframe" selector="//div[@id='stripe-payments-card-cvc']//iframe" />
+        <element name="cvcField" type="input" selector="//input[@name='cvc']" />
+    </section>
+</sections>

@@ -1,0 +1,973 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <resource>Magenest_StripePayment::settings</resource>
+            <group id="magenest_stripe" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Stripe Payment Gateways</label>
+                <group id="version" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magenest\StripePayment\Block\Adminhtml\System\Config\Fieldset\Version</frontend_model>
+                </group>
+                <group id="require" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Requirement Settings</label>
+                    <field id="api_check" translate="label" type="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>API Check</label>
+                        <frontend_model>Magenest\StripePayment\Block\Adminhtml\System\Config\Fieldset\ApiCheck</frontend_model>
+                    </field>
+                    <field id="test" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Sandbox Mode Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe/test</config_path>
+                    </field>
+                    <field id="test_publishable" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Test Publishable Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <config_path>payment/magenest_stripe/test_publishable</config_path>
+                        <depends>
+                            <field id="test">1</field>
+                        </depends>
+                    </field>
+                    <field id="test_secret" translate="label" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Test Secret Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <config_path>payment/magenest_stripe/test_secret</config_path>
+                        <depends>
+                            <field id="test">1</field>
+                        </depends>
+                    </field>
+                    <field id="live_publishable" translate="label" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Live Publishable Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <config_path>payment/magenest_stripe/live_publishable</config_path>
+                        <depends>
+                            <field id="test">0</field>
+                        </depends>
+                    </field>
+                    <field id="live_secret" translate="label" type="obscure" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Live Secret Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <config_path>payment/magenest_stripe/live_secret</config_path>
+                        <depends>
+                            <field id="test">0</field>
+                        </depends>
+                    </field>
+                    <field id="webhooks_config" translate="label" type="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Webhooks config</label>
+                        <frontend_model>Magenest\StripePayment\Block\Adminhtml\System\Config\Fieldset\WebHooks</frontend_model>
+                    </field>
+                    <field id="webhook_key" translate="label" type="obscure" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Webhooks Signing secret</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <config_path>payment/magenest_stripe/webhook_key</config_path>
+                    </field>
+                    <field id="statement_descriptor" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Statement Descriptor</label>
+                        <config_path>payment/magenest_stripe/statement_descriptor</config_path>
+                    </field>
+                    <field id="email_customer" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Email Customer</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Allow Stripe to send receipts to customers upon payment success</comment>
+                        <config_path>payment/magenest_stripe/email_customer</config_path>
+                    </field>
+                    <field id="https_check" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>HTTPS check</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe/https_check</config_path>
+                        <comment>Enable client HTTPS check</comment>
+                    </field>
+                </group>
+
+                <group id="stripe" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stripe Payment</label>
+                    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe/active</config_path>
+                    </field>
+                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <comment>The title of the payment method displayed on the checkout page</comment>
+                        <config_path>payment/magenest_stripe/title</config_path>
+                    </field>
+                    <field id="country_specified" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Country Specified</label>
+                        <source_model>Magenest\StripePayment\Model\Source\CountrySpecified</source_model>
+                        <comment>Country Specified</comment>
+                        <config_path>payment/magenest_stripe/country_specified</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Action</label>
+                        <source_model>Magenest\StripePayment\Model\Source\PaymentAction</source_model>
+                        <comment>Authorization expires in 7 days</comment>
+                        <config_path>payment/magenest_stripe/payment_action</config_path>
+                    </field>
+                    <field id="api" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Select Stripe API Integration</label>
+                        <source_model>Magenest\StripePayment\Model\Source\Api</source_model>
+                        <config_path>payment/magenest_stripe/api</config_path>
+                        <comment>
+                            <![CDATA[
+                            PCI Compliance validation
+                            <ol>
+                                <li><strong>Stripe.js v3 & Elements.</strong> Pre-filled SAQ A</li>
+                                <li><strong>Stripe.js v2.</strong> SAQ A-EP</li>
+                                <li><strong>Directly to the API.</strong> SAQ D</li>
+                            </ol>
+                        ]]>
+                        </comment>
+                        <backend_model>Magenest\StripePayment\Model\Config\Api</backend_model>
+                    </field>
+                    <field id="display_payment_button" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display payment button</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe/display_payment_button</config_path>
+                        <comment>
+                            <![CDATA[
+                                <p>Display payment button: Apple Pay, Google Pay, Microsoft Pay</p>
+                                <p>For display ApplePay, you need to verify your domain.</p>
+                            ]]>
+                        </comment>
+                        <depends>
+                            <field id="api">v3</field>
+                        </depends>
+                    </field>
+                    <field id="three_d_secure" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                        <label>3d secure</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>An additional layer of authentication that protects you from liability for fraudulent card payments.</comment>
+                        <config_path>payment/magenest_stripe/three_d_secure</config_path>
+                        <depends>
+                            <field id="api" separator=",">v2,v3</field>
+                        </depends>
+                    </field>
+                    <field id="force_d_secure" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="1">
+                        <label>Force 3d secure</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe/force_d_secure</config_path>
+                        <depends>
+                            <field id="api" separator=",">v2,v3</field>
+                        </depends>
+                    </field>
+                    <field id="three_d_secure_verify" translate="label" type="multiselect" sortOrder="60" showInDefault="1" showInWebsite="1">
+                        <label>3D Secure verification applies when</label>
+                        <source_model>Magenest\StripePayment\Model\Source\ThreedSecureAction</source_model>
+                        <depends>
+                            <field id="three_d_secure">1</field>
+                            <field id="api" separator=",">v2,v3</field>
+                        </depends>
+                        <config_path>payment/magenest_stripe/three_d_secure_verify</config_path>
+                        <comment>
+                            <![CDATA[
+                            <ol>
+                                <li><strong>3D Secure is recommended.</strong> The process is not required, but you can be covered by liability shift with a minimal impact to your conversion rate.</li>
+                                <li><strong>3D Secure is optional.</strong> The process isn’t required but can be performed to help reduce the likelihood of fraud.</li>
+                            </ol>
+                        ]]>
+                        </comment>
+                        <can_be_empty>1</can_be_empty>
+                    </field>
+                    <field id="save" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable card saving</label>
+                        <source_model>Magenest\StripePayment\Model\Source\SaveCard</source_model>
+                        <comment>Store customers' card information on Stripe's server for quicker access in the future</comment>
+                        <config_path>payment/magenest_stripe/save</config_path>
+                        <depends>
+                            <field id="api" separator=",">v2,v3</field>
+                        </depends>
+                    </field>
+                    <field id="active_moto" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="0">
+                        <label>Enable MOTO</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe/active_moto</config_path>
+                        <comment>Enable Mail And Telephone Orders</comment>
+                    </field>
+                    <field id="order_status" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                        <config_path>payment/magenest_stripe/order_status</config_path>
+                    </field>
+
+                    <field id="cctypes" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allowed credit card types</label>
+                        <source_model>Magenest\StripePayment\Model\Source\Cctype</source_model>
+                        <config_path>payment/magenest_stripe/cctypes</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/magenest_stripe/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/magenest_stripe/specificcountry</config_path>
+                    </field>
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe/instructions</config_path>
+                    </field>
+
+                    <field id="sort_order" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <validate>validate-number</validate>
+                        <config_path>payment/magenest_stripe/sort_order</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order Total</label>
+                        <config_path>payment/magenest_stripe/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order Total</label>
+                        <config_path>payment/magenest_stripe/max_order_total</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_paymentintents" translate="label" sortOrder="15" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stripe Payment Intents (SCA Ready)</label>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_paymentintents/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_paymentintents/title</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Action</label>
+                        <source_model>Magenest\StripePayment\Model\Source\PaymentAction</source_model>
+                        <config_path>payment/magenest_stripe_paymentintents/payment_action</config_path>
+                    </field>
+                    <field id="order_status" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                        <config_path>payment/magenest_stripe_paymentintents/order_status</config_path>
+                    </field>
+                    <field id="cctypes" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display credit card types</label>
+                        <source_model>Magenest\StripePayment\Model\Source\Cctype</source_model>
+                        <config_path>payment/magenest_stripe_paymentintents/cctypes</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_paymentintents/sort_order</config_path>
+                    </field>
+
+                </group>
+
+                <group id="magenest_stripe_checkout" translate="label" sortOrder="12" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stripe Checkout Hosted on Stripe (SCA Ready)</label>
+                    <comment>
+                        <![CDATA[
+                            <strong>You should add checkout.session.completed to webhooks events to receive webhooks</strong>
+                            <br>
+                            <strong>Stripe Checkout includes support for:</strong>
+                            <ul>
+                                <li>Credit and debit cards payment</li>
+                                <li>Apple Pay (with no additional setup required)</li>
+                                <li>Dynamic 3D Secure 2</li>
+                            </ul>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_checkout/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_checkout/title</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Action</label>
+                        <source_model>Magenest\StripePayment\Model\Source\PaymentAction</source_model>
+                        <config_path>payment/magenest_stripe_checkout/payment_action</config_path>
+                    </field>
+                    <field id="collect_billing_address" translate="label" sortOrder="40" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Collect Billing Address</label>
+                        <config_path>payment/magenest_stripe_checkout/collect_billing_address</config_path>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="order_status" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                        <config_path>payment/magenest_stripe_checkout/order_status</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/magenest_stripe_checkout/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/magenest_stripe_checkout/specificcountry</config_path>
+                    </field>
+                    <group id="magenest_stripe_checkout_customize" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Customize checkout page</label>
+                        <field id="checkout_title" translate="label" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Checkout Title</label>
+                            <config_path>payment/magenest_stripe_checkout/checkout_title</config_path>
+                        </field>
+                        <field id="checkout_description" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Checkout Description</label>
+                            <config_path>payment/magenest_stripe_checkout/checkout_description</config_path>
+                        </field>
+                        <field id="checkout_image_url" translate="label" sortOrder="30" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Checkout Image Url</label>
+                            <config_path>payment/magenest_stripe_checkout/checkout_image_url</config_path>
+                        </field>
+                        <field id="checkout_submit_type" translate="label" sortOrder="40" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Submit Button Type</label>
+                            <config_path>payment/magenest_stripe_checkout/checkout_submit_type</config_path>
+                            <source_model>Magenest\StripePayment\Model\Source\CheckoutSubmitType</source_model>
+                        </field>
+                    </group>
+                </group>
+
+                <group id="magenest_stripe_iframe" translate="label" sortOrder="111" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stripe IFrame Checkout Form</label>
+                    <comment>Stripe payment method uses checkout.js</comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_iframe/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_iframe/title</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Action</label>
+                        <source_model>Magenest\StripePayment\Model\Source\PaymentAction</source_model>
+                        <comment>Authorization expires in 7 days</comment>
+                        <config_path>payment/magenest_stripe_iframe/payment_action</config_path>
+                    </field>
+                    <field id="order_status" translate="label" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                        <config_path>payment/magenest_stripe_iframe/order_status</config_path>
+                    </field>
+                    <field id="three_d_secure" translate="label" type="select" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>3d secure</label>
+                        <source_model>Magenest\StripePayment\Model\Source\IframeThreeDSecure</source_model>
+                        <config_path>payment/magenest_stripe_iframe/three_d_secure</config_path>
+                    </field>
+                    <field id="display_name" translate="label" sortOrder="25" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Name of website displayed on Checkout</label>
+                        <config_path>payment/magenest_stripe_iframe/display_name</config_path>
+                    </field>
+                    <field id="button_label" translate="label" sortOrder="28" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Panel label</label>
+                        <config_path>payment/magenest_stripe_iframe/button_label</config_path>
+                        <comment>The label of the payment button in the Checkout form</comment>
+                    </field>
+                    <!--<field id="collect_billing" translate="label" sortOrder="36" type="select" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                        <!--<label>Allow Stripe Checkout to collect customer's billing address</label>-->
+                        <!--<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+                        <!--<config_path>payment/magenest_stripe_iframe/collect_billing</config_path>-->
+                    <!--</field>-->
+                    <!--<field id="collect_shipping" translate="label" sortOrder="38" type="select" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                        <!--<label>Allow Stripe Checkout to collect customer's shipping address</label>-->
+                        <!--<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+                        <!--<config_path>payment/magenest_stripe_iframe/collect_shipping</config_path>-->
+                        <!--<depends>-->
+                            <!--<field id="collect_billing">1</field>-->
+                        <!--</depends>-->
+                    <!--</field>-->
+                    <field id="collect_zip" translate="label" sortOrder="40" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow Stripe Checkout to collect customer's zip code</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_iframe/collect_zip</config_path>
+                    </field>
+                    <field id="allow_remember" translate="label" sortOrder="45" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Remember Me</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Allow customer to save their information for quicker access in the future</comment>
+                        <config_path>payment/magenest_stripe_iframe/allow_remember</config_path>
+                    </field>
+                    <field id="upload_image_id" translate="label comment" type="image" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo Image</label>
+                        <backend_model>Magenest\StripePayment\Model\Source\Image</backend_model>
+                        <base_url type="media" scope_info="1">stripe</base_url>
+                        <config_path>payment/magenest_stripe_iframe/upload_image_id</config_path>
+                    </field>
+                    <field id="locale" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Locale</label>
+                        <source_model>Magenest\StripePayment\Model\Source\Locale</source_model>
+                        <config_path>payment/magenest_stripe_iframe/locale</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <validate>validate-number</validate>
+                        <config_path>payment/magenest_stripe_iframe/sort_order</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/magenest_stripe_iframe/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/magenest_stripe_iframe/specificcountry</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order Total</label>
+                        <config_path>payment/magenest_stripe_iframe/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order Total</label>
+                        <config_path>payment/magenest_stripe_iframe/max_order_total</config_path>
+                    </field>
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe_iframe/instructions</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_applepay" translate="label" sortOrder="112" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apple Pay, Google Pay, Microsoft Pay</label>
+                    <comment>
+                        <![CDATA[
+                            <ol>
+                                <li><strong>Stripe payment button only work with HTTPS domains</strong></li>
+                            </ol>
+                        ]]>
+                    </comment>
+                    <field id="register_applepay" translate="button_label" sortOrder="0" showInDefault="1" showInWebsite="0"
+                           showInStore="0">
+                        <label>Register ApplePay</label>
+                        <frontend_model>Magenest\StripePayment\Block\Adminhtml\System\Config\Fieldset\RegisterApplepay</frontend_model>
+                        <comment>
+                            <![CDATA[
+                                <p>Before active ApplePay, you need to <a target="_blank" href="https://stripe.com/docs/stripe-js/elements/payment-request-button#verifying-your-domain-with-apple-pay">verify the domain</a></p>
+                                <p>Url example: example.com</p>
+                            ]]>
+                        </comment>
+                    </field>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_applepay/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_applepay/title</config_path>
+                    </field>
+                    <field id="active_on_product_details" translate="label" sortOrder="21" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display button on Product Details Page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_applepay/active_on_product_details</config_path>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="active_on_shopping_cart" translate="label" sortOrder="22" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display button on Checkout Cart Page / Mini Cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_applepay/active_on_shopping_cart</config_path>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="active_on_checkout" translate="label" sortOrder="23" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Active on Checkout Page as Payment Method</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_applepay/active_on_checkout</config_path>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Action</label>
+                        <source_model>Magenest\StripePayment\Model\Source\PaymentAction</source_model>
+                        <config_path>payment/magenest_stripe_applepay/payment_action</config_path>
+                        <comment>Authorization expires in 7 days</comment>
+                    </field>
+                    <field id="order_status" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                        <config_path>payment/magenest_stripe_applepay/order_status</config_path>
+                    </field>
+                    <field id="replace_placeorder" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Preload Stripe Payment Button</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_applepay/replace_placeorder</config_path>
+                        <comment>
+                            <![CDATA[
+                                <p>Enable this option will cause conflict with One Step Checkout</p>
+                                <p>If you're using One Step Checkout, choose No</p>
+                            ]]>
+                        </comment>
+                    </field>
+                    <!--<field id="paybutton_label" translate="label" type="text" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                        <!--<label>Button Label</label>-->
+                        <!--<config_path>payment/magenest_stripe_applepay/paybutton_label</config_path>-->
+                    <!--</field>-->
+                    <field id="paybutton_type" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Button Type</label>
+                        <source_model>Magenest\StripePayment\Model\Source\ApplePay\ButtonType</source_model>
+                        <config_path>payment/magenest_stripe_applepay/paybutton_type</config_path>
+                    </field>
+                    <field id="paybutton_theme" translate="label" type="select" sortOrder="47" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Button Theme</label>
+                        <source_model>Magenest\StripePayment\Model\Source\ApplePay\ButtonTheme</source_model>
+                        <config_path>payment/magenest_stripe_applepay/paybutton_theme</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <validate>validate-number</validate>
+                        <config_path>payment/magenest_stripe_applepay/sort_order</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/magenest_stripe_applepay/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/magenest_stripe_applepay/specificcountry</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order Total</label>
+                        <config_path>payment/magenest_stripe_applepay/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order Total</label>
+                        <config_path>payment/magenest_stripe_applepay/max_order_total</config_path>
+                    </field>
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe_applepay/instructions</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_giropay" translate="label" sortOrder="118" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Giropay</label>
+                    <comment>
+                        <![CDATA[
+                            <p>Giropay payments must be in EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_giropay/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_giropay/title</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <validate>validate-number</validate>
+                        <config_path>payment/magenest_stripe_giropay/sort_order</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order Total</label>
+                        <config_path>payment/magenest_stripe_giropay/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order Total</label>
+                        <config_path>payment/magenest_stripe_giropay/max_order_total</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_alipay" translate="label" sortOrder="114" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alipay</label>
+                    <comment>
+                        <![CDATA[
+                            <p>The currency of the payment must be the default currency for your country</p>
+                            <p>The currency can only be: AUD, CAD, EUR, HKD, JPY, NZD, SGD, or USD</p>
+                            <p>Users in Denmark, Norway, Sweden, or Switzerland must use EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_alipay/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_alipay/title</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/magenest_stripe_alipay/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/magenest_stripe_alipay/specificcountry</config_path>
+                    </field>
+
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <validate>validate-number</validate>
+                        <config_path>payment/magenest_stripe_alipay/sort_order</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order Total</label>
+                        <config_path>payment/magenest_stripe_alipay/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order Total</label>
+                        <config_path>payment/magenest_stripe_alipay/max_order_total</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_sofort" translate="label" sortOrder="120" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SOFORT</label>
+                    <comment>
+                        <![CDATA[
+                            <p>SOFORT payments must be in EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_sofort/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_sofort/title</config_path>
+                    </field>
+                    <field id="allow_select_bank_country" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow select bank country</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_sofort/allow_select_bank_country</config_path>
+                    </field>
+                    <field id="default_bank_country" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Default Bank Country</label>
+                        <source_model>Magenest\StripePayment\Model\Source\SofortCountry</source_model>
+                        <config_path>payment/magenest_stripe_sofort/default_bank_country</config_path>
+                    </field>
+                    <field id="allow_select_language" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow select language</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_sofort/allow_select_language</config_path>
+                    </field>
+                    <field id="default_language" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Default language</label>
+                        <source_model>Magenest\StripePayment\Model\Source\SofortLanguage</source_model>
+                        <config_path>payment/magenest_stripe_sofort/default_language</config_path>
+                    </field>
+
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_sofort/sort_order</config_path>
+                    </field>
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe_sofort/instructions</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_ideal" translate="label" sortOrder="130" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>iDEAL</label>
+                    <comment>
+                        <![CDATA[
+                            <p>iDEAL payments must be in EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_ideal/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_ideal/title</config_path>
+                    </field>
+                    <field id="use_element" translate="label" sortOrder="30" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Use iDEAL Bank Element Interface</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_ideal/use_element</config_path>
+                    </field>
+                    <field id="allow_select_bank" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow select bank country</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_ideal/allow_select_bank</config_path>
+                        <depends>
+                            <field id="use_element">0</field>
+                        </depends>
+                    </field>
+                    <field id="default_bank" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Default Bank</label>
+                        <source_model>Magenest\StripePayment\Model\Source\IdealBank</source_model>
+                        <config_path>payment/magenest_stripe_ideal/default_bank</config_path>
+                        <depends>
+                            <field id="use_element">0</field>
+                        </depends>
+                    </field>
+
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_ideal/sort_order</config_path>
+                    </field>
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe_ideal/instructions</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_bancontact" translate="label" sortOrder="140" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bancontact</label>
+                    <comment>
+                        <![CDATA[
+                            <p>Bancontact payments must be in EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_bancontact/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_bancontact/title</config_path>
+                    </field>
+                    <field id="allow_select_language" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow select language</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_bancontact/allow_select_language</config_path>
+                    </field>
+                    <field id="default_language" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Default language</label>
+                        <source_model>Magenest\StripePayment\Model\Source\BancontactLanguage</source_model>
+                        <config_path>payment/magenest_stripe_bancontact/default_language</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_bancontact/sort_order</config_path>
+                    </field>
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe_bancontact/instructions</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_p24" translate="label" sortOrder="150" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Przelewy24</label>
+                    <comment>
+                        <![CDATA[
+                            <p>P24 payments must be in either EUR or PLN</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_p24/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_p24/title</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_p24/sort_order</config_path>
+                    </field>
+
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe_p24/instructions</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_eps" translate="label" sortOrder="160" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>EPS</label>
+                    <comment>
+                        <![CDATA[
+                            <p>EPS payments must be in EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_eps/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_eps/title</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_eps/sort_order</config_path>
+                    </field>
+
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Instructions</label>
+                        <comment>Payment instructions for customers</comment>
+                        <config_path>payment/magenest_stripe_eps/instructions</config_path>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_multibanco" translate="label" sortOrder="170" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Multibanco</label>
+                    <comment>
+                        <![CDATA[
+                            <p>Multibanco payments must be in EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_multibanco/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_multibanco/title</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_multibanco/sort_order</config_path>
+                    </field>
+
+                </group>
+
+                <group id="magenest_stripe_wechatpay" translate="label" sortOrder="180" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>WeChat Pay</label>
+                    <comment>
+                        <![CDATA[
+                            <p>The currency of the payment must be the default currency for your country</p>
+                            <p>The currency can only be: AUD, CAD, EUR, GBP, HKD, JPY, SGD, or USD</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_wechatpay/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_wechatpay/title</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_wechatpay/sort_order</config_path>
+                    </field>
+
+                </group>
+
+                <group id="magenest_stripe_sepa" translate="label" sortOrder="200" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SEPA Direct Debit</label>
+                    <comment>
+                        <![CDATA[
+                            <p>SEPA Direct Debit must be in EUR</p>
+                        ]]>
+                    </comment>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_sepa/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_sepa/title</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_sepa/sort_order</config_path>
+                    </field>
+                    <field id="instructions" translate="label" type="textarea" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment display text</label>
+                        <config_path>payment/magenest_stripe_sepa/instructions</config_path>
+                        <comment><![CDATA[
+                            <p><strong>Sample text: </strong></p>
+                            <p>By providing your IBAN and confirming this payment, you are authorizing <strong style="color:red">YOUR COMPANY NAME</strong> and Stripe, our payment service provider, to send instructions to your bank to debit your account and your bank to debit your account in accordance with those instructions. You are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.</p>
+                        ]]></comment>
+                    </field>
+                </group>
+
+                <group id="magenest_stripe_intents" translate="label" sortOrder="15" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stripe Payment Intents (SCA Ready 2.0)</label>
+                    <field id="active" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/magenest_stripe_intents/active</config_path>
+                    </field>
+                    <field id="title" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/magenest_stripe_intents/title</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Action</label>
+                        <source_model>Magenest\StripePayment\Model\Source\PaymentAction</source_model>
+                        <config_path>payment/magenest_stripe_intents/payment_action</config_path>
+                    </field>
+                    <field id="order_status" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                        <config_path>payment/magenest_stripe_intents/order_status</config_path>
+                    </field>
+                    <field id="cctypes" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display credit card types</label>
+                        <source_model>Magenest\StripePayment\Model\Source\Cctype</source_model>
+                        <config_path>payment/magenest_stripe_intents/cctypes</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment from Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    </field>
+                    <field id="save" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable card saving</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Store customers' card information on Stripe's server for quicker access in the future</comment>
+                        <config_path>payment/magenest_stripe_intents/save_card</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/magenest_stripe_intents/sort_order</config_path>
+                    </field>
+
+                </group>
+
+            </group>
+        </section>
+    </system>
+</config>

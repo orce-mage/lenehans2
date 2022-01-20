@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="submit_before">
+            <block class="Magenest\StripePayment\Block\Adminhtml\Creditmemo\RefundReason" template="Magenest_StripePayment::creditmemo/refundreason.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

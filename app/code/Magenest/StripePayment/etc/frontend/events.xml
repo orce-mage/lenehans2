@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="shortcut_buttons_container">
+        <observer name="stripe_buttons" instance="Magenest\StripePayment\Observer\AddStripeButton"/>
+    </event>
+</config>

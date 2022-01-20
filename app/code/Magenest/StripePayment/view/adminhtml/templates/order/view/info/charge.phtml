@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+/** @var \Magenest\StripePayment\Block\Adminhtml\Order\View\Info\Charge $block */
+$dataView = $block->getDataView();;
+?>
+
+<table class="data-table admin__table-secondary">
+    <tbody>
+
+    <?php foreach ($dataView as $row) { ?>
+        <tr>
+            <td><?=$row['label']?:$row['label']?></td>
+            <td><?=$row['value']?:$row['value']?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>

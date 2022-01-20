@@ -1,0 +1,49 @@
+<?php
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+?>
+<div class="magenest-version-section">
+    <h1>
+        <a>Stripe Payment Gateways</a>
+    </h1>
+    <div>
+        Support:
+        <a target="_blank" href="http://servicedesk.izysync.com/servicedesk/customer/portal/22"><?= __('Submit a ticket') ?></a>
+        <br>
+        Contact us:
+        <a target="_blank" href="mailto:support@magenest.com"><?= __('support@magenest.com') ?></a>
+    </div>
+    <div class="user-guide">
+        To configure this extension, please read our <a target="_blank" href="http://www.confluence.izysync.com/display/DOC/2.+Stripe+Payment+and+Subscriptions+User+Guides">User Guide</a>
+    </div>
+    <div class="logger">
+        For us to better diagnose your site, please download and send us this <a href="<?=$block->getDownloadDebugUrl()?>">file</a> along with your support request
+    </div>
+    <div class="version">
+        ver. <?= $block->getVersion() ?>
+    </div>
+</div>
+
+<style>
+    .magenest-version-section{
+        background: #f8f8f8;
+        border: 1px solid #e3e3e3;
+        padding: 1.5rem;
+    }
+    .magenest-version-section h1{
+        font-weight: bold;
+    }
+    .magenest-version-section .version{
+        text-align: right;
+    }
+    .magenest-version-section a{
+        color: #eb5202;
+        text-decoration: none;
+    }
+    .magenest-version-section a:hover{
+        color: #eb5202;
+        text-decoration: none;
+    }
+</style>

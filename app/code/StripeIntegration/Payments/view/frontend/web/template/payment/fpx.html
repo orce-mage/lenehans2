@@ -1,0 +1,93 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}" id="stripe_fpx">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="
+                 attr: { 'id': getCode() },
+                 value: getCode(),
+                 checked: isChecked,
+                 click: selectPaymentMethod,
+                 visible: isRadioButtonVisible()
+               "/>
+        <label class="label" data-bind="attr: {'for': getCode()}">
+            <span class="stripe-icon-container" data-bind="css: { right: iconsRight }, if: hasIcons">
+              <img class="stripe-icon" data-bind="attr:{src: getIcon()}">
+            </span>
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <fieldset class="fieldset" data-bind='attr: {id: "payment_form_" + getCode()}'>
+
+            <div class="field required">
+                <label data-bind="attr: {for: getCode() + '_bank'}" class="label">
+                    <!-- ko i18n: 'Your Bank'--><!-- /ko -->
+                </label>
+                <div class="control" id="stripe-fpx-bank-selector">
+                    <!-- ko foreach: dummyArray() -->
+                    <div id="stripe-fpx-select" data-bind="click: $parent.toggleDropdown">
+                        <span data-bind="if: !$parent.selectedBank()">
+                            -- <!-- ko i18n: 'Please select your bank'--><!-- /ko --> --
+                        </span>
+                        <span data-bind="if: $parent.selectedBank()">
+                            <span data-bind="text: $parent.getSelectedBankName()"></span>
+                        </span>
+                    </div>
+                    <div data-bind="visible: isDropdownOpen" id="stripe-fpx-dropdown-container">
+                        <ul id="stripe-fpx-dropdown">
+                            <!-- ko foreach: getBanks() -->
+                            <li data-bind="attr: { id: value, class: value }, click: function(data)
+                                {
+                                    $parent.selectedBank(data);
+                                    $parent.isDropdownOpen(false);
+                                }">
+                                <span class="item" data-bind="text: label"></span>
+                            </li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="field">
+                <div class="checkout-agreements-block">
+                    <!-- ko i18n: $t('By clicking on the "Place Order" button, you agree to FPX’s'); --><!-- /ko -->
+                    <a href="https://www.mepsfpx.com.my/FPXMain/termsAndConditions.jsp" target="_blank" rel="noopener noreferrer">
+                        <!-- ko i18n: $t('Terms and Conditions'); --><!-- /ko -->
+                    </a>
+                </div>
+            </div>
+        </fieldset>
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="payment-method-messages">
+            <!-- ko foreach: getRegion('messages') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: $t('Place Order')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+  <group id="cards" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+    <label>Cards</label>
+    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Enabled</label>
+      <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+      <config_path>payment/stripe_payments/active</config_path>
+    </field>
+    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Title</label>
+      <comment><![CDATA[This is the payment method title used at the checkout page]]></comment>
+      <config_path>payment/stripe_payments/title</config_path>
+    </field>
+    <field id="payment_action" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Payment action</label>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\PaymentAction</source_model>
+      <config_path>payment/stripe_payments/payment_action</config_path>
+    </field>
+    <field id="expired_authorizations" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Expired authorizations</label>
+      <comment>
+        <![CDATA[Authorizations will typically expire after 7 days. What should we do if an admin tries to capture an expired authorization?]]>
+      </comment>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\ExpiredAuthorizations</source_model>
+      <depends>
+        <field id="payment_action">authorize</field>
+      </depends>
+      <config_path>payment/stripe_payments/expired_authorizations</config_path>
+    </field>
+
+    <field id="automatic_invoicing" translate="label" type="select" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Automatic invoicing</label>
+      <comment>
+        <![CDATA[For Authorize Only orders, should we automatically create an invoice in Pending status right after the order?]]>
+      </comment>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\Enabled</source_model>
+      <depends>
+        <field id="payment_action">authorize</field>
+      </depends>
+      <config_path>payment/stripe_payments/automatic_invoicing</config_path>
+    </field>
+    <field id="ccsave" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Save customer cards</label>
+      <comment>
+        <![CDATA[Enable this if you want to save customer cards on Stripe's servers so that they don't have to enter the details of the same card twice]]>
+      </comment>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\CcSave</source_model>
+      <config_path>payment/stripe_payments/ccsave</config_path>
+      <depends>
+        <field id="payment_action">authorize_capture</field>
+      </depends>
+    </field>
+
+    <field id="card_icons" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Card icons</label>
+      <comment><![CDATA[Should we display card icons next to the title of the payment method?]]></comment>
+      <config_path>payment/stripe_payments/card_icons</config_path>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\CardIcons</source_model>
+    </field>
+    <field id="card_icons_specific" translate="label" type="multiselect" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Select card icons</label>
+      <config_path>payment/stripe_payments/card_icons_specific</config_path>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\CardIconsSpecific</source_model>
+      <depends>
+        <field id="card_icons">1</field>
+      </depends>
+    </field>
+    <field id="icons_location" translate="label" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Icons location</label>
+      <config_path>payment/stripe_payments/icons_location</config_path>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\IconsLocation</source_model>
+      <depends>
+        <field id="card_icons" separator=",">0,1</field>
+      </depends>
+    </field>
+
+    <field id="use_store_currency" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Pay in store currency</label>
+      <comment>Choose "Yes" to use store view currency instead of base currency.</comment>
+      <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+      <config_path>payment/stripe_payments/use_store_currency</config_path>
+    </field>
+    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Enable for</label>
+      <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+      <config_path>payment/stripe_payments/allowspecific</config_path>
+   </field>
+   <field id="specificcountry" translate="label" type="multiselect" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Select countries</label>
+      <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+      <config_path>payment/stripe_payments/specificcountry</config_path>
+      <depends>
+        <field id="allowspecific">1</field>
+      </depends>
+   </field>
+   <field id="installment_plans" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Installment plans</label>
+      <comment>Installment plans are available by certain card issuers in Mexico. When the customer places the order, we retrieve available installment plans for eligible cards and allow the customer to select one before finalizing the order. &lt;a href="https://stripe.com/docs/payments/installments#requirements" target="_blank" rel="noopener noreferrer"&gt;Restrictions and requirements apply&lt;/a&gt;.</comment>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\Enabled</source_model>
+      <config_path>payment/stripe_payments/installment_plans</config_path>
+   </field>
+
+    <field id="statement_descriptor" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Optional statement descriptor</label>
+      <config_path>payment/stripe_payments/statement_descriptor</config_path>
+    </field>
+
+   <field id="sort_order" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+     <label>Sort order</label>
+     <comment>Adjust this to move the payment method above or below other payment methods</comment>
+     <frontend_class>validate-number</frontend_class>
+      <config_path>payment/stripe_payments/sort_order</config_path>
+   </field>
+ </group>
+</include>

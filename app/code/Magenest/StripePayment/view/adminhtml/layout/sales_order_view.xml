@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="payment_additional_info">
+            <block class="Magenest\StripePayment\Block\Adminhtml\Order\View\Info\Charge" name="stripe_charge_info" template="Magenest_StripePayment::order/view/info/charge.phtml" />
+        </referenceContainer>
+    </body>
+</page>

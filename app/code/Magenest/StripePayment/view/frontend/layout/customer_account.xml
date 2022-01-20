@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-stripe-card">
+                <arguments>
+                    <argument name="path" xsi:type="string">stripe/customer/card/</argument>
+                    <argument name="label" xsi:type="string" translate="true">Stripe Card Management</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
+
+

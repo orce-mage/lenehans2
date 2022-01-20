@@ -1,0 +1,119 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="
+        attr: { 'id': getCode() },
+        value: getCode(),
+        checked: isChecked,
+        click: selectPaymentMethod,
+        visible: isRadioButtonVisible()
+      "/>
+        <label class="label" data-bind="attr: {'for': getCode()}">
+            <span class="stripe-icon-container" data-bind="css: { right: iconsRight }, if: hasIcons">
+              <img class="stripe-icon" data-bind="attr:{src: getIcon()}">
+            </span>
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <fieldset class="fieldset" data-bind='attr: {id: "payment_form_" + getCode()}'>
+            <div class="field required">
+                <label data-bind="attr: {for: getCode() + '_account_holder_name'}" class="label">
+                    <span><!-- ko i18n: 'Account Holder Name'--><!-- /ko --></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="payment[ach][account_holder_name]" class="input-text" value=""
+                           data-bind="attr: {
+                                    id: getCode() + '_account_holder_name',
+                                    title: $t('Account Holder Name'),
+                                    'data-container': getCode() + '-account_holder_name',
+                                    'data-validate': JSON.stringify({'required':true})
+                                  },
+                                  value: accountHolderName" />
+                </div>
+            </div>
+            <div class="field required">
+                <label data-bind="attr: {for: getCode() + '_account_holder_type'}" class="label">
+                    <span><!-- ko i18n: 'Account Type'--><!-- /ko --></span>
+                </label>
+                <div class="control">
+                    <select name="payment[ach][account_holder_type]" class="input-select" value=""
+                           data-bind="options: accountHolderTypes,
+                                      value: accountHolderType,
+                                      optionsCaption: '-- Please choose an option --',
+                                      attr: {
+                                        id: getCode() + '_account_holder_type',
+                                        title: $t('Account Type'),
+                                        'data-container': getCode() + '-account_holder_type',
+                                        'data-validate': JSON.stringify({'required':true,'validate-select':true})
+                                      }" />
+                </div>
+            </div>
+            <div class="field required">
+                <label data-bind="attr: {for: getCode() + '_account_number'}" class="label">
+                    <span><!-- ko i18n: 'Account Number'--><!-- /ko --></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="payment[ach][account_number]" class="input-select" value=""
+                           data-bind="
+                                  value: accountNumber,
+                                  attr: {
+                                    id: getCode() + '_account_number',
+                                    title: $t('Account Number'),
+                                    'data-container': getCode() + '-account_number',
+                                    'data-validate': JSON.stringify({'required-number':true})
+                                  }" />
+                </div>
+            </div>
+            <div class="field required">
+                <label data-bind="attr: {for: getCode() + '_routing_number'}" class="label">
+                    <span><!-- ko i18n: 'Routing Number'--><!-- /ko --></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="payment[ach][routing_number]" class="input-select" value=""
+                           data-bind="
+                                  value: routingNumber,
+                                  attr: {
+                                    id: getCode() + '_routing_number',
+                                    title: $t('Routing Number'),
+                                    'data-container': getCode() + '-routing_number',
+                                    'data-validate': JSON.stringify({'required-number':true})
+                                  }" />
+                </div>
+            </div>
+        </fieldset>
+        <p><!-- ko i18n: 'After the order is placed, two micro-deposits will be made to your bank account with a statement description of "AMNTS:". These deposits will take 1-2 business days to appear on your online statement. Once they appear, click the link in your order email to enter these two amounts into a verification form. As soon as your bank account is verified, the payment will be completed and your order will be processed. For registered customers, this is only needed once per bank account.' --><!-- /ko --></p>
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="payment-method-messages">
+            <!-- ko foreach: getRegion('messages') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="actions-toolbar" id="ach-actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: $t('Place Order')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

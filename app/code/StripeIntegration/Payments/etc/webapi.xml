@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/stripe/payments/redirect_url" method="GET">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="redirect_url"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/stripe/payments/get_setup_intent" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_setup_intent"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Express Checkout -->
+    <route url="/V1/stripe/payments/set_billing_address" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="set_billing_address"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/estimate_cart" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="estimate_cart"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/apply_shipping" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="apply_shipping"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/place_order" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="place_order"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/addtocart" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="addtocart"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/get_cart" method="GET">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_cart"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/get_prapi_params" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_prapi_params"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/get_klarna_payment_options" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_klarna_payment_options"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/get_installment_plans" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_installment_plans"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/get_trialing_subscriptions" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_trialing_subscriptions"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/get_checkout_payment_methods" method="POST">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_checkout_payment_methods"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/stripe/payments/get_checkout_session_id" method="GET">
+        <service class="StripeIntegration\Payments\Api\ServiceInterface" method="get_checkout_session_id"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

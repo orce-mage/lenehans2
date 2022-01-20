@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="stripe_subscriptions" sortOrder="20">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Subscriptions by Stripe</label>
+        </settings>
+        <container name="stripe_subscriptions" sortOrder="8">
+            <htmlContent name="stripe_html_content">
+                <block name="stripe_subscriptions_coupons" class="StripeIntegration\Payments\Block\Adminhtml\Coupons\Config" />
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

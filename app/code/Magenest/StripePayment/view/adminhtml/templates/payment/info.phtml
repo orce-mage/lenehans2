@@ -1,0 +1,240 @@
+<?php
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+/**
+ * @var \Magento\Payment\Block\Adminhtml\Transparent\Form $block
+ */
+$code = $block->escapeHtml($block->getMethodCode());
+$ccType = $block->getInfoData('cc_type');
+$ccExpMonth = $block->getInfoData('cc_exp_month');
+$ccExpYear = $block->getInfoData('cc_exp_year');
+/** @var \Magenest\StripePayment\Helper\Config $stripeConfig */
+$stripeConfig = $this->helper("\Magenest\StripePayment\Helper\Config");
+$publicKey = $stripeConfig->getPublishableKey();
+?>
+<fieldset class="admin__fieldset payment-method" id="payment_form_<?= /* @noEscape */ $code ?>"
+          style="display:none">
+    <input type="hidden" name="payment[customer_id]" id="stripe-customer-id-input">
+    <input type="hidden" name="payment[stripe_response]" id="stripe-response">
+    <input type="hidden" name="payment[cardId]" value="0">
+    <div>
+        <strong style="color: red" id="stripe-validate-message"></strong>
+    </div>
+    <div class="field-type admin__field _required" id="stripe-save-card-div">
+        <label class="admin__field-label" for="stripe-save-card">
+            <span><?= $block->escapeHtml(__('Choose Card')) ?></span>
+        </label>
+        <div class="admin__field-control">
+            <select name="payment[cardId]" class="admin__control-select" id="stripe-save-card">
+
+            </select>
+        </div>
+    </div>
+
+    <div id="stripe-cc-field">
+        <div class="field-number admin__field _required">
+            <label class="admin__field-label" for="<?= /* @noEscape */ $code ?>_cc_number">
+                <span><?= $block->escapeHtml(__('Credit Card Number')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" id="<?= /* @noEscape */ $code ?>_cc_number" name="payment[cc_number]"
+                       title="<?= $block->escapeHtml(__('Credit Card Number')) ?>" class="admin__control-text"
+                       value="<?= /* @noEscape */ $block->getInfoData('cc_number') ?>"/>
+            </div>
+        </div>
+        <div class="field-date admin__field _required">
+            <label class="admin__field-label" for="<?= /* @noEscape */ $code ?>_expiration">
+                <span><?= $block->escapeHtml(__('Expiration Date')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select id="<?= /* @noEscape */ $code ?>_expiration" name="payment[cc_exp_month]"
+                        class="admin__control-select admin__control-select-month">
+                    <?php foreach ($block->getCcMonths() as $k => $v): ?>
+                        <option value="<?= $block->escapeHtml($k) ?>"
+                                <?php if ($k == $ccExpMonth): ?>selected="selected"<?php endif ?>>
+                            <?= $block->escapeHtml($v) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <select id="<?= /* @noEscape */ $code ?>_expiration_yr" name="payment[cc_exp_year]"
+                        class="admin__control-select admin__control-select-year">
+                    <?php foreach ($block->getCcYears() as $k => $v): ?>
+                        <option value="<?= /* @noEscape */ $k ? $block->escapeHtml($k) : '' ?>"
+                                <?php if ($k == $ccExpYear): ?>selected="selected"<?php endif ?>>
+                            <?= $block->escapeHtml($v) ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="field-number required admin__field _required">
+            <label class="admin__field-label" for="<?= /* @noEscape */
+            $code ?>_cc_cid">
+                <span><?= $block->escapeHtml(__('Card Verification Number')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" title="<?= $block->escapeHtml(__('Card Verification Number')) ?>"
+                       class="admin__control-cvn admin__control-text"
+                       id="<?= /* @noEscape */
+                       $code ?>_cc_cid"
+                       name="payment[cc_cid]" value="<?= /* @noEscape */
+                $block->getInfoData('cc_cid') ?>"/>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<style>
+    #payment_form_magenest_stripe ._required > .admin__field-label span:after{
+        margin-left: 0;
+    }
+</style>
+
+<script>
+    require([
+        'jquery',
+        'prototype',
+        'Magento_Sales/order/create/scripts',
+        "Magento_Sales/order/create/form"
+
+    ], function($){
+        order.addExcludedPaymentMethod('<?php /* @noEscape */ echo $code; ?>');
+        var selector = $('#submit_order_top_button, .order-totals-actions>.actions>button');
+        var is_select = false;
+        if(!window.mgn_list_payment){
+            window.mgn_list_payment = [];
+        }
+        var methodCode = '<?=$block->getMethodCode()?>';
+        window.mgn_list_payment.push(methodCode);
+        setInterval(function () {
+            $('#stripe-customer-id-input').val(order.customerId);
+            if($('#p_method_magenest_stripe').is(":checked")){
+                is_select = true;
+                selector.attr("onclick", "");
+            }else{
+                is_select = false;
+                selector.attr("onclick", "order.submit()");
+            }
+
+            if($('#stripe-save-card').children().length == 0){
+                if(window.stripe_save_card_html){
+                    $('#stripe-save-card').html(window.stripe_save_card_html);
+                }
+            }
+
+            if($('#stripe-save-card').val()){
+                $('#stripe-cc-field').hide();
+            }else{
+                $('#stripe-cc-field').show();
+            }
+
+            if(!window.stripe_ajax_load) {
+                window.stripe_ajax_load = true;
+                $.ajax({
+                    method: "POST",
+                    url: '<?=$block->getUrl('stripe/customer/getCard')?>',
+                    data: {'customer_id': order.customerId},
+                    success: function (response) {
+                        if(response.success){
+                            window.stripe_save_card_html = response.html;
+                        }
+                    },
+                    dataType: 'json'
+                });
+            }
+        },200);
+
+        //selector.unbind('click');
+        selector.on("click", function () {
+            if( (is_select)&&($('#p_method_magenest_stripe').is(":checked"))&&(jQuery('#edit_form').valid()) ){
+                if ($('#stripe-save-card').val()) {
+                    $('#edit_form').submit();
+                } else {
+                    loadStripeJs(function () {
+                        if (validate()) {
+                            var firstName = $('#order-billing_address_firstname').val();
+                            var lastName = $('#order-billing_address_lastname').val();
+                            var owner = {
+                                address: {
+                                    postal_code: $('#order-billing_address_postcode').val(),
+                                    city: $('#order-billing_address_city').val(),
+                                    country: $('#order-billing_address_country_id').val(),
+                                    line1: $('#order-billing_address_street0').val(),
+                                    line2: $('#order-billing_address_street1').val(),
+                                    state: $('#order-billing_address_region_id').val(),
+                                },
+                                name: firstName + " " + lastName,
+                                email: $('#email').val(),
+                            };
+
+                            if ($('#order-billing_address_telephone').val()) {
+                                owner.phone = $('#order-billing_address_telephone').val();
+                            }
+
+                            Stripe.source.create({
+                                type: 'card',
+                                card: {
+                                    number: $('#magenest_stripe_cc_number').val(),
+                                    cvc: $('#magenest_stripe_cc_cid').val(),
+                                    exp_month: $('#magenest_stripe_expiration').val(),
+                                    exp_year: $('#magenest_stripe_expiration_yr').val()
+                                },
+                                owner: owner
+                            }, function (status, response) {
+                                if (response.error) {
+                                    console.log(response);
+                                    alert(response.error.message);
+                                } else {
+                                    $('#stripe-response').val(JSON.stringify(response));
+                                    $('#edit_form').submit();
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+        
+        function validate() {
+            if(!Stripe.card.validateCardNumber($('#magenest_stripe_cc_number').val())){
+                $("#stripe-validate-message").text("Card number is not correct");
+                return false;
+            }
+
+            if(!Stripe.card.validateExpiry($('#magenest_stripe_expiration').val(), $('#magenest_stripe_expiration_yr').val())){
+                $("#stripe-validate-message").text("Card expiration date is not correct");
+                return false;
+            }
+            if(!Stripe.card.validateCVC($('#magenest_stripe_cc_cid').val())){
+                $("#stripe-validate-message").text("Card verification code is not correct");
+                return false;
+            }
+            $("#stripe-validate-message").text("");
+            return true;
+        }
+
+        function loadStripeJs (callback) {
+            var jsUrl = "https://js.stripe.com/v2/";
+            if (typeof Stripe === "undefined")
+            {
+                $.ajax({
+                    url: jsUrl,
+                    dataType: 'script',
+                    success: function (result) {
+                        Stripe.setPublishableKey("<?=$publicKey?>");
+                        callback();
+                    },
+                    async: true,
+                    showLoader: true
+                });
+            }
+            else {
+                Stripe.setPublishableKey("<?=$publicKey?>");
+                callback();
+            }
+        }
+    });
+</script>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page layout="checkout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" design_abstraction="custom">
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="label" xsi:type="string">Payment Authorization</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="StripeIntegration\Payments\Block\Authorization\Multishipping" name="stripe_authorization_multishipping" template="StripeIntegration_Payments::authorization/multishipping.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,98 @@
+<?php
+
+$cards = $this->getCards();
+
+if (empty($cards)): ?>
+<div class="message info empty">
+  <span><?php echo $block->escapeHtml(__('You do not have any saved cards yet.')); ?></span>
+</div>
+<?php else: ?>
+  <div class="table-wrapper stripe-payments">
+    <table class="data table table-order-items history saved-cards" id="my-orders-table">
+      <caption class="table-caption"><?php echo $block->escapeHtml(__('Saved Cards')); ?></caption>
+      <thead>
+        <tr>
+          <th scope="col" class="col cards" colspan="3">
+            <?php echo $block->escapeHtml(__('Cards')); ?>
+          </th>
+          <th scope="col" class="col actions"><?php echo $block->escapeHtml(__('Actions')); ?></th>
+        </tr>
+      </thead>
+      <tbody>
+  <?php foreach ($cards as $card): ?>
+      <tr>
+        <td data-th="Brand" class="col brand">
+          <span class="type <?php echo $card->brand; ?>">
+            <?php echo $block->cardType($card->brand); ?>
+          </span>
+        </td>
+        <td data-th="Last 4" class="col last4">
+          ****&nbsp;<?php echo $card->last4; ?>
+        </td>
+        <td data-th="Expires" class="col exp">
+          <?php echo $card->exp_month; ?>/<?php echo $card->exp_year; ?>
+        </td>
+        <td data-th="Actions" class="col actions">
+          <a href="delete/<?php echo $card->id; ?>" class="stripe-payments delete-card">
+            <?php echo $block->escapeHtml(__('Delete')); ?>
+          </a>
+        </td>
+      </tr>
+  <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+<?php endif; ?>
+
+<?php if (!$block->config->getSaveCards()) { return; } ?>
+<br>
+
+<form class="form new-saved-card" action="<?php echo $block->getUrl("*/*/*", ["save" => "card"]); ?>" method="post" id="payment_form_stripe_payments_payment">
+  <input type="hidden" name="form_key" value="<?php echo $block->getFormKey() ?>" />
+  <fieldset class="fieldset payment-method stripe-new stripe-payments">
+    <legend class="legend"><span><?php echo $block->escapeHtml(__('Add a new saved card')); ?></span></legend>
+    <br>
+
+<?php if ($this->verifyBillingAddress()): ?>
+
+  <?php echo $block->getLayout()->createBlock('StripeIntegration\Payments\Block\StripeElements')->toHtml(); ?>
+
+  </fieldset>
+
+  <script type="text/javascript">
+    require(['domReady!'], function()
+    {
+      var params = <?php echo $block->config->getStripeParams(); ?>;
+      initStripe(params, function(err)
+      {
+        if (err)
+        {
+          alert(err);
+          return;
+        }
+        stripe.initStripeElements(params.locale);
+      });
+    });
+  </script>
+
+  <div class="actions-toolbar">
+    <div class="primary">
+      <button type="submit" title="Save" class="action save primary" onclick="return stripe.saveCard(this);">
+        <span>
+          <?php echo $block->escapeHtml(__('Save')); ?>
+        </span>
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<?php else: ?>
+
+  <div class="message info empty">
+    <span><?php echo $block->escapeHtml(__('You must first add a full billing address before you can add saved cards.')); ?></span>
+  </div>
+
+  </fieldset>
+</form>
+<?php endif; ?>

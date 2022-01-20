@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="StripeIntegration_Payments::css/stripe_payments_base.css" />
+        <css src="StripeIntegration_Payments::css/stripe_payments_elements.css" />
+        <css src="StripeIntegration_Payments::css/paymentfont.min.css" />
+    </head>
+    <body>
+        <block class="StripeIntegration\Payments\Block\Sepa" name="payment.method.stripe_payments_sepa" template="StripeIntegration_Payments::form/sepa.phtml" cacheable="false">
+        </block>
+    </body>
+</page>

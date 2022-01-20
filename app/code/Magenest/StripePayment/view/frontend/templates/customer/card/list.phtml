@@ -1,0 +1,174 @@
+<?php
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+$delUrl = $block->getUrl('stripe/customer/del');
+?>
+
+<?php $cards = $block->getDataCard(); ?>
+<a id="add-stripe-card-action" href="#"><?=__('Add a credit card')?></a>
+<div id="stripe-creditcard-form" style="display: none">
+    <form action="<?=$block->getUrl('stripe/customer/createCard')?>" method="post" id="payment-form">
+        <div class="stripe-form-row">
+            <label for="card-element">
+                <strong><?=__('Credit or debit card')?></strong>
+            </label>
+            <div id="card-element">
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+
+            <!-- Used to display Element errors. -->
+            <div id="card-errors" role="alert"></div>
+        </div>
+
+        <button id="btn-stripe-submitcard"><?=__('Submit')?></button>
+    </form>
+</div>
+
+<table id="customer-booking-order-list" class="data table table-downloadable-products">
+    <?php if (!sizeof($cards)) { ?>
+        <div class="message info empty">
+            <span><?php echo __('You don\'t store any card yet.'); ?></span>
+        </div>
+    <?php } else {
+        $i = 0;
+        ?>
+        <thead>
+        <tr>
+            <th><?php echo __('Credit Card'); ?></th>
+            <th><?php echo __('Expires'); ?></th>
+            <th><?php echo __('Created At'); ?></th>
+            <th><?php echo __('Action'); ?></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody id="card_table_body">
+        <?php foreach ($cards as $card) { ?>
+        <tr id="row-<?php echo $card['id']; ?>">
+            <td><span><?php echo $card['brand']; ?></span> - <span><?php echo 'xxxxxxxxxxxx - ' . $card['last4']; ?></span></td>
+            <td><?php echo $card['exp_month'] . '/' . $card['exp_year']; ?></td>
+            <td><?php echo $card['created_at']; ?></td>
+            <td>
+                <a href="<?=$block->getUrl('stripe/customer/del', ['id'=>$card['id']])?>" class="action delete"
+                   onclick="return confirm(<?=__('Are you sure you want to cancel this card?')?>);"
+                >
+                    <span><?php echo __('Delete')?></span>
+                </a>
+            </td>
+            <?php } ?>
+        </tbody>
+    <?php } ?>
+</table>
+
+<script>
+    require([
+        'jquery',
+        'mage/url'
+    ], function ($, url) {
+        var stripe, card;
+        $('#add-stripe-card-action').on("click", function (e) {
+            e.preventDefault();
+            if (typeof Stripe === "undefined") {
+                loadStripeApi();
+            }
+        });
+        $('#btn-stripe-submitcard').on("click", function (e) {
+            $('#btn-stripe-submitcard').prop("disabled", true);
+            $('body').trigger('processStart');
+            e.preventDefault();
+            stripe.createSource(card).then(function (result) {
+                if (result.error) {
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                    $('#btn-stripe-submitcard').prop("disabled", false);
+                    $('body').trigger('processStop');
+                } else {
+                    $.post(
+                        url.build('stripe/customer/createCard'),
+                        {
+                            'form_key': $.cookie('form_key'),
+                            'result': result
+                        },
+                        function (response) {
+                            if(response.success){
+                                location.reload();
+                            }
+                            if(response.error){
+                                $('#btn-stripe-submitcard').prop("disabled", false);
+                                $('body').trigger('processStop');
+                                alert(response.message);
+                            }
+                        },
+                        'json'
+                    )
+
+                }
+            });
+        });
+        function loadStripeApi() {
+            var script = document.createElement('script');
+            script.onload = function () {
+                stripe = Stripe('<?=$block->getStripePublickey()?>');
+                var style = {
+                    base: {
+                        color: '#32325d',
+                        lineHeight: '18px',
+                        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                        fontSmoothing: 'antialiased',
+                        fontSize: '16px',
+                        '::placeholder': {
+                            color: '#aab7c4'
+                        }
+                    },
+                    invalid: {
+                        color: '#fa755a',
+                        iconColor: '#fa755a'
+                    }
+                };
+
+                elements = stripe.elements();
+                card = elements.create('card', {
+                    style: style
+                });
+
+                card.mount('#card-element');
+                card.addEventListener('change', function(event) {
+                    var displayError = document.getElementById('card-errors');
+                    if (event.error) {
+                        displayError.textContent = event.error.message;
+                    } else {
+                        displayError.textContent = '';
+                    }
+                });
+                $('#stripe-creditcard-form').slideDown(500);
+            };
+            script.onerror = function (response) {
+                console.log("stripe js v3 load error");
+                console.log(response);
+            };
+            script.src = "https://js.stripe.com/v3/";
+            document.head.appendChild(script);
+        }
+    })
+</script>
+
+<style>
+    #card-element{
+        padding: 20px
+    }
+    .StripeElement--invalid {
+        border-color: #fa755a;
+    }
+
+    .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+    }
+
+    #card-errors {
+        height: 20px;
+        padding: 4px 0;
+        color: #e02b27;
+    }
+</style>

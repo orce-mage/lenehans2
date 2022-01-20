@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Payment\Model\CcGenericConfigProvider">
+        <arguments>
+            <argument name="methodCodes" xsi:type="array">
+                <item name="magenest_stripe" xsi:type="const">Magenest\StripePayment\Model\Ui\ConfigProvider::CODE</item>
+                <item name="magenest_stripe_paymentintents" xsi:type="const">Magenest\StripePayment\Model\PaymentIntents::CODE</item>
+                <item name="magenest_stripe_intents" xsi:type="const">Magenest\StripePayment\Model\Intents::CODE</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="magenest_stripe_config" xsi:type="object">Magenest\StripePayment\Model\Ui\ConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\App\Request\CsrfValidator">
+        <plugin name="csrf_by_pass_stripe" type="Magenest\StripePayment\Plugin\Framework\App\Request\CsrfByPass" sortOrder="0"/>
+    </type>
+
+    <type name="Magenest\StripePayment\Block\Payment\Button">
+        <arguments>
+            <argument name="paymentMethodCode" xsi:type="const">Magenest\StripePayment\Model\ApplePay::CODE</argument>
+            <argument name="alias" xsi:type="string">product.info.addtocart.stripebutton</argument>
+            <argument name="shortcutTemplate" xsi:type="string">payment/button.phtml</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\CustomerData\Cart">
+        <plugin name="add_detail_to_cart_section" type="Magenest\StripePayment\Plugin\AddInfoToCartSection"/>
+    </type>
+</config>

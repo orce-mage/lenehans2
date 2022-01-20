@@ -1,0 +1,64 @@
+<?php
+
+// This template is loaded on the multi-shipping checkout page
+$code = $block->escapeHtml($block->getMethodCode());
+$cards = $block->getCustomerCards();
+
+?>
+<input type="hidden" name="form_key" value="<?php echo $block->getFormKey() ?>" />
+
+<fieldset id="payment_form_stripe_payments" class="stripe-payments standard-form fieldset items stripe-new indent-target" style="display: none;">
+
+<fieldset class="fieldset payment-method stripe-new stripe-payments" id="payment_form_stripe_payments_payment">
+
+  <?php if (!empty($cards)): ?>
+    <div class="stripe-payments-saved-cards-section" id="saved-cards">
+      <?php foreach ($cards as $key => $card): ?>
+        <div class="stripe-payments-saved-card">
+          <input type="radio" name="payment[cc_saved]" class="select"
+                value="<?php echo $card->id . ':' . $card->brand . ':' . $card->last4; ?>" id="<?php echo $card->id; ?>"
+            >
+          <label for="<?php echo $card->id; ?>">
+            <span class="type <?php echo $card->brand ?>">
+                <?php echo (empty($card->brand) ? __('Card') : $block->cardType($card->brand)); ?>
+            </span>
+            <span class="last4 stripe-payments-fade"><?php echo __('ending in'); ?> <?php echo $card->last4; ?></span>
+            <span class="exp stripe-payments-fade"><?php echo __('expires'); ?>
+                <?php echo str_pad($card->exp_month,2,'0',STR_PAD_LEFT); ?>/<?php echo $card->exp_year; ?>
+            </span>
+          </label>
+        </div>
+      <?php endforeach; ?>
+
+      <div>
+        <input type="radio" name="payment[cc_saved]" value="new_card" class="select" id="new_card" checked="checked">
+        <label for="new_card">
+          <span class="type"><?php echo __('Use a new card'); ?></span>
+        </label>
+      </div>
+    </div>
+  <?php endif; ?>
+
+  <?php echo $block->getLayout()->createBlock('StripeIntegration\Payments\Block\StripeElements')->toHtml(); ?>
+
+  <!-- In multishipping, Magento 2 will create multiple charges. We need to save the card in order to reuse if for all charges -->
+  <input type="hidden" id="stripe_payments_cc_save" name="payment[cc_save]" value="1" />
+  <input type="hidden" id="stripe_payments_cc_save" name="payment[is_multishipping]" value="1" />
+
+</fieldset>
+
+<script type="text/javascript">
+  var params = <?php echo $block->config->getStripeParams(); ?>;
+  initStripe(params, function(err)
+  {
+    if (err)
+    {
+      alert(err);
+      return;
+    }
+    stripe.initStripeElements(params.locale);
+    stripe.initMultiShippingEvents();
+  });
+</script>
+
+</fieldset>

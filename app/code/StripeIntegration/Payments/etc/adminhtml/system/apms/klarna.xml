@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+  <group id="klarna" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+    <label>Klarna</label>
+    <comment>Klarna is a payment method made available through the Stripe payment gateway</comment>
+    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Enabled</label>
+      <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+      <config_path>payment/stripe_payments_klarna/active</config_path>
+    </field>
+
+    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Title</label>
+      <comment><![CDATA[This is the payment method title used at the checkout page]]></comment>
+      <config_path>payment/stripe_payments_klarna/title</config_path>
+    </field>
+
+    <field id="payment_action" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Payment action</label>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\PaymentAction</source_model>
+      <config_path>payment/stripe_payments_klarna/payment_action</config_path>
+    </field>
+
+    <field id="specificcountry" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Enable for</label>
+      <comment><![CDATA[Select the countries and currencies for which Klarna is available at the checkout.]]></comment>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\KlarnaCountries</source_model>
+      <config_path>payment/stripe_payments_klarna/specificcountry</config_path>
+    </field>
+
+    <field id="custom_payment_methods" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Enabled payment options</label>
+      <source_model>StripeIntegration\Payments\Model\Adminhtml\Source\KlarnaCustomPaymentMethods</source_model>
+      <config_path>payment/stripe_payments_klarna/custom_payment_methods</config_path>
+    </field>
+
+    <field id="sort_order" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Sort order</label>
+      <comment>Adjust this to move the payment method above or below other payment methods</comment>
+      <frontend_class>validate-number</frontend_class>
+      <config_path>payment/stripe_payments_klarna/sort_order</config_path>
+    </field>
+  </group>
+</include>

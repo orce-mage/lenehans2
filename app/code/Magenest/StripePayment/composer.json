@@ -1,0 +1,20 @@
+{
+    "name": "magenest/module-stripe-payment",
+    "description": "Magenest Stripe Global Magento Extension",
+    "require": {
+        "magenest/core": "*",
+        "stripe/stripe-php": ">=7.0.0"
+    },
+    "type": "magento2-module",
+    "version": "2.4.4",
+    "license": [
+        "OSL-3.0",
+        "proprietary"
+    ],
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": {
+            "Magenest\\StripePayment\\": ""
+        }
+    }
+}

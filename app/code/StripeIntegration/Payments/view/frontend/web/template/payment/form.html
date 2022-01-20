@@ -1,0 +1,235 @@
+<div class="payment-method stripe-payments"
+  data-bind="
+    css: {
+      '_active': (getCode() == isChecked())
+    }">
+  <div class="payment-method-title field choice">
+    <input type="radio"
+      name="payment[method]"
+      class="radio"
+      data-bind="
+        attr: { 'id': getCode() },
+        value: getCode(),
+        checked: isChecked,
+        click: selectPaymentMethod,
+        visible: isRadioButtonVisible()
+      "/>
+    <label class="label" data-bind="attr: {'for': getCode()}">
+      <span class="stripe-icon-container" data-bind="css: { right: iconsRight }, if: hasIcons">
+        <span data-bind="foreach: icons()">
+          <img class="stripe-icon" data-bind="attr:{src: path}">
+        </span>
+      </span>
+      <span data-bind="text: getTitle()"></span>
+    </label>
+  </div>
+
+  <div class="payment-method-content" data-bind="if: stripePaymentsError()">
+    <p class="message message-error error">
+      <!-- ko i18n: stripePaymentsError() --><!-- /ko -->
+    </p>
+  </div>
+
+  <div class="payment-method-content stripe-payments-card-form" data-bind="if: !stripePaymentsError()">
+    <div class="payment-method-billing-address">
+      <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+      <!-- ko template: getTemplate() --><!-- /ko -->
+      <!--/ko-->
+    </div>
+
+    <p class="stripe-payments-billing-address-warning" data-bind="if: !isBillingAddressSet()">
+      <!-- ko i18n: 'Please update your billing address to proceed.'--><!-- /ko -->
+    </p>
+
+    <div data-bind="if: displayAtThisLocation(), visible: isPlaceOrderEnabled(), afterRender: initPRAPI">
+      <div class="stripe-payments stripe-payments-apple-pay-section" data-bind="visible: showApplePaySection(), if: displayAtThisLocation()">
+        <label><!-- ko i18n: 'Pay with ' + prapiTitle() --><!-- /ko --></label>
+        <div id="payment-request-button"></div>
+        <label><!-- ko i18n: 'Or use a card below'--><!-- /ko --></label>
+      </div>
+    </div>
+
+    <div data-bind="
+        attr: {
+          id: getCode() + '_saved_cards_div'
+        },
+        if: showSavedCardsSection,
+        visible: showSavedCardsSection
+      " class="stripe-payments stripe-payments-saved-cards-section">
+      <div data-bind="foreach: config().savedCards">
+        <div class="stripe-payments-saved-card">
+          <input type="radio" name="payment[cc_saved]" class="select"
+            data-bind="
+              checked: $parent.stripePaymentsSelectedCard,
+              attr: {
+                id: id
+              },
+              value: (id + ':' + brand + ':' + last4)
+            ">
+          <label data-bind="attr: { for: id }">
+            <span data-bind="attr: { class: brand + ' type' }, text: cardType"></span>
+            <span data-bind="text: last4" class="last4 stripe-payments-fade"></span>
+            <span class="exp stripe-payments-fade">
+              <!-- ko i18n: 'exp'--><!-- /ko -->
+              <span data-bind="text: exp_month"></span>/<span data-bind="text: exp_year"></span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div data-bind="if: config().savedCards.length">
+        <input data-bind="checked: stripePaymentsSelectedCard" type="radio" name="payment[cc_saved]" value="new_card" class="select" id="new_card">
+        <label for="new_card">
+            <span><!-- ko i18n: 'Use a new card'--><!-- /ko --></span>
+        </label>
+      </div>
+      <br>
+    </div>
+
+    <div class="fieldset ccard" data-bind="visible: showNewCardSection">
+
+      <div>
+        <div class="stripe-payments-elements">
+          <label for="card-number" id="card-details-label">
+            <span><!-- ko i18n: 'Enter your card details:'--><!-- /ko --></span>
+          </label>
+        </div>
+        <div class="stripe-payments-elements no-wrap">
+          <div id="stripe-payments-card-number" class="stripe-elements-field">
+          <!-- a Stripe Element will be inserted here. -->
+          </div>
+          <div class="stripe-payments-brand"><i class="pf pf-credit-card" id="stripe-payments-brand-icon"></i></div>
+        </div>
+        <div class="stripe-payments-elements no-wrap">
+          <div id="stripe-payments-card-expiry" class="stripe-elements-field">
+          <!-- a Stripe Element will be inserted here. -->
+          </div>
+          <div id="stripe-payments-card-cvc" class="stripe-elements-field">
+          <!-- a Stripe Element will be inserted here. -->
+          </div>
+        </div>
+        <div class="stripe-payments-elements">
+          <div class="pci-dss-info-block">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24" id="pci-svg">
+              <path d="m18,8l-1,0l0,-2c0,-2.76 -2.24,-5 -5,-5s-5,2.24 -5,5l0,2l-1,0c-1.1,0 -2,0.9 -2,2l0,10c0,1.1 0.9,2 2,2l12,0c1.1,0 2,-0.9 2,-2l0,-10c0,-1.1 -0.9,-2 -2,-2zm-6,9c-1.1,0 -2,-0.9 -2,-2s0.9,-2 2,-2s2,0.9 2,2s-0.9,2 -2,2zm3.1,-9l-6.2,0l0,-2c0,-1.71 1.39,-3.1 3.1,-3.1c1.71,0 3.1,0.92125 3.1,2.84372l0,-0.78122l0,3.0375z"/>
+            </svg>
+            <div class="pci-dss-info-text">
+              <span><!-- ko i18n: 'Your card details are protected using PCI DSS v3.2 security standards.'--><!-- /ko --></span>
+            </div>
+          </div>
+        </div>
+
+        <div id="stripe-payments-card-errors"></div>
+      </div>
+
+    </div>
+
+
+    <div data-bind="
+      attr: {
+        id: getCode() + '_cc_save_div'
+      },
+      if: showSaveCardOption,
+      visible: !config().alwaysSaveCard">
+      <div class="input-box">
+        <label for="stripe_payments_cc_save">
+            <input type="checkbox"
+              data-bind="
+                attr: {
+                  title: $t('Save card for future purchases'),
+                  id: getCode() + '_cc_save'
+                },
+                checked: stripePaymentsCardSave
+              "
+              class="input-checkbox stripe-input" name="payment[cc_save]" checked="checked"/>
+            <label data-bind="attr: {for: getCode() + '_cc_save'}" class="label">
+              <span><!-- ko i18n: 'Save card for future purchases'--><!-- /ko --></span>
+            </label>
+        </label>
+      </div>
+    </div>
+
+    <input type="hidden"
+          class="input-text"
+          name="payment[cc_stripejs_token]"
+          value=""
+          data-bind="
+            attr: {
+              id: getCode() + '_cc_stripejs_token'
+            },
+            value: stripePaymentsStripeJsToken
+          "/>
+
+    <div class="checkout-agreements-block">
+        <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+
+    <!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+
+    <div class="actions-toolbar" id="actions-toolbar">
+      <div class="primary">
+        <button class="action primary checkout" type="submit"
+          data-bind="
+            click: placeOrder,
+            enable: isPlaceOrderEnabled(),
+            attr: {title: $t('Place Order')},
+            afterRender: onCheckoutFormRendered
+          ">
+          <span data-bind="i18n: 'Place Order'"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="payment-method-content stripe-payments-installments-form" style="display: none;">
+
+    <div class="installments-header">
+      <h3>
+        <a class="action back-link" data-bind="click: collapseInstallments">&lt; <!-- ko i18n: 'Back'--><!-- /ko --></a>
+        <!-- ko i18n: 'Installment plans are available for your card!'--><!-- /ko -->
+      </h3>
+    </div>
+
+    <div class="stripe-payments-installment-plans" data-bind="if: installmentPlans">
+      <label><!-- ko i18n: 'I would like to pay my balance'--><!-- /ko --></label>
+      <label>
+        <input type="radio" name="use_installment" id="stripe_installment_now" value="now" checked>
+        <span><!-- ko i18n: 'Immediately'--><!-- /ko --></span>
+      </label>
+      <label>
+        <input type="radio" name="use_installment" id="stripe_installment_over_time" value="over_time">
+        <span><!-- ko i18n: 'Over a period of'--><!-- /ko --></span>
+        <select data-bind="click: focusInstallments,
+                       options: installmentPlans,
+                       optionsText: 'label',
+                       optionsValue: 'value',
+                       value: selectedInstallmentPlan" name="selected_plan">
+         </select>
+      </label>
+    </div>
+
+    <!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+
+    <div class="actions-toolbar" id="actions-toolbar" data-bind="if: installmentPlans">
+      <div class="primary">
+        <button class="action primary checkout" type="submit"
+          data-bind="
+            click: placeOrderWithToken,
+            attr: {title: $t('Finalize Order')}
+          ">
+          <span data-bind="i18n: 'Finalize Order'"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

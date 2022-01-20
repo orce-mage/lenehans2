@@ -1,0 +1,97 @@
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice" data-bind="css: 'stripe-source'">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <img data-bind="attr: {
+                        'src': getIcons(),
+                        'alt': getCode()
+                        }">
+            <span data-bind="text: getTitle()"></span></label>
+    </div>
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <form class="form" data-bind="attr: {'id': getCode() + '-form'}, mageInit: {'validation':{}}">
+            <fieldset data-bind="attr: {class: 'fieldset payment items ccard ' + getCode(), id: 'payment_form_' + getCode()}">
+                <div class="field country required" data-bind="attr: {id: getCode() + '_country'}, visible: allowSelectBankCountry()">
+                    <label data-bind="attr: {for: getCode() + '_country'}" class="label">
+                        <span><!-- ko i18n: 'Bank Country '--><!-- /ko --></span>
+                    </label>
+                    <div class="control">
+                        <div class="fields group group-2">
+                            <div class="field country">
+                                <div class="control">
+                                    <select style="width: 140px;" name="payment[country]"
+                                            class="select select-country"
+                                            data-bind="attr: {id: getCode() + '_country','data-validate': JSON.stringify({'required-entry':true})},
+                                                       value: country,
+                                                       options: bankList,
+                                                       optionsValue: 'value',
+                                                       optionsText: 'label'">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field language" data-bind="attr: {id: getCode() + '_language'}, visible: allowSelectLanguage()">
+                    <label data-bind="attr: {for: getCode() + '_language'}" class="label">
+                        <span><!-- ko i18n: 'Select language'--><!-- /ko --></span>
+                    </label>
+                    <div class="control">
+                        <div class="fields group group-2">
+                            <div class="field language">
+                                <div class="control">
+                                    <select style="width: 140px;" name="payment[language]"
+                                            class="select select-language"
+                                            data-bind="attr: {id: getCode() + '_language'},
+                                                   options: languageList,
+                                                   optionsValue: 'value',
+                                                   optionsText: 'label',
+                                                   value: language
+                                            ">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <p data-bind="html: getInstructions()"></p>
+
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind=" click: placeOrder, attr: {title: $t('Continue')}, css: {disabled: !isPlaceOrderActionAllowed()}, enable: (getCode() == isChecked()) "
+                        disabled>
+                    <span data-bind="i18n: 'Continue'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<?php
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+$apiTest = $block->getCurrentStatusApiTest();
+$apiLive = $block->getCurrentStatusApiLive();;
+?>
+<div class="actions">
+    <label class="domain-field">
+        <input type="text" placeholder="example.com" id="domain_field">
+        <button class="action-register-domain" type="button" id="register_domain">
+            <span id="span-for-active-button"><?php /* @escapeNotVerified */
+                echo "Register" ?>
+            </span>
+        </button>
+    </label>
+    <div id="applepay_status">
+        <div>
+            <h2>ApplePay Test Mode: </h2>
+            <span class="span-test <?= $apiTest?"api-success":"api-fail" ?>"><?= $apiTest? $apiTest['domain_name'] : "Domain Inactive" ?></span>
+        </div>
+        <div>
+            <h2>ApplePay Live Mode: </h2>
+            <span class="span-live <?= $apiLive?"api-success":"api-fail" ?>"><?= $apiLive? $apiTest['domain_name'] : "Domain Inactive" ?></span>
+        </div>
+    </div>
+    <div id="result_response"></div>
+</div>
+<script>
+    require(['jquery'], function ($) {
+        $('#register_domain').click(function () {
+            $.ajax({
+                type: "GET",
+                url: "<?= $block->getUrl('stripe/config/registerApplepay'); ?>",
+                data: {
+                    domain: $('#domain_field').val()
+                },
+                showLoader: true,
+                success: function (response) {
+                    console.log(response);
+                    $('#result_response').html(response.message);
+                    if(response.error){
+                        alert(response.message);
+                    }
+                    if(response.success){
+                        if(response.response_test){
+                            $('#applepay_status .span-test').removeClass("api-fail").addClass("api-success").html(response.response_test)
+                        }
+                        if(response.message_test){
+                            alert(response.message_test);
+                        }
+                        if(response.response_live){
+                            $('#applepay_status .span-live').removeClass("api-fail").addClass("api-success").html(response.response_live)
+                        }
+                        if(response.message_live){
+                            alert(response.message_live);
+                        }
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+<style>
+    input#domain_field {
+        width: 70%;
+        margin-right: 7px;
+        float: left;
+    }
+
+    div#applepay_status div {
+        margin-top: 20px;
+    }
+
+    div#applepay_status div h2 {
+        margin-bottom: 0;
+        float: left;
+        margin-right: 5px;
+    }
+
+    div#applepay_status div {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    #applepay_status .api-success{
+        color: #006400
+    }
+    #applepay_status .api-fail{
+        color: #e02b27
+    }
+    #applepay_status span{
+        font-weight: bold;
+    }
+</style>

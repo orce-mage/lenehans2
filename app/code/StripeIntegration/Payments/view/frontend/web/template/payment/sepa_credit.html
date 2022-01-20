@@ -1,0 +1,92 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="
+        attr: { 'id': getCode() },
+        value: getCode(),
+        checked: isChecked,
+        click: selectPaymentMethod,
+        visible: isRadioButtonVisible()
+      "/>
+        <label class="label" data-bind="attr: {'for': getCode()}">
+            <span class="stripe-icon-container" data-bind="css: { right: iconsRight }, if: hasIcons">
+              <img class="stripe-icon" data-bind="attr:{src: getIcon()}">
+            </span>
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <fieldset class="fieldset" data-bind='attr: {id: "payment_form_" + getCode()}'>
+            <div class="field">
+                <p><!-- ko i18n: 'A payment for this order can be made through a SEPA bank transfer. You will receive the details of our bank account as soon as the order is placed. The payment can be made in a single transfer, or in multiple transfers. You will receive an email confirmation for every payment that we receive. Bank transfers take on average 1-2 business days to reach us.' --><!-- /ko --></p>
+            </div>
+            <div class="field" data-bind="if: showCustomerBankAccountFields, attr: { class: requiredClass }">
+                <label data-bind="attr: {for: getCode() + '_sender_name'}" class="label">
+                    <span><!-- ko i18n: 'Your Account Holder Name'--><!-- /ko --></span>
+                    <span class="optional" data-bind="if: isOptional()">(<!-- ko i18n: 'optional'--><!-- /ko -->)</span>
+                </label>
+                <div class="control">
+                    <input type="text" name="payment[sender_name]" class="input-text" value=""
+                            data-bind="value: sender_name,
+                                attr: {
+                                    autocomplete: off,
+                                    id: getCode() + '_sender_name',
+                                    title: $t('Sender Name'),
+                                    'data-container': getCode() + '-sender-name'
+                                }" />
+                </div>
+            </div>
+            <div class="field" data-bind="if: showCustomerBankAccountFields, attr: { class: requiredClass }">
+                <label data-bind="attr: {for: getCode() + '_sender_iban'}" class="label">
+                    <span><!-- ko i18n: 'Your IBAN'--><!-- /ko --></span>
+                    <span class="optional" data-bind="if: isOptional()">(<!-- ko i18n: 'optional'--><!-- /ko -->)</span>
+                </label>
+                <div class="control">
+                    <input type="text" name="payment[sender_iban]" class="input-text required-entry" value=""
+                            data-validate='{"required":true}'
+                            data-bind="value: sender_iban,
+                                attr: {
+                                    autocomplete: off,
+                                    id: getCode() + '_sender_iban',
+                                    title: $t('IBAN'),
+                                    'data-container': getCode() + '-sender-iban'
+                                }" />
+                </div>
+            </div>
+            <div class="payment-method-note subnote" data-bind="if: showCustomerBankAccountFields">
+                <p><sup>*</sup> <!-- ko i18n: 'The provided bank account details will only be used for refunds.' --><!-- /ko --></p>
+            </div>
+        </fieldset>
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="payment-method-messages">
+            <!-- ko foreach: getRegion('messages') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: $t('Place Order')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56 (81588) - https://sketch.com -->
+    <title>cimb_icon_only</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="cimb_original" fill-rule="nonzero">
+            <g id="g10" transform="translate(16.000000, 16.000000) scale(-1, 1) rotate(-180.000000) translate(-16.000000, -16.000000) translate(0.000000, -0.000000)">
+                <polygon id="path544" fill="#790008" points="31.8137731 0.55606245 0.468000235 0.55606245 0.468000235 31.5083394 31.8137731 31.5083394"></polygon>
+                <g id="g546" transform="translate(3.976065, 15.641952)" fill="#FFFFFF">
+                    <polygon id="path548" points="17.3917743 10.0173812 0.726106575 10.0173812 8.10166817 0.386384705 24.7673359 0.386384705"></polygon>
+                </g>
+                <g id="g550" transform="translate(4.104329, 6.011528)" fill="#ED1D24">
+                    <polygon id="path552" points="24.6383469 10.0173812 7.9741285 10.0173812 0.598566897 0.392108922 17.2627853 0.392108922"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,162 @@
+<?php if (!$this->appliesToPaymentMethod()) return; ?>
+
+<br>
+<?php if ($this->shouldDisplayStripeSection()): ?>
+<table class="admin__table-secondary order-information-table stripe payment-info">
+  <tbody>
+    <?php if ($this->getPaymentLocation()): ?>
+    <tr>
+      <th><?php echo __('Payment Location'); ?></th>
+      <td><?php echo __($this->getPaymentLocation()); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php if (!empty($this->getSourceType())): ?>
+    <tr>
+        <th><?php echo __('Payment Type'); ?></th>
+        <td class="source-type"><?php echo $this->getSourceType(); ?></td>
+    </tr>
+    <?php endif; ?>
+
+    <?php $paymentIndex = 1; while ($charge = $block->nextCharge()): ?>
+
+    <?php if ($paymentIndex < $block->totalCharges): ?>
+    <tr>
+      <th colspan="2" style="text-align: center;"><b><?php echo __("Payment #%1", $paymentIndex++); ?></b></th>
+    </tr>
+    <?php endif; ?>
+    <?php if ($this->getBrand() && $this->getLast4()): ?>
+    <tr>
+      <th><?php echo __('%1 ending ', $this->getBrand()); ?></th>
+      <td>xxxx <?php echo $this->getLast4(); ?></td>
+    </tr>
+    <?php endif; ?>
+    <tr>
+        <th><?php echo __('Card Country'); ?></th>
+        <td class="country"><?php echo ucfirst($this->getCardCountry()); ?></td>
+    </tr>
+    <tr>
+        <th><?php echo __('Charge'); ?></th>
+        <td class="result charge <?php echo $this->getChargeOutcome(); ?>">
+            <?php echo ucwords(str_replace('_', ' ', $this->getChargeOutcome())); ?>
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-passed.png'); ?>" class="passed">
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-failed.png'); ?>" class="failed">
+        </td>
+    </tr>
+    <tr>
+        <th><?php echo __('Radar Risk'); ?></th>
+        <td class="result radar <?php echo $this->getRadarRisk(); ?>"><?php echo ucfirst($this->getRadarRisk()); ?></td>
+    </tr>
+  <tr>
+    <th><?php echo __('Street Check'); ?></th>
+    <td class="result <?php echo $this->getStreetCheck(); ?>">
+            <?php echo ucfirst($this->getStreetCheck()); ?>
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-passed.png'); ?>" class="passed">
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-failed.png'); ?>" class="failed">
+        </td>
+  </tr>
+  <tr>
+    <th><?php echo __('Zip Check'); ?></th>
+    <td class="result <?php echo $this->getZipCheck(); ?>">
+            <?php echo ucfirst($this->getZipCheck()); ?>
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-passed.png'); ?>" class="passed">
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-failed.png'); ?>" class="failed">
+        </td>
+  </tr>
+    <tr>
+        <th><?php echo __('CVC Check'); ?></th>
+        <td class="result <?php echo $this->getCVCCheck(); ?>">
+            <?php echo ucfirst($this->getCVCCheck()); ?>
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-passed.png'); ?>" class="passed">
+            <img src="<?php echo $block->getViewFileUrl('StripeIntegration_Payments/img/avs-failed.png'); ?>" class="failed">
+        </td>
+    </tr>
+    <tr>
+        <th><?php echo __('Captured'); ?></th>
+        <td class="captured"><?php echo $this->getCaptured(); ?></td>
+    </tr>
+    <tr>
+        <th><?php echo __('Refunded'); ?></th>
+        <td class="refunded"><?php echo $this->getRefunded(); ?></td>
+    </tr>
+    <?php if ($this->getPaymentId()): ?>
+    <tr>
+        <th><?php echo __('Payment'); ?></th>
+        <td class="payment">
+            <a href="https://dashboard.stripe.com/<?php echo $this->getMode(); ?>payments/<?php echo $this->getPaymentId(); ?>" target="_blank" rel="noopener noreferrer">View in Stripe</a>
+        </td>
+    </tr>
+    <?php endif; ?>
+    <?php if ($this->getCustomerId()): ?>
+    <tr>
+        <th><?php echo __('Customer'); ?></th>
+        <td class="customer">
+            <a href="https://dashboard.stripe.com/<?php echo $this->getMode(); ?>customers/<?php echo $this->getCustomerId(); ?>" target="_blank" rel="noopener noreferrer">View in Stripe</a>
+        </td>
+    </tr>
+    <?php endif; ?>
+
+    <?php endwhile; ?>
+
+    </tbody>
+</table>
+<?php elseif ($this->getPaymentId()): ?>
+<table class="admin__table-secondary order-information-table stripe payment-info">
+    <tbody>
+    <?php if ($this->getPaymentId()): ?>
+    <tr>
+        <th><?php echo __('Payment'); ?></th>
+        <td class="payment">
+            <a href="https://dashboard.stripe.com/<?php echo $this->getMode(); ?>payments/<?php echo $this->getPaymentId(); ?>" target="_blank" rel="noopener noreferrer">View in Stripe</a>
+        </td>
+    </tr>
+    <?php endif; ?>
+    <?php if ($this->getCustomerId()): ?>
+    <tr>
+        <th><?php echo __('Customer'); ?></th>
+        <td class="customer">
+            <a href="https://dashboard.stripe.com/<?php echo $this->getMode(); ?>customers/<?php echo $this->getCustomerId(); ?>" target="_blank" rel="noopener noreferrer">View in Stripe</a>
+        </td>
+    </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
+<?php elseif ($this->getSubscription()): ?>
+<table class="admin__table-secondary order-information-table stripe payment-info">
+    <tbody>
+    <?php if ($this->getSubscription()): ?>
+    <tr>
+        <th><?php echo __('Subscription'); ?></th>
+        <td class="payment">
+            <a href="https://dashboard.stripe.com/<?php echo $this->getMode(); ?>subscriptions/<?php echo $this->getSubscription()->id; ?>" target="_blank" rel="noopener noreferrer">View in Stripe</a>
+        </td>
+    </tr>
+    <?php endif; ?>
+    <?php if ($this->getSubscription()->customer): ?>
+    <tr>
+        <th><?php echo __('Customer'); ?></th>
+        <td class="customer">
+            <a href="https://dashboard.stripe.com/<?php echo $this->getMode(); ?>customers/<?php echo $this->getSubscription()->customer; ?>" target="_blank" rel="noopener noreferrer">View in Stripe</a>
+        </td>
+    </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
+<?php elseif ($this->isStripeMethod()): ?>
+    <br>
+    <center><p><?php echo __("The payment is pending."); ?></p></center>
+<?php endif; ?>
+
+<?php
+// This info comes from non-card based payment methods
+$_specificInfo = $block->getSpecificInformation();
+?>
+<?php if (count($_specificInfo) > 0): ?>
+    <table class="data-table admin__table-secondary">
+        <?php foreach ($_specificInfo as $_label => $_value):?>
+            <tr>
+                <th><?php echo __($block->escapeHtml($_label))?></th>
+                <td><?php echo nl2br(implode("\n", $block->getValueAsArray($_value, true)))?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>

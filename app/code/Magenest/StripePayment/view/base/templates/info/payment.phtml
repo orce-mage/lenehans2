@@ -1,0 +1,14 @@
+<?php
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+$dataDisplay = $block->getDataDisplay();
+
+?>
+<dl class="payment-info">
+    <?php foreach ($dataDisplay as $data){ ?>
+        <dt class="title"><?=$data['label']?:""?></dt>
+        <p class="value"><?=$data['value']?:""?></p>
+    <?php } ?>
+</dl>

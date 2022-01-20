@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <link src="StripeIntegration_Payments::js/stripe_payments.js" />
+    <css src="StripeIntegration_Payments::css/stripe_payments.css"/>
+  </head>
+  <body>
+    <!-- Order success page -->
+    <referenceContainer name="order.success.additional.info">
+        <block class="StripeIntegration\Payments\Block\Success"
+          name="custom_info.order.success"
+          template="StripeIntegration_Payments::order/success.phtml"
+          after="-">
+        </block>
+   </referenceContainer>
+  </body>
+</page>
+

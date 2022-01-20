@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <methods>
+        <method name="stripe_payments">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_invoice">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_bancontact">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_giropay">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_ideal">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_sepa">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_sepa_credit">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_sofort">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_multibanco">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_eps">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_p24">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_alipay">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_wechat">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_klarna">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_paypal">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="stripe_payments_checkout">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+    </methods>
+</payment>

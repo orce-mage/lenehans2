@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <exclude>
+        <item type="file">StripeIntegration_Payments::js/stripe_payments_express.js</item>
+        <item type="file">StripeIntegration_Payments::js/stripe_payments.js</item>
+        <item type="file">StripeIntegration_Payments/js/stripe_payments_express.js</item>
+        <item type="file">StripeIntegration_Payments/js/stripe_payments.js</item>
+        <item type="directory">StripeIntegration_Payments::js</item>
+    </exclude>
+</view>

@@ -1,0 +1,61 @@
+
+/* Stripe Elements */
+#card-details-label {
+    display: block;
+}
+#stripe-payments-card-number {
+    width: 15em;
+    display: inline-block;
+}
+.admin__payment-methods #stripe-payments-card-number {
+    width: 224px;
+}
+.stripe-payments-brand {
+    opacity: 0.5;
+    height: 24px;
+    width: 32px;
+    display: inline-block;
+    font-size: 20px;
+    margin-left: -49px;
+    position: relative;
+    top: -12px;
+}
+#stripe-payments-card-expiry {
+    width: 7em;
+    display: inline-block;
+}
+#stripe-payments-card-cvc {
+    width: 6em;
+    display: inline-block;
+}
+.stripe-elements-field {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 5px 14px;
+    border-style: none;
+    background-color: #fefefe;
+    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #fefefe;
+    border-radius: 4px;
+}
+li.stripe-payments-elements.no-wrap {
+    white-space: nowrap;
+}
+.pci-dss-info-block {
+    margin: 10px 15px -16px 25px;
+    width: 240px;
+    font-size: smaller;
+    opacity: 0.7;
+}
+#pci-svg {
+    position: relative;
+    left: -25px;
+    top: 5px;
+    opacity: 0.7;
+    fill: green;
+}
+.pci-dss-info-text {
+    display: inline-block;
+    position: relative;
+    top: -20px;
+}

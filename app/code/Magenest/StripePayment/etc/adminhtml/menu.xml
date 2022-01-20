@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Magenest_StripePayment::stripe" title="Stripe Payment"
+             module="Magenest_StripePayment" sortOrder="30"
+             dependsOnModule="Magenest_StripePayment"
+             resource="Magenest_StripePayment::stripe" />
+        <add id="Magenest_StripePayment::settings"
+             title="Settings" module="Magenest_StripePayment"
+             sortOrder="20" parent="Magenest_StripePayment::stripe"
+             action="adminhtml/system_config/edit/section/payment/stripe"
+             resource="Magenest_StripePayment::settings" />
+    </menu>
+</config>

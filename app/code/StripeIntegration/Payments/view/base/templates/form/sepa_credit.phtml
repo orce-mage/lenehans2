@@ -1,0 +1,48 @@
+<?php
+$code = \StripeIntegration\Payments\Model\Method\SepaCredit::METHOD_CODE;
+$isOptional = $block->isBankAccountOptional();
+$isRequired = $block->isBankAccountRequired();
+
+if ($isRequired)
+    $required = "_required";
+else
+    $required = "";
+
+$iban = $block->getInfoData('sender_iban');
+$name = $block->getInfoData('sender_name');
+?>
+
+<fieldset id="payment_form_<?php echo $code; ?>" class="stripe-payments standard-form admin__fieldset indent-target items payment-method <?php echo $code; ?>" style="display: none">
+    <div class="fieldset indent">
+        <div class="control payment-method-note">
+            <?php echo __('A payment for this order can be made through a SEPA bank transfer. You will receive the details of our bank account as soon as the order is placed. The payment can be made in a single transfer, or in multiple transfers. You will receive an email confirmation for every payment that we receive. Bank transfers take on average 1-2 business days to reach us.'); ?>
+        </div>
+        <?php if ($isOptional || $isRequired): ?>
+            <div class="field <?php echo $required; ?>">
+                <label class="label" for="<?php echo $code; ?>_sender_name">
+                    <span><?php echo __('Customer Account Holder Name'); ?></span>
+                </label>
+                <div class="control">
+                    <input type="text" id="<?php echo $code; ?>_sender_name"
+                        name="payment[bic]"
+                        title="<?php echo __('Customer Account Holder Name'); ?>" class="text"
+                        value="<?php echo $name; ?>" />
+                </div>
+            </div>
+            <div class="field <?php echo $required; ?>">
+                <label class="label" for="<?php echo $code; ?>_sender_iban">
+                    <span><?php echo __('Customer IBAN'); ?></span>
+                </label>
+                <div class="control">
+                    <input type="text" id="<?php echo $code; ?>_sender_iban"
+                        name="payment[sender_iban]"
+                        title="<?php echo __('IBAN'); ?>" class="text"
+                        value="<?php echo $iban; ?>" />
+                </div>
+            </div>
+            <div class="payment-method-note subnote">
+                * <?php echo __('The provided bank account details will be used for refunds if one is requested by the customer at a later time. You can alternatively enter the bank account manually when creating a Credit Memo'); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</fieldset>

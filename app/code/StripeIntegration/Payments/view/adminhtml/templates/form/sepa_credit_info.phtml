@@ -1,0 +1,20 @@
+<?php
+$specificInfo = $block->getSpecificInformation();
+$paymentTitle = $block->getMethod()->getConfigData('title', $block->getInfo()->getOrder()->getStoreId());
+?>
+<p><?= $block->escapeHtml($paymentTitle) ?></p>
+
+<p><?php echo __("The customer needs to pay <b>%1</b> to the following bank account:", $block->getFormattedDueAmount()); ?>
+
+<table class="data-table admin__table-secondary">
+<?php foreach ($specificInfo as $label => $value) : ?>
+    <tr>
+        <th><?= $block->escapeHtml($label) ?>:</th>
+        <td>
+            <?= nl2br($value) ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+
+<?= $block->getChildHtml() ?>

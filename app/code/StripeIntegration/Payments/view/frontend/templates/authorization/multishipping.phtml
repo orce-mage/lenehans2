@@ -1,0 +1,85 @@
+<div class="multishipping-authorization">
+
+<?php
+
+if (empty($block->orders)): ?>
+
+<div class="message-notice notice message">
+  <p>Your session has expired!</p>
+</div>
+
+<?php else: ?>
+
+<div class="block">
+    <div class="block-title">Customer authentication is required by your bank for this payment.</div>
+
+    <div class="block-content">
+        <?php foreach ($block->orders as $order): ?>
+            <p><b>Amount for Order #<?php echo $order->getIncrementId(); ?></b>: <?php echo $block->getFormattedAmountFor($order); ?></p>
+        <?php endforeach; ?>
+
+        <div class="authentication message">
+        <div class="spinner">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+          <p>Please wait while the authentication dialog is loading. If the dialog does not open, please <a href="javascript:stripe.processNextAuthentication(onAuthenticationComplete);">click here</a>.</p>
+        </div>
+    </div>
+</div>
+
+<?php endif; ?>
+
+<div class="actions-toolbar">
+  <div class="primary">
+    <a href="<?php echo $block->getUrl('/'); ?>" class="action back">
+      &laquo; <span>Back to main website</span>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<form method="post" action="<?php echo $block->getConfirmationUrl(); ?>" id="confirm-payments"></form>
+
+<script type="text/javascript">
+require(['domReady', 'jquery'], function(onDomReady, $)
+{
+    var hasErrors = <?php echo $block->hasErrors(); ?>;
+
+    window.onAuthenticationComplete = function(err)
+    {
+        $('body').trigger('processStop');
+
+        if (err)
+        {
+            alert(err);
+            stripe.processNextAuthentication(onAuthenticationComplete);
+            return;
+        }
+
+        $('body').trigger('processStart');
+        $("#confirm-payments").submit();
+    };
+
+    var beginAuthentication = function(err)
+    {
+        if (err)
+        {
+            alert(err);
+            return;
+        }
+
+        <?php foreach ($block->paymentIntentClientSecrets as $paymentIntentClientSecret): ?>
+        stripe.paymentIntents.push("<?php echo $paymentIntentClientSecret; ?>");
+        <?php endforeach; ?>
+
+        // Wait 1s for Stripe.js to initialize
+        setTimeout(function(){
+            $('body').trigger('processStart');
+            stripe.processNextAuthentication(onAuthenticationComplete);
+        }, 1000);
+    };
+
+    initStripe(<?php echo $block->config->getStripeParams(); ?>, beginAuthentication);
+})
+</script>

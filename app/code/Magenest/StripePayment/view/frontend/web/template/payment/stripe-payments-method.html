@@ -1,0 +1,95 @@
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice" data-bind="css: 'stripe-payment'">
+        <input type="radio"
+               name="payment[method]"
+               class="radio stripe-radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+        <label data-bind="attr: {'for': getCode()}" class="label stripe-label">
+            <!-- ko foreach: {data: getCcAvailableTypesValues(), as: 'item'} -->
+            <!--ko if: $parent.getIcons(item.value) -->
+            <img data-bind="attr: {
+                        'src': $parent.getIcons(item.value).url,
+                        'alt': item.type,
+                        'width': $parent.getIcons(item.value).width,
+                        'height': $parent.getIcons(item.value).height
+                        }">
+            <!--/ko-->
+            <!--/ko-->
+            <span class="stripe-span" data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <!-- ko if: (saveCardConfig && isLogged && hasCard) -->
+        <select name="payment[credit_card_name]" class="select"
+                data-bind="attr: {id: getCode() + '-card-id', 'data-container': getCode() + '-card-id'},
+                           options: customerCard,
+                           optionsText: function(item) {
+                               return 'xxxxxxxxxxxx'+item.last4 + ' (' + item.brand + ')'
+                           },
+                           optionsValue: function(item) {return item.card_id},
+                           optionsCaption: 'Select card',
+                           value: cardId
+                           ">
+        </select>
+        <!-- /ko -->
+
+        <div class="field" data-bind="attr: {id: getCode() + '-form-div'}, fadeVisible: showPaymentField()">
+            <hr>
+            <form class="form" data-bind="attr: {'id': getCode() + '-form'}">
+                <!-- ko template: 'Magenest_StripePayment/payment/cc-form' --><!-- /ko -->
+            </form>
+        </div>
+
+        <p data-bind="html: getInstructions()"></p>
+
+        <div class="checkout-savecart-block">
+            <div data-role="checkout-savecart">
+                <div class="checkout-savecart" data-bind="visible: (saveCardConfig && isLogged && !isSelectCard())">
+                    <div class="checkout-savecart">
+                        <input type="checkbox" class="checkbox" data-bind="checked: saveCardOption"
+                               id="magenest_stripe_savecart" name="payment[save]" value="1">
+                        <label for="magenest_stripe_savecart">
+                            <span><!-- ko text: $t('Save your creditcard ?')--><!-- /ko --></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        attr: {title: $t('Place Order')},
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: $t('Place Order')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

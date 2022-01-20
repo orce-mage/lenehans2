@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <magenest_stripe>
+                <test>0</test>
+                <api>v3</api>
+                <active>0</active>
+                <save>0</save>
+                <title>Stripe Card</title>
+                <country_specified>US</country_specified>
+                <display_payment_button>1</display_payment_button>
+                <three_d_secure>0</three_d_secure>
+                <force_d_secure>0</force_d_secure>
+                <order_status>processing</order_status>
+                <payment_action>authorize_capture</payment_action>
+                <active_moto>0</active_moto>
+                <email_customer>0</email_customer>
+                <cctypes>AE,VI,MC,DI,JCB</cctypes>
+                <useccv>1</useccv>
+                <allowspecific>0</allowspecific>
+                <https_check>0</https_check>
+                <model>Magenest\StripePayment\Model\StripePaymentMethod</model>
+            </magenest_stripe>
+
+            <magenest_stripe_iframe>
+                <active>0</active>
+                <title>Stripe iFrame</title>
+                <allow_bitcoin>0</allow_bitcoin>
+                <payment_action>authorize_capture</payment_action>
+                <allow_alipay>0</allow_alipay>
+                <collect_billing>0</collect_billing>
+                <collect_shipping>0</collect_shipping>
+                <order_status>processing</order_status>
+                <collect_zip>1</collect_zip>
+                <display_name>Demo Site</display_name>
+                <button_label>Pay now</button_label>
+                <allow_remember>0</allow_remember>
+                <locale>auto</locale>
+                <model>Magenest\StripePayment\Model\StripePaymentIframe</model>
+            </magenest_stripe_iframe>
+
+            <magenest_stripe_applepay>
+                <active>0</active>
+                <title>Apple Pay, Google Pay, Microsoft Pay</title>
+                <active_on_product_details>1</active_on_product_details>
+                <active_on_shopping_cart>1</active_on_shopping_cart>
+                <active_on_checkout>1</active_on_checkout>
+                <payment_action>authorize_capture</payment_action>
+                <replace_placeorder>0</replace_placeorder>
+                <paybutton_label>Total Amount</paybutton_label>
+                <paybutton_type>default</paybutton_type>
+                <paybutton_theme>dark</paybutton_theme>
+                <order_status>processing</order_status>
+                <model>Magenest\StripePayment\Model\ApplePay</model>
+            </magenest_stripe_applepay>
+
+            <magenest_stripe_giropay>
+                <active>0</active>
+                <title>Stripe Giropay</title>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <model>Magenest\StripePayment\Model\GiroPay</model>
+            </magenest_stripe_giropay>
+
+            <magenest_stripe_alipay>
+                <active>0</active>
+                <title>Stripe Alipay</title>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <model>Magenest\StripePayment\Model\Alipay</model>
+            </magenest_stripe_alipay>
+
+            <magenest_stripe_sofort>
+                <active>0</active>
+                <title>Stripe SOFORT</title>
+                <payment_action>authorize_capture</payment_action>
+                <allow_select_bank_country>1</allow_select_bank_country>
+                <allow_select_language>0</allow_select_language>
+                <default_bank_country>AT</default_bank_country>
+                <default_language>en</default_language>
+                <model>Magenest\StripePayment\Model\Sofort</model>
+            </magenest_stripe_sofort>
+
+            <magenest_stripe_ideal>
+                <active>0</active>
+                <title>Stripe iDEAL</title>
+                <payment_action>authorize_capture</payment_action>
+                <use_element>1</use_element>
+                <allow_select_bank>1</allow_select_bank>
+                <model>Magenest\StripePayment\Model\Ideal</model>
+            </magenest_stripe_ideal>
+
+            <magenest_stripe_bancontact>
+                <active>0</active>
+                <title>Stripe Bancontact</title>
+                <payment_action>authorize_capture</payment_action>
+                <allow_select_language>0</allow_select_language>
+                <default_language>en</default_language>
+                <model>Magenest\StripePayment\Model\Bancontact</model>
+            </magenest_stripe_bancontact>
+
+            <magenest_stripe_p24>
+                <active>0</active>
+                <title>Stripe P24</title>
+                <payment_action>authorize_capture</payment_action>
+                <model>Magenest\StripePayment\Model\Przelewy</model>
+            </magenest_stripe_p24>
+
+            <magenest_stripe_eps>
+                <active>0</active>
+                <title>Stripe EPS</title>
+                <payment_action>authorize_capture</payment_action>
+                <model>Magenest\StripePayment\Model\Eps</model>
+            </magenest_stripe_eps>
+
+            <magenest_stripe_multibanco>
+                <active>0</active>
+                <title>Stripe Multibanco</title>
+                <payment_action>authorize_capture</payment_action>
+                <model>Magenest\StripePayment\Model\Multibanco</model>
+            </magenest_stripe_multibanco>
+
+            <magenest_stripe_wechatpay>
+                <active>0</active>
+                <title>Stripe WeChat Pay</title>
+                <payment_action>authorize</payment_action>
+                <order_status>pending</order_status>
+                <model>Magenest\StripePayment\Model\WeChatPay</model>
+            </magenest_stripe_wechatpay>
+
+            <magenest_stripe_paymentintents>
+                <active>0</active>
+                <title>Stripe Payment Intents</title>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <cctypes>AE,VI,MC,DI,JCB</cctypes>
+                <model>Magenest\StripePayment\Model\PaymentIntents</model>
+                <allowspecific>0</allowspecific>
+            </magenest_stripe_paymentintents>
+
+            <magenest_stripe_sepa>
+                <active>0</active>
+                <title>Stripe SEPA Direct Debit</title>
+                <payment_action>authorize_capture</payment_action>
+                <instructions>By providing your IBAN and confirming this payment, you are authorizing YOUR COMPANY NAME and Stripe, our payment service provider, to send instructions to your bank to debit your account and your bank to debit your account in accordance with those instructions. You are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.</instructions>
+                <model>Magenest\StripePayment\Model\Sepa</model>
+            </magenest_stripe_sepa>
+
+            <magenest_stripe_checkout>
+                <active>0</active>
+                <title>Stripe Checkout</title>
+                <payment_action>authorize_capture</payment_action>
+                <allowspecific>0</allowspecific>
+                <model>Magenest\StripePayment\Model\StripeCheckout</model>
+                <checkout_title>Order Total</checkout_title>
+                <checkout_submit_type>pay</checkout_submit_type>
+            </magenest_stripe_checkout>
+
+            <magenest_stripe_intents>
+                <active>0</active>
+                <title>Stripe Payment Intents 2.0</title>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <cctypes>AE,VI,MC,DI,JCB</cctypes>
+                <model>Magenest\StripePayment\Model\Intents</model>
+                <allowspecific>0</allowspecific>
+            </magenest_stripe_intents>
+        </payment>
+    </default>
+</config>

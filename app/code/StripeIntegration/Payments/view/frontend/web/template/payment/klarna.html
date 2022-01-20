@@ -1,0 +1,63 @@
+<!-- ko ifnot: showKlarnaSection -->
+    <!-- ko foreach: elems() -->
+        <!-- ko if: $parent.isPaymentOption($data) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}, attr: { id: 'stripe_' + code }, if: showKlarnaSection">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="
+        attr: { 'id': getCode() },
+        value: getCode(),
+        checked: isChecked,
+        click: selectPaymentMethod,
+        visible: isRadioButtonVisible()
+      "/>
+        <label class="label" data-bind="attr: {'for': getCode()}">
+            <span class="stripe-icon-container" data-bind="css: { right: iconsRight }, if: hasIcons">
+              <img class="stripe-icon" data-bind="attr:{src: getIcon()}">
+            </span>
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="klarna-loader" data-bind="blockLoader: isLoading">
+            <div class="klarna-error-container" data-bind="if: errorMessage">
+                <p class="message message-error error" data-bind="if: errorMessage">
+                  <!-- ko i18n: errorMessage --><!-- /ko -->
+                </p>
+            </div>
+            <p class="payment-method-note" data-bind="if: isLoading">
+                <!-- ko text: $t('Loading payment options...') --><!-- /ko -->
+            </p>
+            <div class="payment-method-messages">
+                <!-- ko foreach: getRegion('messages') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        css: {disabled: isPlaceOrderDisabled},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: $t('Place Order')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

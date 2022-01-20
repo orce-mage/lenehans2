@@ -6,7 +6,8 @@
             "store_id": true
         },
         "index": {
-            "AMASTY_AMLOCATOR_LOCATION_IDX_LOCATION_ID_PRD_ID_STORE_ID": true
+            "AMASTY_AMLOCATOR_LOCATION_IDX_LOCATION_ID_PRD_ID_STORE_ID": true,
+            "AMASTY_AMLOCATOR_LOCATION_INDEX_LOCATION_ID_PRODUCT_ID_STORE_ID": true
         }
     }
 }

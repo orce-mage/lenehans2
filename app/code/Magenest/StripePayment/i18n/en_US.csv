@@ -1,0 +1,200 @@
+"Stripe Charge ID","Stripe Charge ID"
+"Error: Stripe PHP Library was not installed correctly","Error: Stripe PHP Library was not installed correctly"
+"Command to install: composer require stripe/stripe-php","Command to install: composer require stripe/stripe-php"
+"Stripe PHP Library %1 was installed","Stripe PHP Library %1 was installed"
+"Use webhooks to receive events from your account","Use webhooks to receive events from your account"
+"URL to be called","URL to be called"
+Example,Example
+"Domain name is require","Domain name is require"
+"Register api success","Register api success"
+"Error: Test secret key is missing","Error: Test secret key is missing"
+"Error: Live secret key is missing","Error: Live secret key is missing"
+"Select card","Select card"
+"Invalid Form Key","Invalid Form Key"
+"Invalid form key","Invalid form key"
+"Source error","Source error"
+"Stripe PHP library was not installed","Stripe PHP library was not installed"
+"Payment source validation fail","Payment source validation fail"
+"Payment failed","Payment failed"
+"Cannot find the order","Cannot find the order"
+"Payment exception","Payment exception"
+"Order processing error","Order processing error"
+"Payment is authorizing for complete order","Payment is authorizing for complete order"
+"Payment success","Payment success"
+"Cannot get cart info","Cannot get cart info"
+"3d secure validate fail","3d secure validate fail"
+"3d secure authenticate fail","3d secure authenticate fail"
+"Cannot get order info","Cannot get order info"
+"Cannot process payment","Cannot process payment"
+"Stripe Stored Cards","Stripe Stored Cards"
+Error,Error
+"Invalid request","Invalid request"
+"Delete card success","Delete card success"
+"Cannot send request to Stripe servers.","Cannot send request to Stripe servers."
+"Magento Order #","Magento Order #"
+"Payment data response error","Payment data response error"
+"Charge doesn't exist. Please try again later.","Charge doesn't exist. Please try again later."
+"Transaction doesn't existed.","Transaction doesn't existed."
+"Payment is pending. Cannot capture this payment","Payment is pending. Cannot capture this payment"
+"Stripe.js v3 & Elements (Recommended Integration)","Stripe.js v3 & Elements (Recommended Integration)"
+"Stripe.js v2","Stripe.js v2"
+"Directly to the API (Not Recommend)","Directly to the API (Not Recommend)"
+Dark,Dark
+Light,Light
+"Light Outline","Light Outline"
+Default,Default
+Donate,Donate
+Buy,Buy
+Auto,Auto
+English,English
+German,German
+French,French
+Dutch,Dutch
+"Please Select","Please Select"
+"Affected by Settings of Stripe Payment","Affected by Settings of Stripe Payment"
+"Simplified Chinese","Simplified Chinese"
+Danish,Danish
+Finnish,Finnish
+Italian,Italian
+Japanese,Japanese
+Norwegian,Norwegian
+Spanish,Spanish
+Swedish,Swedish
+"Authorize Only","Authorize Only"
+"Authorize and Capture","Authorize and Capture"
+Yes,Yes
+No,No
+Austria,Austria
+Belgium,Belgium
+Germany,Germany
+Italy,Italy
+Netherlands,Netherlands
+Spain,Spain
+Polish,Polish
+"3D Secure is recommended","3D Secure is recommended"
+"3D Secure is optional","3D Secure is optional"
+Active,Active
+Inactive,Inactive
+"Operation not allowed","Operation not allowed"
+"Something went wrong. Please try again later.","Something went wrong. Please try again later."
+"Cannot process 3D Secure","Cannot process 3D Secure"
+"You can't create an invoice without products.","You can't create an invoice without products."
+"Stripe Refund Reason","Stripe Refund Reason"
+"No Reason","No Reason"
+Duplicate,Duplicate
+Fraudulent,Fraudulent
+"Requested By Customer","Requested By Customer"
+"Choose Card","Choose Card"
+"Credit Card Number","Credit Card Number"
+"Expiration Date","Expiration Date"
+"Card Verification Number","Card Verification Number"
+"Submit a ticket","Submit a ticket"
+support@magenest.com,support@magenest.com
+"Add a credit card","Add a credit card"
+"Credit or debit card","Credit or debit card"
+Submit,Submit
+"You don't store any card yet.","You don't store any card yet."
+"Credit Card","Credit Card"
+Expires,Expires
+"Created At","Created At"
+Action,Action
+"Are you sure you want to cancel this card?","Are you sure you want to cancel this card?"
+Delete,Delete
+"Credit Card Information","Credit Card Information"
+"Please check your card number.","Please check your card number."
+"Please check your card exp","Please check your card exp"
+"What is this?","What is this?"
+"Please check your card ccv","Please check your card ccv"
+"Place Order","Place Order"
+"Select language","Select language"
+Continue,Continue
+"iDEAL Bank","iDEAL Bank"
+"Bank Country ","Bank Country "
+"Please enter a valid credit card type number.","Please enter a valid credit card type number."
+"Please enter a valid credit card number.","Please enter a valid credit card number."
+"Incorrect credit card expiration month.","Incorrect credit card expiration month."
+"Please enter a valid credit card verification number.","Please enter a valid credit card verification number."
+"Incorrect credit card expiration year.","Incorrect credit card expiration year."
+"Shopping Cart","Shopping Cart"
+"You don't need to select a shipping method.","You don't need to select a shipping method."
+Shipping,Shipping
+"Error: HTTPS is not enabled","Error: HTTPS is not enabled"
+"No API key provided.","No API key provided."
+"Stripe js load error","Stripe js load error"
+"Error: Current payment method is unavailable","Error: Current payment method is unavailable"
+"Something went wrong, please try again.","Something went wrong, please try again."
+"No Data Secret provided.","No Data Secret provided."
+"Stripe Payment Gateways","Stripe Payment Gateways"
+"Requirement Settings","Requirement Settings"
+"API Check","API Check"
+"Sandbox Mode Enabled","Sandbox Mode Enabled"
+"Test Publishable Key","Test Publishable Key"
+"Test Secret Key","Test Secret Key"
+"Live Publishable Key","Live Publishable Key"
+"Live Secret Key","Live Secret Key"
+"Webhooks config","Webhooks config"
+"Webhooks Signing secret","Webhooks Signing secret"
+"Statement Descriptor","Statement Descriptor"
+"Email Customer","Email Customer"
+"HTTPS check","HTTPS check"
+"Stripe Payment","Stripe Payment"
+Enabled,Enabled
+Title,Title
+"Payment Action","Payment Action"
+"Select Stripe API Integration","Select Stripe API Integration"
+"Display payment button","Display payment button"
+"3d secure","3d secure"
+"Force 3d secure","Force 3d secure"
+"3D Secure verification applies when","3D Secure verification applies when"
+"Enable card saving","Enable card saving"
+"Enable MOTO","Enable MOTO"
+"New Order Status","New Order Status"
+"Allowed credit card types","Allowed credit card types"
+"Payment from Applicable Countries","Payment from Applicable Countries"
+"Payment from Specific Countries","Payment from Specific Countries"
+Instructions,Instructions
+"Sort Order","Sort Order"
+"Minimum Order Total","Minimum Order Total"
+"Maximum Order Total","Maximum Order Total"
+"Stripe Payment Intents (SCA Ready)","Stripe Payment Intents (SCA Ready)"
+"Display credit card types","Display credit card types"
+"Stripe Checkout Hosted on Stripe (SCA Ready)","Stripe Checkout Hosted on Stripe (SCA Ready)"
+"Collect Billing Address","Collect Billing Address"
+"Customize checkout page","Customize checkout page"
+"Checkout Title","Checkout Title"
+"Checkout Description","Checkout Description"
+"Checkout Image Url","Checkout Image Url"
+"Submit Button Type","Submit Button Type"
+"Stripe IFrame Checkout Form","Stripe IFrame Checkout Form"
+"Name of website displayed on Checkout","Name of website displayed on Checkout"
+"Panel label","Panel label"
+"Allow Stripe Checkout to collect customer's zip code","Allow Stripe Checkout to collect customer's zip code"
+"Enable Remember Me","Enable Remember Me"
+"Logo Image","Logo Image"
+Locale,Locale
+"Apple Pay, Google Pay, Microsoft Pay","Apple Pay, Google Pay, Microsoft Pay"
+"Display button on Product Details Page","Display button on Product Details Page"
+"Display button on Checkout Cart Page / Mini Cart","Display button on Checkout Cart Page / Mini Cart"
+"Active on Checkout Page as Payment Method","Active on Checkout Page as Payment Method"
+"Preload Stripe Payment Button","Preload Stripe Payment Button"
+"Button Type","Button Type"
+"Button Theme","Button Theme"
+Giropay,Giropay
+Alipay,Alipay
+SOFORT,SOFORT
+"Allow select bank country","Allow select bank country"
+"Default Bank Country","Default Bank Country"
+"Allow select language","Allow select language"
+"Default language","Default language"
+iDEAL,iDEAL
+"Use iDEAL Bank Element Interface","Use iDEAL Bank Element Interface"
+"Default Bank","Default Bank"
+Bancontact,Bancontact
+Przelewy24,Przelewy24
+EPS,EPS
+Multibanco,Multibanco
+"WeChat Pay","WeChat Pay"
+"SEPA Direct Debit","SEPA Direct Debit"
+"Payment display text","Payment display text"
+"Stripe Card Management","Stripe Card Management"
+"My Stripe Stored Card","My Stripe Stored Card"
