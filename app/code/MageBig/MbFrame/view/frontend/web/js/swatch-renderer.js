@@ -9,7 +9,8 @@ define([
 
         var create = targetModule.prototype._create,
             updatePrice = targetModule.prototype._UpdatePrice,
-            renderSwatchOptions = targetModule.prototype._RenderSwatchOptions;
+            renderSwatchOptions = targetModule.prototype._RenderSwatchOptions,
+            updateBaseImage = targetModule.prototype.updateBaseImage;
 
         targetModule.prototype._create = wrapper.wrap(create, function(original){
             var options = this.options,
@@ -185,8 +186,8 @@ define([
                     html += '<div class="' + optionClass + ' image" ' + attr +
                         ' style="width:' +
                         swatchImageWidth + 'px; height:' + swatchImageHeight + 'px">' +
-                        '<span class="img-lazy-wrap" style="padding-bottom: ' + percent + '%;">' +
-                        '<img class="media-lazy lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="' + swatchImageWidth + '" height="' + swatchImageHeight + '" data-src="' + value + '">' +
+                        '<span class="img-native-wrap" style="padding-bottom: ' + percent + '%;">' +
+                        '<img loading="lazy" class="img-fluid" alt="" width="' + swatchImageWidth + '" height="' + swatchImageHeight + '" src="' + value + '">' +
                         '</span>' +
                         '</div>';
                 } else if (type === 3) {
@@ -199,6 +200,51 @@ define([
             });
 
             return html;
+        });
+
+        /**
+         * Update [gallery-placeholder] or [product-image-photo]
+         * @param {Array} images
+         * @param {jQuery} context
+         * @param {Boolean} isInProductView
+         */
+        targetModule.prototype.updateBaseImage = wrapper.wrap(updateBaseImage, function (original, images, context, isInProductView) {
+            var justAnImage = images[0],
+                initialImages = this.options.mediaGalleryInitial,
+                imagesToUpdate,
+                gallery = context.find(this.options.mediaGallerySelector).data('gallery'),
+                isInitial;
+
+            if (isInProductView) {
+                if (_.isUndefined(gallery)) {
+                    context.find(this.options.mediaGallerySelector).on('gallery:loaded', function () {
+                        this.updateBaseImage(images, context, isInProductView);
+                    }.bind(this));
+
+                    return;
+                }
+
+                imagesToUpdate = images.length ? this._setImageType($.extend(true, [], images)) : [];
+                isInitial = _.isEqual(imagesToUpdate, initialImages);
+
+                if (this.options.gallerySwitchStrategy === 'prepend' && !isInitial) {
+                    imagesToUpdate = imagesToUpdate.concat(initialImages);
+                }
+
+                imagesToUpdate = this._setImageIndex(imagesToUpdate);
+
+                if (imagesToUpdate.length > 1) {
+                    context.find(this.options.mediaGallerySelector).addClass('imgs');
+                } else {
+                    context.find(this.options.mediaGallerySelector).removeClass('imgs');
+                }
+
+                gallery.updateData(imagesToUpdate);
+                this._addFotoramaVideoEvents(isInitial);
+
+            } else if (justAnImage && justAnImage.img) {
+                context.find('.product-image-photo').attr('src', justAnImage.img);
+            }
         });
 
         return targetModule;

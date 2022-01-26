@@ -33,6 +33,8 @@
             <ul>
                 <li>
                     <a href="<?= $block->getBaseUrl() ?>customer/account/"><i class="mbi mbi-clipboard-user"></i><span><?= __('My Account') ?></span></a></li>
+                <li>
+                    <a href="<?= $block->getBaseUrl() ?>sales/order/history/"><i class="mbi mbi-menu-square"></i><span><?= __('My Orders') ?></span></a></li>
                 <?php if ($wishlistHelper->isAllow()): ?>
                     <li>
                         <a href="<?= $block->getBaseUrl() ?>wishlist/"><i class="mbi mbi-heart"></i><span><?= __('My Wishlist') ?></span></a></li>

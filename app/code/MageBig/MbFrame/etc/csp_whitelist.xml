@@ -13,9 +13,11 @@
                 <value id="cloudflare" type="host">*.cloudflare.com</value>
 
                 <!--Google-->
-                <value id="google-analytics" type="host">www.google-analytics.com</value>
-                <value id="google-recaptcha" type="host">www.google.com</value>
-                <value id="google-gstatic" type="host">www.gstatic.com</value>
+                <value id="google-analytics" type="host">*.google-analytics.com</value>
+                <value id="google-recaptcha" type="host">*.google.com</value>
+                <value id="google-gstatic" type="host">*.gstatic.com</value>
+                <value id="google-adservices" type="host">*.googleadservices.com</value>
+                <value id="google-apis" type="host">*.googleapis.com</value>
 
                 <!--Functions-->
                 <value id="trustedshops" type="host">*.trustedshops.com</value>
@@ -24,6 +26,9 @@
                 <value id="addthis" type="host">*.addthis.com</value>
                 <value id="addthisedge" type="host">*.addthisedge.com</value>
                 <value id="moatads" type="host">*.moatads.com</value>
+
+                <value id="paypal" type="host">www.paypal.com</value>
+                <value id="paypalobjects" type="host">www.paypalobjects.com</value>
             </values>
         </policy>
         <policy id="frame-src">
@@ -70,6 +75,7 @@
 
                 <!--Inline Images-->
                 <value id="data" type="host">data:</value>
+                <value id="data-b" type="host">blob:</value>
             </values>
         </policy>
         <policy id="connect-src">

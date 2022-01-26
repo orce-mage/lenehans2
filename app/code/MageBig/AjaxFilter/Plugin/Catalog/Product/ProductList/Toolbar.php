@@ -7,16 +7,14 @@ namespace MageBig\AjaxFilter\Plugin\Catalog\Product\ProductList;
 
 use MageBig\AjaxFilter\Model\Layer\Filter\Rating;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Registry;
 use Magento\Store\Model\ScopeInterface;
 
 class Toolbar
 {
-    private \Magento\Catalog\Model\Product\ProductList\Toolbar $toolbarModel;
-    private RequestInterface $request;
-    private Registry $coreRegistry;
-    private ScopeConfigInterface $scopeConfig;
+    private $toolbarModel;
+    private $coreRegistry;
+    private $scopeConfig;
 
     public function __construct(
         \Magento\Catalog\Model\Product\ProductList\Toolbar $toolbarModel,

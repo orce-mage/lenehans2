@@ -72,10 +72,7 @@ class Image extends \MageBig\Shopbybrand\Block\Adminhtml\Shopbybrand\AbstractHtm
                     'cms/wysiwyg_images/index',
                     ['target_element_id' => $elementId]
                 )
-                    . "', null, null,'" . $this->escapeQuote(
-                        __('Upload Images'),
-                        true
-                    ) . "');",
+                    . "', null, null,'" . $this->escapeHtmlAttr(__('Upload Images')) . "');",
                 'disabled' => $element->getDisabled()
             ]
         );

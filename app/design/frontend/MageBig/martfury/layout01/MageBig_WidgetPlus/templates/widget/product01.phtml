@@ -21,7 +21,7 @@ $carousel   = $block->getData('slider');
 $collection = $block->getLoadedProductCollection();
 $count      = 0;
 if ($collection) {
-    $count = $collection->count(); 
+    $count = $collection->count();
 }
 $showBlock = 1;
 if ($count < 1 && ($type == 'related' || $type = 'crosssell' || $type = 'upsell')) {

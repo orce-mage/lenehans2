@@ -95,6 +95,7 @@ define([
                  * @param {jQuery.Event} event
                  */
                 events['click ' + ':button.cart-btn-qty'] = function (event) {
+                    event.preventDefault();
                     event.stopPropagation();
                     self._increaseQty($(event.currentTarget));
                 };
@@ -103,6 +104,7 @@ define([
                  * @param {jQuery.Event} event
                  */
                 events['click ' + this.options.item.button] = function (event) {
+                    event.preventDefault();
                     event.stopPropagation();
                     self._updateItemQty($(event.currentTarget));
                 };

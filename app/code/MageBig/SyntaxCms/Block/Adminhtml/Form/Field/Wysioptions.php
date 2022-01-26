@@ -24,16 +24,14 @@ class Wysioptions extends AbstractFieldArray
             'name',
             [
                 'label' => __('Name'),
-                'type' => 'text',
-                //'renderer'  => $this->getCountryRenderer(),
+                'type' => 'text'
             ]
         );
         $this->addColumn(
             'value',
             [
                 'label' => __('Value'),
-                'type' => 'text',
-                //'renderer'  => $this->getCcTypesRenderer(),
+                'type' => 'text'
             ]
         );
         $this->_addAfter = false;
@@ -69,5 +67,7 @@ class Wysioptions extends AbstractFieldArray
      */
     protected function _prepareArrayRow(DataObject $row)
     {
+        // Fix delete action in Magento 2.4
+        $row['_id'] = 'op-'.rand();
     }
 }

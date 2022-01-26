@@ -36,6 +36,11 @@ if ($imgCount > 1) {
     $imgs = 'imgs';
     $pl = '<span class="thumb-pl"></span>';
 }
+
+$thumbWidth = $block->getImageAttribute('product_page_image_small', 'width');
+$thumbHeight = $block->getImageAttribute('product_page_image_small', 'height');
+$thumbW = 65;
+$thumbH = $thumbW * $thumbHeight / $thumbWidth;
 ?>
 <div class="gallery-placeholder _block-content-loading <?= $thumbType ?> <?= $imgs ?>"
      data-gallery-role="gallery-placeholder">
@@ -44,6 +49,8 @@ if ($imgCount > 1) {
             alt="main product photo"
             class="img-fluid"
             src="<?= /* @noEscape */ $mainImageData ?>"
+            width="<?= $block->getImageAttribute('product_page_image_medium', 'width') ?>"
+            height="<?= $block->getImageAttribute('product_page_image_medium', 'height') ?>"
         />
         <?= $pl ?>
     </div>
@@ -66,9 +73,8 @@ if ($imgCount > 1) {
                     "allowfullscreen": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/allowfullscreen') ?>,
                     "showCaption": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_caption') ?>,
                     "width": "<?= $block->getImageAttribute('product_page_image_medium', 'width') ?>",
-                    "thumbwidth": "<?= $block->getImageAttribute('product_page_image_small', 'width') ?>",
-                    "thumbheight": <?= $block->getImageAttribute('product_page_image_small', 'height')
-                        ?: $block->getImageAttribute('product_page_image_small', 'width'); ?>,
+                    "thumbwidth": <?= $thumbW ?>,
+                    "thumbheight": <?= $thumbH ?>,
                     "height": <?= $block->getImageAttribute('product_page_image_medium', 'height')
                         ?: $block->getImageAttribute('product_page_image_medium', 'width'); ?>,
                     "transitionduration": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_duration') ?>,
@@ -95,4 +101,3 @@ if ($imgCount > 1) {
         }
     }
 </script>
-

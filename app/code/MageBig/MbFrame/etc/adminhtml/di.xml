@@ -14,4 +14,10 @@
 	<type name="Magento\Ui\Component\Wysiwyg\ConfigInterface">
 		<plugin disabled="false" name="MageBig_MbFrame_Wysiwyg_ConfigInterface" sortOrder="10" type="MageBig\MbFrame\Framework\Cms\Plugin\Wysiwyg"/>
 	</type>
+    <type name="Magento\Cms\Helper\Wysiwyg\Images">
+        <plugin name="magebig_cms_image"
+                type="MageBig\MbFrame\Framework\Cms\Plugin\Images"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>

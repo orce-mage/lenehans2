@@ -60,6 +60,11 @@
                 type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
     </type>
 
+    <type name="Amasty\XmlSitemap\Model\Sitemap">
+        <plugin name="amasty_sitemap_model_sitemap_magefan_blog"
+                type="Magefan\Blog\Plugin\Magento\Sitemap\SitemapPlugin" sortOrder="10"/>
+    </type>
+
     <type name="Magento\AdminGws\Model\Models">
         <plugin name="magefan_blog_plugin_admingws_model_models_plugin" type="\Magefan\Blog\Plugin\Magento\AdminGws\Model\ModelsPlugin" sortOrder="10"/>
     </type>
@@ -92,7 +97,7 @@
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/list.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                     <item name="list" xsi:type="array">
                         <item name="label" xsi:type="string">Modern (List)</item>
@@ -104,7 +109,7 @@
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/view.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                     <item name="modern" xsi:type="array">
                         <item name="label" xsi:type="string">Modern</item>
@@ -128,14 +133,14 @@
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::post/view/relatedposts.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                 </item>
                 <item name="blog_post_sidebar_posts" xsi:type="array">
                     <item name="default" xsi:type="array">
                         <item name="label" xsi:type="string">Use System Settings</item>
                         <item name="value" xsi:type="string"></item>
-                        <item name="template" xsi:type="string">Magefan_Blog::sidebar/recent.phtml</item>
+                        <item name="template" xsi:type="string"></item>
                     </item>
                 </item>
             </argument>
@@ -166,5 +171,31 @@
             <argument name="templateType" xsi:type="string">blog_post_sidebar_posts</argument>
         </arguments>
     </virtualType>
+    
+    <type name="Magento\PageBuilder\Model\UpgradableEntitiesPool">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="magefan_blog_post" xsi:type="array">
+                    <item name="identifier" xsi:type="string">post_id</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="content" xsi:type="boolean">true</item>
+                        <item name="short_content" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+                <item name="magefan_blog_category" xsi:type="array">
+                    <item name="identifier" xsi:type="string">category_id</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="content" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+                <item name="magefan_blog_tag" xsi:type="array">
+                    <item name="identifier" xsi:type="string">tag_id</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="content" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 
 </config>

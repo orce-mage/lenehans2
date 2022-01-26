@@ -56,8 +56,8 @@ class Price extends \Magento\CatalogSearch\Model\Layer\Filter\Price
 
     protected $helper;
 
-    protected RequestInterface $request;
-    private Registry $coreRegistry;
+    protected $request;
+    private $coreRegistry;
 
     public function __construct(
         ItemFactory $filterItemFactory,

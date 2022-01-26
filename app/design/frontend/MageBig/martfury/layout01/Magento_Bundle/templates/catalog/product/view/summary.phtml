@@ -4,17 +4,12 @@
  * See LICENSE.txt for license details.
  */
 
-// @codingStandardsIgnoreFile
-
-?>
-
-<?php
-    $_product = $block->getProduct();
+// phpcs:disable PHPCompatibility.Miscellaneous.RemovedAlternativePHPTags.MaybeASPOpenTagFound
+$_product = $block->getProduct();
 ?>
 <?php if ($_product->isSaleable() && $block->hasOptions()): ?>
 <div id="bundleSummary"
-     class="block-bundle-summary"
-     data-mage-init='{"sticky":{"container": ".product-add-form"}}'>
+     class="block-bundle-summary">
     <div class="content">
         <div class="bundle-info">
             <div class="product-details">
@@ -23,20 +18,4 @@
         </div>
     </div>
 </div>
-<script type="text/x-magento-init">
-    {
-        ".product-add-form": {
-            "slide": {
-                "slideSpeed": 1500,
-                "slideSelector": "#bundle-slide",
-                "slideBackSelector": ".action.customization.back",
-                "bundleProductSelector": "#bundleProduct",
-                "bundleOptionsContainer": ".product-add-form"
-                <?php if ($block->isStartCustomization()): ?>
-                ,"autostart": true
-                <?php endif;?>
-            }
-        }
-    }
-</script>
 <?php endif; ?>

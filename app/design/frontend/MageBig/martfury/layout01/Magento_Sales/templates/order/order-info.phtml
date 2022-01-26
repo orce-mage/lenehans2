@@ -1,0 +1,25 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /** @var $block \Magento\Sales\Block\Order\Info */ ?>
+<?php
+$orderId = __('Order # %1', $block->getOrder()->getRealOrderId());
+?>
+<div class="order-info-wrap">
+    <div class="real-order-id">
+        <div class="order-id"><?= $orderId ?></div>
+        <div class="order-date">
+            <?= $block->escapeHtml(
+                __(
+                    '<span class="label">Order Date:</span> %1',
+                    '<span>' . $block->formatDate($block->getOrder()->getCreatedAt(), \IntlDateFormatter::LONG) . '</span>'
+                ),
+                ['span']
+            )?>
+        </div>
+    </div>
+</div>
+<div class="order-status-inner"><span class="order-status <?= $block->getOrder()->getState() ?>"><?= $block->escapeHtml($block->getOrder()->getStatusLabel()) ?></span></div>

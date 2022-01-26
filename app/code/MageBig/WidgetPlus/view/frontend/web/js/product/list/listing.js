@@ -123,24 +123,31 @@ define([
         sliderInit: function (index) {
             var count = this.filteredRows._latestValue.length;
 
-            if (index === count -1) {
+            if (index === count - 1) {
                 setTimeout(function () {
                     // $("form[data-role='tocart-form']").catalogAddToCart();
                     var rtl = false;
                     if ($('body').hasClass('layout-rtl') || $('body').hasClass('rtl')) {
-                        rtl =  true;
+                        rtl = true;
                     }
                     $('.recently-viewed').owlWidget({
-                        "autoplay"          : false,
-                        "autoplayTimeout"   : 5000,
-                        "items"             : 5,
-                        "margin"            : 30,
-                        "rewind"            : true,
-                        "nav"               : true,
-                        "navText"           : ['<i class="mbi mbi-chevron-left"></i>', '<i class="mbi mbi-chevron-right"></i>'],
-                        "dots"              : false,
-                        "responsive"        : {"0":{"items":2},"576":{"items":2},"768":{"items":3},"992":{"items":4},"1200":{"items":5},"1600":{"items":6}},
-                        "rtl"               : rtl
+                        "autoplay": false,
+                        "autoplayTimeout": 5000,
+                        "items": 5,
+                        "margin": 30,
+                        "rewind": true,
+                        "nav": true,
+                        "navText": ['<i class="mbi mbi-chevron-left"></i>', '<i class="mbi mbi-chevron-right"></i>'],
+                        "dots": false,
+                        "responsive": {
+                            "0": {"items": 2},
+                            "576": {"items": 2},
+                            "768": {"items": 3},
+                            "992": {"items": 4},
+                            "1200": {"items": 5},
+                            "1600": {"items": 6}
+                        },
+                        "rtl": rtl
                     });
                     if ($(window).width() > 767) {
                         $('.mb-tooltip').tooltip({
@@ -168,18 +175,18 @@ define([
             }
         },
 
-        getPercentDiscount: function(row){
+        getPercentDiscount: function (row) {
             var regular_price = row['price_info']['regular_price'],
                 special_price = row['price_info']['final_price'];
 
-            if(regular_price > special_price){
+            if (regular_price > special_price) {
                 var discount;
-                discount = parseInt(Math.round((special_price/regular_price)*100) - 100);
+                discount = 100 - parseInt(Math.round((special_price / regular_price) * 100));
 
-                return discount > 0 ? discount + '%' : false;
+                return discount > 0 ? '-' + discount + '%' : false;
             }
 
             return false;
-        },
+        }
     });
 });

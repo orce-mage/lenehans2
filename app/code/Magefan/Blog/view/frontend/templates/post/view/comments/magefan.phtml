@@ -77,9 +77,9 @@
                     <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
 
                     <?php if ($canPost) { ?>
-                        <button type="submit" class="action primary"><?= $block->escapeHtml(__('Submit')) ?></button>
+                        <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
                     <?php } else { ?>
-                        <button type="button" class="action primary"
+                        <button type="button"
                                 onclick="window.location='<?= $block->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
                             <?= $block->escapeHtml(__('Sign In')) ?>
                         </button>

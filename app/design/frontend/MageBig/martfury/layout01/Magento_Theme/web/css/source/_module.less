@@ -189,35 +189,6 @@
         margin-top: auto;
     }
 
-    .footer {
-        &.content {
-            border-top: 1px solid @border-color__base;
-            margin-top: 25px;
-            padding-bottom: 25px;
-            padding-top: 25px;
-
-            ul {
-                &:extend(.abs-reset-list all);
-            }
-
-            .links {
-                > li {
-                    margin: 0 0 8px;
-                }
-            }
-
-            .switcher-store {
-                margin: 0 0 30px;
-            }
-        }
-
-        .copyright,
-        .bugs {
-            display: block;
-            margin: 20px 0 0;
-        }
-    }
-
     //
     //  Widgets
     //  ---------------------------------------------
@@ -301,31 +272,6 @@
                 float: right;
                 margin-top: @indent__base;
             }
-        }
-    }
-
-    .footer {
-        &.content {
-            .block {
-                float: right;
-            }
-
-            .links {
-                display: inline-block;
-                margin-bottom: 20px;
-                padding: 0 50px 0 0;
-                vertical-align: top;
-            }
-
-            .switcher.store {
-                display: inline-block;
-                padding-right: 50px;
-                vertical-align: top;
-            }
-        }
-
-        .copyright {
-            &:extend(.abs-add-clearfix all);
         }
     }
 }

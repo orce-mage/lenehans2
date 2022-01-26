@@ -23,6 +23,12 @@
                         padding-top: 15px;
                     }
                 }
+                &:last-child {
+                    th,
+                    td {
+                        padding-bottom: 15px;
+                    }
+                }
             }
             th,
             td {
@@ -51,7 +57,6 @@
                             padding-top: 15px;
                         }
                         > td:last-child {
-                            border-bottom: @table__border-width @table__border-style @table__border-color;
                             padding-bottom: 15px;
                         }
                         > td.col.qty {
@@ -74,6 +79,11 @@
                 }
             }
             .table:not(.totals):not(.table-comparison) {
+                tbody {
+                    tr td {
+                        padding: 3px 10px;
+                    }
+                }
                 tfoot {
                     display: block;
                     tr {
@@ -82,7 +92,7 @@
                         &:first-child {
                             th,
                             td {
-                                padding-top: @indent__base;
+                                padding-top: 15px;
                             }
                         }
                     }
@@ -108,23 +118,45 @@
                 }
             }
         }
-        .block-addresses-list .table-wrapper {
-            border-top: none;
-        }
     }
 
     @media (min-width: 768px) {
         .account {
             .table>tbody>tr>th, .table>tbody>tr>td {
                 border-bottom: 1px solid #ccc;
-                padding: 10px 5px;
+                padding: 10px;
                 width: auto;
             }
-            .table>thead>tr>th {
-                padding: 10px 5px;
+        }
+    }
+
+    @media print {
+        .container {
+            max-width: 100% !important;
+        }
+        .col-12 {
+            width: 100% !important;
+        }
+        .table-wrapper table {
+            width: 100%;
+
+            td, th {
+                width: auto;
             }
-            .table>tbody>tr>th {
-                background: #f1f1f1;
+            .col {
+                width: auto !important;
+            }
+
+            table-layout: fixed;
+
+            & > tfoot > tr:first-child {
+                border-top: none;
+            }
+        }
+        .block-order-details-view {
+            .box {
+                width: 25% !important;
+                float: left !important;
             }
         }
     }

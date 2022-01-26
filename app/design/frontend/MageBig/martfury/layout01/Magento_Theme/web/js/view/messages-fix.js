@@ -9,17 +9,19 @@ define([
         var initialize = targetModule.prototype.initialize;
 
         targetModule.prototype.initialize = wrapper.wrap(initialize, function(original){
-            $(window).on('beforeunload', function(){
-                $.cookieStorage.set('mage-messages', '');
-            });
-
             var mess = $('.page.messages').find('> .messages .message');
             if (mess.length) {
                 mess.append('<span class="close-message"><i class="mbi mbi-cross"></i></span>');
                 this.showHideMess();
             }
 
-            return original();
+            original();
+
+            //Fix for magento 2.3
+            $.mage.cookies.set('mage-messages', '', {
+                samesite: 'strict',
+                domain: ''
+            });
         });
 
         targetModule.prototype.showHideMess = function () {
@@ -29,11 +31,17 @@ define([
             }, 100);
             setTimeout(function () {
                 $elm.removeClass('active');
-                $.cookieStorage.set('mage-messages', '');
+                $.mage.cookies.set('mage-messages', '', {
+                    samesite: 'strict',
+                    domain: ''
+                });
             }, 15000);
             $('.close-message').on('click', function () {
                 $elm.removeClass('active');
-                $.cookieStorage.set('mage-messages', '');
+                $.mage.cookies.set('mage-messages', '', {
+                    samesite: 'strict',
+                    domain: ''
+                });
             });
         };
 

@@ -11,4 +11,28 @@
             <argument name="reader" xsi:type="object">MageBig\MbFrame\Framework\App\Config\Initial\Reader\Proxy</argument>
         </arguments>
     </type>
+
+    <virtualType name="DefaultWYSIWYGValidator">
+        <arguments>
+            <argument name="allowedTags" xsi:type="array">
+                <item name="iframe" xsi:type="string">iframe</item>
+            </argument>
+            <argument name="allowedAttributes" xsi:type="array">
+                <item name="data-src" xsi:type="string">data-src</item>
+            </argument>
+            <argument name="attributesAllowedByTags" xsi:type="array">
+                <item name="a" xsi:type="array">
+                    <item name="rel" xsi:type="string">rel</item>
+                </item>
+                <item name="img" xsi:type="array">
+                    <item name="loading" xsi:type="string">loading</item>
+                    <item name="srcset" xsi:type="string">srcset</item>
+                    <item name="data-object-fit" xsi:type="string">data-object-fit</item>
+                </item>
+                <item name="iframe" xsi:type="array">
+                    <item name="loading" xsi:type="string">loading</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

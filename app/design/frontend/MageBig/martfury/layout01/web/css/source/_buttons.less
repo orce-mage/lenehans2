@@ -38,26 +38,6 @@
             display: none;
         }
     }
-    .loading-mask {
-        background: rgba(255, 255, 255, 0.9);
-        z-index: 999999;
-        .loader {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -15px;
-            margin-left: -15px;
-            width: 30px;
-            height: 30px;
-            border: 2px dashed @main_color;
-            border-radius: 100%;
-            animation: loadingD 1.5s .3s cubic-bezier(.17,.37,.43,.67) infinite;
-            content: '';
-            img {
-                display: none !important;
-            }
-        }
-    }
     .widget-product .owl-carousel:after {
         position: absolute;
         top: 50%;
@@ -108,17 +88,6 @@
             &:extend(.widget-product .owl-carousel:after);
         }
     }
-    @keyframes loadingD {
-        0% {
-            transform: rotate(0deg);
-        }
-        50% {
-            transform: rotate(180deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
     a.action.continue, a.action.primary {
         .lib-link-as-button();
         vertical-align: top;
@@ -130,7 +99,6 @@
         background-color: #ffffff;
         border-radius: 3px;
         padding: 5px 15px;
-        .font-size(14);
         &:hover {
             color: @main_color;
         }
@@ -177,7 +145,7 @@
             }
         }
     }
-    .action.back, .action.print, .action.track, .action.edit, .action.view, .action.change-password, .action.order {
+    .action.back, .action.print, .action.track, .action.edit, .action.view, .action.change-password {
         color: @main2_color;
         .font-size(15);
         &:hover {

@@ -19,8 +19,14 @@ define([
             var self = this,
                 elm = this.element,
                 id = '#'+elm.attr('id'),
-                owl = elm.find('.owl-carousel'),
+                owl,
                 autoplay = this.options.autoplay;
+
+            if (elm.find('[data-content-type=html]').first().length) {
+                elm.find('[data-content-type=html]').children().unwrap();
+            }
+
+            owl = elm.find('.owl-carousel');
 
             if (elm.hasClass('lazyload') && autoplay) {
                 this.options.autoplay = false;

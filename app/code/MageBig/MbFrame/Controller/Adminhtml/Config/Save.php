@@ -211,11 +211,11 @@ class Save extends \Magento\Config\Controller\Adminhtml\System\AbstractConfig
         $pathToCustomFile = $pathDir . '_custom.less';
 
         if ($isStatic) {
+            $modeDir = 2775;
+            $modeFile = 2664;
+        } else {
             $modeDir = 0775;
             $modeFile = 0664;
-        } else {
-            $modeDir = 0755;
-            $modeFile = 0644;
         }
 
         if (!is_dir($pathDir)) {

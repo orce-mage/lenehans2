@@ -3,11 +3,13 @@
  * Copyright © magebig.com - All rights reserved.
  * See LICENSE.txt for license details.
  */
+
 namespace MageBig\SyntaxCms\Block\Adminhtml;
 
 /**
  * Form fieldset renderer
  */
+
 use MageBig\SyntaxCms\Plugin\Cms\Model\Wysiwyg\Config;
 use Magento\Backend\Block\Template;
 use Magento\Store\Model\ScopeInterface;
@@ -29,7 +31,7 @@ class Show extends Template
      */
     protected function _prepareLayout()
     {
-        if ($this->isEnabled() && $this->getRequest()->getModuleName() != 'nwdthemes_revslider') {
+        if ($this->isEnabled()) {
             $this->pageConfig->addPageAsset('MageBig_SyntaxCms::cm/lib/codemirror.css');
             $this->pageConfig->addPageAsset('MageBig_SyntaxCms::cm/addon/hint/show-hint.css');
             $this->pageConfig->addPageAsset('MageBig_SyntaxCms::cm/addon/dialog/dialog.css');
@@ -55,15 +57,47 @@ class Show extends Template
     }
 
     /**
+     * @return string
+     */
+    public function getElementsData()
+    {
+        $value = $this->_scopeConfig->getValue(
+            Config::BGELEMENTS,
+            ScopeInterface::SCOPE_STORE
+        );
+
+        return $value;
+    }
+
+    /**
      * @return bool
      */
     public function isEnabled()
     {
-        return $this->_scopeConfig->isSetFlag(
+        $action = $this->getRequest()->getFullActionName();
+        $enable = $this->_scopeConfig->isSetFlag(
             Config::ENABLED,
             ScopeInterface::SCOPE_STORE
         );
+        $enablePage = $this->_scopeConfig->getValue(
+            Config::ENABLE_ON_PAGE,
+            ScopeInterface::SCOPE_STORE
+        );
+        $isActive = false;
+
+        if ($enablePage) {
+            $pages = explode(',', $enablePage);
+            foreach ($pages as $page) {
+                if (strpos($action, $page) === 0) {
+                    $isActive = true;
+                    break;
+                }
+            }
+        }
+
+        return $enable && $isActive;
     }
+
     public function getJsonOption()
     {
         $option = [];
@@ -83,7 +117,7 @@ class Show extends Template
      */
     protected function _toHtml()
     {
-        if ($this->isEnabled() && $this->getRequest()->getModuleName() != 'nwdthemes_revslider') {
+        if ($this->isEnabled()) {
             return parent::_toHtml();
         }
         return '';

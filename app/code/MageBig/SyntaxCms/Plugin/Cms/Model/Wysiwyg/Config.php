@@ -16,6 +16,7 @@ use Magento\Store\Model\ScopeInterface;
 class Config
 {
     const ENABLED = 'magebig_syntaxcms/general/enabled';
+    const ENABLE_ON_PAGE = 'magebig_syntaxcms/general/enable_on_page';
     const SETTINGS = 'magebig_syntaxcms/general/wysi_options';
     const BGELEMENTS = 'magebig_syntaxcms/general/bgelements';
     /**

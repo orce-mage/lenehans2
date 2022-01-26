@@ -49,32 +49,8 @@ if ($googleFont) {
         });
     </script>
 <?php elseif ($googleFont && $font_default == 'Work Sans'): ?>
-    <link rel="preload" as="style" href="<?= $block->getViewFileUrl('css/localfont.css') ?>">
-    <script>
-        require(['Magento_Theme/js/webfontloader'], function(WebFont) {
-            WebFont.load({
-                custom: {
-                    families: ["Work Sans", "mbicon"],
-                    urls: ["<?= $block->getViewFileUrl('css/localfont.css') ?>"]
-                },
-                classes: true,
-                timeout: 2000
-            });
-        });
-    </script>
+    <link rel="preload stylesheet" as="style" href="<?= $block->getViewFileUrl('css/localfont.css') ?>">
 <?php else: ?>
     <?php $iconFont = $block->getViewFileUrl('css/iconfont.css'); ?>
-    <link rel="preload" as="style" href="<?= $iconFont ?>">
-    <script>
-        require(['Magento_Theme/js/webfontloader'], function(WebFont) {
-            WebFont.load({
-                custom: {
-                    families: ["mbicon"],
-                    urls: ["<?= $iconFont ?>"]
-                },
-                classes: true,
-                timeout: 2000
-            });
-        });
-    </script>
+    <link rel="preload stylesheet" as="style" href="<?= $iconFont ?>">
 <?php endif ?>

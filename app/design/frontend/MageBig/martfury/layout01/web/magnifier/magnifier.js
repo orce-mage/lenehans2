@@ -533,25 +533,29 @@
 
             showWrapper = false;
             $(thumbObj).on('load', function () {
-                data[idx].status = 1;
+                if (data[idx] !== undefined) {
+                    data[idx].status = 1;
 
-                $(largeObj).on('load', function () {
+                    $(largeObj).on('load', function () {
 
-                    if (largeObj.width > largeWrapper.width() || largeObj.height > largeWrapper.height()) {
-                        showWrapper = true;
-                        bindEvents(eventType, thumb);
-                        data[idx].status = 2;
-                        if (largeObj.width > largeObj.height) {
-                            data[idx].zoom = largeObj.width / largeWrapper.width();
-                        } else {
-                            data[idx].zoom = largeObj.height / largeWrapper.height();
+                        if (largeObj.width > largeWrapper.width() || largeObj.height > largeWrapper.height()) {
+                            if (data[idx] !== undefined) {
+                                showWrapper = true;
+                                bindEvents(eventType, thumb);
+                                data[idx].status = 2;
+                                if (largeObj.width > largeObj.height) {
+                                    data[idx].zoom = largeObj.width / largeWrapper.width();
+                                } else {
+                                    data[idx].zoom = largeObj.height / largeWrapper.height();
+                                }
+                                setThumbData(thumb, data[idx]);
+                                updateLensOnLoad(idx, thumb, largeObj, largeWrapper);
+                            }
                         }
-                        setThumbData(thumb, data[idx]);
-                        updateLensOnLoad(idx, thumb, largeObj, largeWrapper);
-                    }
-                });
+                    });
 
-                largeObj.src = data[idx].largeUrl;
+                    largeObj.src = data[idx].largeUrl;
+                }
             });
 
             thumbObj.src = thumb.src;

@@ -42,9 +42,10 @@
         padding-left: 25px;
         margin: 0;
     }
-    button, html input[type=button], input[type=reset], input[type=submit] {
+    button, input[type=button], input[type=reset], input[type=submit] {
         -webkit-appearance: button;
         cursor: pointer;
+        touch-action: manipulation;
     }
     button[disabled] {
         cursor: default;
@@ -87,6 +88,34 @@
     .modal-popup .modal-footer {
         text-align: right;
     }
+    [data-role="checkout-messages"] {
+        position: fixed;
+        top: 72px;
+        right: -340px;
+        z-index: 10000;
+        width: 340px;
+
+        .message {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            margin-bottom: 10px;
+            transition: visibility 450ms ease, opacity 450ms ease, transform 450ms ease;
+            transition-delay: 1s;
+            position: relative;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-350px);
+        }
+        &[style="display: none;"] {
+            display: block !important;
+            .message {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateX(0);
+            }
+        }
+    }
     .page.messages {
         position: fixed;
         top: 72px;
@@ -108,7 +137,7 @@
         }
         .messages .message {
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
             margin-bottom: 10px;
             opacity: 0;
@@ -308,6 +337,10 @@
                         width: 18px;
                         height: 12px;
                         margin-top: -6px;
+
+                        img {
+                            vertical-align: top;
+                        }
                     }
                 }
             }
@@ -1739,11 +1772,13 @@
             bottom: 0;
             text-align: center;
         }
-        .img-lazy-wrap {
+        .img-lazy-wrap, .img-native-wrap {
             padding-bottom: 0 !important;
             height: 100%;
             z-index: 2;
             img {
+                height: 100%;
+                width: 100%;
                 object-fit: cover;
                 font-family: "object-fit: cover";
             }
@@ -1785,7 +1820,7 @@
     }
 
     // Footer
-    .footer-content {
+    .footer.content {
         border-top: 1px solid #e1e1e1;
         padding-top: 50px;
     }
@@ -1949,6 +1984,13 @@
                     text-decoration: underline;
                 }
             }
+        }
+    }
+
+    .view-more-detail {
+        text-align: right;
+        a {
+            color: @main2_color;
         }
     }
 
@@ -2704,7 +2746,13 @@
             word-wrap: break-word;
         }
     }
+    .google-map {
+        iframe {
+            width: 100%;
+        }
+    }
     #contact-form {
+        padding: 30px 0;
         .contact-title {
             margin-bottom: 30px;
         }
@@ -2993,6 +3041,7 @@
         .block-content {
             position: relative;
             height: 100%;
+            z-index: 2;
             .block-center {
                 left: 26%;
             }
@@ -3249,7 +3298,7 @@
     .bn-item-promo {
         position: relative;
         margin-bottom: 30px;
-        > .img-lazy-wrap {
+        > .img-lazy-wrap, > .img-native-wrap {
             position: absolute;
             width: 100%;
         }
@@ -3270,7 +3319,7 @@
     .bn-item-promo2 {
         position: relative;
         margin-bottom: 30px;
-        > .img-lazy-wrap {
+        > .img-lazy-wrap, > .img-native-wrap {
             position: absolute;
             width: 100%;
         }
@@ -3665,6 +3714,26 @@
         }
     }
 
+    .img-native-wrap {
+        display: block;
+        height: 0;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        img {
+            bottom: 0;
+            display: block;
+            height: auto;
+            left: 0;
+            margin: auto;
+            max-width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+        }
+    }
+
     // Blur Lazyload
     .img-lazy-wrap {
         position: relative;
@@ -3733,29 +3802,29 @@
             width: 100%;
             height: 100%;
         }
-        .img-lazy-wrap {
+        .img-lazy-wrap, .img-native-wrap {
             padding-bottom: 0 !important;
             height: 100%;
-            img {
-                object-fit: cover;
-                font-family: "object-fit: cover";
-                height: 100% !important;
-                width: 100% !important;
-            }
+        }
+        img {
+            object-fit: cover;
+            font-family: "object-fit: cover";
+            height: 100% !important;
+            width: 100% !important;
         }
     }
     .object-center {
-        > .img-lazy-wrap img {
+        img {
             object-position: center center !important;
         }
     }
     .object-right {
-        > .img-lazy-wrap img {
+        img {
             object-position: center right !important;
         }
     }
     .object-left {
-        > .img-lazy-wrap img {
+        img {
             object-position: center left !important;
         }
     }

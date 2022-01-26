@@ -22,7 +22,7 @@ $apiLive = $block->getCurrentStatusApiLive();;
         </div>
         <div>
             <h2>ApplePay Live Mode: </h2>
-            <span class="span-live <?= $apiLive?"api-success":"api-fail" ?>"><?= $apiLive? $apiTest['domain_name'] : "Domain Inactive" ?></span>
+            <span class="span-live <?= $apiLive?"api-success":"api-fail" ?>"><?= $apiLive? $apiLive['domain_name'] : "Domain Inactive" ?></span>
         </div>
     </div>
     <div id="result_response"></div>

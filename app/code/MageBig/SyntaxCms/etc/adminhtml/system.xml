@@ -12,6 +12,12 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <config_path>magebig_syntaxcms/general/enabled</config_path>
                 </field>
+                <field id="enable_on_page" translate="label" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Enable on Pages</label>
+                    <comment>Ex: cms_page,cms_block,catalog_category,catalog_product</comment>
+                    <config_path>magebig_syntaxcms/general/enable_on_page</config_path>
+                </field>
                 <field id="line_wrapping" translate="label" type="select" showInDefault="1" showInWebsite="1"
                        showInStore="1" canRestore="1">
                     <label>Use LineWrapping</label>
@@ -51,7 +57,7 @@
                         <field id="*/*/enabled">1</field>
                     </depends>
                 </field>
-                <field id="frontend" translate="label" type="select" showInDefault="1" showInWebsite="1"
+                <!--<field id="frontend" translate="label" type="select" showInDefault="1" showInWebsite="1"
                        showInStore="1" canRestore="1">
                     <label>Add for Frontend</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -59,7 +65,7 @@
                     <depends>
                         <field id="*/*/enabled">1</field>
                     </depends>
-                </field>
+                </field>-->
             </group>
         </section>
     </system>

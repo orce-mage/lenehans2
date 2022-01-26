@@ -36,8 +36,8 @@
                 <div class="post-item">
                     <?php if ($featuredImage = $_post->getFeaturedImage()) : ?>
                         <a class="img-featured" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
-                            <span class="img-lazy-wrap" style="padding-top: <?= $padTop ?>%">
-                                <img class="media-lazy lazyload" data-src="<?= $imageHelper->init($_post->getFeaturedImg())->resize($width, $height) ?>" src="#" width="<?= $width ?>" height="<?= $height ?>" alt="<?php echo $_postName ?>" />
+                            <span class="img-native-wrap" style="padding-top: <?= $padTop ?>%">
+                                <img class="img-fluid" src="<?= $imageHelper->init($_post->getFeaturedImg())->resize($width, $height) ?>" width="<?= $width ?>" height="<?= $height ?>" alt="<?php echo $_postName ?>" />
                             </span>
                         </a>
                     <?php endif;?>

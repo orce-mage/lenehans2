@@ -28,12 +28,11 @@
     z-index: 9 !important;
 }
 
-.snm-cm-wrap.ui-resizable:after {
-    content: 'Press F11 to Full Screen Editing';
+.snm-cm-wrap > .note {
     top: -20px;
     right: 0;
     position: absolute;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .snm-cm-wrap .CodeMirror-vscrollbar {
@@ -156,6 +155,10 @@
 
 .cm-invalidchar {
     color: #f00;
+}
+
+.mce-panel {
+    overflow: hidden;
 }
 
 .CodeMirror-foldmarker {

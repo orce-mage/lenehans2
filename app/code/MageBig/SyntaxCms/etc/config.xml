@@ -5,9 +5,10 @@
         <magebig_syntaxcms>
             <general>
                 <enabled>1</enabled>
+                <enable_on_page>cms_page,cms_block,catalog_category,catalog_product,adminhtml_email_template,mbframe_config,blog</enable_on_page>
                 <line_wrapping>1</line_wrapping>
                 <theme>darcula</theme>
-                <wysi_options>[{"name":"entity_encoding","value":"raw"},{"name":"forced_root_block","value":""},{"name":"allow_html_in_named_anchor","value":true},{"name":"extended_valid_elements","value":"div[*],span[*],i[*],script[*],a[*]"}]
+                <wysi_options>[{"name":"entity_encoding","value":"raw"},{"name":"forced_root_block","value":""},{"name":"allow_html_in_named_anchor","value":true},{"name":"extended_valid_elements","value":"div[*],span[*],i[*],script[*],a[*],img[*],iframe[*]"}]
                 </wysi_options>
                 <bgelements>[
                     {"selector":"div.admin__control-wysiwig > textarea","type":"magento","comment":"Wysiwig Editor"},

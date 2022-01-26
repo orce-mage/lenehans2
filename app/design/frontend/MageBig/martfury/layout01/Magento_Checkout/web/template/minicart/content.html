@@ -16,8 +16,7 @@
                     <span
                         class="qty empty"
                         text="getCartParam('summary_count')"
-                        data-bind="css: { empty: !!getCartParam('summary_count') == false },
-                       attr: { title: $t('Items in Cart') }, blockLoader: isLoading">
+                        data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
                     </span>
                 </strong>
             </div>
@@ -31,8 +30,8 @@
 
     <ifnot args="getCartParam('summary_count')">
         <div class="empty-cart">
-            <span class="img-lazy-wrap" style="padding-bottom: 53.76%">
-                <img class="media-lazy lazyload" data-bind="attr: { 'data-src': require.toUrl('images/empty-cart.svg') }" alt="empty cart"/>
+            <span class="img-native-wrap" style="padding-bottom: 53.76%">
+                <img loading="lazy" class="img-fluid" data-bind="attr: { 'src': require.toUrl('images/empty-cart.svg') }" alt="empty cart"/>
             </span>
             <div class="subtitle empty"
                  translate="'You have no items in your shopping cart.'"

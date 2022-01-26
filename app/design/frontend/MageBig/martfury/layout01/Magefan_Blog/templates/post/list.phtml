@@ -22,7 +22,7 @@ $_postCollection = $block->getPostCollection();
     <?php echo $block->getAdditionalHtml() ?>
     <div class="post-list-wrapper">
         <?php $iterator = 1; ?>
-        <div class="row">
+        <div class="row post-list">
             <?php foreach ($_postCollection as $_post): ?>
                 <?php echo $block->getPostHtml($_post) ?>
             <?php endforeach; ?>

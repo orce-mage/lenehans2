@@ -26,4 +26,16 @@ class Filetypes extends AbstractFieldArray
 		$this->_addAfter = false;
     }
 
+    /**
+     * Prepare existing row data object
+     *
+     * @param DataObject $row
+     * @return void
+     */
+    protected function _prepareArrayRow(DataObject $row)
+    {
+        // Fix delete action in Magento 2.4
+        $row['_id'] = 'file-'.rand();
+    }
+
 }

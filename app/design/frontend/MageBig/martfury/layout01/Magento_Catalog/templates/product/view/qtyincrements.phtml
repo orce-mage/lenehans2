@@ -5,6 +5,7 @@
             inrement = <?= $block->getProductQtyIncrements() ? $block->getProductQtyIncrements() : 1 ?>;
 
         $(".btn-qty").click(function (event) {
+            event.preventDefault();
             var $button = $(this),
                 $input = $button.closest('.control').find("input#qty"),
                 oldValue = parseFloat($input.val());

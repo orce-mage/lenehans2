@@ -6,15 +6,21 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <referenceContainer name="content">
-        <container name="order.status.container" htmlTag="div" htmlClass="order-status-wrap" before="-">
-            <block class="Magento\Sales\Block\Order\Info" name="order.status" template="Magento_Sales::order/order_status.phtml" />
-            <container name="order.actions.container" htmlTag="div" htmlClass="actions-toolbar order-actions-toolbar">
-                <block class="Magento\Sales\Block\Order\Info" name="order.date" template="Magento_Sales::order/order_date.phtml" />
-                <block class="Magento\Sales\Block\Order\Info\Buttons" as="buttons" name="sales.order.info.buttons" cacheable="false">
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My Orders</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <container name="order.status.container" htmlTag="div" htmlClass="order-status-wrap" before="-">
+                <block class="Magento\Sales\Block\Order\Info" name="order.status" template="Magento_Sales::order/order-info.phtml" />
+                <block class="Magento\Sales\Block\Order\Info\Buttons" as="buttons" name="sales.order.info.buttons" template="Magento_Sales::order/print.phtml" cacheable="false">
                     <block class="Magento\Sales\Block\Order\Info\Buttons\Rss" as="buttons.rss" name="sales.order.info.buttons.rss" cacheable="false"/>
                 </block>
+                <block class="Magento\Sales\Block\Order\Info\Buttons" name="sales.order.info.reorder" template="Magento_Sales::order/reorder.phtml" cacheable="false" after="sales.order.view" />
             </container>
-        </container>
-    </referenceContainer>
+        </referenceContainer>
+        <referenceContainer name="order.date" remove="true" />
+    </body>
 </page>

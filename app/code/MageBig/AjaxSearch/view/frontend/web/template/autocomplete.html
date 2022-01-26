@@ -20,10 +20,10 @@
                 <!-- /ko -->
                 <!-- ko if: result.product.data().length>1 -->
                     <!-- ko i18n: 'products'--><!-- /ko -->
+                    <a class="see-all" data-bind="attr: {href: result.product.url ? result.product.url : '#'}" href="#">
+                        <!-- ko i18n: 'View all' --><!-- /ko -->
+                    </a>
                 <!-- /ko -->
-                <a class="see-all" data-bind="attr: {href: result.product.url}">
-                    <!-- ko i18n: 'View all' --><!-- /ko -->
-                </a>
             </div>
             <ul id="product-search-list" role="listbox" data-bind="foreach: result.product.data">
                 <li>

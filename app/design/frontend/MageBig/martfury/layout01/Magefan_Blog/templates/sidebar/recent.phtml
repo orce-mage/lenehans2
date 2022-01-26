@@ -45,8 +45,8 @@
                         }
                         ?>
                         <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
-                            <span class="img-lazy-wrap" style="padding-top: <?= $padTop ?>%">
-                                <img class="media-lazy lazyload" data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" src="#" width="<?= $width ?>" height="<?= $height ?>" layout="responsive" data-src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
+                            <span class="img-native-wrap" style="padding-top: <?= $padTop ?>%">
+                                <img class="img-fluid" data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" width="<?= $width ?>" height="<?= $height ?>" src="<?= $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height); ?>"
                                  alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                             </span>
                         </a>

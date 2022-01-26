@@ -98,5 +98,7 @@ class Bgelements extends AbstractFieldArray
                 = 'selected="selected"';
         }
         $row->setData('option_extra_attrs', $options);
+        // Fix delete action in Magento 2.4
+        $row['_id'] = 'bg-'.rand();
     }
 }

@@ -47,7 +47,7 @@ class Plugin
             $params[$id] = [
                 'type'     => 'add',
                 'id'       => $id,
-                'title'    => $title . ' v3.1',
+                'title'    => $title . ' v3.3',
                 'module'   => 'MageBig_MbFrame',
                 'action'   => 'mbframe/config/edit/code/' . $code . '/section/mbconfig/theme_id/' . $this->getThemeId(),
                 'resource' => 'MageBig_MbFrame::themes_config',

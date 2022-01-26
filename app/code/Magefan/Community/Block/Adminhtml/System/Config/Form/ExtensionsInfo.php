@@ -97,10 +97,10 @@ class ExtensionsInfo extends Field
 
 
                 $html .= '<tr>';
-                $html .= '<td><a target="_blank" href="' . $this->escapeHtml($product->product_url) . '">' . $this->escapeHtml($product->product_name) . '</a></td>';
+                $html .= '<td><a target="_blank" href="' . $this->escapeHtml($product->product_url) . '?aff=8d5e957f297893487bd98fa830fa6413">' . $this->escapeHtml($product->product_name) . '</a></td>';
                 $html .= '<td>' . $this->escapeHtml($version) . '</td>';
-                $html .= '<td><a target="_blank" href="' . $this->escapeHtml($product->change_log_url) . '">' . $this->escapeHtml(__('Change Log')) . '</a></td>';
-                $html .= '<td><a target="_blank" href="' . $this->escapeHtml($product->documentation_url) . '">'. $this->escapeHtml(__('User Guide')). '</a></td>';
+                $html .= '<td><a target="_blank" href="' . $this->escapeHtml($product->change_log_url) . '?aff=8d5e957f297893487bd98fa830fa6413">' . $this->escapeHtml(__('Change Log')) . '</a></td>';
+                $html .= '<td><a target="_blank" href="' . $this->escapeHtml($product->documentation_url) . '?aff=8d5e957f297893487bd98fa830fa6413">'. $this->escapeHtml(__('User Guide')). '</a></td>';
                 $html .= '</tr>';
             }
 

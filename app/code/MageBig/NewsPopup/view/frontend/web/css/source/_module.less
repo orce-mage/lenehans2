@@ -11,6 +11,9 @@
             right: 12px;
             opacity: 1;
         }
+        .field-recaptcha {
+            margin-top: 10px;
+        }
     }
     .newsletter-content {
         padding: 15px;
@@ -62,6 +65,28 @@
         input {
             vertical-align: top;
             margin-top: 4px;
+        }
+    }
+
+    #newsletter-validate-detail .field-recaptcha {
+        margin-top: 10px;
+    }
+
+    @media (max-width: 767px) {
+        #magebig_newsletter:before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .newsletter-content .newsletter_text {
+            padding: 0;
+        }
+        .newsletter-content .newsletter_text .text_desc {
+            color: #000;
         }
     }
 }

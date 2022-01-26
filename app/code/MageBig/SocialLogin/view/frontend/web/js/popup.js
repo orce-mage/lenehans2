@@ -417,6 +417,7 @@ define([
                 } else {
                     // self.reloadCaptcha('login');
                     self.removeLoading(self.loginFormContent);
+                    self.reloadRecaptcha();
                 }
             }).fail(function () {
                 // self.reloadCaptcha('login');
@@ -425,6 +426,7 @@ define([
                     success: false
                 });
                 self.removeLoading(self.loginFormContent);
+                self.reloadRecaptcha();
             });
         },
 
@@ -452,6 +454,7 @@ define([
                 // self.reloadCaptcha('forgot');
                 self.addMsg(self.forgotFormContent, response);
                 self.removeLoading(self.forgotFormContent);
+                self.reloadRecaptcha();
             });
         },
 
@@ -522,6 +525,7 @@ define([
                     // self.reloadCaptcha('create');
                     self.addMsg(self.createFormContent, response);
                     self.removeLoading(self.createFormContent);
+                    self.reloadRecaptcha();
                 }
             });
         },
@@ -584,6 +588,18 @@ define([
             }
 
             currentMessage.append($('<div>' + message + '</div>'));
+        },
+
+        reloadRecaptcha: function () {
+            if (typeof grecaptcha !== 'undefined') {
+                var c = $('.g-recaptcha').length;
+                if (c) {
+                    for (var i = 0; i < c; i++)
+                        grecaptcha.reset(i);
+
+                    $('input[name="token"]').val('');
+                }
+            }
         }
     });
 

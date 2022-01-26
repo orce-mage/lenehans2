@@ -274,11 +274,11 @@ class Save extends \Magento\Backend\App\Action
         $pathToLessFile = $pathDir . '_' . $section . '.less';
 
         if ($isStatic) {
+            $modeDir = 2775;
+            $modeFile = 2664;
+        } else {
             $modeDir = 0775;
             $modeFile = 0664;
-        } else {
-            $modeDir = 0755;
-            $modeFile = 0644;
         }
 
         if (!is_dir($pathDir)) {

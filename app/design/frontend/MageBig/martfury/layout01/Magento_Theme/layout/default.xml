@@ -11,6 +11,7 @@
         <referenceBlock name="head.additional">
             <block class="Magento\Framework\View\Element\Template" name="head.additional.config" template="Magento_Theme::html/head_config.phtml" />
         </referenceBlock>
+        <referenceBlock name="skip_to_content.target" remove="true" />
         <move element="main_css_preloader" destination="root" before="-" />
         <referenceContainer name="header.panel">
             <block class="Magento\Framework\View\Element\Template" name="header.main.content" template="Magento_Theme::html/header/header-content.phtml">
@@ -51,15 +52,8 @@
             </block>
         </referenceBlock>
         <referenceContainer name="footer-container">
-            <container name="footer.top" label="Footer Top Full" htmlTag="div" htmlClass="footer-top" before="-">
-                <container name="footer.top.content" htmlTag="div" htmlClass="footer-top-content container" label="Footer Top Container" after="-" />
-            </container>
-            <container name="footer" label="Footer Content" htmlTag="div" htmlClass="footer-content">
-                <block class="Magento\Framework\View\Element\Html\Links" name="footer_links">
-                    <arguments>
-                        <argument name="css_class" xsi:type="string">footer links</argument>
-                    </arguments>
-                </block>
+            <container name="footer.top" label="Footer Top Full" htmlTag="div" htmlClass="footer-top" before="footer">
+                <container name="footer.top.content" htmlTag="div" htmlClass="footer-top-content container" label="Footer Top Container" before="-" />
             </container>
             <container name="footer.bottom" label="Footer Bottom Full" htmlTag="div" htmlClass="footer-bottom" after="-">
                 <container name="footer.bottom.content" htmlTag="div" htmlClass="footer-bottom-content container">
@@ -67,9 +61,8 @@
                 </container>
             </container>
         </referenceContainer>
-        <referenceBlock name="footer_links" display="false" />
+        <referenceBlock name="footer_links" remove="true" />
         <referenceBlock name="report.bugs" remove="true" />
-
         <move element="copyright" destination="footer.bottom.content" before="-" />
         <referenceContainer name="page.wrapper">
             <container name="gotop" after="footer-container">

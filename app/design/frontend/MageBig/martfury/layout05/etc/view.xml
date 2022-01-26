@@ -53,8 +53,8 @@
                 <height>120</height>
             </image>
             <image id="mini_cart_product_thumbnail" type="thumbnail">
-                <width>65</width>
-                <height>65</height>
+                <width>130</width>
+                <height>130</height>
             </image>
             <image id="new_products_content_widget_grid" type="small_image">
                 <width>270</width>
@@ -83,8 +83,8 @@
                 <frame>0</frame>
             </image>
             <image id="product_page_image_small" type="thumbnail">
-                <width>65</width>
-                <height>65</height>
+                <width>130</width>
+                <height>130</height>
             </image>
             <image id="product_swatch_image_large" type="image"/>
             <image id="product_swatch_image_medium" type="image">
@@ -106,8 +106,8 @@
                 <frame>0</frame>
             </image>
             <image id="product_page_more_views" type="thumbnail">
-                <width>65</width>
-                <height>65</height>
+                <width>130</width>
+                <height>130</height>
             </image>
             <image id="product_stock_alert_email_product_image" type="small_image">
                 <width>65</width>
@@ -118,8 +118,8 @@
                 <height>120</height>
             </image>
             <image id="product_thumbnail_image" type="thumbnail">
-                <width>65</width>
-                <height>65</height>
+                <width>130</width>
+                <height>130</height>
             </image>
             <image id="recently_compared_products_grid_content_widget" type="small_image">
                 <width>270</width>
@@ -174,8 +174,8 @@
                 <height>120</height>
             </image>
             <image id="side_column_widget_product_thumbnail" type="thumbnail">
-                <width>65</width>
-                <height>65</height>
+                <width>130</width>
+                <height>130</height>
             </image>
             <image id="upsell_products_list" type="small_image">
                 <width>270</width>

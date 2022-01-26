@@ -11,5 +11,19 @@
                 <session_lifetime>86400</session_lifetime>
             </security>
         </admin>
+        <csp>
+            <policies>
+                <storefront>
+                    <frame-ancestors>
+                        <inline>0</inline>
+                    </frame-ancestors>
+                </storefront>
+                <admin>
+                    <frame-ancestors>
+                        <inline>0</inline>
+                    </frame-ancestors>
+                </admin>
+            </policies>
+        </csp>
     </default>
 </config>

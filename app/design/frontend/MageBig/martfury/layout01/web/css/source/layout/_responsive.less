@@ -510,11 +510,23 @@
         .bn-item-promo .bn-item-content .title {
             .font-size(20);
         }
-        .block-dashboard-orders .orders-recent {
-            border-top: none;
+
+        .account {
+            .main-wrap {
+                order: 1;
+            }
+            .sidebar-wrap {
+                order: 2;
+            }
         }
-        .customer-account-index .column .block-dashboard-orders .block-title {
-            margin-bottom: 0;
+
+        .table-order-items {
+            tbody tr {
+                border-bottom: 1px solid #ccc;
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
         }
     }
 
@@ -538,6 +550,23 @@
         }
         div.box-tocart .fieldset-add input.input-text {
             width: 100px;
+        }
+
+        .order-status-wrap {
+            .action-reorder {
+                width: 100%;
+                margin-top: 10px;
+                .action {
+                    width: 100%;
+                }
+            }
+        }
+
+        ul.order-links {
+            margin: 0 -10px;
+            .item {
+                padding: 10px;
+            }
         }
     }
 

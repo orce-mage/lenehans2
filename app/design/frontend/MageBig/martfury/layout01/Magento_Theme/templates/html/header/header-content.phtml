@@ -33,7 +33,7 @@ $bottomMenu     = $mbHelper->getConfig('mbconfig/mobile_view/bottom_menu');
                 <div class="col-12 col-md-3 col-lg-3 col-logo">
                     <div class="menu-logo">
                         <?php if ($topMenuBtn) : ?>
-                        <div class="btn-nav-mobile-top d-table-cell d-md-none"><button type="button" class="btn-nav mb-toggle-switch mb-toggle-switch__htx"><span></span></button></div>
+                        <div class="btn-nav-mobile-top d-table-cell d-md-none"><button type="button" class="btn-nav mb-toggle-switch mb-toggle-switch__htx" aria-label="menu"><span></span></button></div>
                         <?php endif ?>
                         <div class="logo-top d-table-cell <?php if ($topMenuBtn) echo 'has-btn' ?>"><?= $this->getChildHtml('logo') ?></div>
                         <div class="icon-top-mobile">
@@ -43,13 +43,7 @@ $bottomMenu     = $mbHelper->getConfig('mbconfig/mobile_view/bottom_menu');
                                     <i class="mbi mbi-bag2"></i>
                                     <span class="counter qty empty"
                                           data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
-                                    <span class="counter-number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
-                                    <span class="counter-label">
-                                    <!-- ko if: getCartParam('summary_count') -->
-                                        <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
-                                        <!-- ko i18n: 'items' --><!-- /ko -->
-                                        <!-- /ko -->
-                                    </span>
+                                    <span class="counter-number" data-bind="html: getCartParam('summary_count') > 9 ? '&nbsp;9<sup>+</sup>' : getCartParam('summary_count')"></span>
                                 </span>
                                 </a>
                             </div>
@@ -114,7 +108,7 @@ $bottomMenu     = $mbHelper->getConfig('mbconfig/mobile_view/bottom_menu');
 <div class="d-block d-md-none col-btn-actions">
     <div class="header-content-action row no-gutters">
         <div class="btn-nav-mobile col">
-            <button type="button" class="btn-nav mb-toggle-switch mb-toggle-switch__htx"><span></span></button>
+            <button type="button" class="btn-nav mb-toggle-switch mb-toggle-switch__htx" aria-label="menu"><span></span></button>
             <div class="menu-btn-text"><?= $block->escapeHtml(__('Menu')) ?></div>
         </div>
         <div class="btn-search-mobile col">
@@ -131,10 +125,7 @@ $bottomMenu     = $mbHelper->getConfig('mbconfig/mobile_view/bottom_menu');
                 <a class="action showcart" href="<?= $block->getUrl('checkout/cart') ?>" data-bind="scope: 'minicart_content'">
                     <i class="mbi mbi-bag2"></i>
                     <span class="counter qty empty" data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
-                        <span class="counter-number"><!-- ko text: getCartParam('summary_count') -->0<!-- /ko --></span>
-                        <span class="counter-label">
-                        <!-- ko if: getCartParam('summary_count') --><!-- /ko -->
-                        </span>
+                        <span class="counter-number" data-bind="html: getCartParam('summary_count') > 9 ? '&nbsp;9<sup>+</sup>' : getCartParam('summary_count')"></span>
                     </span>
                 </a>
             </div>

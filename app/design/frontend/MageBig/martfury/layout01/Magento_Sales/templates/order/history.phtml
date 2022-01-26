@@ -14,40 +14,36 @@
         <table class="data table table-order-items history" id="my-orders-table">
             <thead>
                 <tr>
-                    <th scope="col" class="table-col order-id"><?= /* @escapeNotVerified */ __('Order #') ?></th>
-                    <th scope="col" class="table-col date"><?= /* @escapeNotVerified */ __('Date') ?></th>
+                    <th scope="col" class="table-col order-id"><?= $block->escapeHtml(__('Order #')) ?></th>
+                    <th scope="col" class="table-col date"><?= $block->escapeHtml(__('Date')) ?></th>
                     <?= /* @noEscape */ $block->getChildHtml('extra.column.header') ?>
-                    <th scope="col" class="table-col shipping"><?= /* @escapeNotVerified */ __('Ship To') ?></th>
-                    <th scope="col" class="table-col total"><?= /* @escapeNotVerified */ __('Order Total') ?></th>
-                    <th scope="col" class="table-col status"><?= /* @escapeNotVerified */ __('Status') ?></th>
-                    <th scope="col" class="table-col actions"><?= /* @escapeNotVerified */ __('Action') ?></th>
+                    <th scope="col" class="table-col shipping"><?= $block->escapeHtml(__('Ship To')) ?></th>
+                    <th scope="col" class="table-col total"><?= $block->escapeHtml(__('Order Total')) ?></th>
+                    <th scope="col" class="table-col status"><?= $block->escapeHtml(__('Status')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($_orders as $_order): ?>
                     <tr>
-                        <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="table-col order-id"><?= /* @escapeNotVerified */ $_order->getRealOrderId() ?></td>
-                        <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="table-col date"><?= /* @escapeNotVerified */ $block->formatDate($_order->getCreatedAt()) ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Order')) ?>" class="table-col order-id">
+                            <a href="<?= $block->getViewUrl($_order) ?>" class="action view mb-tooltip"
+                               title="<?= $block->escapeHtml(__('View Order')) ?> #<?= $_order->getRealOrderId() ?>">
+                                <span><?= $_order->getRealOrderId() ?></span>
+                            </a>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="table-col date"><?= $block->formatDate($_order->getCreatedAt()) ?></td>
                         <?php $extra = $block->getChildBlock('extra.container'); ?>
                         <?php if ($extra): ?>
                             <?php $extra->setOrder($_order); ?>
                             <?= /* @noEscape */ $extra->getChildHtml() ?>
                         <?php endif; ?>
                         <td data-th="<?= $block->escapeHtml(__('Ship To')) ?>" class="table-col shipping"><?= $_order->getShippingAddress() ? $block->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
-                        <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="table-col total"><?= /* @escapeNotVerified */ $_order->formatPrice($_order->getGrandTotal()) ?></td>
-                        <td data-th="<?= $block->escapeHtml(__('Status')) ?>" class="table-col status"><?= /* @escapeNotVerified */ $_order->getStatusLabel() ?></td>
-                        <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="table-col actions">
-                            <a href="<?= /* @escapeNotVerified */ $block->getViewUrl($_order) ?>" class="action view">
-                                <span><?= /* @escapeNotVerified */ __('View Order') ?></span>
+                        <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="table-col total"><?= $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Status')) ?>" class="table-col status">
+                            <a href="<?= $block->getViewUrl($_order) ?>" class="action-status mb-tooltip"
+                               title="<?= $block->escapeHtml(__('View Order')) ?> #<?= $_order->getRealOrderId() ?>">
+                                <span class="order-status <?= $_order->getState() ?>"><?= $_order->getStatusLabel() ?></span>
                             </a>
-                            <?php if ($this->helper('Magento\Sales\Helper\Reorder')->canReorder($_order->getEntityId())) : ?>
-                                <a href="#" data-post='<?php /* @escapeNotVerified */ echo
-                                $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
-                                    ->getPostData($block->getReorderUrl($_order))
-                                ?>' class="action order">
-                                    <span><?= /* @escapeNotVerified */ __('Reorder') ?></span>
-                                </a>
-                            <?php endif ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -58,5 +54,5 @@
         <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
     <?php endif ?>
 <?php else: ?>
-    <div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have placed no orders.') ?></span></div>
+    <div class="message info empty"><span><?= $block->escapeHtml(__('You have placed no orders.')) ?></span></div>
 <?php endif ?>

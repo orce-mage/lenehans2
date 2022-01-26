@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var $block Magento\Newsletter\Block\Subscribe;
+ */
 $mbHelper = $this->helper('MageBig\NewsPopup\Helper\Data');
 
 $enable = $mbHelper->getConfig('tsNewsPopup/general/enable');
@@ -30,8 +33,10 @@ $min_height = $mbHelper->getConfig('tsNewsPopup/general/min_height');
                         method="post"
                         data-mage-init='{"validation": {"errorClass": "mage-error"}}'
                         id="mb-newsletter-form">
+                        <?= /* @noEscape */ $block->getBlockHtml('formkey'); ?>
                         <div class="input-box field">
                             <input name="email" type="text" id="mb-newsletter" value="<?= __('Enter your email address') ?>" onclick="this.value=='<?= __('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?= __('Enter your email address') ?>':''" class="input-text" data-validate="{required:true, 'validate-email':true}"/>
+                            <?= $block->getChildHtml() ?>
                             <button type="submit" title="<?= __('Subscribe') ?>" class="btn action primary">
                                     <span><span><?= __('Subscribe') ?></span></span></button>
                         </div>
@@ -56,7 +61,7 @@ $min_height = $mbHelper->getConfig('tsNewsPopup/general/min_height');
                 "cookieFlag": "magebig_newsletter_Flag",
                 "isSuccess": ".messages .message-success",
                 "notShow": ".not-show-popup input",
-                "submitButton": "#magebig_newsletter .input-box button.button"
+                "submitButton": "#magebig_newsletter button.btn"
             }
         }
     }

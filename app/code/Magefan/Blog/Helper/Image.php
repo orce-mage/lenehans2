@@ -104,7 +104,7 @@ class Image extends AbstractHelper
     {
         if ($this->_baseFile) {
             $pathinfo = pathinfo(($this->_baseFile));
-            if (isset($pathinfo) && $pathinfo['extension'] == 'webp') {
+            if (isset($pathinfo) && isset($pathinfo['extension']) && $pathinfo['extension'] == 'webp') {
                 $this->_newFile = $this->_baseFile;
             } else {
                 $path = 'blog/cache/' . $width . 'x' . $height;
@@ -172,9 +172,8 @@ class Image extends AbstractHelper
     {
         $url = "";
         if ($this->_baseFile) {
-            $url = $this->_storeManager->getStore()->getBaseUrl(
-                    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                ) . $this->_newFile;
+            $url = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) .
+                $this->_newFile;
         }
         return $url;
     }

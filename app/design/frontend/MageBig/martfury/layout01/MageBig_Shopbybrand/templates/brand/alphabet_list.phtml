@@ -40,10 +40,9 @@ $widget = [
                 <div class="brand-item col-6 col-md-4 col-lg-3 col-xl-2" data-label='<?= $label ?>'>
                     <div class="brand-item-inner">
                         <div class="item-img product-image-container">
-                            <a class="brand-link product-image-wrapper img-lazy-wrap" style="padding-bottom: <?= $paddingBottom ?>%" href="<?= $url ?>" title="<?= $label; ?>">
-                                <img class="brand-img img-fluid product-image-photo media-lazy lazyload" alt="<?= $label ?>"
-                                     data-src="<?= $block->getThumbnailImage($brand, ['width' => $width, 'height' => $height]) ?>"
-                                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+                            <a class="brand-link product-image-wrapper img-native-wrap" style="padding-bottom: <?= $paddingBottom ?>%" href="<?= $url ?>" title="<?= $label; ?>">
+                                <img class="brand-img img-fluid product-image-photo" alt="<?= $label ?>"
+                                     src="<?= $block->getThumbnailImage($brand, ['width' => $width, 'height' => $height]) ?>"/>
                             </a>
                         </div>
                         <div class="item-info">

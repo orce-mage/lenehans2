@@ -78,7 +78,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      */
     public function getTitle()
     {
-        return $this->getData('title') ?: __('Recent Blog Posts');
+        return $this->getData('title') ?: '';
     }
 
     /**
@@ -128,10 +128,9 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         }
 
         $enableNoRepeat = $this->getData('no_repeat_posts_enable');
-        if ($enableNoRepeat && self::$processedIds){
+        if ($enableNoRepeat && self::$processedIds) {
             $this->_postCollection->addFieldToFilter('post_id', ['nin' => self::$processedIds]);
         }
-
     }
 
     /**
@@ -158,15 +157,17 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         return $this->_category;
     }
-
+    
     /**
      * Retrieve post short content
-     * @param  \Magefan\Blog\Model\Post $post
      *
+     * @param  \Magefan\Blog\Model\Post $post
+     * @param  mixed $len
+     * @param  mixed $endСharacters
      * @return string
      */
-    public function getShorContent($post)
+    public function getShorContent($post, $len = null, $endСharacters = null)
     {
-        return $post->getShortFilteredContent();
+        return $post->getShortFilteredContent($len, $endСharacters);
     }
 }

@@ -9,9 +9,9 @@
 <div class="cart-empty text-center">
     <?= $block->getChildHtml('checkout_cart_empty_widget') ?>
     <div class="no-item-cart">
-        <span class="img-lazy-wrap" style="padding-bottom: 53.76%">
-            <img class="media-lazy lazyload" src="#"
-            data-src="<?php echo $block->getViewFileUrl('images/empty-cart.svg') ?>" alt="empty cart" style="max-width: 360px;" />
+        <span class="img-native-wrap" style="padding-bottom: 53.76%">
+            <img class="img-fluid"
+                src="<?php echo $block->getViewFileUrl('images/empty-cart.svg') ?>" alt="empty cart" style="max-width: 360px;" />
         </span>
     </div>
     <h2><?= /* @escapeNotVerified */ __('You have no items in your shopping cart.') ?></h2>

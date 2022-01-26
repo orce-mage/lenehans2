@@ -15,6 +15,7 @@
                 method="post"
                 data-mage-init='{"validation": {"errorClass": "mage-error"}}'
                 id="newsletter-validate-detail-footer">
+                <?= /* @noEscape */ $block->getBlockHtml('formkey'); ?>
                 <div class="block-content">
                     <div class="input-box">
                         <input name="email" type="email" id="newsletter"
@@ -34,10 +35,8 @@
 </div>
 <script type="text/x-magento-init">
     {
-        "*": {
-            "Magento_Customer/js/block-submit-on-send": {
-                "formId": "newsletter-validate-detail-footer"
-            }
+        "#newsletter-validate-detail": {
+            "MageBig_NewsPopup/js/ajax-newsletter": {}
         }
     }
 </script>

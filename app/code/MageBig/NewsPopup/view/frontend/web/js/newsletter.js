@@ -1,9 +1,12 @@
 define([
     "jquery",
-    "MageBig_NewsPopup/js/js.cookie",
+    'MageBig_NewsPopup/js/js.cookie',
+    'Magento_Customer/js/customer-data',
+    'MageBig_NewsPopup/js/ajax-newsletter',
+    'mage/validation',
     "domReady!",
     "magnificpopup"
-], function($,Cookies){
+], function($,Cookies, customerData, ajaxNewsletter){
     "use strict";
 
     $.widget('custom.mbNewsPopup', {
@@ -14,7 +17,8 @@ define([
             cookieFlag: 'magebig_newsletter_Flag',
             isSuccess: ".messages .message-success",
             notShow: '.not-show-popup input',
-            submitButton: "#magebig_newsletter .input-box button.button"
+            submitButton: ".btn-subscribe",
+            form: '#mb-newsletter-form'
         },
 
         _create: function() {
@@ -24,23 +28,10 @@ define([
             var cookieLifetime = this.options.cookieLifetime;
             var showhome = this.options.showHome;
             var self = this;
-            $(this.options.notShow).on('click', function () {
-                var $elm = $(this);
-                if ($elm.is(':checked')) {
-                    self._subsSetcookie(cookieName, cookieLifetime, showhome);
-                } else {
-                    self._subsRemove(cookieName, showhome);
-                }
-            });
 
-            $(this.options.submitButton).on('click', function () {
-                var button = $(this);
-                setTimeout(function () {
-                    if (!button.parents('.input-box').find('input#mb-newsletter').hasClass('mage-error')) {
-                        self._subsSetcookie(cookieFlag, cookieLifetime, showhome);
-                    }
-                }, 200);
-            });
+            self.hidePopup();
+
+            ajaxNewsletter(self.options, self.options.form, self._subsSetcookie);
 
             if (!(subscribeFlag && this.options.isSuccess.length) && !Cookies.get(cookieName)) {
                 var idPopup = this.options.idPopup;
@@ -84,6 +75,17 @@ define([
             }
         },
 
+        hidePopup: function () {
+            $(this.options.notShow).on('click', function () {
+                var $elm = $(this);
+                if ($elm.is(':checked')) {
+                    self._subsSetcookie(cookieName, cookieLifetime, showhome);
+                } else {
+                    self._subsRemove(cookieName, showhome);
+                }
+            });
+        },
+
         _subsSetcookie: function (cookieName, cookieLifetime, showhome) {
             if (cookieLifetime == 0 && showhome == 1) {
                 Cookies.set(cookieName, 'true');
@@ -102,6 +104,12 @@ define([
             } else {
                 Cookies.remove(cookieName, { path: '/' });
             }
+        },
+
+        validate: function () {
+            var form = this.options.form;
+
+            return $(form).validation() && $(form).validation('isValid');
         }
     });
 

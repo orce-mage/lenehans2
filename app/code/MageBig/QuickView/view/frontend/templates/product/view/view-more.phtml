@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © magebig.com - All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/**
+ * @var Magento\Catalog\Block\Product\View $block
+ */
+
+?>
+<?php
+$_product = $block->getProduct();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$productUrl = $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url');
+$productName = $_helper->productAttribute($_product, $_product->getName(), 'name');
+?>
+<div class="view-more-detail mt-3">
+    <a href="<?= $productUrl ?>"><?= $block->escapeHtml(__('see details...')) ?></a>
+</div>

@@ -17,13 +17,7 @@
             <i class="mbi mbi-bag2"></i>
             <span class="counter qty empty"
                   data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
-                <span class="counter-number"><!-- ko text: getCartParam('summary_count') --><!-- /ko --></span>
-                <span class="counter-label">
-                <!-- ko if: getCartParam('summary_count') -->
-                    <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
-                    <!-- ko i18n: 'items' --><!-- /ko -->
-                    <!-- /ko -->
-                </span>
+                <span class="counter-number" data-bind="html: getCartParam('summary_count') > 9 ? '&nbsp;9<sup>+</sup>' : getCartParam('summary_count')"></span>
             </span>
         </a>
     </div>
@@ -51,4 +45,3 @@
         </script>
     </div>
 </div>
-

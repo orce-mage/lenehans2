@@ -99,9 +99,13 @@ class View extends AbstractPost implements \Magento\Framework\DataObject\Identit
             $parentCategories = [];
             $parentCategory = $this->getPost()->getParentCategory();
             while ($parentCategory) {
-                $parentCategories[] = $parentCategory;
+                if (isset($parentCategories[$parentCategory->getId()])) {
+                    break;
+                }
+                $parentCategories[$parentCategory->getId()] = $parentCategory;
                 $parentCategory = $parentCategory->getParentCategory();
             }
+            $parentCategories = array_values($parentCategories);
 
             for ($i = count($parentCategories) - 1; $i >= 0; $i--) {
                 $parentCategory = $parentCategories[$i];

@@ -6,38 +6,51 @@
 
 namespace MageBig\SmartMenu\Block;
 
+use Exception;
 use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\Indexer\Category\Flat\State;
+use Magento\Catalog\Model\Layer;
+use Magento\Catalog\Model\Layer\Resolver;
+use Magento\Cms\Model\Template\FilterProvider;
 use Magento\Customer\Model\Context;
+use Magento\Framework\DataObject;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Registry;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Element\Template;
+use Magento\Store\Model\Group;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\App\Http\Context as HttpContext;
+use Magento\Catalog\Helper\Category as HelperCategory;
 
-class SmartMenu extends \Magento\Framework\View\Element\Template
+class SmartMenu extends Template
 {
 
     /**
-     * @var \Magento\Cms\Model\Template\FilterProvider
+     * @var FilterProvider
      */
     protected $_cmsFilter;
 
     /**
-     * @var \Magento\Catalog\Helper\Category
+     * @var HelperCategory
      */
     protected $_helperCategory;
 
     /**
-     * @var \Magento\Framework\Registry
+     * @var Registry
      */
     protected $_registry;
 
     /**
      * Customer session
      *
-     * @var \Magento\Framework\App\Http\Context
+     * @var HttpContext
      */
     protected $httpContext;
 
+
     /**
-     * Catalog layer
-     *
-     * @var \Magento\Catalog\Model\Layer
+     * @var Layer
      */
     protected $_catalogLayer;
 
@@ -54,7 +67,7 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
     protected $_catPosLevel = [];
 
     /**
-     * @var \Magento\Catalog\Model\Indexer\Category\Flat\State
+     * @var State
      */
     protected $flatState;
 
@@ -73,28 +86,29 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
 
     /**
      * SmartMenu constructor.
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Catalog\Helper\Category $helperCategory
-     * @param \Magento\Cms\Model\Template\FilterProvider $cmsFilter
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Catalog\Model\Indexer\Category\Flat\State $flatState
-     * @param \Magento\Framework\App\Http\Context $httpContext
-     * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param Template\Context $context
+     * @param HelperCategory $helperCategory
+     * @param FilterProvider $cmsFilter
+     * @param Registry $registry
+     * @param State $flatState
+     * @param HttpContext $httpContext
+     * @param Resolver $layerResolver
+     * @param StoreManagerInterface $storeManager
      * @param array $data
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Catalog\Helper\Category $helperCategory,
-        \Magento\Cms\Model\Template\FilterProvider $cmsFilter,
-        \Magento\Framework\Registry $registry,
-        \Magento\Catalog\Model\Indexer\Category\Flat\State $flatState,
-        \Magento\Framework\App\Http\Context $httpContext,
-        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        Template\Context $context,
+        HelperCategory $helperCategory,
+        FilterProvider $cmsFilter,
+        Registry $registry,
+        State $flatState,
+        HttpContext $httpContext,
+        Resolver $layerResolver,
+        StoreManagerInterface $storeManager,
         array $data = []
-    ) {
+    )
+    {
         $this->_helperCategory = $helperCategory;
         $this->_cmsFilter = $cmsFilter;
         $this->_registry = $registry;
@@ -104,13 +118,18 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
         $this->_storeManager = $storeManager;
         $this->_isFlat = $this->flatState->isFlatEnabled();
         $this->_baseUrl = $this->_storeManager->getStore()->getBaseUrl();
-        $this->_mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+        $this->_mediaUrl = $this->getMediaUrl();
         parent::__construct($context, $data);
 
         $this->addData([
             'cache_lifetime' => 86400,
-            'cache_tags' => [Category::CACHE_TAG, \Magento\Store\Model\Group::CACHE_TAG]
+            'cache_tags' => [Category::CACHE_TAG, Group::CACHE_TAG]
         ]);
+    }
+
+    public function getMediaUrl()
+    {
+        return $this->_storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
     }
 
     public function getCacheKeyInfo()
@@ -138,7 +157,7 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getCurrentCategoryKey()
     {
@@ -157,7 +176,7 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
     /**
      * Checkin activity of category
      *
-     * @param \Magento\Framework\DataObject $category
+     * @param DataObject $category
      * @return  bool
      */
     public function isCategoryActive($category)
@@ -169,7 +188,7 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @return \Magento\Catalog\Model\Category
+     * @return Category
      */
     public function getCurrentCategory()
     {
@@ -180,7 +199,7 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
      * @param $block
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function _getStatic($block)
     {
@@ -324,8 +343,7 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
         } elseif ($iconImage = $catInfo->getData('smartmenu_cat_imgicon')) {
             $iconImage = str_replace('catalog/tmp/', 'catalog/', $iconImage);
             if (strpos($iconImage, '/catalog/')) {
-                $iconImage = str_replace('/media/', '', $iconImage);
-                $iconHtml = '<img width="20" height="20" alt="' . $catInfo->getData('name') . '" src="' . $this->_mediaUrl . $iconImage . '">';
+                $iconHtml = '<img width="20" height="20" alt="' . $catInfo->getData('name') . '" src="' . $this->_baseUrl . $iconImage . '">';
             } else {
                 $iconHtml = '<img width="20" height="20" alt="' . $catInfo->getData('name') . '" src="' . $this->_mediaUrl . 'catalog/category/' . $iconImage . '">';
             }
@@ -472,7 +490,8 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
         $outerClass = '',
         $childWrapClass = '',
         $vertical = false
-    ) {
+    )
+    {
         if (!$catInfo->getIsActive()) {
             return '';
         }
@@ -579,8 +598,7 @@ class SmartMenu extends \Magento\Framework\View\Element\Template
         } elseif ($iconImage = $catInfo->getData('smartmenu_cat_imgicon')) {
             $iconImage = str_replace('catalog/tmp/', 'catalog/', $iconImage);
             if (strpos($iconImage, '/catalog/')) {
-                $iconImage = str_replace('/media/', '', $iconImage);
-                $iconHtml = '<img width="20" height="20" alt="' . $catInfo->getData('name') . '" src="' . $this->_mediaUrl . $iconImage . '">';
+                $iconHtml = '<img width="20" height="20" alt="' . $catInfo->getData('name') . '" src="' . $this->_baseUrl . $iconImage . '">';
             } else {
                 $iconHtml = '<img width="20" height="20" alt="' . $catInfo->getData('name') . '" src="' . $this->_mediaUrl . 'catalog/category/' . $iconImage . '">';
             }

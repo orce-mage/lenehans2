@@ -10,10 +10,9 @@
 ?>
 <div class="col col-wishlist d-none d-md-block">
     <div class="wishlist-topbar" data-bind="scope: 'wishlist'">
-        <a <?= /* @noEscape */
-        $block->getLinkAttributes() ?> class="wishlist-icon link wishlist">
+        <a <?= /* @noEscape */ $block->getLinkAttributes() ?> class="wishlist-icon link wishlist">
             <i class="mbi mbi-heart"></i>
-            <span data-bind="text: wishlist().counter ? wishlist().items.length : 0, css: { empty: !!wishlist().counter == false }" class="counter-number qty empty"></span>
+            <span data-bind="html: wishlist().counter ? (wishlist().counter.replace(/[^0-9]/g,'') > 9 ? '&nbsp;9<sup>+</sup>' : wishlist().counter.replace(/[^0-9]/g,'')) : 0, css: { empty: !!wishlist().counter == false }" class="counter-number qty empty"></span>
         </a>
     </div>
 </div>

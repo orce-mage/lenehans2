@@ -29,12 +29,18 @@ $mainImageData = $mainImage ?
     $helper->getDefaultPlaceholderUrl('image');
 
 $thumbType = $_mbHelper->getConfig('mbconfig/product_view/nav_dir');
+$rtl = $_mbHelper->getConfig('mbdesign/general/enable_rtl');
 $imgs = '';
 $pl = '';
 if ($imgCount > 1) {
     $imgs = 'imgs';
     $pl = '<span class="thumb-pl"></span>';
 }
+
+$thumbWidth = $block->getImageAttribute('product_page_image_small', 'width');
+$thumbHeight = $block->getImageAttribute('product_page_image_small', 'height');
+$thumbW = 65;
+$thumbH = $thumbW * $thumbHeight / $thumbWidth;
 ?>
 <div class="gallery-placeholder _block-content-loading <?= $thumbType ?> <?= $imgs ?>" id="quickview-gallery">
     <div class="gallery-placeholder__image">
@@ -42,6 +48,8 @@ if ($imgCount > 1) {
             alt="main product photo"
             class="img-fluid"
             src="<?= /* @noEscape */ $mainImageData ?>"
+            width="<?= $block->getImageAttribute('product_page_image_medium', 'width') ?>"
+            height="<?= $block->getImageAttribute('product_page_image_medium', 'height') ?>"
         />
         <?= $pl ?>
     </div>
@@ -51,8 +59,8 @@ if ($imgCount > 1) {
         "#quickview-gallery": {
             "mage/gallery/gallery": {
                 "mixins":["magnifier/magnify"],
-                "magnifierOpts": <?= /* @escapeNotVerified */ $block->getMagnifier() ?>,
-                "data": <?= /* @escapeNotVerified */ $block->getGalleryImagesJson() ?>,
+                "magnifierOpts": <?= $block->getMagnifier() ?>,
+                "data": <?= $block->getGalleryImagesJson() ?>,
                 "options": {
                     "thumbmargin": <?= $block->getVar("gallery/thumbmargin") ?>,
                     "thumbborderwidth": 1,
@@ -64,16 +72,16 @@ if ($imgCount > 1) {
                     "allowfullscreen": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/allowfullscreen') ?>,
                     "showCaption": 0,
                     "width": "<?= $block->getImageAttribute('product_page_image_medium', 'width') ?>",
-                    "thumbwidth": "<?= $block->getImageAttribute('product_page_image_small', 'width') ?>",
-                    "thumbheight": <?= $block->getImageAttribute('product_page_image_small', 'height')
-                        ?: $block->getImageAttribute('product_page_image_small', 'width'); ?>,
+                    "thumbwidth": <?= $thumbW ?>,
+                    "thumbheight": <?= $thumbH ?>,
                     "height": <?= $block->getImageAttribute('product_page_image_medium', 'height')
                         ?: $block->getImageAttribute('product_page_image_medium', 'width'); ?>,
                     "transitionduration": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_duration') ?>,
                     "transition": "<?= $_mbHelper->getConfig('mbconfig/product_view/gallery_effect') ?>",
                     "navarrows": <?= (int)$block->getVar("gallery/navarrows") ?>,
                     "navtype": "<?= $block->getVar("gallery/navtype") ?>",
-                    "navdir": "<?= $_mbHelper->getConfig('mbconfig/product_view/nav_dir') ?>"
+                    "navdir": "<?= $thumbType ?>",
+                    "direction": "<?= $rtl ? 'rtl' : 'ltr'?>"
                 },
                 "fullscreen": {
                     "nav": "<?= $block->getVar("gallery/fullscreen/nav") ?>",
@@ -84,11 +92,11 @@ if ($imgCount > 1) {
                     "arrows": <?= (int)$block->getVar("gallery/fullscreen/arrows") ?>,
                     "showCaption": 0,
                     "transitionduration": <?= (int)$_mbHelper->getConfig('mbconfig/product_view/gallery_duration') ?>,
-                    "transition": "<?= $_mbHelper->getConfig('mbconfig/product_view/gallery_effect') ?>"
+                    "transition": "<?= $_mbHelper->getConfig('mbconfig/product_view/gallery_effect') ?>",
+                    "direction": "<?= $rtl ? 'rtl' : 'ltr'?>"
                 },
                 "breakpoints": <?= $block->getBreakpoints() ?>
             }
         }
     }
 </script>
-

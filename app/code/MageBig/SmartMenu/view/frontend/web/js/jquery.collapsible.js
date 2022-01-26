@@ -62,7 +62,7 @@ define([
                                     if (close) {
                                         if ($parent.find("ul") != visible[visibleIndex]) {
                                             $(visible[visibleIndex]).slideUp(opts.speed, function () {
-                                                $self.removeClass(opts.expanded).addClass(opts.collapsed);
+                                                $(this).parent("li").find("a:first").next().removeClass(opts.expanded).addClass(opts.collapsed);
                                             });
                                         }
                                     }
