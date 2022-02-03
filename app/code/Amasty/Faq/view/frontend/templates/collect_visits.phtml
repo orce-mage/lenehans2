@@ -1,0 +1,18 @@
+<?php
+/** @var $block \Amasty\Faq\Block\CollectVisits */
+?>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        var options = <?= /** @noEscape */ $block->getStatData(); ?>,
+            url = '<?= $block->escapeUrl($block->getStatUrl()); ?>';
+        $.ajax({
+            type: "GET",
+            data: options,
+            url: url,
+            dataType: 'json'
+        });
+    });
+
+</script>

@@ -1,0 +1,23 @@
+<?php /** @var \Amasty\Faq\Block\Forms\Search $block */ ?>
+<div class="amfaq-search" data-amfaq-js="search">
+    <form id="amfaq_search" action="<?= $block->escapeUrl($block->getUrlAction()); ?>" method="get" data-mage-init='{"validation": {}}'>
+        <input class="am-input input-text required-entry validate-length validate-length-3 placeholder"
+               type="search"
+               data-mage-init='{"amfaqSearch":{
+                                "formSelector":"#amfaq_search",
+                                "url":"<?= $block->escapeUrl($block->getSuggestUrl()); ?>",
+                                "destinationSelector":"#amfaq_search_autocomplete"}
+                           }'
+               placeholder="<?= $block->escapeHtml(__("Find answer (deliver, etc.)")); ?>"
+               title="<?= $block->escapeHtml(__("Search")); ?>"
+               id="search-faq"
+               name="query"
+               value="<?= $block->escapeHtml($block->getQuery()); ?>"
+               maxlength="100"
+               minlength="3"/>
+        <div id="amfaq_search_autocomplete" class="search-autocomplete"></div>
+        <button class="button am-button" title="<?= $block->escapeHtml(__("Search")); ?>" type="submit"></button>
+    </form>
+</div>
+
+<?= /** @escapeNotVerified */ $block->getChildHtml() ?>

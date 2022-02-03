@@ -1,0 +1,94 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/amasty_faq/question" method="POST">
+        <service class="Amasty\Faq\Api\QuestionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Faq::question" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/question/:questionId" method="PUT">
+        <service class="Amasty\Faq\Api\QuestionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Faq::question" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/question/:questionId" method="DELETE">
+        <service class="Amasty\Faq\Api\QuestionRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Faq::question" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/question" method="GET">
+        <service class="Amasty\Faq\Api\QuestionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Faq::question" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/question/all" method="GET">
+        <service class="Amasty\Faq\Api\QuestionRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Faq::question" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_faq/category" method="POST">
+        <service class="Amasty\Faq\Api\CategoryRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Faq::category" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/category/:categoryId" method="PUT">
+        <service class="Amasty\Faq\Api\CategoryRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Faq::category" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/category/:categoryId" method="DELETE">
+        <service class="Amasty\Faq\Api\CategoryRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Faq::category" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/category" method="GET">
+        <service class="Amasty\Faq\Api\CategoryRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Faq::category" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/category/all" method="GET">
+        <service class="Amasty\Faq\Api\CategoryRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Faq::category" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_faq/tag" method="POST">
+        <service class="Amasty\Faq\Api\TagRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Faq::faq" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/tag/:tagId" method="PUT">
+        <service class="Amasty\Faq\Api\TagRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Faq::faq" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/tag/:tagId" method="DELETE">
+        <service class="Amasty\Faq\Api\TagRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Faq::faq" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/tag" method="GET">
+        <service class="Amasty\Faq\Api\TagRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Faq::faq" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_faq/tag/all" method="GET">
+        <service class="Amasty\Faq\Api\TagRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Faq::faq" />
+        </resources>
+    </route>
+</routes>

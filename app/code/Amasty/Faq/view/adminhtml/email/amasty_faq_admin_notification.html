@@ -1,0 +1,18 @@
+<!--@subject FAQ: you received new question @-->
+<!--@vars {
+"var sender_name":"Sender Name",
+"var sender_email":"Sender Email",
+"var question":"Question",
+"var product_url":"Asked from:"
+} @-->
+
+<table>
+    <tr class="email-intro">
+        <td valign="top">
+            <p>{{trans "Customer: %name" name=$sender_name}}{{depend sender_email}}({{var sender_email|escape}}){{/depend}}</p>
+            <p>{{trans "Question:" question=$question}}</p>
+            <p>{{var question|escape}}</p>
+            {{depend product_url}}<p>{{trans "Asked from:"}} <a href="{{var product_url|escape}}">{{var product_url|escape}}</a></p>{{/depend}}
+        </td>
+    </tr>
+</table>

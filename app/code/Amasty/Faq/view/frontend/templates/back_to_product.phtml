@@ -1,0 +1,21 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div class="back am-back-button" data-role="faq-back-button" data-bind="scope: 'faq-back'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "[data-role=faq-back-button]": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "faq-back": {
+                    "component": "Amasty_Faq/js/back-to-product"
+                }
+            }
+        }
+    }
+}
+</script>

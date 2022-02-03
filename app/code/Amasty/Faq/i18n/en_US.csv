@@ -1,0 +1,359 @@
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Delete,Delete
+"Not Selected","Not Selected"
+ID,ID
+Title,Title
+"Url Key","Url Key"
+Exclude,Exclude
+Field,Field
+"Save and Send email to Customer","Save and Send email to Customer"
+Question,Question
+Status,Status
+"Sort Option","Sort Option"
+"Product Questions","Product Questions"
+"No Questions","No Questions"
+Guest,Guest
+Admin,Admin
+"Search results for ""%1"":","Search results for ""%1"":"
+"We can't change item right now. Please review the log and try again.","We can't change item right now. Please review the log and try again."
+"A total of %1 record(s) have been changed.","A total of %1 record(s) have been changed."
+"No records have been changed.","No records have been changed."
+"You deleted the category.","You deleted the category."
+"We can't delete item right now. Please review the log and try again.","We can't delete item right now. Please review the log and try again."
+"We can't find a item to delete.","We can't find a item to delete."
+"This category no longer exists.","This category no longer exists."
+Categories,Categories
+"New Category","New Category"
+"FAQ Categories","FAQ Categories"
+"Please correct the data sent.","Please correct the data sent."
+"Something went wrong while saving the question.","Something went wrong while saving the question."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"No records have been deleted.","No records have been deleted."
+"The wrong item is specified.","The wrong item is specified."
+"You saved the item.","You saved the item."
+"Import FAQ Categories","Import FAQ Categories"
+"Import FAQ Questions","Import FAQ Questions"
+"You deleted the question.","You deleted the question."
+"This question no longer exists.","This question no longer exists."
+Questions,Questions
+"New Question","New Question"
+"FAQ Questions","FAQ Questions"
+"Email can not be sent. Email field is empty.","Email can not be sent. Email field is empty."
+"You saved the item. Answer sent to Customer's Email.","You saved the item. Answer sent to Customer's Email."
+"FAQ Search Terms Report","FAQ Search Terms Report"
+"Form Key is Invalid, please, reload page and try again.","Form Key is Invalid, please, reload page and try again."
+"Please log in to ask a question.","Please log in to ask a question."
+"The question was sent. We'll notify you about the answer via email.","The question was sent. We'll notify you about the answer via email."
+"The question was sent.","The question was sent."
+"We can't post your question right now.","We can't post your question right now."
+"Question doesn't exists.","Question doesn't exists."
+"You successfully voted.","You successfully voted."
+"Can't save question.","Can't save question."
+"This question or category is not available for the current store view","This question or category is not available for the current store view"
+"FAQ Search Results","FAQ Search Results"
+"Duplicate Url key","Duplicate Url key"
+"Invalid Url key. Only a-z, 0-9, ., -, _ expected.","Invalid Url key. Only a-z, 0-9, ., -, _ expected."
+"Voting is not allowed.","Voting is not allowed."
+"Unable to save category with ID %1. Error: %2","Unable to save category with ID %1. Error: %2"
+"Unable to save new category. Error: %1","Unable to save new category. Error: %1"
+"Category with specified ID ""%1"" not found.","Category with specified ID ""%1"" not found."
+"Unable to remove category with ID %1. Error: %2","Unable to remove category with ID %1. Error: %2"
+"Unable to remove category. Error: %1","Unable to remove category. Error: %1"
+Position,Position
+Name,Name
+"Most Viewed","Most Viewed"
+"1 column","1 column"
+"2 columns","2 columns"
+"3 columns","3 columns"
+"Don't Add","Don't Add"
+"From Current Store Default Country","From Current Store Default Country"
+"From Current Store Locale","From Current Store Locale"
+"2 columns with left sidebar","2 columns with left sidebar"
+"2 columns with right sidebar","2 columns with right sidebar"
+"Customer Service","Customer Service"
+"Technical Support","Technical Support"
+"Billing Support","Billing Support"
+"Bill Payment","Bill Payment"
+Sales,Sales
+Reservations,Reservations
+"Credit Card Support","Credit Card Support"
+Emergency,Emergency
+"Baggage Tracking","Baggage Tracking"
+"Roadside Assistance","Roadside Assistance"
+"Package Tracking","Package Tracking"
+"Show Short answer","Show Short answer"
+"Show Cut Full answer","Show Cut Full answer"
+Left,Left
+Center,Center
+Right,Right
+Customer,Customer
+"Nothing to Export","Nothing to Export"
+"You already voted.","You already voted."
+"Please, login to rate the question.","Please, login to rate the question."
+Disabled,Disabled
+Enabled,Enabled
+"NOT LOGGED IN","NOT LOGGED IN"
+Yes/No,Yes/No
+Voting,Voting
+"Average Rating","Average Rating"
+Pending,Pending
+Answered,Answered
+None,None
+Public,Public
+"For logged in only","For logged in only"
+"FAQ Category","FAQ Category"
+"Specific Questions","Specific Questions"
+"From Specific Product","From Specific Product"
+"From Current Product","From Current Product"
+"Please enter a question title.","Please enter a question title."
+"Please enter correct email.","Please enter correct email."
+"Unable to save question with ID %1. Error: %2","Unable to save question with ID %1. Error: %2"
+"Unable to save new question. Error: %1","Unable to save new question. Error: %1"
+"Question with specified ID ""%1"" not found.","Question with specified ID ""%1"" not found."
+"Unable to remove question with ID %1. Error: %2","Unable to remove question with ID %1. Error: %2"
+"Unable to remove question. Error: %1","Unable to remove question. Error: %1"
+Add,Add
+Add/Update,Add/Update
+"Unable to save tag with ID %1. Error: %2","Unable to save tag with ID %1. Error: %2"
+"Unable to save new tag. Error: %1","Unable to save new tag. Error: %1"
+"Tag with specified ID ""%1"" not found.","Tag with specified ID ""%1"" not found."
+"Unable to remove tag with ID %1. Error: %2","Unable to remove tag with ID %1. Error: %2"
+"Unable to remove tag. Error: %1","Unable to remove tag. Error: %1"
+"Visit with specified ID ""%1"" not found.","Visit with specified ID ""%1"" not found."
+"Unable to save visit with ID %1. Error: %2","Unable to save visit with ID %1. Error: %2"
+"Unable to save new visit. Error: %1","Unable to save new visit. Error: %1"
+"All Store Views","All Store Views"
+"Add Selected Questions","Add Selected Questions"
+"Question Name","Question Name"
+Remove,Remove
+"Read More","Read More"
+"View all","View all"
+Tags,Tags
+"Please, mind that only logged in users can submit questions","Please, mind that only logged in users can submit questions"
+"Did you find what you were looking for?","Did you find what you were looking for?"
+"Ask a Question","Ask a Question"
+"Hide form","Hide form"
+"* Required Fields","* Required Fields"
+"Your question:","Your question:"
+"Type your question here...","Type your question here..."
+GDPR,GDPR
+"Your name:","Your name:"
+Notification,Notification
+"get notification on email when the answer is ready","get notification on email when the answer is ready"
+"Your e-mail:","Your e-mail:"
+Email,Email
+"Send the Question","Send the Question"
+"Find answer (deliver, etc.)","Find answer (deliver, etc.)"
+Search,Search
+Categories:,Categories:
+"No categories to display. Create or enable categories.","No categories to display. Create or enable categories."
+"Customer Questions","Customer Questions"
+"Customer: %name","Customer: %name"
+Question:,Question:
+"Delete image","Delete image"
+"Dear %name,","Dear %name,"
+"We answered your question.","We answered your question."
+"Your Question: %question","Your Question: %question"
+"Answer: %answer","Answer: %answer"
+"Back to Product","Back to Product"
+"Rate the answer?","Rate the answer?"
+"Total rating ","Total rating "
+"Was this answer helpful?","Was this answer helpful?"
+Yes,Yes
+No,No
+"people of","people of"
+"found this answer helpful","found this answer helpful"
+"Invalid url key. Only a-z, 0-9, ., -, _ expected.","Invalid url key. Only a-z, 0-9, ., -, _ expected."
+"Invalid template and/or element id selector","Invalid template and/or element id selector"
+"See all results","See all results"
+"Hide results","Hide results"
+"Amasty FAQ","Amasty FAQ"
+"FAQ and Product Questions","FAQ and Product Questions"
+"General Settings","General Settings"
+"Enable module","Enable module"
+"The name of the FAQ page to be used in the top(breadcrumbs) and bottom menu(footer)","The name of the FAQ page to be used in the top(breadcrumbs) and bottom menu(footer)"
+"URL prefix","URL prefix"
+"route name, for example {base_store_url}/{URL prefix}/{question_url_key)","route name, for example {base_store_url}/{URL prefix}/{question_url_key)"
+"Add FAQ To the Toolbar","Add FAQ To the Toolbar"
+"Link to the FAQ page will be added to toolbar","Link to the FAQ page will be added to toolbar"
+"Add FAQ To the Categories Menu","Add FAQ To the Categories Menu"
+"Link to the FAQ page will be added to categories menu","Link to the FAQ page will be added to categories menu"
+"Add FAQ To the Footer","Add FAQ To the Footer"
+"Link to the FAQ page will be added to footer","Link to the FAQ page will be added to footer"
+"Allow unregistered customers to ask questions","Allow unregistered customers to ask questions"
+"Not logged in customers will be permitted to submit questions if the setting is YES","Not logged in customers will be permitted to submit questions if the setting is YES"
+"FAQ Home Page","FAQ Home Page"
+"Use FAQ Home Page","Use FAQ Home Page"
+"Select CMS Page","Select CMS Page"
+"Select FAQ Pages Layout","Select FAQ Pages Layout"
+"FAQ Search, Navigation and Sorting","FAQ Search, Navigation and Sorting"
+"Show breadcrumbs","Show breadcrumbs"
+"Show Ask a Question Button","Show Ask a Question Button"
+"Sort Categories By","Sort Categories By"
+"Sort Questions By","Sort Questions By"
+"Limit Displayed Answer Length","Limit Displayed Answer Length"
+"Show Search Box","Show Search Box"
+"No Results Text","No Results Text"
+"Specifies the text to display if nothing has been found by the search results page.","Specifies the text to display if nothing has been found by the search results page."
+"Include FAQ Categories into Searching","Include FAQ Categories into Searching"
+"If enabled, you will get search results based not only on questions but also on categories, if the search query matches the category name.","If enabled, you will get search results based not only on questions but also on categories, if the search query matches the category name."
+"Limit Categories Number in Search Results","Limit Categories Number in Search Results"
+"Limit Questions Number in Category","Limit Questions Number in Category"
+"Limit Questions Number in Search Results","Limit Questions Number in Search Results"
+"Short Answer Behavior","Short Answer Behavior"
+"Limit Tags in Menu","Limit Tags in Menu"
+"User Notifications","User Notifications"
+"Notify user via email","Notify user via email"
+"Email Sender","Email Sender"
+"Email Template","Email Template"
+"Admin Notifications","Admin Notifications"
+"Notify admin of a new question","Notify admin of a new question"
+"Send e-mail to","Send e-mail to"
+"Product Page","Product Page"
+"Show `Product Questions` Tab","Show `Product Questions` Tab"
+"`Product Questions` Tab Name","`Product Questions` Tab Name"
+"`Product Questions` Tab Position","`Product Questions` Tab Position"
+"Sort order should be greater than 0","Sort order should be greater than 0"
+"Limit questions number","Limit questions number"
+Rating,Rating
+Type,Type
+"Hide Zero Total Rating","Hide Zero Total Rating"
+"Allow Rating for Guests","Allow Rating for Guests"
+"Social buttons","Social buttons"
+"Social Networks","Social Networks"
+SEO,SEO
+"Enable Question and Category URL Suffix","Enable Question and Category URL Suffix"
+"Please mind that changing this configuration may affect your indexing in Google.","Please mind that changing this configuration may affect your indexing in Google."
+"Remove Trailing Slash from Question and Category URLs","Remove Trailing Slash from Question and Category URLs"
+"If enabled, a trailing slash will be removed from FAQ question URLs and FAQ category URLs.","If enabled, a trailing slash will be removed from FAQ question URLs and FAQ category URLs."
+"Question and Category URL Suffix","Question and Category URL Suffix"
+"Use Canonical URL on Pages","Use Canonical URL on Pages"
+"Mark Up FAQ with Structured Data","Mark Up FAQ with Structured Data"
+"Structured data will be added to product pages, FAQ home page, FAQ question pages and FAQ category pages.","Structured data will be added to product pages, FAQ home page, FAQ question pages and FAQ category pages."
+"Enable Rich Data Breadcrumbs","Enable Rich Data Breadcrumbs"
+"The <b>Show breadcrumbs</b> setting should be enabled in the <b>Faq Page</b> section.","The <b>Show breadcrumbs</b> setting should be enabled in the <b>Faq Page</b> section."
+"Enable Rich Data Organization","Enable Rich Data Organization"
+"Organization Website Url","Organization Website Url"
+"The URL of the website associated with the logo.","The URL of the website associated with the logo."
+"Organization Logo Url","Organization Logo Url"
+"URL of a logo that is representative of the organization.","URL of a logo that is representative of the organization."
+"Image requirements:<ul style=""margin-left: 5px;""><li>The image must be 112x112px, at minimum.</li><li>The image URL must be crawlable and indexable.</li><li>The image must be in .jpg, .png, or. gif format.</li></ul>","Image requirements:<ul style=""margin-left: 5px;""><li>The image must be 112x112px, at minimum.</li><li>The image URL must be crawlable and indexable.</li><li>The image must be in .jpg, .png, or. gif format.</li></ul>"
+"Organization Name","Organization Name"
+"Add Contact for Organization","Add Contact for Organization"
+"Contact Type","Contact Type"
+Telephone,Telephone
+"Phone number should be in internationalized version, starting with the ""<b>+</b>"" symbol and country code (+1 in the US and Canada).<br>Examples:<br><b>+1-800-555-1212</b><br><b>+44-2078225951</b>","Phone number should be in internationalized version, starting with the ""<b>+</b>"" symbol and country code (+1 in the US and Canada).<br>Examples:<br><b>+1-800-555-1212</b><br><b>+44-2078225951</b>"
+"XML Sitemap","XML Sitemap"
+"Add FAQ urls to XML Sitemap","Add FAQ urls to XML Sitemap"
+"Enable Hreflang URLs","Enable Hreflang URLs"
+"Language Code","Language Code"
+"Country Code","Country Code"
+Frequency,Frequency
+Priority,Priority
+"Valid values range from 0.0 to 1.0.","Valid values range from 0.0 to 1.0."
+"GDPR Consent","GDPR Consent"
+"Сonsent Text","Сonsent Text"
+Buffer,Buffer
+Facebook,Facebook
+WhatsApp,WhatsApp
+Digg,Digg
+Google+,Google+
+LinkedIn,LinkedIn
+Pinterest,Pinterest
+Reddit,Reddit
+StumbleUpon,StumbleUpon
+Tumblr,Tumblr
+Twitter,Twitter
+VKontakte,VKontakte
+"Amasty FAQ Categories","Amasty FAQ Categories"
+"Amasty FAQ Questions","Amasty FAQ Questions"
+"Amasty Back to Product Button","Amasty Back to Product Button"
+"Back to last viewed Product Button by Amasty","Back to last viewed Product Button by Amasty"
+"Back To Product button Align","Back To Product button Align"
+"Amasty FAQ Search Box","Amasty FAQ Search Box"
+"Amasty FAQ Search Box widget","Amasty FAQ Search Box widget"
+"Search Box Width","Search Box Width"
+"You can use the CSS-length values for the Search Box configuration (100px, 77pt, 20em, .5ex or 50%)","You can use the CSS-length values for the Search Box configuration (100px, 77pt, 20em, .5ex or 50%)"
+"Search Box Align","Search Box Align"
+"Amasty FAQ Categories List","Amasty FAQ Categories List"
+"FAQ and Product Questions Categories list widget","FAQ and Product Questions Categories list widget"
+"Layout Type","Layout Type"
+"Limit question number in category","Limit question number in category"
+"Limit categories number","Limit categories number"
+"Categories list without questions","Categories list without questions"
+"Amasty FAQ Tags Block","Amasty FAQ Tags Block"
+"Tags block for home page","Tags block for home page"
+"Tags limit","Tags limit"
+"Amasty FAQ Questions List","Amasty FAQ Questions List"
+"FAQ and Product Questions list widget","FAQ and Product Questions list widget"
+"Block Title","Block Title"
+"Widget Type","Widget Type"
+"Select Category...","Select Category..."
+"Select Question...","Select Question..."
+Product,Product
+"Select Product...","Select Product..."
+"Category Information","Category Information"
+Back,Back
+Save,Save
+"Save and Continue Edit","Save and Continue Edit"
+"Category Details","Category Details"
+"Enable Category","Enable Category"
+"Category Name","Category Name"
+"Category Name on Category Page","Category Name on Category Page"
+"Please fill in the field if you want to display a different category name on the category page on front end. Otherwise, the name specified in the ‘Category Name’ setting will be used.","Please fill in the field if you want to display a different category name on the category page on front end. Otherwise, the name specified in the ‘Category Name’ setting will be used."
+"Url key","Url key"
+"Store View","Store View"
+"Display for Specific Customer Groups","Display for Specific Customer Groups"
+"Leave the field empty if you would like to show this question to all customer groups","Leave the field empty if you would like to show this question to all customer groups"
+"
+                        Image will be resized to 50x50 px. Allowed file types : jpg jpeg gif png. Gif can have only one frame
+                    ","
+                        Image will be resized to 50x50 px. Allowed file types : jpg jpeg gif png. Gif can have only one frame
+                    "
+Description,Description
+"Add questions","Add questions"
+Cancel,Cancel
+Visibility,Visibility
+Actions,Actions
+"Meta title","Meta title"
+"Meta description","Meta description"
+"Exclude from XML SiteMap","Exclude from XML SiteMap"
+Noindex,Noindex
+Nofollow,Nofollow
+Canonical,Canonical
+"Add New Category","Add New Category"
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+"Change Status","Change Status"
+Edit,Edit
+Viewed,Viewed
+"Meta Title","Meta Title"
+"Meta Description","Meta Description"
+Id,Id
+"Don't show question direct URL","Don't show question direct URL"
+Thumbnail,Thumbnail
+SKU,SKU
+Price,Price
+General,General
+"Set ""Yes"" if you want to hide ""Read more"" link and disable direct question URL (useful for brief answers)","Set ""Yes"" if you want to hide ""Read more"" link and disable direct question URL (useful for brief answers)"
+"URL Key","URL Key"
+Stores,Stores
+"Short Answer","Short Answer"
+"Full Answer","Full Answer"
+"Positive Rating","Positive Rating"
+"Negative Rating","Negative Rating"
+"Customer Info","Customer Info"
+"Sender Name","Sender Name"
+"Sender Email","Sender Email"
+"Asked in","Asked in"
+Products,Products
+"Add products","Add products"
+"Add Selected Products","Add Selected Products"
+"Product Categories","Product Categories"
+"Select Categories","Select Categories"
+"Add New Question","Add New Question"
+"Change Visibility","Change Visibility"
+"Clear Grid","Clear Grid"
+"Search query","Search query"
+Result,Result
+Hits,Hits

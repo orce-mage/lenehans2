@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var $block Amasty\Faq\Block\Lists\CategoryList
+ * @var $escaper Magento\Framework\Escaper
+ */
+?>
+
+<?php if ($block->getCategories() && $block->isShowCategoryInSearch()): ?>
+    <div class="amfaq-links-container" data-bind="scope: 'faq-search'">
+        <!-- ko foreach: $data.showedCategories -->
+            <div class="item amfaq-link-category">
+                <a data-bind="attr: {href: $data.url}, text: $data.title"></a>
+            </div>
+        <!--/ko-->
+        <!-- ko if: $data.showButtonSeeAll -->
+            <button class="amfaq-button -questions"
+                    data-bind="click: $data.toggleAllResults.bind($data)">
+                <span data-bind="text: $data.isShowAllResults() ? $data.text.hideResults : $data.text.seeResults"></span>
+                <span data-bind="text: '(' + $data.questionsCount() + ')',  hidden: $data.isShowAllResults"></span>
+            </button>
+        <!--/ko-->
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            ".amfaq-links-container": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "faq-search": {
+                            "component": "Amasty_Faq/js/categories-search",
+                            "categories": <?= /** @noEscape */ $block->getCategoriesJson() ?>,
+                            "limitCategories": <?= $escaper->escapeJs($block->getLimitCategoryInSearch()) ?>
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<?php endif ?>

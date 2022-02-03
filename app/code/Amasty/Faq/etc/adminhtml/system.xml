@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amastyfaq" translate="label" type="text" sortOrder="161817" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>FAQ and Product Questions</label>
+            <tab>amasty</tab>
+            <resource>Amasty_Faq::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="label" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <comment>The name of the FAQ page to be used in the top(breadcrumbs) and bottom menu(footer)</comment>
+                </field>
+                <field id="url_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>URL prefix</label>
+                    <comment>route name, for example {base_store_url}/{URL prefix}/{question_url_key)</comment>
+                </field>
+                <field id="add_to_toolbar_menu" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add FAQ To the Toolbar</label>
+                    <comment>Link to the FAQ page will be added to toolbar</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="add_to_category_menu" translate="label comment" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add FAQ To the Categories Menu</label>
+                    <comment>Link to the FAQ page will be added to categories menu</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="add_to_footer_menu" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add FAQ To the Footer</label>
+                    <comment>Link to the FAQ page will be added to footer</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="unregistered_customers_questions" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow unregistered customers to ask questions</label>
+                    <comment>Not logged in customers will be permitted to submit questions if the setting is YES</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="faq_home_page" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>FAQ Home Page</label>
+                <field id="use_faq_home_page" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use FAQ Home Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cmspages_faq_home_page" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select CMS Page</label>
+                    <depends>
+                        <field id="use_faq_home_page">1</field>
+                    </depends>
+                    <source_model>Amasty\Faq\Model\Config\CmsPage</source_model>
+                </field>
+                <field id="layout" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select FAQ Pages Layout</label>
+                    <source_model>Amasty\Faq\Model\Config\Layouts</source_model>
+                </field>
+            </group>
+
+            <group id="faq_page" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>FAQ Search, Navigation and Sorting</label>
+                <field id="show_breadcrumbs" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show breadcrumbs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_ask" translate="label" type="select" sortOrder="85" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Ask a Question Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="category_sort" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Categories By</label>
+                    <source_model>Amasty\Faq\Model\Config\CategoriesSort</source_model>
+                </field>
+                <field id="question_sort" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Questions By</label>
+                    <source_model>Amasty\Faq\Model\Config\QuestionsSort</source_model>
+                </field>
+                <field id="limit_short_answer" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Limit Displayed Answer Length</label>
+                </field>
+                <field id="show_search" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Search Box</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="no_result" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No Results Text</label>
+                    <comment>Specifies the text to display if nothing has been found by the search results page.</comment>
+                </field>
+                <field id="category_in_search" translate="label tooltip" type="select" sortOrder="140" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Include FAQ Categories into Searching</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>If enabled, you will get search results based not only on questions but also on categories, if the search query matches the category name.</tooltip>
+                </field>
+                <field id="limit_category_search" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Limit Categories Number in Search Results</label>
+                    <depends>
+                        <field id="category_in_search">1</field>
+                    </depends>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="limit_question_category" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Limit Questions Number in Category</label>
+                    <depends>
+                        <field id="layout">amastyfaq_column</field>
+                    </depends>
+                </field>
+                <field id="limit_question_search" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Limit Questions Number in Search Results</label>
+                    <depends>
+                        <field id="show_search">1</field>
+                    </depends>
+                </field>
+                <field id="short_answer_behavior" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Short Answer Behavior</label>
+                    <source_model>Amasty\Faq\Model\Config\ShortAnswerBehavior</source_model>
+                </field>
+                <field id="tag_menu_limit" translate="label" type="text" sortOrder="180" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Limit Tags in Menu</label>
+                    <validate>validate-zero-or-greater</validate>
+                </field>
+            </group>
+
+            <group id="user_email" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>User Notifications</label>
+                <field id="user_notify" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notify user via email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <depends>
+                        <field id="user_notify">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="template" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Email Template</label>
+                    <depends>
+                        <field id="user_notify">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+
+            <group id="admin_email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Admin Notifications</label>
+                <field id="enable_notify" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notify admin of a new question</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="send_to" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send e-mail to</label>
+                    <depends>
+                        <field id="enable_notify">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="template" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Email Template</label>
+                    <depends>
+                        <field id="enable_notify">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+
+            <group id="product_page" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Page</label>
+                <field id="show_tab" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show `Product Questions` Tab</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="tab_name" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>`Product Questions` Tab Name</label>
+                    <comment>You can use {count} to show how many questions Product has</comment>
+                </field>
+                <field id="tab_position" translate="label comment" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>`Product Questions` Tab Position</label>
+                    <comment>Sort order should be greater than 0</comment>
+                </field>
+                <field id="show_link" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Ask a Question Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="show_tab">1</field>
+                    </depends>
+                </field>
+                <field id="limit_question_product" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Limit questions number</label>
+                    <depends>
+                        <field id="show_tab">1</field>
+                    </depends>
+                </field>
+                <field id="short_answer_behavior" translate="label" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Short Answer Behavior</label>
+                    <source_model>Amasty\Faq\Model\Config\ShortAnswerBehavior</source_model>
+                </field>
+            </group>
+
+            <group id="rating" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Rating</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="type" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Type</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <source_model>Amasty\Faq\Model\OptionSource\Question\RatingType</source_model>
+                </field>
+                <field id="avg_hide_empty_total" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide Zero Total Rating</label>
+                    <depends>
+                        <field id="type" negative="0">2</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allow_guests" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Rating for Guests</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="social" translate="label" type="text" sortOrder="85" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Social buttons</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="buttons" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Social Networks</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <source_model>Amasty\Faq\Model\Config\SocialOptions</source_model>
+                </field>
+            </group>
+
+            <group id="seo" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>SEO</label>
+                <field id="add_url_suffix" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Question and Category URL Suffix</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Please mind that changing this configuration may affect your indexing in Google.</comment>
+                </field>
+                <field id="remove_trailing_slash" translate="label tooltip" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Remove Trailing Slash from Question and Category URLs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>If enabled, a trailing slash will be removed from FAQ question URLs and FAQ category URLs.</tooltip>
+                    <depends>
+                        <field id="add_url_suffix">0</field>
+                    </depends>
+                </field>
+                <field id="url_suffix" translate="label tooltip" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Question and Category URL Suffix</label>
+                    <comment>Please notice that URL keys of FAQ questions and FAQ categories should not contain suffixes added manually earlier.</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="add_url_suffix">1</field>
+                    </depends>
+                </field>
+                <field id="canonical_url" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Canonical URL on Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="add_structureddata" translate="label tooltip" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Mark Up FAQ with Structured Data</label>
+                    <tooltip>Structured data will be added to product pages, FAQ home page, FAQ question pages and FAQ category pages.</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="add_richdata_breadcrumbs" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Rich Data Breadcrumbs</label>
+                    <comment><![CDATA[The <b>Show breadcrumbs</b> setting should be enabled in the <b>Faq Page</b> section.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="add_richdata_organization" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Rich Data Organization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="organization_website_url" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Organization Website Url</label>
+                    <comment><![CDATA[The URL of the website associated with the logo.]]></comment>
+                    <validate>required-entry validate-url</validate>
+                    <depends>
+                        <field id="add_richdata_organization">1</field>
+                    </depends>
+                </field>
+                <field id="organization_logo_url" translate="label comment tooltip" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Organization Logo Url</label>
+                    <comment><![CDATA[URL of a logo that is representative of the organization.]]></comment>
+                    <tooltip><![CDATA[Image requirements:<ul style="margin-left: 5px;"><li>The image must be 112x112px, at minimum.</li><li>The image URL must be crawlable and indexable.</li><li>The image must be in .jpg, .png, or. gif format.</li></ul>]]></tooltip>
+                    <validate>required-entry validate-url</validate>
+                    <depends>
+                        <field id="add_richdata_organization">1</field>
+                    </depends>
+                </field>
+                <field id="organization_name" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Organization Name</label>
+                    <depends>
+                        <field id="add_richdata_organization">1</field>
+                    </depends>
+                </field>
+                <field id="add_richdata_contact" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add Contact for Organization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="add_richdata_organization">1</field>
+                    </depends>
+                </field>
+                <field id="organization_contact_type" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Contact Type</label>
+                    <source_model>Amasty\Faq\Model\Config\RichDataContactType</source_model>
+                    <depends>
+                        <field id="add_richdata_organization">1</field>
+                        <field id="add_richdata_contact">1</field>
+                    </depends>
+                </field>
+                <field id="organization_telephone" translate="label tooltip" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Telephone</label>
+                    <tooltip><![CDATA[Phone number should be in internationalized version, starting with the "<b>+</b>" symbol and country code (+1 in the US and Canada).<br>Examples:<br><b>+1-800-555-1212</b><br><b>+44-2078225951</b>]]></tooltip>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="add_richdata_organization">1</field>
+                        <field id="add_richdata_contact">1</field>
+                    </depends>
+                </field>
+                <group id="xml" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>XML Sitemap</label>
+                    <field id="sitemap" translate="label" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Add FAQ urls to XML Sitemap</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="hreflang" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Hreflang URLs</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="language" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Language Code</label>
+                        <source_model>Amasty\Faq\Model\Config\Hreflang\Language</source_model>
+                        <depends>
+                            <field id="hreflang">1</field>
+                        </depends>
+                    </field>
+                    <field id="country" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Country Code</label>
+                        <source_model>Amasty\Faq\Model\Config\Hreflang\Country</source_model>
+                        <depends>
+                            <field id="hreflang">1</field>
+                        </depends>
+                    </field>
+                    <field id="changefreq" translate="label" type="select" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Frequency</label>
+                        <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
+                        <depends>
+                            <field id="sitemap">1</field>
+                        </depends>
+                    </field>
+                    <field id="sitemap_priority" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Priority</label>
+                        <backend_model>Magento\Sitemap\Model\Config\Backend\Priority</backend_model>
+                        <comment>Valid values range from 0.0 to 1.0.</comment>
+                        <depends>
+                            <field id="sitemap">1</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
+
+            <group id="gdpr" translate="label" type="text" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>GDPR Consent</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="text" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Сonsent Text</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

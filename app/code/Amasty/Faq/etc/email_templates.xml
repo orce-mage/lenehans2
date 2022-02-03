@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="amastyfaq_admin_email_template"
+              label="Amasty Faq and Product Questions Admin Notification"
+              file="amasty_faq_admin_notification.html"
+              type="html"
+              module="Amasty_Faq"
+              area="adminhtml"
+    />
+    <template id="amastyfaq_user_email_template"
+              label="Amasty Faq and Product Questions Customer Notification"
+              file="amasty_faq_customer_notification.html"
+              type="html"
+              module="Amasty_Faq"
+              area="frontend"
+    />
+</config>

@@ -1,0 +1,112 @@
+//
+//  JetTheme compatibility
+//  _____________________________________________
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .amfaq-search {
+        .search-autocomplete {
+            .lib-css(border, @amtheme__border);
+
+            border-top: none;
+            box-sizing: border-box;
+        }
+
+        li {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .amfaq-category.selected {
+            background: inherit;
+        }
+    }
+
+    .amfaq-rating .average-rate-wrapper:not(:checked) > label {
+        & {
+            padding: 0;
+        }
+
+        &:before,
+        &:after {
+            position: static;
+            border: none;
+            border-radius: unset;
+            background: none;
+        }
+    }
+
+    .ask-question-form.widget .ask-form-container {
+        margin-bottom: @indent__sm;
+    }
+
+    .amfaq-rating-average {
+        margin-right: 5px;
+    }
+
+    .ask-question-form .button-container .button-info {
+        float: none;
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .amfaq-rating .amfaq-rating-average {
+        & {
+            flex-wrap: wrap;
+        }
+
+        .amfaq-rate-the-answer:first-of-type {
+            width: 100%;
+        }
+
+        .average-rate-wrapper {
+            padding-left: 0;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .amfaq-search,
+    .amfaq_categories {
+        margin-top: @indent__sm;
+    }
+
+    .amfaq-question-footer-wrapper {
+        & {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .amfaq-rating {
+            margin-bottom: @indent__sm;
+        }
+    }
+
+    .amfaq-search .search-autocomplete {
+        margin: 0;
+        padding: 20px @indent__sm;
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amfaq-search .search-autocomplete {
+        top: auto;
+        padding: 0;
+        border-radius: unset;
+    }
+
+    .amfaq-question-footer-wrapper {
+        flex-wrap: wrap;
+    }
+}

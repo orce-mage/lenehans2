@@ -1,0 +1,20 @@
+question_id,question,url_key,store_codes,short_answer,answer,status,visibility,position,meta_title,meta_description,name,email,category_ids,product_skus
+1,Do you provide the same day delivery to NY?,delivery-question,default,Please check other delivery options for alternative ways of getting your purchases in New York. Pickup Available We have several mobile pickup locations in the city.,"<p>Please check other delivery options for<span class=""Apple-converted-space""> </span><a href=""http://faq-and-product-questions-m2.demo.amasty.com/faq-and-product-questions-m2/index.php/sales/guest/form/"">alternative ways</a><span class=""Apple-converted-space""> </span>of getting your purchases in New York.</p>
+<p></p>
+<h2>Pickup Available</h2>
+<p>We have several mobile pickup locations in the city. They located in the following city districts:</p>
+<ul>
+<li>Manhattan</li>
+<li>Brooklyn</li>
+<li>Queens</li>
+<li>The Bronx</li>
+<li>Staten Island</li>
+</ul>
+<div>Please, contact our customer care service in order to get their addresses.</div>",0,1,0,,,,,"1,2,3",24-MB04
+2,How can you take credit cards payments across the web?,how-can-you-take-credit-cards,,,"There are three ways that merchants can take credit cards across the net. The first is by capturing card details securely, transmitting them to the desktop PC and then processing them through a normal PDQ facility. This option is only suitable if the ecommerce software has the appropriate security and is bank-approved. It costs the least and minimises change and hassle for an existing business.
+
+The second option is to process card payments in real time on the internet. Service providers include NetBanx, Secure Trading, WorldPay, Secpay and Datacash. You will need a merchant account and will generally have to wait for the money, but the PSPs charge you to process everything on your behalf. This can be suitable for medium and high volume sites.
+
+Finally, some of the above service partners provide a ‘bureau’ type service. If you are unable to acquire your own merchant account, they will transact the funds on your behalf — a useful service for some, but not cheap.",1,1,1,,,,,"3,4",
+,Do you have Chelsea Tee in other colors?,do-you-have-chelsea-tee-in-other-colors,,,"No, we offer Chelsea Tee only in black, blue and white.",1,2,2,Chelsea Tee,,,,,
+6,Do you charge extra payments for fragile products?,extra-payments,default,,"No, there are no additional payments for fragile products.",0,0,,,,,,1,"24-WB04,24-MB04"

@@ -1,0 +1,65 @@
+<?php
+/**
+ * @var \Amasty\Faq\Block\Lists\QuestionsList $block
+ */
+
+/** @var \Amasty\Faq\Block\Rating\Rating $rating */
+$rating = $block->getChildBlock('amasty_faq_rating');
+?>
+<div class="amfaq_questions widget">
+    <?php if ($block->hasBlockTitle()): ?>
+        <div class="amfaq-title"><?= $block->escapeHtml((string)$block->getBlockTitle()) ?></div>
+    <?php endif; ?>
+<?php if ($questions = $block->getQuestions()): ?>
+    <?php foreach ($questions as $question): ?>
+        <div class="am-item">
+            <div class="am-title">
+                <?= /** @noEscape */ $block->highlight($block->escapeHtml($question->getTitle())); ?>
+            </div>
+            <div class="am-content amfaq-hidden">
+                <div class="amfaq-short-answer-container"><?= /** @noEscape */ $block->highlight($block->getShortAnswer($question)); ?></div>
+                <div class="amfaq-question-footer-wrapper">
+                    <?php if (!$question->isShowFullAnswer()): ?>
+                    <div class="am-links">
+                        <a href="<?= $block->escapeUrl($block->getQuestionLink($question)) ?>">
+                            <?= $block->escapeHtml(__('Read More')); ?>
+                        </a>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if ($rating): ?>
+                        <?= /** @noEscape */ $rating->ratingItemHtml((int)$question->getQuestionId()); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    <?php if ($pager = $block->getPagerHtml()): ?>
+        <div class="amfaq-pager"><?= /** @noEscape */ $pager; ?></div>
+    <?php endif; ?>
+<?php else: ?>
+    <div class="am-no-items">
+        <?= $block->escapeHtml($block->getNoItemsLabel()); ?>
+    </div>
+<?php endif; ?>
+</div>
+<?php if ($rating): ?>
+    <?= /** @noEscape */ $block->getChildHtml('amasty_faq_rating'); ?>
+<?php endif; ?>
+<?php if ($block->isShowQuestionForm()): ?>
+    <?= /** @noEscape */ $block->getChildHtml('amasty_faq_ask_question_form'); ?>
+<?php endif; ?>
+<script type="text/x-magento-init">
+{
+    ".amfaq_questions .am-item": {
+        "collapsible": {
+            "collapsible": true,
+            "header": ".am-title",
+            "content": ".am-content",
+            "animate": 500,
+            "icons": {"header": "am-minus", "activeHeader": "am-plus"}
+        }
+    }
+}
+</script>
+<?= /** @noEscape */ $block->getChildHtml('amasty_faq_structureddata'); ?>

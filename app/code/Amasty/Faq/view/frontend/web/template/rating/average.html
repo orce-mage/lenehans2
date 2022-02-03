@@ -1,0 +1,18 @@
+<!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+<div class="amfaq-rating-average">
+    <span data-bind="i18n: 'Rate the answer?'" class="amfaq-rate-the-answer"></span>
+    <span class="amfaq-rating-data-wrapper average-rate-wrapper" data-bind="css:{'-voted': isVoted}">
+        <!-- ko foreach: ko.utils.range(1, 5).reverse() -->
+            <input type="radio" data-bind="
+                checked: $parent.votedStarNumber,
+                attr: {id: ++ko.uid, value: $data}"
+            />
+            <label data-bind="attr: {title: $data + ' Stars', for: ko.uid}"></label>
+        <!-- /ko -->
+    </span>
+    <!-- ko ifnot: hideZeroRating && average() == 0 -->
+        <span class="amfaq-rate-the-answer -gray" data-bind="i18n: 'Total rating ' + average().toFixed(1)"></span>
+    <!-- /ko -->
+</div>

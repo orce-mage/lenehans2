@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_Faq::faq"
+             title="Amasty FAQ"
+             translate="title"
+             module="Amasty_Faq"
+             parent="Magento_Backend::content"
+             dependsOnModule="Amasty_Faq"
+             sortOrder="110"
+             resource="Amasty_Faq::faq"
+        />
+        <add id="Amasty_Faq::question"
+             title="FAQ Questions"
+             translate="title"
+             sortOrder="10"
+             module="Amasty_Faq"
+             parent="Amasty_Faq::faq"
+             action="amastyfaq/question/index"
+             resource="Amasty_Faq::question"
+        />
+
+        <add id="Amasty_Faq::category"
+             title="FAQ Categories"
+             translate="title"
+             sortOrder="20"
+             module="Amasty_Faq"
+             parent="Amasty_Faq::faq"
+             action="amastyfaq/category/index"
+             resource="Amasty_Faq::category"
+        />
+
+        <add id="Amasty_Faq::reports"
+             title="FAQ Search Terms Report"
+             translate="title"
+             sortOrder="40"
+             module="Amasty_Faq"
+             parent="Amasty_Faq::faq"
+             action="amastyfaq/report/index"
+             resource="Amasty_Faq::reports"
+        />
+        <!---->
+        <!--<add id="Amasty_Faq::tag"-->
+             <!--title="FAQ Tags"-->
+             <!--translate="title"-->
+             <!--sortOrder="30"-->
+             <!--module="Amasty_Faq"-->
+             <!--parent="Amasty_Faq::faq"-->
+             <!--action="amastyfaq/tag/index"-->
+             <!--resource="Amasty_Faq::tag"-->
+        <!--/>-->
+
+        <add id="Amasty_Faq::category_import"
+             title="Import FAQ Categories"
+             module="Amasty_Faq"
+             sortOrder="70"
+             action="amastyfaq/import/categoryimport"
+             parent="Magento_Backend::system_convert"
+             resource="Amasty_Faq::faq_import"/>
+        <add id="Amasty_Faq::question_import"
+             title="Import FAQ Questions"
+             module="Amasty_Faq"
+             sortOrder="71"
+             action="amastyfaq/import/questionimport"
+             parent="Magento_Backend::system_convert"
+             resource="Amasty_Faq::faq_import"/>
+    </menu>
+</config>

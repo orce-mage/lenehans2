@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aminvisiblecaptcha>
+            <general>
+                <enabledCaptcha>0</enabledCaptcha>
+            </general>
+            <setup>
+                <captchaLanguage>en</captchaLanguage>
+                <captchaScore>0.5</captchaScore>
+                <badgeTheme>light</badgeTheme>
+                <badgePosition>bottomright</badgePosition>
+                <errorMessage>Sorry, Google Recaptcha has detected you as a bot and restricted the access. Please contact the administrator in case you are not a bot.</errorMessage>
+            </setup>
+            <forms>
+                <defaultForms>customer/account/createpost,customer/account/loginPost,customer/account/forgotpasswordpost,customer/account/resetpasswordpost,newsletter/subscriber/new,contact/index/post,review/product/post</defaultForms>
+            </forms>
+        </aminvisiblecaptcha>
+    </default>
+</config>

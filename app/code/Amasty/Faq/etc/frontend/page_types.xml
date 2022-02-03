@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<page_types xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_types.xsd">
+    <type id="faq_category_view" label="Amasty FAQ Category Page (All)"/>
+    <type id="faq_question_view" label="Amasty FAQ Question/Answer Page (All)"/>
+    <type id="faq_search_index" label="Amasty FAQ Search Result Page"/>
+</page_types>

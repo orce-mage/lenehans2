@@ -1,0 +1,21 @@
+{
+    "name": "amasty\/aminvisiblecaptcha",
+    "description": "Amasty Google Invisible Captcha",
+    "require": {
+        "php": ">=7.3.0",
+        "amasty\/base": ">=1.13.0"
+    },
+    "type": "magento2-module",
+    "version": "2.4.3",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\InvisibleCaptcha\\": ""
+        }
+    }
+}

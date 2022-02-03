@@ -1,0 +1,5 @@
+category_id,title,url_key,store_codes,status,meta_title,meta_description,position,question_ids
+1,Frequently Asked,frequently-asked-questions,default,1,FAQ,,1,4
+,Delivery questions,delivery,,1,,,2,3
+3,Colors and sizes,colors-and-sizes,,0,,colors and size,3,2
+4,Deals & Sale,deals,default,1,Deals and Sales,,4,1

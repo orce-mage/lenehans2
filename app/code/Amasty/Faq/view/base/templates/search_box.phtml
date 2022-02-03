@@ -1,0 +1,7 @@
+<?php /** @var \Amasty\Faq\Block\Widgets\SearchBox $block */ ?>
+<div class="am-search-box-wrapper">
+    <div class="<?= $block->escapeHtml($block->getSearchBoxAlign()) ?>"
+         style="width: <?= $block->escapeHtml($block->getSearchBoxWidth()) ?>">
+        <?= /** @noEscape */ $block->getSearchBlockHtml() ?>
+    </div>
+</div>

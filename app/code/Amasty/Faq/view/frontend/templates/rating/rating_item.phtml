@@ -1,0 +1,9 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div class="amfaq-rating"
+     data-bind="scope: 'faq-rating.faq-rating-item-<?= $block->escapeHtml($block->getData('questionId')); ?>'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>

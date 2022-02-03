@@ -1,0 +1,7 @@
+<?php
+/** @var \Amasty\Faq\Block\RichData\StructuredData $block */
+if (!empty($block->getStructuredData())): ?>
+    <script type="application/ld+json">
+        <?= /* @noEscape */ \Zend_Json::encode($block->getStructuredData()); ?>
+    </script>
+<?php endif; ?>

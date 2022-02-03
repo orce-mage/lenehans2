@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Faq\Api\Data\QuestionInterface" type="Amasty\Faq\Model\Question"/>
+    <preference for="Amasty\Faq\Api\QuestionRepositoryInterface" type="Amasty\Faq\Model\QuestionRepository"/>
+    <preference for="Amasty\Faq\Api\Data\CategoryInterface" type="Amasty\Faq\Model\Category"/>
+    <preference for="Amasty\Faq\Api\CategoryRepositoryInterface" type="Amasty\Faq\Model\CategoryRepository"/>
+    <preference for="Amasty\Faq\Api\Data\TagInterface" type="Amasty\Faq\Model\Tag"/>
+    <preference for="Amasty\Faq\Api\TagRepositoryInterface" type="Amasty\Faq\Model\TagRepository"/>
+    <preference for="Amasty\Faq\Api\VisitStatRepositoryInterface" type="Amasty\Faq\Model\VisitStatRepository"/>
+
+    <preference for="Amasty\Faq\Api\Data\QuestionSearchResultsInterface" type="Amasty\Faq\Model\QuestionSearchResults"/>
+    <preference for="Amasty\Faq\Api\Data\CategorySearchResultsInterface" type="Amasty\Faq\Model\CategorySearchResults"/>
+
+    <preference for="Amasty\Faq\Model\Frontend\Rating\VotingRequest\VotingRequestInterface" type="Amasty\Faq\Model\Frontend\Rating\VotingRequest\VotingRequest"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amastyfaq_question_listing_data_source" xsi:type="string">Amasty\Faq\Model\ResourceModel\Question\Collection</item>
+                <item name="amastyfaq_category_listing_data_source" xsi:type="string">Amasty\Faq\Model\ResourceModel\Category\Collection</item>
+                <item name="amastyfaq_category_question_listing_data_source" xsi:type="string">Amasty\Faq\Model\ResourceModel\Category\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Xsearch\Block\Search\Faq">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="collectionFactory" xsi:type="object">Magento\Framework\Data\CollectionFactory</item>
+                <item name="questionsCollectionFactory" xsi:type="object">Amasty\Faq\Model\ResourceModel\Question\CollectionFactory</item>
+                <item name="categoriesCollectionFactory" xsi:type="object">Amasty\Faq\Model\ResourceModel\Category\CollectionFactory</item>
+                <item name="dataObjectFactory" xsi:type="object">Magento\Framework\DataObjectFactory</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Faq\Model\Frontend\Rating\VotingService">
+        <arguments>
+            <argument name="votingProcessors" xsi:type="array">
+                <item name="voting" xsi:type="object">Amasty\Faq\Model\Frontend\Rating\Processor\YesNoVoting</item>
+                <item name="yesno" xsi:type="object">Amasty\Faq\Model\Frontend\Rating\Processor\YesNoVoting</item>
+                <item name="average" xsi:type="object">Amasty\Faq\Model\Frontend\Rating\Processor\Average</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="AssociatedQuestionEntityMap" type="Magento\Framework\DataObject">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="category_ids" xsi:type="array">
+                    <item name="column" xsi:type="string">category_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateQuestionCategoryTable::TABLE_NAME</item>
+                </item>
+                <item name="store_ids" xsi:type="array">
+                    <item name="column" xsi:type="string">store_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateQuestionStoreTable::TABLE_NAME</item>
+                </item>
+                <item name="tag_ids" xsi:type="array">
+                    <item name="column" xsi:type="string">tag_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateQuestionTagTable::TABLE_NAME</item>
+                </item>
+                <item name="product_ids" xsi:type="array">
+                    <item name="column" xsi:type="string">product_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateQuestionProductTable::TABLE_NAME</item>
+                </item>
+                <item name="product_category_ids" xsi:type="array">
+                    <item name="column" xsi:type="string">category_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateQuestionsProductCategoryTable::TABLE_NAME</item>
+                </item>
+                <item name="customer_groups" xsi:type="array">
+                    <item name="column" xsi:type="string">customer_group_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateQuestionCustomerGroupTable::TABLE_NAME</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Faq\Model\ResourceModel\Question">
+        <arguments>
+            <argument name="associatedQuestionEntityMap" xsi:type="object">AssociatedQuestionEntityMap</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Faq\Controller\Adminhtml\Question\Save">
+        <arguments>
+            <argument name="associatedQuestionEntityMap" xsi:type="object">AssociatedQuestionEntityMap</argument>
+        </arguments>
+    </type>
+    <virtualType name="AssociatedCategoryEntityMap" type="Magento\Framework\DataObject">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="questions" xsi:type="array">
+                    <item name="column" xsi:type="string">question_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateQuestionCategoryTable::TABLE_NAME</item>
+                </item>
+                <item name="store_ids" xsi:type="array">
+                    <item name="column" xsi:type="string">store_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateCategoryStoreTable::TABLE_NAME</item>
+                </item>
+                <item name="customer_groups" xsi:type="array">
+                    <item name="column" xsi:type="string">customer_group_id</item>
+                    <item name="table" xsi:type="const">Amasty\Faq\Setup\Operation\CreateFaqCategoryCustomerGroupTable::TABLE_NAME</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Faq\Controller\Adminhtml\Category\Save">
+        <arguments>
+            <argument name="associatedCategoryEntityMap" xsi:type="object">AssociatedCategoryEntityMap</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Faq\Model\ResourceModel\Category">
+        <arguments>
+            <argument name="associatedCategoryEntityMap" xsi:type="object">AssociatedCategoryEntityMap</argument>
+        </arguments>
+    </type>
+    <virtualType name="Social\Buffer" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">Buffer</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[https://bufferapp.com/add?url=#CURRENT_URL#&amp;text=#TITLE#%0A#SHORT_ANSWER#]]></argument>
+            <argument name="imgName" xsi:type="string">buffer.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Facebook" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">Facebook</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[http://www.facebook.com/sharer.php?u=#CURRENT_URL#]]></argument>
+            <argument name="imgName" xsi:type="string">facebook.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\WhatsApp" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">WhatsApp</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[https://api.whatsapp.com/send?text=#TITLE#%0A#SHORT_ANSWER#&amp;url=#CURRENT_URL#]]></argument>
+            <argument name="imgName" xsi:type="string">whatsapp.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Digg" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">Digg</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[http://www.digg.com/submit?url=#CURRENT_URL#]]></argument>
+            <argument name="imgName" xsi:type="string">diggit.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Email" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">Email</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[mailto:?Subject=#TITLE#&amp;Body=#CURRENT_URL#%0A#TITLE#%0A#SHORT_ANSWER#]]></argument>
+            <argument name="imgName" xsi:type="string">email.png</argument>
+            <argument name="isOpenInNewTab" xsi:type="boolean">false</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Google" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true"><![CDATA[Google+]]></argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[https://plus.google.com/share?url=#CURRENT_URL#]]></argument>
+            <argument name="imgName" xsi:type="string">google.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\LinkedIn" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">LinkedIn</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[http://www.linkedin.com/shareArticle?mini=true&amp;url=#CURRENT_URL#]]></argument>
+            <argument name="imgName" xsi:type="string">linkedin.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Pinterest" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <!--issue - pintest can pin only images. So, them not included in list-->
+            <argument name="name" xsi:type="string" translate="true">Pinterest</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());]]></argument>
+            <argument name="imgName" xsi:type="string">pinterest.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Reddit" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">Reddit</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[http://reddit.com/submit?url=#CURRENT_URL#&amp;title=#TITLE#&amp;text=#SHORT_ANSWER#]]></argument>
+            <argument name="imgName" xsi:type="string">reddit.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\StumbleUpon" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">StumbleUpon</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[http://www.stumbleupon.com/submit?url=#CURRENT_URL#&amp;title=#TITLE#&amp;text=#SHORT_ANSWER#]]></argument>
+            <argument name="imgName" xsi:type="string">stumbleupon.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Tumblr" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">Tumblr</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[http://www.tumblr.com/share/link?url=#CURRENT_URL#&amp;title=#TITLE#&amp;text=#SHORT_ANSWER#]]></argument>
+            <argument name="imgName" xsi:type="string">tumblr.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\Twitter" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">Twitter</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[https://twitter.com/share?url=#CURRENT_URL#&amp;text=#TITLE#%0A#SHORT_ANSWER#]]></argument>
+            <argument name="imgName" xsi:type="string">twitter.png</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Social\VKontakte" type="Amasty\Faq\Model\SocialData">
+        <arguments>
+            <argument name="name" xsi:type="string" translate="true">VKontakte</argument>
+            <argument name="hrefTemplate" xsi:type="string"><![CDATA[http://vkontakte.ru/share.php?url=#CURRENT_URL#]]></argument>
+            <argument name="imgName" xsi:type="string">vk.png</argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Faq\Model\SocialDataList">
+        <arguments>
+            <argument name="socialList" xsi:type="array">
+                <item name="email" xsi:type="object">Social\Email</item>
+                <item name="whatsapp" xsi:type="object">Social\WhatsApp</item>
+                <item name="facebook" xsi:type="object">Social\Facebook</item>
+                <item name="twitter" xsi:type="object">Social\Twitter</item>
+                <!--<item name="pinterest" xsi:type="object">Social\Pinterest</item>-->
+                <item name="reddit" xsi:type="object">Social\Reddit</item>
+                <item name="tumblr" xsi:type="object">Social\Tumblr</item>
+                <item name="google" xsi:type="object">Social\Google</item>
+                <item name="digg" xsi:type="object">Social\Digg</item>
+                <item name="stumbleupon" xsi:type="object">Social\StumbleUpon</item>
+                <item name="linkedin" xsi:type="object">Social\LinkedIn</item>
+                <item name="vk" xsi:type="object">Social\VKontakte</item>
+                <item name="buffer" xsi:type="object">Social\Buffer</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Faq\Model\CategoryImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">\Amasty\Faq\Model\ImageProcessor::CATEGORY_MEDIA_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">\Amasty\Faq\Model\ImageProcessor::CATEGORY_MEDIA_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Faq\Controller\Adminhtml\Category\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\Faq\Model\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Faq\Model\ImageProcessor">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\Faq\Model\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sitemap\Model\Sitemap">
+        <plugin name="amastyFaqSitemap" type="Amasty\Faq\Plugin\Sitemap\Model\Sitemap" />
+    </type>
+    <type name="Amasty\XmlSitemap\Model\Sitemap">
+        <plugin name="amastyFaqXmlSitemap" type="Amasty\Faq\Plugin\XmlSitemap\Model\Sitemap" />
+    </type>
+    <virtualType name="sampleFile" type="Magento\ImportExport\Model\Import\SampleFileProvider">
+        <arguments>
+            <argument name="samples" xsi:type="array">
+                <item name="faq_category_import" xsi:type="string">Amasty_Faq</item>
+                <item name="faq_question_import" xsi:type="string">Amasty_Faq</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Faq\Model\Emails\NotifierProvider">
+        <arguments>
+            <argument name="notifiers" xsi:type="array">
+                <item name="admin" xsi:type="object">Amasty\Faq\Model\Emails\Notifier\AdminNotifier\Proxy</item>
+                <item name="customer" xsi:type="object">Amasty\Faq\Model\Emails\Notifier\CustomerNotifier\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Faq\Model\XmlSitemap\Source\Category" type="Amasty\Faq\Model\XmlSitemap\Source\EntitySource">
+        <arguments>
+            <argument name="entityCode" xsi:type="string">amasty_faq_category</argument>
+            <argument name="entityLabel" xsi:type="string" translate="true">Amasty FAQ Categories</argument>
+            <argument name="collectionProvider" xsi:type="object">Amasty\Faq\Model\XmlSitemap\Source\CollectionProvider\Category</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\Faq\Model\XmlSitemap\Source\Question" type="Amasty\Faq\Model\XmlSitemap\Source\EntitySource">
+        <arguments>
+            <argument name="entityCode" xsi:type="string">amasty_faq_question</argument>
+            <argument name="entityLabel" xsi:type="string" translate="true">Amasty FAQ Questions</argument>
+            <argument name="collectionProvider" xsi:type="object">Amasty\Faq\Model\XmlSitemap\Source\CollectionProvider\Question</argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\XmlSitemap\Model\Sitemap\SourceProvider">
+        <arguments>
+            <argument name="sources" xsi:type="array">
+                <item name="amasty_faq_category" xsi:type="string">Amasty\Faq\Model\XmlSitemap\Source\Category</item>
+                <item name="amasty_faq_question" xsi:type="string">Amasty\Faq\Model\XmlSitemap\Source\Question</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

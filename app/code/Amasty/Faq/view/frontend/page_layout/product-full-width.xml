@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <referenceContainer name="product.info.details.after.wrapper.main">
+        <block class="Amasty\Faq\Block\Catalog\Product\Tab" name="product.faq.wrapper"
+               template="Magento_PageBuilder::catalog/product/view/section_wrapper.phtml"/>
+    </referenceContainer>
+
+    <move element="amasty_faq_product_tab" destination="product.faq.wrapper"/>
+</layout>

@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="faq" xsi:type="array">
+                    <item name="class" xsi:type="string">Amasty\Faq\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\Faq\Model\Session\Storage" type="Magento\Framework\Session\Storage">
+        <arguments>
+            <argument name="namespace" xsi:type="string">faq</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\Faq\Model\Session" type="Magento\Framework\Session\Generic">
+        <arguments>
+            <argument name="storage" xsi:type="object">Amasty\Faq\Model\Session\Storage</argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Faq\Controller\Category\View">
+        <arguments>
+            <argument name="faqSession" xsi:type="object">Amasty\Faq\Model\Session</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Faq\Model\ResolveQuestionCategory">
+        <arguments>
+            <argument name="faqSession" xsi:type="object">Amasty\Faq\Model\Session</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Faq\CustomerData\Question">
+        <arguments>
+            <argument name="faqSession" xsi:type="object">Amasty\Faq\Model\Session</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Faq\Controller\Index\Save">
+        <arguments>
+            <argument name="faqSession" xsi:type="object">Amasty\Faq\Model\Session</argument>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+            <argument name="productRepository" xsi:type="object">Magento\Catalog\Api\ProductRepositoryInterface\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="faq" xsi:type="string">Amasty\Faq\CustomerData\Question</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Block\SectionConfig">
+        <arguments>
+            <argument name="clientSideSections" xsi:type="array">
+                <item name="faq_product" xsi:type="string">faq_product</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\App\Http\Context">
+        <plugin sortOrder="9" name="amastyFaqContext" type="Amasty\Faq\Plugin\App\Http\ContextPlugin"/>
+    </type>
+    <type name="Amasty\Faq\Plugin\App\Http\ContextPlugin">
+        <arguments>
+            <argument name="faqSession" xsi:type="object">Amasty\Faq\Model\Session</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\App\PageCache\Identifier">
+        <plugin name="amastyFaqIdentifier" type="Amasty\Faq\Plugin\App\PageCache\IdentifierPlugin"/>
+    </type>
+    <type name="Amasty\Faq\Plugin\App\PageCache\IdentifierPlugin">
+        <arguments>
+            <argument name="faqSession" xsi:type="object">Amasty\Faq\Model\Session</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Block\Product\View\Description">
+        <plugin name="Amasty_Faq::ProductViewTabPosition" type="Amasty\Faq\Plugin\TabPosition" />
+    </type>
+
+    <type name="Amasty\Faq\Block\Forms\AskQuestion">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Faq\Controller\Stat\Collect">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Faq\Controller\Question\View">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

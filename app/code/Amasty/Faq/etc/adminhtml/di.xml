@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="amastyImportSampleFiles" type="Magento\Framework\DataObject">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="faq_category_import" xsi:type="string">Amasty_Faq</item>
+                <item name="faq_question_import" xsi:type="string">Amasty_Faq</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Base\Component\ComponentRegistrar">
+        <arguments>
+            <argument name="samples" xsi:type="object">amastyImportSampleFiles</argument>
+        </arguments>
+    </type>
+
+    <!-- Category Import Config -->
+    <virtualType name="Amasty\Faq\Model\Import\Category\ValidatorPool" type="Amasty\Base\Model\Import\Validation\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="basic" xsi:type="object">Amasty\Faq\Model\Import\Category\Validation\Basic</item>
+                <item name="store" xsi:type="object">Amasty\Faq\Model\Import\Category\Validation\Stores</item>
+                <item name="url" xsi:type="object">Amasty\Faq\Model\Import\Category\Validation\UrlKey</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\Faq\Model\Import\Category\Behavior\BehaviorProvider" type="Amasty\Base\Model\Import\Behavior\BehaviorProvider">
+        <arguments>
+            <argument name="behaviors" xsi:type="array">
+                <item name="custom" xsi:type="object">Amasty\Faq\Model\Import\Category\Behaviors\Add</item>
+                <item name="add_update" xsi:type="object">Amasty\Faq\Model\Import\Category\Behaviors\AddUpdate</item>
+                <item name="delete" xsi:type="object">Amasty\Faq\Model\Import\Category\Behaviors\Delete</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <type name="Amasty\Faq\Model\Import\Category\Import">
+        <arguments>
+            <argument name="entityTypeCode" xsi:type="string">faq_category_import</argument>
+            <argument name="validatorPool" xsi:type="object">Amasty\Faq\Model\Import\Category\ValidatorPool</argument>
+            <argument name="behaviorProvider" xsi:type="object">Amasty\Faq\Model\Import\Category\Behavior\BehaviorProvider</argument>
+            <argument name="mapping" xsi:type="object">Amasty\Faq\Model\Import\Category\Mapping</argument>
+        </arguments>
+    </type>
+    <!-- End Category Import Config -->
+
+    <!-- Question Import Config -->
+    <virtualType name="Amasty\Faq\Model\Import\Question\ValidatorPool" type="Amasty\Base\Model\Import\Validation\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="basic" xsi:type="object">Amasty\Faq\Model\Import\Question\Validation\Basic</item>
+                <item name="store" xsi:type="object">Amasty\Faq\Model\Import\Question\Validation\Stores</item>
+                <item name="url" xsi:type="object">Amasty\Faq\Model\Import\Question\Validation\UrlKey</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\Faq\Model\Import\Question\Behavior\BehaviorProvider" type="Amasty\Base\Model\Import\Behavior\BehaviorProvider">
+        <arguments>
+            <argument name="behaviors" xsi:type="array">
+                <item name="custom" xsi:type="object">Amasty\Faq\Model\Import\Question\Behaviors\Add</item>
+                <item name="add_update" xsi:type="object">Amasty\Faq\Model\Import\Question\Behaviors\AddUpdate</item>
+                <item name="delete" xsi:type="object">Amasty\Faq\Model\Import\Question\Behaviors\Delete</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Faq\Model\Import\Question\Import">
+        <arguments>
+            <argument name="entityTypeCode" xsi:type="string">faq_question_import</argument>
+            <argument name="validatorPool" xsi:type="object">Amasty\Faq\Model\Import\Question\ValidatorPool</argument>
+            <argument name="behaviorProvider" xsi:type="object">Amasty\Faq\Model\Import\Question\Behavior\BehaviorProvider</argument>
+            <argument name="mapping" xsi:type="object">Amasty\Faq\Model\Import\Question\Mapping</argument>
+        </arguments>
+    </type>
+    <!-- End Question Import Config -->
+
+    <type name="Magento\AdvancedPricingImportExport\Controller\Adminhtml\Export\GetFilter">
+        <plugin name="Amasty_Faq::ExportFilter" type="Amasty\Faq\Plugin\ImportExport\Controller\Adminhtml\Export\GetFilter" />
+    </type>
+    <type name="Magento\ImportExport\Controller\Adminhtml\Export\GetFilter">
+        <plugin name="Amasty_Faq::ExportFilter" type="Amasty\Faq\Plugin\ImportExport\Controller\Adminhtml\Export\GetFilter" />
+    </type>
+    <type name="Magento\ImportExport\Controller\Adminhtml\Export\Export">
+        <plugin name="Amasty_Faq::ExportExport" type="Amasty\Faq\Plugin\ImportExport\Controller\Adminhtml\Export\Export" />
+    </type>
+
+    <type name="Amasty\Faq\Plugin\ImportExport\Controller\Adminhtml\Export\Export">
+        <arguments>
+            <argument name="sessionManager" xsi:type="object">Magento\Framework\Session\SessionManagerInterface\Proxy</argument>
+        </arguments>
+    </type>
+</config>

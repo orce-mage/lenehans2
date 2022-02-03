@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="faq_sidebar"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\Faq\Block\View\Search" name="amasty_faq_search_view" template="Amasty_Faq::pages/search_view.phtml">
+                <block class="Amasty\Faq\Block\Lists\CategoryList" name="amasty_faq_categories_search" template="Amasty_Faq::lists/categories_search.phtml"/>
+                <block class="Amasty\Faq\Block\Lists\NoSearchResult" name="amasty_faq_no_search_result" template="Amasty_Faq::lists/results_not_found.phtml"/>
+                <block class="Amasty\Faq\Block\Lists\QuestionsList" name="amasty_faq_questions" template="Amasty_Faq::lists/questions.phtml" cacheable="false">
+                    <block class="Amasty\Faq\Block\Lists\Pager" name="amasty_faq_pager"/>
+                    <block class="Amasty\Faq\Block\Forms\AskQuestion" name="amasty_faq_ask_question_form" template="Amasty_Faq::forms/askquestion.phtml"/>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="amasty_faq_bread">
+            <action method="addCrumb">
+                <argument name="name" xsi:type="string">search</argument>
+                <argument name="params" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Search</item>
+                    <item name="title" xsi:type="string" translate="true">Search</item>
+                </argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

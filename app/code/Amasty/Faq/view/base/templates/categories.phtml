@@ -1,0 +1,70 @@
+<?php
+/** @var \Amasty\Faq\Block\Widgets\Categories $block */
+
+/** @var \Amasty\Faq\Api\Data\CategoryInterface $category */
+
+/** @var \Amasty\Faq\Api\Data\QuestionInterface $question */
+?>
+<?php if ($categories = $block->getCategories()): ?>
+    <div class="<?= $block->escapeHtml($block->getLayoutType()) ?> widget">
+        <?php foreach ($categories as $category): ?>
+            <div class="am-widget-category">
+                <div class="am-category-container">
+                    <div class="am-category-header">
+                        <?php if ($block->canShowCategoryIcon($category)): ?>
+                        <div class="faq-category-image">
+                            <img src="<?= $block->escapeUrl($block->getCategoryIconUrl($category)); ?>"
+                                 width="50" height="50"
+                                 alt="<?= $block->escapeHtml($category->getIcon()); ?>">
+                        </div>
+                        <?php endif; ?>
+                        <div class="faq-category-title"><?= $block->escapeHtml($category->getTitle()); ?></div>
+                    </div>
+                    <?php if (!$block->isShowWithoutQuestions()
+                        && $questions = $block->getCategoryQuestions($category)): ?>
+                        <div class="amfaq_questions">
+                            <?php foreach ($questions as $question): ?>
+                                <div class="am-item">
+                                    <div class="am-title"><?= $block->escapeHtml($question->getTitle()); ?></div>
+                                    <div class="am-content amfaq-hidden">
+                                        <div class="amfaq-short-answer-container"><?= /** @noEscape */ $block->getShortAnswer($question) ?></div>
+                                        <div class="amfaq-question-footer-wrapper">
+                                            <?php if (!$question->isShowFullAnswer()): ?>
+                                                <div class="am-links">
+                                                    <a href="<?= $block->escapeUrl($block->getQuestionUrl($question)) ?>">
+                                                        <?= $block->escapeHtml(__('Read More')); ?>
+                                                    </a>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                    <a href="<?= $block->escapeUrl($block->getCategoryUrl($category)) ?>" class="view-all">
+                        <?= $block->escapeHtml(__('View all')); ?>
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <?php if (!$block->isShowWithoutQuestions()): ?>
+        <script type="text/x-magento-init">
+        {
+            ".amfaq_questions .am-item": {
+                "collapsible": {
+                    "collapsible": true,
+                    "header": ".am-title",
+                    "content": ".am-content",
+                    "animate": 500,
+                    "icons": {"header": "am-minus", "activeHeader": "am-plus"}
+                }
+            }
+        }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
+<?php if ($block->isAddStructuredData()): ?>
+    <?= /** @noEscape */ $block->getCategoriesStructuredDataHtml(); ?>
+<?php endif; ?>

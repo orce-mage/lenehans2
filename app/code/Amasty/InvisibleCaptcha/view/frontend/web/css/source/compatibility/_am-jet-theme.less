@@ -1,0 +1,30 @@
+//
+// Compatibility with Amasty Jet Theme
+// ______________________________________________
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .amtheme-reviewform-block {
+        & {
+            display: flex;
+            overflow: hidden;
+            height: 0;
+        }
+
+        &.-amtheme-active {
+            overflow: visible;
+            height: auto;
+        }
+
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+
+        &.-amtheme-active .grecaptcha-badge {
+            visibility: visible;
+        }
+    }
+}

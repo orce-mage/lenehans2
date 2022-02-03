@@ -1,0 +1,153 @@
+<?php
+/**
+ * @var \Amasty\Faq\Block\Forms\AskQuestion $block
+ */
+?>
+<div class="ask-question-form widget">
+    <?php if (!$block->isAllowUnregisteredCustomersAsk() && !$block->isCustomerLoginIn()): ?>
+        <div class="button-container">
+            <div class="button-info">
+                <?= $block->escapeHtml(__('Please, mind that only logged in users can submit questions')); ?>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="button-container">
+            <div class="button-info">
+                <?= $block->escapeHtml(__('Did you find what you were looking for?')); ?>
+            </div>
+            <?php
+            $askQuestion = $block->escapeHtml(__('Ask a Question'));
+            ?>
+            <button type="button"
+                    title="<?= /** @noEscape */ $askQuestion; ?>"
+                    class="form-toggle-button action"
+                    data-mage-init='{"toggleAdvanced":
+                        {
+                            "toggleContainers":".ask-form-container",
+                            "selectorsToggleClass":"amfaq-hidden",
+                            "newLabel":"<?= $block->escapeHtml(__('Hide form')); ?>",
+                            "curLabel":"<?= /** @noEscape */ $askQuestion; ?>"
+                        }
+                    }'>
+                <?= /** @noEscape */ $askQuestion; ?>
+            </button>
+        </div>
+    <?php endif; ?>
+    <div class="ask-form-container amfaq-hidden" data-role="faq-post-form" data-bind="scope: 'faq-form'">
+        <form action="<?= $block->escapeUrl($block->getUrlAction()); ?>"
+              data-bind="submit: formSubmit"
+              id="amfaq-ask-form-inline"
+              method="post">
+            <?= /** @noEscape */ $block->getBlockHtml('formkey'); ?>
+            <?php if ($additionalField = $block->getAdditionalField()): ?>
+                <input name="<?= $block->escapeHtml($additionalField['field']); ?>"
+                       type="hidden"
+                       value="<?= $block->escapeHtml($additionalField['value']); ?>" />
+            <?php endif; ?>
+            <fieldset class="fieldset" data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')); ?>">
+                <div class="field required">
+                    <label class="label" for="amfaq-title">
+                        <?= $block->escapeHtml(__('Your question:')); ?>
+                    </label>
+                    <div class="control">
+                        <textarea name="title"
+                                  id="amfaq-title"
+                                  title="<?= $block->escapeHtml(__('Question')); ?>"
+                                  class="required-entry input-text"
+                                  cols="5"
+                                  rows="3"
+                                  data-bind="value: title"
+                                  placeholder="<?= $block->escapeHtml(__('Type your question here...'));?>"></textarea>
+                    </div>
+                </div>
+
+                <?php if ($block->isGDPREnabled()): ?>
+                    <div class="field required choice">
+                        <input type="checkbox"
+                               name="gdpr"
+                               id="amfaq-gdpr"
+                               title="<?= $block->escapeHtml(__('GDPR')); ?>"
+                               data-bind="event: {change: toggleNameAndNotification($element)};"
+                               required
+                               value="1">
+                        <label class="label" for="amfaq-gdpr">
+                            <?= /** @noEscape */ $block->getGDPRText(); ?>
+                        </label>
+                    </div>
+
+                    <div class="field amfaq-hidden" data-bind="fadeVisible: isNameVisible">
+                        <label class="label" for="amfaq-name">
+                            <?= $block->escapeHtml(__('Your name:')); ?>
+                        </label>
+                        <div class="control">
+                            <input name="name" id="amfaq-name"
+                                   class="input-text"
+                                   title="<?= $block->escapeHtml(__('Name')); ?>"
+                                   type="text"
+                                   data-bind="value: name">
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="field">
+                        <label class="label" for="amfaq-name">
+                            <?= $block->escapeHtml(__('Your name:')); ?>
+                        </label>
+                        <div class="control">
+                            <input name="name" id="amfaq-name" class="input-text"
+                                   title="<?= $block->escapeHtml(__('Name')); ?>"
+                                   type="text"
+                                   data-bind="value: name">
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($block->isNotifyUser()): ?>
+                    <?php if ($block->isGDPREnabled()): ?>
+                        <div class="field amfaq-hidden" data-bind="fadeVisible: isNotificationVisible">
+                    <?php else: ?>
+                        <div class="field">
+                    <?php endif; ?>
+                            <input type="checkbox"
+                                   name="notification"
+                                   id="amfaq-notification"
+                                   title="<?= $block->escapeHtml(__('Notification')); ?>"
+                                   data-bind="event: {change: toggleEmail($element)};"
+                                   value="1">
+                            <label class="label" for="amfaq-notification">
+                                <?= $block->escapeHtml(__('get notification on email when the answer is ready')); ?>
+                            </label>
+                        </div>
+
+                    <div class="field amfaq-hidden email-field required" data-bind="fadeVisible: isEmailVisible">
+                        <label class="label required" for="amfaq-email">
+                            <?= $block->escapeHtml(__('Your e-mail:')); ?>
+                        </label>
+                        <div class="control">
+                            <input name="email" id="amfaq-email" class="required validate-email"
+                                   title="<?= $block->escapeHtml(__('Email')); ?>"
+                                   type="text"
+                                   data-bind="value: email">
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <button type="submit" class="action submit primary">
+                    <?= $block->escapeHtml(__('Send the Question')); ?>
+                </button>
+            </fieldset>
+        </form>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=faq-post-form]": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "faq-form": {
+                            "component": "Amasty_Faq/js/askform"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+    </div>
+</div>

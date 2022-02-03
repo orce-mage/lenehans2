@@ -1,0 +1,16 @@
+<?php
+/**
+ * @var \Amasty\Faq\Block\Lists\SocialShare $block
+ */
+?>
+<div class="amfaq-social-buttons">
+    <?php foreach ($block->getButtons() as $button): ?>
+        <?php $label = $block->escapeHtml($button->getName()); ?>
+        <a href="<?= $block->escapeUrl($block->renderButtonHref($button)) ?>"
+            <?= /* @noEscape */ $block->getAttributesHtml($button) ?>>
+            <img src="<?= $block->escapeUrl($block->getImage($button)); ?>"
+                 alt="<?= $block->escapeHtml($label); ?>"
+                 title="<?= $block->escapeHtml($label); ?>" />
+        </a>
+    <?php endforeach; ?>
+</div>

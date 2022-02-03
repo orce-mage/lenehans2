@@ -1,0 +1,8 @@
+<!-- ko if: isEnabledOnPayments -->
+    <div class="am-recaptcha-container">
+        <div class="messages-container" style="display: none">
+            <div class="message message-error error"></div>
+        </div>
+        <input type="hidden" name="am_invisible_token" data-bind="afterRender: renderReCaptcha">
+    </div>
+<!-- /ko -->

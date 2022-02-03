@@ -1,0 +1,13 @@
+<!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+<div class="amfaq-rating-voting">
+    <span data-bind="i18n: 'Was this answer helpful?'" class="amfaq-was-it-helpful"></span>
+    <span class="amfaq-rating-data-wrapper" data-bind="css:{'isVoted': isVoted}">
+        <span class="amfaq-arrow amfaq-arrow-up" data-bind="click: votePositive, css: {'amfaq-voted': isPositiveVotedQuestion()}"></span>
+        <span data-bind="text: positiveRating"></span>
+        |
+        <span class="amfaq-arrow amfaq-arrow-down" data-bind="click: voteNegative, css: {'amfaq-voted': isNegativeVotedQuestion()}"></span>
+        <span data-bind="text: negativeRating"></span>
+    </span>
+</div>

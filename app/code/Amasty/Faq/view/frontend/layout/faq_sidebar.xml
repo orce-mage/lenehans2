@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="faq_default"/>
+    <body>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true"/>
+        <referenceBlock name="sale.reorder.sidebar" remove="true"/>
+        <referenceContainer name="sidebar.additional">
+            <referenceBlock name="wishlist_sidebar" remove="true"/>
+            <referenceBlock name="multiple-wishlist_sidebar" remove="true"/>
+            <block class="Amasty\Faq\Block\Forms\Search" name="amasty_faq_search" template="Amasty_Faq::forms/search.phtml" ifconfig="amastyfaq/faq_page/show_search"/>
+            <block class="Amasty\Faq\Block\Lists\CategoryList" name="amasty_faq_categories" template="Amasty_Faq::lists/categories.phtml"/>
+            <block class="Amasty\Faq\Block\Lists\TagList" name="amasty_faq_tags" template="Amasty_Faq::lists/tags.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

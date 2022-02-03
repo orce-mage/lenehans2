@@ -1,0 +1,51 @@
+<?php
+/** @var \Amasty\Faq\Block\Adminhtml\Question\Widget\QuestionList $block **/
+?>
+
+<div id="amfaq_dynamic_rows_questions">
+    <table class="admin__control-table">
+        <thead>
+        <tr id="attribute-options-table">
+            <th class="col-draggable"></th>
+            <th><?= $block->escapeHtml(__('ID')); ?></th>
+            <th><?= $block->escapeHtml(__('Question Name')); ?></th>
+            <th class="col-delete"><?= $block->escapeHtml(__('Remove')); ?></th>
+        </tr>
+        </thead>
+        <tbody data-role="options-container" class="ignore-validate"></tbody>
+    </table>
+    <input type="hidden" id="option-count-check" value="" />
+</div>
+
+<script>
+    require([
+        'jquery',
+        'Amasty_Faq/js/widget/faq-questions-grid',
+        'Amasty_Faq/js/widget/dynamic-rows',
+        'domReady!'
+    ], function ($) {
+        var fSet = '<?= $block->escapeHtml($block->getFieldsetId()); ?>';
+
+        $(document).on('change', '.field-' + fSet + '_widget_type select', function() {
+            $('.field-' + fSet + '_faq_categories, .field-' + fSet + '_questions, .field-' + fSet + '_product').hide()
+                .next().hide();
+
+            switch ($(this).val()) {
+                case '<?= (int)\Amasty\Faq\Model\OptionSource\Widget\QuestionList\WidgetType::SPECIFIC_CATEGORY ?>':
+                    $('.field-' + fSet + '_faq_categories').show().next().show();
+                    break;
+                case '<?= (int)\Amasty\Faq\Model\OptionSource\Widget\QuestionList\WidgetType::SPECIFIC_QUESTIONS ?>':
+                    $('.field-' + fSet + '_questions').show().next().show();
+                    break;
+                case '<?= (int)\Amasty\Faq\Model\OptionSource\Widget\QuestionList\WidgetType::SPECIFIC_PRODUCT ?>':
+                    $('.field-' + fSet + '_product').show().next().show();
+                    break;
+            }
+        });
+        $('.field-' + fSet + '_widget_type select').change();
+
+        $('#amfaq_dynamic_rows_questions').amFaqWidgetDynamicRows(<?= /** @noEscape */ $block->getConfig(); ?>);
+        $('.field-' + fSet + '_questions')
+            .faqQuestionsGrid({"uniqId": "<?= $block->escapeHtml($block->getUniqId()) ?>"});
+    });
+</script>

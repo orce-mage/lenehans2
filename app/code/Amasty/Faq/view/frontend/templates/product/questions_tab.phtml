@@ -1,0 +1,16 @@
+<?php
+/**
+ * @var \Amasty\Faq\Block\Catalog\Product\Tab $block
+ */
+?>
+<div class="amfaq-product-tab">
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__('Customer Questions')); ?></strong>
+    </div>
+    <?= /** @noEscape */ $block->getChildHtml('amasty_faq_questions'); ?>
+    <?php
+    if ($block->showAskQuestionForm()) {
+        echo $block->getChildHtml('amasty_faq_ask_question_form');
+    }
+    ?>
+</div>

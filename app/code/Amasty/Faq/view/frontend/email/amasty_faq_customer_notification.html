@@ -1,0 +1,30 @@
+<!--@subject Your question was answered @-->
+<!--@vars {
+"var customer_name":"Customer Name",
+"var question":"Customer Question",
+"var answer":"Answer for Customer question",
+"var product_link":"Link to Product where was question asked",
+"var product_name":"Product Name where was question asked",
+"var question_link":"Direct link to answered question page"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td valign="top">
+            <p>{{trans "Dear %name," name=$customer_name}}</p>
+            <p>{{trans "We answered your question."}}</p>
+            <br>
+            <p>{{trans "Your Question: %question" question=$question}}</p>
+            <p>{{trans "Answer: %answer" answer=$answer|raw}}</p>
+            {{depend product_link}}
+            <p>{{trans "Related Product"}}: <a href="{{var product_link|escape}}">{{var product_name|escape}}</a></p>
+            {{/depend}}
+            {{depend question_link}}
+            <p><a href="{{var question_link|escape}}">{{trans "Check out the response on our website"}}</a></p>
+            {{/depend}}
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

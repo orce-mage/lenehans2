@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="faq_sidebar"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\Faq\Block\View\Category" name="questions_wrapper" template="Amasty_Faq::pages/category_view.phtml">
+                <block class="Amasty\Faq\Block\Lists\QuestionsList" name="amasty_faq_questions" template="Amasty_Faq::lists/questions.phtml">
+                    <block class="Amasty\Faq\Block\Lists\Pager" name="amasty_faq_pager"/>
+                    <block class="Amasty\Faq\Block\Forms\AskQuestion" name="amasty_faq_ask_question_form" template="Amasty_Faq::forms/askquestion.phtml"/>
+                    <block class="Amasty\Faq\Block\RichData\StructuredData" name="amasty_faq_structureddata" ifconfig="amastyfaq/seo/add_structureddata">
+                        <arguments>
+                            <argument name="pageType" xsi:type="string">FAQPage</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

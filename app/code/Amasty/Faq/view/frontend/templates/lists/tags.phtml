@@ -1,0 +1,21 @@
+<?php
+/** @var \Amasty\Faq\Block\Lists\TagList $block */
+
+$currentTag = $block->getCurrentTag();
+if ($tags = $block->getTags()): ?>
+<div class="amfaq_tags">
+    <div class="item title">
+        <?= $block->escapeHtml(__('Tags')); ?>
+    </div>
+    <div class="tags_content">
+    <?php foreach ($tags as $tag): ?>
+        <div class="item<?= ($tag->getTitle() == $currentTag) ? ' current' : ''; ?>">
+            <a href="<?= $block->escapeUrl($block->getTagLink($tag->getTitle())); ?>">
+                <?= $block->escapeHtml($tag->getTitle()); ?>
+                (<?= (int)$tag->getCount() ?>)
+            </a>
+        </div>
+    <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,10 @@
+<?php
+/**
+ * @var \Amasty\Faq\Block\View\Category $block
+ */
+?>
+<?php if ($description = $block->getDescription()): ?>
+    <div class="amfaq-category-description"><?= /** @noEscape */ $description; ?></div>
+<?php endif; ?>
+<?=  /** @noEscape */ $block->getChildHtml('amasty_faq_questions'); ?>
+<?=  /** @noEscape */ $block->getChildHtml('amasty_faq_ask_question_form'); ?>

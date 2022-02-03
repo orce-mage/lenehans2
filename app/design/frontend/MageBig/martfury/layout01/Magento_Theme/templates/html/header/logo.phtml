@@ -22,8 +22,6 @@
         <strong><?= /* @escapeNotVerified */ $block->getLogoAlt() ?></strong>
         <img class="img-fluid" src="<?= /* @escapeNotVerified */ $block->getLogoSrc() ?>"
              alt="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
-             <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
-             <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
         />
     </a>
 <?php if ($mbHelper->isHomePage()):?>

@@ -1,0 +1,18 @@
+<?php /** @var \Amasty\Faq\Block\Widgets\TagsBlock $block */ ?>
+<?php if ($tags = $block->getTags()): ?>
+<div class="am-faq-tags-widget">
+    <div class="am-tags-main-title">
+        <span><?= $block->escapeHtml(__('Tags')); ?></span>
+    </div>
+    <div class="am-tags-main-block-wrapper">
+        <?php foreach ($tags as $tag): ?>
+            <span class="am-tags-tag">
+                <a href="<?= $block->escapeUrl($tag['link']); ?>">
+                    <span class="am-tag-title"><?= $block->escapeHtml($tag['title']); ?></span>
+                    <span class="am_tag_count">(<?= (int)$tag['count'] ?>)</span>
+                </a>
+            </span>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>

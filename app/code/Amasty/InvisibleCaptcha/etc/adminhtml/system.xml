@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
+    <system>
+        <section id="aminvisiblecaptcha" translate="label" type="text" sortOrder="091422" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Google Invisible Captcha</label>
+            <tab>amasty</tab>
+            <resource>Amasty_InvisibleCaptcha::aminvisiblecaptcha</resource>
+            <group id="amasty_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Information</label>
+                <frontend_model>Amasty\InvisibleCaptcha\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabledCaptcha" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Invisible Captcha</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enabledCaptchaForGuestsOnly" translate="label tooltip" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Invisible Captcha for Guests Only</label>
+                    <tooltip>Registered users will not interact with recaptcha if enabled</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="ipWhiteList" translate="label comment tooltip" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>IP Whitelist</label>
+                    <tooltip>Invisible Captcha will be disabled for the specified IP addresses</tooltip>
+                    <comment><![CDATA[For example: <strong>192.168.1.2</strong> </br>Each IP must be on a new line]]></comment>
+                    <depends>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="setup" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Captcha Setup</label>
+                <depends>
+                    <field id="*/general/enabledCaptcha">1</field>
+                </depends>
+                <field id="captchaVersion" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Captcha Version</label>
+                    <source_model>Amasty\InvisibleCaptcha\Model\Config\Source\CaptchaVersion</source_model>
+                    <depends>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="captchaKey" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Site Key (Version 2)</label>
+                    <comment><![CDATA[You can generate site key <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>]]></comment>
+                    <depends>
+                        <field id="captchaVersion">2</field>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="captchaSecret" translate="label comment" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret Key (Version 2)</label>
+                    <comment><![CDATA[You can generate secret key <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="captchaVersion">2</field>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="captchaKeyV3" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Site Key (Version 3)</label>
+                    <comment><![CDATA[You can generate site key <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>]]></comment>
+                    <depends>
+                        <field id="captchaVersion">3</field>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="captchaSecretV3" translate="label comment" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret Key (Version 3)</label>
+                    <comment><![CDATA[You can generate secret key <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="captchaVersion">3</field>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="captchaScore" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Captcha Version 3 Score</label>
+                    <comment><![CDATA[You can find more information about score <a href="https://developers.google.com/recaptcha/docs/v3#score" target="_blank">here</a>]]></comment>
+                    <validate>required-entry validate-number-range number-range-0-1</validate>
+                    <depends>
+                        <field id="captchaVersion">3</field>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="errorMessage" translate="label comment" type="textarea" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error Message</label>
+                    <tooltip>The message will be displayed on the frontend in the case when Captcha defines a user as a bot and blocks the interraction.</tooltip>
+                    <depends>
+                        <field id="captchaVersion">3</field>
+                        <field id="enabledCaptcha">1</field>
+                    </depends>
+                </field>
+                <field id="captchaLanguage" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Language</label>
+                    <comment><![CDATA[Please leave empty to allow Google to detect a language of user agent or please set needed value from the following list of <a href="https://developers.google.com/recaptcha/docs/language" target="_blank">languages</a>]]></comment>
+                    <validate>validate-length maximum-length-6</validate>
+                </field>
+                <field id="badgeTheme" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Theme of Captcha Badge</label>
+                    <comment><![CDATA[Provided by Google]]></comment>
+                    <source_model>Amasty\InvisibleCaptcha\Model\Config\Source\BadgeTheme</source_model>
+                </field>
+                <field id="badgePosition" translate="label tooltip" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Position for Captcha Badge</label>
+                    <tooltip>The extension does not support the inline position for the Captcha Badge, because  explicitly renders the reCAPTCHA widget.</tooltip>
+                    <source_model>Amasty\InvisibleCaptcha\Model\Config\Source\BadgePosition</source_model>
+                </field>
+            </group>
+            <group id="forms" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Forms to be Protected by Captcha</label>
+                <depends>
+                    <field id="*/general/enabledCaptcha">1</field>
+                </depends>
+                <field id="defaultForms" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable ReCaptcha on Default Magento Forms</label>
+                    <source_model>Amasty\InvisibleCaptcha\Model\Config\Source\DefaultForms</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <group id="custom" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Forms Protection</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+                    <field id="urls" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Request URL of the Protected Form</label>
+                        <config_path>aminvisiblecaptcha/forms/urls</config_path>
+                        <comment><![CDATA[For example: <strong>customer/account/createpost</strong> </br>Each url must be on a new line </br> <a href="https://amasty.com/docs/doku.php?id=magento_2:google_invisible-recaptcha-m2#advanced_settings" target="_blank">How to choose URL</a>]]></comment>
+                    </field>
+                    <field id="selectors" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>CSS Selector of the Protected Form</label>
+                        <config_path>aminvisiblecaptcha/forms/selectors</config_path>
+                        <comment><![CDATA[For example: <strong>form[action*="customer/account/createpost"]</strong></br>
+                        Each selector must be on a new line</br>
+                        <a href="https://amasty.com/docs/doku.php?id=magento_2:google_invisible-recaptcha-m2#advanced_settings" target="_blank">How to Add CSS Selector</a>]]></comment>
+                    </field>
+                </group>
+            </group>
+            <group id="amasty" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Invisible Captcha for Amasty Extensions</label>
+                <depends>
+                    <field id="*/general/enabledCaptcha">1</field>
+                </depends>
+                <field id="customForm" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Form</label>
+                    <frontend_model>Amasty\InvisibleCaptcha\Block\Adminhtml\System\Config\Field\AmastyCustomForms</frontend_model>
+                    <source_model>AmastyCustomForm</source_model>
+                </field>
+                <field id="Faq" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>FAQ and Product Questions</label>
+                    <frontend_model>Amasty\InvisibleCaptcha\Block\Adminhtml\System\Config\Field\AmastyFaq</frontend_model>
+                    <source_model>AmastyFaq</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

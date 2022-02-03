@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Amasty_Faq::js/section/product-url.js"/>
+    </head>
+    <body>
+        <referenceBlock name="product.info.details">
+            <block class="Amasty\Faq\Block\Catalog\Product\Tab" name="amasty_faq_product_tab" ifconfig="amastyfaq/product_page/show_tab" as="amfaq_product" template="Amasty_Faq::product/questions_tab.phtml" group="detailed_info">
+                <block class="Amasty\Faq\Block\Lists\QuestionsList" name="amasty_faq_questions" template="Amasty_Faq::lists/questions.phtml">
+                    <block class="Amasty\Faq\Block\Rating\Rating" ifconfig="amastyfaq/rating/enabled" name="amasty_faq_rating" template="Amasty_Faq::rating/rating.phtml">
+                        <block class="Magento\Framework\View\Element\Template" name="amasty_faq_rating_item" template="Amasty_Faq::rating/rating_item.phtml"/>
+                    </block>
+                    <block class="Amasty\Faq\Block\Lists\Pager" name="amasty_faq_pager"/>
+                    <block class="Amasty\Faq\Block\Forms\AskQuestion" name="amasty_faq_ask_question_form" template="Amasty_Faq::forms/askquestion.phtml"/>
+                    <block class="Amasty\Faq\Block\RichData\StructuredData" name="amasty_faq_structureddata" ifconfig="amastyfaq/seo/add_structureddata">
+                        <arguments>
+                            <argument name="pageType" xsi:type="string">FAQPage</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

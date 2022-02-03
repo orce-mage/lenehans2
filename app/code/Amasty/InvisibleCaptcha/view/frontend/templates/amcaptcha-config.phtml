@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var $block Magento\Framework\View\Element\Template
+ * @var $viewModel Amasty\InvisibleCaptcha\ViewModel\Captcha
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel->isNeedToShowCaptcha()): ?>
+    <script>
+        require([
+            'Amasty_InvisibleCaptcha/js/model/am-recaptcha',
+    ], function (amRecaptchaModel) {
+            amRecaptchaModel.setConfig({
+                "formsToProtect": "<?= $escaper->escapeJs(implode(',', $viewModel->getAllFormSelectors())) ?>",
+                "isEnabledOnPayments": "<?= $escaper->escapeJs($viewModel->isCaptchaOnPayments())?>",
+                "checkoutRecaptchaValidateUrl": "<?= $escaper->escapeHtml($viewModel->getCheckoutValidateCaptchaUrl()) ?>",
+                "invisibleCaptchaCustomForm": "<?= $escaper->escapeHtml($viewModel->getInvisibleCaptchaCustomForm()) ?>",
+                "recaptchaConfig": {
+                    "lang": "<?= $escaper->escapeJs($viewModel->getLanguage()) ?>",
+                    "theme": "<?= $escaper->escapeHtml($viewModel->getBadgeTheme()) ?>",
+                    "badge": "<?= $escaper->escapeHtml($viewModel->getBadgePosition()) ?>",
+                    "sitekey": "<?= $escaper->escapeHtml($viewModel->getSiteKey()) ?>"
+                }
+            })
+    });
+    </script>
+<?php endif; ?>

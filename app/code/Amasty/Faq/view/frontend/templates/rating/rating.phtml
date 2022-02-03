@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var \Amasty\Faq\Block\Rating\Rating $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "faq-rating": {
+                            "component": "Amasty_Faq/js/rating",
+                            "votingBehavior": "<?= $escaper->escapeHtml($block->getVotingBehavior()); ?>",
+                            "hideZeroRating": "<?= $escaper->escapeHtml($block->isHideZeroRatingTotal()); ?>",
+                            "itemsTemplate": "<?= $escaper->escapeUrl($block->getRatingTemplateName()); ?>",
+                            "items": [<?= $escaper->escapeHtml($block->getQuestionIds()); ?>],
+                            "dataUrl": "<?= $escaper->escapeHtml($block->getDataUrl()); ?>",
+                            "voteUrl": "<?= $escaper->escapeHtml($block->getVoteUrl()); ?>"
+                        }
+                    }
+                }
+            }
+        }
+</script>

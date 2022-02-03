@@ -1,0 +1,22 @@
+<?php
+/** @var \Amasty\Faq\Api\Data\QuestionInterface $question */
+/** @var \Amasty\Faq\Block\View\Question $block */
+$question = $block->getCurrentQuestion();
+
+/** @var \Amasty\Faq\Block\Rating\Rating $rating */
+$rating = $block->getChildBlock('amasty_faq_rating');
+?>
+<div class="question_view">
+    <div class="answer">
+        <?= /** @noEscape */ $block->wrapContent($question->getAnswer()); ?>
+    </div>
+    <div class="amfaq-question-footer-wrapper">
+        <?php if ($rating): ?>
+            <?= /** @noEscape */ $rating->ratingItemHtml((int)$question->getQuestionId()); ?>
+            <?= /** @noEscape */ $block->getChildHtml('amasty_faq_rating'); ?>
+        <?php endif; ?>
+        <?= /** @noEscape */ $block->getChildHtml('amasty_faq_socialshare'); ?>
+    </div>
+</div>
+<?= $block->showAskQuestionForm() ? $block->getChildHtml('amasty_faq_ask_question_form') : ''; ?>
+<?= /** @noEscape */ $block->getChildHtml('amasty_faq_structureddata'); ?>

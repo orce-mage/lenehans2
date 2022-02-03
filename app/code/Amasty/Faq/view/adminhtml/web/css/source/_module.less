@@ -1,0 +1,249 @@
+//
+// Amasty FAQ
+// ______________________________
+
+//
+// Variables
+// ------------------------------
+@am-color0: #222;
+@am-color1: #aaa;
+@am-color2: #dadada;
+@am-color3: #212121;
+@am-color4: #6d95e0;
+@am-color5: #999;
+@am-color6: #bbcef1;
+
+//
+// Common
+// -----------------------------
+
+& when (@media-common = true) {
+    ul.tagit {
+        & {
+            background: inherit;
+            border: 1px solid #C6C6C6;
+            margin-right: inherit;
+            overflow: auto;
+            padding: 1px 5px;
+        }
+
+        li {
+            display: block;
+            float: left;
+            margin: 2px 5px 2px 0;
+        }
+
+        li.tagit-choice {
+            & {
+                border-radius: 6px;
+                background-color: #DEE7F8 !important;
+                background: none;
+                border: 1px solid #CAD8F3;
+                font-weight: normal;
+                line-height: inherit;
+                position: relative;
+            }
+
+            a.tagit-label {
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .tagit-close {
+                cursor: pointer;
+                line-height: 17px;
+                margin-top: -8px;
+                position: absolute;
+                right: .4em;
+                top: 50%;
+            }
+
+            .tagit-close .text-icon {
+                color: #777;
+                display: inline;
+                font-family: arial, sans-serif;
+                font-size: 16px;
+                line-height: 16px;
+            }
+
+            input {
+                display: block;
+                float: left;
+                margin: 2px 5px 2px 0;
+            }
+
+            .tagit-label {
+                &:not(a) {
+                    color: #555;
+                }
+            }
+
+            a.tagit-close {
+                text-decoration: none;
+            }
+
+            a.tagit-close .text-icon {
+                &:hover {
+                    .lib-css(color, @am-color0);
+                }
+            }
+
+            .ui-icon {
+                display: none;
+            }
+
+            &:hover {
+                .lib-css(background-color, @am-color6);
+                .lib-css(border-color, @am-color4);
+            }
+
+            a.tagLabel {
+                &:hover {
+                    .lib-css(color, @am-color0);
+                }
+            }
+        }
+
+        li.tagit-choice-read-only {
+            padding: .2em .5em;
+        }
+
+        li.tagit-choice-editable {
+            padding: .2em 18px .2em .5em;
+        }
+
+        li.tagit-new {
+            padding: .25em 4px .25em 0;
+        }
+
+        input[type="text"] {
+            box-shadow: none;
+            box-sizing: border-box;
+            background-color: inherit;
+            background: none;
+            border: none;
+            color: #333;
+            margin: 0;
+            outline: none;
+            padding: 0;
+            width: inherit;
+        }
+
+        li.tagit-choice.remove {
+            .lib-css(background-color, @am-color6);
+            .lib-css(border-color, @am-color4);
+        }
+    }
+
+    input.tagit-hidden-field {
+        display: none;
+    }
+
+    .ui-widget {
+        font-size: 1.1em;
+    }
+
+    .tagit-autocomplete.ui-autocomplete {
+        cursor: default;
+        position: absolute;
+        width: 1px;
+    }
+
+    .tagit-autocomplete.ui-menu {
+        & {
+            display: block;
+            float: left;
+            list-style: none;
+            margin: 0;
+            padding: 2px;
+        }
+
+        .ui-menu {
+            margin-top: -3px;
+        }
+
+        .ui-menu-item {
+            clear: left;
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            zoom: 1;
+        }
+
+        .ui-menu-item a {
+            display: block;
+            line-height: 1.5;
+            padding: .2em .4em;
+            text-decoration: none;
+            zoom: 1;
+        }
+    }
+
+    .tagit-autocomplete {
+        .ui-menu {
+            .ui-menu-item a.ui-state-hover {
+                font-weight: normal;
+                margin: -1px;
+            }
+
+            .ui-menu-item a.ui-state-active {
+                font-weight: normal;
+                margin: -1px;
+            }
+        }
+
+        .ui-corner-all {
+            border-radius: 4px;
+        }
+
+        .ui-state-hover {
+            .lib-css(background, @am-color2);
+            .lib-css(border, 1px solid @am-color5);
+            .lib-css(color, @am-color3);
+            font-weight: normal;
+        }
+
+        .ui-state-focus {
+            .lib-css(background, @am-color2);
+            .lib-css(border, 1px solid @am-color5);
+            .lib-css(color, @am-color3);
+            font-weight: normal;
+        }
+
+        .ui-state-active {
+            .lib-css(border, 1px solid @am-color1);
+        }
+
+        .ui-widget-content {
+            .lib-css(border, 1px solid @am-color1);
+        }
+    }
+
+    .tagit-autocomplete.ui-widget-content {
+        background: #fff 50% 50% repeat-x;
+        .lib-css(border, 1px solid @am-color1);
+        .lib-css(color, @am-color0);
+    }
+
+    .tagit-autocomplete.ui-corner-all {
+        border-radius: 4px;
+    }
+
+    .tagit {
+        .ui-helper-hidden-accessible {
+            clip: rect(1px, 1px, 1px, 1px);
+            position: absolute !important;
+        }
+    }
+
+    //tagit styles end
+
+    .amfaq-fieldset-container .admin__field-control {
+        .admin__control-text,
+        .pagebuilder-wysiwyg-wrapper,
+        .admin__control-textarea {
+            max-width: ~'calc(100% - 45px - 4px)';
+        }
+    }
+}

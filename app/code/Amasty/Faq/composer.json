@@ -1,0 +1,26 @@
+{
+    "name": "amasty\/module-faq-product-questions",
+    "description": "FAQ and Products by Amasty team",
+    "require": {
+        "php": "^7.3.0",
+        "amasty\/base": ">=1.13.0",
+        "amasty\/aminvisiblecaptcha": ">=2.4.3"
+    },
+    "suggest": {
+        "amasty\/module-faq-graphql": "We recommend to install Faq GraphQL module if you use Magento 2.3.3+.",
+        "amasty\/module-faq-product-questions-mftf-3": "Install module-faq-product-questions-mftf-3 module to be able to run FAQ MFTF tests for Magento 2.4.2+ version."
+    },
+    "type": "magento2-module",
+    "version": "2.11.3",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Faq\\": ""
+        }
+    }
+}

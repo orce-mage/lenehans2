@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_ImportExport:etc/export.xsd">
+    <entity name="faq_category_export"
+            label="Amasty FAQ Categories"
+            model="Amasty\Faq\Model\Export\Category\Export"
+            entityAttributeFilterType="faq_category" />
+    <entity name="faq_question_export"
+            label="Amasty FAQ Questions"
+            model="Amasty\Faq\Model\Export\Question\Export"
+            entityAttributeFilterType="faq_question" />
+</config>

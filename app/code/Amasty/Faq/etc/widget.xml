@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="amasty_faq_back_to_product" class="Amasty\Faq\Block\Widgets\BackToProduct" is_email_compatible="false">
+        <label translate="true">Amasty Back to Product Button</label>
+        <description translate="true">Back to last viewed Product Button by Amasty</description>
+        <parameters>
+            <parameter name="back_to_product_align" xsi:type="select" visible="true" source_model="Amasty\Faq\Model\Config\WidgetAlign">
+                <label translate="true">Back To Product button Align</label>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="amasty_faq_search_box" class="Amasty\Faq\Block\Widgets\SearchBox" is_email_compatible="false">
+        <label translate="true">Amasty FAQ Search Box</label>
+        <description translate="true">Amasty FAQ Search Box widget</description>
+        <parameters>
+            <parameter name="search_box_width" xsi:type="text" required="true" visible="true">
+                <label translate="true">Search Box Width</label>
+                <description translate="true">You can use the CSS-length values for the Search Box configuration (100px, 77pt, 20em, .5ex or 50%)</description>
+            </parameter>
+            <parameter name="search_box_align" xsi:type="select" visible="true" source_model="Amasty\Faq\Model\Config\WidgetAlign">
+                <label translate="true">Search Box Align</label>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="amasty_faq_categories" class="Amasty\Faq\Block\Widgets\Categories" is_email_compatible="false">
+        <label translate="true">Amasty FAQ Categories List</label>
+        <description translate="true">FAQ and Product Questions Categories list widget</description>
+        <parameters>
+            <parameter name="layout_type" xsi:type="select" visible="true" source_model="Amasty\Faq\Model\Config\CategoriesWidgetLayoutType">
+                <label translate="true">Layout Type</label>
+            </parameter>
+            <parameter name="questions_limit" xsi:type="text" required="false" visible="true">
+                <label translate="true">Limit question number in category</label>
+            </parameter>
+            <parameter name="categories_limit" xsi:type="text" required="false" visible="true">
+                <label translate="true">Limit categories number</label>
+            </parameter>
+            <parameter name="without_questions" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Categories list without questions</label>
+            </parameter>
+            <parameter name="sort_categories_by" xsi:type="select" visible="true" source_model="Amasty\Faq\Model\Config\CategoriesSort">
+                <label translate="true">Sort Categories By</label>
+            </parameter>
+            <parameter name="sort_questions_by" xsi:type="select" visible="true" source_model="Amasty\Faq\Model\Config\QuestionsSort">
+                <label translate="true">Sort Questions By</label>
+            </parameter>
+            <parameter name="short_answer_behavior" xsi:type="select" visible="true" source_model="Amasty\Faq\Model\Config\ShortAnswerBehavior">
+                <label translate="true">Short Answer Behavior</label>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="amasty_faq_tags_block" class="Amasty\Faq\Block\Widgets\TagsBlock" is_email_compatible="false">
+        <label translate="true">Amasty FAQ Tags Block</label>
+        <description translate="true">Tags block for home page</description>
+        <parameters>
+            <parameter name="tags_limit" xsi:type="text" visible="true" required="true">
+                <label translate="true">Tags limit</label>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="amasty_faq_questions_list" class="Amasty\Faq\Block\Widgets\QuestionsList" is_email_compatible="false">
+        <label translate="true">Amasty FAQ Questions List</label>
+        <description translate="true">FAQ and Product Questions list widget</description>
+        <parameters>
+            <parameter name="block_title" xsi:type="text" visible="true" sort_order="1" required="true">
+                <label translate="true">Block Title</label>
+            </parameter>
+            <parameter name="widget_type" xsi:type="select" visible="true"
+                       source_model="Amasty\Faq\Model\OptionSource\Widget\QuestionList\WidgetType" sort_order="2">
+                <label translate="true">Widget Type</label>
+            </parameter>
+            <parameter name="short_answer_behavior" xsi:type="select" visible="true"
+                       source_model="Amasty\Faq\Model\Config\ShortAnswerBehavior" sort_order="3">
+                <label translate="true">Short Answer Behavior</label>
+            </parameter>
+            <parameter name="limit_short_answer" xsi:type="text" visible="true" sort_order="4" required="true">
+                <label translate="true">Limit Displayed Answer Length</label>
+            </parameter>
+            <parameter name="show_ask" xsi:type="select" visible="true" sort_order="5"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Ask a Question Button</label>
+            </parameter>
+            <parameter name="faq_categories" xsi:type="block" visible="true" required="false" sort_order="6">
+                <label translate="true">FAQ Category</label>
+                <block class="Amasty\Faq\Block\Adminhtml\Category\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Category...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="questions" xsi:type="block" visible="true" required="false" sort_order="7">
+                <label translate="true">Questions</label>
+                <block class="Amasty\Faq\Block\Adminhtml\Question\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Question...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="product" xsi:type="block" visible="true" required="false" sort_order="8">
+                <label translate="true">Product</label>
+                <block class="Magento\Catalog\Block\Adminhtml\Product\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Product...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
